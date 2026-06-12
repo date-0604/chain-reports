@@ -11,9 +11,10 @@ body{font-family:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,san
 h1{font-size:21px;margin-bottom:4px}
 .sub{color:var(--soft);font-size:12.5px;margin-bottom:20px}
 h2{font-size:14px;margin:24px 0 10px;padding-left:9px;border-left:4px solid var(--accent);color:#374151}
+.glist{display:grid;grid-template-columns:1fr;gap:9px}
 .item{display:flex;align-items:center;justify-content:space-between;gap:10px;
   background:var(--card);border:1px solid var(--line);border-radius:12px;
-  padding:13px 15px;margin-bottom:9px;text-decoration:none;color:var(--ink);
+  padding:13px 15px;text-decoration:none;color:var(--ink);
   box-shadow:0 1px 2px rgba(0,0,0,.05);transition:background .12s}
 .item:active{background:#eef2ff}
 @media(hover:hover){.item:hover{background:#f0f4ff;border-color:#c7d6fb}}
@@ -22,16 +23,17 @@ h2{font-size:14px;margin:24px 0 10px;padding-left:9px;border-left:4px solid var(
 .arr{color:#c0c6cf;font-size:22px;flex-shrink:0}
 .foot{margin-top:34px;color:#9ca3af;font-size:11.5px;border-top:1px solid var(--line);padding-top:12px}
 @media(max-width:420px){body{padding:22px 12px 48px} h1{font-size:19px} .tt{font-size:14.5px}}
+@media(min-width:720px){ /* 桌面:加寬+兩欄網格,保持原本電腦版的密度 */
+  body{max-width:880px;padding:44px 24px 64px}
+  h1{font-size:23px}
+  .glist{grid-template-columns:1fr 1fr;gap:11px}
+  .glist:has(.item:only-child){grid-template-columns:1fr}
+}
 </style></head><body>
 <h1>📚 製程鏈 × 供應鏈 研究報告</h1>
 <div class="sub">更新:2026-06-12 · 個人研究筆記,非投資建議</div>
-<h2>研究主題候選清單</h2><a class="item" href="research/研究主題候選清單.html"><span class="tt">研究主題候選清單<small>25 個候選主題 · 含台股名單與研究切角</small></span><span class="arr">›</span></a>
-<h2>深度研究報告</h2><a class="item" href="deep/ai-server-power/AI伺服器電源鏈-process-chain.html"><span class="tt">AI伺服器電源鏈<small>深色 · 技術版</small></span><span class="arr">›</span></a>
-<a class="item" href="deep/ai-server-power/AI伺服器電源鏈-process-chain-light.html"><span class="tt">AI伺服器電源鏈<small>淺色 · 投資指南版</small></span><span class="arr">›</span></a>
-<a class="item" href="deep/glass-substrate/glass-substrate-process-chain.html"><span class="tt">glass-substrate<small>深色 · 技術版</small></span><span class="arr">›</span></a>
-<a class="item" href="deep/glass-substrate/glass-substrate-process-chain-light.html"><span class="tt">glass-substrate<small>淺色 · 投資指南版</small></span><span class="arr">›</span></a>
-<h2>產業研究指南(研究雷達)</h2><a class="item" href="research/AI伺服器電源/AI伺服器電源-guide.html"><span class="tt">AI伺服器電源<small>產業研究指南</small></span><span class="arr">›</span></a>
-<a class="item" href="research/功率元件/功率元件-guide.html"><span class="tt">功率元件<small>產業研究指南</small></span><span class="arr">›</span></a>
-<a class="item" href="research/玻璃基板/玻璃基板-guide.html"><span class="tt">玻璃基板<small>產業研究指南</small></span><span class="arr">›</span></a>
+<h2>研究主題候選清單</h2><div class="glist"><a class="item" href="research/研究主題候選清單.html"><span class="tt">研究主題候選清單<small>25 個候選主題 · 含台股名單與研究切角</small></span><span class="arr">›</span></a></div>
+<h2>深度研究報告</h2><div class="glist"><a class="item" href="deep/ai-server-power/AI伺服器電源鏈-process-chain.html"><span class="tt">AI伺服器電源鏈<small>深色 · 技術版</small></span><span class="arr">›</span></a><a class="item" href="deep/ai-server-power/AI伺服器電源鏈-process-chain-light.html"><span class="tt">AI伺服器電源鏈<small>淺色 · 投資指南版</small></span><span class="arr">›</span></a><a class="item" href="deep/glass-substrate/glass-substrate-process-chain.html"><span class="tt">玻璃基板供應鏈<small>深色 · 技術版</small></span><span class="arr">›</span></a><a class="item" href="deep/glass-substrate/glass-substrate-process-chain-light.html"><span class="tt">玻璃基板供應鏈<small>淺色 · 投資指南版</small></span><span class="arr">›</span></a></div>
+<h2>產業研究指南(研究雷達)</h2><div class="glist"><a class="item" href="research/AI伺服器電源/AI伺服器電源-guide.html"><span class="tt">AI伺服器電源<small>產業研究指南</small></span><span class="arr">›</span></a><a class="item" href="research/功率元件/功率元件-guide.html"><span class="tt">功率元件<small>產業研究指南</small></span><span class="arr">›</span></a><a class="item" href="research/玻璃基板/玻璃基板-guide.html"><span class="tt">玻璃基板<small>產業研究指南</small></span><span class="arr">›</span></a></div>
 <div class="foot">內容為個人研究彙整,所有數據以原始來源為準;不構成任何投資建議。</div>
 </body></html>
