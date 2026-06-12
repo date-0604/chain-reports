@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 伺服器電源鏈 製程鏈 × 供應鏈 研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#c2410c; --accent-soft:#ffedd5;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#fff4ec,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:780px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:820px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:140px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:760px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">AI 伺服器電源鏈<span>製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱門</a>
+    <a href="#categories">核心製程</a><a href="#application">關鍵應用</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">難度評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>AI 伺服器電源鏈 <em>× 54V→800VDC 架構轉換</em> 2026</h1>
+  <p class="lead">AI 機櫃功耗從 130kW 衝向 1MW,NVIDIA 官方定調 54V「物理上與經濟上不可行」。台灣在機櫃電源元件層全球主導(NVIDIA 官方名單 7 取 3:台達/光寶/貿聯)、BBU 模組寡佔;灰區設施級由西方重電把持,台達是唯一兩邊都卡位的台廠。2H26 Rubin 放量是當下主場,2027 Kyber 才是 800VDC 元年。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:AI 資料中心 / NVIDIA 800VDC</span>
+    <span class="badge">市場:台灣為主+美日中韓對照</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:兩輪 deep-research,25 條存活→8 大發現+150 條逐檔佐證</span>
+  </div>
+</div></div>
+
+<!-- 01 總覽 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽</h2>
+  <p class="subtitle">AI 伺服器電源鏈 = 市電(13.8kV 中壓)到 GPU 核心電壓之間的所有電力設備。800VDC 架構把「多段 AC-AC 轉換」改為「周界一次轉 800VDC、全程直流」——同線徑功率 +157%(vs 415VAC)、機櫃銅排省 45%(NVIDIA 官方,up to 工程估算)。本研究排除 SiC/GaN 元件本體(已另行研究),聚焦系統/模組層。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">⚡</span>白區:Power Shelf / PSU / 電容儲能</h4><p>機櫃電源心臟。PSU 3.2→5.5→12→18.3kW、shelf 33→72→110kW;Rubin 世代機櫃級電容 400J/GPU 標配。台灣全球主導(Yole:台達+光寶+華為+AE 佔半)。</p></div>
+    <div class="card"><h4><span class="ico">🔋</span>BBU 備援電池(模組+電芯)</h4><p>停電 ride-through。模組 5.5→8→12kW;800V 化嵌進 power rack(台達 660kW 櫃內嵌 480kW BBU)。台廠模組寡佔(AES-KY/順達/新盛力…),電芯 Molicel(台泥)vs 三星 SDI/LG。</p></div>
+    <div class="card"><h4><span class="ico">🏭</span>灰區:SST / 整流 / 直流配電</h4><p>中壓→800VDC 的設施級轉換與保護。西方重電主導(ABB/Eaton/Schneider/Vertiv…+Heron Power);台達 SST 送樣四大 CSP、中國已落地;固態斷路器台股缺席。2028-29 才上移放量。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 供應鏈四層 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(四層結構)</h2>
+  <p class="subtitle">上游元件/材料 → 中游模組 → 整合(電源櫃/系統)→ 終端。<span class="conf c-high">綠=獨立佐證</span> <span class="conf c-med">橘=法說/單源</span> 其餘市場列舉待查。</p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游<small>元件/磁件/電芯</small></div><div class="items">
+      <span class="badge b-accent">SiC/GaN 元件(Infineon/Navitas/TI…已另研究)</span>
+      <span class="badge b-tw">臺慶科 3357(TLVR)</span><span class="badge b-tw">新聿科 7912 興櫃(TLVR,Rubin 認證自述)</span>
+      <span class="badge b-tw">國巨 2327(奇力新+Pulse 磁件/KEMET 超容)</span>
+      <span class="badge b-tw">Molicel 能元(台泥 1101,BBU 電芯)</span>
+      <span class="badge b-accent">三星 SDI/LGES(電芯)</span><span class="badge b-accent">TDK/村田(磁材)</span>
+    </div></div>
+    <div class="chain-row"><div class="lvl">中游<small>PSU/BBU 模組</small></div><div class="items">
+      <span class="badge b-tw">台達電 2308</span><span class="badge b-tw">光寶科 2301</span><span class="badge b-tw">康舒 6282</span><span class="badge b-tw">群電 6412(送樣)</span>
+      <span class="badge b-tw">AES-KY 6781(BBU ~70% 營收)</span><span class="badge b-tw">順達 3211</span><span class="badge b-tw">新盛力 4931</span><span class="badge b-tw">系統電 5309</span><span class="badge b-tw">加百裕 3323(2027)</span>
+      <span class="badge b-accent">Flex</span><span class="badge b-accent">Megmeet 002851.SZ(中國唯一)</span>
+    </div></div>
+    <div class="chain-row"><div class="lvl">整合<small>電源櫃/SST/互連</small></div><div class="items">
+      <span class="badge b-tw">台達電(660kW rack/SST)</span><span class="badge b-tw">光寶科(>1.5MW rack)</span>
+      <span class="badge b-tw">貿聯-KY 3665(800V busbar/線纜,官方名單)</span><span class="badge b-tw">健和興 3003(HVDC 端子送樣)</span>
+      <span class="badge b-accent">Vertiv/Schneider/Eaton/ABB(sidecar/SSCB)</span><span class="badge b-accent">Heron Power(SST 新創)</span>
+    </div></div>
+    <div class="chain-row"><div class="lvl">終端<small>需求火車頭</small></div><div class="items">
+      <span class="badge b-ok">NVIDIA(GB300→Rubin 2H26→Kyber 800VDC 2027)</span>
+      <span class="badge b-ok">四大 CSP(OCP Mt Diablo ±400V 並行規格)</span>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- 03 為何熱門(含四問) -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Now</span>
+  <h2 class="title">為何熱門 — 投資視角四問</h2>
+  <p class="subtitle">需求 → 瓶頸 → 受惠傳導,以及:為什麼重要 / 故事到哪 / 市場多大 / 台灣吃多少。</p>
+  <div class="flow">
+    <div class="step"><b>需求端</b><small>機櫃 130kW→600kW→1MW;GPU 同步脈動需毫秒級平滑(Rubin 400J/GPU 電容標配)</small></div><div class="arrow">→</div>
+    <div class="step"><b>供給/瓶頸</b><small>54V 物理極限(64U/200kg 銅);DC 電弧不自熄→固態斷路器;高功率電芯/高頻磁材集中</small></div><div class="arrow">→</div>
+    <div class="step"><b>受惠傳導</b><small>NVIDIA 官方名單→送樣認證→Q3/Q4 量產→2027 Kyber 放量;單櫃電源價值量倍增</small></div>
+  </div>
+
+  <h3>💡 為什麼重要</h3>
+  <p style="max-width:900px">這不是漸進改款而是<b>整條電力 BOM 重洗牌</b>:新增 SST、固態斷路器、800V power rack、嵌入式 BBU、機櫃級電容儲能等全新品項(媒體引法人估 800VDC 電源櫃 ASP 約 40-50 萬美元、近傳統 AC 十倍——未經原始報告核對 <span class="conf c-un">未驗證</span>)。台灣是少數「<b>系統層主導</b>」的 AI 環節:NVIDIA 官方 power system components 名單 7 家台佔 3(台達/光寶/貿聯)<span class="conf c-high">高</span>;Yole 點名台達為次世代 PSU 設計領導者 <span class="conf c-high">高</span>。與已研究的功率元件(SiC)互補:增量全在模組/系統層。</p>
+
+  <h3>📅 故事時間軸(現在到哪、催化劑)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時點</th><th>事件</th><th>狀態</th></tr></thead>
+    <tbody>
+      <tr><td>2025/05-10</td><td>NVIDIA 公布 800VDC 架構+兩版夥伴名單(10 月貿聯入列);GB300 實配定調:電解電容入 shelf(65J/GPU),無獨立超容層架</td><td><span class="conf c-high">已發生・官方</span></td></tr>
+      <tr><td>2026/03</td><td>GTC:Rubin NVL72 全面投產、2H26 出貨;台達展 660kW rack+SST;光寶展 110kW shelf</td><td><span class="conf c-high">已發生・官方</span></td></tr>
+      <tr><td><b>2026/06(現在)</b></td><td>光寶 110kW shelf 量產;COMPUTEX 光寶 800VDC 液冷 rack 實機首秀;台達 YTD +123%</td><td><span class="conf c-high">進行中</span></td></tr>
+      <tr><td>2026Q3-Q4</td><td>台達 800VDC Q3 量產(原 Q4 提前)、Q4 出貨北美 Hyperscaler;光寶 800V rack Q3 驗證/Q4 量產;AES-KY HVDC BBU 下旬量產</td><td><span class="conf c-med">前瞻・法說/外資</span></td></tr>
+      <tr><td><b>2027</b></td><td><b>Kyber NVL576 + 800VDC 全面量產(官方)</b>;台達主要貢獻期;順達 800V BBU 量產;Heron SST 試產</td><td><span class="conf c-high">官方 roadmap</span></td></tr>
+      <tr><td>2028-29</td><td>配電上移設施灰區(SST+整流站),端到端效率 82-83%→87-92%</td><td><span class="conf c-med">前瞻</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>📐 市場規模 / 成長率(口徑並列)</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>資料中心 PSU(Yole 2025/7)</p><h4>$140 億 @2030</h4><p>>3kW 段 $115 億、CAGR>25%;四強(台達/光寶/華為/AE)佔半</p></div>
+    <div class="card"><p>AI 機櫃 BBU(DIGITIMES 窄口徑)</p><h4>$3.7 億 @2025</h4><p>2026 +50%≈$5.5 億;「$28 億」版本含電信、口徑不同勿混用</p></div>
+    <div class="card"><p>800VDC 量化(SemiAnalysis)</p><h4>39GW @2030</h4><p>power rack TAM 峰值 $110 億@2028;SST $130 億@2030(分歧 $320 億)</p></div>
+    <div class="card"><p>超容・資料中心應用</p><h4>CAGR 20.8%</h4><p>Mordor 至 2031、各應用最快;整體市場研調分歧 5 倍</p></div>
+  </div>
+
+  <h3>🇹🇼 台灣吃得到多少 + 新舊架構對比</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>台灣角色</th><th>證據等級</th></tr></thead>
+    <tbody>
+      <tr><td>Power shelf/PSU(白區)</td><td><b>主導</b>(官方名單 7 取 3;Yole 四強佔半)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>BBU 模組</td><td><b>寡佔</b>(多數經台達/光寶整合間接進鏈)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>BBU 電芯</td><td>有牌未上市(Molicel/台泥);模組×電芯對應是黑箱</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>互連/busbar</td><td><b>重要供應商</b>(貿聯=官方名單唯一台資互連)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>板級磁件 TLVR</td><td>重要供應商(臺慶科/新聿科/國巨系);主變壓器被電源廠內製</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>電容儲能/超容</td><td><b>陪跑</b>(國巨 KEMET AVL;凱美親口否認;立隆無佐證)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>灰區 SST/配電</td><td>挑戰者(台達 SST 中國落地、美系驗證中;其餘西方重電)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>固態斷路器</td><td><b>缺席</b>(ABB/Eaton/LS Electric)</td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="table-wrap" style="margin-top:14px"><table>
+    <thead><tr><th>面向</th><th>54V 集中式(GB200/300)</th><th>800VDC(Kyber 2027)</th></tr></thead>
+    <tbody>
+      <tr><td>轉換路徑</td><td>多段 AC-AC → 機櫃內 AC→54V</td><td>周界一次 AC→800VDC,全程直流</td></tr>
+      <tr><td>1MW 機櫃可行性</td><td>需 64U 電源層架+200kg 銅排(不可行)</td><td>同線徑功率 +157%、省銅 45%</td></tr>
+      <tr><td>電源位置</td><td>power shelf 在運算機櫃內</td><td>獨立電源櫃/sidecar(空間還給 GPU)</td></tr>
+      <tr><td>保護</td><td>AC 斷路器(電弧過零自熄)</td><td>固態斷路器 SSCB(DC 電弧不自熄)</td></tr>
+      <tr><td>儲能</td><td>BBU 層架+PSU 內電解電容(65J/GPU)</td><td>嵌入式 BBU+機櫃級電容 400J/GPU 標配</td></tr>
+      <tr><td>端到端效率</td><td>~82-83%</td><td>87-92%(NVIDIA 稱 92%+;TCO -30% 官方宣傳值)</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 核心製程 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心環節深度解析</h2>
+  <p class="subtitle">完整鏈 7 環節:灰區整流/SST → 直流配電/保護 → power shelf/PSU → 板級磁件 → BBU → 電容儲能 → busbar/互連。挑門檻最高的 4 個深挖。</p>
+
+  <h3>① Power Shelf / 高瓦數 PSU(台灣主場)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>世代</th><th>PSU 模組</th><th>Shelf</th><th>關鍵規格</th><th>台廠地位</th></tr></thead>
+    <tbody>
+      <tr><td>H100/HGX</td><td>3.2kW CRPS</td><td>—</td><td>98W/in³</td><td><span class="stars">★★★★☆</span></td></tr>
+      <tr><td>GB200/300 DGX</td><td>5.5kW</td><td>33kW(6 顆,5+1)</td><td>鈦金 96%+、OCP ORv3 HPR</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>GB300 MGX</td><td>12kW</td><td>72kW(OCP HPR V2)</td><td>台達為 VR200 首家 12kW 認證(媒體)</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>Rubin NVL72(2H26)</td><td>18.3kW(台達 18.5kW、98%)</td><td>110kW 3U(N+1)</td><td>PSU 內建電容;仍 50V busbar(5000A 液冷)</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>Kyber(2027)</td><td>90kW DC/DC shelf(800→50V)</td><td>660kW 獨立電源櫃</td><td>內嵌 480kW BBU(台達 GTC 2026)</td><td><span class="stars">★★★★☆</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2" style="margin-top:12px">
+    <div class="card"><h4>台達電 <span class="code">2308</span></h4><p>官方名單+Yole 設計領導者;660kW rack/SST/BBU 全鏈;AI 電源佔比 23%→30%(法說後媒體)。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>光寶科 <span class="code">2301</span></h4><p>官方名單;110kW shelf 6 月量產、800V rack(>1.5MW)Q4 量產提前一季;與兩家 CSP 合作。<span class="conf c-high">高</span></p></div>
+  </div>
+
+  <h3>② BBU 備援電池(台廠寡佔、但「標配與否」是變數)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>層</th><th>玩家</th><th>狀態</th><th>佐證</th></tr></thead>
+    <tbody>
+      <tr><td>模組(直供 CSP)</td><td>AES-KY 6781</td><td>BBU 佔營收 ~70%;HVDC 品 2026 下旬量產;capex +20-30%</td><td><span class="conf c-high">法說+財報</span></td></tr>
+      <tr><td>模組(經電源廠整合)</td><td>順達 3211 / 新盛力 4931 / 加百裕 3323 / 系統電 5309</td><td>順達 800V 2027(股東會文件);新盛力 5 月營收 +179%;加百裕 12kW 2027;系統電 Q2 量產</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>電芯</td><td>Molicel(台泥 1101)vs 三星 SDI/LG</td><td>2024Q4 起出貨 5kW BBU 電池給全球知名 CSP(台泥法說);P50S 200W/100A;小港火災後台南+OEM 補位</td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn">⚠️ TrendForce:BBU <b>非 GB300 標準配置</b>、採用率隨功耗上升——「標配說」依 CSP 而異;且<b>模組廠×電芯品牌對應全鏈無公開佐證</b>,是本題最大資訊黑箱。</div>
+
+  <h3>③ 電容儲能 / 超級電容(技術路線風險全鏈最高)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>路線</th><th>實證</th><th>誰在做</th><th>判讀</th></tr></thead>
+    <tbody>
+      <tr><td>電解電容入 PSU</td><td><b>GB300 量產實配</b>:65J/GPU、佔 PSU 一半體積、削峰 30%(NVIDIA 官方 2025/7)</td><td>電源廠體系內</td><td>已落地;郭明錤「超容移除」調研方向正確</td></tr>
+      <tr><td>機櫃級電容(Rubin)</td><td>400J/GPU 標配、削峰 25%(官方);<b>官方只說 capacitors、未指 EDLC、未公布供應商</b></td><td>台達(鋁電容 rack)/光寶/Flex+Musashi/Skeleton 線索</td><td>供應商=開放問題</td></tr>
+      <tr><td>LIC/超容</td><td>Musashi LIC 入 GB200(TrendForce 轉述);LS Materials MW 級已交付;Skeleton GrapheneGPU</td><td>日韓歐三強;台:國巨 KEMET AVL</td><td>無具名 NVIDIA 訂單</td></tr>
+      <tr><td>台股概念股</td><td><b>凱美 2375 法說親口「無超容開發計畫」;立隆電 2472 查無超容佐證</b></td><td>—</td><td><span class="conf c-low">反證/未佐證</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>④ 灰區 SST / 固態斷路器(2028-29 的故事、進入障礙最高)</h3>
+  <div class="grid cols-2">
+    <div class="card"><h4>SST 固態變壓器 <span class="code">台達 2308 vs 西方重電</span></h4><p>台達 SST 效率 98.5%、送樣四大 CSP、<b>中國超大規模資料中心已落地</b>(公司自述);執行長坦言美系 CSP 仍在測試驗證期。對手:Eaton(購 Resilient)、ABB、Heron Power(2027 試產、B 輪 $140M、>50GW 興趣)。<span class="conf c-med">中</span></p></div>
+    <div class="card"><h4>固態斷路器 SSCB <span class="code">台股缺席</span></h4><p>DC 電弧無零交越不自熄,SSCB 微秒級分斷是 800VDC 隘口。ABB SACE Infinitus 為首款 IEC 60947-2 認證品(1000V/2500A、<25µs,2025/10 攜 NVIDIA);LS Electric 首款 UL 認證 1500V DC MCCB。<b>台股無對應標的</b>。<span class="conf c-high">高</span></p></div>
+  </div>
+</div></section>
+
+<!-- 05 關鍵應用 -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Application</span>
+  <h2 class="title">關鍵應用場景拆解(電力路徑逐級)</h2>
+  <p class="subtitle">市電到 GPU 的完整路徑,標示每級的台廠切入點。</p>
+  <div class="stack">
+    <div class="layer"><b>市電 13.8kV AC(灰區入口)</b><div class="uses">用到:SST/工業整流器——台達(送樣中)、ABB/Eaton/Vertiv/Heron;固態斷路器(台股缺席)</div></div>
+    <div class="down">↓ 800VDC</div>
+    <div class="layer"><b>直流配電 + 800V busway</b><div class="uses">用到:DC busway(Vertiv)、800V 線纜/busbar——貿聯 3665(官方名單)、健和興 3003(端子送樣)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>電源櫃 / sidecar(660kW;嵌 480kW BBU)</b><div class="uses">用到:power rack——台達/光寶/Schneider(1.2MW sidecar);BBU 模組——AES-KY/順達/新盛力/系統電/加百裕;電芯——Molicel/三星 SDI/LG</div></div>
+    <div class="down">↓ 50VDC busbar(5000A+ 液冷)</div>
+    <div class="layer"><b>運算機櫃(Rubin NVL72)</b><div class="uses">用到:110kW shelf×4、18.3kW PSU(內建電容 400J/GPU)——台達/光寶/康舒/群電/Flex/Megmeet;板級 TLVR——臺慶科/新聿科/國巨系</div></div>
+    <div class="down">↓ <1V</div>
+    <div class="layer"><b>GPU(Rubin/Rubin Ultra)</b><div class="uses">毫秒級脈動由機櫃級電容平滑(Intelligent Power Smoothing 削峰 25%)</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:<b>價值量「往機櫃外移」</b>——54V 時代電源都在運算櫃內;800VDC 把電源獨立成櫃(空間還給 GPU),電源廠從「賣 shelf」升級成「賣整櫃含 BBU/儲能」,這就是單櫃 ASP 倍增的來源;下一步(2028-29)再往設施灰區移,誰先過美系 CSP 驗證誰吃最大塊。</div>
+</div></section>
+
+<!-- 06 族群邏輯 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>營運受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>整機電源(台達/光寶/康舒/群電)</td><td>2026Q3-Q4 800VDC 量產潮;2027 Kyber 放量</td><td>PSU 瓦數×效率升級帶 ASP;電源櫃化(含 BBU/儲能)使單櫃價值倍增</td></tr>
+      <tr><td>BBU 模組(AES-KY/順達/新盛力/系統電/加百裕)</td><td>GB300→Rubin BBU 規格上調;HVDC BBU 2026 下旬-2027 量產</td><td>模組瓦數 5.5→12kW、嵌入式化;擴產(AES capex +20-30%、新盛力產能 +50%)</td></tr>
+      <tr><td>互連(貿聯/健和興)</td><td>800V 線纜/busbar 新品項;Interplex 併購綜效</td><td>高壓絕緣+液冷 busbar 取代純銅排價值;留意 800V 長期「減銅」雙面刃</td></tr>
+      <tr><td>板級磁件(臺慶科/國巨/新聿科)</td><td>TLVR 標配化(22-31 顆/板、ASP 3-5 倍)</td><td>量價齊升;但主變壓器被電源廠內製,天花板在板級</td></tr>
+      <tr><td>電芯(台泥/Molicel)</td><td>BBU 放量+下一代電池效能 10 倍說(公司)</td><td>集團內佔比小、小港火災影響;屬間接曝險</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:(1) <b>規格雙軌</b>——NVIDIA 單極 800V vs OCP Mt Diablo ±400V(Google/Meta/微軟)並行,設計投入可能押錯邊;(2) <b>Megmeet(中國)在官方名單內</b>,美中政策(Affiliates Rule 暫停僅至 2026/11/9)是其風險也是台廠的份額機會;(3) Rubin 2026 出貨量傳因 HBM4 驗證下修 ~25%(channel check 等級);(4) AES-KY YTD -12% 示範「題材對、股價已先反映」;(5) 凱美/立隆電/健策/金利等概念股在本題查無佐證或遭公司否認。</div>
+</div></section>
+
+<!-- 07 公司圖譜 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章=查證信心。「未佐證」不代表沒有角色,但不應當事實下單。</p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="power">整機電源</button>
+    <button data-f="bbu">BBU/電芯</button>
+    <button data-f="passive">磁件/電容</button>
+    <button data-f="inter">互連</button>
+    <button data-f="gray">灰區/國際</button>
+    <button data-f="watch">概念股(未佐證/反證)</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="power"><h4>台達電 <span class="code">2308</span></h4><p>NVIDIA 官方名單;Yole 次世代 PSU 設計領導者;800VDC Q3 量產/Q4 北美出貨(外資);SST 兩邊卡位。YTD +123%。</p><span class="conf c-high">高</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="power"><h4>光寶科 <span class="code">2301</span></h4><p>官方名單;110kW shelf 6 月量產;800V rack Q4 量產(提前一季);AI 佔比目標近 30%。</p><span class="conf c-high">高</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="inter"><h4>貿聯-KY <span class="code">3665</span></h4><p>官方名單唯一台資互連;800V 線纜+busbar(含液冷);HPC+半導體佔 51%;$8.5 億美元購 Interplex。</p><span class="conf c-high">高</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="bbu"><h4>AES-KY <span class="code">6781</span></h4><p>BBU 佔營收 ~70%、直供美系 CSP;HVDC 品 2026 下旬量產;「NVIDIA 主力」為法人共識。YTD -12%(估值先行)。</p><span class="conf c-high">高</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="power"><h4>康舒 <span class="code">6282</span></h4><p>33kW shelf 上半年量產(媒體單源)、72kW 認證中;1MW HVDC 方案;AI 佔比目標 30%;「GB200 鏈」僅媒體說法。</p><span class="conf c-med">中</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="bbu"><h4>順達 <span class="code">3211</span></h4><p>BBU 佔比 ~35%(法人);800V HVDC 2027 量產(股東會文件);「與台達合作」出自媒體引法人。</p><span class="conf c-med">中</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="bbu"><h4>新盛力 <span class="code">4931</span></h4><p>5 月營收 +178.6%(硬數字);「BBU 近五成」單一媒體;高雄產能 +50%。</p><span class="conf c-med">中</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="bbu"><h4>系統電 <span class="code">5309</span></h4><p>11kW/5.5kW Q2 量產、首家美系 CSP 出貨;2025 獲利谷底,BBU 是 2026 起選擇權;入股加百裕推美國製造。</p><span class="conf c-med">中</span> <span class="badge b-warn">放量初期</span></div>
+    <div class="card" data-cat="bbu"><h4>加百裕 <span class="code">3323</span></h4><p>直攻 12kW;2026H1 認證/H2 樣品、2027 大量出貨;客戶 NDA 不具名。</p><span class="conf c-med">中</span> <span class="badge b-warn">未來選擇權</span></div>
+    <div class="card" data-cat="bbu"><h4>台泥(Molicel) <span class="code">1101</span></h4><p>能元 2024Q4 起出貨 5kW BBU 電池給全球知名 CSP(法說);P50S 200W/100A;集團內佔比小、間接曝險;小港火災衝擊 110 億。</p><span class="conf c-med">中</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="passive"><h4>臺慶科 <span class="code">3357</span></h4><p>TLVR 電感,與美系原廠共同開發下一代;AI 約 10% 營收。注意:<b>不是 6155</b>(6155=鈞寶)。</p><span class="conf c-med">中</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="passive"><h4>國巨 <span class="code">2327</span></h4><p>磁件(奇力新+Pulse,GB200 鏈為媒體報導)+KEMET 超容 AVL 入伺服器鏈(TrendForce);AI 佔比 ~15%。美磊/奇力新曝險唯一入口。</p><span class="conf c-med">中</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="passive"><h4>新聿科 <span class="code">7912 興櫃</span></h4><p>TLVR/模壓電感;自述 Blackwell 量產+Rubin 認證、AI 佔 47%;興櫃流動性風險(首日 +797%)。</p><span class="conf c-med">中(自述為主)</span> <span class="badge b-ok">現在有營收</span></div>
+    <div class="card" data-cat="inter"><h4>健和興 <span class="code">3003</span></h4><p>HVDC 380V/1000V 端子+BESS 1500V 端子送樣中(公司自述);5 月營收 +50% 創高(含其他動能)。</p><span class="conf c-med">中</span> <span class="badge b-warn">未來選擇權</span></div>
+    <div class="card" data-cat="power"><h4>群電 <span class="code">6412</span></h4><p>AI 伺服器電源 Q2 送樣測試、下半年升溫;兩次法說口徑有階段落差(不同專案)。</p><span class="conf c-med">中</span> <span class="badge b-warn">未來選擇權</span></div>
+    <div class="card" data-cat="gray"><h4>Vertiv / Schneider / Eaton / ABB</h4><p>灰區四強:Vertiv 800VDC 組合 2H26;Schneider 1.2MW sidecar;Eaton 購 Resilient(SST);ABB SACE Infinitus SSCB+HiPerGuard。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="gray"><h4>Heron Power(未上市)</h4><p>SST 新創:B 輪 $140M(a16z/BEV);40GW 年產能廠、2027 試產;>50GW「興趣」≠訂單。</p><span class="conf c-high">高(融資)</span></div>
+    <div class="card" data-cat="gray"><h4>Megmeet <span class="code">002851.SZ</span></h4><p>官方名單唯一中國電源廠;GB200 電源三供之一;570kW 800V rack;2025 獲利滑鐵盧(中媒);政策風險時鐘 2026/11。</p><span class="conf c-high">高(名單)</span></div>
+    <div class="card" data-cat="gray"><h4>Musashi / LS Materials / Skeleton</h4><p>超容三強:Musashi LIC 入 GB200(TrendForce 轉述)+Flex CESS 投產;LS MW 級已交付;Skeleton GrapheneGPU。皆無具名 NVIDIA 訂單。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="watch"><h4>凱美 <span class="code">2375</span></h4><p><b>法說親口:「超級電容……短期內沒有開發計畫」</b>。AI 實績在電阻(佔電阻 9%)。超容概念=反證。</p><span class="conf c-low">反證</span></div>
+    <div class="card" data-cat="watch"><h4>立隆電 <span class="code">2472</span> / 健策 <span class="code">3653</span> / 信邦 <span class="code">3023</span></h4><p>立隆:AI 著力在固液混合電容、超容無佐證;健策:佐證在均熱片(熱管理),電源銅件無佐證;信邦:重心浸沒式冷卻,電源線束僅媒體層級。</p><span class="conf c-un">未佐證(本題)</span></div>
+    <div class="card" data-cat="watch"><h4>全漢 3015 / 僑威 3078 / 博大 8109 / 金利 5383 / 乙盛 5243</h4><p>全漢:展示無出貨佐證;僑威:動能是 RTX 50 PC 電源;博大:自述 AI 伺服器非主力;金利/乙盛:busbar 查無任何佐證。</p><span class="conf c-un">未佐證</span></div>
+    <div class="card" data-cat="watch"><h4>⚠️ 死代號警示</h4><p><b>美磊 3068</b>:2018 併入奇力新已下市;<b>奇力新 2456</b>:2022 併入國巨已下市;<b>「台慶科 6155」是張冠李戴</b>(正確 3357)。仍列這些代號的名單=過時資訊。</p><span class="conf c-low">過時</span></div>
+  </div>
+</div></section>
+
+<!-- 08 難度評分 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">逐環節技術難度評分</h2>
+  <p class="subtitle">維度:技術門檻 / 驗證週期 / 供給稀缺 / 規格變動風險,0~5 分(5=最難)。評分為推估,僅供參考。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>技術門檻</th><th>驗證週期</th><th>供給稀缺</th><th>規格風險</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>灰區整流/SST</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>直流配電/固態斷路器</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>電容儲能/超容</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>Power shelf/PSU</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>板級磁件 TLVR/主變壓器</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>BBU 模組</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>busbar/互連</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">難度評分依公開技術文獻與查證證據推估,僅供參考。</p>
+
+  <h3>公司受惠強度評分(只列有查證信心者,總分排序)</h3>
+  <p class="subtitle">維度:AI/HPC 受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>台達電(2308)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">23.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>光寶科(2301)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">20</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>貿聯-KY(3665)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">19.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>AES-KY(6781)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">19</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>順達(3211)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>康舒(6282)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">15</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>新盛力(4931)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">15</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>臺慶科(3357)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">15.5</span></td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 進度速查 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表</h2>
+  <p class="subtitle">平台錨:Rubin NVL72 全面投產(2H26 出貨)→ Kyber+800VDC 2027 全面量產 → 灰區 2028-29。公司時程皆為法說/公告自述或外資訪查,非財測。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司</th><th>環節定位</th><th>進度/時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>台達電 2308</td><td>±400V/800V rack/SST</td><td>±400V 2026 率先出貨;800V Q3 量產(提前)、Q4 北美 Hyperscaler、2027 主貢獻;SST 送樣四大 CSP、FY27 顯著貢獻</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>光寶科 2301</td><td>110kW shelf/800V rack</td><td>110kW 2026/6 量產;800V rack Q3 驗證/Q4 量產(原 2027Q1 提前);2.5kW DC-DC brick 同步</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>康舒 6282</td><td>33kW/72kW shelf</td><td>33kW 上半年量產(單源)、72kW 認證中;HVDC 機櫃 2027</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>群電 6412</td><td>AI 電源</td><td>Q2 送樣、H2 升溫</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>AES-KY 6781</td><td>HVDC BBU</td><td>2026 下旬量產;capex +20-30% 擴產</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>順達 3211</td><td>800V BBU</td><td>2027 量產(股東會文件);8/12kW 2026 小量(法人)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>系統電 5309</td><td>BBU 11/5.5/3kW</td><td>Q2-Q3 量產;25kW HVDC 2027-28</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>加百裕 3323</td><td>12kW BBU</td><td>2026H1 認證/H2 樣品/2027 大量出貨</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Vertiv</td><td>灰區 800VDC 組合</td><td>2H26 上市、對齊 Rubin Ultra 2027</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Heron Power</td><td>SST</td><td>2027 年初試產、兩年爬坡</td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 10 估值試算 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法+互動計算機。下方預設值為<b>台達電(2308)真實基期數字</b>(2025 營收 5,549 億、淨利率 ~10.8%、股本約 25.9 億股)——成長率/PE 為說明性輸入、非財測。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>台達/光寶/貿聯(有獲利主體)</td><td>FactSet 共識 2026:台達 39.3、光寶 8.5、貿聯 66.37</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG</td><td>高成長段(台達 2026 獲利增 ~70%)</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>EV/EBITDA</b></td><td>(EBITDA×倍數−淨負債)÷股數</td><td>跨國比 Vertiv/Eaton</td><td>查同業</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業估值+潛在貢獻折現</td><td>系統電/加百裕/健和興(2027 才放量)</td><td>多屬此類</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(預設=台達電基期,請自行調整)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="5549"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="30"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="11"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="25.9"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="45"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="60"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">說明性輸入、非財測。2026/6/12 台達電收盤 2,215 元、FactSet 2026 EPS 中位 39.3 → 隱含 PE 約 56 倍;法人目標價 2,200-2,800 元隱含 2027 EPS(59 元)約 37-47 倍。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- 參考資料 -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經兩輪對抗式查證。完整 60+ 來源清單見深色版報告;此處列關鍵 20 筆。</p>
+  <ul class="refs">
+    <li><b>NVIDIA 官方</b> — 800V HVDC 架構白皮書(2025/5)/OCP 生態系(2025/10)/GB300 穩定供電(2025/7)/Vera Rubin Pod(2026/3)<span class="q">primary</span> · <a href="https://developer.nvidia.com/blog/nvidia-800-v-hvdc-architecture-will-power-the-next-generation-of-ai-factories/" target="_blank">連結1</a> <a href="https://developer.nvidia.com/blog/building-the-800-vdc-ecosystem-for-efficient-scalable-ai-factories/" target="_blank">2</a> <a href="https://developer.nvidia.com/blog/how-new-gb300-nvl72-features-provide-steady-power-for-ai/" target="_blank">3</a> <a href="https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/" target="_blank">4</a></li>
+    <li><b>Yole Group</b> — 資料中心 PSU $140 億@2030、四強佔半、台達設計領導者<span class="q">primary</span> · <a href="https://www.yolegroup.com/press-release/artificial-intelligence-ai-surge-pushes-data-center-psu-market-to-14-billion/" target="_blank">連結</a></li>
+    <li><b>台達 GTC 2026 官方稿</b> — 660kW rack(480kW BBU)/18.5kW PSU/SST 98.5%<span class="q">primary</span> · <a href="https://www.prnewswire.com/news-releases/deltas-power-cooling-and-microgrid-solutions-showcased-at-nvidia-gtc-to-bolster-the-800-vdc-architecture-of-next-gen-ai-factories-302714372.html" target="_blank">連結</a></li>
+    <li><b>光寶官方</b> — COMPUTEX 2026(800VDC 液冷 rack 實機)+GTC 2026<span class="q">primary</span> · <a href="https://www.liteon.com/zh-tw/news/press-center/content/liteon-computex-2026" target="_blank">連結</a></li>
+    <li><b>貿聯官方</b> — 800V 連接器/線纜/busbar 範圍+Interplex 收購(中央社)<span class="q">primary</span> · <a href="https://www.bizlinktech.com/news/bizlink-advances-800-vdc-power-solutions-for-ai-infrastructure-with-nvidia" target="_blank">連結</a></li>
+    <li><b>Vertiv / ABB / Schneider / Google(Mt Diablo)官方稿</b> — 灰區與雙標準<span class="q">primary</span> · <a href="https://www.vertiv.com/en-us/about/news-and-events/corporate-news/from-vision-to-readiness-vertiv-collaborates-with-nvidia-to-advance-800-vdc-platform-designs-to-power-the-next-generation-of-ai-factories/" target="_blank">V</a> <a href="https://new.abb.com/news/detail/129805/abb-to-develop-next-generation-ai-data-centers-with-nvidia" target="_blank">A</a> <a href="https://www.businesswire.com/news/home/20251024311492/en/Schneider-Electric-Highlights-Innovation-in-800-VDC-Power-Systems-in-Support-of-NVIDIAs-Next-Generation-GPUs" target="_blank">S</a> <a href="https://cloud.google.com/blog/topics/systems/enabling-1-mw-it-racks-and-liquid-cooling-at-ocp-emea-summit" target="_blank">G</a></li>
+    <li><b>SemiAnalysis</b> — Vera Rubin Co-Design(110kW=6×18.3kW、5000A 液冷 busbar)+800VDC Revolution(39GW、$110 億 TAM、DC 電弧)<span class="q">secondary</span> · <a href="https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution" target="_blank">1</a> <a href="https://newsletter.semianalysis.com/p/inside-the-800vdc-revolution-part" target="_blank">2</a></li>
+    <li><b>法說整理(富果/StockFeel/媒體)</b> — 台達 2025Q4+2026Q1、光寶 2026Q1、凱美 2025/8(超容否認)、系統電、康舒<span class="q">secondary</span> · <a href="https://blog.fugle.tw/post/earnings-call-2308-2026-02-26" target="_blank">台達</a> <a href="https://blog.fugle.tw/post/earnings-call-2301-2026-04-29" target="_blank">光寶</a> <a href="https://blog.fugle.tw/post/earnings-call-2375-2025-08-27" target="_blank">凱美</a></li>
+    <li><b>BBU 三方口徑</b> — DIGITIMES $3.7 億(窄)/Valuates $80 億(全)/AdlerTechLabs $28 億(低透明)<span class="q">secondary</span> · <a href="https://www.compotechasia.com/a/press/2025/0224/59934.html" target="_blank">D</a> <a href="https://www.prnewswire.com/news-releases/battery-backup-unit-bbu-market-to-reach-usd-16-6-billion-by-2031-at-11-0-cagr--valuates-reports-302699745.html" target="_blank">V</a></li>
+    <li><b>台泥/Molicel</b> — 法說(5kW BBU 出貨 CSP)+P50S/P50B 官方<span class="q">secondary</span> · <a href="https://news.cnyes.com/news/id/5787866" target="_blank">法說</a> <a href="https://www.molicel.com/inr-21700-p50b/" target="_blank">P50B</a></li>
+    <li><b>TrendForce</b> — KEMET AVL/Musashi LIC/BBU 非 GB300 標配<span class="q">secondary</span> · <a href="https://www.trendforce.com/news/2025/03/25/news-nvidia-gb300-ignites-supercapacitor-push-among-leading-taiwanese-suppliers/" target="_blank">連結</a></li>
+    <li><b>郭明錤 X</b> — GB300 超容移除調研(2025/2)<span class="q">secondary</span> · <a href="https://x.com/mingchikuo/status/1889911472601657709" target="_blank">連結</a></li>
+    <li><b>FactSet 共識(鉅亨)+TWSE/TPEx 官方行情</b> — EPS 預估與 YTD<span class="q">secondary</span> · <a href="https://news.cnyes.com/news/id/6440141" target="_blank">台達</a> <a href="https://news.cnyes.com/news/id/6437623" target="_blank">光寶</a> <a href="https://news.cnyes.com/news/id/6464126" target="_blank">貿聯</a></li>
+  </ul>
+  <div class="callout risk" style="margin-top:18px">⚠️ <b>未通過查證(請勿當事實):</b>凱美超容概念(公司法說否認)/美磊 3068・奇力新 2456(死代號)/「台慶科=6155」(正確 3357)/詠昇磁件說(實為連接器廠)/GB300 超容層架說(官方:電解電容)/台達 2025Q4 已出貨 800V 說(查無)/光寶 5MW 方案(官方最高 >1.5MW)/800V 櫃 ASP 40-50 萬美元(未經原始報告核對)/金利・乙盛 busbar(查無佐證)。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。alphamemo.ai 經測試無法無頭存取,法說內容以財經媒體報導替代。</p>
+</div></section>
+
+<footer class="container"><p>AI 伺服器電源鏈 製程鏈 × 供應鏈研究指南 · 2026/06 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>

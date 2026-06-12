@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!-- 玻璃基板 製程鏈×供應鏈 研究指南 — industry-investment-guide 完整結構 + 對抗式查證 -->
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玻璃基板 製程鏈 × 供應鏈 研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#2563eb; --accent-soft:#dbeafe;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#eff4ff,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:820px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.card .ico{font-size:22px}
+.card p{color:var(--ink-soft);font-size:14px}
+.card ul{color:var(--ink-soft);font-size:13.5px;padding-left:18px;margin-top:4px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row.tg{border-left-color:var(--tw)}
+.chain-row .lvl{font-weight:800;font-size:14px}
+.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:140px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:760px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer.hl{border-color:var(--accent);border-left:4px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),var(--surface))}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1.4}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:54px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:24px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:#1e40af;font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">玻璃基板<span>製程鏈研究</span></div>
+    <nav class="nav-links">
+      <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱門</a>
+      <a href="#categories">核心製程</a><a href="#application">關鍵應用</a><a href="#stocklogic">族群邏輯</a>
+      <a href="#companies">公司圖譜</a><a href="#radar">評分表</a><a href="#capacity">進度速查</a>
+      <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <h1>玻璃基板 製程鏈 <em>× 供應鏈研究指南</em> 2026</h1>
+    <p class="lead">玻璃核心載板（GCS / TGV）是 Intel 2023 帶頭的下世代 AI/HPC 先進封裝載板，但屬 2027+ 長線。注意：市面常把<strong>「T-Glass 高階玻纖布」（台玻/富喬）</strong>當成玻璃基板股，其實它是 ABF 載板的補強材、另一條鏈，卻是現在就缺料漲價的短期受惠軸線。本指南拆解製程、對照供應鏈、區分兩條鏈，並對每個宣稱掛查證信心。</p>
+    <div class="meta">
+      <span class="badge b-accent">驅動力：AI/HPC 先進封裝</span>
+      <span class="badge">市場：台灣 + 國外（排除中國）</span>
+      <span class="badge b-warn">更新：2026/06</span>
+      <span class="badge b-ok">3 輪查證：75→68 通過 / 7 反駁</span>
+    </div>
+  </div>
+</div>
+
+<!-- 1 總覽 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽：兩條不能混為一談的鏈</h2>
+  <p class="subtitle">「玻璃基板」題材其實混了兩條不同供應鏈，受惠股、時程、邏輯都不同。先分清楚，才不會把玻纖布股當載板股買。</p>
+  <div class="grid cols-2">
+    <div class="card" style="border-left:4px solid var(--accent)"><h4><span class="ico">🔲</span>A. 玻璃核心載板 GCS / TGV <span class="conf c-high">本報告主體</span></h4>
+      <p>載板<b>核心層</b>換玻璃，~10× 互連密度。屬 <b>2027+ 長線</b>（TSMC 2028-29、Samsung 2027），GCS 市場 2030 僅「數億美元」。</p>
+      <ul><li>台廠：欣興 3037、群創 3481、友達 2409、鈦昇 8027、TSMC</li></ul>
+    </div>
+    <div class="card" style="border-left:4px solid var(--tw)"><h4><span class="ico">🧵</span>B. T-Glass 高階玻纖布 <span class="conf c-high">短期受惠</span></h4>
+      <p>ABF/BT 載板的<b>補強纖維布</b>（CCL 材料），因 AI 需求 <b>2025 Q4 起缺料漲價</b>、延續 2026-27。<b>現在就有營收</b>，但屬另一條鏈。</p>
+      <ul><li>台廠：台玻 1802、富喬 1815、南亞</li></ul>
+    </div>
+  </div>
+  <div class="callout warn">⚠️ 常見誤解：把台玻、富喬當「玻璃基板製造股」。實則它們是<b>玻纖布（補強材）</b>受惠者，不是玻璃<b>核心載板</b>製造商。兩者供應鏈、時程不同。</div>
+</div></section>
+
+<!-- 2 供應鏈地圖 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖（兩條鏈）</h2>
+  <p class="subtitle">藍框＝玻璃載板鏈（四層）；紅框＝T-Glass 玻纖布鏈（短期）。<span class="conf c-high">綠徽＝獨立佐證</span>，其餘市場列舉、待查。</p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游<small>材料/設備</small></div><div class="items">
+      <span class="badge">玻璃原料 Corning/AGC/NEG/SCHOTT</span><span class="badge b-accent">TGV 設備 LPKF</span><span class="badge b-accent">金屬化 Applied Materials</span>
+      <span class="badge b-accent">量測 Onto/KLA</span><span class="badge b-tw">鈦昇 8027(TGV設備)</span>
+      <span class="badge">帆宣 6196?</span><span class="badge">雷科 6207?</span><span class="badge">東捷 8064?</span><span class="badge">群翊 6664?</span><span class="badge">悅城 6405?</span><span class="badge">牧德 3563?</span><span class="badge">由田 3455?</span>
+    </div></div>
+    <div class="chain-row"><div class="lvl">中游<small>玻璃載板製造</small></div><div class="items">
+      <span class="badge b-accent">欣興 3037</span><span class="badge b-accent">群創 3481</span><span class="badge b-accent">友達 2409</span>
+      <span class="badge b-accent">Absolics/SKC</span><span class="badge b-accent">Samsung SEMCO</span><span class="badge b-accent">DNP</span><span class="badge b-accent">AT&amp;S</span><span class="badge">南電 8046?</span><span class="badge">健鼎 3044?</span>
+    </div></div>
+    <div class="chain-row"><div class="lvl">整合<small>需求火車頭</small></div><div class="items">
+      <span class="badge b-accent">台積電 TSMC（CoPoS）</span><span class="badge">Intel（自封自用+授權）</span><span class="badge b-tw">iST 宜特（失效分析）</span>
+    </div></div>
+    <div class="chain-row"><div class="lvl">終端<small>應用</small></div><div class="items">
+      <span class="badge b-ok">AI/HPC 加速器</span><span class="badge b-ok">資料中心</span><span class="badge b-ok">CPO 共封裝光學</span><span class="badge b-ok">5G/6G</span>
+    </div></div>
+    <div class="chain-row tg"><div class="lvl" style="color:var(--tw)">T-Glass 鏈<small>玻纖布（短期/另一條）</small></div><div class="items">
+      <span class="badge">龍頭 Nittobo 日東紡(壟斷~90%)</span><span class="badge b-tw">台玻 1802(全球第三家 Low-Dk)</span><span class="badge b-tw">富喬 1815(Low-CTE)</span><span class="badge b-tw">南亞</span>
+      <span class="badge b-ok">→ 供 ABF/BT IC 載板（不是玻璃載板）</span>
+    </div></div>
+  </div>
+  <p class="subtitle" style="margin-top:12px;font-size:13px">註：標「?」者為市場列舉、玻璃<b>載板</b>角色未獲獨立佐證。股號核對：8046＝<b>南電（南亞電路板）</b>，矽品為 <b>2325</b>。</p>
+</div></section>
+
+<!-- 3 為何熱門 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Now</span>
+  <h2 class="title">為何熱門 + 選股節奏</h2>
+  <p class="subtitle">玻璃載板是長線；真正「現在就受惠」的是玻纖布缺料。三段節奏要分清楚。</p>
+  <div class="flow">
+    <div class="step"><b>① 玻纖布（現在）</b><small>T-Glass 缺料漲價，2025Q4 起，台玻/富喬立即受惠</small></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>② 設備（建線期）</b><small>客戶建玻璃載板線，鈦昇等 TGV 設備接單</small></div>
+    <div class="arrow">→</div>
+    <div class="step"><b>③ 玻璃載板（2027-28）</b><small>欣興等載板營收才放大，彈性最大、時程風險也最大</small></div>
+  </div>
+  <h3>關鍵數據點（已查證）</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>互連密度</p><h4>~10×</h4></div>
+    <div class="card"><p>GCS 市場 2030E</p><h4>數億美元<span style="font-size:11px;color:var(--ink-soft)"> (Yole，仍萌芽)</span></h4></div>
+    <div class="card"><p>BT 載板報價 Q3'25</p><h4>+20~30%<span style="font-size:11px;color:var(--ink-soft)"> Q4 再+10%</span></h4></div>
+    <div class="card"><p>T-Glass 龍頭市佔</p><h4>~90%<span style="font-size:11px;color:var(--ink-soft)"> Nittobo</span></h4></div>
+  </div>
+  <h3>有機載板 vs 玻璃載板</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>面向</th><th>有機 ABF 載板（現行）</th><th>玻璃核心載板（下世代）</th></tr></thead>
+    <tbody>
+      <tr><td>互連密度</td><td>穿孔間距 ~325µm</td><td>~100µm（約 10× 密度）</td></tr>
+      <tr><td>訊號損耗</td><td>ε″ ~0.03</td><td>ε″ ~0.001（降 &gt;50%）</td></tr>
+      <tr><td>翹曲</td><td>大尺寸翹曲明顯</td><td>跨 100mm &lt;20µm（降 ~70%）</td></tr>
+      <tr><td>成熟度/時程</td><td>量產成熟</td><td>2026 認證、2027–28 放量、良率為關鍵</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 核心：玻璃載板「會發生」但放量在 2027+；當下最確定的營收受惠在<strong>玻纖布缺料（台玻/富喬）</strong>——但題材已被市場定價（2025/11 概念股五日大漲），追高有風險。</div>
+</div></section>
+
+<!-- 4 核心製程 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心製程深度解析</h2>
+  <p class="subtitle">玻璃載板完整製程 10 環節：玻璃原料→薄化拋光→改質→<b>TGV 成孔</b>→去渣清洗→<b>金屬化 PVD</b>→<b>電鍍填銅</b>→CMP→<b>壓膜 RDL</b>→AOI。挑門檻最高 2 環節深挖。</p>
+  <h3>🕳️ 核心一：TGV 成孔</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>成孔技術</th><th>原理</th><th>特性</th><th>適用性</th></tr></thead>
+    <tbody>
+      <tr><td>機械鑽孔</td><td>實體鑽頭</td><td>孔大、易裂、慢</td><td><span class="stars">★☆☆☆☆</span></td></tr>
+      <tr><td>雷射燒蝕</td><td>雷射直接打穿</td><td>熱影響區、微裂痕</td><td><span class="stars">★★☆☆☆</span></td></tr>
+      <tr><td><b>雷射改質+濕蝕刻 (LIDE)</b></td><td>雷射改質→濕蝕刻（改質區快 100×）</td><td>無接觸、低裂紋、沙漏孔型、面板級 600×600mm</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>純化學蝕刻</td><td>遮罩+濕蝕刻</td><td>孔型控制難</td><td><span class="stars">★★★☆☆</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>LPKF <span class="code">德國</span></h4><p>LIDE 製程開發者（已查證 LIDE=LPKF）、TGV 關鍵專利多。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>鈦昇 <span class="code">8027</span></h4><p>台廠 TGV 雷射鑽孔+電漿清洗一站式、E-Core 大聯盟、8,000 孔/秒、AR 10。<span class="conf c-high">高</span></p></div>
+  </div>
+  <h3>🔩 核心二：金屬化 + 電鍍填銅</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>填銅路線</th><th>方式</th><th>優勢</th><th>挑戰</th></tr></thead>
+    <tbody>
+      <tr><td><b>全填銅 filled</b></td><td>bottom-up 電鍍滿填</td><td>導電佳、機械強</td><td>空洞、銅 overburden、CTE 應力</td></tr>
+      <tr><td><b>側壁鍍 conformal</b></td><td>僅鍍孔壁+介電質填充</td><td>應力低、似有機 PTH</td><td>密度/電性受限</td></tr>
+    </tbody>
+  </table></div>
+  <div class="card"><h4>Applied Materials <span class="code">美國</span></h4><p>金屬化/PVD，經與 SKC 合資 Absolics 投入量產；沙漏孔倒角需 PVD 翻面確保晶種全覆蓋。<span class="conf c-high">高</span>。電鍍藥水對應 Atotech/MKS（<span class="conf c-un">分工未逐項佐證</span>）。</p></div>
+</div></section>
+
+<!-- 5 關鍵應用 -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Application</span>
+  <h2 class="title">關鍵應用：AI 晶片先進封裝堆疊</h2>
+  <p class="subtitle">玻璃基板在封裝中取代「有機核心載板」這一層，承上（晶粒/HBM）啟下（PCB）。標示各層用到玻璃基板與玻纖布的環節。</p>
+  <div class="stack">
+    <div class="layer"><b>① 運算晶粒 GPU/xPU/Chiplet + HBM</b><div class="uses">多晶粒異質整合，對載板平整度/密度要求最高</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② 中介層 Interposer（矽/玻璃）</b><div class="uses">細線路重佈；玻璃中介層為 CoPoS 2030 最難路線</div></div>
+    <div class="down">↓</div>
+    <div class="layer hl"><b>③ 玻璃核心載板 GCS ★ 本產業核心</b><div class="uses">用到：玻璃材料 · TGV 成孔 · 金屬化電鍍 · 壓膜 RDL · AOI（2027+）</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ PCB 主機板（ABF/BT 載板）</b><div class="uses">用到：<b>T-Glass 高階玻纖布</b>補強（台玻/富喬，現在就缺料）</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論：玻璃載板是 AI 超級晶片「越做越大」後的承載地基（長線）；而支撐當下 ABF 載板的 T-Glass 玻纖布是現在的瓶頸與受惠點。兩者在堆疊中位置不同、時程不同。</div>
+</div></section>
+
+<!-- 6 族群邏輯 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <p class="subtitle">四大族群的催化與節奏不同；務必分清「現在受惠」與「2027 才放量」。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td><b>玻纖布（台玻1802/富喬1815）</b></td><td>T-Glass 缺料、ABF 漲價</td><td><b>現在立即</b>：滿單到 2027、ASP 升</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td><b>TGV 設備（鈦昇8027/LPKF）</b></td><td>客戶建線、設備驗證</td><td>建線期接單，單筆波動大</td><td><span class="conf c-high">高（角色）</span></td></tr>
+      <tr><td><b>玻璃載板（欣興3037）</b></td><td>客戶認證、CoPoS 路線圖</td><td><b>2027–28</b> 營收才放大，彈性最大</td><td><span class="conf c-high">高（角色）</span></td></tr>
+      <tr><td><b>面板廠跨界（群創3481/友達2409）</b></td><td>面板級封裝認證</td><td>既有產線再利用、早期</td><td><span class="conf c-high">高（角色）</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險：① 玻璃載板<b>時程遞延</b>（良率/成本/認證任一卡關）；② T-Glass 題材已被市場定價（2025/11 概念股五日大漲，建榮+47%、台玻+33.6%、富喬+28.6%），<b>追高風險</b>；③ 多檔「概念股」（帆宣/東捷/雷科/群翊/悅城/南電/健鼎）玻璃載板實質角色<b>未獲獨立佐證</b>；④ 廠商自述數據缺第三方驗證。</div>
+</div></section>
+
+<!-- 7 公司圖譜 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選；徽章標查證信心 <span class="conf c-high">高</span>／<span class="conf c-un">未佐證</span>，並標所屬鏈（載板 vs 玻纖布）。</p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="tglass">T-Glass 玻纖布</button>
+    <button data-f="maker">玻璃載板製造</button>
+    <button data-f="equip">設備</button>
+    <button data-f="inspect">檢測/整合</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="tglass"><h4>台玻 <span class="code">1802</span></h4><p>全球第三家 Low-Dk 玻纖布、滿單到 2027、22.5 億擴產。</p><span class="badge b-tw">玻纖布</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="tglass"><h4>富喬 <span class="code">1815</span></h4><p>Low-CTE 2025Q4 小量出貨、2026 逐季放量（偏題材）。</p><span class="badge b-tw">玻纖布</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="tglass"><h4>南亞 <span class="code">1303</span></h4><p>T-glass 概念股之一（2025/11 大漲行情）。</p><span class="badge b-tw">玻纖布</span> <span class="conf c-med">中</span></div>
+    <div class="card" data-cat="maker"><h4>欣興 <span class="code">3037</span></h4><p>玻璃載板核心廠，對接 TSMC CoPoS、2026 Q1 樣品。</p><span class="badge b-accent">載板</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>群創 <span class="code">3481</span></h4><p>面板廠跨界攻 CoPoS、目標 2026 認證。</p><span class="badge b-accent">載板</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>友達 <span class="code">2409</span></h4><p>RDL/光通訊累積玻璃製程。</p><span class="badge b-accent">載板</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>Absolics/SKC <span class="code">美/韓</span></h4><p>全球首座玻璃載板量產廠（與 AMAT 合資）。</p><span class="badge b-accent">載板</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>Samsung/DNP/AT&amp;S <span class="code">韓日奧</span></h4><p>國際載板廠：SEMCO 2027、DNP FY2028、AT&amp;S 原型中。</p><span class="badge b-accent">載板</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>南電 / 健鼎 <span class="code">8046/3044</span></h4><p>ABF/BT 載板、PCB；玻璃載板布局屬市場列舉。</p><span class="badge b-accent">載板</span> <span class="conf c-un">未佐證</span></div>
+    <div class="card" data-cat="equip"><h4>鈦昇 <span class="code">8027</span></h4><p>TGV 雷射鑽孔+電漿清洗一站式、E-Core 大聯盟。</p><span class="badge b-tw">設備</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="equip"><h4>LPKF / AMAT <span class="code">德/美</span></h4><p>LIDE 成孔 / 金屬化 PVD（經 Absolics）。</p><span class="badge b-accent">設備</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="equip"><h4>帆宣/東捷/雷科 <span class="code">6196/8064/6207</span></h4><p>傳 LIDE 整合/FOPLP 雷射/雷射加工。</p><span class="badge">設備</span> <span class="conf c-un">未佐證</span></div>
+    <div class="card" data-cat="equip"><h4>群翊/悅城 <span class="code">6664/6405</span></h4><p>傳壓膜烘烤 / 薄化拋光。</p><span class="badge">設備</span> <span class="conf c-un">未佐證</span></div>
+    <div class="card" data-cat="inspect"><h4>Onto / KLA <span class="code">美</span></h4><p>TGV 缺陷量測/檢測（技術權威）。</p><span class="badge b-accent">檢測</span> <span class="conf c-high">高</span></div>
+    <div class="card" data-cat="inspect"><h4>牧德/由田 <span class="code">3563/3455</span></h4><p>AOI 檢測（市場列舉）。</p><span class="badge">檢測</span> <span class="conf c-un">未佐證</span></div>
+    <div class="card" data-cat="inspect"><h4>台積電 / iST <span class="code">台</span></h4><p>CoPoS 需求火車頭 / TGV 失效分析。</p><span class="badge b-accent">整合</span> <span class="conf c-high">高</span></div>
+  </div>
+  <p class="disclaimer">「未佐證」＝該公司在玻璃載板的角色僅市場列舉、未取得獨立佐證，不代表沒有角色但不應直接當事實。股號核對：8046＝南電、矽品＝2325、群創＝3481、友達＝2409。</p>
+</div></section>
+
+<!-- 8 評分表 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">評分表（製程難度 + 公司受惠）</h2>
+  <h3>① 逐環節技術難度（滿分 25）</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>良率</th><th>設備稀缺</th><th>熱/應力</th><th>量產成熟</th><th>總分</th></tr></thead>
+    <tbody>
+      <tr><td><b>④ TGV 成孔</b></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td><b>⑦ 電鍍填銅</b></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">21</span></td></tr>
+      <tr><td>⑥ 金屬化 PVD / ⑨ 壓膜 RDL</td><td colspan="5" style="color:var(--ink-soft)">各約 19（PVD 倒角覆蓋；RDL 的 CTE 匹配/翹曲）</td><td><span class="tot">19</span></td></tr>
+      <tr><td>① 玻璃原料 / ⑩ AOI 檢測</td><td colspan="5" style="color:var(--ink-soft)">17 / 15（無缺陷大玻璃；透明反射檢測難）</td><td><span class="tot">15-17</span></td></tr>
+      <tr><td>②③⑤⑧ 薄化/改質/清洗/CMP</td><td colspan="5" style="color:var(--ink-soft)">難度中等，非主要瓶頸</td><td><span class="tot">11-13</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>② 公司受惠強度（僅列有查證信心者，滿分 25）</h3>
+  <p class="subtitle" style="font-size:13px">⚠ 兩條鏈不可直接比較：台玻/富喬＝玻纖布（現在）、欣興/鈦昇/群創/友達＝玻璃載板（2027+）。EPS/capex 未獲查證，不納入。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司（股號）</th><th>鏈</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td><b>台玻 1802</b></td><td>玻纖布</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td><b>欣興 3037</b></td><td>載板</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">21</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td><b>鈦昇 8027</b></td><td>載板設備</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">19</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td><b>富喬 1815</b></td><td>玻纖布</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">18.5</span></td><td><span class="conf c-high">高（偏題材）</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">評分為推估，僅供參考，不構成投資建議。群創/友達角色有佐證、時程偏早期，總分約 16。</p>
+</div></section>
+
+<!-- 9 進度速查 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">進度速查表</h2>
+  <p class="subtitle">各家環節定位、進度與查證。良率是玻璃載板放量閘門。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司</th><th>鏈/環節</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>台玻 1802</td><td>T-Glass 玻纖布</td><td>全球第三家 Low-Dk、滿單到 2027、22.5 億擴產 4→12 條、2026 倍增（IR/市場彙整）</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>富喬 1815</td><td>T-Glass 玻纖布</td><td>Low-CTE 2025Q4 小量出貨、2026 逐季放量</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>台積電 TSMC</td><td>CoPoS 整合</td><td>2026 試產、高階最快 2028；瓶頸良率</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>欣興 3037</td><td>玻璃載板</td><td>2026 Q1 樣品、最樂觀 2027–28 量產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>鈦昇 8027</td><td>TGV 設備</td><td>2023 通過製程驗證、2026 規劃小量產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Samsung/DNP/Absolics/AT&amp;S</td><td>國際載板</td><td>SEMCO 2027、DNP FY2028、Absolics 已送樣、AT&amp;S 原型中</td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台玻/富喬數字屬公司 IR/市場彙整（2025/11–2026/01），非公司正式財測。各股 EPS/capex 本輪未獲獨立查證。</p>
+</div></section>
+
+<!-- 10 估值試算 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算（工具）</h2>
+  <p class="subtitle">玻纖布（台玻/富喬）＝現有營收受惠；玻璃載板（欣興等）＝2027+ 選擇權。下方計算機為<b>示意預設</b>，請自行填入標的真實財務數字（本輪未取得經查證的 EPS/capex）。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>玻纖布等已獲利者</td><td>歷史區間+成長溢價</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>高成長</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>EV/EBITDA</b></td><td>(EBITDA×倍數−淨負債)÷股數</td><td>重資本載板廠</td><td>載板約 8–15x</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業估值 + 玻璃載板潛在貢獻折現</td><td>欣興等 2027 才放量者</td><td>避免一次 plug-in 滿產</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機（示意預設，非財測）</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="100"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="20"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="12"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="15"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="20"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="20"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具，預設值為示意非個股財測。各股 2026E/2027E EPS、欣興 capex 60→254 億等本輪<b>未獲獨立查證</b>，不應據以估值。本頁僅供研究參考，不構成投資建議。</p>
+</div></section>
+
+<!-- 參考資料 -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 3 輪對抗式查證（2026/06 擷取）。品質：primary/secondary/blog。</p>
+  <ul class="refs">
+    <li><b>Intel Newsroom</b> — Glass substrates（2023/09）<span class="q">primary</span> · <a href="https://newsroom.intel.com/" target="_blank">連結</a></li>
+    <li><b>Onto Innovation</b> — The Long Climb: TGV to HVM<span class="q">primary</span> · <a href="https://ontoinnovation.com/resources/the-long-climb-bringing-through-glass-vias-tgv-to-high-volume-manufacturing/" target="_blank">連結</a></li>
+    <li><b>LPKF</b> — LIDE for Glass Core Substrates（已證實 LIDE=LPKF）<span class="q">primary</span> · <a href="https://lide.lpkf.com/en/applications/glass-core-substrates" target="_blank">連結</a></li>
+    <li><b>ScienceDirect</b> — 玻璃基板綜述<span class="q">primary</span> · <a href="https://www.sciencedirect.com/science/article/abs/pii/S0026271424001574" target="_blank">連結</a></li>
+    <li><b>iST 宜特</b> — TGV Failure Analysis<span class="q">primary</span> · <a href="https://www.istgroup.com/en/tech_20250909_tgv-failure-analysis/" target="_blank">連結</a></li>
+    <li><b>Yole</b> — 先進載板 2030 達 310 億（GCS 單獨僅數億）<span class="q">primary</span> · <a href="https://www.yolegroup.com/press-release/pushed-by-glass-core-and-high-end-ics-substrates-for-ai-the-advanced-ic-substrate-market-reaches-31-billion-by-2030/" target="_blank">連結</a></li>
+    <li><b>SEMI / Global Net</b> — GCS 市場（CAGR 67.2%、2028 起量產）<span class="q">primary</span> · <a href="https://www.semi.org/en/semi-press-release/semi-and-global-net-corp-release-new-report-on-glass-core-substrate-market-and-development-trends-for-semiconductors" target="_blank">連結</a></li>
+    <li><b>TrendForce</b> — Glass Substrate Development（TSMC 2028-29、Samsung 2027）<span class="q">primary</span> · <a href="https://insights.trendforce.com/p/glass-substrate-development" target="_blank">連結</a></li>
+    <li><b>TrendForce</b> — Glass fiber fabric / 為何 T-Glass 關鍵（Nittobo 壟斷、台玻/富喬）<span class="q">secondary</span> · <a href="https://www.trendforce.com/news/2025/11/24/news-what-is-glass-fiber-fabric-and-why-is-t-glass-critical-for-ai-servers-a-deep-dive/" target="_blank">連結</a></li>
+    <li><b>經濟日報</b> — ABF 接棒 BT 漲價，點名台玻、富喬<span class="q">secondary</span> · <a href="https://money.udn.com/money/story/5607/9114578" target="_blank">連結</a></li>
+    <li><b>工商時報</b> — BT 報價 Q3 漲 20-30%、Q4 再漲一成<span class="q">secondary</span> · <a href="https://www.ctee.com.tw/news/20251028700091-439901" target="_blank">連結</a></li>
+    <li><b>TechNews</b> — T-Glass/Low-CTE 是什麼<span class="q">secondary</span> · <a href="https://technews.tw/2025/11/17/what-is-tglass-and-what-is-low-dk-low-cte/" target="_blank">連結</a></li>
+    <li><b>TechNews</b> — Low-CTE（台玻/富喬進度，2026/01）<span class="q">secondary</span> · <a href="https://finance.technews.tw/2026/01/19/low-cte/" target="_blank">連結</a></li>
+    <li><b>TechNews</b> — T-glass 概念股 6 檔 2025/11 漲幅<span class="q">secondary</span> · <a href="https://finance.technews.tw/2025/11/17/t-glass/" target="_blank">連結</a></li>
+    <li><b>SK / Absolics 官方</b> — Covington 廠（與 AMAT 合資）<span class="q">primary</span> · <a href="https://eng.sk.com/" target="_blank">連結</a></li>
+    <li><b>DNP 官方</b> — 玻璃基板試產線/FY2028<span class="q">primary</span> · <a href="https://global.dnp/news/detail/20177773" target="_blank">連結</a></li>
+    <li><b>鉅亨網</b> — 鈦昇 COO 專訪（北美 IDM 客戶、2023 驗證）<span class="q">secondary</span> · <a href="https://news.cnyes.com/news/id/5700065" target="_blank">連結</a></li>
+    <li><b>經濟日報</b> — TSMC CoPoS / 欣興樣品 / 良率<span class="q">secondary</span> · <a href="https://money.udn.com/money/story/124512/9510203" target="_blank">連結</a></li>
+  </ul>
+  <div class="callout risk" style="margin-top:18px">⚠️ <b>未通過查證（請勿當事實）：</b>「鈦昇因 Intel 2026 資本支出訂單大增五成」(0-3)；「鈦昇已突破量產瓶頸/完成美系客戶驗證」(1-2)；商周台股長清單（含誤植股號）具體角色 (0-3)；「Intel 約 2027 量產」(1-2，與官方 2030 前不符)；「日東紡上修淨利 375 億、4.6 倍」(0-3)。鈦昇「北美 IDM 客戶」未具名 Intel；台玻/富喬屬<b>玻纖布鏈</b>非玻璃載板製造商；各股 EPS/capex 未獲查證。</div>
+  <p class="disclaimer">免責聲明：本指南僅供研究與教育參考，不構成投資建議。屬時間敏感領域，數據請以最新官方法說/公告為準；投資人應自行查證並評估風險，盈虧自負。股號核對：8046＝南電、矽品＝2325、群創＝3481、友達＝2409。</p>
+</div></section>
+
+<footer class="container">
+  <p>玻璃基板 製程鏈 × 供應鏈研究指南 · 2026 · Claude Code process-chain-research · 整合 3 輪對抗式查證 · 資料僅供參考，不構成投資建議</p>
+</footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 伺服器電源鏈 製程鏈 × 供應鏈 深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d;
+    --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#ffb347;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;
+    background:linear-gradient(135deg,#161b22,#2e1c10);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#08111d;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(255,179,71,.07)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:22px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>AI 伺服器電源鏈 製程鏈 × 供應鏈 深度研究報告</h1>
+  <div class="sub">54V 集中式 → 800VDC 全直流架構轉換:灰區 SST/整流配電 → Power Shelf/高瓦數 PSU → BBU/電容儲能 → 互連 busbar,逐環節技術難度、台灣與國際供應鏈對照、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期:<b>2026-06-12</b></span>
+    <span class="pill">研究方法:<b>Deep Research 兩輪(多源搜尋＋3 票對抗式查證 + 12 組聚焦補查)</b></span>
+    <span class="pill">來源數:<b>60+</b></span>
+    <span class="pill">主張驗證:<b>第一輪 25 條存活合併為 8 大發現;第二輪 150+ 條逐檔佐證</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s0">0. 投資視角四問</a>
+    <a href="#s1">1. 是什麼/原理</a>
+    <a href="#s2">2. 完整電力鏈環節</a>
+    <a href="#s3">3. 逐環節難度</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. 量產時程</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<div class="callout info"><b>一句話總結:</b>AI 機櫃功耗從 130kW 衝向 1MW,把電力架構從 54V 集中式逼向 NVIDIA 主導的 800VDC 全直流——NVIDIA 官方已定調 54V「物理上與經濟上不可行」(1MW 機櫃需 200kg 銅排、64U 電源層架)。台灣在<b>機櫃電源元件層全球主導</b>(NVIDIA 官方名單 7 家中台達/光寶/貿聯佔 3 席;Yole:台達+光寶+華為+AE 四強佔全球 PSU 過半),BBU 模組台廠寡佔;但<b>灰區設施級(SST/整流站/直流配電)由西方重電把持</b>,台達是唯一兩邊都卡位的台廠(SST 已在中國資料中心落地、美系 CSP 仍在驗證)。時程上 2H26 Rubin NVL72(仍走 50V busbar、110kW shelf)是當下放量主場,<b>2027 Kyber NVL576 才是 800VDC 元年</b>,灰區上移要等 2028-29。</div>
+
+<div class="kpi">
+  <div class="box"><div class="v">+157%</div><div class="l">800VDC 同線徑可傳功率 vs 415VAC(NVIDIA 官方,另一篇用 85% 基準,口徑見警示)</div></div>
+  <div class="box"><div class="v">110kW</div><div class="l">Rubin 世代 power shelf(3U、6×18.3kW PSU),GB200 世代僅 33kW</div></div>
+  <div class="box"><div class="v">$140 億</div><div class="l">2030 資料中心 PSU 市場(Yole 2025/7;>3kW 段 $115 億、CAGR>25%)</div></div>
+  <div class="box"><div class="v">2027</div><div class="l">Kyber NVL576 與 800VDC 資料中心全面量產同步(NVIDIA 官方)</div></div>
+</div>
+
+<!-- 0:投資視角四問 -->
+<h2 id="s0"><span class="n">0</span>投資視角四問(為什麼重要 / 故事到哪 / 市場多大 / 台灣吃多少)</h2>
+
+<div class="card">
+  <h3>💡 為什麼重要</h3>
+  <p>AI 機櫃功耗從 GB200 的 ~120-130kW(GB300 136kW)衝向 Kyber 的 600kW、規劃中的 1MW,迫使電力架構從「54V 機櫃內集中式」改為「設施端一次轉換 800VDC、全程直流配電」。這不是漸進改款而是<b>整條電力 BOM 重洗牌</b>:新增 SST 固態變壓器、固態斷路器、800V power rack、嵌入式 BBU、機櫃級電容儲能等全新品項,單櫃電源價值量倍增(媒體引法人估 800VDC 電源櫃 ASP 約 40-50 萬美元、為傳統 AC 設備近十倍——此數字未經原始報告核對,標 <span class="conf c-un">未驗證</span>)。台灣是這場架構轉換中罕見「<b>在系統層主導</b>」的環節:NVIDIA 官方 800VDC 名單 power system components 共 7 家,台達電、光寶科、貿聯-KY 佔 3 席 <span class="conf c-high">高</span>;Yole 點名台達為「次世代 PSU 設計領導者」<span class="conf c-high">高</span>。與已研究的功率元件(SiC)相鄰但不重複:增量全在模組/系統層,SiC/GaN 元件只是上游輸入。</p>
+
+  <h3>📅 故事時間軸(現在到哪、催化劑)</h3>
+  <table>
+    <tr><th>時點</th><th>事件</th><th>狀態/信心</th></tr>
+    <tr><td>2025/05</td><td>NVIDIA Computex 公布 800VDC 架構 + 初版夥伴名單(台達/光寶/Flex/Megmeet…)</td><td><span class="conf c-high">已發生・官方</span></td></tr>
+    <tr><td>2025H2-2026</td><td>GB300(54V、33kW/72kW shelf)出貨主力;負載平滑用「PSU 內建電解電容 65J/GPU」(無獨立超容層架,官方 2025/7 定調)</td><td><span class="conf c-high">已發生・官方</span></td></tr>
+    <tr><td>2026/03</td><td>GTC 2026:Vera Rubin NVL72 宣布全面投產、on track 2H26 出貨;台達展出 800VDC 全系列(660kW rack/SST/18.5kW PSU);光寶展 110kW shelf</td><td><span class="conf c-high">已發生・官方</span></td></tr>
+    <tr><td>2026/06</td><td>光寶 110kW power shelf 量產(法說 4/29 指引「6 月量產、H2 放量」);COMPUTEX 光寶首秀 800VDC 液冷 power rack 實機</td><td><span class="conf c-high">進行中・法說+官方稿</span></td></tr>
+    <tr><td>2026Q3</td><td>台達 800VDC 量產(原 Q4 提前;美系外資 6/11 通路訪查再確認)、光寶 800V rack 完成驗證</td><td><span class="conf c-med">前瞻・外資/法說</span></td></tr>
+    <tr><td>2026Q4</td><td>台達出貨 800VDC 獨立電力機櫃給北美 Hyperscaler(外資稱其為第一家);光寶 800V rack + 2.5kW DC-DC brick 開始量產</td><td><span class="conf c-med">前瞻・外資/法說</span></td></tr>
+    <tr><td>2026 下旬</td><td>AES-KY HVDC BBU 量產(法說);NVIDIA 800V 氣冷版參考設計送樣量產(SemiAnalysis)</td><td><span class="conf c-med">前瞻</span></td></tr>
+    <tr><td>2027</td><td><b>Kyber NVL576(600kW/櫃)與 800VDC 資料中心全面量產</b>;台達 800V 主要貢獻期;順達 800V BBU 量產;Heron Power SST 試產</td><td><span class="conf c-high">官方 roadmap</span></td></tr>
+    <tr><td>2028-29</td><td>配電層級從機櫃/行級上移至設施灰區(SST+大容量整流站),端到端效率 82-83% → 87-92%</td><td><span class="conf c-med">媒體彙整+NVIDIA 白皮書論述</span></td></tr>
+  </table>
+
+  <h3>📐 市場規模 / 成長率(口徑並列,勿混用)</h3>
+  <ul>
+    <li><b>資料中心 PSU:</b>2030 年 $140 億、2024 起 CAGR 15.5%;其中 >3kW 高功率段 $115 億、CAGR >25%、佔 80%(<b>Yole 2025/7 新聞稿,本報告基準口徑</b> <span class="conf c-high">高</span>)。台達+光寶+華為+Advanced Energy 四強合計過半。</li>
+    <li><b>BBU(口徑之謎已解):</b>$3.7 億@2025(DIGITIMES 余佩儒,<b>窄口徑=僅 AI 伺服器機櫃 BBU</b>、50% 滲透率假設;2026 再 +50% ≈ $5.5 億)vs $28 億@2026(AdlerTechLabs,<b>含電信營運商與廣義資料中心</b>、無公開方法論,SEO 型研報 <span class="conf c-un">不採信不否定</span>)vs $80.2 億@2024(Valuates,全口徑含電信基地台/電梯工業備援)。<b>三者差 7~20 倍純因統計範圍。引用 AI 機櫃 BBU 請用 DIGITIMES 窄口徑。</b></li>
+    <li><b>800VDC 量化(第三方最具參考):</b>SemiAnalysis 2026/5:2030 年 800VDC 新增容量約 39GW;power rack/sidecar TAM 峰值約 $110 億(2028);SST 2030 年約 $130 億(另一處擷取 $320 億,原文付費牆、兩處不一致 <span class="conf c-med">引用須註明分歧</span>)。</li>
+    <li><b>超級電容:</b>研調分歧 5 倍(Mordor $5.4 億@2025 vs HDIN $28-32 億,元件 vs 模組口徑);Mordor 給出「資料中心應用 CAGR 20.76% 至 2031、各應用最快」是目前最具體的切分。<b>無任何研調公布資料中心超容獨立金額。</b></li>
+  </ul>
+
+  <h3>🇹🇼 台灣吃得到多少(分層,證據等級不同)</h3>
+  <table>
+    <tr><th>環節</th><th>台灣角色</th><th>證據</th></tr>
+    <tr><td>Power shelf / 高瓦數 PSU(白區)</td><td><b>主導</b>——NVIDIA 官方名單 7 取 3;Yole 四強佔半(內含台達光寶);台達為 VR200 首家通過 12kW PSU 認證(媒體)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>BBU 模組/pack</td><td><b>寡佔</b>——AES-KY(BBU 佔營收 ~70%、法說)、順達、新盛力、加百裕、系統電;但多數經台達/光寶整合間接進 NVIDIA 鏈</td><td><span class="conf c-high">高</span>(個別佐證強度不一)</td></tr>
+    <tr><td>BBU 高功率電芯</td><td><b>有牌但未上市</b>——Molicel 能元(台泥 1101 旗下)2024Q4 起出貨 5kW BBU 電池給全球知名 CSP(台泥法說);對手三星 SDI/LG;<b>模組廠×電芯品牌對應無公開佐證</b></td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>互連/busbar/線束</td><td><b>重要供應商</b>——貿聯為官方名單唯一台資互連廠(800V busbar+液冷 busbar+線纜),再砸 $8.5 億美元購 Interplex Datacom</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>板級磁件(TLVR 電感)</td><td><b>重要供應商</b>——臺慶科 3357、新聿科 7912(興櫃)、國巨系(奇力新+Pulse);PSU 主變壓器由台達(乾坤+Alps Alpine 資產)/光寶體系內自製,純磁件廠打入 PSU 主變壓器查無佐證</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>電容儲能/超容</td><td><b>陪跑</b>——國巨 KEMET 以 AVL 入伺服器鏈(TrendForce);凱美法說<b>親口否認</b>超容開發;立隆電無超容佐證;國際 Musashi/LS Materials/Skeleton 領跑但也無具名 NVIDIA 訂單</td><td><span class="conf c-med">中(否定發現為高)</span></td></tr>
+    <tr><td>灰區 SST/整流/直流配電</td><td><b>挑戰者</b>——台達 SST 送樣四大 CSP+中國資料中心已落地(公司自述);其餘灰區為 ABB/Eaton/Schneider/Vertiv/Siemens/日立/三菱 + Heron Power;光寶公開證據止於白區</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>固態斷路器/DC 保護</td><td><b>缺席</b>——ABB SACE Infinitus(首款 IEC 認證 SSCB)、Eaton、LS Electric;台股無對應標的</td><td><span class="conf c-high">高(缺席之確認)</span></td></tr>
+  </table>
+  <p class="sub">整體:台灣吃到「機櫃以內」的大頭(PSU/shelf/BBU/互連),正在挑戰「機櫃以外」(SST/電源櫃);吃不到 DC 保護與雷射級設施整合。風險:中國 Megmeet 是官方名單內唯一中國電源廠(GB200 電源三供之一),其滲透受美中政策(Affiliates Rule 暫停僅至 2026/11/9)牽動。</p>
+</div>
+
+<!-- 1:是什麼 -->
+<h2 id="s1"><span class="n">1</span>是什麼、應用、技術原理 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>核心定義</h3>
+  <p><b>AI 伺服器電源鏈 = 把市電(13.8kV 中壓交流)一路降轉到 GPU 核心電壓(<1V)之間的所有電力設備。</b>傳統資料中心走「多段 AC-AC 轉換、到機櫃才轉 DC」;NVIDIA 800VDC 架構改為「<b>資料中心周界用工業級整流器/SST 一次轉成 800VDC,之後全程直流</b>」,機櫃內不再有 54V 集中 power shelf 母線(NVIDIA 官方技術頁逐字定義)。換得:同線徑傳輸功率 +157%(vs 415VAC)、減少轉換段數與用銅量(官方稱機櫃銅排省 45%)、支援 100kW~1MW 機櫃共用同一套電力基建。</p>
+  <h3>為什麼 54V 走不下去(NVIDIA 官方論證)</h3>
+  <ul>
+    <li>1MW 機櫃若沿用 54VDC:power shelf 將佔掉 <b>up to 64U</b> 空間(機櫃根本放不下運算板)、單櫃需 <b>up to 200kg 銅排</b>,GW 級資料中心僅機櫃銅排即達 20 萬公斤。</li>
+    <li>口徑備註:NVIDIA 自家兩篇官方文出現「+157%(同線徑 vs 415VAC)」與「+85%(busway 基準)」兩種比較數字,引用時需標明基準。皆屬廠商自述工程估算(up to 字眼)。</li>
+  </ul>
+  <table>
+    <tr><th>應用/世代</th><th>電力架構</th><th>為何需要本鏈升級</th></tr>
+    <tr><td>GB200/GB300 NVL72(2025-26 主力)</td><td>54V 集中式;33kW shelf(6×5.5kW)/MGX 版 4×72kW(6×12kW)</td><td>機櫃 120→136kW,PSU 從 3.2kW 升 5.5/12kW,鈦金效率 96.5%+ 成標配</td></tr>
+    <tr><td>Vera Rubin NVL72(2H26 出貨)</td><td><b>仍走 50V busbar</b>;4×110kW shelf(N+1、6×18.3kW PSU 內建電容);busbar 5000A+ 需液冷</td><td>機櫃級電容儲能 400 J/GPU(前代 6 倍)、Intelligent Power Smoothing 削峰 25%</td></tr>
+    <tr><td>Kyber NVL576(2027)</td><td><b>原生 800VDC</b>;sidecar/獨立電源櫃供電</td><td>600kW/櫃;800VDC 與資料中心全面量產同步(官方)</td></tr>
+    <tr><td>1MW 機櫃(規劃)</td><td>800VDC + 設施級灰區直流化(2028-29)</td><td>端到端效率 82-83% → 87-92%(NVIDIA 稱 92%+)</td></tr>
+  </table>
+  <h3>儲能的雙重角色(官方定調)</h3>
+  <p>NVIDIA OCP 文件把儲能定位為「電力架構的<b>主動必要元件</b>、非僅停電備援」:毫秒~秒級 GPU 同步負載脈動由<b>機櫃近端電容/超容</b>平滑(Rubin 世代 400J/GPU 標配、官方用語為泛稱 capacitors);秒~分鐘級由設施級 BESS 處理;<b>BBU 負責 ride-through 停電撐秒</b>(該 OCP 文件全文無 BBU/SST 字眼——BBU 是 OCP/CSP 生態的要求,不是 NVIDIA 官方文件的主角,此區別影響「BBU 是否標配」的判讀:TrendForce 稱 GB300「BBU 非標準配置、採用率隨功耗上升」)。</p>
+</div>
+
+<!-- 2:完整鏈環節 -->
+<h2 id="s2"><span class="n">2</span>完整電力鏈逐環節拆解 <span class="conf c-high">高信心</span></h2>
+<p class="sub">主流路線:市電中壓 →(灰區)整流/SST → 800VDC 直流配電+保護 →(白區)power shelf/PSU → 板級磁件 → BBU → 電容儲能 → busbar/互連 → GPU。2026 當下白區先行(sidecar/power rack),灰區 2028-29 上移。來源:NVIDIA 官方 800VDC 白皮書×3、SemiAnalysis 拆解、各公司法說/新聞稿(逐條標註於第 4、7 節)。</p>
+<div class="flow">
+
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>灰區整流 / SST 固態變壓器(13.8kV AC → 800VDC)</h4>
+    <p>做什麼:在資料中心周界把中壓市電一次轉成 800VDC。輸入:13.8kV(或 33kV)三相交流;輸出:800VDC 母線。關鍵料件:中壓 SiC 模組、高頻變壓器、控制系統。台達 SST 效率 98.5%、媒體稱「造價相當於一台保時捷」。</p>
+    <div class="diff">難點:中壓電力電子的可靠度與安規驗證週期極長;美系 CSP 對 SST 仍在測試驗證(台達執行長 2026/6 自述),實際放量目前集中在中國;傳統方案(工業整流器)與 SST 路線並存,贏家未定。</div>
+    <div class="who">對應:<span class="tag t-intl">ABB(HiPerGuard 中壓 UPS)</span><span class="tag t-intl">Eaton(購 Resilient Power)</span><span class="tag t-intl">Heron Power(2027 試產、B 輪 $140M)</span><span class="tag t-intl">Vertiv/Schneider/Siemens/日立/三菱/GE Vernova</span><span class="tag t-tw">台達電 2308(SST 送樣四大 CSP、中國已落地)</span> <span class="conf c-high">官方名單高</span><span class="conf c-med">得單證據中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>直流配電與保護(busway / 固態斷路器 / tap-off)</h4>
+    <p>做什麼:把 800VDC 從整流站送到每排機櫃並提供故障分斷。輸入:800VDC;輸出:至 power rack 的受保護饋線。關鍵料件:DC busway、固態斷路器(SSCB)、熔斷與監控。</p>
+    <div class="diff">難點:<b>直流電弧無零交越、不會自熄</b>——AC 斷路器靠每秒 100-120 次過零滅弧,DC 必須靠半導體直接停止導通(微秒級分斷);現有 DC tap-off 滅弧體積過大不實用。固態斷路器是 800VDC 普及的隘口。</div>
+    <div class="who">對應:<span class="tag t-intl">ABB SACE Infinitus(首款 IEC 60947-2 認證 SSCB,1000V/2500A、<25µs,2025/10 攜手 NVIDIA)</span><span class="tag t-intl">Eaton</span><span class="tag t-intl">LS Electric(首款 UL 認證 1500V DC MCCB)</span><span class="tag t-intl">Vertiv(DC busway)</span> <b>台股:查無對應標的(缺席)</b> <span class="conf c-high">高</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>Power Shelf / 高瓦數 PSU(機櫃電源心臟)</h4>
+    <p>做什麼:AC(或 800VDC)轉 50VDC 上 busbar 餵運算板。瓦數演進:PSU 3.2kW(H100 CRPS)→ 5.5kW(GB200/300 DGX,33kW shelf)→ 12kW(GB300 MGX,72kW shelf;OCP HPR V2)→ 18.3kW(Rubin,110kW shelf 3U、N+1;台達版 18.5kW、效率 98%)。800VDC 世代另增 90kW DC/DC shelf(800V→50V)與 2.5kW DC-DC brick。</p>
+    <div class="diff">難點:功率密度(98 → 137 W/in³)與鈦金效率(50% 負載 ≥96%,Infineon 8kW 參考設計 30-100% 負載含風扇 ≥96.5%);GaN 高頻化 >600kHz 的平面變壓器設計;PSU 內建電容(佔一半體積)的熱與壽命。</div>
+    <div class="who">對應:<span class="tag t-tw">台達電 2308(VR200 首家 12kW PSU 認證・媒體)</span><span class="tag t-tw">光寶科 2301(110kW 6月量產)</span><span class="tag t-tw">康舒 6282(33kW 已量產/72kW 認證中)</span><span class="tag t-tw">群電 6412(Q2 送樣)</span><span class="tag t-intl">Flex</span><span class="tag t-intl">Megmeet 002851.SZ(中國唯一、GB200 電源三供之一)</span><span class="tag t-intl">Advanced Energy</span> <span class="conf c-high">高</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>板級磁件(TLVR 電感 / PSU 主變壓器)</h4>
+    <p>做什麼:PSU 內 LLC 主變壓器(高頻隔離降壓)與 GPU 板上 VRM 的 TLVR(跨電感耦合穩壓)。TLVR 自 H100 選配變 GB200/300 標配,單 GPU 板用量約 22-31 顆、ASP 為傳統電感 3-5 倍(媒體彙整)。</p>
+    <div class="diff">難點:高頻磁芯材料(金屬粉芯)技術在日系手上——台達直接花 23 億台幣買 Alps Alpine 功率電感資產(含獨家粉末專利);PSU 主變壓器由電源廠體系內自製(台達乾坤),純磁件台廠打入主變壓器查無佐證,台廠戰場在板級電感。</div>
+    <div class="who">對應:<span class="tag t-tw">臺慶科 3357(TLVR、AI 約 10% 營收;與美系原廠共同開發下一代)</span><span class="tag t-tw">新聿科 7912 興櫃(自述 Blackwell 量產+Rubin 認證、AI 佔 47%)</span><span class="tag t-tw">國巨 2327(奇力新+Pulse,媒體稱入 GB200 鏈)</span><span class="tag t-tw">台達乾坤(自製)</span><span class="tag t-intl">TDK/村田(材料上游)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>BBU 備援電池(電芯 → BMS → 模組/pack)</h4>
+    <p>做什麼:停電 ride-through(撐到柴油機接手)+部分削峰。規格演進:5.5kW → 8kW → 12kW 模組;台達 800VDC 方案把 BBU 嵌進 power rack(每 110kW shelf 內嵌 80kW BBU、整櫃 480kW)。電芯:高功率 21700(Molicel P50S 200W/100A、P50B 60A)。</p>
+    <div class="diff">難點:高功率電芯(10C 放電)供應集中在 Molicel/三星 SDI/LG;800V 化後 BBU 串數與絕緣規格重設計;「BBU 是否標配」隨 CSP 而異(TrendForce:GB300 非標配)。電芯×模組廠對應關係全鏈無公開佐證——誰用誰家電芯是本題最大的資訊黑箱。</div>
+    <div class="who">對應:<span class="tag t-tw">AES-KY 6781(BBU 佔營收 ~70%、直供美系 CSP;HVDC 品 2026 下旬量產)</span><span class="tag t-tw">順達 3211(800V 2027 量產・股東會)</span><span class="tag t-tw">新盛力 4931(5 月營收 +179%)</span><span class="tag t-tw">加百裕 3323(12kW 認證中、2027 出貨)</span><span class="tag t-tw">系統電 5309(11kW/5.5kW Q2 量產)</span><span class="tag t-tw">電芯:Molicel(台泥 1101 旗下,未上市)</span><span class="tag t-intl">三星 SDI/LGES(InterBattery 2026 主打 BBU)</span> <span class="conf c-high">模組高</span><span class="conf c-med">電芯對應中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>電容儲能 / 超級電容(毫秒級負載平滑)</h4>
+    <p>做什麼:吸收 GPU 同步運算的毫秒級功率脈動、削減電網端峰值。GB300 實配:<b>電解電容整合進 power shelf</b>(佔 PSU 一半體積、65J/GPU、削峰 30%——NVIDIA 官方 2025/7,證實郭明錤「超容層架被移除」調研方向正確);Rubin:機櫃級電容 400J/GPU(6 倍)+閉迴路 Intelligent Power Smoothing 削峰 25%、官方稱可免大型電池組。</p>
+    <div class="diff">難點:NVIDIA 官方只說 capacitors、從未指明 EDLC 超容也未公布供應商;超容路線(Musashi LIC 據 TrendForce 已入 GB200、Flex 合作 CESS 已投產)與大容量電解/鋁電容路線(台達 660kW rack 採鋁電容)並存。台灣被動元件廠直接打入機櫃級儲能<b>無任何公開證據</b>。</div>
+    <div class="who">對應:<span class="tag t-intl">Musashi Energy Solutions(LIC)</span><span class="tag t-intl">LS Materials(MW 級超容系統已交付)</span><span class="tag t-intl">Skeleton(GrapheneGPU shelf、萊比錫廠)</span><span class="tag t-tw">國巨 2327(KEMET 超容 AVL 入伺服器鏈・TrendForce)</span><span class="tag t-tw">凱美 2375(法說自述「無超容開發計畫」——概念股反證)</span><span class="tag t-tw">立隆電 2472(AI 著力點為固液混合電容,超容無佐證)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">7</div><div class="body">
+    <h4>互連:busbar / 電力線束 / 高壓連接器</h4>
+    <p>做什麼:機櫃內 50V busbar(Rubin 世代 5000A+、需液冷;GB 世代 2900A)、rack 間 800V 線纜/power whip、高壓端子。800VDC 長期趨勢是「減銅」(同功率電流降 15 倍)——對純銅排業者是雙面刃,價值轉向高壓絕緣與液冷整合。</p>
+    <div class="diff">難點:5000A 液冷 busbar 的熱/機構整合;800V 高壓連接器的安規(爬電距離)重設計。</div>
+    <div class="who">對應:<span class="tag t-tw">貿聯-KY 3665(NVIDIA 官方名單唯一台資互連廠;800V 連接器+線纜+busbar 含液冷 busbar;HPC+半導體佔營收 51%;$8.5 億美元購 Interplex)</span><span class="tag t-tw">健和興 3003(HVDC 380V/1000V 端子送樣中)</span><span class="tag t-intl">Lead Wealth</span><span class="tag t-intl">GE Vernova</span> <span class="conf c-high">貿聯高</span><span class="conf c-med">其餘中</span></div>
+  </div></div>
+
+</div>
+
+<!-- 3:難度評分 -->
+<h2 id="s3"><span class="n">3</span>逐環節技術難度評分</h2>
+<p class="sub">維度:技術門檻(設計/材料)、驗證週期(安規/客戶認證)、供給稀缺(誰能做)、規格變動風險(平台換代被洗掉的機率)。0~5 分、5=最難/最高。評分依查證證據推估,僅供參考。</p>
+<table>
+  <tr><th>環節</th><th>技術門檻</th><th>驗證週期</th><th>供給稀缺</th><th>規格變動風險</th><th>總分/20</th><th>最卡關原因</th></tr>
+  <tr><td>1. 灰區整流/SST</td><td>5</td><td>5</td><td>4</td><td>3</td><td><b>17</b></td><td>中壓電力電子+美系 CSP 驗證保守(台達自述仍在測試期),SST vs 傳統整流路線未定</td></tr>
+  <tr><td>2. 直流配電/固態斷路器</td><td>5</td><td>5</td><td>5</td><td>2</td><td><b>17</b></td><td>DC 電弧不自熄,SSCB 全球僅 ABB 有 IEC 認證品;台股缺席</td></tr>
+  <tr><td>3. Power shelf/PSU</td><td>4</td><td>4</td><td>3</td><td>3</td><td><b>14</b></td><td>137W/in³ 密度+鈦金 96.5%、GaN >600kHz;但玩家多(台達/光寶/康舒/Flex/Megmeet),競爭加劇</td></tr>
+  <tr><td>4. 板級磁件 TLVR/主變壓器</td><td>4</td><td>3</td><td>4</td><td>3</td><td><b>14</b></td><td>高頻粉芯材料日系壟斷(台達買 Alps 專利即為此);主變壓器被電源廠內製化</td></tr>
+  <tr><td>5. BBU 模組</td><td>3</td><td>4</td><td>3</td><td>4</td><td><b>14</b></td><td>高功率電芯來源集中;800V 化重設計;「標配與否」隨 CSP 政策變動是量的風險</td></tr>
+  <tr><td>6. 電容儲能/超容</td><td>4</td><td>4</td><td>4</td><td>5</td><td><b>17</b></td><td>NVIDIA 未定 EDLC vs 電解路線、未公布供應商——技術路線風險全鏈最高</td></tr>
+  <tr><td>7. busbar/互連</td><td>3</td><td>3</td><td>3</td><td>4</td><td><b>13</b></td><td>5000A 液冷整合難,但 800V 長期「減銅」侵蝕量;價值轉向高壓絕緣/液冷</td></tr>
+</table>
+
+<!-- 4:供應鏈對照 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 有獨立佐證(官方名單/財報/多源)</span>
+  <span><span class="conf c-med">中</span> 法說/單一可靠來源/法人</span>
+  <span><span class="conf c-un">未佐證</span> 概念股清單列舉(不否定、待查)</span>
+  <span><span class="conf c-low">反證</span> 公司否認或查證否決</span>
+</div>
+<h3>台廠 × 環節</h3>
+<table>
+  <tr><th>公司(股號)</th><th>環節</th><th>角色與證據</th><th>受惠節奏</th><th>查證</th></tr>
+  <tr><td><b>台達電(2308)</b></td><td>PSU/shelf/SST/BBU 全鏈</td><td>NVIDIA 官方名單;Yole 點名次世代 PSU 設計領導者;GTC 2026 展 660kW rack(內嵌 480kW BBU)+SST 98.5%;VR200 首家 12kW PSU 認證(媒體);AI 電源佔比 23%→30%(法說後媒體)</td><td>現在就有營收</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>光寶科(2301)</b></td><td>PSU/shelf/800V rack/BBU</td><td>NVIDIA 官方名單;110kW shelf 2026/6 量產(法說);800V rack(>1.5MW)Q3 驗證/Q4 量產、提前一季;與兩家 CSP 合作;AI 佔比目標近 30%</td><td>現在就有營收</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>貿聯-KY(3665)</b></td><td>800V 線纜/busbar/連接器</td><td>NVIDIA 官方名單唯一台資互連廠(2025/10 版新增);官方稿自述含液冷 busbar;HPC+半導體佔營收 51%;$8.5 億美元收購 Interplex Datacom(2026/6/10 公告)</td><td>現在就有營收</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>AES-KY(6781)</b></td><td>BBU 模組(直供 CSP)</td><td>2025 前三季 BBU 佔營收約 70%(法說);2026 capex +20~30% 擴 HVDC 線、2026 下旬量產(法說);「NVIDIA 鏈主力」為法人共識非官方名單</td><td>現在就有營收</td><td><span class="conf c-high">高</span>(NVIDIA 連結<span class="conf c-med">中</span>)</td></tr>
+  <tr><td>康舒(6282)</td><td>33kW/72kW shelf</td><td>33kW 2026 上半年量產(媒體;1 月仍驗證中)、72kW 認證中;1MW HVDC 方案發表;AI 佔比目標 20%→30%(公司);「GB200 供應鏈」僅媒體說法</td><td>現在就有營收</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>順達(3211)</td><td>BBU(低壓出貨中、800V 開發)</td><td>股東會營業報告書:800V HVDC 產品 2027 量產;BBU 佔比約 35%(法人估);「與台達合作 400/800V」出自媒體引法人、公司未點名</td><td>現在就有營收</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>新盛力(4931)</td><td>BBU 模組</td><td>2026/5 月營收 +178.6%(硬數字);「BBU 佔比近五成」出自理財周刊單一來源;高雄產能 +50%(媒體)</td><td>現在就有營收</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>系統電(5309)</td><td>BBU(11kW/5.5kW)</td><td>法說:Q2 起量產、首家美系 CSP Q1 底出貨、25kW HVDC 2027-28;2025 獲利谷底,BBU 是 2026 起選擇權;策略入股加百裕、推美國製造</td><td>未來選擇權→放量初期</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>加百裕(3323)</td><td>BBU(直攻 12kW)</td><td>公司自述:2026H1 認證/H2 樣品、<b>2027 才大量出貨</b>;客戶 NDA 不具名;「交台達/光寶整合」為媒體彙整未證實</td><td>未來選擇權</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>臺慶科(3357)</td><td>TLVR 板級電感</td><td>與美系原廠共同開發下一代 AI 伺服器 TLVR(法說);AI 約 10% 營收;「客戶含 NVIDIA/AWS…」出自部落格未證實</td><td>現在就有營收</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>國巨(2327)</td><td>磁件(奇力新/Pulse)+超容(KEMET)+電容</td><td>KEMET 超容以 AVL 入伺服器鏈(TrendForce);AI 佔比 ~15%(法說);GB200 磁件為媒體報導</td><td>現在就有營收</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>健和興(3003)</td><td>HVDC 端子/連接器</td><td>HVDC 380V/1000V 端子+BESS 1500V 大線徑端子「送樣中」(公司自述);5 月營收 +50% 創高(動能含其他業務)</td><td>未來選擇權</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>台泥(1101)</td><td>BBU 電芯(Molicel,間接)</td><td>2024Q4 起出貨 5kW BBU 電池給全球知名 CSP(法說);P50S 200W/100A;小港廠 2025/7 火災(獲利衝擊估 110 億)、台南+海外 OEM 補位;加拿大擴產已停</td><td>現在就有營收(集團內佔比小)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>新聿科(7912,興櫃)</td><td>TLVR/一體成型電感</td><td>自述 Blackwell 量產、Rubin 認證通過、AMD Venice 公版主供;AI 佔 47%;興櫃流動性風險(掛牌首日 +797%)</td><td>現在就有營收</td><td><span class="conf c-med">中(公司自述為主)</span></td></tr>
+  <tr><td>群電(6412)</td><td>AI 伺服器電源</td><td>法說:Q2 送樣測試、下半年升溫(兩次法說口徑有階段落差,屬不同專案);無出貨數字</td><td>未來選擇權</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>全漢(3015)/僑威(3078)/博大(8109)</td><td>—</td><td>全漢:COMPUTEX 展示 33kW 但無出貨/客戶佐證;僑威:2025 動能是 RTX 50 顯卡 PC 電源、AI 伺服器無佐證;博大:法說自述 AI 伺服器「非主力」</td><td>—</td><td><span class="conf c-un">未佐證</span></td></tr>
+  <tr><td>凱美(2375)</td><td>超容(概念股)</td><td><b>2025/8 法說 Q&A 親口:「超級電容……短期內沒有相關的開發計畫」</b>;其 AI 實績在電阻(AI 伺服器約佔電阻 9%)</td><td>—</td><td><span class="conf c-low">反證</span></td></tr>
+  <tr><td>立隆電(2472)</td><td>超容(概念股)</td><td>AI 著力點為固液混合/高分子固態電容;超容認證/訂單查無;「BBU 超容需求井噴」之說出自部落格</td><td>—</td><td><span class="conf c-un">未佐證</span></td></tr>
+  <tr><td>健策(3653)</td><td>電源模組銅件(概念股)</td><td>有佐證的 AI 角色是均熱片/水冷板(熱管理);電源模組銅件僅車用 IGBT 場景,資料中心查無佐證</td><td>—(本題)</td><td><span class="conf c-un">未佐證</span></td></tr>
+  <tr><td>信邦(3023)/嘉澤(3533)/金利(5383)/乙盛-KY(5243)</td><td>電源線束/連接器/busbar(概念股)</td><td>信邦重心是浸沒式冷卻+充電機櫃;嘉澤動能是 CPU socket/PCIe(電源連接器無佐證);金利、乙盛 busbar 查無任何出貨/送樣報導</td><td>—(本題)</td><td><span class="conf c-un">未佐證</span></td></tr>
+</table>
+<p class="sub">⚠「未逐項佐證」= 未取得該公司在本主題的<b>獨立</b>佐證,<b>不代表沒有角色</b>,但也不應直接當事實下單。</p>
+
+<h3>國際 × 環節</h3>
+<table>
+  <tr><th>公司</th><th>環節</th><th>角色與證據</th><th>查證</th></tr>
+  <tr><td>Vertiv</td><td>灰區整流/DC busway/機櫃 DC-DC</td><td>NVIDIA 官方名單;800VDC 組合 2H26 上市對齊 Rubin Ultra(官方新聞稿;產品時間表非得單)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>ABB</td><td>固態斷路器/中壓 UPS</td><td>SACE Infinitus 首款 IEC 認證 SSCB、2025/10 攜手 NVIDIA;HiPerGuard;灰區「固態化」最具體者</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Schneider Electric</td><td>800VDC sidecar(1.2MW)</td><td>2025/10 公告與 NVIDIA 合作;模組化+儲能整合+Live Swap</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Eaton</td><td>SST(購 Resilient Power)/800V 參考架構</td><td>2025/7 收購+2025/10 發布架構</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Hitachi Energy / 三菱電機 / Siemens / GE Vernova</td><td>灰區電力系統</td><td>官方名單列名;日立 800VDC 架構入 Vera Rubin DSX(2026/3);Siemens/三菱/GE Vernova 僅列名、無具體產品公告(列名≠得單)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>Heron Power</td><td>SST 新創</td><td>B 輪 $140M(a16z/BEV 領投);40GW 年產能工廠、2027 試產;>50GW 採購「興趣」≠訂單;創辦人 Baglino 為前 Tesla 資深副總(非共同創辦人)</td><td><span class="conf c-high">高(融資事實)</span></td></tr>
+  <tr><td>Flex</td><td>Power shelf/CESS</td><td>NVIDIA 官方名單;與 Musashi 合作電容儲能系統 2025 上半年投產(官方稿)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Megmeet 麥格米特(002851.SZ)</td><td>PSU/570kW 800V rack</td><td>NVIDIA 官方名單唯一中國電源廠;GB200 電源三供之一(公司披露);2025「乘風英偉達卻獲利滑鐵盧」(中媒);美中政策風險(Affiliates Rule 暫停僅至 2026/11/9)</td><td><span class="conf c-high">高(名單)</span></td></tr>
+  <tr><td>Musashi Energy Solutions(武藏精密 7220.T 子公司)</td><td>LIC 鋰離子電容</td><td>TrendForce 稱已入 GB200、預期進 GB300(研調轉述,NVIDIA 未證實);與 Flex CESS 合作為官方稿</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>LS Materials(417200.KQ)/ Skeleton</td><td>超容系統</td><td>LS:MW 級超容穩壓系統已交付(官方);Skeleton:GrapheneGPU shelf+萊比錫廠+€33M pre-IPO;皆無具名 NVIDIA 訂單</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>三星 SDI / LG Energy Solution</td><td>BBU 電芯/系統</td><td>InterBattery 2026 雙雙主打 AI 資料中心 BBU/備援(官方+媒體);「三星 SDI 為 BBU 電芯龍頭」僅媒體彙整</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>Google / Meta / Microsoft(OCP Mt Diablo)</td><td>±400VDC sidecar 開放規格</td><td>Google 官方部落格證實三家共同起草;v0.5.2 規格 2025/5/30 公開;與 NVIDIA 單極 800V 路線並行——<b>800V vs ±400V 雙標準並存是供應鏈規格風險</b></td><td><span class="conf c-high">高</span></td></tr>
+</table>
+
+<!-- 5:量產時程 -->
+<h2 id="s5"><span class="n">5</span>量產時程與各家進度</h2>
+<div class="card">
+  <h3>平台時間軸(NVIDIA 官方為錨)</h3>
+  <p><b>GB300(2025H2-2026 主力,54V)→ Vera Rubin NVL72(2026/3 宣布全面投產、2H26 出貨;仍 50V busbar)→ NVIDIA 800V 氣冷參考設計(2026 年中送樣量產・SemiAnalysis)→ Kyber NVL576+800VDC 全面量產(2027)→ 灰區設施級直流化(2028-29)</b>。風險備註:2026 年 Rubin 出貨量傳因 HBM4 驗證延遲由 ~200 萬顆下修至 ~150 萬顆(供應鏈 channel check 等級,屬量的風險非時程延誤)。</p>
+  <h3>各家進度表(公司自述/法說/外資,非財測)</h3>
+  <table>
+    <tr><th>公司</th><th>產品</th><th>時點</th><th>來源強度</th></tr>
+    <tr><td rowspan="3">台達電 2308</td><td>±400V HVDC</td><td>2026 年率先量產出貨(「提前出貨」傳言的真身——<b>「2025Q4 已出貨 800V」查無依據</b>)</td><td><span class="conf c-high">法說</span></td></tr>
+    <tr><td>800VDC(power rack 層)</td><td>2H26 小量出貨、<b>Q3 量產(原 Q4 提前)</b>、Q4 出貨北美 Hyperscaler(外資稱第一家);2027 主要貢獻期</td><td><span class="conf c-med">法說+外資 6/11</span></td></tr>
+    <tr><td>SST(灰區)</td><td>送樣全球四大 CSP、中國資料中心已落地;美系 CSP 測試驗證期;FY27 顯著貢獻(公司)</td><td><span class="conf c-med">公司自述</span></td></tr>
+    <tr><td rowspan="2">光寶科 2301</td><td>110kW power shelf</td><td><b>2026/6 量產</b>、H2 放量(法說 4/29;COMPUTEX 6/2 再確認)</td><td><span class="conf c-high">法說多源</span></td></tr>
+    <tr><td>800VDC power rack(>1.5MW)+2.5kW brick</td><td>原 2027Q1 提前:<b>Q3 完成驗證、Q4 開始量產</b>;與兩家 CSP 合作;放量 2027</td><td><span class="conf c-high">法說多源</span></td></tr>
+    <tr><td>康舒 6282</td><td>33kW shelf / 72kW shelf / 1MW HVDC</td><td>33kW 2026 上半年量產(媒體;單一來源)、72kW 客戶認證中、HVDC 機櫃瞄 2027</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>群電 6412</td><td>AI 伺服器電源</td><td>Q2 送樣測試、下半年升溫</td><td><span class="conf c-med">法說</span></td></tr>
+    <tr><td>AES-KY 6781</td><td>HVDC BBU(5.5/8/12kW)</td><td>2026 下旬量產(法說);capex +20-30% 越南/中國擴產</td><td><span class="conf c-med">法說</span></td></tr>
+    <tr><td>順達 3211</td><td>800V HVDC BBU</td><td>2027 量產出貨(股東會營業報告書);8/12kW 2026 起小量(法人)</td><td><span class="conf c-high">公司文件</span></td></tr>
+    <tr><td>系統電 5309</td><td>BBU 11kW/5.5kW/3kW;25kW HVDC</td><td>Q2 量產/Q3 3kW;25kW 2027-28;首家美系 CSP Q1 底出貨</td><td><span class="conf c-med">法說</span></td></tr>
+    <tr><td>加百裕 3323</td><td>12kW BBU</td><td>2026H1 認證、H2 樣品、<b>2027 大量出貨</b></td><td><span class="conf c-med">公司自述</span></td></tr>
+    <tr><td>Vertiv</td><td>800VDC 全組合</td><td>2H26 上市,對齊 Rubin Ultra 2027</td><td><span class="conf c-high">官方稿</span></td></tr>
+    <tr><td>Heron Power</td><td>SST(Heron Link)</td><td>2027 年初試產、其後兩年爬坡</td><td><span class="conf c-high">官方稿</span></td></tr>
+  </table>
+  <h3>受惠股法人預估與 YTD(2026/1/2 → 6/12,交易所官方收盤)</h3>
+  <table>
+    <tr><th>公司</th><th>2026 EPS(法人)</th><th>2027 EPS(法人)</th><th>YTD 漲幅</th><th>備註</th></tr>
+    <tr><td>台達電 2308</td><td>FactSet 中位 39.3(美系外資 41.5)</td><td>59(外資 65.1;2028 98.5)</td><td><b>+123%</b>(995→2,215)</td><td>目標價 2,200-2,800;1 月時僅 1,288——半年內快速重估</td></tr>
+    <tr><td>光寶科 2301</td><td>FactSet 中位 8.5</td><td>11.67</td><td>+30%(167→217)</td><td>目標價 225</td></tr>
+    <tr><td>貿聯-KY 3665</td><td>FactSet 中位 66.37(大摩 74.77)</td><td>111.14(大摩 120.77)</td><td>+51%(1,525→2,310)</td><td>目標價 3,230(大摩 3,665)</td></tr>
+    <tr><td>AES-KY 6781</td><td>48~50.6(散見法人;公司稱「48 起跳」)</td><td>~63(彙整)</td><td><b>-12%</b>(1,300→1,145)</td><td>七檔唯一下跌——BBU 高基期+市場輪動,估值已先反映</td></tr>
+    <tr><td>順達 3211</td><td>12.1~13.21(投顧區間)</td><td>15~23(分歧大)</td><td>+27%(329→418)</td><td>800V 是 2027 故事</td></tr>
+    <tr><td>新盛力 4931</td><td>無主流共識(彙整 9~10.25 未確認)</td><td>—</td><td>+30%(181→236)</td><td>2025 EPS 3.13;放量由月營收驗證</td></tr>
+    <tr><td>康舒 6282</td><td>2.8(理周投研;弱來源)</td><td>—</td><td>+33%(43.8→58.1)</td><td>2025 EPS 僅 ~0.5,預估隱含大躍進、風險高</td></tr>
+  </table>
+  <p class="sub">以上全為法人預估/媒體彙整,非公司財測;AES-KY 的逆勢下跌提醒:「題材正確 ≠ 股價必漲」,進場估值決定報酬。</p>
+</div>
+
+<!-- 6:投資警示 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被查證否決/反證的說法(請勿當事實):</b>
+  <ul>
+    <li><b>「凱美(2375)= GB300 超級電容概念股」</b> — 公司 2025/8 法說 Q&A 親口:「超級電容……短期內沒有相關的開發計畫」。其 AI 實績在電阻與電容本業。</li>
+    <li><b>「美磊(3068)做伺服器磁件」</b> — 3068 是<b>死代號</b>:美磊 2018 年被奇力新換股併購下市;奇力新(2456)又於 2022/1/5 併入國巨下市。任何仍列「美磊 3068」「奇力新 2456」的名單都是過時資訊,曝險只能透過國巨(2327)。</li>
+    <li><b>「台慶科=6155」</b> — 錯誤。臺慶科正確代號 <b>3357</b>;6155 是鈞寶(磁芯廠,規模小)。</li>
+    <li><b>「詠昇(6418)是磁件廠」</b> — 查證為訊號連接器/傳輸線廠,無磁性元件產品。</li>
+    <li><b>「GB300 量產機有超容層架」</b> — NVIDIA 官方 2025/7 技術文:GB300 負載平滑用「<b>電解電容</b>整合進 power shelf」(65J/GPU),與郭明錤移除說一致;市場流傳「每櫃 300+ 顆超容單價 $20-25」與官方說法衝突。</li>
+    <li><b>「台達 2025Q4 已提前出貨 800VDC」</b> — 查無任何來源;「提前」實為 2027→2026 導入提前與 2026Q4→Q3 量產提前,且 2026 率先出貨的是 ±400V 產品線。</li>
+    <li><b>「光寶 5MW 級電源方案」</b> — 官方文件最高量級為 800VDC 單櫃 >1.5MW;COMPUTEX 官方稿僅用「Megawatt-scale」,5MW 無佐證。</li>
+  </ul>
+</div>
+<div class="card"><h3>數據強度分層 / 開放問題</h3>
+  <ul>
+    <li><b>NVIDIA 官方數字皆「up to」工程估算</b>且內部口徑不一(157% vs 85% 兩種基準);TCO 降 30% 為官方宣傳值。</li>
+    <li><b>名單≠得單:</b>NVIDIA 夥伴名單只證明生態系分工;Siemens/三菱/GE Vernova 僅列名無產品公告;Vertiv 2H26 為產品時間表非訂單。</li>
+    <li><b>規格雙軌風險:</b>NVIDIA 單極 800V vs OCP Mt Diablo ±400V(Google/Meta/微軟)並行,2027 後誰主導影響整條供應鏈的設計投入回收。</li>
+    <li><b>800VDC 電源櫃 ASP $40-50 萬美元/「價值十倍」</b>:媒體轉述法人估算、未經原始報告核對(un)。</li>
+    <li><b>開放問題:</b>(1) BBU 模組廠×電芯品牌對應(全鏈黑箱);(2) Rubin 機櫃級 400J/GPU 電容的實際供應商;(3) 台達 SST 中國落地案的規模與客戶;(4) Megmeet 在 2026/11 Affiliates Rule 重審後的處境;(5) 新盛力「BBU 佔比五成」的公司端確認。</li>
+    <li><b>時效:</b>本報告基準日 2026-06-12;台達 Q3 量產、光寶 Q4 量產、AES 下旬量產皆為未到期前瞻時程,以法說/公告追蹤。</li>
+  </ul>
+</div>
+
+<!-- 7:資料來源 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary(官方/一手)</span> <span class="src-q q-secondary">secondary(媒體/研調)</span> <span class="src-q q-blog">blog/彙整</span>。每筆附佐證內容。</p>
+<div class="card">
+  <div class="src-item"><a href="https://developer.nvidia.com/blog/nvidia-800-v-hvdc-architecture-will-power-the-next-generation-of-ai-factories/" target="_blank">NVIDIA 官方:800V HVDC 架構白皮書(2025/5)</a><span class="src-q q-primary">primary</span><br><span class="sub">54V 不可行論證(64U/200kg 銅)、初版夥伴名單、2027 Kyber 同步量產</span></div>
+  <div class="src-item"><a href="https://developer.nvidia.com/blog/building-the-800-vdc-ecosystem-for-efficient-scalable-ai-factories/" target="_blank">NVIDIA 官方:OCP 800VDC 生態系(2025/10)</a><span class="src-q q-primary">primary</span><br><span class="sub">157% 同線徑、擴編夥伴名單(貿聯入列)、多時間尺度儲能定位</span></div>
+  <div class="src-item"><a href="https://developer.nvidia.com/blog/how-new-gb300-nvl72-features-provide-steady-power-for-ai/" target="_blank">NVIDIA 官方:GB300 穩定供電機制(2025/7)</a><span class="src-q q-primary">primary</span><br><span class="sub">GB300 實配=電解電容入 shelf(65J/GPU、削峰 30%)——超容爭議的官方答案</span></div>
+  <div class="src-item"><a href="https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/" target="_blank">NVIDIA 官方:Vera Rubin Pod(2026/3)</a><span class="src-q q-primary">primary</span><br><span class="sub">NVL72 全面投產、2H26 出貨、400J/GPU、Intelligent Power Smoothing 削峰 25%</span></div>
+  <div class="src-item"><a href="https://www.yolegroup.com/press-release/artificial-intelligence-ai-surge-pushes-data-center-psu-market-to-14-billion/" target="_blank">Yole Group:資料中心 PSU 市場(2025/7)</a><span class="src-q q-primary">primary</span><br><span class="sub">$140 億@2030、>3kW 段 $115 億 CAGR>25%、四強佔半、台達設計領導者</span></div>
+  <div class="src-item"><a href="https://www.prnewswire.com/news-releases/deltas-power-cooling-and-microgrid-solutions-showcased-at-nvidia-gtc-to-bolster-the-800-vdc-architecture-of-next-gen-ai-factories-302714372.html" target="_blank">台達 GTC 2026 官方新聞稿(2026/3)</a><span class="src-q q-primary">primary</span><br><span class="sub">660kW rack(480kW BBU)、18.5kW PSU 98%、SST 98.5%、90kW DC/DC shelf</span></div>
+  <div class="src-item"><a href="https://www.liteon.com/zh-tw/news/press-center/content/liteon-computex-2026" target="_blank">光寶 COMPUTEX 2026 官方新聞稿(2026/6)</a><span class="src-q q-primary">primary</span><br><span class="sub">800VDC 液冷 power rack 實機首秀、110kW shelf、280kW In-Rack CDU;無 5MW 字樣</span></div>
+  <div class="src-item"><a href="https://www.bizlinktech.com/news/bizlink-advances-800-vdc-power-solutions-for-ai-infrastructure-with-nvidia" target="_blank">貿聯官方新聞稿(2025/10)</a><span class="src-q q-primary">primary</span><br><span class="sub">800V 連接器+線纜+busbar(含液冷 busbar)產品範圍自述</span></div>
+  <div class="src-item"><a href="https://www.vertiv.com/en-us/about/news-and-events/corporate-news/from-vision-to-readiness-vertiv-collaborates-with-nvidia-to-advance-800-vdc-platform-designs-to-power-the-next-generation-of-ai-factories/" target="_blank">Vertiv 官方(2025/10)</a><span class="src-q q-primary">primary</span><br><span class="sub">800VDC 組合 2H26、整流器+DC busway+機櫃 DC-DC 元件鏈</span></div>
+  <div class="src-item"><a href="https://new.abb.com/news/detail/129805/abb-to-develop-next-generation-ai-data-centers-with-nvidia" target="_blank">ABB 官方(2025/10)</a><span class="src-q q-primary">primary</span><br><span class="sub">SACE Infinitus SSCB、HiPerGuard 中壓 UPS、與 NVIDIA GW 級合作</span></div>
+  <div class="src-item"><a href="https://cloud.google.com/blog/topics/systems/enabling-1-mw-it-racks-and-liquid-cooling-at-ocp-emea-summit" target="_blank">Google Cloud 官方(2025/4)+ <a href="https://www.opencompute.org/documents/ocp-specification-diablo-400-v0p5p2-2025-05-30-pdf" target="_blank">OCP Diablo 400 v0.5.2 規格</a></a><span class="src-q q-primary">primary</span><br><span class="sub">Mt Diablo ±400VDC sidecar、1MW/rack、三巨頭共同起草</span></div>
+  <div class="src-item"><a href="https://x.com/mingchikuo/status/1889911472601657709" target="_blank">郭明錤 X(2025/2/13+2/15 補充)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">GB300 超容層架移除調研(參考設計 vs CSP 客製的限定條件)</span></div>
+  <div class="src-item"><a href="https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution" target="_blank">SemiAnalysis:Vera Rubin Co-Design(2026/2)+ <a href="https://newsletter.semianalysis.com/p/inside-the-800vdc-revolution-part" target="_blank">800VDC Revolution(2026/5)</a></a><span class="src-q q-secondary">secondary</span><br><span class="sub">110kW=6×18.3kW、5000A 液冷 busbar、DC 電弧難點、39GW@2030、rack TAM $110 億@2028、SST $130 億(分歧 $320 億)</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-2308-2026-02-26" target="_blank">台達電 2025Q4 法說(富果)</a> / <a href="https://www.stockfeel.com.tw/%E5%8F%B0%E9%81%94%E9%9B%BB-2025q4-%E6%B3%95%E8%AA%AA%E6%9C%83-%E9%87%8D%E9%BB%9E/" target="_blank">StockFeel 整理</a> / <a href="https://udn.com/news/story/7240/9559435" target="_blank">美系外資 6/11(udn)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">±400V 2026 率先/800V 2H26 小量/2027 主貢獻;Q3 量產+Q4 北美出貨(外資)</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-2301-2026-04-29" target="_blank">光寶科 2026Q1 法說(富果)</a> / <a href="https://technews.tw/2026/06/02/ai-kiteon-800vdc-infrasture/" target="_blank">TechNews COMPUTEX</a><span class="src-q q-secondary">secondary</span><br><span class="sub">110kW 6 月量產、800V rack Q3 驗證/Q4 量產、AI 佔比近 30% 目標</span></div>
+  <div class="src-item"><a href="https://vocus.cc/article/691c1c11fd89780001f095f1" target="_blank">AES-KY 法說整理</a> / <a href="https://cmnews.com.tw/article/newsyoudeservetoknow-bf0a8eaa-c404-11f0-a1d5-f237a446d8ed" target="_blank">2026 擴產(CMoney)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">BBU 佔營收 ~70%、capex +20-30%、HVDC 2026 下旬量產</span></div>
+  <div class="src-item"><a href="https://news.cnyes.com/news/id/5787866" target="_blank">台泥法說(2024/11,鉅亨)</a> / <a href="https://www.molicel.com/inr-21700-p50b/" target="_blank">Molicel P50B 官網</a> / <a href="https://www.prnewswire.com/news-releases/molicel-s-series-engineered-for-ultimate-safety-in-bbus-data-centers-and-ai-computing-302449459.html" target="_blank">P50S 官方稿</a><span class="src-q q-secondary">secondary</span><br><span class="sub">Molicel 2024Q4 出貨 5kW BBU 電池給全球知名 CSP;P50S 200W/100A</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-2375-2025-08-27" target="_blank">凱美 2025/8 法說 Q&A(富果)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">「超級電容……短期內沒有開發計畫」——概念股反證原文</span></div>
+  <div class="src-item"><a href="https://www.compotechasia.com/a/press/2025/0224/59934.html" target="_blank">DIGITIMES 余佩儒 BBU 市場(2025/2)</a> / <a href="https://www.prnewswire.com/news-releases/battery-backup-unit-bbu-market-to-reach-usd-16-6-billion-by-2031-at-11-0-cagr--valuates-reports-302699745.html" target="_blank">Valuates 全口徑</a> / <a href="https://www.adlertechlabs.com/market/ai-server-bbu-market/" target="_blank">AdlerTechLabs(低透明)</a><span class="src-q q-secondary">secondary/blog</span><br><span class="sub">BBU $3.7 億(窄)vs $80 億(全)vs $28 億(SEO 研報)——口徑之謎三方出處</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/news/2025/03/25/news-nvidia-gb300-ignites-supercapacitor-push-among-leading-taiwanese-suppliers/" target="_blank">TrendForce(2025/3)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">KEMET AVL 入伺服器鏈、Musashi LIC 入 GB200(研調轉述)、BBU 非 GB300 標配</span></div>
+  <div class="src-item"><a href="https://finance.technews.tw/2026/04/15/tlvr/" target="_blank">新聿科 TLVR(TechNews 2026/4)</a> / <a href="https://finance.technews.tw/2025/11/13/3357/" target="_blank">臺慶科法說(2025/11)</a> / <a href="https://finance.technews.tw/2024/08/29/delta-alps-alpine" target="_blank">台達購 Alps Alpine 磁件資產(2024/8)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">板級磁件三角:新聿科 Rubin 認證(自述)、臺慶科 TLVR、台達補材料專利</span></div>
+  <div class="src-item"><a href="https://techcrunch.com/2026/02/18/heron-power-raises-140m-to-ramp-production-of-grid-altering-tech/" target="_blank">Heron Power B 輪(TechCrunch 2026/2)</a> / <a href="https://stcn.com/article/detail/1356044.html" target="_blank">Megmeet(證券時報)</a> / <a href="https://www.mofo.com/resources/insights/251113-united-states-and-china-reach-trade-agreement" target="_blank">Affiliates Rule(Morrison Foerster)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">SST 新創融資、中國電源廠滲透與政策風險時鐘</span></div>
+  <div class="src-item">FactSet 共識(鉅亨轉載):<a href="https://news.cnyes.com/news/id/6440141" target="_blank">台達電</a> / <a href="https://news.cnyes.com/news/id/6437623" target="_blank">光寶科</a> / <a href="https://news.cnyes.com/news/id/6464126" target="_blank">貿聯-KY</a>;YTD 為 TWSE/TPEx 官方收盤<span class="src-q q-secondary">secondary</span><br><span class="sub">法人預估與股價軌跡(非財測)</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法:</b>deep-research workflow(多路平行搜尋 → 抓來源 → 對抗式 3 票查證 → 合併去重)+ 12 組逐檔聚焦補查(台廠/市場口徑/EPS/技術 roadmap/灰區競局)。alphamemo.ai 法說工具經測試無法無頭存取(SPA),法說內容以財經媒體法說報導替代。</p>
+  <p>本報告以「已通過查證」內容為主幹,並標示被反駁與待補項目。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出:2026-06-12 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>
