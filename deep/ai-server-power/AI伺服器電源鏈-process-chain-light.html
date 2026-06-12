@@ -99,6 +99,18 @@ tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
 footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
 @media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
 @media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+
+  /* ===== 手機 RWD 補丁 ===== */
+  @media(max-width:860px){
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  }
+  @media(max-width:640px){
+    .container{padding:0 14px}
+    .nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}
+    .nav-inner::-webkit-scrollbar{display:none}
+    .hero h1{font-size:23px}
+    .calc .inputs,.calc .out{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
