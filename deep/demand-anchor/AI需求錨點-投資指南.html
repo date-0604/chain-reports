@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 需求錨點 × 產能對照 × 前瞻指標 — 供應鏈研究共用參照 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#4f46e5; --accent-soft:#e0e7ff;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#eef2ff,#f6f7f9)}
+.hero h1{font-size:34px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:880px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:50px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:26px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:24px;max-width:880px}
+h3{font-size:18px;font-weight:700;margin:26px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.card h4{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:20px}.card p{color:var(--ink-soft);font-size:13.5px}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.tight{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--danger-soft);color:#b91c1c}
+.balance{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--warn-soft);color:#c2410c}
+.loose{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--ok-soft);color:#047857}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--surface);min-width:600px}
+th{background:var(--surface-2);text-align:left;padding:10px 13px;font-weight:700;font-size:12.5px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.tiers{display:grid;gap:10px}
+.tier-row{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:13px 16px;box-shadow:var(--shadow)}
+.tier-row .lv{font-weight:800;font-size:13.5px;color:var(--accent)}.tier-row .lv small{display:block;color:var(--ink-soft);font-weight:600;font-size:11px}
+.callout{border-radius:var(--radius);padding:15px 18px;margin:16px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}section.block{padding:22px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.hero h1{font-size:26px}.tier-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:22px}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">AI 需求錨點<span> 共用參照</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#capex">需求源頭</a><a href="#deploy">部署量</a>
+    <a href="#bottleneck">需求→瓶頸</a><a href="#gaps">產能缺口</a><a href="#indicators">前瞻指標</a>
+    <a href="#sources">去哪找</a><a href="#calendar">催化劑日曆</a><a href="#bear">空頭情境</a><a href="#refs">參考</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>AI 需求錨點 <em>× 產能對照 × 前瞻指標</em> 2026</h1>
+  <p class="lead">所有台股供應鏈研究都是「供應側」,但<b>兌現時點由需求側決定</b>——超大規模雲端業者的 capex 時程、採購優先序、實際部署量,才決定台廠何時、以多大幅度賺到。這份是 25+ 篇研究的<b>共用上游參照</b>:先把需求定錨,再對照台廠產能瓶頸、給出「如何提前推測需求」的前瞻指標與來源,並附空頭情境兩面並陳。</p>
+  <div class="meta">
+    <span class="badge b-accent">2026 八大 CSP capex ~$600-690B(YoY +60~77%)</span>
+    <span class="badge">用途:所有報告的需求總開關</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">怎麼用這份錨點</h2>
+  <p class="subtitle">三步:① 看需求源頭(誰花多少錢、買什麼)定錨;② 對照「需求→台廠瓶頸」看你關心的題受哪個需求驅動、目前供需鬆緊;③ 用前瞻指標與來源,在出貨數字出來前就預判需求轉折。所有數字標來源——<b>capex 是會變動的「公司指引」、非實績</b>。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">💰</span>需求定錨</h4><p>capex 是供應鏈一切的源頭,但它領先實際出貨 6-12 個月;部署量(機櫃/GW)才是換成台廠營收的橋。</p></div>
+    <div class="card"><h4><span class="ico">🔗</span>瓶頸對照</h4><p>需求一來不是雨露均霑——有兌現順序:電力(總閘門)→ CoWoS(先卡)→ HBM/InP/ABF → 電源/測試/MLCC。</p></div>
+    <div class="card"><h4><span class="ico">📡</span>前瞻雷達</h4><p>RPO/backlog、capex 指引、電力 PPA、CoWoS 預訂、光模組出貨——能在出貨前 1-24 個月領先示警。</p></div>
+  </div>
+  <div class="callout insight">💡 一句話心法:<b>「capex 指引 ≠ 實際上線」。</b>最大的折價因子是電力併網(capex 12-24 個月 vs 電網 4-10 年)——需求金字塔再高,電不到位就無法部署。盯需求,更要盯它能不能落地。</div>
+</div></section>
+
+<!-- 02 需求源頭 -->
+<section class="block" id="capex"><div class="container">
+  <span class="eyebrow">02 · Demand Source</span>
+  <h2 class="title">需求源頭:hyperscaler capex(定錨)</h2>
+  <p class="subtitle">2026 八大 CSP capex 合計約 $600-690B(YoY +60~77%);幾乎每家 2026 都接近翻倍。<b>口徑=公司財測/指引(會變動),除 2025 全年已近實績。</b></p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>業者</th><th>2025 實績</th><th>2026E 指引</th><th>YoY</th><th>部署重點 / 台廠對應</th></tr></thead>
+    <tbody>
+      <tr><td><b>Amazon (AWS)</b></td><td>$131.8B</td><td><b>$200B</b></td><td>+52%</td><td>Trainium3 自研;Project Rainier &gt;1.3GW、近百萬顆 Trn2;FCF 由 $32.9B→$7.7B(capex 吃掉 94.5% 營運現金流)→ ASIC/電源/光通訊/整機</td></tr>
+      <tr><td><b>Microsoft (Azure)</b></td><td>~$90B 量級</td><td><b>~$190B</b></td><td>+61%</td><td>含 ~$25B 記憶體/零組件漲價(非量增);CFO 稱至少到 2026 全年 capacity-constrained → 電源/液冷/ABF/CCL/整機</td></tr>
+      <tr><td><b>Alphabet (Google)</b></td><td>$91-93B</td><td><b>$180-190B</b></td><td>+95~105%</td><td>自研 TPU(Ironwood)主力,Anthropic 部署逾 100 萬顆 → ASIC 設計服務/CCL/載板/光通訊/電源/液冷</td></tr>
+      <tr><td><b>Meta</b></td><td>$72.2B</td><td><b>$125-145B</b></td><td>+73~100%</td><td>MTIA 自研 ASIC + Nvidia GPU;Q1 上修後股價盤後跌 6%(ROI 疑慮)→ 整機/電源/光通訊/ASIC</td></tr>
+      <tr><td><b>Oracle (OCI)</b></td><td>FY26 ~$50B</td><td>FY27 <b>~$70B</b></td><td>+40%</td><td>RPO 暴增至 ~$523B(YoY +433%)、Stargate 主承建;資本密度/融資需求大 → 整機/電源/光通訊/液冷/載板</td></tr>
+    </tbody>
+  </table></div>
+  <h3>新雲 / 主權 AI / 專案(需求的第二引擎)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>來源</th><th>類型</th><th>規模</th><th>備註(口徑)</th></tr></thead>
+    <tbody>
+      <tr><td>OpenAI / Stargate</td><td>專案承諾</td><td>$500B / 10GW(三年)</td><td>Abilene 旗艦 1.2GW、逾 45 萬顆 GB200;2026 上線起用 Vera Rubin。框架承諾、易因併網/合作方變動</td></tr>
+      <tr><td>xAI (Colossus)</td><td>業內/媒體</td><td>2GW、555,000 顆 GPU、$18B</td><td>全球最大單一站點訓練叢集;募 ~$15B 擴 Colossus 2。非財報、為推估</td></tr>
+      <tr><td>CoreWeave</td><td>neocloud</td><td>年化 &gt;$30B(募 ~$28B 股債)</td><td>純 Nvidia 雲、承接 OpenAI;AI 債務超級循環代表</td></tr>
+      <tr><td>Nebius</td><td>neocloud</td><td>ARR $7-9B、已簽電力 &gt;2GW</td><td>自建資料中心、資本效率模型;capex 數字缺官方</td></tr>
+      <tr><td>主權 AI(中東為主)</td><td>政府/專案</td><td>HUMAIN 2030 1.9GW→6.6GW;Stargate UAE 5GW</td><td>多與 OpenAI/Oracle/NVIDIA 綁定。框架承諾、易變動</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">合計 2026 全球資料中心 capex YoY +57%(研調);累計至 2030 估需約 $3T。新雲/主權 AI 是超大規模之外的增量,但融資結構較脆弱(見空頭情境)。</p>
+</div></section>
+
+<!-- 03 部署量 -->
+<section class="block" id="deploy"><div class="container">
+  <span class="eyebrow">03 · Deployment</span>
+  <h2 class="title">部署量:把 capex 換成實體(才是台廠營收的橋)</h2>
+  <p class="subtitle">capex 是金額,部署量(機櫃/GPU/GW)才是台廠出貨。數字屢經上下修、視為動態。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>平台 / 指標</th><th>量</th><th>時點</th><th>來源</th></tr></thead>
+    <tbody>
+      <tr><td>Nvidia GB200/GB300 NVL72 機櫃</td><td>2025 ~25,000-35,000 櫃 → 2026 ~70,000-80,000 櫃</td><td>GB300 2025Q3 量產、2H26 GB200→GB300 交棒</td><td>TrendForce/MS/郭明錤(動態)</td></tr>
+      <tr><td>Nvidia Vera Rubin(VR200/NVL144)</td><td>2026 約 200,000-300,000 顆 Rubin GPU(產能上限)</td><td>2H26 量產爬坡;算力密度約 NVL72 兩倍</td><td>Foxconn/CES 2026</td></tr>
+      <tr><td>Google TPU(Ironwood)</td><td>Anthropic 單一客戶部署逾 100 萬顆</td><td>2026 大規模放量</td><td>Google 揭露</td></tr>
+      <tr><td>AWS Trainium2</td><td>Project Rainier 近百萬顆 / &gt;1.3GW</td><td>2025-2026 放量;Trainium3 2025/12 推出(3nm)</td><td>SemiAnalysis</td></tr>
+      <tr><td>資料中心 GW 建置</td><td>2026 有 5 座 1GW+ DC 上線;Stargate ~7GW 規劃</td><td>2026-2029 陸續上線</td><td>研調/專案公告</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 需求→瓶頸 -->
+<section class="block" id="bottleneck"><div class="container">
+  <span class="eyebrow">04 · Demand → Bottleneck</span>
+  <h2 class="title">⭐ 需求 → 台廠產能瓶頸對照(核心)</h2>
+  <p class="subtitle">每個需求驅動連回已研究/候選的台股題,標供需鬆緊與最該盯的領先訊號。<span class="tight">吃緊</span> <span class="balance">偏緊/可擴</span> <span class="loose">尚未放量</span></p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>需求驅動</th><th>台股題</th><th>供需</th><th>最該盯的領先訊號</th></tr></thead>
+    <tbody>
+      <tr><td>Rubin/GB300 放量</td><td>CoWoS/CoPoS 先進封裝</td><td><span class="tight">吃緊(最緊)</span></td><td>台積電 CoWoS 月產能、NVIDIA 預訂 wafer 數</td></tr>
+      <tr><td>HBM4 隨 Rubin(每 GPU 8 stack)</td><td>HBM 測試與後段(京元電/致茂…)</td><td><span class="tight">吃緊(短缺至 27-28)</span></td><td>SK hynix/三星 HBM 售罄與擴產 capex</td></tr>
+      <tr><td>自研 ASIC 爆發(出貨 +44.6%)</td><td>雲端 AI ASIC 設計服務(世芯/創意)</td><td><span class="tight">需求吃緊</span></td><td>設計服務 bookings;但兌現受 CoWoS/HBM 限</td></tr>
+      <tr><td>scale-out 光連接(每 GPU ~6 顆光模組)</td><td>InP 光通訊上游(聯亞/全新)</td><td><span class="tight">吃緊(EML/InP 最緊)</span></td><td>800G/1.6T 光模組出貨、InP 基板許可</td></tr>
+      <tr><td>Rubin 載板面積再放大</td><td>ABF/BT 載板(候選)</td><td><span class="tight">吃緊→2027 擴大</span></td><td>欣興/南電 ABF 稼動率、報價</td></tr>
+      <tr><td>板材/PCB 升級(更大、更多層)</td><td>T-Glass 玻纖布(台玻/富喬)</td><td><span class="tight">吃緊(最底層原料)</span></td><td>Nittobo 漲價/擴產、台廠高階布出貨</td></tr>
+      <tr><td>單櫃功率衝 MW 級</td><td>AI 伺服器電源(台達/光寶)</td><td><span class="tight">吃緊(電源 IC 緊)</span></td><td>power shelf 訂單、800VDC 認證進度</td></tr>
+      <tr><td>晶片測試工時暴增(&gt;20 分/顆)</td><td>AI 晶片測試鏈(京元電/穎崴…)</td><td><span class="tight">吃緊(SLT/介面緊)</span></td><td>SLT 採用率、京元電 capex、Advantest 產能</td></tr>
+      <tr><td>單櫃 MW 級散熱</td><td>AI 資料中心液冷(奇鋐/雙鴻)</td><td><span class="balance">偏緊但可擴</span></td><td>瓶頸偏設計/良率/認證,非產能</td></tr>
+      <tr><td>高容 MLCC 用量暴增(GB300 ~45 萬顆/櫃)</td><td>MLCC 被動元件(候選)</td><td><span class="tight">吃緊(高容階)</span></td><td>Murata/太陽誘電交期、訂單出貨比 BB</td></tr>
+      <tr><td>NVL72 機櫃放量</td><td>整機組裝 ODM(鴻海/廣達,候選)</td><td><span class="balance">偏平衡/可擴</span></td><td>組裝非瓶頸,出貨受 CoWoS 上游供料決定</td></tr>
+      <tr><td>資料中心電力(最終天花板)</td><td>重電與電網出口(華城/中興電,候選)</td><td><span class="tight">吃緊(變壓器交期長)</span></td><td>變壓器/GIS 交期、在手訂單、PPA 簽署</td></tr>
+      <tr><td>玻璃基板(TGV/GCS)導入</td><td>玻璃基板 GCS(台積電鏈)</td><td><span class="loose">2027+ 才放量</span></td><td>目前『卡時程』非『卡產能』;采鈺試產進度</td></tr>
+    </tbody>
+  </table></div>
+  <h3>瓶頸兌現順序(需求一來,先卡誰)</h3>
+  <div class="tiers">
+    <div class="tier-row"><div class="lv">第 0 層<small>總閘門</small></div><div><b>電力 / 併網</b> —— 在所有晶片瓶頸之上。Gartner 估 2027 年 40% AI 資料中心受電力限制;併網等數年。電不到位,晶片再多也無法部署。對台廠是間接題(重電出口/HVDC),但決定 capex 兌現節奏。</div></div>
+    <div class="tier-row"><div class="lv">第 1 層<small>先卡</small></div><div><b>CoWoS 先進封裝</b> —— 單一最緊。2026 需求 ~100 萬片 vs 台積電年底 ~125-130K/月、外包升至 70-80%。多方共識:真正限制 GPU 出貨的是封裝(CoWoS+interposer+載板工具交期 12-18 個月)。</div></div>
+    <div class="tier-row"><div class="lv">第 2 層<small>同步緊</small></div><div><b>HBM、InP 雷射、ABF 載板、T-Glass</b> —— 隨封裝一起緊的「料」:HBM 售罄至 2027、InP 基板雙寡頭+中國管制、ABF 2027 缺口擴大、T-Glass Nittobo 壟斷。</div></div>
+    <div class="tier-row"><div class="lv">第 3 層<small>系統緊</small></div><div><b>電源、測試、MLCC</b> —— 晶片做出來後的系統環節:電源 IC 短缺、測試工時暴增(SLT)、高容 MLCC 交期拉長。</div></div>
+    <div class="tier-row"><div class="lv">可擴層<small>非瓶頸</small></div><div><b>整機組裝、液冷</b> —— 產能可擴,瓶頸在上游供料(CoWoS)與設計/良率,非組裝/冷板產能本身。</div></div>
+  </div>
+</div></section>
+
+<!-- 05 產能缺口 -->
+<section class="block" id="gaps"><div class="container">
+  <span class="eyebrow">05 · Capacity Gaps</span>
+  <h2 class="title">關鍵環節產能缺口(量化)</h2>
+  <p class="subtitle">需求 vs 產能,缺口越大、漲價/缺料邏輯越強。數字多為研調/業內推估、標來源。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>需求</th><th>產能</th><th>缺口 / 狀態</th></tr></thead>
+    <tbody>
+      <tr><td>CoWoS 先進封裝</td><td>2026 ~100 萬片晶圓(MS)</td><td>台積電 25 年 ~75K/月、26 年底 ~125-130K/月</td><td>吃緊;需求年增 75%+,名目產能近年翻倍仍供不應求</td></tr>
+      <tr><td>HBM(HBM3E/4)</td><td>Rubin 每 GPU 8 stack、288GB</td><td>三星 26 年擬 +50%、SK hynix 已售罄</td><td>吃緊;SK hynix CFO 明言 2026 全年供給售罄</td></tr>
+      <tr><td>ABF 載板(FC-BGA)</td><td>Rubin 載板面積較 Blackwell 再放大</td><td>欣興 ABF 稼動率已約 90%</td><td>吃緊→擴大;分析師估 2027 缺口 &gt;20%</td></tr>
+      <tr><td>T-Glass / 低 CTE 玻纖布</td><td>更大基板、更多層</td><td>Nittobo 握 T-glass 全球 ~90%</td><td>吃緊;短缺延續 2026-2027</td></tr>
+      <tr><td>光收發 EML/CW(InP)</td><td>每 GPU ~6 顆光模組</td><td>瓶頸在 EML/CW 雷射晶粒(InP)</td><td>吃緊;McKinsey 估 800G 產出短於需求</td></tr>
+      <tr><td>AI 晶片測試(ATE/SLT)</td><td>Blackwell 級測試 &gt;20 分/顆</td><td>Advantest 產能拉到年 1 萬台 SoC tester</td><td>吃緊;測試工時暴增=結構性產能擠壓</td></tr>
+      <tr><td>高容 MLCC</td><td>GB300 ~44-48 萬顆/櫃(普通伺服器數倍)</td><td>Murata 稱詢問量遠超現有產能</td><td>吃緊;高容階交期由 8-12 週拉長</td></tr>
+      <tr><td>AI 伺服器電源(PSU/IC)</td><td>rack 100kW→1MW+</td><td>台達/光寶白區主力</td><td>吃緊;電源 IC 全年短缺、MW 級 HVDC 緊</td></tr>
+      <tr><td>資料中心電力(最終天花板)</td><td>2026 五座 1GW+ DC 上線</td><td>變壓器/GIS 交期拉長、併網排隊</td><td>吃緊;Gartner 估 2027 年 40% DC 受限</td></tr>
+      <tr><td>整機組裝(ODM)</td><td>NVL72 機櫃 2026 ~7-8 萬櫃</td><td>Foxconn &gt;1,000 櫃/週、目標倍增</td><td>偏平衡/可擴;受 CoWoS 上游供料決定出貨</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 06 前瞻指標 -->
+<section class="block" id="indicators"><div class="container">
+  <span class="eyebrow">06 · Leading Indicators</span>
+  <h2 class="title">前瞻領先指標:如何在出貨前預判需求</h2>
+  <p class="subtitle">這些指標「領先實際出貨」,讓你在台廠營收數字出來前就看到需求轉折。按領先時間排。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>領先指標</th><th>領先什麼 / 多久</th><th>怎麼用 · 現況</th></tr></thead>
+    <tbody>
+      <tr><td>電力 PPA / 變電站申請 / 併網排隊</td><td>領先資料中心上線 <b>18-24 個月</b>(最長)</td><td>最硬的前瞻約束。美高壓變電站交期 &gt;160 週、PJM 排隊逾 2,600GW;申請=未來 capex 落地的先決</td></tr>
+      <tr><td>半導體/封裝/載板設備交期(ASML/設備)</td><td>領先產能開出 ~12 個月</td><td>ASML 2026 指引 €34-39B、EUV 交期 &gt;12 月;設備交期拉長=產能要更久才開</td></tr>
+      <tr><td>CoWoS 預訂量(TSMC + OSAT)</td><td>領先 GPU 出貨 ~12-18 個月</td><td>NVIDIA 2026 預訂 ~595K CoWoS wafers(全球 ~60%);預訂=鎖產能=需求確認</td></tr>
+      <tr><td>HBM 售罄狀態與 HBM4 合約定價時點</td><td>領先 1-2 季</td><td>SK hynix 2026 已售罄、Micron 跟進;定價時點是供需強度溫度計</td></tr>
+      <tr><td>Hyperscaler capex 指引</td><td>領先出貨/拉貨 <b>6-12 個月</b></td><td>2026 合計指引 $660-725B;指引上修/下修是需求方向第一訊號</td></tr>
+      <tr><td>Hyperscaler RPO / backlog</td><td>領先 capex 投放 ~1-2 季</td><td>Oracle RPO +433%、AWS backlog +40%;在手合約領先實際花錢</td></tr>
+      <tr><td>Custom ASIC 廠 bookings(Broadcom/Marvell)</td><td>領先 ASIC 出貨</td><td>Broadcom FY26 Q1 AI 半導體 $8.4B(+106%);bookings 領先世芯/創意營收</td></tr>
+      <tr><td>光模組出貨(800G/1.6T)</td><td>領先 AI cluster 部署</td><td>800G+ 2025 出貨 24M→2026 ~33.5-63M;光模組出貨領先 scale-out 建置</td></tr>
+      <tr><td>台積電月營收 + 法說 capex/HPC 占比</td><td>近即時 + 領先全年</td><td>TSMC 2026 capex $52-56B(+30%)、HPC 70-80%;月營收(每月 10 日)是最即時溫度計</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 07 去哪找 -->
+<section class="block" id="sources"><div class="container">
+  <span class="eyebrow">07 · Where to Look</span>
+  <h2 class="title">去哪找前瞻需求訊號(分層來源指南)</h2>
+  <p class="subtitle">你問的「從哪裡找」——分四層:一手最準但慢、社群最快但雜、研調業內居中、上游台廠最即時(月營收)。</p>
+  <div class="grid cols-2">
+    <div class="card"><h4><span class="ico">①</span>一手(最準、季度)</h4><p><b>Hyperscaler 10-Q/法說</b>:RPO/backlog、capex 實績與指引、融資租賃。<b>NVIDIA 法說+10-Q</b>:GPU 需求展望、供給承諾(non-cancellable 訂單=鎖產能)。<b>電力監管</b>:美各州 PUC、FERC、PPA 簽署、併網申請(資料中心上線最硬的前瞻約束,事件驅動)。</p></div>
+    <div class="card"><h4><span class="ico">②</span>研調業內(居中、週/季)</h4><p><b>SemiAnalysis</b>:CoWoS/HBM 產能配置量化模型、GPU 出貨拆解(訂閱)。<b>TrendForce/DIGITIMES/Counterpoint</b>:AI 伺服器出貨成長、ASIC 占比。<b>Dell'Oro/LightCounting</b>:800G/1.6T 光模組出貨與滲透、交換器 capex。<b>Yole/Omdia</b>:先進封裝/材料。</p></div>
+    <div class="card"><h4><span class="ico">③</span>社群/業內爆料(最快、即時)</h4><p><b>X(Twitter)</b>:Serenity @aleabitoreddit(供應鏈 chokepoint 反向工程)、Dan Nystedt(台積電/台鏈彙整)、Jukan(記憶體/韓系)——取得路徑見記憶 playbook(xcancel/Google 索引/媒體轉述)。<b>科技新報 finance.technews.tw / IG</b>:台股 AI 鏈即時新聞、法人焦點股、台廠月營收彙整。<b>當初篩、進報告前必查證。</b></p></div>
+    <div class="card"><h4><span class="ico">④</span>上游台廠(最即時、每月)</h4><p><b>HBM 三大廠法說</b>(SK hynix/三星/美光):售罄/擴產 capex/wpm 路徑。<b>台積電月營收</b>(每月 10 日)+法說 capex。<b>載板/光模組廠法說</b>+台廠月營收(每月 10 日 MOPS):買方預付款=需求確認。台廠月營收是全鏈最即時的需求溫度計。</p></div>
+  </div>
+  <div class="callout insight">💡 實務工作流:<b>季度</b>看一手(capex 指引/RPO)定方向 → <b>每月 10 日</b>看台廠月營收抓即時動能 → <b>即時</b>用 X/科技新報當雷達抓突發(查證後用)→ <b>不定期</b>盯電力 PPA/併網(最長前瞻)與 SemiAnalysis 的 CoWoS/HBM 模型(最量化)。</div>
+</div></section>
+
+<!-- 08 催化劑日曆 -->
+<section class="block" id="calendar"><div class="container">
+  <span class="eyebrow">08 · Catalyst Calendar</span>
+  <h2 class="title">未來需求面催化劑日曆</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時間窗</th><th>事件</th><th>為何重要</th></tr></thead>
+    <tbody>
+      <tr><td>2026/6/1-5(已過)</td><td>Computex 2026 + GTC Taipei(黃仁勳 keynote)</td><td>Vera Rubin 全面量產宣告、供應鏈夥伴名單</td></tr>
+      <tr><td>2026/7 中</td><td>TSMC 2026 Q2 法說</td><td>capex 是否再上修、HPC 占比、CoWoS 產能進度</td></tr>
+      <tr><td>2026/7/28-30</td><td>Hyperscaler Q2 法說(MS/Meta/Amazon)</td><td>capex 指引是否續上修、RPO/backlog 動能</td></tr>
+      <tr><td>2026/8(Q3)</td><td>NVIDIA FY27 Q2 法說 + Broadcom/Marvell</td><td>GPU 需求展望、custom ASIC bookings</td></tr>
+      <tr><td>2026/Q3-Q4</td><td>Vera Rubin 量產爬坡、R100 Q4 sampling、GB300 交棒</td><td>台廠 2H26 出貨放量的兌現點</td></tr>
+      <tr><td>2026/Q4</td><td>HBM4 16-Hi 交貨 + 2027 HBM 合約定價/量敲定</td><td>記憶體供需強度與台鏈測試需求</td></tr>
+      <tr><td>2027/1</td><td>TSMC 發布 2027 capex 指引 + hyperscaler Q4 法說</td><td>2027 需求方向定調</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 09 空頭情境 -->
+<section class="block" id="bear"><div class="container">
+  <span class="eyebrow">09 · Bear Case</span>
+  <h2 class="title">空頭情境與反轉訊號(兩面並陳)</h2>
+  <p class="subtitle">需求敘事極強,但必須知道空方論點與「需求若降溫會先從哪看到」。這份不是只做多頭。</p>
+  <div class="callout risk"><b>空頭論點(bear case):</b>
+    <ul style="margin:8px 0 0;padding-left:20px;font-size:14px">
+      <li><b>ROI 缺口 10:1：</b>2026 八大 CSP capex ~$600-690B,但直接帶來的 AI 營收僅約 $51B(約 10:1;2011 雲端同階段為 2.4:1)</li>
+      <li><b>折舊陷阱：</b>三大雲把伺服器折舊年限由 3-4 年延長至 6 年(Meta 5.5 年),合計每年約少提列 $18B 折舊(美化盈餘)</li>
+      <li><b>表外融資脆弱：</b>Oracle/xAI/Meta/CoreWeave 透過 SPV 把約 $120B AI 基建債務移出表外;信用收緊即下行風險</li>
+      <li><b>需求是「價」不是「量」：</b>微軟 $190B 中約 $25B 是記憶體漲價;記憶體 2026 估占 capex ~30%(2023 約 8%)——名目 capex 灌水</li>
+      <li><b>企業端 ROI 未兌現：</b>調查顯示約 95% 企業 AI 專案無可衡量 ROI、僅 ~8.6% 有 AI agent 進生產——需求集中在訓練、推論變現待證</li>
+      <li><b>pull-in vs 永續：</b>Blackwell backlog 3.6M 顆部分是漲價/缺貨下提前拉貨,「售罄」敘事不等於永續需求</li>
+    </ul>
+  </div>
+  <div class="callout warn"><b>需求降溫的領先反轉訊號(若要轉空,會先從這看到):</b>
+    <ul style="margin:8px 0 0;padding-left:20px;font-size:14px">
+      <li><b>capex 指引下修</b>(尤其法說拿掉「capacity-constrained/供不應求」措辭)——第一訊號</li>
+      <li><b>RPO/backlog 成長放緩</b>(Oracle 已從 +433%→+363%;增速見頂)</li>
+      <li><b>GPU 租金/二手價跌</b>(H100 租金已從 &gt;$7/hr 跌至中位 ~$2.95/hr)</li>
+      <li><b>記憶體漲價回吐</b>(名目 capex ~30% 是記憶體,合約價見頂則 capex 自動縮水——需分辨 BOM 通縮 vs 真降溫)</li>
+      <li><b>資料中心取消/延後</b>(已有美國 ~7GW 報導)、併網惡化</li>
+      <li><b>NVIDIA 客戶集中度 &gt;70% / 交期由緊轉鬆</b>(CoWoS/載板工具交期鬆動=供過於求前兆)</li>
+      <li><b>折舊年限再延長 / GPU 資產減損公告</b>(會計面的需求反轉確認)</li>
+    </ul>
+  </div>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <ul class="refs">
+    <li><b>各 hyperscaler Q1/Q4 2026 法說與 8-K</b>(Alphabet/MS/Meta/Amazon/Oracle)— capex 指引、RPO、部署<span class="q">primary</span></li>
+    <li><b>OpenAI/Stargate、xAI、CoreWeave、Nebius 公告/SEC</b> — 專案承諾、GW、融資<span class="q">primary</span></li>
+    <li><b>SemiAnalysis / TrendForce / Morgan Stanley</b> — GB/Rubin 出貨、CoWoS/HBM 產能、ASIC 占比<span class="q">secondary</span></li>
+    <li><b>Dell'Oro / LightCounting / Goldman Sachs</b> — 800G/1.6T 光模組出貨;光網路 TAM<span class="q">secondary</span></li>
+    <li><b>Gartner / Sightline Climate / IEA</b> — 電力/併網瓶頸(2027 年 40% DC 受限、5GW 缺口)<span class="q">secondary</span></li>
+    <li><b>空頭面:</b>各家折舊年限變更揭露、SPV 表外融資報導、企業 AI ROI 調查(MIT/麥肯錫系)<span class="q">secondary</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>使用須知:</b>① capex 全為「公司指引」、會變動,非實績;② 部署量/缺口多為研調/業內推估、屢經上下修;③ 主權 AI/Stargate 為框架承諾、易因併網/合作方變動;④ 本頁為需求總開關參照,個股仍以各供應鏈報告與最新法說為準。</div>
+  <p class="disclaimer">免責聲明:本參照僅供研究與教育用途,不構成投資建議。AI 需求為時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>AI 需求錨點 × 產能對照 × 前瞻指標 · 2026 · process-chain-research 共用參照 · 資料僅供參考,不構成投資建議</p></footer>
+
+</body>
+</html>
