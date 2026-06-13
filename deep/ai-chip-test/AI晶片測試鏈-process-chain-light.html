@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 晶片測試鏈 製程鏈 × 供應鏈研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#0891b2; --accent-soft:#cffafe;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#e0f7fb,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:780px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">AI 晶片測試鏈<span> 製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱門</a>
+    <a href="#categories">核心環節</a><a href="#application">測試流程</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">難度評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>AI 晶片測試鏈 <em>× 供應鏈研究指南</em> 2026</h1>
+  <p class="lead">AI 晶片把測試從「抽樣成本中心」結構性轉成「100% 全測 + burn-in + SLT 的良率保險」——是<b>結構性放量、非一次性漲價</b>。最性感的是 SLT 系統級測試(從可選變強制)。台股卡位完整:測試代工京元電(AI 測試時間 +100-200%)、分選機鴻勁(NVIDIA AI FT ~90%)、測試座穎崴(全球第一)、SLT 系統致茂(NVIDIA 15 年獨家)、探針卡旺矽/中華精測。天花板:ATE 測試機被 Advantest/Teradyne 壟斷。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:AI 晶片測試強度結構性大增</span>
+    <span class="badge">市場:台灣為主＋國際對照</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽</h2>
+  <p class="subtitle">AI 加速器是「多 die 模組」(chiplet+HBM+SRAM 以 CoWoS/3D IC 整合),任一壞 die 毀掉整個數千美元封裝 → 測試從抽樣變結構性必跑。<b>切分:</b>本題是邏輯/SoC/AI 加速器測試(CP/burn-in/FT/SLT);與「HBM 測試」(記憶體)相鄰但不同,重疊股註明、不重複灌。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🏭</span>測試代工(OSAT)</h4><p>京元電(FT+burn-in 龍頭)、欣銓(CP)、矽格(FT/SiP)——AI 測試時間倍增、量價齊升。</p></div>
+    <div class="card"><h4><span class="ico">📍</span>測試介面(探針卡/測試座)</h4><p>探針卡:旺矽、中華精測;測試座:穎崴(全球第一);測試板:雍智。ASP 隨先進封裝/針數上升。</p></div>
+    <div class="card"><h4><span class="ico">⚙️</span>測試設備(分選/SLT/ATC)</h4><p>鴻勁(分選機/ATC,NVIDIA AI FT ~90%)、致茂(SLT 系統,NVIDIA 15 年獨家)。SLT 從可選變強制。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(四層結構)</h2>
+  <p class="subtitle">設計 DFT/IP → 測試介面(探針卡/測試座/治具)→ 測試設備(ATE/分選/SLT)→ 測試代工執行。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝公司自述</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游<small>設計 DFT/EDA(台廠缺席)</small></div><div class="items"><span class="badge b-accent">Synopsys/Siemens/Cadence(DFT)</span></div></div>
+    <div class="chain-row"><div class="lvl">測試介面<small>探針卡/測試座/治具</small></div><div class="items"><span class="badge b-tw">旺矽 6223</span><span class="badge b-tw">中華精測 6510</span><span class="badge b-tw">穎崴 6515</span><span class="badge b-tw">雍智 6683</span><span class="badge b-accent">FormFactor/Technoprobe/Cohu/ISC</span></div></div>
+    <div class="chain-row"><div class="lvl">測試設備<small>ATE/分選/SLT</small></div><div class="items"><span class="badge b-tw">鴻勁 7769</span><span class="badge b-tw">致茂 2360</span><span class="badge b-tw">惠特 6706</span><span class="badge b-accent">Advantest/Teradyne(ATE 天花板)</span></div></div>
+    <div class="chain-row"><div class="lvl">測試代工<small>執行(OSAT)</small></div><div class="items"><span class="badge b-tw">京元電 2449</span><span class="badge b-tw">欣銓 3264</span><span class="badge b-tw">矽格 6257</span><span class="badge b-ok">→ NVIDIA/ASIC 客戶</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:測試介面(探針卡/測試座)、測試設備(分選/SLT)、測試代工三層都有龍頭級卡位;唯上游 DFT/EDA 與大型 ATE 測試機本體是國際主場、台廠吃不到。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Now</span>
+  <h2 class="title">為何熱門</h2>
+  <p class="subtitle">AI 多 die → 強制 KGD + SLT → 測試插入點與工時倍增 → 測試鏈全面放量。這是結構性、不是一次性漲價。</p>
+  <div class="flow">
+    <div class="step"><b>需求端</b><small>AI 多 die 封裝、單顆價值數千美元;一壞 die 毀整封裝</small></div><div class="arrow">→</div>
+    <div class="step"><b>結構放大</b><small>強制 KGD + SLT 變必跑;測試插入點/工時 +100-200%;高功率需液冷</small></div><div class="arrow">→</div>
+    <div class="step"><b>受惠傳導</b><small>測試代工(京元電)/介面(穎崴/旺矽)/設備(鴻勁/致茂)量價齊升</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>AI 封裝測試成本占比</p><h4>10-15%(vs 消費 5%)</h4></div>
+    <div class="card"><p>SLT 市場 2026 成長</p><h4>+30%(Digitimes)</h4></div>
+    <div class="card"><p>AI 測試時間增幅</p><h4>+100~200%(京元電自述)</h4></div>
+    <div class="card"><p>後段測試設備 2025</p><h4>$11.2B(+48% SEMI)</h4></div>
+  </div>
+  <p class="disclaimer">AI 測試時間/單價增幅為京元電公司自述(無第三方 benchmark);SLT +30% 為 Digitimes 口徑;市場規模研調口徑分歧(見第 09 段)。標來源、非成交數。</p>
+  <h3>傳統測試 vs AI 晶片測試</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>面向</th><th>傳統消費 SoC</th><th>AI 加速器晶片</th></tr></thead>
+    <tbody>
+      <tr><td>測試定位</td><td>抽樣成本中心</td><td>100% 全測 + 良率保險</td></tr>
+      <tr><td>KGD 把關</td><td>可選</td><td>強制(一壞 die 毀整封裝)</td></tr>
+      <tr><td>SLT 系統級測試</td><td>選配</td><td>強制必跑</td></tr>
+      <tr><td>測試成本占比</td><td>~5%</td><td>10-15%</td></tr>
+      <tr><td>功率/散熱</td><td>低</td><td>300W~2000W、需液冷</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心環節深度解析</h2>
+  <p class="subtitle">6 環節中門檻最高、AI 增幅最大的是 <b>⑤ SLT(19/20)</b> 與 <b>② CP 探針卡(18/20)</b>。</p>
+  <h3>核心 A:SLT 系統級測試(AI 新增強度最大)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>能力</th><th>作用</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>真實 workload 驗證</td><td>抓 ATE 抓不到的 system-level/SDE 缺陷</td><td>重現真實系統+長工時穩定</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>高功率 SLT 平台</td><td>2kW→4kW 供電/液冷</td><td>高 TDP 下散熱與供電工程</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>致茂 <span class="code">2360</span></h4><p>全球第四大半導體測試廠、NVIDIA 15 年 SLT 獨家夥伴(每顆 GPU 須過其設備);新世代 AI SLT 案 2026H2 量產;2026Q1 +73% YoY、毛利率 63%。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>穎崴 <span class="code">6515</span></h4><p>SLT 測試座,SLT 相關營收占比逾 5 成;Functional burn-in 結合 SLT;北美 AI 客戶 80%+。<span class="conf c-high">高</span></p></div>
+  </div>
+  <h3>核心 B:CP 晶圓針測(探針卡,18/20)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>類型</th><th>原理</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>MEMS 探針卡</td><td>微機電製超高針數探針</td><td>微 pitch、平整度、接觸壽命</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>2nm 節點認證</td><td>先進製程 CP</td><td>認證週期長、與設計綁定</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>旺矽 <span class="code">6223</span></h4><p>探針卡龍頭(占營收 ~76%,CPC/VPC/MEMS 自製探針)+測試設備;2026Q1 EPS 12.53、毛利率 59.45% 雙創高。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>中華精測 <span class="code">6510</span></h4><p>台積電轉投資,高自製 MEMS 探針卡+測試載板,主攻 CP/HPC;2026Q1 EPS 10.43(+54% YoY);增發蓋第三廠。<span class="conf c-high">高</span></p></div>
+  </div>
+</div></section>
+
+<!-- 05 測試流程 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Test Flow</span>
+  <h2 class="title">完整測試流程(逐站)</h2>
+  <p class="subtitle">一顆 AI 晶片從晶圓到出貨,要過的測試插入點(test insertions)。AI 把這條鏈從「幾站」拉長成「全程串接」。</p>
+  <div class="stack">
+    <div class="layer"><b>① 設計 DFT(可測試性設計)</b><div class="uses">scan/BIST/UCIe-HBM loopback;國際 EDA 主場</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② CP 晶圓針測(封裝前)</b><div class="uses">探針卡挑壞 die、做 KGD;旺矽/中華精測/欣銓</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ Burn-in 老化(WLBI+高功率)</b><div class="uses">逼出早夭;京元電自製爐/穎崴 socket/Aehr WLBI</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ FT 成品終測(封裝後)</b><div class="uses">分選機+ATC+ATE 全功能分 bin;京元電/鴻勁/穎崴</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ SLT 系統級測試 ★ AI 強制</b><div class="uses">真實 workload 抓 SDE;致茂/鴻勁/穎崴</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 出貨檢測 QA</b><div class="uses">AOI/打標/編帶(周邊)</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:AI 晶片把測試插入點從「CP→FT 幾站」延伸成「CP→burn-in→FT→SLT 全程串接、且每站工時倍增」,這是測試鏈整體放量的結構來源。台股在 ②~⑤ 都有龍頭,①(DFT)與 ATE 本體吃不到。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>測試代工(京元電/欣銓/矽格)</td><td>AI 測試時間/插入點倍增</td><td>京元電 FT+burn-in 量價齊升;欣銓 ASIC CP 2026H2(選擇權)</td></tr>
+      <tr><td>測試設備(鴻勁/致茂/惠特)</td><td>SLT 強制化、高功率 ATC</td><td>鴻勁 NVIDIA AI FT ~90%;致茂 SLT NVIDIA 獨家;惠特光測轉盈(選擇權)</td></tr>
+      <tr><td>測試介面(穎崴/旺矽/中華精測/雍智)</td><td>大封裝/高針數 ASP 上升</td><td>穎崴測試座全球第一;旺矽探針卡龍頭;雍智 Google TPU 測試板</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>ATE 測試機本體天花板</b>(Advantest 66%+Teradyne 雙寡占,台廠吃不到);② <b>capex/折舊壓力</b>(京元電 500 億創天量、產能 Q3-Q4 才開出);③ <b>認證遞延</b>(欣銓/致茂/雍智多為 2026H2 前瞻指引);④ <b>與 HBM 測試題重疊</b>(京元電/欣銓/矽格/穎崴/旺矽橫跨,勿重複計);⑤ <b>探針卡 2nm 認證被國際三強卡位</b>。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手佐證 <span class="conf c-med">中</span>=公司自述/部分 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="osat">測試代工</button><button data-f="iface">測試介面</button>
+    <button data-f="equip">測試設備</button><button data-f="intl">國際對手</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="osat"><h4>京元電子 <span class="code">2449</span></h4><p>FT+burn-in 測試代工龍頭(自製爐);AI 測試時間 +100-200%/單價 +50-100%(公司自述);2026Q1 營收 101.92 億創高,capex 上修 500 億。註:AI 占比公司自述、留意折舊獲利。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="equip"><h4>鴻勁精密 <span class="code">7769</span></h4><p>SoC 測試分選機/ATC;NVIDIA AI FT 約 90%;2026Q1 +81% YoY;高盛 TP NT$5,000。2025/11 已轉上市。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="iface"><h4>穎崴 <span class="code">6515</span></h4><p>測試座/測試介面全球第一;北美 AI 80%+;HyperSocket ASP 高 30%+;SLT 占比逾 5 成;2026Q1 EPS 19.54 雙創高。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="equip"><h4>致茂 <span class="code">2360</span></h4><p>SLT 系統+量測,全球第四大測試廠、NVIDIA 15 年 SLT 獨家;新案 2026H2 量產;2026Q1 +73%、毛利率 63%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="iface"><h4>旺矽 <span class="code">6223</span></h4><p>探針卡龍頭(~76%)+設備;2026Q1 EPS 12.53、毛利率 59.45% 雙創高。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="iface"><h4>中華精測 <span class="code">6510</span></h4><p>台積電轉投資,MEMS 探針卡+測試載板,主攻 CP/HPC;2026Q1 EPS 10.43(+54% YoY)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="osat"><h4>矽格 <span class="code">6257</span></h4><p>FT/SiP/RF 測試代工,布局 AI/HPC SLT/矽光子;2026Q1 EPS 2.1(+34% YoY)、5 月營收創高。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="iface"><h4>雍智科技 <span class="code">6683</span></h4><p>IC 測試板(load board),切入 Google TPU CP/FT;2026Q1 +46% YoY、EPS 6.23 雙創高。<b>股號=6683(非 7758)</b>。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="osat"><h4>欣銓 <span class="code">3264</span></h4><p>CP 晶圓測試代工(ASIC 佔比 ~20%);龍潭 ASIC CP 新專案 2026H2 貢獻(未來選擇權);2026Q1 EPS 1.95 創同期高。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="equip"><h4>惠特 <span class="code">6706</span></h4><p>原 LED 點測分選龍頭轉 AI 光電/矽光子高階設備;新品驗證未放量、去年虧損(估今年轉盈)——未來選擇權。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="equip"><h4>德律 <span class="code">3030</span></h4><p>ICT 電性測試+3D AOI;AI 受惠主要在網通/伺服器板測;2026Q1 EPS 3.5(+43% YoY)。屬周邊。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>Advantest / Teradyne <span class="code">6857.T/TER</span></h4><p>ATE 測試機雙寡占(Advantest SoC tester 66%);台廠在測試機本體吃不到=天花板。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>FormFactor / Technoprobe / Cohu / ISC <span class="code">FORM 等</span></h4><p>探針卡三強約 6-7 成、測試座 Cohu/ISC;國際對手,卡位台積電 2nm 與 AI 測試座。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">逐環節技術難度評分</h2>
+  <p class="subtitle">維度:技術門檻 / 設備稀缺 / AI 強度增幅 / 客戶認證綁定,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>設備稀缺</th><th>AI增幅</th><th>客戶綁定</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>⑤ SLT 系統級測試</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>② CP 晶圓針測(探針卡)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>① 設計 DFT/DFT-DV</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>③ Burn-in 老化</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>④ FT 成品終測</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>⑥ 出貨檢測 QA</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">8</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台股甜蜜點:SLT(19)+探針卡(18)+burn-in/FT(17),台廠都有龍頭卡位;DFT 與 ATE 本體是國際主場。評分為推估,僅供參考。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>京元電 2449</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>鴻勁精密 7769</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><span class="tot">22.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>致茂 2360</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">21.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>穎崴 6515</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">20.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>旺矽 6223</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">19</span></td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>京元電 2449</td><td>FT+burn-in 代工</td><td>2026Q1 營收創高;capex 二度上修 500 億(高功率燒機/先進封裝測試)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>鴻勁 7769</td><td>分選機/ATC</td><td>NVIDIA AI FT ~90%;高盛估 2026 +54%/2027 +40%;CPO 測試設備已出貨</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>致茂 2360</td><td>SLT 系統</td><td>NVIDIA 15 年獨家;新世代 AI SLT 案 2026H2 量產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>穎崴 6515 / 旺矽 6223 / 中華精測 6510</td><td>測試座/探針卡</td><td>2026Q1 EPS 普遍創高;探針卡 ASP 隨先進封裝升</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>欣銓 3264 / 雍智 6683</td><td>CP 代工 / 測試板</td><td>欣銓 ASIC CP 新專案 2026H2;雍智 Google TPU 測試板(前瞻)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>SLT 結構放量(事件)</td><td>產業趨勢</td><td>Teradyne Titan HP 2kW→4kW;ISC AI 測試座 +115%;Digitimes 估 SLT 2026 +30%</td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入測試代工龍頭<b>示意數字</b>(非財測),請依個股真實財務調整。測試代工為資本/折舊密集,留意 capex 週期。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>探針卡/測試座股 PE 高(高毛利)</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>EV/EBITDA</b></td><td>(EBITDA×倍數−淨負債)÷股數</td><td>重資產測試代工</td><td>京元電/矽格(折舊大)適用</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業 + 未來 AI 案折現</td><td>未放量案</td><td>欣銓 ASIC CP、惠特光測、雍智 TPU</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="400"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="30"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="22"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="12.2"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="20"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="35"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為示意非個股財測。測試代工(京元電)vs 介面/設備(穎崴/鴻勁/旺矽)財務結構差異大(毛利率 30% vs 50-60%),務必填入標的真實數字。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;股號/口徑修正已標註。</p>
+  <ul class="refs">
+    <li><b>京元電/鴻勁/穎崴/致茂/旺矽/中華精測/矽格/雍智/欣銓 2026Q1 法說與月營收</b> — 各家數字<span class="q">primary</span></li>
+    <li><b>SEMI</b> — 後段測試設備 2025 $11.2B(+48.1%);<b>Advantest FY25 法說</b> — SoC tester CY26 $8.7-9.5B、市占 66%<span class="q">primary</span></li>
+    <li><b>SemiEngineering / FormFactor(Silicon Saxony 2026)</b> — KGD、SLT 強制化、測試插入點倍增、測試成本占比<span class="q">secondary</span></li>
+    <li><b>Digitimes(2025/7)</b> SLT 2026 +30%;<b>高盛(2026/1)</b> 鴻勁 TP $5,000;<b>Teradyne</b> Titan HP 2kW→4kW<span class="q">secondary</span></li>
+    <li><b>Mordor / QYR / FMI / VMR</b> — 探針卡/測試座/burn-in/SLT 市場規模(口徑分歧,量級參考)<span class="q">blog</span></li>
+    <li><b>Aehr Test Systems</b> — WLBI 晶圓級老化、2026/2 AI 大客戶 $14M 訂單<span class="q">primary</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>股號/口徑修正:</b>① <b>雍智科技=6683</b>(非 7758=睿騰能源);<b>鴻勁 7769 已 2025/11 轉上市</b>(非興櫃);② 京元電 AI 占比與測試時間 +100-200%/單價 +50-100% 為<b>公司自述</b>(無第三方 benchmark),2026Q1 營收創高需留意折舊獲利;③ 探針卡市場研調絕對值/CAGR 分歧大、SLT +30% 為 Digitimes 口徑,皆量級參考;④ 京元電/欣銓/矽格/穎崴/旺矽橫跨「HBM 測試」題,勿重複計受惠。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>AI 晶片測試鏈 製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>

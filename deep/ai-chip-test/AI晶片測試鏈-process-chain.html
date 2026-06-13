@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 晶片測試鏈 製程鏈 × 供應鏈 深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#22d3ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#0e2630);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#08111d;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(34,211,238,.08)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li,td{overflow-wrap:anywhere}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>AI 晶片測試鏈 製程鏈 × 供應鏈 深度研究報告</h1>
+  <div class="sub">CP 晶圓測試 → Burn-in 老化 → FT 成品測試 → SLT 系統級測試;探針卡/測試座/分選機/治具逐環節難度、台廠/國際對照、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 研究＋對抗式查證</b></span>
+    <span class="pill">驅動力：<b>AI 晶片測試強度結構性大增</b></span>
+    <span class="pill">配對淺色版：<b>AI晶片測試鏈-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/應用/原理</a>
+    <a href="#s2">2. 完整測試流程</a>
+    <a href="#s3">3. 逐環節難度</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. 市場與時程</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>AI 晶片把測試從「抽樣的成本中心」結構性轉成「100% 全測 + burn-in + SLT 的良率保險」——這是<b>結構性放量、非一次性漲價事件</b>。最性感的環節是 <b>SLT 系統級測試</b>(從可選變強制)。台股卡位完整:測試代工京元電(AI 測試時間 +100-200%/單價 +50-100%)、分選機鴻勁(NVIDIA AI FT 約 90%)、測試座穎崴(全球第一、北美 AI 80%+)、SLT 系統致茂(NVIDIA 15 年獨家夥伴)、探針卡旺矽/中華精測。天花板:大型 ATE 測試機被 Advantest/Teradyne 壟斷,台廠吃不到。</div>
+<div class="kpi">
+  <div class="box"><div class="v">10-15% vs 5%</div><div class="l">先進 AI 封裝測試成本占比 vs 傳統消費 SoC</div></div>
+  <div class="box"><div class="v">+30%</div><div class="l">SLT 測試市場 2026 估成長(Digitimes)</div></div>
+  <div class="box"><div class="v">+100~200%</div><div class="l">AI 晶片測試時間增幅(京元電自述)</div></div>
+  <div class="box"><div class="v">$11.2B</div><div class="l">半導體後段測試設備 2025(+48% YoY,SEMI)</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、應用、技術原理 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>核心定義:為何 AI 讓測試「強度倍增」</h3>
+  <p>AI 加速器(NVIDIA GB/Rubin、Google TPU 等 ASIC)是「多 die 模組」——數千核心的 chiplet + HBM + SRAM 以 CoWoS/3D IC 整合。這把測試從「抽樣」變成「結構性必跑」,五條互相加乘:</p>
+  <ul>
+    <li><b>chiplet 多 die → 強制 KGD(Known-Good-Die):</b>任一壞 die 毀掉整個數千美元封裝,封裝前必須全測;測試插入點(test insertions)從 CP 一路串到 burn-in、FT、SLT。</li>
+    <li><b>SLT 從選配變必要:</b>AI 晶片的矽資料錯誤(SDE/silent data corruption)只能在近真實系統的 SLT 抓出。</li>
+    <li><b>高功率(每封裝 300W~2000W):</b>測試期間散熱/供電變難,液冷估佔 AI 老化/SLT 平台約 41%。</li>
+    <li><b>大 die、高核心數 → 測試時間倍增</b>(京元電稱 +100~200%、單價 +50~100%,公司自述)。</li>
+    <li><b>測試成本占比上升:</b>先進 AI 封裝測試成本佔總晶片成本 10-15%,vs 傳統消費 SoC 約 5%。</li>
+  </ul>
+  <div class="callout warn"><b>同名不同物/切分:</b>本主題是邏輯/SoC/AI 加速器測試(CP/burn-in/FT/SLT 與探針卡/測試座/分選/代工);與「HBM 測試與後段周邊」(記憶體測試)為相鄰但不同 segment——京元電/欣銓/矽格/穎崴/旺矽橫跨兩者,重疊處註明、不重複當兩批受惠灌。</div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>完整測試流程拆解(6 環節)<span class="conf c-high">高信心</span></h2>
+<p class="sub">設計 DFT → CP 晶圓針測 → Burn-in 老化 → FT 成品終測 → <b>SLT 系統級測試(AI 新增強度最大)</b> → 出貨檢測。台廠主戰場在 ②CP 探針卡、③burn-in、④FT、⑤SLT;① DFT 是國際 EDA 主場、台廠缺席。</p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>設計階段 DFT / DFT-DV(可測試性設計)</h4>
+    <p>RTL 階段插入 scan chain/BIST/UCIe-HBM-SerDes loopback,產生測試向量。chiplet 多 die 需專屬 interconnect test。</p>
+    <div class="diff">難點:多 die DFT 自動化,被 Synopsys/Siemens(Tessent Multi-die)/Cadence 三家 EDA 寡占——<b>台廠幾乎缺席</b>(本報告不灌入測試耗材族群錯認)。</div>
+    <div class="who">對應:<span class="tag t-intl">Siemens EDA / Synopsys / Cadence</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>CP 晶圓針測(封裝前,探針卡)</h4>
+    <p>探針卡接觸晶圓每顆 die 做電性初測,挑壞 die、做 KGD 清單,壞 die 不進昂貴封裝。</p>
+    <div class="diff">難點:超高針數/微 pitch MEMS 探針卡;國際三強(FormFactor+Technoprobe+MJC)約 6 成、MEMS 佔 73%;Technoprobe 拿台積電 2nm 約 30% 認證(壁壘極高)。</div>
+    <div class="who">對應:<span class="tag t-tw">旺矽 6223</span> <span class="tag t-tw">中華精測 6510</span> <span class="tag t-tw">欣銓 3264(CP 代工)</span> <span class="tag t-intl">FormFactor/Technoprobe/MJC</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>Burn-in 老化測試(含 WLBI 晶圓級 + 高功率燒錄)</h4>
+    <p>高溫+高壓+加電應力逼出早夭缺陷。AI 晶片價值高、故障損失大,從可選變關鍵把關。</p>
+    <div class="diff">難點:高功率(300W~2000W)供電與液冷散熱、自製老化爐成本優勢、老化座高溫接觸壽命;WLBI 全晶圓 contactor 是 Aehr 獨門(台廠缺席)。</div>
+    <div class="who">對應:<span class="tag t-tw">京元電 2449(自製爐)</span> <span class="tag t-tw">穎崴 6515(burn-in socket)</span> <span class="tag t-tw">雍智 6683</span> <span class="tag t-intl">Aehr(WLBI)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>FT 成品終測(封裝後,分選機+測試座+ATE)</h4>
+    <p>分選機送 DUT 進測試座,ATE 雙/三溫下全功能+效能+分 bin 測試。chiplet 封裝後最後整體驗證。</p>
+    <div class="diff">難點:分選機主動溫控(ATC)在高功率下精準維持接面溫度;測試座承受高頻/大電流/大封裝(&gt;100×100mm、2 萬 pin)。京元電在 NVIDIA AI FT 近乎主導。</div>
+    <div class="who">對應:<span class="tag t-tw">京元電 2449</span> <span class="tag t-tw">鴻勁 7769(分選/ATC)</span> <span class="tag t-tw">穎崴 6515(socket)</span> <span class="tag t-tw">矽格 6257</span> <span class="tag t-intl">Advantest/Teradyne(ATE)、Cohu/TechWing</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>SLT 系統級測試 ⭐ AI 新增強度最大環節</h4>
+    <p>載入真實 OS/firmware/workload,長時間驗證整顆晶片在真實情境的功能/效能/穩定性,抓 ATE 抓不到的 system-level 缺陷。</p>
+    <div class="diff">難點:重現真實系統+高功率供電+液冷+長工時;<b>已從可選變 AI 晶片強制步驟</b>;Teradyne Titan HP 已支援 2kW、路線圖到 4kW。護城河極高。</div>
+    <div class="who">對應:<span class="tag t-tw">致茂 2360(NVIDIA 15 年獨家)</span> <span class="tag t-tw">鴻勁 7769</span> <span class="tag t-tw">穎崴 6515(SLT socket &gt;5 成)</span> <span class="tag t-tw">京元電 2449</span> <span class="tag t-intl">Advantest/Teradyne</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>最終出貨檢測 / Outgoing QA(增幅最小)</h4>
+    <p>AOI 外觀檢測(共面性/翹曲)、最終抽檢、雷射打標、編帶包裝與追溯。</p>
+    <div class="diff">難點相對低:成熟自動化檢測+OSAT 標準流程;大封裝翹曲/共面檢測規格升高,但非測試強度核心(周邊、不作投資主軸)。</div>
+    <div class="who">對應:<span class="tag t-tw">測試代工內含</span> <span class="tag t-tw">德律 3030(AOI,周邊)</span> <span class="conf c-med">中(周邊)</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐環節技術難度評分</h2>
+<p class="sub">維度:技術門檻 / 設備稀缺 / AI 強度增幅 / 客戶認證綁定,各 0~5 分(5＝最難)。評分為推估。</p>
+<table>
+  <tr><th>製程環節</th><th>技術門檻</th><th>設備稀缺</th><th>AI強度增幅</th><th>客戶綁定</th><th>總分/20</th><th>最卡關原因</th></tr>
+  <tr><td><b>⑤ SLT 系統級測試</b></td><td>5</td><td>4</td><td>5</td><td>5</td><td><b>19</b></td><td>從可選變強制、高功率+真實 workload,增幅最大</td></tr>
+  <tr><td>② CP 晶圓針測(探針卡)</td><td>5</td><td>4</td><td>4</td><td>5</td><td>18</td><td>MEMS 微機電製程、2nm 認證壁壘極高</td></tr>
+  <tr><td>① 設計 DFT/DFT-DV</td><td>5</td><td>4</td><td>4</td><td>4</td><td>17</td><td>多 die DFT 自動化,EDA 三家寡占(台廠缺席)</td></tr>
+  <tr><td>③ Burn-in 老化</td><td>4</td><td>4</td><td>5</td><td>4</td><td>17</td><td>高功率供電+液冷、自製爐;WLBI 是 Aehr 獨門</td></tr>
+  <tr><td>④ FT 成品終測</td><td>4</td><td>4</td><td>4</td><td>5</td><td>17</td><td>分選機 ATC 高功率溫控、大封裝測試座</td></tr>
+  <tr><td>⑥ 出貨檢測 QA</td><td>2</td><td>2</td><td>2</td><td>2</td><td>8</td><td>成熟檢測收尾,非強度核心</td></tr>
+</table>
+<div class="callout"><b>台股甜蜜點:</b>SLT(19)+ 探針卡(18)+ burn-in/FT(17)——這幾環台廠都有龍頭級卡位(致茂/鴻勁/穎崴/旺矽/京元電/中華精測);唯 ① DFT 與 ATE 測試機本體是國際主場、台廠吃不到。</div>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 有獨立佐證</span>
+  <span><span class="conf c-med">中</span> 部分佐證/公司自述</span>
+  <span><span class="conf c-un">待查</span> 概念股列舉</span>
+</div>
+<h3>台廠 × 環節</h3>
+<table>
+  <tr><th>公司(股號)</th><th>環節定位</th><th>角色 / 最新數字 / AI 受惠</th><th>查證</th></tr>
+  <tr><td>京元電子 2449</td><td>FT+burn-in 測試代工龍頭</td><td>AI GPU/ASIC 成品測試+高功率燒錄;AI 測試時間 +100-200%、單價 +50-100%(公司自述);2026Q1 營收 101.92 億創高(+近 40%),capex 二度上修至 500 億創天量。註:AI 占比為公司自述、留意折舊與獲利</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>鴻勁精密 7769</td><td>SoC 測試分選機/ATC</td><td>FT/SLT handler+主動溫控;NVIDIA 倚賴的 AI FT 約 90%;2026Q1 營收 107 億(+81% YoY);高盛 2026/1 TP 上調 NT$5,000、估營收 2026 +54%/2027 +40%。2025/11/27 已轉上市(非興櫃)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>穎崴 6515</td><td>測試座/測試介面龍頭</td><td>全球第一大測試座;北美 AI 客戶占營收 80%+;HyperSocket 大封裝/大功耗 ASP 高 30%+、SLT 相關營收占比逾 5 成;2026Q1 EPS 19.54 雙創高</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>致茂 2360</td><td>SLT 系統+電源測試/量測</td><td>全球第四大半導體測試廠、NVIDIA 15 年 SLT 獨家夥伴(每顆 GPU 須過其設備);新世代 AI GPU/ASIC SLT 案 2026H2 量產;2026Q1 營收 +73% YoY、EPS 9.12 創高、毛利率 63%</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>旺矽 6223</td><td>探針卡龍頭+測試設備</td><td>探針卡占營收約 76%(CPC/VPC/MEMS、自製探針)+設備約 23%;2026Q1 營收 39.33 億(+39%)、EPS 12.53 創高、毛利率 59.45% 創高</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>中華精測 6510</td><td>MEMS 探針卡+測試載板</td><td>台積電轉投資,主攻 CP/HPC;2026Q1 EPS 10.43(+54% YoY);增發 20 億 CB 蓋第三廠(2028 初完工)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>矽格 6257</td><td>FT/SiP/RF 測試代工</td><td>布局 AI/HPC SLT、矽光子、高速網通;2026Q1 EPS 2.1(+34% YoY)、5 月營收創高;capex 88 億(+49%)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>雍智科技 6683</td><td>IC 測試板(load board)/介面</td><td>切入 Google TPU CP/FT 測試板;2026Q1 營收 6.64 億(+46% YoY)、EPS 6.23 雙創高。<b>股號修正:雍智=6683(非 7758=睿騰能源)</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>欣銓 3264</td><td>CP 晶圓測試代工</td><td>ASIC 佔比約 20%;龍潭新廠 ASIC CP 新專案最快 2026H2 貢獻(全年估雙位數百分比)——未來選擇權;2026Q1 EPS 1.95 創同期高</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>惠特 6706</td><td>光電/雷射測試設備</td><td>原 LED 點測分選龍頭轉 AI 光電/矽光子高階設備;新品在客戶驗證未放量、去年虧損(券商估今年有望轉盈)——未來選擇權</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>德律 3030</td><td>ICT 電性測試+3D AOI</td><td>AI 受惠主要在網通/伺服器板測;2026Q1 EPS 3.5(+43% YoY)。屬周邊、非測試強度核心</td><td><span class="conf c-med">中</span></td></tr>
+</table>
+<p class="sub">⚠「未逐項佐證」= 未取得該公司在本主題的<b>獨立</b>佐證,不代表沒有角色,但也不應直接當事實下單。京元電/欣銓/矽格/穎崴/旺矽橫跨記憶體與邏輯測試,與「HBM 測試」題重疊,勿重複計兩次受惠。</p>
+<h3>國際 × 環節(台廠的天花板)</h3>
+<table>
+  <tr><th>公司</th><th>環節</th><th>角色 / 市占</th><th>查證</th></tr>
+  <tr><td>Advantest(6857.T)</td><td>ATE 測試機</td><td>SoC tester 全球龍頭,CY26 市場 $8.7-9.5B、市占 66%;FY26 財測創高(¥1.42 兆 +25.8%)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Teradyne(TER)</td><td>ATE+SLT</td><td>測試機全球第二;Titan HP SLT 平台 2kW→4kW,對應 AI 高功率</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>FormFactor / Technoprobe / MJC</td><td>探針卡</td><td>三強約 6-7 成(FORM ~30%、MJC ~14%);卡位台積電 2nm 認證</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Cohu / ISC / Leeno / TechWing</td><td>測試座/分選機</td><td>測試座市場分散(前五約 41%);ISC 2025 AI 測試座 +115%、SLT 佔該類 &gt;50%</td><td><span class="conf c-high">高</span></td></tr>
+</table>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>市場規模與量產時程</h2>
+<div class="card">
+  <h3>市場規模(口徑分層,標來源)</h3>
+  <ul>
+    <li><b>後段測試設備(SEMI):</b>2025 $11.2B(+48.1% YoY)、2026 +12%、2027 +7.1%</li>
+    <li><b>SoC 測試機(Advantest 口徑):</b>CY25 $6.9B → CY26 $8.7-9.5B,Advantest 市占 66%</li>
+    <li><b>探針卡(Mordor):</b>2026 $2.71B → 2031 $4.23B、CAGR 9.31%(各研調口徑分歧:MRFR/VMR 更高)</li>
+    <li><b>測試座(QYR/Valuates):</b>2025 約 $1.5B、CAGR ~7%</li>
+    <li><b>AI 加速器 Burn-in+SLT 窄口徑(FMI):</b>2025 $0.8B → 2026 $0.9B → 2036 $2.2B、CAGR 9.3%</li>
+    <li><b>結構指標:</b>先進 AI 封裝測試成本佔晶片成本 10-15%(vs 消費 SoC ~5%);SLT 市場 2026 估 +30%(Digitimes)</li>
+  </ul>
+  <h3>近 12 個月催化劑時間軸</h3>
+  <ul>
+    <li><b>2025/7:</b>Digitimes:AI ASIC 採用率上升驅動 SLT 激增、估 2026 +30%</li>
+    <li><b>2025/10:</b>Teradyne Titan HP SLT 平台支援 2kW、路線圖到 4kW(對應 AI 高功率)</li>
+    <li><b>2025 全年:</b>ISC AI 測試座 +115%、SLT 佔該類 &gt;50%(印證 SLT 結構放量)</li>
+    <li><b>2026/1:</b>高盛調高鴻勁 TP NT$5,000(估營收 2026 +54%/2027 +40%)</li>
+    <li><b>2026/4-5:</b>京元電 capex 二度上修至 500 億創高;FormFactor Q1 +32% 創高;Advantest FY26 財測再創高</li>
+    <li><b>2026/H2:</b>致茂新世代 AI SLT 案量產、欣銓龍潭 ASIC CP 新專案貢獻(前瞻指引)</li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>現在就有營收=京元電/鴻勁/穎崴/致茂/旺矽/中華精測/矽格/雍智;未來選擇權=欣銓(ASIC CP 2026H2)/惠特(光測轉盈)。</div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>口徑/股號修正(對抗式查證後):</b>
+  <ul>
+    <li><b>雍智科技 = 6683</b>(非 7758;7758 是睿騰能源/儲能,務必勿混);<b>鴻勁 7769 已於 2025/11/27 轉上市</b>(非興櫃)</li>
+    <li><b>京元電 AI 占比、測試時間 +100-200%/單價 +50-100% 為公司自述</b>(無第三方 benchmark);2026Q1 營收創高但需留意折舊與獲利結構</li>
+    <li>SLT 量化(+30% 市場、強度倍增)多為 Digitimes/法人口徑;探針卡市場研調絕對值與 CAGR 分歧大(Mordor vs MRFR vs VMR),為量級參考</li>
+  </ul>
+</div>
+<div class="card"><h3>結構性風險</h3>
+  <ul>
+    <li><b>ATE 測試機本體天花板:</b>大型 ATE 由 Advantest(SoC tester 66%)+Teradyne 雙寡占,台廠在「測試機本體」基本吃不到——台廠強在代工、探針卡、測試座、分選機、SLT 系統</li>
+    <li><b>資本支出與折舊壓力:</b>京元電 capex 500 億創天量、矽格 88 億(+49%);先進測試機交期 6-8 個月、產能 Q3-Q4 才開出,折舊先行</li>
+    <li><b>認證週期長、放量遞延:</b>欣銓 ASIC 新專案 2026H2 才貢獻、致茂新 SLT 案 2026H2 量產、雍智 Google TPU——皆前瞻指引,尚未認列</li>
+    <li><b>與 HBM/記憶體測試題重疊:</b>京元電/欣銓/矽格/穎崴/旺矽橫跨兩題,評估受惠時勿重複計</li>
+    <li><b>探針卡 2nm 認證被國際三強卡位:</b>Technoprobe/MJC 已拿台積電 2nm 認證,台廠在最尖端節點屬追趕第二梯隊</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item">京元電/鴻勁/穎崴/致茂/旺矽/中華精測/矽格/雍智/欣銓 2026Q1 法說與月營收(公開申報)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">SEMI 後段測試設備市場 2025 $11.2B(+48.1%);Advantest FY25 法說(SoC tester CY26 $8.7-9.5B、市占 66%)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">SemiEngineering《AI Accelerators Usher In New Era of Test》/ FormFactor(Silicon Saxony 2026) — KGD、SLT 強制化、測試插入點倍增<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Digitimes(2025/7) SLT 2026 +30%;高盛(2026/1) 鴻勁 TP $5,000;Teradyne Titan HP 2kW→4kW<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Mordor/QYR/FMI/Verified Market Research — 探針卡/測試座/burn-in/SLT 市場規模(口徑分歧,量級參考)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item">Aehr Test Systems 新聞稿 — WLBI 晶圓級老化、2026/2 AI 大客戶 $14M 訂單<span class="src-q q-primary">primary</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(測試流程/台廠/國際市場)+ 對抗式查證(股號修正、口徑、風險);對標 AI伺服器電源 黃金樣本。</p>
+  <p>本報告以「已通過查證」內容為主幹,口徑修正與待查項目已標明。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>
