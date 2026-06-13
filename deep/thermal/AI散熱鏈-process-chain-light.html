@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 散熱鏈(資料中心液冷)製程鏈 × 供應鏈研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#0284c7; --accent-soft:#e0f2fe;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#e0f2fe,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:780px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">AI 散熱鏈<span> 製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">瓶頸邏輯</a>
+    <a href="#categories">核心環節</a><a href="#application">熱階層</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">難度評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>AI 散熱鏈(資料中心液冷)<em>× 供應鏈研究指南</em> 2026</h1>
+  <p class="lead">機櫃功率(15kW→GB300 130-140kW→Rubin Ultra 600kW→1MW+)與單晶片 TDP(700W→2029 4000W)兩條曲線同時撞破氣冷物理極限,散熱從「能效升級」變成「部署前提」。液冷滲透率 14%(2024)→47%(2026)。台廠在散熱全球最強(約佔 AI 伺服器散熱 9 成):奇鋐/雙鴻(冷板/CDU/VC)、健策(晶片封裝級 IHS→MCL)、高力(BPHE 唯一)、富世達(UQD 首家認證)、建準(風扇→液冷泵)。最性感:封裝級 MCL(19/20)、CDU/UQD(18/20);最大風險:規格變更砍價(健策 IHS $150→$50)與估值預支。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:機櫃撞破氣冷極限</span>
+    <span class="badge">市場:台廠主場+國際對照</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽</h2>
+  <p class="subtitle">AI 散熱是「把晶片的熱一層層往外帶到大氣」的完整堆疊。<b>切分:</b>本題是完整散熱鏈母題,涵蓋候選清單原「液冷散熱鏈」(冷板/CDU/UQD/manifold/浸沒),並補上它未深做的封裝級(MCL/TIM)與 2-phase(VC/熱導管)。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🔥</span>晶片/封裝級(最前瞻)</h4><p>IHS 散熱蓋→TIM→封裝內微通道(MCL),把冷卻拉到離電晶體數十微米。Rubin 破 2000W 後成瓶頸。健策卡位,難度 17-19。</p></div>
+    <div class="card"><h4><span class="ico">💧</span>水路核心(台廠主場)</h4><p>冷板帶走 &gt;80% 機櫃熱、CDU 做熱交換分流、UQD 零洩漏快接。奇鋐/雙鴻/高力/富世達卡位,難度 17-18。</p></div>
+    <div class="card"><h4><span class="ico">❄️</span>模組與系統</h4><p>VC/熱導管(2-phase 過渡)、浸沒式、後門熱交換 RDHx。建準/泰碩/台達/晟銘電卡位,屬過渡與設施端。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(四層結構)</h2>
+  <p class="subtitle">晶片封裝級 → 模組級 → 機櫃水路 → 系統設施。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝公司自述</span> <span class="conf c-un">灰＝概念/早期</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">晶片/封裝級<small>IHS/TIM/MCL</small></div><div class="items"><span class="badge b-tw">健策 3653(IHS/MCL)</span><span class="badge b-accent">Honeywell(TIM)</span><span class="badge b-accent">TSMC IMC-Si</span></div></div>
+    <div class="chain-row"><div class="lvl">模組級<small>VC/熱導管/冷板</small></div><div class="items"><span class="badge b-tw">奇鋐 3017</span><span class="badge b-tw">雙鴻 3324</span><span class="badge b-tw">泰碩 3338</span><span class="badge b-accent">Boyd/CoolIT</span></div></div>
+    <div class="chain-row"><div class="lvl">機櫃水路<small>CDU/UQD/manifold</small></div><div class="items"><span class="badge b-tw">高力 8996(BPHE)</span><span class="badge b-tw">富世達 6805(UQD)</span><span class="badge b-tw">建準 2421(泵/水冷板)</span><span class="badge b-tw">台達 2308</span><span class="badge b-accent">Vertiv/CEJN</span></div></div>
+    <div class="chain-row"><div class="lvl">系統設施<small>RDHx/浸沒/sidecar</small></div><div class="items"><span class="badge b-tw">晟銘電 3013(sidecar)</span><span class="badge b-tw">緯穎/技嘉(浸沒)</span><span class="badge b-accent">Vertiv/Motivair/3M</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:從晶片封裝級(健策)到機櫃水路(奇鋐/雙鴻/高力/富世達/建準)全段卡位,台灣約佔 AI 伺服器散熱 9 成。最上游 TIM 料源(液態金屬/銦鎵)與最下游介電液仍是國際的天下。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Bottleneck</span>
+  <h2 class="title">為何散熱從可選變必要(雙曲線撞極限)</h2>
+  <p class="subtitle">機櫃級 × 晶片級 × 封裝級三條曲線同時撞破氣冷物理極限。</p>
+  <div class="flow">
+    <div class="step"><b>機櫃級暴衝</b><small>15kW→GB300 130-140kW→Rubin Ultra 600kW→1MW+;氣冷上限 ~35kW/rack</small></div><div class="arrow">→</div>
+    <div class="step"><b>晶片級破壁</b><small>單 GPU TDP 700W→Rubin 1.8kW→2029 4000W;氣冷實務上限 ~400W/GPU</small></div><div class="arrow">→</div>
+    <div class="step"><b>封裝級瓶頸</b><small>熱通量破 1 kW/cm²,連 TIM2 都成瓶頸 → 微通道做進封裝蓋</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>機櫃功率(2025→2027+)</p><h4>15kW → 1MW+</h4></div>
+    <div class="card"><p>液冷滲透率(2024→2026)</p><h4>14% → 47%</h4></div>
+    <div class="card"><p>資料中心液冷市場(2025→2029)</p><h4>$30 億→$70 億</h4></div>
+    <div class="card"><p>單 GPU TDP(H100→2029)</p><h4>700W → 4000W</h4></div>
+  </div>
+  <p class="disclaimer">機櫃/TDP 為 NVIDIA roadmap 媒體彙整;滲透率 TrendForce 口徑(部分研調更高,分歧大);市場規模 Dell'Oro。標來源、非成交數。</p>
+  <h3>新舊技術對比</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>項目</th><th>氣冷(舊)</th><th>液冷(新,AI 必要)</th></tr></thead>
+    <tbody>
+      <tr><td>機櫃散熱上限</td><td>~35kW/rack</td><td>冷板 130kW+、浸沒更高</td></tr>
+      <tr><td>單晶片可承受</td><td>~400W/GPU</td><td>冷板 1.4kW、MCL 2000W+</td></tr>
+      <tr><td>PUE / 能效</td><td>較差(風扇耗能)</td><td>顯著改善、可回收餘熱</td></tr>
+      <tr><td>台廠卡位</td><td>風扇(成熟、低毛利)</td><td>冷板/CDU/UQD/IHS(高毛利、稀缺)</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心環節深度解析</h2>
+  <p class="subtitle">難度最高的是 <b>② 封裝級 MCL(19/20)</b> 與 <b>⑥ CDU/UQD(18/20)</b>,皆為台廠卡位的塔尖。</p>
+  <h3>核心 A:封裝級散熱(② 19/20,健策卡位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>方案</th><th>原理</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>IHS 全尺寸散熱蓋</td><td>矽與外界第一層擴熱、配 TIM1</td><td>蓋件平整/翹曲/接合;GB300 改沙漏+石墨提良率</td><td><span class="stars">★★★★☆</span></td></tr>
+      <tr><td>MCL 微通道水冷蓋</td><td>微通道做進封裝蓋、消掉 TIM2</td><td>封裝內微通道蝕刻 30-150µm+氣密;CoWoS 整合冷卻;與 TSMC 共開發</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>健策 3653 <span class="code">封裝級</span></h4><p>熱階層最上游(貼 GPU die 的 IHS、未來 MCL);傳率先取得 NVIDIA Rubin MCL 認證(2026H2 導入)。<b>但液態金屬退回石墨、IHS 單價 $150→$50 使 2026 營收估減,股價回檔逾 20%。</b><span class="conf c-high">高(IHS)/中(MCL)</span></p></div>
+    <div class="card"><h4>TSMC IMC-Si / Microsoft <span class="code">前瞻</span></h4><p>矽整合微冷卻 Rth 0.055°C/W;MS in-chip microfluidics 較冷板強 3x(原型)。封裝級散熱的國際前緣。<span class="conf c-med">中(原型)</span></p></div>
+  </div>
+  <h3>核心 B:機櫃水路 CDU/UQD(⑥ 18/20,高力/富世達卡位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>作用</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>CDU 冷卻液分配單元</td><td>泵+板式熱交換器 BPHE+漏液偵測,熱交換分流</td><td>BPHE 真空硬銲、泵可靠度、零洩漏控制</td><td><span class="stars">★★★★☆</span></td></tr>
+      <tr><td>UQD 無溢流快接</td><td>熱插拔、零洩漏連接(VR200 單櫃 500+ 顆)</td><td>零洩漏/低壓降/可互換(OCP);漏液=機櫃級災難</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>高力 8996 <span class="code">BPHE</span></h4><p>台灣唯一、全球少數量產高品質真空硬銲板式熱交換器(BPHE,CDU 最核心件)、市佔逾 9 成;向 CDU/分歧管升級。<b>股號=8996(非 1465 偉全紡織)</b>。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>富世達 6805 <span class="code">UQD</span></h4><p>UQD 通過 NVIDIA(GB200/300/VR200)認證、首家正式出貨快接的台廠;1Q26 營收 41.84 億、EPS 13.38 創高、伺服器占比衝 50%+。<span class="conf c-high">高</span></p></div>
+  </div>
+</div></section>
+
+<!-- 05 熱階層 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Thermal Stack</span>
+  <h2 class="title">完整熱階層(晶片 → 大氣)</h2>
+  <p class="subtitle">8 層:由內(貼著矽)往外。台廠在晶片級、冷板、CDU/UQD 卡位最強;封裝級 MCL 是最難、最前瞻的增量。</p>
+  <div class="stack">
+    <div class="layer"><b>① 晶片級 IHS/lid + TIM1</b><div class="uses">健策;矽的第一層擴熱蓋</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② 封裝級 MCL/direct-to-silicon ★ 最難</b><div class="uses">健策/TSMC IMC-Si;微通道做進封裝蓋,消掉 TIM2</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ TIM 熱介面(液態金屬/PCM/石墨)</b><div class="uses">Honeywell;Rubin 因外溢退回石墨(路線未定)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ 模組級 2-phase(VC/熱導管)</b><div class="uses">奇鋐/雙鴻/泰碩;氣冷天花板與周邊散熱</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ 冷板 cold plate ★ 帶走 &gt;80% 機櫃熱</b><div class="uses">奇鋐/雙鴻/健策;每晶片一塊、滲透 76%</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ CDU/manifold/UQD ★ 高門檻</b><div class="uses">高力 BPHE/富世達 UQD/雙鴻/台達;水路分配</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 浸沒式 immersion</b><div class="uses">緯穎/技嘉/3M 介電液;高密度替代解</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ 系統/環境(chiller/RDHx/sidecar)</b><div class="uses">晟銘電/台達/Vertiv;排熱到設施再到大氣</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:AI 散熱的 alpha 集中在「水路核心」(冷板/CDU/UQD,台廠全球最強+現在就有營收)與「封裝級 MCL」(2026H2-2027 兌現的選擇權)。風扇(氣冷舊主場)毛利低、被取代;真正受惠是把冷卻拉近晶片的高門檻環節。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>散熱整機龍頭(奇鋐/雙鴻)</td><td>冷板/CDU/VC 整套放量</td><td>奇鋐冷板市占 40-50%、1Q26 EPS 20.17 創高;雙鴻液冷占比衝 &gt;55%、整套交付 Meta/AWS/MS(現在)</td></tr>
+      <tr><td>水路關鍵件(高力/富世達)</td><td>CDU BPHE + UQD 快接</td><td>高力 BPHE 台灣唯一 &gt;9 成;富世達 UQD 首家 NVIDIA 認證出貨(現在,稀缺)</td></tr>
+      <tr><td>晶片封裝級(健策)</td><td>IHS→MCL 規格升級</td><td>IHS 現有營收;MCL 2026H2 選擇權(但液金退場使近期下修)</td></tr>
+      <tr><td>風扇轉型(建準/泰碩)</td><td>風扇→液冷泵/水冷板</td><td>建準伺服器占比 47%、水冷板 Q4 放量;泰碩平台轉換期承壓(1Q26 EPS 0.27)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>規格變更可單向砍價</b>(健策 IHS $150→$50、-66% 即實例,機構件「單價只漲不跌」是錯覺);② <b>估值已大幅預支</b>(健策 33 倍 PE);③ <b>液態金屬路線未定</b>(Rubin 退回石墨,TIM 升級題材須重評);④ <b>與既有液冷題重疊、敘事擁擠</b>(同幾家法說);⑤ <b>二線概念股佐證落差</b>(泰碩/鴻準/廣運題材在、營收未到位)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手 <span class="conf c-med">中</span>=公司自述/部分 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="pkg">封裝/晶片級</button><button data-f="mod">模組/冷板</button>
+    <button data-f="water">CDU/UQD/水路</button><button data-f="sys">系統/浸沒</button><button data-f="intl">國際</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="pkg"><h4>健策 <span class="code">3653</span></h4><p>晶片封裝級 IHS→MCL 最上游;傳率先取得 Rubin MCL 認證(2026H2)。風險:液態金屬退回石墨、IHS 單價 $150→$50 使 2026 營收估減、股價回檔逾 20%、33 倍 PE。</p><span class="conf c-high">高(IHS)/中(MCL)</span></div>
+    <div class="card" data-cat="mod water"><h4>奇鋐 <span class="code">3017</span></h4><p>全球散熱龍頭(VC/冷板/CDU);水冷板 GB200/300 市占 40-50%、月產能 20 萬→100 萬組;1Q26 營收 490 億 +110%、EPS 20.17 創高、毛利 29.77%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="mod water"><h4>雙鴻 <span class="code">3324</span></h4><p>VC+冷板+CDU+快接整套,客戶 Meta/AWS/MS、GB300 認證;液冷占比 24 年 12%→2026 預期 &gt;55%;1Q26 EPS 12.61、2025 EPS 28.26。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="water"><h4>高力 <span class="code">8996</span></h4><p>BPHE 板式熱交換器(CDU 核心件)台灣唯一、市佔 &gt;9 成;向 CDU/分歧管升級、橋頭新廠擴產。股號=8996(非 1465)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="water"><h4>富世達 <span class="code">6805</span></h4><p>UQD 快接通過 NVIDIA(GB200/300/VR200)認證、首家正式出貨的台廠;1Q26 營收 41.84 億、EPS 13.38 創高、伺服器占比衝 50%+。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="water mod"><h4>建準 <span class="code">2421</span></h4><p>風扇龍頭→液冷泵/水冷板;1Q26 營收 50.2 億創高、EPS 2.36、伺服器占比 47%;水冷板 Q4 放量。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="mod"><h4>泰碩 <span class="code">3338</span></h4><p>熱導管/均溫板向液冷模組(CDM/CDU)延伸;但 1Q26 EPS 僅 0.27(年減 -56%)、平台轉換期承壓。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="mod water"><h4>力致 <span class="code">3483</span></h4><p>NB 風扇轉型 AI 液冷全品類(風扇/熱導管→水冷板/CDU/浸沒);浸沒式送驗;動能待放量。</p><span class="conf c-med">中(選擇權)</span></div>
+    <div class="card" data-cat="sys mod"><h4>鴻準 <span class="code">2354</span></h4><p>金屬機殼→散熱模組/液冷機櫃(鴻海集團);液冷板/CDU 仍送樣、早期;1Q26 EPS 0.47(年減 -30%)。</p><span class="conf c-un">概念/早期</span></div>
+    <div class="card" data-cat="sys water"><h4>廣運 <span class="code">6125</span></h4><p>子公司金運推台灣首批自研 2.5MW 超大型液冷 CDU;液冷實體在未上市子公司、本體佐證較弱。</p><span class="conf c-un">概念/早期</span></div>
+    <div class="card" data-cat="sys water"><h4>台達電 <span class="code">2308</span></h4><p>電源+液冷雙線;L2A CDU 80kW、in-rack L2L CDU 200kW/rack;RDHx。散熱為其電源題的延伸。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="sys"><h4>晟銘電 <span class="code">3013</span></h4><p>機殼→液冷 sidecar/機櫃整合;傳獲 Meta sidecar 訂單。屬系統設施端。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>Vertiv <span class="code">VRT</span></h4><p>CDU/整機系統龍頭;CoolChip CDU 121kW(專為 GB300 NVL72)、CoolLoop RDHx 80kW。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Boyd / CoolIT / Motivair <span class="code">冷板/CDU</span></h4><p>Boyd(被 Eaton 收)累交 500 萬片冷板;CoolIT direct-to-chip 純玩家;Motivair 由 Schneider $8.5 億收 75%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Honeywell / 3M <span class="code">TIM/介電液</span></h4><p>Honeywell TIM/液態金屬;3M 兩相浸沒介電液(惟 PFAS 退場議題)。最上游材料端。</p><span class="conf c-med">中</span></div>
+  </div>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">逐環節技術難度評分</h2>
+  <p class="subtitle">維度:技術門檻 / 良率 / AI 需求增幅 / 客戶認證,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>良率</th><th>AI增幅</th><th>客戶認證</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>② 封裝級 MCL</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>⑥ CDU/manifold/UQD</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>① 晶片級 IHS/TIM1</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>⑤ 冷板 cold plate</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>③ TIM 液態金屬/PCM</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>⑦ 浸沒式</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>④ VC/熱導管</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台股甜蜜點:封裝級 MCL(19,健策)、CDU/UQD(18,高力/富世達)、冷板(17,奇鋐/雙鴻)。MCL 仍未量產(選擇權)、TIM 路線因液金外溢未定。評分為推估,僅供參考。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>奇鋐 3017</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><span class="tot">23</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>雙鴻 3324</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>富世達 6805</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">21.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>高力 8996</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">20.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>建準 2421</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><span class="tot">18</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>健策 3653</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">19.5</span></td><td><span class="conf c-med">中(風險高)</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。健策技術卡位最深(封裝級),但商轉時程因液態金屬退場、規格砍價而下修、估值已預支,故總分高而信心標中。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>奇鋐 3017</td><td>散熱龍頭(冷板/CDU/VC)</td><td>冷板市占 40-50%、月產能 20 萬→100 萬;1Q26 EPS 20.17 創高(現在)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>雙鴻 3324</td><td>液冷整套</td><td>液冷占比衝 &gt;55%;GB300 認證、Meta/AWS/MS;1Q26 EPS 12.61(現在)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>高力 8996 / 富世達 6805</td><td>BPHE / UQD</td><td>高力 BPHE &gt;9 成;富世達 UQD 首家 NVIDIA 認證出貨、EPS 13.38 創高(現在)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>建準 2421</td><td>風扇→液冷泵/水冷板</td><td>伺服器占比 47%;水冷板 Q4 放量</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>健策 3653(MCL)</td><td>封裝級散熱</td><td>IHS 現有營收;MCL 2026H2 導入(選擇權);液金退場使近期下修</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>產業時間軸(事件)</td><td>滲透率/機櫃</td><td>液冷滲透 14%→33%→47%(24-26);Rubin Ultra 600kW 機櫃 2027 → MCL 兌現點</td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入奇鋐量級<b>示意數字</b>(非財測),請依個股真實財務調整。散熱龍頭營收規模大、毛利率與股數差異大。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>散熱龍頭 PE 已偏高(預支 2-3 年)</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>市占×市場規模</b></td><td>液冷 TAM × 市占 × 淨利率</td><td>放量股</td><td>冷板/CDU 滲透率驅動</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業 + MCL/浸沒折現</td><td>未放量</td><td>健策 MCL/力致浸沒屬此類</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="1500"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="60"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="14"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="2.4"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="25"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="70"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為示意非個股財測。散熱股營收量級與毛利率差異大(奇鋐毛利 ~30%、富世達/高力為關鍵件高毛利但規模小),務必填入標的真實數字。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查已標註。</p>
+  <ul class="refs">
+    <li><b>奇鋐/雙鴻/健策/高力/富世達/建準 2026Q1 法說與月營收</b> — 各家數字<span class="q">primary</span></li>
+    <li><b>Dell'Oro Group(2026/1)</b> — 液冷市場 2025 $30 億→2029 $70 億、CDU 2029 $60 億、DCPI $610 億<span class="q">secondary</span></li>
+    <li><b>TrendForce</b> — 液冷滲透率 14%→33%→47%;<b>TechNews(2026/5/6)</b> — 健策液態金屬退回石墨、IHS 單價 $150→$50<span class="q">secondary</span></li>
+    <li><b>Digitimes(2025/10)</b> NVIDIA MCL/MCCP;<b>FinancialContent(2026/1)</b> Rubin 2000W+、TSMC IMC-Si;<b>工商時報(2025/11)</b> VR200 UQD 500+ 顆<span class="q">secondary</span></li>
+    <li><b>Precedence/IDTechEx/MRFR</b> — VC/TIM/RDHx 市場規模(口徑分歧,量級參考)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>口徑修正:</b>① <b>高力=8996</b>(非 1465 偉全紡織);② 健策 MCL ASP 倍數/Rubin 認證/TAM 多為研調媒體估、非公司法說親口,不錯殺亦不採信;③ 奇鋐/雙鴻「液冷占比 50%+」部分為法人推估;滲透率 50-76% 口徑分歧大;④ 二線概念股(泰碩/鴻準/廣運)題材在、營收與一手佐證未到位。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>AI 散熱鏈(資料中心液冷)製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||(c.dataset.cat||'').split(' ').includes(f))?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
