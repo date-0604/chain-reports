@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雲端 AI ASIC 設計服務台鏈 製程鏈 × 供應鏈研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#7c3aed; --accent-soft:#ede9fe;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#f3f0ff,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:130px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:780px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">AI ASIC 設計服務<span> 製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱門</a>
+    <a href="#categories">核心製程</a><a href="#application">客戶ASIC地圖</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">難度評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>雲端 AI ASIC 設計服務台鏈 <em>× 供應鏈研究指南</em> 2026</h1>
+  <p class="lead">當 CSP 自研 ASIC 擺脫 NVIDIA GPU,設計這些晶片的「設計服務商」成了 AI 第二主軸。台股雙雄世芯(AWS Trainium3 後段+turnkey)與創意(Google Axion、Meta MTIA-3、Tesla AI5)卡在最深的後段實體+chiplet 封裝護城河;世芯 Q1'26 谷底、Q3 放量,是「故事確立×股價剛反轉」的甜蜜點。最大風險:CSP 走 COT 化、prime co-design 被 Broadcom+Marvell 壟斷 ~95%。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:CSP 自研 ASIC(AI 第二主軸)</span>
+    <span class="badge">市場:台灣為主＋國際/客戶對照</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽</h2>
+  <p class="subtitle">ASIC 設計服務商替 CSP 把自研晶片從規格做到量產。商業模式是一條光譜:<b>NRE(設計費、高毛利)→ Turnkey(統包量產、毛利稀釋至 ~20%)→ COT(客戶自有 tooling、抽成最少)</b>。<b>同名不同物:</b>本主題是「設計服務商業模式與訂單」,不是 CoWoS 封裝產能、不是 HBM 本體。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🧩</span>設計服務 turnkey</h4><p>後段實體設計+封裝+統包量產。世芯(AWS Trainium3)、創意(Google Axion)、智原(中階/AIoT)——台廠核心戰場。</p></div>
+    <div class="card"><h4><span class="ico">🔑</span>矽智財 IP</h4><p>silicon-proven 可重用 IP 收 royalty(高毛利可重複)。創意(UCIe/HBM4 PHY)、力旺(eNVM 標配)、M31(介面 IP)、晶心科(RISC-V)。</p></div>
+    <div class="card"><h4><span class="ico">💾</span>客製記憶體/被動(邊緣)</h4><p>愛普:S-SiCap 矽電容(先進封裝電源完整性,量產中)+ VHM 客製記憶體(2027-28 選擇權)。與 HBM 本體切開。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(四層結構)</h2>
+  <p class="subtitle">客戶(CSP)→ 設計服務/IP → 製造(台積電)→ 終端 AI 資料中心。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝公司自述/部分</span> <span class="conf c-un">灰＝媒體彙整</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">需求火車頭<small>CSP 客戶</small></div><div class="items"><span class="badge b-accent">Google</span><span class="badge b-accent">AWS</span><span class="badge b-accent">Meta</span><span class="badge b-accent">Microsoft</span><span class="badge b-accent">OpenAI</span><span class="badge b-accent">Tesla</span></div></div>
+    <div class="chain-row"><div class="lvl">設計服務/IP<small>本題核心</small></div><div class="items"><span class="badge b-tw">世芯 3661</span><span class="badge b-tw">創意 3443</span><span class="badge b-tw">智原 3035</span><span class="badge b-tw">聯發科 2454</span><span class="badge b-tw">力旺 3529</span><span class="badge b-tw">M31 6643</span><span class="badge b-tw">晶心科 6533</span><span class="badge b-accent">Broadcom/Marvell</span><span class="badge b-accent">Synopsys/Cadence</span></div></div>
+    <div class="chain-row"><div class="lvl">製造/封裝<small>晶圓代工</small></div><div class="items"><span class="badge b-accent">台積電 N3P/N2 + CoWoS</span><span class="badge b-ok">日月光/Amkor(封測)</span></div></div>
+    <div class="chain-row"><div class="lvl">終端<small>應用</small></div><div class="items"><span class="badge b-ok">AI 資料中心(訓練/推論)</span><span class="badge b-ok">通用 CPU(Axion)</span><span class="badge b-ok">車用 FSD(Tesla)</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:卡在「設計服務/IP」層的<b>後段實體設計+chiplet 封裝</b>(護城河最深),以及通用 CPU/利基 ASIC;但最前段架構協同被 Broadcom/Marvell 與 CSP 自研壟斷。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Now</span>
+  <h2 class="title">為何熱門</h2>
+  <p class="subtitle">CSP 為擺脫 GPU 成本自研 ASIC → ASIC 出貨成長近 GPU 三倍 → 設計服務台廠接單放量。</p>
+  <div class="flow">
+    <div class="step"><b>需求端</b><small>CSP 自研 ASIC 省 GPU 成本、為工作負載最佳化;ASIC 2026 出貨 +44.6% vs GPU +16.1%</small></div><div class="arrow">→</div>
+    <div class="step"><b>供給/瓶頸</b><small>CSP 缺先進製程後段+封裝 know-how → 外包設計服務;台積電 OIP VCA 少數能代設計整顆 SiP</small></div><div class="arrow">→</div>
+    <div class="step"><b>受惠傳導</b><small>NRE 設計費(高毛利)→ turnkey 量產放量(世芯 Q3'26)→ IP 權利金(2027)</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>ASIC 型 AI 伺服器出貨占比 2026</p><h4>~27.8%</h4></div>
+    <div class="card"><p>2026 ASIC vs GPU 出貨 YoY</p><h4>+44.6% / +16.1%</h4></div>
+    <div class="card"><p>ASIC 出貨超越 GPU</p><h4>2028 年</h4></div>
+    <div class="card"><p>AI 加速器 TAM 2027</p><h4>$70-80B</h4></div>
+  </div>
+  <p class="disclaimer">出貨占比/成長率為 TrendForce/Counterpoint(2026,出貨量口徑);TAM $70-80B 為聯發科 2026/4/30 法說自述(由先前 2028 達 $70B 提前一年),最接近的獨立背書是 Broadcom CEO 的 2027 客製加速器 TAM $60-90B。皆樂觀框架,標來源、非成交數。</p>
+  <h3>商業模式光譜(決定毛利)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>模式</th><th>認列</th><th>毛利</th><th>實例</th></tr></thead>
+    <tbody>
+      <tr><td><b>NRE 一次性設計費</b></td><td>設計期</td><td>高(世芯 1Q26 50.2% 創高)</td><td>tape-out 前的設計工作</td></tr>
+      <tr><td><b>Turnkey 統包量產</b></td><td>量產期</td><td>稀釋(~20%)</td><td>世芯 Trainium3 Q3'26 放量</td></tr>
+      <tr><td><b>COT 客戶自有 tooling</b></td><td>抽成最少</td><td>最低</td><td>Trainium3 Mariana 光罩(Annapurna 自有)</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心製程深度解析</h2>
+  <p class="subtitle">完整 7 環節:規格/架構 → 前端 RTL → IP → <b>後段實體設計</b> → <b>chiplet 封裝 co-design</b> → 光罩/turnkey → 客製記憶體。門檻最高、台廠卡最深的是後段(④)與封裝(⑤)。</p>
+  <h3>核心環節 A:後段實體設計(④,台廠核心戰場)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>子步驟</th><th>作用</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>Floorplan / P&amp;R</td><td>佈局繞線</td><td>需最多次迭代、決定 PPA</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>Timing closure / signoff</td><td>時序收斂/IR drop</td><td>N3/N2 每代指數級變難;工具被 Synopsys/Cadence 雙寡占</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>DFT(可測試設計)</td><td>scan/BIST/ATPG</td><td>良率測試覆蓋+超短 TAT 是核心競爭力</td><td><span class="stars">★★★★☆</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>世芯-KY <span class="code">3661</span></h4><p>Trainium3 後段實體設計獨拿,在 design bakeoff 擊敗前代設計商 Marvell(SemiAnalysis);官網稱可降 die size 至多 15%、提升良率至多 20%、420+ SoC 量產經驗。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>創意 <span class="code">3443</span></h4><p>完整後段+turnkey,台積電持股 ~35%、OIP VCA 核心;Google Axion 製程實作主力。<span class="conf c-high">高</span></p></div>
+  </div>
+  <h3>核心環節 B:chiplet 封裝 co-design(⑤,難度最高 19/20)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>能力</th><th>作用</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>2.5D/3D SiP 封裝設計</td><td>interposer/RDL/TSV 佈線</td><td>die 級+封裝級訊號/熱/應力協同</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>UCIe / HBM4 整合</td><td>die-to-die 互連+記憶體</td><td>綁 CoWoS 產能與 3Dblox/UCIe 生態</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>創意 <span class="code">3443</span></h4><p>自有 UCIe 64G/HBM4 PHY+Controller(N3P,2026/2 tape-out)、APT 2.5D/3D 平台、與緯穎「晶片到系統」合作(2026/5/4)。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>世芯-KY <span class="code">3661</span></h4><p>Trainium3 封裝設計;台積電 3DFabric Alliance 少數能代客戶設計整顆 SiP 的設計夥伴。<span class="conf c-high">高</span></p></div>
+  </div>
+</div></section>
+
+<!-- 05 客戶 ASIC 地圖(取代一般 application stack) -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Customer Map</span>
+  <h2 class="title">⭐ 客戶 ASIC 地圖:誰做誰的晶片</h2>
+  <p class="subtitle">本題最核心的一張表——每顆 CSP 自研晶片,誰設計、用什麼製程、何時量產。台廠在「後段+封裝+通用 CPU」卡位,前段架構多由 CSP/Broadcom 主導。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>客戶</th><th>ASIC 專案</th><th>設計夥伴(台廠粗體)</th><th>製程</th><th>時點</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>AWS</td><td>Trainium3(訓練)</td><td>前段 Annapurna;<b>後段+封裝 世芯</b></td><td>N3P</td><td>世芯 Q3'26 大量放量</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>AWS</td><td>Trainium2(前代)</td><td>Marvell</td><td>N5</td><td>2025 量產 &gt;50 萬顆</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>Axion CPU(Arm 通用)</td><td><b>創意 GUC(turnkey)</b></td><td>3nm</td><td>GA 上線;占創意 2026 營收 50%+</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>TPU v7 Ironwood(推論)</td><td>Broadcom + <b>聯發科</b></td><td>N3P</td><td>2026 數百萬顆放量</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>TPU v8i『Zebrafish』(推論)</td><td><b>聯發科</b></td><td>傳 2nm</td><td>聯發科自述 Q4'26 單季 ~$2B(量產時點口徑分歧)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Google</td><td>TPU v8t『Sunfish』(訓練)</td><td>Broadcom</td><td>傳 2nm</td><td>2026 預覽、量產未定</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Meta</td><td>MTIA-2 / MTIA-3</td><td>Broadcom;<b>MTIA-3 後段 創意</b></td><td>3nm,CoWoS</td><td>MTIA-2 H1'26、MTIA-3 H2'26</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Microsoft</td><td>Maia 200(推論/RL)</td><td>MS 自架;Marvell 供 IP/後段;<b>創意=供應鏈/封裝(不參與設計)</b></td><td>3nm</td><td>延至 2026 登場</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>OpenAI</td><td>自研推論加速器(10GW)</td><td>Broadcom($10B)</td><td>3nm/2nm</td><td>首批機櫃 H2'26、2029 全 10GW</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Tesla</td><td>AI5(FSD/ADAS)</td><td><b>創意 GUC 設計夥伴</b>;雙代工三星/台積</td><td>3nm 級</td><td>已 tape-out;2027 中量產</td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 核心結論:<b>世芯=AWS 軸</b>(Trainium 系列後段+封裝)、<b>創意=Google/Meta/Tesla 軸</b>(Axion 通用 CPU 現在進行式、MTIA-3/AI5 在後)、<b>聯發科=Google TPU 推論軸</b>(Q4'26 起)。三家客戶軸不同、互不直接衝突,是台股難得的「分軸卡位」。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>設計服務 turnkey(世芯/創意/智原)</td><td>CSP 自研 ASIC 放量</td><td>世芯 Q3'26 Trainium3 放量;創意 Axion 進行式;智原中階復甦</td></tr>
+      <tr><td>IC 設計跨 ASIC(聯發科)</td><td>Google TPU 推論共構</td><td>Q4'26 單季 ~$2B、2027 放大;新成長曲線(占比小)</td></tr>
+      <tr><td>矽智財 IP 收租(力旺/M31/晶心科)</td><td>先進製程 IP 標配+權利金</td><td>力旺現在收租(NVIDIA Vera Rubin);M31/晶心 2027 權利金/量產選擇權</td></tr>
+      <tr><td>客製記憶體/矽電容(愛普)</td><td>先進封裝電源完整性</td><td>S-SiCap 現在量產;VHM 2027-28 選擇權(本題邊緣)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>COT 化天花板</b>(郭明錤:Google 已詢問台積電直接下單晶圓,代號 Humufish H2'27);② <b>客戶集中</b>(世芯單客戶占比 2024 60%→2025 18%,斷一世代殺傷大);③ <b>NRE vs turnkey 毛利波動</b>(50%→20%);④ <b>兩強壟斷</b>(Broadcom 60-80%+Marvell 20-25%≈95% prime co-design);⑤ <b>聯發科 $2B 是 Q4'26 單季非全年</b>,易誤讀。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手佐證 <span class="conf c-med">中</span>=公司自述/部分 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="service">設計服務 turnkey</button><button data-f="ip">矽智財 IP</button>
+    <button data-f="mem">客製記憶體</button><button data-f="intl">國際對手</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="service"><h4>世芯-KY <span class="code">3661</span></h4><p>後段+turnkey 龍頭;AWS Trainium3 後段+封裝獨拿,Q3'26 大量放量;1Q26 谷底(毛利率 50.2% 創高 NRE-driven)。Anita 光罩約佔量 30-37%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="service"><h4>創意 <span class="code">3443</span></h4><p>全方位設計服務(台積電持股 ~35%);Google Axion 占 2026 營收 50%+、Meta MTIA-3 後段、Tesla AI5;1Q26 EPS 12.28(+71% YoY)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="service"><h4>智原 <span class="code">3035</span></h4><p>中階/AIoT 設計服務(聯電集團);1Q26 毛利率 47.3% 創 13 季高;5nm 新案+9 個先進封裝案 2026 量產。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="service"><h4>聯發科 <span class="code">2454</span></h4><p>跨雲端 ASIC 協同;Google TPU v8i 共同設計,Q4'26 單季 ~$2B、2027 放大;ASIC 為新成長曲線(占整體小)。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="ip"><h4>力旺 <span class="code">3529</span></h4><p>eNVM/OTP IP 收租龍頭(毛利近 100%);NeoFuse 深整合 NVIDIA Vera Rubin,3nm 權利金爆發前夕。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="ip"><h4>M31/円星 <span class="code">6643</span></h4><p>介面/基礎 IP 授權;3nm 已開發、2nm 啟動;FY26 Q1 小虧(北美案遞延),權利金 2027 里程碑。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="ip"><h4>晶心科 <span class="code">6533</span></h4><p>RISC-V CPU IP 全球指標;Meta MTIA 第五代(估 2026 量產)、Cuzco 瞄資料中心;FY25 仍虧損。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="mem"><h4>愛普* <span class="code">6531</span></h4><p>客製記憶體/矽電容(本題邊緣);S-SiCap 隨 AI 先進封裝量產(1Q26 +115% YoY 創高);VHM 2027-28。與 ASIC 設計服務本業切分。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>Broadcom <span class="code">AVGO</span></h4><p>全球第一大客製 ASIC 共同設計商;Google/Meta/OpenAI/ByteDance;2027 prime co-design 市占 ~60%、AI backlog $73B。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Marvell <span class="code">MRVL</span></h4><p>結構性第二大;AWS Trainium2、Microsoft Maia;2026 AI ASIC $11B;Trainium3 後段已敗給世芯。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Synopsys / Cadence <span class="code">SNPS/CDNS</span></h4><p>EDA+IP 雙寡占;尖端 SerDes/PCIe/HBM PHY 與 signoff 工具標準,工具層議價權在它們。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">逐環節技術難度評分</h2>
+  <p class="subtitle">維度:技術門檻 / IP 積累 / 客戶綁定 / 製程+封裝整合,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>IP積累</th><th>客戶綁定</th><th>製程+封裝</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>⑤ chiplet 封裝 co-design</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>③ 矽智財 IP</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>④ 後段實體設計</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>① 規格/架構定義</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>⑦ 客製記憶體</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>② 前端 RTL 設計與驗證</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>⑥ 光罩/量產(turnkey)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台廠甜蜜點在 ④+⑤(後段+封裝,17-19);①②(架構/前端)是 CSP 自研天花板。評分為推估,僅供參考。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>世芯-KY 3661</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>創意 3443</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>力旺 3529</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><span class="tot">20.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>智原 3035</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">17</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>聯發科 2454</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">17.5</span></td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。聯發科 ASIC 占整體營收比重小,規模分高但 ASIC 純度低。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>世芯-KY 3661</td><td>AWS 軸後段+turnkey</td><td>1Q26 谷底→Q2 出貨→Q3'26 Trainium3 大量放量;N2 案年底 tape-out</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>創意 3443</td><td>Google/Meta/Tesla 軸</td><td>Axion 進行式(占 2026 營收 50%+);MTIA-3 H2'26;Tesla AI5 2027 中量產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>聯發科 2454</td><td>Google TPU 推論軸</td><td>TPU v8i 首案 Q4'26 單季 ~$2B、第二案 2027 底</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>智原 3035</td><td>中階/AIoT</td><td>5nm 新案 1Q26 拿下;9 個先進封裝案 2026 內量產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>力旺 3529</td><td>eNVM IP 收租</td><td>現在收租(NVIDIA Vera Rubin);3 個 3nm AI 案、權利金 2027 放大</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>晶心科 6533 / M31 6643</td><td>RISC-V / 介面 IP</td><td>晶心 Meta MTIA 估 2026 量產;M31 權利金 2027 里程碑(現遞延小虧)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>COT 風險(事件)</td><td>天花板觀察點</td><td>郭明錤:Google 詢問台積電直接下單(Humufish,H2'27)</td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入創意量級<b>示意數字</b>(非財測),請依個股真實財務調整。設計服務商 NRE vs turnkey 認列會使毛利/EPS 季波動大。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>設計服務股 PE 高(成長溢價)</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>SOTP</b></td><td>NRE(高毛利)+ turnkey(低毛利)+ IP royalty 分部估值</td><td>業務結構分歧大</td><td>世芯/創意適用</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業 + 未來 ASIC 案折現</td><td>未放量案</td><td>聯發科 ASIC、晶心 MTIA、愛普 VHM</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="400"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="35"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="11"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="1.34"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="28"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="40"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為示意非個股財測。設計服務股因 NRE/turnkey 認列時點,單季 EPS 波動大,務必填入標的真實數字並參考全年。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查說法已標註。</p>
+  <ul class="refs">
+    <li><b>SemiAnalysis《Trainium3 Deep Dive》(2025/12)</b> — 設計分工(前段 Annapurna/後段+封裝世芯)、Anita vs Mariana 雙光罩、世芯擊敗 Marvell<span class="q">secondary</span></li>
+    <li><b>世芯/創意/智原/聯發科/力旺/M31/晶心科/愛普 1Q26 法說與月營收</b> — 各家數字<span class="q">primary</span></li>
+    <li><b>TrendForce / Counterpoint(2026)</b> — ASIC 出貨占比 ~27.8%、+44.6% vs GPU、2028 超越 GPU、Broadcom 市占 ~60%<span class="q">secondary</span></li>
+    <li><b>Broadcom / Marvell 法說</b> — AI backlog $73B、$60-90B SAM;Marvell AI ASIC $11B<span class="q">primary</span></li>
+    <li><b>創意官方 PR(2026/2、5/4)、Google Cloud Next(4/22)、OpenAI×Broadcom</b> — tape-out、TPU v8 雙軌、10GW<span class="q">primary</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>口徑修正 / 待查:</b>① 聯發科 $2B 是「Q4'26 單季」非全年;② 創意 Google 是「占總營收 50%+」非「占 turnkey」;③ 世芯 Trainium3 量中 Anita 光罩僅 ~30-37%(其餘 COT);④ TAM $70-80B 為聯發科自述、Broadcom $60-90B 背書,皆樂觀框架;⑤ 多數客戶 ASIC 對應為 SemiAnalysis/媒體彙整或公司自述,客戶身分未經兩造逐項證實。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>雲端 AI ASIC 設計服務台鏈 製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
