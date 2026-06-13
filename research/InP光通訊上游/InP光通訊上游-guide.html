@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InP 光通訊上游(III-V 化合物半導體鏈)製程鏈 × 供應鏈研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#db2777; --accent-soft:#fce7f3;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#fdf2f8,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:780px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">InP 光通訊上游<span> 製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">瓶頸邏輯</a>
+    <a href="#categories">核心環節</a><a href="#application">製程鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">難度評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>InP 光通訊上游 <em>× 供應鏈研究指南</em> 2026</h1>
+  <p class="lead">AI 光通訊(CPO/1.6T)的雷射光源只能做在 InP 上、無矽替代——這是材料端的物理瓶頸。「瓶頸中的瓶頸」是基板長晶(AXT+住友雙寡頭近 8 成、產能受中國管制、6 吋 +250%)。台廠吃磊晶+雷射晶粒(聯亞一條龍最硬、全新 MOCVD 龍頭、英特磊 MBE),基板長晶=零(成本端受制)。性感點:需求 9 倍 × 供給寡占 × 地緣管制三重共振。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:AI 光通訊最上游瓶頸</span>
+    <span class="badge">市場:台灣磊晶 + 國際基板對照</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽</h2>
+  <p class="subtitle">InP(磷化銦)是 III-V 化合物半導體,雷射發光元件的必要基板。<b>切分:</b>本題是材料層(基板長晶/磊晶/雷射晶粒);與「CPO 矽光子」(光引擎/FAU/封測,下游)相鄰但不同——聯亞/全新/聯鈞跨兩題勿重複計。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">💎</span>基板長晶(台股缺席)</h4><p>瓶頸中的瓶頸:AXT+住友雙寡頭近 8 成、產能受中國管制、6 吋 +250%。台灣基板長晶=零,須全數外購(成本端受制)。</p></div>
+    <div class="card"><h4><span class="ico">🌈</span>磊晶(台廠卡位最硬)</h4><p>MOCVD/MBE 在基板上長 EML/CW/PD 元件層。全新(MOCVD 龍頭)、聯亞(一條龍)、英特磊(MBE+國防)是全球少數 InP 磊晶外包產能。</p></div>
+    <div class="card"><h4><span class="ico">🔦</span>雷射晶粒製造</h4><p>EML/CW DFB/PD 裸晶粒。聯亞有自有晶粒;穩懋 200G PD 量產、CW/EML 2027 選擇權;IDM(Lumentum/Coherent)自製為主。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(四層結構)</h2>
+  <p class="subtitle">原料 → 基板長晶 → 磊晶 → 雷射晶粒 →(下游 CPO 光引擎)。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝公司自述</span> <span class="conf c-un">灰＝媒體彙整</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">原料/基板<small>台股缺席=成本端</small></div><div class="items"><span class="badge b-accent">住友/AXT-Tongmei/JX(基板)</span><span class="badge b-accent">中國銦精煉</span><span class="badge b-accent">Coherent(自製 6 吋)</span></div></div>
+    <div class="chain-row"><div class="lvl">磊晶<small>台廠最硬</small></div><div class="items"><span class="badge b-tw">全新 2455(MOCVD)</span><span class="badge b-tw">聯亞 3081</span><span class="badge b-tw">英特磊 4971(MBE)</span><span class="badge b-accent">IQE / Aixtron(設備)</span></div></div>
+    <div class="chain-row"><div class="lvl">雷射晶粒<small>製造代工</small></div><div class="items"><span class="badge b-tw">聯亞 3081(自有)</span><span class="badge b-tw">穩懋 3105(200G PD)</span><span class="badge b-tw">宏捷科 8086</span><span class="badge b-accent">Lumentum/Coherent</span></div></div>
+    <div class="chain-row"><div class="lvl">下游交界<small>COS/光引擎</small></div><div class="items"><span class="badge b-tw">聯鈞 3450(COS/AOC)</span><span class="badge b-ok">→ CPO 矽光子題</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:卡在「磊晶+雷射晶粒」兩段(全球少數產能、議價力正兌現);最上游基板長晶與原料完全缺席=成本端與地緣風險源。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Bottleneck</span>
+  <h2 class="title">為何 InP 是最上游瓶頸(四層)</h2>
+  <p class="subtitle">物理唯一性 × 供給寡占 × 地緣管制 × 需求暴衝,四重共振。</p>
+  <div class="flow">
+    <div class="step"><b>物理唯一性</b><small>雷射只能長在 InP 上、矽不發光(矽光子仍須外掛 InP 雷射)</small></div><div class="arrow">→</div>
+    <div class="step"><b>供給寡占+地緣</b><small>基板 AXT+住友近 8 成、AXT 產能多在中國受出口管制</small></div><div class="arrow">→</div>
+    <div class="step"><b>需求暴衝</b><small>光網路 TAM 2028 達 $1,540 億(近 9 倍)、塔尖發光全靠 InP</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>光網路 TAM 2026→2028</p><h4>$150 億→$1,540 億(9 倍)</h4></div>
+    <div class="card"><p>6 吋 InP 晶圓累計漲幅</p><h4>+250%(至 $5,000)</h4></div>
+    <div class="card"><p>AXT+住友基板市占</p><h4>~8 成</h4></div>
+    <div class="card"><p>InP 基板供需缺口</p><h4>近 7 成</h4></div>
+  </div>
+  <p class="disclaimer">TAM 為 GS 口徑;漲價兩套口徑並行(國際累計 6 吋 +250% vs 台廠合約 +3-5%,差一數量級);基板市占 Reuters 口徑(36kr 系給住友 60%/AXT 35%)。缺口為 36kr/DIGITIMES 量級參考。標來源、非成交數。</p>
+  <h3>地緣事件鏈(供給瓶頸的時間線)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時點</th><th>事件</th></tr></thead>
+    <tbody>
+      <tr><td>2025/2/4</td><td>中國第 10 號公告對「銦」(含 InP)出口管制、逐案許可——瓶頸引爆點</td></tr>
+      <tr><td>2025 上半年→Q3</td><td>AXT 自中國出口 InP 從「零許可」到 Q3 起穩定獲批(約 4 個月空窗)</td></tr>
+      <tr><td>2025/11</td><td>中國暫停部分礦物管制,但「銦/InP 未獲暫停」</td></tr>
+      <tr><td>2026/3/2</td><td>NVIDIA 對 Lumentum+Coherent 各注資 ~$20 億(合計 $40 億)鎖 EML/InP 產能</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心環節深度解析</h2>
+  <p class="subtitle">難度最高的是 <b>② 基板長晶(19/20,瓶頸中的瓶頸)</b> 與 <b>③④ 磊晶/雷射晶粒(16/20,台廠主場)</b>。</p>
+  <h3>核心 A:基板長晶(② 19/20,台股缺席)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>方法</th><th>原理</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>LEC 液封柴可拉斯基</td><td>B2O3 液封抑磷揮發、拉晶</td><td>拉晶快但差排高</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>VGF 垂直梯度凝固</td><td>低溫梯度長低差排大尺寸</td><td>磷揮發+InP 易孿晶、良率 20-25%</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>住友 / AXT-Tongmei / JX <span class="code">國際</span></h4><p>三強占 80-90%;AXT 產能多在中國受出口管制;台廠完全缺席、須全數外購(=成本端受制+地緣風險)。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>Coherent <span class="code">COHR</span></h4><p>西方少數垂直整合者,建全球首座 6 吋 InP 量產廠(繞開中國)。<span class="conf c-high">高</span></p></div>
+  </div>
+  <h3>核心 B:磊晶 + 雷射晶粒(③④ 16/20,台廠主場)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>作用</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>MOCVD/MBE 磊晶</td><td>長 EML/CW/PD 元件層</td><td>1310/1550nm 長波長均勻性;Aixtron MOCVD 設備隘口(70-90%)</td><td><span class="stars">★★★★☆</span></td></tr>
+      <tr><td>EML 雷射晶粒</td><td>DFB+EAM 單片整合</td><td>200G/lane、106GBaud、e-beam 微影、Tier-1 認證</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>聯亞光電 <span class="code">3081</span></h4><p>InP 磊晶+雷射晶粒一條龍(鏈上最硬),矽光子 CW/外置光源主供;與住友五年長約鎖料;1Q26 +99%、EPS 3.44 創高、毛利率 54.8% 8 年高。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>全新光電 <span class="code">2455</span></h4><p>InP/GaAs MOCVD 磊晶龍頭;200G PD Q2 出貨、Q2 成本轉嫁;1Q26 EPS 1.06、MOCVD 擴 5 部 2027 投產。<span class="conf c-high">高</span></p></div>
+  </div>
+</div></section>
+
+<!-- 05 製程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Process Flow</span>
+  <h2 class="title">完整製程鏈(原料 → 光引擎)</h2>
+  <p class="subtitle">一顆 1.6T 模組的雷射光源,從礦端銦到光引擎要走的路。台廠卡在中段(磊晶/晶粒),上游基板與原料是國際/中國的天下。</p>
+  <div class="stack">
+    <div class="layer"><b>① 原料(銦/鎵/鍺・紅磷)+ pBN 坩堝</b><div class="uses">中國主導精煉;銦受永久出口管制</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② InP 基板長晶(LEC/VGF)★ 瓶頸中的瓶頸</b><div class="uses">AXT/住友/JX 80-90%;台股缺席</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ MOCVD/MBE 磊晶 ★ 台廠主場</b><div class="uses">全新/聯亞/英特磊;Aixtron 設備隘口</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ 雷射晶粒製造(EML/CW DFB/PD)</b><div class="uses">聯亞自有/穩懋 200G PD;Lumentum/Coherent IDM</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ COS 封測 → 光引擎/模組(CPO 題)</b><div class="uses">聯鈞 COS/AOC;與 CPO 矽光子題交界</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:需求金字塔(光網路 TAM 9 倍)的「塔尖發光」全靠 InP,但供給的「塔基」(基板長晶)被三家寡占+中國管制卡住——台廠的 alpha 在中段磊晶/晶粒的全球稀缺產能與漲價轉嫁,不是塔基(基板長晶台廠=零)。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>磊晶三雄(聯亞/全新/英特磊)</td><td>InP 缺料漲價 + CPO/1.6T 放量</td><td>聯亞一條龍最硬+住友長約鎖料;全新 200G PD+成本轉嫁;英特磊 InP 占比翻倍</td></tr>
+      <tr><td>雷射晶粒代工(聯亞/穩懋/宏捷科)</td><td>EML/CW DFB 需求倍增</td><td>聯亞自有晶粒(現在);穩懋 200G PD 量產、CW/EML 2027(選擇權);宏捷科認證待證</td></tr>
+      <tr><td>下游封測交界(聯鈞)</td><td>AOC/COS 放量</td><td>偏 CPO 下游,與 CPO 題重疊(交界對照)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>台灣基板長晶=零</b>(成本端受制,基板 +250% 是壓力);② <b>穩懋/宏捷科本業手機 PA</b>、InP 光通訊貢獻小,勿誇大;③ <b>CPO 量產時程遞延</b>(CPO 2026 滲透率僅 0.5%);④ <b>漲價口徑分歧</b>(國際 +250% vs 台廠 +3-5%);⑤ <b>中國 InP 許可審批是雙向最大變數</b>(放鬆=供給釋出壓低漲價邏輯)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手 <span class="conf c-med">中</span>=公司自述/部分 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="epi">磊晶</button><button data-f="die">雷射晶粒/代工</button>
+    <button data-f="down">下游交界</button><button data-f="intl">國際/基板</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="epi"><h4>聯亞光電 <span class="code">3081</span></h4><p>InP 磊晶+雷射晶粒一條龍(鏈上最硬);矽光子 CW/ELS 主供;住友五年長約鎖料;1Q26 +99%、EPS 3.44 創高、毛利率 54.8% 8 年高;2027 前段產能倍增。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="epi"><h4>全新光電 <span class="code">2455</span></h4><p>InP/GaAs MOCVD 磊晶龍頭;200G PD Q2 出貨、Q2 成本轉嫁;1Q26 EPS 1.06、毛利率 38.09%;MOCVD 擴 5 部 2027 投產。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="epi"><h4>英特磊 IET-KY <span class="code">4971</span></h4><p>少數 MBE 路線(美國生產),InP 光通訊+國防雙引擎;InP 占比 50%→60%、2026 訂單翻倍;1Q26 淨利 +231.8%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="die"><h4>穩懋 <span class="code">3105</span></h4><p>全球最大 GaAs 代工跨光通訊;200G PD 2026/4 量產出貨美系客戶(現在);CW/EML 2H26 目標但量產落 2027(選擇權)。本業手機 PA、InP 貢獻小。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="die"><h4>宏捷科 <span class="code">8086</span></h4><p>全球第二大 GaAs 代工(中美晶集團);媒體稱通過 1.6T EML/CW 驗證、有 6 吋 InP 產線,但 InP 認證未獨立佐證、論壇有質疑;現有放量主體 GaAs。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="down"><h4>聯鈞 <span class="code">3450</span></h4><p>雷射二極體封測 COS+AOC;2026/5 月營收 9.60 億 +49.9%;400G AOC 月產 4.5→8.5 萬條、800G AOC 2H26。偏 CPO 下游、與 CPO 題重疊。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>住友 / AXT-Tongmei / JX <span class="code">基板</span></h4><p>InP 基板三強 80-90%;住友最大、AXT 產能多在中國受管制、JX 第三(擴產 +50%)。台廠基板長晶=零。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Coherent / Lumentum <span class="code">COHR/LITE</span></h4><p>垂直整合(基板+磊晶+晶粒);Coherent 建全球首座 6 吋 InP 廠;Lumentum 200G EML 50-60%;NVIDIA 各注資 ~$20 億。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>IQE / Aixtron / Riber <span class="code">磊晶/設備</span></h4><p>IQE 獨立磊晶代工(MACOM 投資 £45M);Aixtron 光子 MOCVD 70-90%(擴產隘口);Riber MBE 龍頭(英特磊用)。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">逐環節技術難度評分</h2>
+  <p class="subtitle">維度:技術門檻 / 壟斷集中度 / 設備稀缺 / 良率挑戰,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>壟斷集中</th><th>設備稀缺</th><th>良率挑戰</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>② InP 基板長晶</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>③ 磊晶(MOCVD/MBE)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>④ 雷射晶粒(EML/CW)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>① 原料+pBN 坩堝</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>⑤ 晶粒封測 COS</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">10</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台廠卡在 ③④(磊晶/晶粒,16),議價力正兌現;② 基板長晶(19,瓶頸中的瓶頸)台廠完全缺席。評分為推估,僅供參考。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>聯亞 3081</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">21.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>全新 2455</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">19.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>英特磊 4971</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">18</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>穩懋 3105</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。穩懋本業手機 PA、InP 光通訊現階段貢獻小(規模分高但 InP 純度低)。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>聯亞 3081</td><td>磊晶+晶粒一條龍</td><td>住友五年長約鎖料;1Q26 +99% EPS 3.44 創高;2027 前段產能倍增</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>全新 2455</td><td>MOCVD 磊晶龍頭</td><td>200G PD Q2 出貨;Q2 成本轉嫁;MOCVD 擴 5 部 2027 投產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>英特磊 4971</td><td>MBE 磊晶+國防</td><td>InP 占比 50%→60%、2026 訂單翻倍</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>穩懋 3105 / 宏捷科 8086</td><td>GaAs 代工跨光通訊</td><td>穩懋 200G PD 2026/4 量產、CW/EML 2027(選擇權);宏捷科認證待證</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>中國 InP 管制(事件)</td><td>供給最大變數</td><td>2025/2 銦管制、逐案許可;審批 60+ 工作天;雙向變數</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>NVIDIA 注資(事件)</td><td>需求鎖產能</td><td>2026/3 對 Lumentum+Coherent 各 ~$20 億鎖 EML/InP</td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入聯亞量級<b>示意數字</b>(非財測),請依個股真實財務調整。磊晶股營收量級小但毛利高、彈性大。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>磊晶股 PE 高(稀缺+成長)</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>毛利率擴張</b></td><td>漲價轉嫁 → 毛利率上行 → EPS 槓桿</td><td>缺料漲價</td><td>聯亞毛利率 8 年高即此邏輯</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業 + CW/EML 放量折現</td><td>未放量</td><td>穩懋 CW/EML(2027)屬此類</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="36"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="50"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="30"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="0.93"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="30"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="60"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為示意非個股財測。磊晶三雄營收量級小、毛利率與股數差異大(聯亞毛利 ~55% vs 全新 ~38%),務必填入標的真實數字。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查已標註。</p>
+  <ul class="refs">
+    <li><b>全新/聯亞/英特磊/穩懋/宏捷科/聯鈞 2026Q1 法說與月營收</b> — 各家數字<span class="q">primary</span></li>
+    <li><b>Reuters(2026/6/10-11)</b> — 6 吋 InP +250% 至 $5,000、AXT+住友近 8 成;<b>AXT 1Q26 法說</b> — backlog 逾 1 億創高、出口許可為最大變數<span class="q">primary</span></li>
+    <li><b>中國商務部第 10 號公告(2025/2/4)</b> 銦出口管制;<b>白宮 232 條/CFIUS(2026/1)</b><span class="q">primary</span></li>
+    <li><b>Goldman Sachs《Optical Networking》</b> — 光網路 TAM 2026 $150 億→2028 $1,540 億(近 9 倍)<span class="q">secondary</span></li>
+    <li><b>TrendForce(2026/4-6)</b> — EML+CW 月產能倍增至 5,070 萬顆、800G+ 模組 6,300 萬;NVIDIA 注資 Lumentum+Coherent $40 億<span class="q">secondary</span></li>
+    <li><b>Mordor / QY Research</b> — InP 基板市場規模(口徑分歧,量級參考);<b>globalsemiresearch</b> — 良率/缺口/原料利用率<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>口徑修正:</b>① 「全新 6/12 漲價公告」查無佐證、已剔除(以 Q2 成本轉嫁為準);② 「pBN 坩堝被中國管制」查無官方佐證、已剔除(確證在效是銦管制);③ 漲價兩套口徑差一數量級(國際累計 +250% vs 台廠合約 +3-5%);④ 台灣基板長晶=零(成本端受制);⑤ 聯亞/全新/聯鈞跨「CPO 矽光子」題,勿重複計受惠;⑥ 穩懋/宏捷科本業手機 PA、InP 貢獻小,勿誇大。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>InP 光通訊上游(III-V 化合物半導體鏈)製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
