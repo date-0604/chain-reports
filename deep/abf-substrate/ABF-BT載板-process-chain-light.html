@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABF/BT 高階 IC 載板漲價循環 製程鏈 × 供應鏈研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#d97706; --accent-soft:#fef3c7;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#fffbeb,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:780px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">ABF/BT 高階載板<span> 製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">漲價邏輯</a>
+    <a href="#categories">核心環節</a><a href="#application">製程鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">市場+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>ABF/BT 高階 IC 載板漲價循環 <em>供應鏈研究指南</em> 2026</h1>
+  <p class="lead">ABF 載板是 AI 晶片封裝必要載體;晶片面積/層數暴增使單顆用量數倍,2026-2028 漲價循環已啟動且財報驗證(欣興 1Q26 EPS 3.28 創 13 季高)。台灣是「產能主導者(全球約 30% 第一)、最高階 FC-BGA 技術老二」(日 Ibiden/Shinko 掌頂規 70-80%);吃全球近半產能 × 漲價 ASP,但上游味之素 ABF 膜(&gt;95%)+ T-glass 全在日本——「吃漲價也被漲價」,轉嫁能力是觀察重點。本題是已研究 T-Glass(上游)與玻璃 GCS(接替者)之間缺的中游環節。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:2026-2028 漲價循環(財報已驗證)</span>
+    <span class="badge">台灣吃:全球近半產能×漲價 ASP</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:漲價循環三因</h2>
+  <p class="subtitle"><b>切分:</b>本題聚焦「載板廠環節」(製程/產能/ASP/認證/獲利彈性);上游 T-Glass 玻纖布與下一代玻璃載板 GCS 已各有專篇,本篇只交叉引用其向下傳導與接替時程,不重做。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">📈</span>需求拉動(規格升級)</h4><p>AI 晶片面積逼近 reticle、層數 3+3→11+11→13+13,單顆 ABF 用量數倍;大尺寸/細線路良率低 → 更耗產能 → 放大缺口(高盛邏輯)。</p></div>
+    <div class="card"><h4><span class="ico">⛽</span>成本推動(上游漲價)</h4><p>味之素 ABF 膜(&gt;95%)擬漲 ≥30%、MGC BT 樹脂 +30%、T-glass 交期 30 週+——載板廠取得對下游 ASP 漲價正當性(2026 報價估 +15-20%)。</p></div>
+    <div class="card"><h4><span class="ico">✅</span>財報已驗證(非純題材)</h4><p>欣興 1Q26 EPS 3.28 創 13 季新高(純益年增 4.5 倍)、ABF 營收 QoQ +14%、Blackwell ABF &gt;30%、美系 AI ASIC 載板 &gt;70%。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(三層結構)</h2>
+  <p class="subtitle">上游材料(日系獨佔)→ 載板製造(台日韓中)→ 下游封裝(OSAT/CoWoS)。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝公司自述</span> <span class="conf c-un">灰＝媒體彙整/分類待釐清</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游材料<small>日系獨佔·漲價源頭</small></div><div class="items"><span class="badge b-accent">味之素 ABF 膜(&gt;95%)</span><span class="badge b-accent">MGC BT 樹脂</span><span class="badge b-accent">日東紡 T-glass</span><span class="badge b-accent">三井 銅箔</span></div></div>
+    <div class="chain-row"><div class="lvl">載板製造<small>台灣主場(約30%)</small></div><div class="items"><span class="badge b-tw">欣興 3037</span><span class="badge b-tw">南電 8046</span><span class="badge b-tw">景碩 3189</span><span class="badge b-tw">臻鼎 4958</span><span class="badge b-accent">Ibiden/Shinko(頂規)/SEMCO</span></div></div>
+    <div class="chain-row"><div class="lvl">下游封裝<small>CoWoS/OSAT</small></div><div class="items"><span class="badge b-tw">台積電(CoWoS)</span><span class="badge b-tw">日月光(OSAT)</span><span class="badge b-ok">→ AI GPU/ASIC/CPU</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:卡在「載板製造本身」(全球約 30% 第一、漲價 ASP 兌現於財報);上游材料(味之素/MGC/T-glass)被日系獨佔、製程設備(雷射鑽孔/DI/AOI)多由國際日商寡占——「吃漲價、也被上游漲價」的中間層,轉嫁能力是毛利關鍵。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何現在是漲價循環高點段</h2>
+  <p class="subtitle">需求拉動 × 成本推動 × 缺貨拉動,三因共振且已有財報驗證。</p>
+  <div class="flow">
+    <div class="step"><b>規格升級</b><small>層數 3+3→13+13、大尺寸逼近 reticle,單顆 ABF 用量數倍</small></div><div class="arrow">→</div>
+    <div class="step"><b>上游漲價</b><small>味之素膜 +30%、MGC BT +30%、T-glass 交期 30 週+</small></div><div class="arrow">→</div>
+    <div class="step"><b>缺口放大</b><small>大尺寸低良率耗產能,高階 AI ABF 缺口 2028 估 35-42%</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>欣興 1Q26 EPS</p><h4>3.28 元 / +446%(創 13 季高)</h4></div>
+    <div class="card"><p>味之素 ABF 膜市佔</p><h4>&gt;95%(獨佔)</h4></div>
+    <div class="card"><p>2026 報價漲幅</p><h4>+15-20%(部分 &gt;20%)</h4></div>
+    <div class="card"><p>2028 高階 AI ABF 缺口</p><h4>約 35-42%(外資、口徑分歧)</h4></div>
+  </div>
+  <p class="disclaimer">味之素 +30%、報價 +15-20% 為廠商/媒體口徑,缺第三方 benchmark;供需缺口三套外資口徑分歧(見市場頁)。標來源、非成交數。</p>
+  <h3>玻璃基板接替(遠端結構性風險,非近端替代)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時點</th><th>事件</th></tr></thead>
+    <tbody>
+      <tr><td>2026 初</td><td>Intel Clearwater Forest(玻璃核心 CPU)CES 發表、小量;Samsung 玻璃 2026H2 全面驗證</td></tr>
+      <tr><td>2028-2030</td><td>GCS 先侵蝕「最頂規、最大尺寸、&gt;1000W」少數旗艦(翹曲 &lt;20μm 優於有機 &gt;50μm),逐步擴大</td></tr>
+      <tr><td>共識</td><td>2030 前 ABF 仍是唯一可大規模量產方案;2026-2028 漲價窗口成立。玻璃製程細節見 GCS 專篇</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心環節深度解析</h2>
+  <p class="subtitle">良率分水嶺在 <b>mSAP 細線路(17/20)</b> 與 <b>翹曲管控(17/20)</b>;成本/供給命門在 <b>上游材料獨佔(18/20)</b>。</p>
+  <h3>核心 A:mSAP 細線路 + 翹曲管控(台廠真實 alpha)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>作用</th><th>難點</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>mSAP 細線路</td><td>L/S ~25μm 半加成、承載 I/O 密度</td><td>20/20μm 以下過蝕/欠蝕窗口極窄;台日韓技術分水嶺</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>翹曲 warpage 管控</td><td>大面積/高層數回焊翹曲矯正</td><td>有機 &gt;50μm@100mm vs 玻璃 &lt;20μm;CTE 失配、枕頭效應</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>台廠 alpha=「買得到機台、買不到良率」</h4><p>味之素膜為各家共同料,差異化全在 mSAP 製程能力與翹曲控制配方(CTE 匹配/對稱疊構/stiffener);AI 大尺寸良率低→更耗產能→放大缺口。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>設備/藥水仰賴國際</h4><p>電鍍藥水 Atotech/上村、乾膜旭化成、DI 曝光 Orbotech、AOI Camtek/KLA、翹曲量測 Akrometrix——台廠多採購;電測德律 TRI 有 alpha 並外銷。<span class="conf c-med">中</span></p></div>
+  </div>
+  <h3>核心 B:上游材料獨佔(味之素/MGC,成本與供給命門)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>材料</th><th>供應商</th><th>市佔/狀態</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>ABF 增層膜</td><td>味之素 Ajinomoto</td><td>&gt;95% 獨佔、Q3 擬漲 30%(維權基金施壓)</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>BT 樹脂/CCL</td><td>MGC 三菱瓦斯</td><td>主導、全系電子材料 +30%(2026/4/1 生效)</td><td><span class="stars">★★★★☆</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 載板廠無法垂直整合上游、只能被動接受漲價與配額;漲價對載板廠是「順價題材+護城河」也是「毛利壓力」,能否全額轉嫁(缺第三方 benchmark)是核心變數。</div>
+</div></section>
+
+<!-- 05 製程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Process Flow</span>
+  <h2 class="title">完整製程鏈(材料 → FC-BGA)</h2>
+  <p class="subtitle">一張高階 AI 載板要走的八道環節。台廠 alpha 在「製造良率/產能/順價」,幾乎全數缺席於造設備、造膜。</p>
+  <div class="stack">
+    <div class="layer"><b>① 上游材料(ABF 膜/BT/玻纖布/銅箔)★ 材料即瓶頸</b><div class="uses">味之素 ABF &gt;95%、MGC BT、日東紡 T-glass(日系獨佔)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② core / coreless 設計成形</b><div class="uses">coreless 翹曲變異 +25-50%;AI 大尺寸傾向 coreless</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ 增層 build-up(ABF 膜真空壓膜)</b><div class="uses">堆 11+11→13+13;壓膜空洞 void 是良率主因</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ 雷射鑽孔 via(&lt;50μm)</b><div class="uses">設備 backlog 18 個月;三菱/Via Mechanics/LPKF 約 70%</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ mSAP/SAP 細線路 ★ 良率最敏感</b><div class="uses">L/S 25μm 以下=台日韓技術分水嶺、台廠 alpha</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 表面處理/SMT pad/平坦化</b><div class="uses">相對成熟;共面度/表面層均勻性</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ AOI/電測/翹曲管控 ★ 頭號良率殺手</b><div class="uses">有機 &gt;50μm vs 玻璃 &lt;20μm;CTE 匹配是勝負手</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ FC-BGA 封裝交界(OSAT/CoWoS)</b><div class="uses">大尺寸 co-design;載板缺口傳導到 AI 算力出貨最後關卡</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:漲價循環的「真窗口」落在 2026-2028 載板製造環節——台廠的 alpha 是製造良率/產能/順價(買得到機台、買不到良率),不是造設備或造膜(那是日德國際的天下),也不是最頂規 FC-BGA(那是日 Ibiden/Shinko 的老大位置)。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>ABF 三雄(欣興/南電/景碩)</td><td>AI 載板量價齊揚 + 順價</td><td>現在就有營收(財報驗證);欣興規模龍頭、南電純度最高彈性最大、景碩雙引擎均衡</td></tr>
+      <tr><td>BT 載板(南電/景碩)</td><td>DDR5/HBM 周邊 + 成本驅動漲價</td><td>較防禦;漲價偏成本轉嫁(需驗證全額順價)、AI 直接曝險低於 ABF</td></tr>
+      <tr><td>挑戰者(臻鼎)</td><td>BT 已量產 + 高階 ABF/FCBGA</td><td>BT 真受惠(現有營收);高階 ABF 2027 後(佰鼎/深圳廠 ramp)為選擇權</td></tr>
+      <tr><td>(觀察)PCB/HDI(健鼎/華通/定穎)</td><td>AI 伺服器/記憶體/車用 PCB</td><td>非 ABF/BT 載板廠;本業另有受惠故事,就本題維持觀察、不混為載板核心</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>「吃漲價也被上游漲價」</b>——能否全額順價是毛利變數(缺 benchmark);② <b>南電高 beta</b>(2024-25 曾因庫存獲利大幅下滑);③ <b>擴產+double-booking</b>(Ibiden 5,000 億 2027 爬坡,峰值後恐回吐);④ <b>玻璃基板 2028-2030 接替頂規</b>(遠端風險,須追蹤良率拐點);⑤ <b>口徑陷阱</b>(缺口三套外資勿混報、市場規模四層勿混算);⑥ <b>健鼎/華通/定穎非載板廠,勿誤掛 ABF 受惠</b>。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手 <span class="conf c-med">中</span>=公司自述/部分 <span class="conf c-un">待查/非載板環節</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="abf">ABF 載板</button><button data-f="dual">雙引擎</button>
+    <button data-f="bt">BT·挑戰者</button><button data-f="watch">觀察</button>
+    <button data-f="mat">上游材料</button><button data-f="intl">國際</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="abf"><h4>欣興 <span class="code">3037</span></h4><p>全球 IC 載板產能第一;1Q26 EPS 3.28 創 13 季高(YoY +446%)、ABF QoQ +14%、Blackwell ABF &gt;30%、美系 AI ASIC 載板 &gt;70%;2026 載板產能 +35-40%、capex 上修至 340 億;玻璃 GCS 2027-2028 量產(選擇權)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="abf"><h4>南電 <span class="code">8046</span></h4><p>覆晶載板領導廠、ABF 純度最高;高階接近滿載、HBM4 拉高依賴、被點名供應鏈瓶頸;非長約占比高→報價彈性最大但高 beta(2024-25 曾大幅下滑)。FactSet 2026 EPS 共識約 2.66(後上修)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="dual"><h4>景碩 <span class="code">3189</span></h4><p>唯一 ABF+BT 雙引擎、AI+記憶體兩頭賺;1Q26 營收 111 億 YoY +28.8% 創同期高;ABF 約 46%/BT 約 36%;切入 Google TPU、Meta、AWS(2026H2);稼動 85→90%、三年 235 億 capex、2027 擴產約 25%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="bt"><h4>臻鼎-KY <span class="code">4958</span></h4><p>挑戰者:BT 載板已量產(IC 載板 2025 +31.3%、2026 估增逾 70%);高階 ABF/FCBGA 2026Q1 才打樣;佰鼎南科高雄 80 億建 FCBGA 線、2027 ramp。本體仍以軟板/HDI/伺服器板為主,高階 ABF 屬 2027 後選擇權。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="watch"><h4>健鼎 <span class="code">3044</span></h4><p>(觀察)不生產 ABF/BT IC 載板;主力伺服器板、記憶體模組 PCB(裝 DRAM 的 PCB 非載板)、車用板;2026 營收估約 844 億 +15%。屬 AI 伺服器/記憶體 PCB 受惠、非本題載板環節。</p><span class="conf c-un">非載板環節</span></div>
+    <div class="card" data-cat="watch"><h4>華通 <span class="code">2313</span></h4><p>(觀察)HDI 技術領先廠與低軌衛星板供應商;主力 HDI/多層 PCB、非 ABF/BT 載板廠。常被與欣興作 PCB vs ABF 對照;本業低軌衛星/HDI 為另一受惠故事。</p><span class="conf c-un">非載板環節</span></div>
+    <div class="card" data-cat="watch"><h4>定穎投控 <span class="code">3715</span></h4><p>(觀察)主力車用板與伺服器 PCB(6251 定穎、3715 定穎投控,代號需區分);未見 ABF/BT 載板布局可信佐證。本業車用/伺服器 PCB 為獨立題材,維持觀察。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="intl"><h4>Ibiden / Shinko <span class="code">日</span></h4><p>最高階 FC-BGA 龍頭(掌 NVIDIA GPU 主載板頂規 70-80%);Ibiden 2026/2 宣布 3 年 5,000 億日圓擴產、AI 用 IC 基板 2028 擴至 2.5 倍(河間 2027 投產);Shinko coreless 領先、被 JIC 私有化。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>SEMCO / LG Innotek / Daeduck <span class="code">韓</span></h4><p>SEMCO 韓系最大、FCBGA 需求超產能逾 50%、越南太原 12 億美元廠;LG Innotek 搶 Tesla(AI5/Dojo)ABF 挑戰 SEMCO;Daeduck 稼動約 70%、評估擴產。</p><span class="conf c-high">高(SEMCO)</span></div>
+    <div class="card" data-cat="intl"><h4>深南電路 / 興森科技 <span class="code">中</span></h4><p>中系追趕:深南 FC-BGA 量產 22 層以下、24 層以上研發;興森陸媒稱國內唯一 ABF 量產、客戶認證推進中。高階仍落後日台、良率認證未獨立驗證。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="mat"><h4>味之素 / MGC <span class="code">日·材料</span></h4><p>味之素 ABF 膜 &gt;95% 獨佔(Q3 擬漲 30%、岐阜三廠 2032);MGC BT 樹脂主導(全系電子材料 +30% 2026/4/1 生效)。整條鏈成本傳導的最上游樞紐,載板廠無法垂直整合。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Intel(玻璃核心) <span class="code">美</span></h4><p>Clearwater Forest(CES 2026)號稱首顆量產玻璃核心 CPU,代表 ABF 之後玻璃基板接替路線(2028-2030 放量)。本篇僅交代接替時程,玻璃製程見 GCS 專篇;量產良率待驗。</p><span class="conf c-med">中</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 細顆粒地圖 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 細顆粒設備/材料地圖 + 台灣吃得到定位</h2>
+  <p class="subtitle">一句話:<b>載板製造本身(良率/產能/順價)=台灣主場(全球約 30% 第一);造設備、造膜、最高階 FC-BGA 頂規=國際/日商主場。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>機型/等級取自官網/法說/新聞稿(味之素 GX/GZ/GL、雷射機 LPKF+三菱約 70% 等已查證);投資前自行查證。</div>
+  <h3>台灣吃得到多少(逐環節定位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>上游 ABF 膜 / BT 樹脂</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 被動接受漲價</span></td><td>味之素 ABF &gt;95%、MGC BT 主導;無法垂直整合</td></tr>
+      <tr><td>製程設備(雷射鑽孔/DI/AOI/壓膜)</td><td>(多缺席;電測有)</td><td><span class="badge b-danger">多缺席 · 國際日商寡占</span></td><td>三菱/Via Mechanics/LPKF、Orbotech、Camtek;德律 TRI 電測有 alpha</td></tr>
+      <tr><td>最高階 AI GPU FC-BGA(頂規)</td><td>(技術老二)</td><td><span class="badge b-warn">老二 · 日系掌 70-80%</span></td><td>Ibiden/Shinko 掌 NVIDIA GPU 最頂規;台廠次高階主力</td></tr>
+      <tr><td>ABF 載板製造(整體+ASIC/CPU/網通)⭐</td><td>欣興 3037 / 南電 8046 / 景碩 3189</td><td><span class="badge b-ok">主導 · 全球約 30% 第一</span></td><td>欣興 Blackwell ABF &gt;30%、美系 ASIC 載板 &gt;70%</td></tr>
+      <tr><td>BT 載板(記憶體/HBM 周邊)</td><td>南電 / 景碩 / 臻鼎</td><td><span class="badge b-warn">重要供應商</span></td><td>受惠 DDR5/HBM;BT 競爭者多護城河弱於 ABF</td></tr>
+      <tr><td>玻璃載板 GCS(2028+ 接替)</td><td>欣興卡位(較弱)</td><td><span class="badge b-warn">未來選擇權 · 卡位較弱</span></td><td>欣興 2027-2028 量產;台廠 GCS 卡位弱(見玻璃報告)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>細顆粒設備/材料地圖(逐製程 × 具體商/機型·等級)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程 / 設備·材料 + 機型·等級</th><th>供應商(代號/別)</th><th>台廠地位</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">介電/核心材料 ★日系獨佔</td></tr>
+      <tr><td>味之素 ABF 膜:GX(環氧主流)/ GZ(氰酸酯超低介損 Df≈0.006)/ GL(最新更低 CTE)</td><td>味之素(&gt;95% 獨佔)——實質無第二供應商</td><td><span class="badge b-danger">缺席(不造膜)· 唯一大規模加工者</span></td></tr>
+      <tr><td>BT 樹脂/CCL:MGC BT laminate / 非鹵低 CTE HFBT</td><td>MGC(主導)/ Resonac;CCL 台廠聯茂 6213/台光電 2383(非載板環節)</td><td><span class="badge b-warn">CCL 有 alpha;高階 BT 核心仍仰賴 MGC</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">增層壓合 ★設備日商</td></tr>
+      <tr><td>真空快速壓膜機(high-vacuum、void-free,配 11+11 以上)</td><td>日:名機 Meiki / Nikko-Materials;歐:Bürkle</td><td><span class="badge b-danger">缺席(不造機)· alpha 在製程 know-how</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">雷射鑽孔 ★日德寡占 · 設備=瓶頸</td></tr>
+      <tr><td>CO2 雷射(≥40μm via)/ UV 雷射(&lt;40μm);14 層 ABF 交期 28 週、機台 backlog 18 個月</td><td>三菱電機 / Via Mechanics(日立)/ LPKF(德)/ 大族(陸);LPKF+三菱約 70%</td><td><span class="badge b-danger">缺席 · 誰先買到機台誰先吃單</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">細線路 mSAP/SAP ★藥水日歐 · 良率=台廠 alpha</td></tr>
+      <tr><td>mSAP(L/S ~25μm)/ SAP(~36μm);化學銅+電鍍 void-free fill+快蝕</td><td>藥水:Atotech(MKS)/ 上村 Uyemura;乾膜:旭化成 / 日立化成</td><td><span class="badge b-ok">藥水缺席;25μm 以下良率=台廠吃飯本事</span></td></tr>
+      <tr><td>細線路微影:DI 直接成像(&lt;25μm L/S)</td><td>Orbotech(KLA)/ SCREEN / Adtec</td><td><span class="badge b-danger">缺席 · alpha 在 yield loop</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">檢測/量測 ★國際寡占 · 電測台廠有</td></tr>
+      <tr><td>AOI(Camtek Phoenix,檢 5μm)/ X-ray(via 對位、空泡)</td><td>AOI:Camtek/Orbotech-KLA;X-ray:YXLON/島津/Nikon;台:由田/牧德(PCB)</td><td><span class="badge b-warn">高階缺席;PCB AOI 台廠有份額</span></td></tr>
+      <tr><td>電性測試(open/short、阻抗)</td><td>德律 Test Research TRI(台,外銷)/ 日本測試機</td><td><span class="badge b-ok">台廠 alpha(德律外銷)</span></td></tr>
+      <tr><td>翹曲量測(shadow moiré);有機 &gt;50μm@100mm vs 玻璃 &lt;20μm</td><td>Akrometrix(美,業界標準)/ Keyence</td><td><span class="badge b-danger">缺席 · alpha 在翹曲控制配方</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>主流技術路線(4 條)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>路線</th><th>取捨</th><th>玩家</th></tr></thead>
+    <tbody>
+      <tr><td><b>ABF(FC-BGA 高階)vs BT(記憶體/中階)</b></td><td>ABF 量價齊揚+順價+AI 直球曝險、毛利最高(漲價主軸);BT 漲價偏成本驅動、AI 曝險低、需驗證全額順價</td><td>ABF:欣興/南電/景碩/臻鼎+Ibiden/Shinko/SEMCO;BT:南電/景碩+記憶體下游</td></tr>
+      <tr><td><b>有核 cored vs 無核 coreless</b></td><td>cored 翹曲易控、量產成熟(主流);coreless 更薄密低電感,但翹曲+25-50%、組裝良率風險</td><td>cored:欣興/南電/Ibiden;coreless:Shinko/Ibiden/SEMCO</td></tr>
+      <tr><td><b>mSAP vs SAP 細線路</b></td><td>SAP ~36μm pitch(最高階);mSAP ~25μm 線形佳適高頻(放量主流);25μm 以下良率即台廠真實 alpha</td><td>台廠(南電/欣興)+國際;藥水/設備靠 Atotech/旭化成/Orbotech/Camtek(國際寡占)</td></tr>
+      <tr><td><b>ABF vs 玻璃基板 GCS 接替</b></td><td>2026-2028 ABF 唯一可大規模量產(漲價窗口);GCS 2028-2030 先侵蝕頂規(遠端風險非近端替代)</td><td>ABF:欣興/南電/景碩/臻鼎+Ibiden/Shinko;GCS:Intel/Samsung/SKC/康寧(台廠卡位弱)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">資料整合自各家官網/法說/新聞稿(一手)+ TechNews/Digitimes/Yole 等研調,為研究線索、非投資背書。味之素漲幅、缺口口徑均標分歧/待查。</p>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場規模 + 逐環節難度 + 公司受惠評分</h2>
+  <p class="subtitle">市場口徑分三層(整體 ABF / FC-BGA / AI 子市場)勿混算;供需缺口三套外資勿混報。</p>
+  <h3>市場規模(三層口徑務必區分)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調</th><th>口徑(三層)</th><th>基準</th><th>目標</th><th>CAGR</th></tr></thead>
+    <tbody>
+      <tr><td>Intel Market Research</td><td>整體 ABF 載板</td><td>2025 $54.2 億</td><td>2032 $95.5 億</td><td>10.6%</td></tr>
+      <tr><td>Prismark(舊版)/ Verified</td><td>FC-BGA</td><td>2021 / 2023 $51.66 億</td><td>2026 約 $121 億 / 2030 $102 億</td><td>~10-11.5%</td></tr>
+      <tr><td>高盛(C.Wang)</td><td>AI 伺服器 ABF 子市場 TAM</td><td>2025</td><td>2026 +35% / 2027 +55%</td><td>整體 ABF 約 33%</td></tr>
+      <tr><td>MarketsandMarkets</td><td>上游 ABF 膜材料(勿與成品比)</td><td>—</td><td>2032 約 $496 億</td><td>—</td></tr>
+      <tr><td>Valuates</td><td>上游 BT 樹脂</td><td>2025 $23.45 億</td><td>2033 $38.32 億</td><td>6.3%</td></tr>
+    </tbody>
+  </table></div>
+  <h3>供需缺口(外資 3 套口徑,逐家標、勿混用)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>機構</th><th>2026</th><th>2027</th><th>2028 / 長期</th><th>口徑</th></tr></thead>
+    <tbody>
+      <tr><td>高盛</td><td>2H26 約 10%(另版 8%)</td><td>約 21-27%</td><td>2028 約 42%</td><td>高階 AI ABF、逐月惡化</td></tr>
+      <tr><td>美銀/匯豐(陸媒彙整)</td><td>約 8%</td><td>約 27%</td><td>2028 約 35%</td><td>高階 AI ABF(具名待查)</td></tr>
+      <tr><td>摩根士丹利</td><td>—</td><td>—</td><td>2030 穩態約 22%</td><td>長期穩態(擴產收斂);CAGR 16.1%</td></tr>
+      <tr><td>TPCA/工研院</td><td>—</td><td>ABF 21-27%</td><td>—</td><td>HVLP4 銅箔 48%、T-glass &gt;30 週</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">分歧主因:整體 ABF vs 高階 AI ABF、峰值年份不同、含不含 T-glass 缺料放大與 double-booking。<b>共識:中低階供需平衡,缺口集中在高階 AI。</b>採區間並列,不取單一數字當定論。</p>
+  <h3>逐環節技術難度評分</h3>
+  <p class="subtitle">維度:技術門檻 / 良率挑戰 / 翹曲應力 / 設備材料稀缺,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>良率挑戰</th><th>翹曲應力</th><th>設備材料稀缺</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>① 上游材料(ABF 膜/BT/玻纖布)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>⑤ mSAP/SAP 細線路</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>⑦ AOI/電測/翹曲管控</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>③ 增層 build-up 壓膜</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>⑧ FC-BGA 封裝交界(co-design)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>④ 雷射鑽孔 via</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>② core/coreless</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>⑥ 表面處理/平坦化</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">11</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台廠 alpha 集中在 mSAP 細線路(⑤)/壓膜(③)/翹曲管控(⑦)的良率 know-how;幾乎全數缺席於造設備、造膜。評分為推估。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者(holds);PCB 觀察股不列。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>欣興 3037</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">24</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>南電 8046</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">24</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>景碩 3189</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">21</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>臻鼎-KY 4958</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">14</span></td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">欣興=規模龍頭(毛利受折舊壓抑);南電=ABF 純度最高、高 beta;景碩=雙引擎均衡(BT 護城河弱);臻鼎=BT 已量產+高階 ABF 2027 後選擇權。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2026→2030 催化劑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>欣興 3037</td><td>ABF 龍頭</td><td>1Q26 EPS 3.28 創 13 季高;2026 載板產能 +35-40%、capex 340 億;玻璃 GCS 2027-2028 量產(選擇權)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>南電 8046</td><td>ABF 純度最高</td><td>高階接近滿載、HBM4 拉高依賴;非長約彈性大但高 beta;2026/27 營收共識約 547/682 億</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>景碩 3189</td><td>ABF+BT 雙引擎</td><td>1Q26 +28.8% 創同期高;切入 TPU/Meta/AWS(2026H2);稼動 85→90%、2027 擴產約 25%</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>臻鼎-KY 4958</td><td>挑戰者</td><td>BT 已量產;高階 ABF/FCBGA 2026Q1 打樣、佰鼎 2027 ramp;IC 載板 2026 估增逾 70%</td><td><span class="conf c-med">中(2027 展望)</span></td></tr>
+      <tr><td>味之素 / MGC(事件)</td><td>上游漲價</td><td>味之素 ABF Q3 擬漲 30%(維權基金施壓);MGC +30% 2026/4/1 生效</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Ibiden(事件)</td><td>供給擴產</td><td>2026/2 宣布 3 年 5,000 億日圓擴產、河間 2027 投產、AI 用 IC 基板 2028 擴至 2.5 倍</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>缺口峰值(展望)</td><td>2028</td><td>高盛約 42%、美銀/匯豐約 35%;留意擴產到位與 double-booking 回吐</td><td><span class="conf c-un">展望</span></td></tr>
+      <tr><td>玻璃接替(展望)</td><td>2028-2030</td><td>Intel/Samsung 玻璃基板侵蝕頂規;2030 前 ABF 仍唯一可大規模量產</td><td><span class="conf c-un">展望</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有營收(漲價已財報驗證)=欣興/南電/景碩(2026-2027 量價齊揚);未來選擇權=臻鼎高階 ABF/FCBGA(2027 ramp)、欣興玻璃 GCS(2028+)。ABF 漲價彈性:南電(最純高 beta)&gt; 欣興(規模龍頭、毛利受折舊壓抑)&gt; 景碩(雙引擎均衡)&gt;&gt; 臻鼎。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入南電量級<b>示意數字</b>(非財測),請依個股真實財務調整。ABF 漲價循環核心邏輯=漲價轉嫁 → 毛利率上行 → EPS 槓桿。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>漲價上行期載板股 PE 拉升</td></tr>
+      <tr><td><b>毛利率擴張槓桿</b></td><td>漲價轉嫁 → 毛利率上行 → EPS 放大</td><td>本輪核心</td><td>南電純度高彈性最大(也最 beta)</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業 + 高階 ABF/FCBGA 放量折現</td><td>未放量</td><td>臻鼎高階 ABF(2027)屬此類</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="460"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="19"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="12"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="6.46"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="22"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="80"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為南電量級示意、非個股財測。三雄股數/毛利差異大(欣興規模遠大、南電純度高彈性大、景碩雙引擎),務必填入標的真實數字。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查已標註。</p>
+  <ul class="refs">
+    <li><b>欣興/南電/景碩/臻鼎 2026Q1 法說與月營收</b>(公開申報)— 欣興 EPS 3.28、純益 50.43 億、ABF QoQ +14%<span class="q">primary</span></li>
+    <li><b>Ibiden 官方(2026/02/03)</b> 3 年 5,000 億日圓擴產;<b>MGC 公告</b>全系電子材料 +30%(2026/4/1);<b>Intel CES 2026</b> Clearwater Forest 玻璃核心<span class="q">primary</span></li>
+    <li><b>TechNews finance(2026/04-05)</b> — 外資缺口 8/27/35、三雄目標價、AMD EFB、T-glass、大摩 2030 22%<span class="q">secondary</span></li>
+    <li><b>Digitimes</b>(味之素 +30%、SEMCO/LG/Tesla)/ <b>Korea Herald</b>(SEMCO 1 兆韓元)/ <b>東方財富</b>(缺口逐家彙整)/ <b>高盛經 X·Jukan 轉述</b>(AI ABF TAM)<span class="q">secondary</span></li>
+    <li><b>Intel Market Research</b>(整體 ABF)/ <b>Prismark·Verified</b>(FC-BGA,口徑不一)/ <b>MarketsandMarkets</b>(ABF 膜)/ <b>Valuates</b>(BT 樹脂)<span class="q">secondary</span></li>
+    <li><b>味之素 Fine-Techno + polymerinnovationblog</b>(GX/GZ/GL 等級)/ <b>KLA</b>(載板六大良率關卡)/ <b>Akrometrix</b>(翹曲)/ <b>Atotech</b>(mSAP);<b>豐雲學堂/工商/經濟/旺得富/財報狗</b>(台股法說目標價)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後的口徑修正(請勿當既成事實):</b>① 味之素「確定 Q3 漲 30%/高階 50%/台廠已確認」=源自維權基金 Palliser 施壓訴求、非官方公告(「正考慮調漲至少 30%、協商中」),50% 僅單一中國自媒體;② 缺口「8/27/35 或 10/21/42、22%」=三套外資口徑互不一致(整體 vs 高階、峰值年份、含不含 double-booking),不可混用為定論;③ 健鼎/華通/定穎=PCB/HDI 廠非 ABF/BT 載板廠,屬分類錯置(本業另有受惠、維持觀察不錯殺);④ 欣興玻璃 GCS=2027-2028 才量產(材料未定案),屬未來選擇權非 2026 同步引擎。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>ABF/BT 高階 IC 載板漲價循環 製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
