@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPO 共封裝光學 × 矽光子 製程鏈 × 供應鏈 深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#22d3ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#0c2a30);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#08111d;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(34,211,238,.08)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>CPO 共封裝光學 × 矽光子 深度研究報告</h1>
+  <div class="sub">交換器 ASIC → COUPE 光引擎晶圓(PIC/EIC・SoIC-X)→ 雷射光源 ELS(InP)→ FAU 光纖陣列耦合 → 光引擎封測與系統;逐環節難度、台廠/國際對照、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
+    <span class="pill">驅動力：<b>2026 CPO 商轉元年(Spectrum-X Photonics 量產)</b></span>
+    <span class="pill">配對淺色版：<b>CPO共封裝光學-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/為何卡台灣</a>
+    <a href="#s2">2. 完整製程鏈</a>
+    <a href="#s3">3. 逐環節難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. 市場與時程</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>CPO 把光引擎從「前面板可插拔光模組」搬到「交換 ASIC 旁邊同一封裝」,2026 是商轉元年——NVIDIA Spectrum-X Photonics 於 2026/06 量產、Broadcom Tomahawk6-Davisson 102.4T(16 顆 6.4T 光引擎)已出貨,<b>兩家光引擎都建在台積電 COUPE 平台上</b>。台灣吃得最深的是三段:<b>① 光引擎晶圓平台(SoIC-X+CoWoS,近獨佔)、② FAU 光纖陣列耦合(上詮)、③ 光引擎封測(日月光/訊芯)</b>;在「雷射 ELS 整模組(Lumentum/Coherent 寡占)、晶圓級耦合機台(德 ficonTEC/PI)、可拆卸光連接器標準(美日)」偏陪跑或缺席。最大變數:2026/06/10 SemiAnalysis 警告光引擎良率不足、量產恐延至 2028,當天台股矽光子 9 檔跌停,NVIDIA 回應 Quantum-X 已出貨——<b>多空爭議未定</b>。</div>
+<div class="kpi">
+  <div class="box"><div class="v">102.4T</div><div class="l">Broadcom TH6-Davisson 已出貨(16×6.4T 光引擎)</div></div>
+  <div class="box"><div class="v">狹義$7.6億 vs 廣義$100億+</div><div class="l">CPO 市場 2030-31 口徑差逾 10 倍</div></div>
+  <div class="box"><div class="v">SoIC-X+CoWoS</div><div class="l">台積電 COUPE=台灣最不可替代的一環</div></div>
+  <div class="box"><div class="v">9 檔跌停</div><div class="l">2026/06/10 SemiAnalysis 唱衰引爆多空爭議</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、為何卡住台灣 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>CPO 的本質:把「光」搬進晶片封裝</h3>
+  <p>傳統交換器把 SerDes 訊號拉到前面板插上可插拔光模組(pluggable);CPO(Co-Packaged Optics 共封裝光學)把光引擎(完成電→光轉換的矽光子晶片)搬到交換 ASIC 旁、同一封裝內,縮短電氣路徑、大降功耗。NVIDIA 自述較可插拔省電 3.5x、Broadcom 自述光互連省電 70%(<b>皆公司自述、缺第三方 benchmark</b>)。</p>
+  <ul>
+    <li><b>為何台灣卡得住:</b>CPO 光引擎=PIC(矽光子晶片,含 200G 微環調變器 MRM/波導)+ EIC(電子驅動晶片),用台積電 <b>COUPE</b> 平台以 SoIC-X 垂直堆疊、再進 CoWoS 與 ASIC 共封。NVIDIA 與 Broadcom 的 CPO 都建在 COUPE 上——台灣在「晶圓級光電整合」這層近乎主導、無直接競爭者。</li>
+    <li><b>但價值量最大的光引擎設計 IP(MRM/MZM 調變器、架構)仍握在 NVIDIA/Broadcom 手上</b>,台積電吃晶圓代工與封裝整合;台股設計端著墨不到調變器 IP 本身。</li>
+    <li><b>三大失效/瓶頸物理:</b>(1) MRM 微環調變器對溫度極敏感(每 +1°C 共振波長漂移約 0.1nm),須加熱器閉迴路鎖波長、對抗多環熱串擾;(2) FAU 光纖陣列對準容差是 sub-micron,SemiAnalysis 點名為良率瓶頸;(3) 雷射是整機最高失效率元件,故業界一致把雷射「外置」做成可插拔 FRU(ELS)。</li>
+  </ul>
+  <div class="callout warn"><b>切分(與已研究的鏈):</b>本題講「<b>光的路徑</b>」(雷射光源 → PIC/EIC 光引擎 → FAU 耦合 → 封測 → 系統);與「<b>InP 光通訊上游</b>」(基板/磊晶/雷射晶粒材料,上游)、「<b>玻璃載板 GCS</b>」(基板材料)相鄰但不同。聯亞/全新跨 InP 題、日月光跨 GCS 題,評估受惠勿重複計;「CPO 下一代基板可能採玻璃中介層」僅作介面交代,基板製程見 GCS 報告。</div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>完整製程鏈拆解(架構 → 系統)<span class="conf c-high">高信心</span></h2>
+<p class="sub">五環節:① 交換 ASIC＋CPO 架構定義 → ② COUPE 光引擎晶圓(PIC/EIC・SoIC-X,台灣最硬)→ ③ 雷射光源 ELS(InP,料源台廠卡位、整模組缺席)→ ④ FAU 光纖陣列＋晶圓級耦合(上詮卡位、機台缺席)→ ⑤ 光引擎組裝＋MRM 熱鎖＋封測＋系統(日月光/訊芯)。</p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>交換 ASIC 與 CPO 系統架構定義</h4>
+    <p>把交換晶片(NVIDIA Quantum-X/Spectrum-X、Broadcom TH6-Davisson 102.4T)的 SerDes 從「拉到前面板可插拔」改成「光引擎搬到 ASIC 旁同封裝」;定義幾顆光引擎、每顆速率、走 MRM/MZM 哪種調變、雷射是否外置可拆。</p>
+    <div class="diff">難點:系統級取捨——電氣/熱/可維修性與光學良率互相拉扯。CPO 把「一個光埠壞了不能像插拔模組那樣換」變成系統風險,架構期就須決定雷射外置與光引擎做成可拆 sub-assembly。TH6-Davisson=16 顆 6.4T DR 光引擎拼成 102.4T(官方、已出貨),概念已成熟。</div>
+    <div class="who">對應:<span class="tag t-intl">NVIDIA / Broadcom / Marvell / Cisco</span> <span class="tag t-tw">台積電 2330(ASIC＋CoWoS 代工)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>COUPE 光引擎晶圓製造(PIC＋EIC・SoIC-X 堆疊・200G MRM)⭐ 台灣最不可替代</h4>
+    <p>晶圓廠把 65nm SOI 矽光子晶片 PIC(含 200G 微環調變器 MRM、波導、光柵)與 6nm 電子驅動晶片 EIC,以 SoIC-X 混合鍵合垂直堆疊成單一光引擎,再進 CoWoS 與 ASIC 共封。COUPE=SoIC-X(PIC/EIC)+ CoWoS。</p>
+    <div class="diff">難點:把 6nm CMOS 與 65nm 矽光子兩個製程世代用 SoIC-X 晶圓級混合鍵合,需 sub-micron overlay 對位＋極低介面阻抗;PIC 趨向超薄大面積,鍵合前晶圓翹曲/平整度直接吃掉 overlay 良率。MRM 製程變異使共振波長偏移,KGD 良率端要靠後段熱調校救。2026 首度大規模商轉,存在 ramp 風險。</div>
+    <div class="who">對應:<span class="tag t-tw">台積電 2330(COUPE,獨家)</span> <span class="tag t-intl">GlobalFoundries Fotonix / Intel / Tower / Ayar Labs+Alchip</span> <span class="conf c-high">高(2026 量產屬首度商轉、ramp 中信心)</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>雷射光源 ELS 製造(InP 磊晶 → CW DFB / EML → 外置光源模組)</h4>
+    <p>在 InP 基板上長磊晶、做成連續波 CW DFB 雷射(給 MRM 矽光子的外置光源)或直調 EML,封成外置雷射模組 ELS/ELSFP,把光「餵」進光引擎。雷射晶片(發光體)只能做在 InP 上、無矽替代。</p>
+    <div class="diff">難點:reliability 與高功率壽命——高輸出雷射發熱大、熱應力下衰退快,雷射＋TEC 約占 ELS 70% 功耗;CW 需窄線寬、低 RIN、波長穩定才餵得動溫度敏感的 MRM。InP 磊晶門檻高、6 吋基板供應受限。<b>整模組由 Lumentum/Coherent 寡占(NVIDIA 2026/03 各注資約 $20 億鎖產能);台廠在晶粒/磊晶料源卡位、整模組本體缺席。</b></div>
+    <div class="who">對應:<span class="tag t-intl">Lumentum(唯一量產 200G/lane EML)/ Coherent / 古河 / 三菱 / 住友</span> <span class="tag t-tw">聯亞 3081(CW/EML 磊晶晶粒)</span> <span class="conf c-high">高(整模組寡占);台廠料源中信心</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>FAU 光纖陣列製作＋晶圓級耦合對準(sub-micron・耐迴流焊)⭐ 整鏈最卡良率</h4>
+    <p>把多根光纖排成精密陣列 FAU(2D/1D、玻璃 V-groove),與 PIC 波導/光柵做 sub-micron 主動/被動對準,UV 膠固著,確保低插損且能撐過後段 260°C 迴流焊。</p>
+    <div class="diff">難點:對準容差 sub-micron,一偏移插損暴增;HVM 要兼顧精度＋吞吐＋(可拆卸式)多次插拔重複性;固著後「耐迴流焊」——封裝高溫讓 UV 膠與 PIC 翹曲改變對位、熱循環下漂移。上詮以 ReLFACon 專利平台降低高溫封裝耦合損耗,是其護城河。<b>注意:晶圓級耦合「機台」本身由德商 ficonTEC/PI 主導,台廠是用機台做 FAU、非造機。</b></div>
+    <div class="who">對應:<span class="tag t-tw">上詮 3363(FAU＋與台積共研對準,核心)</span> <span class="tag t-tw">波若威 3163</span> <span class="tag t-intl">SENKO / 住友 / Corning / 天孚 TFC(陸)/ ficonTEC・PI(機台)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>光引擎組裝＋MRM 熱鎖＋封測＋系統整合</h4>
+    <p>把 COUPE 光引擎、FAU、外置雷射 ELS、ASIC 與散熱整合進封裝/系統,建立 MRM 閉迴路熱波長鎖定,做光電聯合測試與可靠度驗證後出貨 CPO 交換器(如 51.2T/102.4T)。</p>
+    <div class="diff">難點:MRM 對溫度極敏感(0.1nm/°C 漂移＋環間熱串擾),須整合加熱器＋光功率監測＋閉迴路控制器即時鎖波長,在高溫高密度環境最棘手;異質整合多元件、良率連乘(KGD↘);嵌入封裝的光埠失效難現場更換,須把光引擎/雷射做成可拆 FRU。邊緣耦合 vs 光柵耦合對準貼合,260°C 迴流焊。</div>
+    <div class="who">對應:<span class="tag t-tw">日月光投控 3711(VIPack 後段整合)</span> <span class="tag t-tw">訊芯-KY 6451(edge-coupling CPO 封裝,Broadcom)</span> <span class="tag t-tw">華星光 4979(模組端)</span> <span class="tag t-intl">ASE/SPIL / Fabrinet / 旭創・Eoptolink(陸)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐環節技術難度 ＋ 公司受惠強度評分</h2>
+<p class="sub">難度維度:技術門檻 / 良率挑戰 / 熱·可靠度 / 設備材料稀缺度,各 0~5 分(5＝最難)。評分為推估。</p>
+<table>
+  <tr><th>製程環節</th><th>技術門檻</th><th>良率挑戰</th><th>熱·可靠度</th><th>設備材料稀缺</th><th>總分/20</th><th>最卡關原因</th></tr>
+  <tr><td><b>② COUPE 光引擎晶圓(SoIC-X)</b></td><td>5</td><td>5</td><td>3</td><td>5</td><td><b>18</b></td><td>6nm+65nm 跨世代混合鍵合 sub-micron overlay＋PIC 翹曲;MRM 共振波長偏移壓低 KGD;首度商轉 ramp 風險</td></tr>
+  <tr><td><b>⑤ 光引擎組裝+MRM 熱鎖+封測</b></td><td>5</td><td>5</td><td>5</td><td>3</td><td><b>18</b></td><td>MRM 0.1nm/°C 漂移＋環間熱串擾需閉迴路鎖波長;異質整合良率連乘;光埠失效難維修</td></tr>
+  <tr><td><b>④ FAU＋晶圓級耦合對準</b></td><td>5</td><td>5</td><td>4</td><td>3</td><td><b>17</b></td><td>sub-micron 對準容差(SemiAnalysis 點名良率瓶頸);UV 固著耐迴流焊與熱循環漂移;機台仰賴德商</td></tr>
+  <tr><td>③ 雷射光源 ELS(InP)</td><td>4</td><td>4</td><td>5</td><td>4</td><td><b>17</b></td><td>雷射最高失效率元件、reliability＋高功率衰退;雷射+TEC 占 ELS 70% 功耗;InP 6 吋供應受限</td></tr>
+  <tr><td>① 交換 ASIC＋CPO 架構</td><td>3</td><td>2</td><td>3</td><td>2</td><td><b>10</b></td><td>可維修性 vs 良率/插損的系統級取捨;TH6-Davisson 已出貨、概念成熟</td></tr>
+</table>
+<div class="callout"><b>台廠的位置:</b>四個高難度環節中,台灣在 <b>② COUPE 晶圓(近獨佔)、④ FAU 耦合(上詮卡位)、⑤ 封測(日月光/訊芯)</b> 三段卡得最硬;在 <b>③ 雷射 ELS 整模組</b> 只吃晶粒/磊晶料源(整模組被 Lumentum/Coherent 寡占)、在「晶圓級耦合機台/micro-TEC/可拆卸連接器標準」缺席。</div>
+<h3>公司受惠強度評分(報酬,僅列有查證信心者)</h3>
+<p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>台積電 2330</td><td>5</td><td>5</td><td>4</td><td>5</td><td>5</td><td><b>24</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>上詮 3363</td><td>5</td><td>5</td><td>4</td><td>4</td><td>3</td><td><b>21</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>日月光投控 3711</td><td>5</td><td>4</td><td>3</td><td>4</td><td>5</td><td><b>21</b></td><td><span class="conf c-high">高(CPO 本身中)</span></td></tr>
+  <tr><td>聯亞 3081</td><td>5</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>20</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>訊芯-KY 6451</td><td>4</td><td>4</td><td>4</td><td>3</td><td>3</td><td><b>18</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>波若威 3163</td><td>4</td><td>3</td><td>3</td><td>3</td><td>3</td><td><b>16</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>華星光 4979</td><td>4</td><td>3</td><td>3</td><td>2</td><td>3</td><td><b>15</b></td><td><span class="conf c-med">中</span></td></tr>
+</table>
+<p class="sub">台積電總分最高反映「平台地位＋供給稀缺」(SoIC-X+CoWoS 獨家),但 CPO 對其 2026 營收占比 &lt;1%、屬長線戰略卡位;商轉時程欄反映 CPO 當期營收普遍 2026H2-2027 才放量。上詮 FAU 卡位最直接(2026H2 兌現、Q3 為 1.6T 認證分水嶺)。日月光高分來自先進封裝大盤倍增,CPO 本身屬 2027+ 選擇權。受惠評分為推估,僅供參考。</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 有獨立佐證</span>
+  <span><span class="conf c-med">中</span> 部分佐證/公司自述</span>
+  <span><span class="conf c-un">待查</span> 媒體彙整、未逐項佐證(不否定)</span>
+</div>
+<h3>台廠 × 環節</h3>
+<table>
+  <tr><th>公司(股號)</th><th>環節定位</th><th>角色 / 最新數字 / CPO 受惠</th><th>查證</th></tr>
+  <tr><td>台積電 2330</td><td>光引擎晶圓平台(COUPE)</td><td>COUPE 以 SoIC-X 把 EIC 堆疊於 PIC,NVIDIA Quantum-X/Spectrum-X 與 Broadcom TH6-Davisson 皆採用;2025 完成 pluggable 驗證、2026 量產並整合進 CoWoS。CPO 對總營收占比 2026 &lt;1%,屬平台地位＞當期營收。官方宣稱 5-10x 能效(公司自述、缺第三方 benchmark)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>上詮 3363</td><td>FAU 光纖陣列耦合(核心)</td><td>FAU/晶圓級對準龍頭、與台積電共研 COUPE 對準貼合、ReLFACon 護城河;2026 資本支出約 NT$15.8 億(逾 10 億投 FAU 自動化)、現增籌資、6 月設泰國子公司 2027Q1 量產;LPO FAU 2026 起貢獻、CPO FAU 2026H2-2027 放量;客戶 82% 來自美國(未具名);2026Q3 為 1.6T 認證關鍵</td><td><span class="conf c-med">中(具體數字單一可靠源)</span></td></tr>
+  <tr><td>聯亞 3081</td><td>雷射光源上游(InP 磊晶+CW/EML 晶粒)</td><td>全球少數穩定供 CW 雷射/InP 磊晶,屬 ELS「料源+晶粒」端而非成品雷射主導;矽光相關營收占比法人估 2026 上看 60-75%;2026 新增 1 家美 CSP 直供、追加 capex 7.07 億購 MOCVD。<b>與 InP 上游題重疊,勿重複計</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>日月光投控 3711</td><td>CPO 後段封測整合(VIPack)</td><td>封測龍頭,VIPack 整合 FOPoP/2.5D-3D/CPO 共封;2026 capex 70 億美元創高(75% 投先進封裝)、先進封裝營收估倍增至 32 億美元。CPO 自述仍早期開發、FOPLP 2027 才小量;<b>當期真受惠來自 CoWoS/SiP 大盤,CPO 本身屬 2027+ 選擇權</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>訊芯-KY 6451</td><td>光引擎 SiP 共封裝(鴻海系)</td><td>具光元件→FAU→Transceiver→CPO 一站式封裝(越南);51.2T CPO 已小量出貨中國與北美、102.4T 完成 NPI 交測;營收結構高速光模組約 63%(重心 400G)、SiP+感測約 31%;edge-coupling CPO 封裝、握 Broadcom。CPO 占營收仍小、屬真受惠但規模尚淺</td><td><span class="conf c-high">高(CPO 占比中)</span></td></tr>
+  <tr><td>波若威 3163</td><td>光被動/FAU/MPO 連接器</td><td>光通訊被動元件(連接器、WDM、FAU、MPO);CPO 產品送樣中、Q3 小量、Q4 月產千級、2027Q1 萬級;指出 CPO FAU 尚無統一標準;2026Q1 EPS 3.03、近四季 8.64。NVIDIA/Google CPO design-win 未具名(待查),但光被動本業真實</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>華星光 4979</td><td>光收發模組 + ELS/Fiber Attach 切入</td><td>光模組廠,2026 為 800G/1.6T 導入爆發年(客戶 1→2-3 家);CPO 切入點為外置光源 ELS 與高精度 Fiber Attach,研發含 100mW CW 雷射;市場連結 Marvell。<b>2026 主受惠仍為 800G/1.6T 模組,CPO 增量法人估落 2027</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>全新 2455</td><td>(觀察)雷射光源上游 GaAs/磊晶</td><td>全球最大 RF 磊晶廠;光電子業務 2026 翻倍(占比上看 40%)、主力 800G PD 與 LD 發射端磊晶。<b>偏 GaAs/VCSEL、與 CPO 所需 InP CW DFB 製程不同源,CPO 直接角色待查、降為觀察</b>;主受惠來自 800G/1.6T 模組磊晶而非 CPO 本身。已列 InP 上游 holds</td><td><span class="conf c-un">CPO 待查</span></td></tr>
+  <tr><td>光聖 6442</td><td>(觀察)高芯數光纖跳線 + 結盟磊晶</td><td>AI 資料中心高芯數跳線領導、Google 布線關鍵供應(現有營收);2025/12 與 IET-KY 換股結盟(持股約 15.26%)垂直整合切入 CPO 磊晶材料、共同開發。CPO 直接角色仍透過結盟「開發中」、佐證較弱,維持觀察</td><td><span class="conf c-un">CPO 待查</span></td></tr>
+  <tr><td>IET-KY 4971</td><td>(觀察)III-V MBE 磊晶上游</td><td>全球少數高品質 MBE 磊晶廠;與光聖換股結盟瞄 CPO 雷射材料源頭。但 CPO 主流光源多採 MOCVD-based InP/GaAs,MBE 對 CPO 直接料源路徑佐證較弱、營收貢獻待查;維持觀察。已列 InP 上游 holds(英特磊)</td><td><span class="conf c-un">CPO 待查</span></td></tr>
+</table>
+<p class="sub">⚠ 聯亞/全新跨「InP 光通訊上游」題、日月光跨「玻璃載板 GCS」題,評估受惠勿重複計。「未逐項佐證」=未取得該公司在 CPO 的<b>獨立</b>佐證,不代表沒有角色,但也不應直接當事實下單。</p>
+<h3>國際 × 環節</h3>
+<table>
+  <tr><th>公司</th><th>環節</th><th>角色 / 市占</th><th>查證</th></tr>
+  <tr><td>NVIDIA / Broadcom</td><td>光引擎品牌＋交換 ASIC</td><td>NVIDIA Quantum-X(InfiniBand)/Spectrum-X(Ethernet,512×1.6T=400T)CPO;Broadcom TH6-Davisson 102.4T=16×6.4T DR 光引擎、採 COUPE、2025/10 出貨。光引擎設計 IP 在其手上</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Lumentum / Coherent</td><td>雷射光源 ELS(整模組主導)</td><td>NVIDIA 生態系;Lumentum 唯一量產 200G/lane EML、ELSFP 外置雷射模組;Coherent 矽光子整合＋6 吋 InP 線、CPO transceiver 上調至 2030 約 $150 億。NVIDIA 2026/03 各注資約 $20 億、合計 $40 億鎖產能</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>古河電工 / 三菱電機 / 住友電工</td><td>雷射光源(日系高功率 DFB/EML)</td><td>古河 2025/12 新建高功率 DFB 雷射晶粒廠、100mW CW-DFB;三菱為全球 5 大 InP 雷射晶粒之一;住友亦為 InP 基板雙寡頭、與 SENKO 合推 SN-MT 連接器</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>SENKO / Corning / 住友</td><td>FAU / 光連接器</td><td>NVIDIA 生態系;SENKO 可拆式 36 通道 PIC 連接器(已導入 Marvell custom XPU CPO)、SN-MT;Corning GlassWorks AI 細徑光纖、FlexConnect 可拆式玻璃對晶片、與波若威並列 Shuffle Box 雙供應(各約 50%)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>天孚通信 TFC(陸)</td><td>FAU / ELS 光被動</td><td>NVIDIA 生態系成員;FAU 與 ELS 主力,Q1-2026 營收 yoy +40.8%。陸資部落格稱其 FAU「獨家供應」缺第三方 benchmark(待查);NVIDIA 名單同列波若威/SENKO/Corning,顯示 FAU 非單一獨家</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>ficonTEC(德)/ PI(德)</td><td>晶圓級耦合對準機台</td><td>ficonTEC 300mm 雙面晶圓電光對準測試平台;PI FMPA 多通道快速主動對準。<b>耦合「造機」由歐廠主導,台廠是用機台做 FAU</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Fabrinet(泰)/ 鴻海</td><td>模組/系統組裝</td><td>Fabrinet 為 NVIDIA/Cisco/AWS/Lumentum 代工 transceiver、CPO 組裝外包承接;鴻海交換器系統整合(訊芯母集團)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>Ayar Labs / Marvell / Lightmatter</td><td>scale-up/可拆卸(2028+ 展望)</td><td>Ayar Labs 晶片內 optical I/O chiplet(scale-up CPO);Marvell custom XPU CPO(導入 SENKO 可拆式);Lightmatter vClick 可拆式 FAU、Passage interposer。屬 GPU 內 CPO 展望期玩家</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>Samsung(韓)</td><td>矽光子/CPO turnkey(追趕)</td><td>規劃 2029 CPO turnkey,落後台積電 COUPE(2026)約 3 年</td><td><span class="conf c-med">中</span></td></tr>
+</table>
+<h3>台灣吃得到多少(逐環節定位)</h3>
+<p class="sub">一句話:<b>光引擎晶圓平台＋FAU 耦合＋光引擎封測=台灣主場(alpha 所在);雷射 ELS 整模組＋晶圓級耦合機台＋可拆卸連接器標準＋光學熱管理=國際主場、台廠缺席或陪跑</b>。定位為質化判斷。</p>
+<table>
+  <tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>光引擎設計 IP(MRM/MZM/架構)</td><td>(缺席)</td><td><span class="conf c-low">缺席 · 客戶自有 IP</span></td><td>NVIDIA(MRM)/Broadcom(MZM)自研,價值量最大環節握在品牌手上</td></tr>
+  <tr><td>① 光引擎晶圓平台(PIC/EIC・SoIC-X)⭐</td><td>台積電 2330</td><td><span class="conf c-high">近獨佔 · 最不可替代</span></td><td>COUPE=SoIC-X+CoWoS;NVIDIA/Broadcom 共同底層、無直接競爭者;Intel/三星(2029)追趕</td></tr>
+  <tr><td>② 雷射 ELS 整模組</td><td>(料源:聯亞 3081)</td><td><span class="conf c-low">整模組缺席 · 僅吃晶粒料源</span></td><td>Lumentum/Coherent 寡占(NVIDIA 各注資 $20 億);聯亞供 CW/EML 晶粒、整模組本體缺席</td></tr>
+  <tr><td>③ FAU 光纖陣列＋耦合(製作端)⭐</td><td>上詮 3363 / 波若威 3163</td><td><span class="conf c-high">領先 · 與台積共研</span></td><td>上詮 ReLFACon＋與台積電 COUPE 共研對準,2026H2 兌現;台灣最強被動光學介面 alpha</td></tr>
+  <tr><td>③' 晶圓級耦合對準「機台」</td><td>(缺席)</td><td><span class="conf c-low">缺席 · 歐廠造機</span></td><td>ficonTEC/PI(德)主導,台廠用機台做 FAU、非造機</td></tr>
+  <tr><td>④ 光引擎組裝/封測 ⭐</td><td>日月光 3711 / 訊芯-KY 6451</td><td><span class="conf c-high">領先 · alpha 紮實</span></td><td>訊芯 edge-coupling CPO 封裝、握 Broadcom;日月光 VIPack 後段+對準,矽光子聯盟發起者</td></tr>
+  <tr><td>⑤ 高芯數光纖配線/WDM/可拆卸連接器</td><td>波若威 3163 / 光聖 6442</td><td><span class="conf c-med">卡位(配線)· 連接器標準缺席</span></td><td>波若威/光聖打入 NVIDIA/Google 配線;可拆卸連接器標準由 US Conec/SENKO(美日)主導</td></tr>
+  <tr><td>⑥ MRM 熱管理 / micro-TEC / 光學級 TIM</td><td>(外圍機構散熱)</td><td><span class="conf c-med">核心缺席 · 僅吃外圍</span></td><td>micro-TEC=Phononic/Ferrotec(美日);台股散熱廠可吃冷板/均熱外圍,光學熱管理核心非強項</td></tr>
+  <tr><td>⑦ 1.6T/3.2T 模組整合(CPO 承接)</td><td>華星光 4979</td><td><span class="conf c-med">追趕 · 公司/法人自述</span></td><td>與 Marvell 緊密、1.6T 進度領先同業,惟逐項一手佐證偏弱、需更獨立 benchmark</td></tr>
+</table>
+<h3>🔬 細顆粒設備/材料/技術地圖(逐製程 × 具體技術·機型 × 台廠地位)</h3>
+<div class="callout warn">把 CPO 拆到技術/機型/材料供應商。<b>晶圓平台(SoIC-X/CoWoS)、FAU 製作、光引擎封測=台灣卡位;ELS 整模組、晶圓級耦合機台、micro-TEC/可拆卸連接器標準=台灣缺席。</b>機型/技術取自官網/法說/新聞稿;為研究線索、非投資背書,投資前自行查證。</div>
+<table>
+  <tr><th>製程 / 技術·機型</th><th>供應商(代號/別)</th><th>台廠地位</th></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">① 光源磊晶 / 雷射晶粒(CW DFB / EML die)</td></tr>
+  <tr><td>InP CW DFB 連續波雷射晶粒(CPO 外置光源核心發光體)、EML</td><td>Lumentum(美)/ Coherent(美)/ 住友・三菱(日)/ 源傑(陸);InP 基板:住友/AXT/IQE;台:<b>聯亞 3081</b></td><td><span class="conf c-high">聯亞卡位(InP 缺貨上游)</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">② 外置光源模組 ELS / ELSFP ★台廠缺席</td></tr>
+  <tr><td>Lumentum ELSFP(800mW 級、16ch 多工 24dBm 入纖)/ Coherent CPO SAM(CW+隔離器+TEC+PMLA 保偏透鏡陣列)</td><td>Lumentum / Coherent(NVIDIA 2026/03 各投 $20 億);隔離器 信越/TDK(日);TEC Phononic(美)/Ferrotec(日)</td><td><span class="conf c-low">缺席(整模組被寡占)</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">③ 矽光子 PIC 晶圓＋微環調變器 MRM/MZM ★台積電核心</td></tr>
+  <tr><td>MRM 微環調變器(~1-2pJ/bit、體積小但溫度敏感需 heater 鎖波長)/ MZM 馬赫曾德(~5-10pJ/bit、穩定但占面積)</td><td>PIC 晶圓:<b>台積電 2330(COUPE)</b>/ GlobalFoundries Fotonix / Tower / IMEC;MRM IP=NVIDIA 自研、MZM=Broadcom 自研</td><td><span class="conf c-high">台積電核心(調變器 IP 屬客戶)</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">④ EIC/PIC 3D 堆疊(SoIC-X)＋ CoWoS 整合 ★台灣最強</td></tr>
+  <tr><td>SoIC-X 把 EIC 3D 堆疊在 PIC 上(超低阻抗 die-to-die)+ CoWoS 與 ASIC 共封;COUPE=SoIC-X+CoWoS</td><td><b>台積電 2330(獨家)</b>;Intel(EMIB/Foveros 自家)/ Samsung(2029 turnkey)</td><td><span class="conf c-high">近獨佔(最不可替代)</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⑤ 光引擎 OSAT 封裝＋邊緣/光柵耦合＋耐迴流焊 ★台廠卡位</td></tr>
+  <tr><td>邊緣耦合(edge coupling)vs 光柵耦合(grating coupler)貼合;260°C 迴流焊;SiP/Transceiver 級封裝</td><td><b>日月光 3711</b> / <b>訊芯-KY 6451</b>(鴻海系,2021 起 edge-coupling 為美系客戶開發 CPO);Fabrinet(泰)/ 旭創・Eoptolink(陸)</td><td><span class="conf c-high">領先(握 Broadcom)</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⑥ FAU 光纖陣列＋晶圓級耦合對準 ★製作台廠卡位·機台缺席</td></tr>
+  <tr><td>FAU 光纖陣列(2D/1D、玻璃 V-groove、保偏 PM、20/40/80 通道)+ 上詮 ReLFACon</td><td><b>上詮 3363</b>(與台積 COUPE 共研、與大立光驗證)/ SENKO(日)/ Corning(美)</td><td><span class="conf c-high">領先(製作端)</span></td></tr>
+  <tr><td>晶圓級耦合對準「機台」</td><td>ficonTEC(德,300mm 雙面晶圓電光對準)/ PI FMPA(德,多通道快速主動對準)</td><td><span class="conf c-low">缺席(造機歐廠)</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⑦ 高密度配線 / WDM / 可拆卸光連接器</td></tr>
+  <tr><td>高階光纖配線盒/套件(入 NVIDIA/Google);WDM 波長分合(Branch/OIN);可拆卸連接器(≤0.4dB、260°C 相容、陶瓷對位取代塑膠)</td><td><b>波若威 3163</b>(OIN/WDM/Branch)/ 上詮 / 光聖 6442;US Conec・SENKO(可拆卸標準)/ Corning</td><td><span class="conf c-med">配線卡位 · 連接器標準缺席</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⑧ MRM 熱管理 ＋ TEC ＋ CPO 散熱介面 ★核心缺席</td></tr>
+  <tr><td>MRM 鎖波長加熱器＋閉迴路控溫;雷射貼附 micro-TEC;CPO 散熱 TIM/冷板;保偏透鏡陣列 PMLA</td><td>TEC Phononic(美)/Ferrotec(日)/Laird;PMLA Coherent(美);TIM/冷板=傳統散熱供應鏈</td><td><span class="conf c-med">核心缺席 · 僅吃外圍</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⑨ 1.6T/3.2T 光收發模組整合(CPO 承接)</td></tr>
+  <tr><td>1.6T COUPE 一代光引擎(2026H2 商轉);ASIC+光引擎模組整合;3.2T 下世代零組件商機估 $102.7 億(法人口徑)</td><td><b>華星光 4979</b>(與 Marvell 密切、1.6T 領先)/ 旭創・Eoptolink(陸)/ Fabrinet(泰)</td><td><span class="conf c-med">追趕(待更獨立佐證)</span></td></tr>
+</table>
+<h3>主流技術路線之爭(尚無第三方獨立 benchmark 定勝負)</h3>
+<table>
+  <tr><th>路線</th><th>取捨</th><th>玩家</th></tr>
+  <tr><td><b>微環 MRM vs 馬赫曾德 MZM</b></td><td>MRM 賭密度與功耗(~1-2pJ/bit)、扛熱穩定風險;MZM 賭可靠度與良率、犧牲密度(~5-10pJ/bit)。2026 兩路線同時量產對打</td><td>MRM:NVIDIA(Quantum-X/Spectrum-X)+台積 COUPE;MZM:Broadcom(TH6-Davisson)</td></tr>
+  <tr><td><b>外置光源 ELS vs 整合雷射</b></td><td>ELS 換可維修性與良率、代價是額外模組與耦合損耗(2026 主流);整合雷射換極致功耗/密度、輸在 InP/Si 良率與可靠度</td><td>ELS:Lumentum/Coherent+聯亞供磊晶;整合:Intel/Ayar Labs(2028+ 展望)</td></tr>
+  <tr><td><b>固定 vs 可拆卸光連接</b></td><td>固定賭低損耗與量產一致性、輸在維修;可拆卸賭資料中心可維護性、要克服插損與壽命。商用初期以固定為主</td><td>固定:台積 COUPE/上詮 FAU 永久貼合;可拆卸:US Conec/SENKO(標準收斂中)</td></tr>
+  <tr><td><b>矽光子 SiP vs 薄膜鈮酸鋰 TFLN</b></td><td>SiP 賭量產良率與生態成熟(2026 壓倒性主流)、上限受矽調變效率限制;TFLN 賭性能上限、輸在供應鏈與成本未規模化</td><td>SiP:台積 COUPE/GF/Broadcom/NVIDIA 全押;TFLN:HyperLight 等新創(觀察級、待查)</td></tr>
+</table>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>市場規模與量產時程</h2>
+<div class="card">
+  <h3>市場規模(口徑分歧極大,狹義 vs 廣義 2030-31 差逾 10 倍,務必標口徑)</h3>
+  <table>
+    <tr><th>研調</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR</th><th>口徑說明</th></tr>
+    <tr><td>Mordor Intelligence</td><td>狹義偏中(元件含光引擎/EIC/雷射/連接器)</td><td>2025 約 $1.21 億</td><td>2031 $7.64 億</td><td>35.9%</td><td>2026 值約 $1.65 億;不計整機交換器系統營收</td></tr>
+    <tr><td>IDTechEx</td><td>狹義 CPO</td><td>2025 約 $1.2 億</td><td>2035 $24 億(另一口徑 &gt;$12 億)</td><td>28.9%</td><td>落在 Mordor 與 Yole 之間,屬保守-中性</td></tr>
+    <tr><td>Yole Group</td><td>廣義光子封裝 + CPO 狹義(雙口徑)</td><td>2025 廣義 $45 億 / CPO 近零</td><td>2031 廣義 $144 億 / CPO 約 $50 億</td><td>廣義 21%+</td><td>同一家內部即雙口徑差約 3 倍,為口徑差異最佳教材</td></tr>
+    <tr><td>LightCounting</td><td>廣義(scale-up+scale-out、收發+LPO+CPO)</td><td>2024 $50 億</td><td>2030 $100 億+</td><td>雙位數</td><td>口徑最廣=整包 AI 叢集光互連,非純 CPO,與 Mordor 不可直接比</td></tr>
+    <tr><td>Coherent(公司自述)</td><td>廣義 CPO transceiver TAM</td><td>n/a</td><td>2030 $150 億</td><td>n/a</td><td>公司自述、上調口徑、缺第三方 benchmark,最樂觀端</td></tr>
+    <tr><td>MRFR</td><td>廣義(含系統,口徑寬鬆)</td><td>2025 $22 億</td><td>2035 $50 億</td><td>8.5%</td><td>基期偏高疑併入相鄰市場、CAGR 反最低,口徑與他家不一致(待查)</td></tr>
+  </table>
+  <p class="sub">差異主因:是否計入(1)整機交換器系統營收(2)scale-up+scale-out 全光互連(3)LPO/transceiver 相鄰市場。跨家數字不可直接相比。輔助量化:800G/1.6T SiPh 滲透率約 60%/80%(單一可靠源、中信心)。</p>
+  <h3>催化劑時間軸(2025 → 2029)</h3>
+  <ul>
+    <li><b>2025/03:</b>NVIDIA GTC 發表 Quantum-X / Spectrum-X Photonics,全球首個 3D 堆疊矽光子引擎(自述 4x 少雷射、3.5x 省電)<span class="conf c-high">已發生</span></li>
+    <li><b>2025/09:</b>SEMICON Taiwan 台積電首度揭露 COUPE 平台細節(SoIC-X 堆疊 EIC/PIC)<span class="conf c-high">已發生</span></li>
+    <li><b>2025/10/08:</b>Broadcom 發表並出貨 TH6-Davisson 102.4T(16 顆 6.4T 光引擎、採 COUPE)<span class="conf c-high">已發生</span></li>
+    <li><b>2025/12:</b>光聖×IET-KY 換股結盟(CPO 垂直整合);古河電工公告新建高功率 DFB 雷射晶粒廠<span class="conf c-high">已發生</span></li>
+    <li><b>2026/03:</b>GTC 2026 揭路線圖(2028 NVLink8/Kyber CPO scale-up);NVIDIA 砸 $40 億投資 Lumentum+Coherent 鎖光子產能<span class="conf c-high">已發生</span></li>
+    <li><b>2026 上半:</b>台積電 COUPE 一代(OSFP 1.6T)量產;NVIDIA Quantum-X InfiniBand 商業供貨<span class="conf c-med">進行中</span></li>
+    <li><b>2026/06/01:</b>GTC Taipei Jensen 主題演講:Vera Rubin pod-scale 整合 Spectrum-X、矽光子商轉元年<span class="conf c-high">已發生</span></li>
+    <li><b>2026/06/10:</b>SemiAnalysis 唱衰:光引擎連接良率不足、量產恐延至 2028-29,台股矽光子 9 檔跌停;NVIDIA 反擊稱已出貨<span class="conf c-low">多空爭議</span></li>
+    <li><b>2026 下半(Q3 重點):</b>Spectrum-X Ethernet Photonics 系統廠放量;上詮等 1.6T 系統廠認證=實績兌現分水嶺<span class="conf c-un">展望</span></li>
+    <li><b>2027:</b>台積電 COUPE 三代(整合進處理器封裝 on interposer、12.8T);波若威 CPO 月產萬級<span class="conf c-un">展望</span></li>
+    <li><b>2028:</b>NVIDIA Rubin Ultra/Feynman GPU scale-up CPO(NVLink8/Kyber)——晶片內 CPO 元年<span class="conf c-un">展望</span></li>
+    <li><b>2029:</b>Samsung CPO turnkey 上線(追趕台積電 COUPE)<span class="conf c-un">展望</span></li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>現在就有營收(透過 800G/1.6T 模組與 ELS 共用料源)=聯亞(磊晶料源)、訊芯(51.2T 已小量)、上詮(LPO FAU 2026 起);CPO 本身放量=2026H2-2027(上詮 Q3 認證、波若威 2027Q1 萬級);純未來選擇權=台積電 COUPE(平台地位)、日月光 CPO(2027+)、GPU 內 CPO(2028+)。<b>務必區分「當期 800G/1.6T 受惠」與「CPO 選擇權」。</b></div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
+  <ul>
+    <li><b>上詮 3363「台積電 COUPE 前兩代獨家 FAU 供應商」:</b>上詮法說只確認其為「關鍵 FAU 供應商」、客戶 82% 美國但未具名,從未自稱「獨家/前兩代獨家」——此措辭為媒體彙整/法人推估。FAU 角色真實(維持中-高),但「獨家」應標待查、不可寫死</li>
+    <li><b>日月光 3711「CPO 已量產＋六座新廠」:</b>日月光自述 CPO 仍早期開發、FOPLP 2027 才小量量產——「已量產」與進度不符。capex 70 億美元、先進封裝倍增、買群創南科五廠/聯合再生竹南廠為真;「六座新廠」缺單一官方清單、屬擴產敘事彙整。當期真受惠來自 CoWoS/SiP 大盤,非 CPO</li>
+    <li><b>波若威 3163「已正式進入 NVIDIA/Google CPO 供應鏈(design-win)」:</b>查證僅到「被視為潛在合作夥伴、CPO 產品 2025H2 完成驗證、2026 放量」與「CPO FAU 尚無統一標準」,未見確認 design-win 或客戶具名。應標「潛在/驗證中」,但不否定其 FAU/MPO 與 AI 光纖套件真實受惠</li>
+    <li><b>全新 2455 與聯亞 3081 同為「CW laser / CPO 直接受惠」:</b>兩者皆磊晶料源端而非 CPO 成品。聯亞較貼近 CW laser 晶粒+InP 磊晶;全新偏 800G PD 與 LD 發射端 GaAs 磊晶,與 CPO 所需 InP CW DFB 不同源。把兩者一律貼「CPO 直接受惠」是過度外推</li>
+    <li><b>華星光 4979「2026 CPO 大爆發、CPO 王者」:</b>華星光 CPO 切入點為 ELS 與 Fiber Attach,法人明確指 CPO 增量落 2027,2026 主受惠仍為 800G/1.6T 模組。「2026 大爆發」為題材前置</li>
+    <li><b>IET-KY 4971 為「CPO 核心受惠股」:</b>MBE 磊晶稀缺性為真,但 CPO 主流光源多採 MOCVD-based InP/GaAs,MBE 對 CPO 直接料源路徑佐證較弱;與光聖換股「共同開發 CPO」屬早期、營收貢獻待查。維持觀察</li>
+    <li><b>天孚通信 TFC「FAU 獨家供應」:</b>來源為陸資投資部落格、缺第三方 benchmark;NVIDIA 官方生態系名單同列波若威/SENKO/Corning,顯示 FAU 非單一獨家</li>
+  </ul>
+</div>
+<div class="card"><h3>結構性風險與開放問題</h3>
+  <ul>
+    <li><b>量產時程多空爭議(最大變數):</b>2026/06/10 SemiAnalysis 警告光引擎連接良率不足、ASIC 整合難,大規模量產恐延至 2028 Feynman/甚至 2029、2027 出貨遠低預期;NVIDIA 稱 Quantum-X 已出貨。兩造並陳、不選邊——這是整題估值的核心 swing factor</li>
+    <li><b>當期受惠 vs CPO 選擇權混淆:</b>多檔「CPO 概念股」當下實為 800G/1.6T 光模組與 ELS 共用料源的受惠,純 CPO 對 2026 營收占比普遍小;市場常把兩者混為一談</li>
+    <li><b>價值量最大環節台廠吃不到:</b>光引擎設計 IP(MRM/MZM/架構)握在 NVIDIA/Broadcom;雷射 ELS 整模組被 Lumentum/Coherent 寡占;晶圓級耦合機台、micro-TEC、可拆卸連接器標準台廠缺席</li>
+    <li><b>廠商/官方自述數據:</b>NVIDIA 3.5x 省電、Broadcom 70% 省電、台積 5-10x 能效、上詮 ReLFACon 降損,均公司自述、缺獨立 benchmark</li>
+    <li><b>跨題重疊勿重複計:</b>聯亞/全新跨 InP 上游題、日月光跨玻璃載板 GCS 題</li>
+    <li><b>開放問題:</b>MRM vs MZM 誰勝、可拆卸連接器標準何時收斂、TFLN 量產時程、GPU 內 CPO(2028+)台廠卡位——均待後續追蹤</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item"><a href="https://www.broadcom.com/company/news/product-releases/63626" target="_blank">Broadcom 新聞稿</a> — TH6-Davisson 102.4T、16×6.4T DR 光引擎、採 TSMC COUPE、2025/10 出貨、自述省電 70%<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.nvidia.com/en-us/networking/products/silicon-photonics/" target="_blank">NVIDIA Networking — Silicon Photonics</a> / GTC 2025·2026 blog — Quantum-X/Spectrum-X Photonics、3.5x 省電、4x 少雷射<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">台積電 SEMICON Taiwan(2025/09 揭 COUPE)/ Lumentum·Coherent·古河 官方新聞稿 — COUPE SoIC-X、ELSFP 24dBm、200G EML、DFB 雷射廠<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">上詮/聯亞/訊芯/日月光/波若威/華星光 2026Q1 法說與月營收(公開申報)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/news/2026/04/01/news-silicon-photonics-race-intensifies-as-tsmc-targets-2026-coupe-production-samsung-eyes-2029-cpo-turnkey/" target="_blank">TrendForce(2026/04)</a> — COUPE 2026 量產/三星 2029 turnkey;Digitimes/HPCwire/AIwire — GTC 2026 路線圖、NVIDIA $40 億投資<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Mordor / Yole / LightCounting / IDTechEx / MRFR — CPO 市場多口徑(狹義 vs 廣義差逾 10 倍);AIP/Optica/Nature — MRM 熱(0.1nm/°C);3DInCites/SemiEngineering — hybrid bonding 翹曲<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://statementdog.com/news/16708" target="_blank">SemiAnalysis 唱衰(2026/06/10,經財報狗/今周刊轉述)</a> — 良率不足、量產恐延 2028-29、台股矽光 9 檔跌停;ficonTEC/PI 官網(耦合機台)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item">TechNews 科技新報 / 優分析 UAnalyze / 經濟日報 / 今周刊 / 鉅亨 / 財報狗 / Vocus — 台股七劍客個股研究(公司/法人口徑,缺第三方 benchmark 者已標)<span class="src-q q-blog">blog</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(製程鏈 / 台廠逐檔查證 / 國際與市場 / 細顆粒地圖)＋ 對抗式查證(口徑修正、股號核對、真受惠 vs 陪跑分類)。</p>
+  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明。屬時間敏感領域(2026/06 多空爭議激烈),數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>
