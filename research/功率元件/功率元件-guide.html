@@ -3,13 +3,18 @@
 <head><meta name="robots" content="noindex">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>功率元件 產業投資全指南 2026</title>
+<title>功率元件(SiC/GaN)製程鏈 × 供應鏈研究指南 2026</title>
 <style>
 :root{
-  --bg:#f6f7f9;--surface:#ffffff;--surface-2:#f3f4f6;--ink:#1f2937;--ink-soft:#6b7280;
-  --line:#e5e7eb;--accent:#6366f1;--accent-soft:#e0e7ff;--warn:#ff8c42;--warn-soft:#ffedd5;
-  --ok:#10b981;--ok-soft:#d1fae5;--danger:#ef4444;--danger-soft:#fee2e2;
-  --maxw:1180px;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#dc2626; --accent-soft:#fee2e2;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
   --shadow-lg:0 8px 24px rgba(0,0,0,.08);
   --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
 }
@@ -19,545 +24,472 @@ a{color:var(--accent);text-decoration:none}
 .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
-.brand{font-weight:800;font-size:17px;white-space:nowrap}
-.brand span{color:var(--accent)}
-.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
-.nav-links::-webkit-scrollbar{display:none}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
 .nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
 .nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
-.hero{padding:54px 0 40px;background:linear-gradient(135deg,#eef0ff,#f6f7f9)}
-.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:780px}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#fef2f2,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:820px}
 .hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
 section.block{padding:52px 0;border-top:1px solid var(--line)}
 .eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
 h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
-.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:850px}
-h3{font-size:19px;font-weight:700;margin:30px 0 12px}
-.grid{display:grid;gap:16px}
-.cols-2{grid-template-columns:repeat(2,1fr)}
-.cols-3{grid-template-columns:repeat(3,1fr)}
-.cols-4{grid-template-columns:repeat(4,1fr)}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
 .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
-.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
-.card .ico{font-size:22px}
-.card p{color:var(--ink-soft);font-size:14px}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
 .card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
 .badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
-.badge.b-accent{background:var(--accent-soft);color:#4338ca}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
 .badge.b-ok{background:var(--ok-soft);color:#047857}
 .badge.b-warn{background:var(--warn-soft);color:#c2410c}
 .badge.b-danger{background:var(--danger-soft);color:#b91c1c}
 .stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
 .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
 table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
 th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
 td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:none}
-tbody tr:hover{background:#fafbfc}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
 .chain{display:grid;gap:12px}
-.chain-row{display:grid;grid-template-columns:140px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
-.chain-row .lvl{font-weight:800;font-size:14px}
-.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
 .chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
 .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
-.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:150px;flex:1}
-.flow .step b{display:block;font-size:14px}
-.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:140px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
 .flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
 .stack{max-width:760px;margin:0 auto}
 .stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
-.stack .layer b{font-size:15px}
-.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
-.stack .layer.hl{border-color:var(--accent);border-left:4px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),var(--surface))}
-.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1.4}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
 .filters button:hover{border-color:var(--accent)}
 .filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .score-bar{display:flex;align-items:center;gap:8px}
-.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:54px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
 .score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
-.score-bar .num{font-weight:700;font-size:12.5px;width:24px;text-align:right}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
 .calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
 .calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
 .calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
 .calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
-.calc .out .res small{display:block;color:#4338ca;font-size:12px;font-weight:600}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
 .calc .out .res b{font-size:22px;color:var(--ink)}
 .callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
 .callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
 .callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
 .disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
-.tot{display:inline-block;font-weight:800;font-size:15px;color:#4338ca;background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
 .refs{list-style:none;display:grid;gap:8px}
 .refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
-.refs li b{color:var(--ink)}
-.refs li a{word-break:break-all}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
 footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
-@media print{
-  header.nav{position:static}
-  .card:hover{transform:none;box-shadow:var(--shadow)}
-  section.block{padding:24px 0;break-inside:avoid}
-  .hero{padding:24px 0}
-  body{font-size:12px}
-  a{color:var(--ink)}
-}
-@media(max-width:860px){
-  .cols-2,.cols-3,.cols-4{grid-template-columns:1fr}
-  .calc .inputs{grid-template-columns:1fr 1fr}
-  .calc .out{grid-template-columns:1fr 1fr}
-  .hero h1{font-size:28px}
-  .chain-row{grid-template-columns:1fr}
-}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <div class="brand">功率元件<span>投資全指南</span></div>
-    <nav class="nav-links">
-      <a href="#overview">產業總覽</a>
-      <a href="#industry">產業地圖</a>
-      <a href="#whyhot">為何熱門</a>
-      <a href="#categories">核心品類</a>
-      <a href="#application">關鍵應用</a>
-      <a href="#stocklogic">股價邏輯</a>
-      <a href="#companies">公司圖譜</a>
-      <a href="#radar">評分表</a>
-      <a href="#capacity">產能速查</a>
-      <a href="#model">估值模型</a>
-      <a href="#refs">參考資料</a>
-    </nav>
+<header class="nav"><div class="nav-inner">
+  <div class="brand">功率元件 SiC/GaN<span> 製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱門</a>
+    <a href="#categories">核心製程</a><a href="#application">關鍵應用</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">難度評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>功率元件(SiC / GaN / MOSFET)<em>× 供應鏈研究指南</em> 2026</h1>
+  <p class="lead">三代半導體進入產業洗牌年:台積電 2027/7 退出 GaN 代工、Navitas 全線轉單力積電;Wolfspeed 破產重整、意法收縮帶動 SiC 轉單。需求由電動車為主軸、AI 電源 800V HVDC(GaN 為 DC-DC 主力)為新增量。本段是「元件層」(SiC/GaN/MOSFET/二極體晶粒與代工),與「AI 伺服器電源」系統/模組層切開。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:AI 電源 800V × 電動車 × 再生能源</span>
+    <span class="badge">市場:台灣為主＋國際對照</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:缺口分析＋對抗式查證</span>
   </div>
-</header>
+</div></div>
 
-<div class="hero">
-  <div class="container">
-    <h1>功率元件 產業<em>投資全指南</em> 2026</h1>
-    <p class="lead">AI 資料中心電力需求由千瓦級躍升至百萬瓦級、電動車 800V 高壓平台普及——功率半導體正迎來 2021 以來最嚴重的供需缺口循環。寬能隙(SiC/GaN)第三代半導體取代矽,成為 AI 電源與車用電動化的關鍵心臟。本指南拆解供應鏈、品類技術、台廠卡位與估值。</p>
-    <div class="meta">
-      <span class="badge b-accent">驅動力:AI 800V HVDC + 車用電動化</span>
-      <span class="badge">市場:台股為主、全球為輔</span>
-      <span class="badge b-warn">更新:2026/05</span>
-      <span class="badge b-danger">供需缺口至 2027H2</span>
+<!-- 01 總覽 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽</h2>
+  <p class="subtitle">功率元件控制電流的開關與整流,是電源、電動車、再生能源的核心。<b>三大材料路線:</b>矽(Si)成熟主流、碳化矽(SiC)高壓高效(EV/工業)、氮化鎵(GaN)高頻(快充/AI 電源 DC-DC)。<b>切分:</b>本主題是元件層(晶粒/代工);系統/模組(PSU/power shelf/BBU)屬「AI 伺服器電源」;類比/電源管理 IC 屬「成熟製程代工×類比 IC」。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🔲</span>矽基(Si MOSFET/二極體)</h4><p>成熟主流、量大價穩。台廠強茂/大中/富鼎/朋程/台半;車用整流、消費/工業電源。</p></div>
+    <div class="card"><h4><span class="ico">⬡</span>碳化矽(SiC)</h4><p>高壓高效,主戰場 800V 電動車與工業。需 SiC 基板+磊晶+代工;漢磊/嘉晶/世界先進切入。</p></div>
+    <div class="card"><h4><span class="ico">⚡</span>氮化鎵(GaN)</h4><p>高頻、低損,快充與 AI 電源 800V DC-DC。台積電 2027 退出代工→力積電接 Navitas 全線轉單。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 供應鏈四層 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(四層結構)</h2>
+  <p class="subtitle">基板/磊晶 → 元件代工 → 元件(IDM/設計) → 模組/系統。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝部分佐證</span> <span class="conf c-un">灰＝概念股/待查</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游<small>基板/磊晶</small></div><div class="items"><span class="badge b-tw">環球晶 6488(SiC/GaN/SOI 基板)</span><span class="badge b-tw">嘉晶 3016(SiC/GaN 磊晶)</span><span class="badge b-tw">合晶 6182(矽晶圓)</span><span class="badge b-accent">Wolfspeed/Coherent(SiC 基板)</span></div></div>
+    <div class="chain-row"><div class="lvl">中游<small>元件代工</small></div><div class="items"><span class="badge b-tw">力積電 6770(GaN 代工)</span><span class="badge b-tw">漢磊 3707(SiC/GaN)</span><span class="badge b-tw">世界先進 5347(GaN 授權)</span><span class="badge b-accent">台積電(2027 退 GaN)</span></div></div>
+    <div class="chain-row"><div class="lvl">元件<small>IDM/設計</small></div><div class="items"><span class="badge b-tw">強茂 2481</span><span class="badge b-tw">大中 6435</span><span class="badge b-tw">富鼎 8261</span><span class="badge b-tw">朋程 8255</span><span class="badge b-tw">台半 5425</span><span class="badge b-accent">Infineon/ON/STM</span></div></div>
+    <div class="chain-row"><div class="lvl">終端<small>系統/應用</small></div><div class="items"><span class="badge b-ok">電動車 OBC/逆變器</span><span class="badge b-ok">AI 電源 800V HVDC</span><span class="badge b-ok">再生能源/工業</span></div></div>
+  </div>
+  <div class="callout insight">💡 2026 最關鍵的結構變化在「中游代工」:台積電退出 GaN 把整條 GaN 代工版圖洗牌,力積電成最大受惠者(Navitas 全線轉單)、世界先進取得台積電 GaN 授權切入。這是元件層因產業洗牌而「地位上升」的台廠,過去名單常漏。</div>
+</div></section>
+
+<!-- 03 為何熱門 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Now</span>
+  <h2 class="title">為何熱門</h2>
+  <p class="subtitle">需求(EV+AI 電源)結構性增長 + 供給洗牌(台積退 GaN、國際 SiC 重整)→ 台廠轉單與卡位機會。</p>
+  <div class="flow">
+    <div class="step"><b>需求端</b><small>800V 電動車普及(每車 SiC MOSFET 24→48 顆)、AI 機櫃功率 120kW→1MW 級拉動 GaN DC-DC</small></div><div class="arrow">→</div>
+    <div class="step"><b>供給洗牌</b><small>台積電 2027/7 退 GaN 代工;Wolfspeed 破產重整轉 200mm;STM 收縮</small></div><div class="arrow">→</div>
+    <div class="step"><b>受惠傳導</b><small>GaN 代工轉單力積電/世界先進;SiC 轉單台廠(需逐項查實際訂單)</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>GaN 功率市場(Yole)</p><h4>2024 $3.55億→2030 $30億</h4></div>
+    <div class="card"><p>GaN CAGR(Yole/TrendForce)</p><h4>~42-44%</h4></div>
+    <div class="card"><p>SiC 功率市場 2026</p><h4>$5.33-6.14B</h4></div>
+    <div class="card"><p>全球 8 吋稼動率</p><h4>2025 ~80%→2026 近 90%</h4></div>
+  </div>
+  <p class="disclaimer">市場規模口徑並列(基期不同,勿直接比較):GaN Yole 2024 USD 3.55 億→2030 約 30 億(CAGR 42%,電信/資料中心 segment CAGR 53%);TrendForce GaN 2026 估 USD 9.2 億(口徑不同);SiC TrendForce 2026 約 5.33B、Yole 2026 約 6.14B(已上修)。AI 機櫃功率:120-140kW(GB300)→200kW(Vera Rubin 2026)→250-500kW(Rubin Ultra 2027)→1MW 級(2029)。</p>
+  <h3>三材料路線對比</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>面向</th><th>矽 Si</th><th>碳化矽 SiC</th><th>氮化鎵 GaN</th></tr></thead>
+    <tbody>
+      <tr><td>耐壓 / 場景</td><td>低中壓、量大</td><td>高壓(650V-1700V+)、EV/工業</td><td>中低壓、高頻;快充/AI 電源 DC-DC</td></tr>
+      <tr><td>主晶圓</td><td>8/12 吋矽</td><td>6→8 吋 SiC 基板</td><td>6→8 吋 GaN-on-Si</td></tr>
+      <tr><td>台廠卡位</td><td>強茂/大中/富鼎/朋程/台半(成熟)</td><td>漢磊/嘉晶/世界先進(切入中)</td><td>力積電(代工)/世界先進(授權)</td></tr>
+      <tr><td>2026 變數</td><td>歐盟制裁中系→轉單</td><td>國際重整→轉單(待查實單)</td><td>台積退出→力積電接單;中系英諾賽科價格戰</td></tr>
+    </tbody>
+  </table></div>
+  <h3>市場規模(多研調口徑,SiC 分歧尤大)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>子市場</th><th>多研調口徑</th><th>分歧主因</th></tr></thead>
+    <tbody>
+      <tr><td>GaN 功率元件(全市場)</td><td>Yole:2024 $355M→2030 $3.0B(CAGR 42%,資料中心/電信 segment 53%、車用 73%);TrendForce:2024 $390M→2030 $3.51B(44%)</td><td>兩家量級接近;分歧主因基期口徑(是否含快充/消費歸類);均第三方非廠商自估</td></tr>
+      <tr><td>SiC 功率元件(全市場)</td><td>Yole:2030 近 $10.3B(惟 2026-2028 過剩下行、2025 上游稼動率僅 ~50%);Research and Markets:2030 $4.9B~$7.1B(同機構不同報告也分歧);TrendForce:2026 約 $5.33B</td><td>分歧近一倍:中國 6 吋 SiC 基板殺到約 $500(國際 1/3)壓 ASP、EV 放緩假設、元件 vs 含基板/模組口徑</td></tr>
+      <tr><td>AI 資料中心電源用 GaN(窄口徑)</td><td>Yole:資料中心/電信 GaN 2030 &gt;$380M(segment CAGR 53%);NVIDIA/Navitas(系統側):800V HVDC、機櫃 GB300 120-140kW→Rubin Ultra 250-500kW(2027)→1MW(2029)</td><td>窄口徑僅 Yole 一家具名;NVIDIA/Navitas 為系統規格(廠商自述)非市場規模,不可相加;小基期易誇大</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">市場規模均第三方研調、量級參考。SiC 因中系殺價+EV 放緩,Yole 看「量增價跌、中期 V 轉」;AI-GaN 窄口徑高成長但小基期。標來源、非成交數。</p>
+</div></section>
+
+<!-- 04 核心製程 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Deep Dive</span>
+  <h2 class="title">核心製程深度解析</h2>
+  <p class="subtitle">完整製程:長晶(基板) → 磊晶 → 晶圓製造/代工 → 元件(晶粒) → 封裝/模組 → 驅動/系統。門檻最高在「SiC 長晶/磊晶」與「GaN-on-Si 代工」。</p>
+  <h3>核心環節 A:GaN-on-Si 8 吋代工(2026 洗牌焦點)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>路線</th><th>原理</th><th>難點</th><th>壁壘</th></tr></thead>
+    <tbody>
+      <tr><td>GaN-on-Si(180nm)</td><td>矽基板長 GaN 磊晶、做高頻功率元件</td><td>磊晶應力/翹曲、8 吋良率</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>GaN-on-SiC(RF)</td><td>SiC 基板長 GaN(射頻為主)</td><td>成本高;屬射頻非電源功率</td><td><span class="stars">★★★★☆</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>力積電 <span class="code">6770</span></h4><p>Navitas 全線(100V-650V)200mm GaN-on-Si 轉單竹南 Fab 8B;100V 1H26 已投產、650V 12-24 個月內自台積電轉移——台積退 GaN 最大受惠。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>世界先進 <span class="code">5347</span></h4><p>2026/01 取得台積電 650V+80V GaN 授權、8 吋平台 2028H1 量產;台積電 2026/05 已出脫其 8.1% 持股(降至 19%)。<span class="conf c-high">高</span></p></div>
+  </div>
+  <h3>核心環節 B:SiC 長晶 / 磊晶(高壓主戰場)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程</th><th>作用</th><th>難點</th><th>重要性</th></tr></thead>
+    <tbody>
+      <tr><td>SiC 長晶(6→8 吋)</td><td>長 SiC 單晶基板</td><td>缺陷密度、轉 8 吋良率;國際寡占</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>SiC 磊晶</td><td>基板上長元件層</td><td>厚度均勻、摻雜控制</td><td><span class="stars">★★★★☆</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="grid cols-2">
+    <div class="card"><h4>嘉晶 <span class="code">3016</span></h4><p>外延磊晶代工:SiC/GaN 磊晶片;8 吋 SiC 磊晶準備、GaN-on-Si 磊晶布局(中美晶集團上游)。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>漢磊 <span class="code">3707</span></h4><p>SiC/GaN 代工 + 第四代 SiC 平面 MOSFET;SiC 在 AI 機櫃定位 PFC/前級(與 GaN 的 DC-DC 切開)。<span class="conf c-high">高</span></p></div>
+  </div>
+</div></section>
+
+<!-- 05 關鍵應用 -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Application</span>
+  <h2 class="title">關鍵應用場景拆解</h2>
+  <p class="subtitle">功率元件從晶粒往上承載到電動車與 AI 電源系統。</p>
+  <div class="stack">
+    <div class="layer"><b>功率元件晶粒(Si/SiC/GaN)</b><div class="uses">用到:長晶 → 磊晶 → 代工 → 元件</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>功率模組 / 驅動(逆變器、OBC、DC-DC)</b><div class="uses">用到:SiC MOSFET(高壓)、GaN(高頻)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>電動車 800V 平台 / AI 電源 800V HVDC</b><div class="uses">EV:每車 SiC 24→48 顆;AI 電源:GaN 做 DC-DC、SiC 做 PFC/前級</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>再生能源 / 工業電源</b><div class="uses">逆變器、儲能 PCS</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:AI 電源(800V HVDC)主力是 GaN 與系統廠,SiC 在 AI 機櫃內角色偏 PFC/前級——勿把 SiC 受惠誇大為「AI 電源主力」。EV 仍是 SiC 的最大量產出海口。</div>
+</div></section>
+
+<!-- 06 族群邏輯 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>營運受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>GaN 代工(力積電/世界先進)</td><td>台積電 2027 退出 GaN 代工</td><td>Navitas 全線轉單(力積)、台積 GaN 授權(世界先進)</td></tr>
+      <tr><td>第三代半導體上游(嘉晶/環球晶/合晶)</td><td>SiC/GaN 磊晶與基板需求</td><td>8 吋 SiC 磊晶/基板放量;中美晶集團整合</td></tr>
+      <tr><td>SiC 代工(漢磊)</td><td>EV 800V + 工業高壓</td><td>第四代 SiC MOSFET;AI 偏 PFC/前級(勿誇大)</td></tr>
+      <tr><td>矽基分立元件(強茂/大中/富鼎/朋程/台半)</td><td>歐盟制裁中系功率元件→轉單</td><td>車用整流(朋程龍頭)、MOSFET/二極體轉單機會</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① 中國英諾賽科(2577.HK)8 吋 GaN 低價傾銷,台廠 GaN 成本/良率須抗價格戰;② SiC「國際退出→台廠轉單」需逐項查實際訂單,勿一概當受惠;③ 宏捷科是射頻 GaN(非電源功率)、杰力是類比 IC,易被誤列;④ EV 需求若放緩,SiC 量產出海口受壓。</div>
+  <h3>台灣吃得到多少(逐環節質化定位)</h3>
+  <p class="subtitle">台廠最有實績的是「磊晶代工 + 矽基成熟分立元件」;SiC 單晶基板與高階 SiC/GaN 模組基本缺席。GaN 代工因台積退出「地位上升」但須抗中系價格戰。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>基板長晶(SiC 單晶/GaN-on-Si 基材)</td><td>環球晶 6488(矽/SOI 為主)</td><td><span class="badge b-danger">SiC 單晶缺席</span></td><td>SiC 單晶由 Wolfspeed/Coherent/中國寡占;台廠多外購、環球晶 SiC 多在研發 <span class="conf c-med">中</span></td></tr>
+      <tr><td>磊晶(SiC/GaN-on-Si)</td><td>嘉晶 3016 / 漢磊 3707</td><td><span class="badge b-ok">領先/追趕 · 亞洲要角</span></td><td>嘉晶 8 吋 GaN 小量試產、8 吋 SiC 磊晶估 2026H1 量產;台廠最實質卡位環節 <span class="conf c-high">高</span></td></tr>
+      <tr><td>GaN-on-Si 8 吋元件代工</td><td>力積電 6770 / 世界先進 5347 / 漢磊 3707</td><td><span class="badge b-warn">地位上升 · 須抗價格戰</span></td><td>力積電拿 Navitas 全線轉單(最硬佐證);GF/ROHM/Samsung 也接棒、中系英諾賽科價格戰在側 <span class="conf c-high">高</span></td></tr>
+      <tr><td>SiC 元件/MOSFET 代工</td><td>漢磊 3707</td><td><span class="badge b-warn">追趕</span></td><td>第四代 SiC MOSFET、trench 2026Q2;國際 Infineon/onsemi/STM 以 IDM+200mm 領先;AI 偏 PFC/前級 <span class="conf c-med">中</span></td></tr>
+      <tr><td>矽基分立元件(MOSFET/二極體/整流)</td><td>朋程 8255 / 強茂 2481 / 台半 5425 / 大中 6435 / 富鼎 8261</td><td><span class="badge b-ok">領先(成熟最有實績)</span></td><td>朋程承接 Bosch 退出車用整流市占(硬佐證);強茂車規認證到 2026 切 CSP;轉單/漲價須逐項查實單 <span class="conf c-high">高(朋程/強茂)</span></td></tr>
+      <tr><td>功率模組/封裝/驅動</td><td>朋程 / 強茂(自封裝)/ 台半</td><td><span class="badge b-warn">部分參與 · 高階缺席</span></td><td>高階 SiC/GaN 模組(散熱/寄生電感門檻高)由 Infineon/onsemi/台達/Vertiv 主導;台廠以分立自封裝為主 <span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 07 公司圖譜 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選標的;徽章標查證信心。<span class="conf c-high">高</span>=有訂單/授權/財報佐證 <span class="conf c-med">中</span>=部分佐證 <span class="conf c-un">待查/釐清</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="up">基板/磊晶</button><button data-f="foundry">元件代工</button>
+    <button data-f="device">矽基元件</button><button data-f="watch">待查/釐清</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="foundry"><h4>力積電 <span class="code">6770</span></h4><p>Navitas 全線 200mm GaN-on-Si 轉單(竹南 Fab 8B);100V 1H26 投產、650V 12-24 月內轉移。台積退 GaN 最大受惠。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="up"><h4>嘉晶 <span class="code">3016</span></h4><p>外延磊晶代工:SiC/GaN 磊晶片;8 吋 SiC 準備、GaN-on-Si 布局(中美晶集團)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="foundry"><h4>漢磊 <span class="code">3707</span></h4><p>SiC/GaN 代工 + 第四代 SiC 平面 MOSFET;SiC 於 AI 機櫃定位 PFC/前級。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="foundry"><h4>世界先進 <span class="code">5347</span></h4><p>2026/01 取得台積電 650V+80V GaN 授權、8 吋平台 2028H1 量產;台積已出脫 8.1% 持股。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="device"><h4>朋程 <span class="code">8255</span></h4><p>車用整流二極體(全球車用整流器龍頭)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="device"><h4>強茂 <span class="code">2481</span></h4><p>二極體/MOSFET;歐盟制裁中系功率元件的潛在轉單受惠。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="device"><h4>大中 <span class="code">6435</span></h4><p>MOSFET(車用/工業功率)。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="device"><h4>富鼎 <span class="code">8261</span></h4><p>MOSFET(消費/PC 電源為主)。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="device"><h4>台半 <span class="code">5425</span></h4><p>二極體/小信號;歐盟制裁中系的轉單機會。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="up"><h4>環球晶 <span class="code">6488</span></h4><p>全球矽晶圓第三;發展 SiC/GaN/SOI 基板(上游基板端)。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="watch"><h4>宏捷科 <span class="code">8086</span></h4><p>砷化鎵 PA(射頻)為主業;『GaN/PA』易誤導為功率 GaN,實為射頻 GaN,非電源功率主力。</p><span class="conf c-un">釐清</span></div>
+    <div class="card" data-cat="watch"><h4>杰力 <span class="code">5299</span></h4><p>電源管理 IC 設計(類比);與『成熟製程×類比 IC』題重疊,非功率分立元件。</p><span class="conf c-un">釐清</span></div>
+    <div class="card" data-cat="watch"><h4>中美晶 <span class="code">5483</span></h4><p>環球晶/嘉晶母公司(第三代半導體控股);受惠靠子公司,本體間接。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="watch"><h4>偉詮電 <span class="code">2436</span></h4><p>USB-PD + GaN SiP;GaN 著力為消費快充,切入 AI 伺服器電源 GaN 為傳聞/送樣。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="watch"><h4>英諾賽科 <span class="code">2577.HK</span></h4><p>中國 8 吋 GaN IDM、發動價格戰;台廠 GaN 最大威脅(非投資標的,列風險對照)。</p><span class="conf c-low">風險</span></div>
+  </div>
+</div></section>
+
+<!-- 08 逐環節難度評分 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">逐環節技術難度評分</h2>
+  <p class="subtitle">維度:技術門檻 / 良率挑戰 / 設備稀缺 / 國際壟斷,各 0~5 分(5＝最難)。總分越高越卡關。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>良率挑戰</th><th>設備稀缺</th><th>國際壟斷</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>SiC 長晶(6→8 吋基板)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>GaN-on-Si 8 吋代工</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>SiC/GaN 磊晶</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>元件(MOSFET/二極體)製造</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">10</span></td></tr>
+      <tr><td>封裝/模組</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">10</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">最卡關環節:SiC 長晶(19/20)——國際寡占、台廠多外購基板;GaN-on-Si 代工(16/20)是 2026 洗牌焦點與台廠新機會。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>力積電 6770</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">19.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>嘉晶 3016</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">17</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>漢磊 3707</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">16.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>世界先進 5347</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><span class="tot">16</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>朋程 8255</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16.5</span></td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 進度速查 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時程錨點</h2>
+  <p class="subtitle">各家環節定位、進度時程與查證信心。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>環節定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>力積電 6770</td><td>GaN-on-Si 代工</td><td>Navitas 100V 1H26 投產、650V 12-24 月內轉移</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>台積電(事件)</td><td>GaN 代工退出</td><td>2027/7/31 全面結束(2025/07 公告)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>世界先進 5347</td><td>GaN 授權新平台</td><td>2026/01 取得台積 GaN 授權、8 吋 2028H1 量產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>嘉晶 3016</td><td>SiC/GaN 磊晶</td><td>8 吋 SiC 磊晶準備、GaN-on-Si 布局</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Wolfspeed(事件)</td><td>SiC 國際龍頭</td><td>2025/09 走完破產重整、Renesas 入股、轉 200mm(非單純退出)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>漢磊 3707</td><td>SiC 代工</td><td>第四代 SiC 平面 MOSFET;AI 偏 PFC/前級</td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>催化劑時間軸(2025-2026)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時點</th><th>狀態</th><th>事件</th><th>影響</th></tr></thead>
+    <tbody>
+      <tr><td>2025/07</td><td><span class="badge b-ok">已發生</span></td><td>台積電公告 2027/7/31 全面退出 GaN 代工</td><td>觸發 GaN 代工版圖洗牌;力積/世界先進/GF/ROHM 先後接手</td></tr>
+      <tr><td>2025/09</td><td><span class="badge b-ok">已發生</span></td><td>Wolfspeed 走完 Chapter 11、Renesas 債轉股、CFIUS 2026/01 放行</td><td>SiC 國際龍頭未消失而是重整轉 200mm;「退出→轉單」須精確化</td></tr>
+      <tr><td>2025/10-11</td><td><span class="badge b-ok">已發生</span></td><td>NVIDIA 公布 800V HVDC 生態夥伴(Infineon/onsemi/Navitas/STM/Innoscience…)</td><td>確立 AI 電源 800V 為功率元件新增量;GaN 做 DC-DC、SiC 做 PFC</td></tr>
+      <tr><td>1H2026</td><td><span class="badge b-warn">進行中</span></td><td>力積電接 Navitas 全線 200mm GaN-on-Si:100V 1H26 投產、650V 12-24 月轉移、最快 2026Q4 認證</td><td>台積退 GaN 最大直接受惠、綁 NVIDIA 800V 供應鏈</td></tr>
+      <tr><td>2026/01-03</td><td><span class="badge b-warn">進行中</span></td><td>世界先進簽台積 650V+80V GaN 授權(2028H1 量產);GF/ROHM 也取得授權</td><td>GaN 代工接棒者增多、美日廠分食;台廠非唯一受惠、競爭加劇</td></tr>
+      <tr><td>2026/05</td><td><span class="badge b-warn">進行中</span></td><td>傳 Samsung 將 GaN 轉做代工(最快 2026/07 啟動)</td><td>再添 8 吋 GaN 代工大廠,台廠價格壓力升溫</td></tr>
+      <tr><td>2026/06</td><td><span class="badge b-ok">已發生</span></td><td>中國最高法院終審維持禁售令,Infineon 不得在中國銷售相關 GaN(賠 Innoscience)</td><td>中系 GaN 氣勢增強=價格戰風險;Infineon 在中受限或外溢轉單(待觀察)</td></tr>
+      <tr><td>2026 全年</td><td><span class="badge b-warn">進行中</span></td><td>Infineon 指引 AI 資料中心營收 FY26 €1.5B→FY27 €2.5B、capex 加碼 €2.7B</td><td>國際龍頭把 AI 電源當主成長軸;台廠矽基元件以 CSP 轉單跟車</td></tr>
+      <tr><td>2026/11</td><td><span class="badge b-accent">前瞻</span></td><td>中美鎵出口管制暫停期到期,可能恢復鎵出口限制</td><td>鎵為 GaN 關鍵原料;若恢復管制,GaN 上游成本/供給風險上升</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">狀態:已發生=公告/財報;進行中=轉單/授權執行中;前瞻=變數。市場規模/轉單多為研調與公司指引,量級參考。</p>
+</div></section>
+
+<!-- 10 估值試算 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方為<b>示意預設</b>(非財測),請填入標的真實財務數字。功率元件多為週期股,留意景氣位置。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>歷史區間+成長溢價</td></tr>
+      <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+      <tr><td><b>EV/EBITDA</b></td><td>(EBITDA×倍數−淨負債)÷股數</td><td>代工/重資產</td><td>力積電等代工適用</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業估值 + GaN/SiC 轉單貢獻折現</td><td>未放量題材</td><td>世界先進 GaN(2028)屬此類</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="500"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="12"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="10"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="40"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="20"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="18"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
     </div>
   </div>
-</div>
-
-<!-- 1. 產業總覽 -->
-<section class="block" id="overview">
-  <div class="container">
-    <span class="eyebrow">01 · Overview</span>
-    <h2 class="title">產業總覽</h2>
-    <p class="subtitle">「功率元件」是負責<strong>電能轉換、整流與開關</strong>的半導體,決定電源效率與散熱。對照軸:<strong>矽基(Si)傳統元件 vs 寬能隙(SiC/GaN)第三代半導體</strong>。寬能隙材料能在高壓、高頻、高溫下穩定運作,大幅降低切換損耗與冷卻成本,是 AI 電源與 EV 的升級主軸。聚焦範圍:二極體/整流器、MOSFET、IGBT、SiC、GaN 及其上游基板/磊晶。</p>
-    <div class="grid cols-3">
-      <div class="card"><h4><span class="ico">⬛</span>二極體 / 整流器</h4><p>整流、保護。車用整流二極體為台廠強項;高壓快回復二極體用於電源。</p></div>
-      <div class="card"><h4><span class="ico">🔲</span>MOSFET</h4><p>低中壓開關主力,用於電源管理、DC-DC、消費/工控。台廠設計廠林立。</p></div>
-      <div class="card"><h4><span class="ico">⬜</span>IGBT</h4><p>高壓大電流開關,用於工業變頻、車用主逆變(部分被 SiC 取代)。</p></div>
-      <div class="card"><h4><span class="ico">🟪</span>SiC 碳化矽</h4><p>高壓(>650V)高效;EV 主逆變、800V HVDC、充電樁、太陽能。取代 IGBT 降損耗、縮散熱。</p></div>
-      <div class="card"><h4><span class="ico">🟦</span>GaN 氮化鎵</h4><p>高頻高效率;AI 資料中心高階 DC-DC、快充、48V power stage。</p></div>
-      <div class="card"><h4><span class="ico">🧱</span>上游基板/磊晶</h4><p>SiC/GaN 長晶基板與磊晶,決定良率與成本;8 吋化是降本關鍵。</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. 產業地圖 -->
-<section class="block" id="industry">
-  <div class="container">
-    <span class="eyebrow">02 · Supply Chain</span>
-    <h2 class="title">產業地圖</h2>
-    <p class="subtitle">SiC/GaN 為高度專業分工結構。台廠在<strong>基板/磊晶(漢民集團)、晶圓代工(漢磊)、設計 IDM(朋程、強茂、富鼎等)</strong>形成完整生態系。</p>
-    <div class="chain">
-      <div class="chain-row">
-        <div class="lvl">上游<small>基板/長晶/磊晶</small></div>
-        <div class="items">
-          <span class="badge b-accent">環球晶 6488(基板)</span><span class="badge b-accent">中美晶 5483</span><span class="badge b-accent">嘉晶 3016(磊晶)</span>
-          <span class="badge">Wolfspeed(美)</span><span class="badge">Coherent(美)</span><span class="badge">羅姆 ROHM(日)</span>
-        </div>
-      </div>
-      <div class="chain-row">
-        <div class="lvl">中游·代工<small>晶圓代工</small></div>
-        <div class="items">
-          <span class="badge b-accent">漢磊 3707(SiC/GaN 代工)</span><span class="badge b-accent">世界先進 5347(8吋SiC合作)</span><span class="badge">台積電</span><span class="badge">宏捷科 8086(GaN)</span>
-        </div>
-      </div>
-      <div class="chain-row">
-        <div class="lvl">中游·設計<small>IDM / Fabless</small></div>
-        <div class="items">
-          <span class="badge b-accent">朋程 8255(整流二極體)</span><span class="badge b-accent">強茂 2481</span><span class="badge b-accent">富鼎 8261</span>
-          <span class="badge b-accent">大中 6435</span><span class="badge b-accent">杰力 5299</span><span class="badge b-accent">尼克森 3317</span><span class="badge b-accent">台半 5425</span><span class="badge b-accent">合晶 6182(GaN)</span>
-        </div>
-      </div>
-      <div class="chain-row">
-        <div class="lvl">電源/系統<small>模組/方案</small></div>
-        <div class="items">
-          <span class="badge b-accent">台達電 2308(Grid-to-Chip)</span><span class="badge">Navitas(美)</span><span class="badge">Vicor(美)</span><span class="badge">Infineon/STM/onsemi</span>
-        </div>
-      </div>
-      <div class="chain-row">
-        <div class="lvl">終端<small>應用市場</small></div>
-        <div class="items">
-          <span class="badge b-ok">AI 伺服器 800V HVDC</span><span class="badge b-ok">電動車 / 車用</span><span class="badge b-ok">太陽能 / 儲能</span><span class="badge b-ok">充電樁</span><span class="badge b-ok">工控變頻</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 3. 為何熱門 -->
-<section class="block" id="whyhot">
-  <div class="container">
-    <span class="eyebrow">03 · Why Now</span>
-    <h2 class="title">為何熱門</h2>
-    <p class="subtitle">三大終端同時爆發(AI 電源、EV、太陽能/儲能)→ 功率元件總需求年增 25–30%,但全球晶圓產能僅增 12–15% → 供需缺口延續至 2027 下半年 → 漲價與寬能隙升級雙重受惠。</p>
-    <div class="flow">
-      <div class="step"><b>需求端</b><small>AI 電力 kW→MW;EV 800V 平台普及;太陽能/儲能擴張</small></div>
-      <div class="arrow">→</div>
-      <div class="step"><b>供給/成本</b><small>需求 +25–30%/年 vs 產能 +12–15%/年;8 吋 SiC 良率/成本卡關</small></div>
-      <div class="arrow">→</div>
-      <div class="step"><b>股價傳導</b><small>缺貨漲價 → SiC/GaN ASP 升 → 產品組合升級 → 毛利改善 → 評價提升</small></div>
-    </div>
-    <h3>關鍵數據點</h3>
-    <div class="grid cols-4">
-      <div class="card"><p>功率元件需求年增</p><h4>25–30%</h4></div>
-      <div class="card"><p>全球晶圓產能年增</p><h4>12–15%</h4></div>
-      <div class="card"><p>SiC 元件需求年增(車用)</p><h4>&gt;40%</h4></div>
-      <div class="card"><p>每車 SiC MOSFET 用量</p><h4>24 → 48 顆</h4></div>
-    </div>
-    <h3>與 2021 缺貨循環的對比</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>面向</th><th>2021 缺貨(疫情/重複下單)</th><th>本輪(結構性升級)</th></tr></thead>
-      <tbody>
-        <tr><td>需求來源</td><td>消費電子拉貨、車用回補</td><td>AI 電源 + EV 電動化 + 能源轉型三引擎</td></tr>
-        <tr><td>技術主軸</td><td>矽基產能不足</td><td>寬能隙(SiC/GaN)世代升級,ASP 與含量同步上升</td></tr>
-        <tr><td>持續性</td><td>需求一次性、後續長期庫存調整</td><td>升級具結構性,缺口延續至 2027H2</td></tr>
-        <tr><td>受惠者</td><td>普遍性</td><td>集中於寬能隙卡位廠與車用龍頭</td></tr>
-      </tbody>
-    </table></div>
-    <div class="callout insight">💡 本輪核心:從「矽基缺貨漲價」進化為「寬能隙世代升級」。輝達 Rubin 將矽中介層升級為碳化矽並推 800V HVDC(2027 全面量產),AI 電源成為 SiC 全新且高速成長的需求曲線。</div>
-  </div>
-</section>
-
-<!-- 4. 核心品類 -->
-<section class="block" id="categories">
-  <div class="container">
-    <span class="eyebrow">04 · Deep Dive</span>
-    <h2 class="title">核心品類深度解析</h2>
-    <p class="subtitle">功率元件可分三大可投資品類:① 矽基功率元件(二極體/MOSFET/IGBT) ② SiC 碳化矽 ③ GaN 氮化鎵。寬能隙(SiC/GaN)是 ASP 與成長性最高的主軸。</p>
-
-    <h3>⬛ 品類一:矽基功率元件(二極體 / MOSFET / IGBT)</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>類型</th><th>特性</th><th>主要應用</th><th>本輪受惠</th></tr></thead>
-      <tbody>
-        <tr><td>整流二極體</td><td>整流、保護,車規可靠度要求高</td><td>車用發電機、電源</td><td><span class="stars">★★★★☆</span></td></tr>
-        <tr><td>低中壓 MOSFET</td><td>低導通電阻、快速開關</td><td>電源管理、DC-DC、消費/工控</td><td><span class="stars">★★★☆☆</span></td></tr>
-        <tr><td>IGBT</td><td>高壓大電流,成本低於 SiC</td><td>工業變頻、部分車用主逆變</td><td><span class="stars">★★★☆☆</span></td></tr>
-      </tbody>
-    </table></div>
-    <div class="grid cols-2">
-      <div class="card"><h4>朋程 <span class="code">8255</span></h4><p>車用整流二極體全球市占近 60%,車用龍頭地位穩固;受惠 EV/車用電子含量提升。中美晶集團持股約 19%。<span class="badge b-ok">車用龍頭</span></p></div>
-      <div class="card"><h4>富鼎 8261 / 大中 6435 / 杰力 5299 / 尼克森 3317 / 台半 5425</h4><p>MOSFET 與功率元件設計廠群,受惠 AI 電源與車用拉貨,部分切入高壓與寬能隙產品線。</p></div>
-    </div>
-
-    <h3>🟪 品類二:SiC 碳化矽(第三代半導體核心)</h3>
-    <p style="color:var(--ink-soft);margin-bottom:10px">高壓高效,EV 主逆變與 AI 800V HVDC 的關鍵。8 吋化是降本主軸;台廠在代工與磊晶卡位完整。國際雙雄(意法、Wolfspeed 等)部分退出/調整,台廠迎轉單。</p>
-    <div class="table-wrap"><table>
-      <thead><tr><th>環節</th><th>內容</th><th>台廠</th><th>卡位</th></tr></thead>
-      <tbody>
-        <tr><td>基板/長晶</td><td>SiC 晶棒、晶圓</td><td>環球晶、中美晶</td><td><span class="stars">★★★★☆</span></td></tr>
-        <tr><td>磊晶</td><td>6/8 吋 SiC 磊晶</td><td>嘉晶(8 吋已送樣)</td><td><span class="stars">★★★★★</span></td></tr>
-        <tr><td>晶圓代工</td><td>SiC MOSFET 製程平台</td><td>漢磊(第四代平面 MOSFET)、世界先進合作 8 吋</td><td><span class="stars">★★★★★</span></td></tr>
-      </tbody>
-    </table></div>
-    <div class="grid cols-2">
-      <div class="card"><h4>漢磊 <span class="code">3707</span></h4><p>SiC/GaN 代工龍頭,具第四代 SiC 平面 MOSFET 平台,鎖定 AI 電源;與世界先進合作 8 吋 SiC 產線,2026H1 試產、4Q26 量產,初期月產能約 1,500 片。<span class="badge b-accent">SiC 代工龍頭</span></p></div>
-      <div class="card"><h4>嘉晶 <span class="code">3016</span></h4><p>漢民集團磊晶廠,8 吋 SiC 磊晶已送樣並備量;受惠 AI 800V HVDC 與車用高壓化,大尺寸 8 吋磊晶 2026 雙位數成長。<span class="badge b-ok">8 吋磊晶</span></p></div>
-    </div>
-
-    <h3>🟦 品類三:GaN 氮化鎵(高頻高效)</h3>
-    <p style="color:var(--ink-soft);margin-bottom:10px">高頻特性適合 AI 資料中心高階 DC-DC、48V power stage 與快充。Navitas 已與 NVIDIA 合作 800V HVDC,台廠 GaN 卡位起步。</p>
-    <div class="grid cols-2">
-      <div class="card"><h4>合晶 <span class="code">6182</span></h4><p>子公司「合晶寬能」專攻 GaN,產品獲主要客戶驗證並小量出貨,鎖定 AI 資料中心高階 DC-DC;2026Q1 新增月產能約 2,000 片。<span class="badge b-accent">GaN 卡位</span></p></div>
-      <div class="card"><h4>宏捷科 <span class="code">8086</span></h4><p>化合物半導體代工,與中美晶串聯第三代半導體材料,具 GaN 製程能力。</p></div>
-    </div>
-    <div class="callout insight">💡 品類選股主軸:<strong>寬能隙(SiC/GaN)含量與 ASP 提升</strong>是本輪最大彈性來源。代工(漢磊)與磊晶(嘉晶)位居成長最快的環節;車用二極體龍頭(朋程)則是穩健受惠的現金流標的。</div>
-  </div>
-</section>
-
-<!-- 5. 關鍵應用 -->
-<section class="block" id="application">
-  <div class="container">
-    <span class="eyebrow">05 · Application</span>
-    <h2 class="title">關鍵應用:AI 資料中心 800V HVDC 電源鏈</h2>
-    <p class="subtitle">輝達 800V HVDC 架構直接把高壓直流送進機櫃,減少 AC-DC 轉換、提升 5% 端到端效率、降 70% 維護與冷卻成本。每一級電力轉換都仰賴功率元件,且高壓化讓 SiC/GaN 含量大增。</p>
-    <div class="stack">
-      <div class="layer"><b>① 電網級 AC/DC(PFC 整流)</b><div class="uses">用到:SiC MOSFET、高壓二極體、IGBT</div></div>
-      <div class="down">↓</div>
-      <div class="layer hl"><b>② 800V HVDC 匯流排 → DC-DC(800V→48V)★ SiC/GaN 主戰場</b><div class="uses">用到:SiC MOSFET、GaN HEMT(高頻高效)</div></div>
-      <div class="down">↓</div>
-      <div class="layer"><b>③ VRM 電壓調節(48V→GPU 核心電壓)</b><div class="uses">用到:GaN / 低壓 MOSFET、功率電感</div></div>
-      <div class="down">↓</div>
-      <div class="layer"><b>④ GPU / xPU 供電</b><div class="uses">用到:保護元件、eFuse、去耦</div></div>
-    </div>
-    <h3>需求成長的本質</h3>
-    <div class="grid cols-3">
-      <div class="card"><h4>① 電力規模躍升</h4><p>單櫃功耗朝 1MW,kW→MW 使功率元件用量與規格全面拉高。</p></div>
-      <div class="card"><h4>② 高壓化(800V)</h4><p>800V HVDC 與 EV 800V 平台,直接拉動 SiC 高壓元件滲透。</p></div>
-      <div class="card"><h4>③ 效率與散熱</h4><p>寬能隙降切換損耗、縮冷卻系統,成為高功率場景剛需。</p></div>
-    </div>
-    <div class="callout insight">💡 核心結論:功率元件是 AI 電力「從千瓦走向百萬瓦」與車輛電動化的能量轉換樞紐。電壓越高、效率要求越嚴、頻率越快 → 寬能隙價值越突出,本輪 SiC/GaN 含量提升最容易被低估。</div>
-  </div>
-</section>
-
-<!-- 6. 股價邏輯 -->
-<section class="block" id="stocklogic">
-  <div class="container">
-    <span class="eyebrow">06 · Stock Logic</span>
-    <h2 class="title">股價邏輯</h2>
-    <p class="subtitle">四大群體的催化劑與獲利彈性對比。寬能隙代工/磊晶彈性最大,車用龍頭最穩健。</p>
-    <div class="table-wrap"><table>
-      <thead><tr><th>群體</th><th>核心催化</th><th>營運受惠點</th></tr></thead>
-      <tbody>
-        <tr><td><b>SiC 代工/磊晶</b></td><td>8 吋量產、AI 電源與車用 SiC 滲透、國際大廠轉單</td><td>稼動率與 ASP 同步升,產能稀缺度高,毛利改善彈性最大</td></tr>
-        <tr><td><b>GaN</b></td><td>AI 資料中心高階 DC-DC、NVIDIA 800V HVDC 生態</td><td>客戶驗證放量、新需求曲線,基期低、成長率高</td></tr>
-        <tr><td><b>車用二極體/MOSFET</b></td><td>EV 含量提升、車規認證壁壘</td><td>市占穩固、現金流佳,ASP 隨高壓化上移</td></tr>
-        <tr><td><b>基板材料</b></td><td>SiC/GaN 晶圓需求、尺寸升級</td><td>規模與良率優勢,跨足多終端攤平風險</td></tr>
-      </tbody>
-    </table></div>
-    <div class="callout risk">⚠️ 特有風險:① <b>SiC 價格戰</b>——中國大舉擴產 8 吋 SiC,中長期報價下行壓力;② <b>良率/成本</b>——8 吋 SiC 良率仍是門檻,認證與放量遞延風險;③ <b>需求週期</b>——EV 銷量與補貼政策波動可能拖累車用需求;④ <b>題材稀釋</b>——部分「第三代半導體概念股」實質 SiC/GaN 營收占比仍低,股價易過度反映。</div>
-  </div>
-</section>
-
-<!-- 7. 公司圖譜 -->
-<section class="block" id="companies">
-  <div class="container">
-    <span class="eyebrow">07 · Companies</span>
-    <h2 class="title">公司圖譜</h2>
-    <p class="subtitle">台股功率元件相關標的,依供應鏈位置分類。點擊篩選。</p>
-    <div class="filters" id="cFilters">
-      <button class="active" data-f="all">全部</button>
-      <button data-f="up">上游基板/磊晶</button>
-      <button data-f="foundry">晶圓代工</button>
-      <button data-f="design">設計 IDM</button>
-      <button data-f="power">電源/系統</button>
-    </div>
-    <div class="grid cols-3" id="cGrid">
-      <div class="card" data-cat="up"><h4>環球晶 <span class="code">6488</span></h4><p>矽晶圓全球第三,發展 SiC/GaN/SOI 基板。</p><span class="badge b-accent">上游基板</span></div>
-      <div class="card" data-cat="up"><h4>中美晶 <span class="code">5483</span></h4><p>持環球晶 51%、朋程約 19%,串聯第三代半導體。</p><span class="badge b-accent">上游基板</span></div>
-      <div class="card" data-cat="up"><h4>嘉晶 <span class="code">3016</span></h4><p>SiC/GaN 磊晶,8 吋 SiC 磊晶已送樣。</p><span class="badge b-accent">磊晶</span> <span class="badge b-ok">8 吋</span></div>
-      <div class="card" data-cat="foundry"><h4>漢磊 <span class="code">3707</span></h4><p>SiC/GaN 代工龍頭,第四代平面 MOSFET。</p><span class="badge b-accent">晶圓代工</span> <span class="badge b-ok">SiC 龍頭</span></div>
-      <div class="card" data-cat="foundry"><h4>世界先進 <span class="code">5347</span></h4><p>與漢磊合作 8 吋 SiC 產線。</p><span class="badge b-accent">晶圓代工</span></div>
-      <div class="card" data-cat="foundry"><h4>宏捷科 <span class="code">8086</span></h4><p>化合物半導體代工,具 GaN 能力。</p><span class="badge b-accent">晶圓代工</span></div>
-      <div class="card" data-cat="design"><h4>朋程 <span class="code">8255</span></h4><p>車用整流二極體全球近 60% 市占。</p><span class="badge b-accent">設計 IDM</span> <span class="badge b-ok">車用龍頭</span></div>
-      <div class="card" data-cat="design"><h4>強茂 <span class="code">2481</span></h4><p>設計到模組整合,AI 營收占比拉升中。</p><span class="badge b-accent">設計 IDM</span></div>
-      <div class="card" data-cat="design"><h4>富鼎 <span class="code">8261</span></h4><p>MOSFET 設計,受惠 AI 電源與車用。</p><span class="badge b-accent">設計 IDM</span></div>
-      <div class="card" data-cat="design"><h4>大中 <span class="code">6435</span></h4><p>功率元件設計,高壓 MOSFET 布局。</p><span class="badge b-accent">設計 IDM</span></div>
-      <div class="card" data-cat="design"><h4>杰力 <span class="code">5299</span></h4><p>電源管理與功率元件設計。</p><span class="badge b-accent">設計 IDM</span></div>
-      <div class="card" data-cat="design"><h4>尼克森 <span class="code">3317</span></h4><p>MOSFET 與功率元件。</p><span class="badge b-accent">設計 IDM</span></div>
-      <div class="card" data-cat="design"><h4>台半 <span class="code">5425</span></h4><p>二極體與功率元件大廠。</p><span class="badge b-accent">設計 IDM</span></div>
-      <div class="card" data-cat="design"><h4>合晶 <span class="code">6182</span></h4><p>合晶寬能專攻 GaN,小量出貨 AI DC-DC。</p><span class="badge b-accent">設計/GaN</span></div>
-      <div class="card" data-cat="power"><h4>台達電 <span class="code">2308</span></h4><p>800V Grid-to-Chip 92% 效率電源方案。</p><span class="badge b-accent">電源系統</span></div>
-    </div>
-    <p class="disclaimer">部分公司寬能隙(SiC/GaN)實質營收占比仍低,屬「卡位/題材」階段;分類依公開供應鏈定位整理,不代表營收貢獻度。</p>
-  </div>
-</section>
-
-<!-- 8. 評分表 -->
-<section class="block" id="radar">
-  <div class="container">
-    <span class="eyebrow">08 · Scorecard</span>
-    <h2 class="title">受惠強度評分表</h2>
-    <p class="subtitle">五維度 0–5 分:AI 電源受惠、車用受惠、寬能隙卡位、供給稀缺度、規模/財務體質。總分滿分 25,依高到低排序。評分為推估,僅供參考。</p>
-    <div class="table-wrap"><table>
-      <thead><tr><th>公司</th><th>AI電源受惠</th><th>車用受惠</th><th>寬能隙卡位</th><th>供給稀缺</th><th>規模/財務</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /25</small></th></tr></thead>
-      <tbody>
-        <tr><td><b>漢磊 3707</b></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-          <td><span class="tot">20.5</span></td></tr>
-        <tr><td><b>嘉晶 3016</b></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-          <td><span class="tot">19.5</span></td></tr>
-        <tr><td><b>環球晶 6488</b></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
-          <td><span class="tot">18.5</span></td></tr>
-        <tr><td><b>強茂 2481</b></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><span class="tot">17.5</span></td></tr>
-        <tr><td><b>朋程 8255</b></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-          <td><span class="tot">16.5</span></td></tr>
-        <tr><td><b>富鼎 8261</b></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
-          <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-          <td><span class="tot">15.5</span></td></tr>
-      </tbody>
-    </table></div>
-    <p class="disclaimer">評分依公開產品線、AI 電源/車用受惠程度、寬能隙技術卡位、供應稀缺度與財務規模推估,僅供參考,不構成投資建議。</p>
-  </div>
-</section>
-
-<!-- 9. 產能速查 -->
-<section class="block" id="capacity">
-  <div class="container">
-    <span class="eyebrow">09 · Capacity</span>
-    <h2 class="title">產能 / 營運速查表</h2>
-    <p class="subtitle">重點廠商的供應鏈位置、寬能隙布局與擴產時程。空白處為公開資訊未明確揭露。</p>
-    <div class="table-wrap"><table>
-      <thead><tr><th>公司</th><th>供應鏈位置</th><th>寬能隙布局</th><th>產能/擴產</th><th>時程</th><th>受惠主軸</th></tr></thead>
-      <tbody>
-        <tr><td><b>漢磊 3707</b></td><td>SiC/GaN 代工</td><td>第四代 SiC 平面 MOSFET 平台</td><td>與世界先進 8 吋 SiC 產線,初期約 1,500 片/月</td><td>2026H1 試產 → 4Q26 量產</td><td>AI 電源 + 車用 SiC</td></tr>
-        <tr><td><b>嘉晶 3016</b></td><td>磊晶</td><td>6/8 吋 SiC、GaN 磊晶</td><td>8 吋磊晶已送樣、小量備產</td><td>2026 大尺寸雙位數成長</td><td>800V HVDC + 車用高壓</td></tr>
-        <tr><td><b>合晶 6182</b></td><td>設計/GaN</td><td>合晶寬能專攻 GaN</td><td>2026Q1 新增約 2,000 片/月</td><td>已驗證、小量出貨</td><td>AI 資料中心 DC-DC</td></tr>
-        <tr><td><b>環球晶 6488</b></td><td>上游基板</td><td>SiC/GaN/SOI 基板</td><td>矽晶圓全球第三;12 吋約 100 萬片/月、8 吋約 130 萬片/月</td><td>進行中</td><td>多終端晶圓需求</td></tr>
-        <tr><td><b>朋程 8255</b></td><td>設計 IDM</td><td>車用整流二極體</td><td>全球市占近 60%</td><td>—</td><td>EV/車用含量提升</td></tr>
-        <tr><td><b>強茂 2481</b></td><td>設計 IDM</td><td>設計到模組整合</td><td>—</td><td>AI 營收占比 2025 約 4–6% → 2026 約 9–12%</td><td>AI 電源 + 車用</td></tr>
-        <tr><td><b>台達電 2308</b></td><td>電源系統</td><td>800V Grid-to-Chip 方案</td><td>—</td><td>已發表 92% 效率方案</td><td>AI 800V HVDC 電源</td></tr>
-      </tbody>
-    </table></div>
-    <p class="disclaimer">資料為公開法說/媒體彙整(約 2025/09–2026/05)。國際對照:Navitas 獲 NVIDIA 800V HVDC 合作;Infineon、STM、onsemi、ROHM、Wolfspeed 為 SiC/GaN 國際大廠。產能數字以公司公告為準。</p>
-  </div>
-</section>
-
-<!-- 10. 估值模型 -->
-<section class="block" id="model">
-  <div class="container">
-    <span class="eyebrow">10 · Valuation</span>
-    <h2 class="title">獲利推算與估值模型</h2>
-    <p class="subtitle">功率元件涵蓋成熟設計廠(穩定獲利)與寬能隙成長股(高 PE/低基期),須分流估值。代工/磊晶適用成長股邏輯,車用龍頭適用穩健現金流邏輯。</p>
-    <div class="table-wrap" style="margin-bottom:24px"><table>
-      <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>本產業參考</th></tr></thead>
-      <tbody>
-        <tr><td><b>PE 本益比</b></td><td>目標價 = EPS × PE</td><td>獲利穩定的設計/車用廠</td><td>功率元件歷史 12–25x,SiC/GaN 題材溢價更高</td></tr>
-        <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>高成長寬能隙代工/磊晶</td><td>PEG &lt;1 低估 / &gt;2 偏貴</td></tr>
-        <tr><td><b>EV/EBITDA</b></td><td>(EBITDA×倍數 − 淨負債) ÷ 股數</td><td>重資本代工/基板廠跨國比較</td><td>晶圓/基板業約 6–15x</td></tr>
-        <tr><td><b>殖利率法</b></td><td>DPS ÷ 目標殖利率</td><td>配息穩定的成熟設計廠</td><td>成熟功率元件廠殖利率 2–5%</td></tr>
-      </tbody>
-    </table></div>
-
-    <h3>龍頭試算示範:寬能隙代工(說明性,可自行調整)</h3>
-    <p style="color:var(--ink-soft);margin-bottom:12px;font-size:14px">下列為<strong>教學示範</strong>輸入值,非任何公司實際財測。輸入營收、成長率、淨利率、股數與目標倍數即時試算。</p>
-    <div class="calc">
-      <div class="inputs">
-        <div><label>基期營收(億元)</label><input id="rev" type="number" value="80"></div>
-        <div><label>營收成長率(%)</label><input id="g" type="number" value="35"></div>
-        <div><label>淨利率(%)</label><input id="npm" type="number" value="15"></div>
-        <div><label>流通股數(億股)</label><input id="sh" type="number" value="6"></div>
-        <div><label>目標 PE(x)</label><input id="pe" type="number" value="30"></div>
-        <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="40"></div>
-      </div>
-      <div class="out">
-        <div class="res"><small>預估 EPS(元)</small><b id="oEps">—</b></div>
-        <div class="res"><small>PE 目標價(元)</small><b id="oPe">—</b></div>
-        <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
-        <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
-      </div>
-    </div>
-
-    <h3>估值分流對照</h3>
-    <div class="table-wrap"><table>
-      <thead><tr><th>群體</th><th>代表股</th><th>適用估值法</th><th>觀察重點</th></tr></thead>
-      <tbody>
-        <tr><td>SiC 代工/磊晶</td><td>漢磊 3707、嘉晶 3016</td><td>PEG / EV-EBITDA</td><td>8 吋稼動率、AI/車用訂單能見度、毛利轉折</td></tr>
-        <tr><td>GaN 成長股</td><td>合晶 6182</td><td>PEG / P/S</td><td>客戶驗證進度、月產能爬升、營收占比</td></tr>
-        <tr><td>車用二極體</td><td>朋程 8255</td><td>PE / 殖利率</td><td>市占穩固度、車用含量、配息</td></tr>
-        <tr><td>基板材料</td><td>環球晶 6488</td><td>PE / EV-EBITDA</td><td>晶圓報價、SiC 占比、跨終端分散</td></tr>
-      </tbody>
-    </table></div>
-    <p class="disclaimer">本頁倍數區間為產業歷史推估,計算機為教學示範,輸入值非投資建議。各公司精確 EPS 預估請以最新券商報告與公司財報為準。投資人應自行評估風險,本指南不構成任何買賣建議。</p>
-  </div>
-</section>
+  <p class="disclaimer">通用試算工具,預設值為示意非個股財測。功率元件為週期股,代工(力積電)與設計(強茂等)財務結構差異大,務必填入標的真實數字。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
 
 <!-- 參考資料 -->
-<section class="block" id="refs">
-  <div class="container">
-    <span class="eyebrow">Sources · 參考資料</span>
-    <h2 class="title">參考資料來源</h2>
-    <p class="subtitle">本指南數據與觀點彙整自下列公開來源(2025/09–2026/05 擷取)。市場數據口徑各家分歧,已於內文並列標示。</p>
-    <ul class="refs">
-      <li><b>鉅亨網</b> — 碳化矽第三代半導體再掀熱潮 嘉晶漲停帶動漢磊大漲 · <a href="https://news.cnyes.com/news/id/6199189">連結</a></li>
-      <li><b>經濟日報</b> — 兩大巨頭退出碳化矽市場 環球晶、漢磊、嘉晶迎轉單 · <a href="https://money.udn.com/money/story/11162/8780405">連結</a></li>
-      <li><b>口袋學堂</b> — 第三代半導體是什麼?SiC / GaN 為何取代矽、台股概念股 · <a href="https://www.pocket.tw/school/report/perspective/6348/">連結</a></li>
-      <li><b>vocus 方格子</b> — 2026 年 AI 數據中心電力心臟:高壓 SiC 技術革命 · <a href="https://vocus.cc/article/69e473adfd897800014ac285">連結</a></li>
-      <li><b>財報狗</b> — HVDC 改寫 AI 資料中心與台股供應鏈 · <a href="https://statementdog.com/news/13940">連結</a></li>
-      <li><b>財報狗</b> — 輝達力推 800VDC 架構,三大晶片廠搶先卡位 · <a href="https://statementdog.com/news/15999">連結</a></li>
-      <li><b>TechNews</b> — 為 NVIDIA 資料中心開發新電源架構,納維半導體盤後飆 200% · <a href="https://finance.technews.tw/2025/05/22/navitas-stock-surge-because-nvidia">連結</a></li>
-      <li><b>Navitas / NVIDIA</b> — Developing Next Generation 800V HVDC Architecture · <a href="https://navitassemi.com/navitas-developing-next-generation-800-v-hvdc-architecture-with-nvidia/">連結</a></li>
-      <li><b>NVIDIA</b> — 800 VDC Architecture for AI Data Centers · <a href="https://www.nvidia.com/en-us/data-center/technologies/800-vdc-architecture/">連結</a></li>
-      <li><b>定錨產業筆記</b> — 中美晶攜手宏捷科,串聯第三代半導體材料 · <a href="https://investanchors.com/home/articles/70">連結</a></li>
-      <li><b>TechNews</b> — 碳化矽廠紛擴 8 吋產線,台廠如何看待因應 · <a href="https://technews.tw/2022/09/23/how-taiwan-fabs-respond-to-8-inch-silicon-carbide/">連結</a></li>
-      <li><b>羅姆 ROHM</b> — SiC-MOSFET 的特徵:何謂 SiC 功率元件 · <a href="https://www.rohm.com.tw/electronics-basics/sic/sic_what3">連結</a></li>
-      <li><b>GII 環球訊息</b> — 2026 年全球碳化矽功率半導體市場報告 · <a href="https://www.gii.tw/report/tbrc1924145-silicon-carbide-power-semiconductor-global-market.html">連結</a></li>
-      <li><b>財報狗</b> — 碳化矽概念股有哪些股票 · <a href="https://statementdog.com/tags/1201">連結</a></li>
-    </ul>
-    <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成任何投資建議或要約。所有財務與產能數據均為第三方公開彙整,非公司正式財測;投資人應自行查證並評估風險,盈虧自負。</p>
-  </div>
-</section>
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經缺口分析與對抗式查證。品質分層;被反駁/待釐清說法已標註。</p>
+  <ul class="refs">
+    <li><b>Navitas 新聞稿 / SEC 8-K</b> — 全線 GaN(100V-650V)200mm 轉單力積電竹南 Fab 8B<span class="q">primary</span></li>
+    <li><b>台積電公告(2025/07)</b> — 2027/7/31 退出 GaN 代工<span class="q">primary</span></li>
+    <li><b>世界先進公告(2026/01)</b> — 取得台積電 650V+80V GaN 授權、8 吋 2028H1 量產<span class="q">primary</span></li>
+    <li><b>Yole《Power GaN 2025》</b> — GaN 2024 USD 3.55 億→2030 約 30 億(CAGR 42%)<span class="q">primary</span></li>
+    <li><b>TrendForce(2026/5)</b> — SiC 2026 約 USD 5.33B;8 吋稼動率 2025 ~80%→2026 近 90%<span class="q">secondary</span></li>
+    <li><b>功率元件-guide(舊版投資指南)</b> — 上中游(環球晶/中美晶/嘉晶/合晶)、SiC/GaN 三品類拆解、估值模型<span class="q">secondary</span></li>
+    <li><b>Yole(2025/10 GaN、2025/12 SiC)</b> GaN 2030 $3.0B(CAGR 42%);SiC 2026-2028 過剩、2030 近 $10.3B;<b>TrendForce</b> GaN 2030 $3.51B<span class="q">secondary</span></li>
+    <li><b>Navitas/PSMC、世界先進、Wolfspeed SEC 8-K、Infineon 法說</b> — 力積 Navitas 轉單、世界先進 GaN 授權、Wolfspeed 重整轉 200mm、Infineon AI 電源 FY26 €1.5B<span class="q">primary</span></li>
+    <li><b>TrendForce(2026/02)</b> 台積 GaN 授權 VIS/GF、Samsung 轉代工;<b>PR Newswire(2026/06)</b> Innoscience 中國終審勝 Infineon GaN 禁售<span class="q">secondary</span></li>
+    <li><b>NVIDIA 技術部落格 / DCD</b> — 800V HVDC 生態夥伴(矽端含 Navitas/Infineon/onsemi/STM/Innoscience)<span class="q">secondary</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>需釐清 / 已更正:</b>① 宏捷科 8086=射頻 GaN(非電源功率 GaN)、杰力 5299=類比/電源管理 IC,兩者移 watch、勿列功率分立元件主力;② 世界先進角色已更新(台積電出脫 8.1% 持股 + GaN 授權);③ Wolfspeed 為破產重整非單純退出;④「國際 SiC 退出→台廠轉單」需逐項查實際訂單,勿一概當受惠;⑤ SiC/GaN 市場規模各家口徑/基期不同,並列僅供量級參考。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
+</div></section>
 
-<footer class="container">
-  <p>功率元件 產業投資全指南 · 2026/05 · 依公開資料彙整,僅供參考,不構成投資建議</p>
-</footer>
+<footer class="container"><p>功率元件(SiC/GaN)製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
 
 <script>
 (function(){
-  const fbar=document.getElementById('cFilters');
-  if(!fbar)return;
-  fbar.addEventListener('click',e=>{
-    const b=e.target.closest('button');if(!b)return;
-    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    const f=b.dataset.f;
-    document.querySelectorAll('#cGrid .card').forEach(c=>{
-      c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';
-    });
-  });
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
 })();
 (function(){
-  const ids=['rev','g','npm','sh','pe','epsg'];
-  const $=id=>document.getElementById(id);
-  function calc(){
-    const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,
-          sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
-    const fwdRev=rev*(1+g);
-    const ni=fwdRev*npm;
-    const eps=sh>0?ni/sh:0;
-    const price=eps*pe;
-    const peg=epsg>0?pe/epsg:0;
-    $('oEps').textContent=eps.toFixed(2);
-    $('oPe').textContent=price.toFixed(0);
-    $('oPeg').textContent=peg.toFixed(2);
-    $('oNi').textContent=ni.toFixed(0);
-  }
-  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});
-  if($('rev'))calc();
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
 })();
 </script>
 </body>
