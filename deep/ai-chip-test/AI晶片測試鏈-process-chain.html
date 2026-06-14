@@ -207,28 +207,43 @@
   <tr><td>FormFactor / Technoprobe / MJC</td><td>探針卡</td><td>三強約 6-7 成(FORM ~30%、MJC ~14%);卡位台積電 2nm 認證</td><td><span class="conf c-high">高</span></td></tr>
   <tr><td>Cohu / ISC / Leeno / TechWing</td><td>測試座/分選機</td><td>測試座市場分散(前五約 41%);ISC 2025 AI 測試座 +115%、SLT 佔該類 &gt;50%</td><td><span class="conf c-high">高</span></td></tr>
 </table>
+<h3>台灣吃得到多少(逐環節定位)</h3>
+<p class="sub">台股在「介面 + 代工 + SLT 系統」吃最深;ATE 測試機本體、DFT/EDA、晶圓級老化(WLBI)缺席。定位為質化判斷、非精確市佔。</p>
+<table>
+  <tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>設計 DFT / 多 die 互連測試</td><td>(缺席)</td><td><span class="conf c-low">缺席</span></td><td>Synopsys/Siemens Tessent/Cadence EDA 三家寡占</td></tr>
+  <tr><td>CP 晶圓針測(探針卡)</td><td>旺矽 6223 / 中華精測 6510 / 雍智 6683 / 欣銓 3264</td><td><span class="conf c-med">領先量產 · 追趕尖端</span></td><td>旺矽龍頭級;2nm 探針卡認證由 FormFactor/Technoprobe/MJC 卡位</td></tr>
+  <tr><td>Burn-in 老化(含 WLBI)</td><td>京元電 2449 / 穎崴 6515</td><td><span class="conf c-med">封裝級領先 · 晶圓級缺席</span></td><td>京元電自製爐成本優勢;WLBI 全晶圓 contactor 是 Aehr 獨門</td></tr>
+  <tr><td>FT 成品終測(分選+座+ATE)</td><td>鴻勁 7769 / 京元電 2449 / 穎崴 6515 / 矽格 6257</td><td><span class="conf c-med">分選/介面領先 · ATE 本體缺席</span></td><td>鴻勁 NVIDIA AI FT 近九成(媒體/法人);ATE 本體 Advantest/Teradyne 雙寡占</td></tr>
+  <tr><td>SLT 系統級測試(AI 增幅最大)</td><td>致茂 2360 / 穎崴 6515 / 京元電 2449 / 鴻勁 7769</td><td><span class="conf c-high">甜蜜點 · 系統+介面+代工全卡位</span></td><td>致茂 NVIDIA SLT 獨家、穎崴 SLT 座占逾 5 成(公司自述)</td></tr>
+  <tr><td>出貨檢測 / Outgoing QA</td><td>德律 3030</td><td><span class="conf c-un">周邊 · 非主軸</span></td><td>大封裝翹曲/共面檢測規格升,屬周邊</td></tr>
+</table>
 
 <!-- 5 -->
 <h2 id="s5"><span class="n">5</span>市場規模與量產時程</h2>
 <div class="card">
-  <h3>市場規模(口徑分層,標來源)</h3>
-  <ul>
-    <li><b>後段測試設備(SEMI):</b>2025 $11.2B(+48.1% YoY)、2026 +12%、2027 +7.1%</li>
-    <li><b>SoC 測試機(Advantest 口徑):</b>CY25 $6.9B → CY26 $8.7-9.5B,Advantest 市占 66%</li>
-    <li><b>探針卡(Mordor):</b>2026 $2.71B → 2031 $4.23B、CAGR 9.31%(各研調口徑分歧:MRFR/VMR 更高)</li>
-    <li><b>測試座(QYR/Valuates):</b>2025 約 $1.5B、CAGR ~7%</li>
-    <li><b>AI 加速器 Burn-in+SLT 窄口徑(FMI):</b>2025 $0.8B → 2026 $0.9B → 2036 $2.2B、CAGR 9.3%</li>
-    <li><b>結構指標:</b>先進 AI 封裝測試成本佔晶片成本 10-15%(vs 消費 SoC ~5%);SLT 市場 2026 估 +30%(Digitimes)</li>
-  </ul>
-  <h3>近 12 個月催化劑時間軸</h3>
-  <ul>
-    <li><b>2025/7:</b>Digitimes:AI ASIC 採用率上升驅動 SLT 激增、估 2026 +30%</li>
-    <li><b>2025/10:</b>Teradyne Titan HP SLT 平台支援 2kW、路線圖到 4kW(對應 AI 高功率)</li>
-    <li><b>2025 全年:</b>ISC AI 測試座 +115%、SLT 佔該類 &gt;50%(印證 SLT 結構放量)</li>
-    <li><b>2026/1:</b>高盛調高鴻勁 TP NT$5,000(估營收 2026 +54%/2027 +40%)</li>
-    <li><b>2026/4-5:</b>京元電 capex 二度上修至 500 億創高;FormFactor Q1 +32% 創高;Advantest FY26 財測再創高</li>
-    <li><b>2026/H2:</b>致茂新世代 AI SLT 案量產、欣銓龍潭 ASIC CP 新專案貢獻(前瞻指引)</li>
-  </ul>
+  <h3>市場規模(四子市場 × 多研調口徑,務必分開看)</h3>
+  <p class="sub">測試鏈不是單一市場——四個子市場絕對值差一個數量級,各家研調範圍界定不同,引用務必標口徑。</p>
+  <table>
+    <tr><th>子市場</th><th>多研調口徑(機構 / 規模 / 年)</th><th>分歧主因</th></tr>
+    <tr><td>後段測試設備大盤(含 ATE)</td><td>SEMI:測試設備 2026 +18.6%(總設備 $139B 創高);Advantest 自估 2026 $12.5-13B、市占近 7 成(公司口徑);第三方 $8.2B~$16.04B</td><td>是否含 ATE 本體/介面耗材/晶圓針測機各家不同;SEMI 只報成長率最可靠</td></tr>
+    <tr><td>探針卡 Probe Card</td><td>Mordor:2026 $2.71B→2031 $4.23B(9.3%);VMR:2024 $3.5B→2032 $7.95B(10.8%);MRFR:CAGR 6.8%、2035 $6.53B</td><td>基準年 + 是否計入 HBM/MEMS 高 ASP;三家皆認 FormFactor+Technoprobe 雙雄、MJC 第三</td></tr>
+    <tr><td>測試座 / Burn-in Socket</td><td>360iResearch:2026 ~$2.06B(6.6%);Market Reports World:2026 $1.55B→2035 $2.99B;HDIN:2026 &gt;$1.9B(AI 2 萬針驅動)</td><td>burn-in 與 FT socket 是否合計、AI 大封裝高針數 ASP 是否反映</td></tr>
+    <tr><td>AI 加速器 burn-in+SLT(窄口徑·強度核心)</td><td>FMI:2025 $0.8B→2026 $0.9B→2036 $2.2B(9.3%);液冷占 41%、burn-in rack 占 38%;Digitimes:SLT 2026 +30%</td><td>絕對值最小但「強度倍增」最集中;與大盤差一個數量級,勿混用</td></tr>
+  </table>
+  <p class="sub">市場規模多為研調報告(部分屬方法不透明的報告農場),分歧大、量級參考;FMI「液冷占 41%/burn-in rack 占 38%」是高功率→液冷結構轉變的質化硬證據。結構指標:先進 AI 封裝測試成本佔晶片成本 10-15%(vs 消費 SoC ~5%)。</p>
+  <h3>催化劑時間軸(2025-2026)</h3>
+  <table>
+    <tr><th>時點</th><th>狀態</th><th>事件</th><th>供應鏈影響</th></tr>
+    <tr><td>2025/08</td><td><span class="conf c-high">已發生</span></td><td>TSMC 認證 MJC 為 2nm 主要探針卡供應商(18 個月共同開發)</td><td>2nm 探針卡被國際三強卡位,台廠屬追趕第二梯隊</td></tr>
+    <tr><td>2025/10</td><td><span class="conf c-high">已發生</span></td><td>FormFactor 約 $120M 併購 MEMS 公司;Technoprobe 開 Dresden 新廠;Teradyne Titan HP SLT 2kW→4kW</td><td>探針卡龍頭加碼 MEMS/擴產;SLT 高功率天花板上移</td></tr>
+    <tr><td>2025/12-2026Q1</td><td><span class="conf c-high">已發生</span></td><td>京元電 capex 由 393.7 億二度上修至 500 億創天量</td><td>押注 AI FT/burn-in/SLT 放量,折舊先行</td></tr>
+    <tr><td>2026/01</td><td><span class="conf c-high">已發生</span></td><td>Teradyne 2026Q1 半導體測試 +87% YoY、約 7 成營收與 AI 相關;FormFactor Q1 創高(HBM 探針卡 +50%+);高盛調鴻勁 TP NT$5,000</td><td>印證 AI 測試大盤放量</td></tr>
+    <tr><td>2026/02-03</td><td><span class="conf c-med">進行中</span></td><td>Aehr 取得 AI 處理器 $14M + 光 I/O WLBI 追加訂單、重啟財測</td><td>WLBI 在 AI 處理器/矽光子能見度升(台廠此環缺席)</td></tr>
+    <tr><td>2026Q1</td><td><span class="conf c-high">已發生</span></td><td>台廠介面同創高:旺矽 EPS 12.53、穎崴 19.54、精測 10.43;矽格 capex 升 88 億</td><td>全鏈量價齊升落地;擴產集中 2026H2-2027 開出</td></tr>
+    <tr><td>2026H2</td><td><span class="conf c-un">前瞻</span></td><td>NVIDIA Vera Rubin 量產爬坡(Q3 出貨/Q4 放量,每 GPU 288GB HBM4)</td><td>下半最大需求催化:測試工時/SLT 強度/液冷再加一檔</td></tr>
+    <tr><td>2026H2→2027</td><td><span class="conf c-un">前瞻</span></td><td>欣銓龍潭 ASIC 廠 6 月交機、Q3 貢獻(2027 全面放量);致茂新世代 AI SLT 案量產</td><td>「未來選擇權」兌現節點;CPO/矽光子放大估 2027</td></tr>
+  </table>
   <div class="callout"><b>選股節奏:</b>現在就有營收=京元電/鴻勁/穎崴/致茂/旺矽/中華精測/矽格/雍智;未來選擇權=欣銓(ASIC CP 2026H2)/惠特(光測轉盈)。</div>
 </div>
 
