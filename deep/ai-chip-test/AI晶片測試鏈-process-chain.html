@@ -231,6 +231,42 @@
   <tr><td>出貨檢測 / Outgoing QA</td><td>德律 3030</td><td><span class="conf c-un">周邊 · 非主軸</span></td><td>大封裝翹曲/共面檢測規格升,屬周邊</td></tr>
 </table>
 
+<h3>🔬 細顆粒設備/機台型號地圖(各環節 × 設備類別 + 具體機台)</h3>
+<div class="callout warn">把測試拆到各環節,列關鍵設備類別 + <b>具體機台型號</b> + 供應商。一眼看出:<b>越靠核心訊號產生(ATE 本體/prober/EDA)越是國際寡頭、台廠缺席;越靠介面/溫控/檢測(探針卡/測試座/分選機/AOI/老化爐)台廠越強。</b>機台型號取自官網/法說/媒體;台廠多只揭產品系列名(具體料號未公開、標待查),為研究線索非投資背書,投資前自行查證。</div>
+<table>
+  <tr><th>設備 · 機台型號</th><th>供應商(代號)</th><th>台廠地位</th></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⓪ 設計 / DFT(EDA 軟體,非機台)</td></tr>
+  <tr><td>多 die/3DIC DFT:Tessent Multi-die(IEEE 1838、SSN+IJTAG)</td><td>Siemens EDA(德/美)</td><td><span class="conf c-low">台廠缺席</span></td></tr>
+  <tr><td>ATPG/DFT:TestMAX·DFT Compiler / Modus DFT</td><td>Synopsys SNPS / Cadence CDNS</td><td><span class="conf c-low">台廠缺席</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">① CP 晶圓針測 — prober 缺席、探針卡台廠強勢</td></tr>
+  <tr><td>晶圓針測機 prober:Precio / Precio XL、Prexa SDP(KGD 單顆 die)</td><td>Tokyo Electron 8035(日)</td><td><span class="conf c-low">國際主場 · 台廠缺席</span></td></tr>
+  <tr><td>HBM/DRAM 探針卡:SmartMatrix 3000XP / 1500XP(全晶圓單次 touchdown)</td><td>FormFactor FORM(美)</td><td><span class="conf c-med">國際龍頭</span></td></tr>
+  <tr><td>垂直/MEMS 探針卡(型號待查)</td><td>Technoprobe(義)</td><td><span class="conf c-med">國際第二 · 台灣擴產</span></td></tr>
+  <tr><td>探針卡全系列 CPC / VPC / MEMS</td><td><b>旺矽 6223</b></td><td><span class="conf c-high">台·三式全系列、MEMS 攻 2nm</span></td></tr>
+  <tr><td>高階 MEMS 探針卡(料號待查)/ load board 介面</td><td><b>中華精測 6510 / 雍智 6683</b></td><td><span class="conf c-high">台·全程自製/介面</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">② Burn-in 老化 — WLBI Aehr 獨門、高功率爐京元電自製</td></tr>
+  <tr><td>晶圓級老化 WLBI:Aehr FOX-XP(9 片並行)/ FOX-NP + WaferPak contactor</td><td>Aehr AEHR(美)</td><td><span class="conf c-low">獨門 · 台廠缺席</span></td></tr>
+  <tr><td>高功率封裝後老化爐:自製 1,500W 預燒爐(規劃液冷)</td><td><b>京元電 2449</b></td><td><span class="conf c-high">台·自製護城河</span></td></tr>
+  <tr><td>動態功能 burn-in(socket+製程)/ burn-in board</td><td><b>穎崴 6515 / 雍智 6683</b></td><td><span class="conf c-high">台·首創動態功能 burn-in</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">③ FT 成品終測 — ATE 本體雙寡頭、handler/socket 台廠主場</td></tr>
+  <tr><td>SoC ATE:Advantest V93000 EXA Scale(Pin Scale 5000B、Xtreme Link 超高電流)</td><td>Advantest 6857(日)</td><td><span class="conf c-low">雙寡頭 · 台廠缺席</span></td></tr>
+  <tr><td>SoC/HBM ATE:Teradyne UltraFLEXplus / Magnum EPIC</td><td>Teradyne TER(美)</td><td><span class="conf c-low">雙寡頭 · 台廠缺席</span></td></tr>
+  <tr><td>分選機 handler + ATC 主動溫控 + Cold Plate 水冷板</td><td><b>鴻勁 7769</b></td><td><span class="conf c-high">台·全球龍頭(handler 42%/ATC 33%/水冷 23%)</span></td></tr>
+  <tr><td>分選機 handler:Eclipse(AI 高熱)/ Diamondx</td><td>Cohu COHU(美)</td><td><span class="conf c-med">國際</span></td></tr>
+  <tr><td>測試座 socket:HyperSocket(448Gbps)/ Coaxial Socket</td><td><b>穎崴 6515</b></td><td><span class="conf c-high">台·全球市佔第一</span></td></tr>
+  <tr><td>測試座 socket / 彈簧針 contactor</td><td>Cohu / ISC · Leeno(韓)/ Smiths-Plastronics</td><td><span class="conf c-med">國際</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">④ SLT 系統級測試 — Teradyne 領先、致茂切入</td></tr>
+  <tr><td>SLT 平台:Titan HP(2kW→4kW、ATC 主動溫控)</td><td>Teradyne TER(美)</td><td><span class="conf c-med">國際領先</span></td></tr>
+  <tr><td>SLT 系統(機型待查)</td><td><b>致茂 2360</b></td><td><span class="conf c-high">台·切入中、2026 量產</span></td></tr>
+  <tr><td>SLT handler/溫控 + SLT socket + 測試服務</td><td><b>鴻勁 7769 / 穎崴 6515 / 京元電 2449</b></td><td><span class="conf c-high">台·周邊主場</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⑤ 量測 / 檢測(AOI / X-ray)— 台廠有實質參與</td></tr>
+  <tr><td>SPI+AOI+AXI 一條龍 + 銅柱 X-ray(2026 推)</td><td><b>德律 3030</b></td><td><span class="conf c-high">台·進台積 OSAT</span></td></tr>
+  <tr><td>半導體/封裝 AOI(型號待查)</td><td><b>由田 3455</b></td><td><span class="conf c-med">台</span></td></tr>
+  <tr><td>先進封裝計量/檢測(Firefly 等)</td><td>Camtek CAMT / Onto ONTO</td><td><span class="conf c-med">國際高階</span></td></tr>
+  <tr><td>光電/矽光子/CPO 測試·貼合:晶圓點測機/雷射系統/貼合機</td><td><b>惠特 6706</b></td><td><span class="conf c-med">台·LED 轉矽光子</span></td></tr>
+</table>
+<p class="sub">⚠ 國際大廠機型有官網/新聞稿背書(FormFactor SmartMatrix、Advantest V93000 EXA、Teradyne Titan HP/UltraFLEXplus、Aehr FOX-XP、TEL Precio/Prexa、Cohu Eclipse);台廠多以產品系列名對外、具體機台料號未揭露(標待查),致茂 SLT 機型未公開。為研究線索非投資背書。</p>
+
 <!-- 5 -->
 <h2 id="s5"><span class="n">5</span>市場規模與量產時程</h2>
 <div class="card">
