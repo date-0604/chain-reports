@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLCC 被動元件供給衝擊 × AI 用量升級 研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#0f766e; --accent-soft:#ccfbf1;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#ecfdf5,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:140px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">MLCC 被動元件<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何缺</a>
+    <a href="#categories">兩大關鍵</a><a href="#application">製程鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">市場+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>MLCC 被動元件供給衝擊 × AI 用量升級<em> 研究指南</em> 2026</h1>
+  <p class="lead">AI 伺服器把 MLCC 從「週期性大宗」變「結構性短缺品」——AI 只吃 2-3% 顆數卻佔約 10% 產能(高容良率僅 40%)。日韓三雄(村田/三星電機/太陽誘電,高端 &gt;80%)把產能轉向 AI 高容,高端供給緊+消費級/標準品缺口外溢轉單台廠。漲價已落地(村田 4/1 +15-35%、太陽誘電 5/1 +6-13%、華新科 6/1 台廠第一槍)。⚠ 台廠吃「外溢轉單+利基高壓」非最高端主菜、全球高端僅 1-2 成,且行情已大漲一段、H2 有通路庫存/訂單修正風險;真受惠 vs 族群沾光須嚴格區分。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:日韓轉產+用量升級+漲價</span>
+    <span class="badge">台灣吃:外溢轉單+利基高壓</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:結構性短缺,但台廠非主菜</h2>
+  <p class="subtitle"><b>切分:</b>國巨(2327)平台型、MLCC 僅占營收 13.5%,其磁件/超容已在「AI 伺服器電源」題,本題僅計 MLCC 暴露;周邊鉭電容(KEMET/Panasonic)非 MLCC、勿混;嵌入式 MLCC 基板涉 ABF/載板題(欣興)。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">⚡</span>結構性短缺(非單純週期)</h4><p>AI 只吃 MLCC 2-3% 顆數卻佔約 10% 產能(高容良率僅 ~40% vs 消費 &gt;99%),明年上看 15-20%。一小撮量結構鎖死高端;村田估 AI MLCC 需求 FY30=FY25 3.3 倍(~30% CAGR)。</p></div>
+    <div class="card"><h4><span class="ico">↗️</span>日韓轉產 → 外溢轉單</h4><p>村田/三星電機/太陽誘電(高端 &gt;80%)把產能從消費級轉向 AI 高容,高端供給緊(BB&gt;1、交期&gt;20 週)+ 消費級/標準品缺口外溢轉向台廠(華新科/國巨)。</p></div>
+    <div class="card"><h4><span class="ico">🎯</span>台廠定位:外溢+利基,非主菜</h4><p>台廠吃「外溢轉單+利基高壓」兩塊,全球高端市占僅約 1-2 成;高容 X6S/X7R 高層數仍日韓壟斷。真受惠純度:利基高壓/上游瓷粉 &gt; 通路 &gt; 族群沾光。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(上游材料 → MLCC 製造 → 通路 → 下游)</h2>
+  <p class="subtitle">上游材料(瓷粉/Ni 膏/爐具,日系獨佔多)→ MLCC 製造(日韓高端/台廠外溢)→ 通路代理 → 下游應用。<span class="conf c-high">綠＝財報/官方</span> <span class="conf c-med">橙＝公司自述/單一券商</span> <span class="conf c-un">灰＝週期沾光待查</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游材料<small>日系獨佔多</small></div><div class="items"><span class="badge b-accent">堺化學(BaTiO3 ~25%)</span><span class="badge b-accent">昭榮 Shoei(Ni 膏)</span><span class="badge b-accent">則武(共燒爐)</span><span class="badge b-tw">信昌電 6173(自製瓷粉)</span></div></div>
+    <div class="chain-row"><div class="lvl">MLCC 製造<small>日韓高端/台廠外溢</small></div><div class="items"><span class="badge b-accent">村田/三星電機/太陽誘電(高端&gt;80%)</span><span class="badge b-tw">華新科 2492</span><span class="badge b-tw">禾伸堂 3026</span><span class="badge b-tw">國巨 2327(僅計 MLCC)</span></div></div>
+    <div class="chain-row"><div class="lvl">通路代理<small>缺貨經濟受惠</small></div><div class="items"><span class="badge b-tw">蜜望實 8043(太陽誘電)</span><span class="badge b-tw">日電貿 3090(三星電機)</span></div></div>
+    <div class="chain-row"><div class="lvl">其他被動<small>真受惠非 MLCC</small></div><div class="items"><span class="badge b-tw">光頡 3624(高功率電阻)</span><span class="badge b-tw">臺慶科 3357(TLVR 電感)</span></div></div>
+    <div class="chain-row"><div class="lvl">下游應用<small>AI/車用/工控</small></div><div class="items"><span class="badge">AI 伺服器電源/加速卡</span><span class="badge">800VDC 機櫃</span><span class="badge">車用/EV/工控</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:上游瓷粉(信昌電,利基稀缺)+ 利基高壓 NP0(禾伸堂,800V)+ 標準品外溢轉單(華新科/國巨)+ 通路代理(蜜望實/日電貿)+ 其他真受惠品類(光頡電阻/臺慶科電感);缺席於奈米配方粉(堺化學 ~25%)、Ni 內電極膏(昭榮等前五大 ~73%)、共燒爐(則武 RHK)、最高容 X6S/X7R 高層數(日韓 &gt;80%)。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何缺:日韓轉產 → 外溢轉單 → 漲價兌現</h2>
+  <p class="subtitle">AI 只吃 2-3% 顆數卻佔 ~10% 產能(高容良率僅 40%),一小撮量結構鎖死高端。</p>
+  <div class="flow">
+    <div class="step"><b>日韓轉產</b><small>三雄把產能從消費級轉 AI 高容(高端&gt;80%);高端 BB&gt;1、交期&gt;20 週</small></div><div class="arrow">→</div>
+    <div class="step"><b>外溢轉單</b><small>消費級/標準品缺口轉向台廠(華新科/國巨);台廠吃外溢+利基</small></div><div class="arrow">→</div>
+    <div class="step"><b>漲價兌現</b><small>村田 4/1 +15-35%、太陽誘電 5/1 +6-13%、華新科 6/1 台廠第一槍;均價跌幅縮至近三年最小</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>AI 佔 MLCC 顆數/產能</p><h4>2-3% 顆數 / ~10% 產能</h4></div>
+    <div class="card"><p>單板用量(TrendForce 硬口徑)</p><h4>GB200 6,500 → Rubin 12,000</h4></div>
+    <div class="card"><p>村田 AI 伺服器 MLCC 需求</p><h4>FY30=FY25 3.3 倍(~30% CAGR)</h4></div>
+    <div class="card"><p>整櫃用量(TrendForce 區間)</p><h4>GB200 NVL72 ~44 萬顆</h4></div>
+  </div>
+  <h3>漲價序列(逐家標源,周邊鉭電容勿混入 MLCC)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時點</th><th>廠商/動作</th><th>口徑</th></tr></thead>
+    <tbody>
+      <tr><td>2026/04/01</td><td>村田漲價生效(首發)</td><td>AI 高容/高端車用/RF MLCC +15-35%(銀價+AI 驅動)</td></tr>
+      <tr><td>2026/05/01</td><td>太陽誘電漲價生效</td><td>消費級低容+部分車用 MLCC +6-13%(口徑分歧:中國代理 vs 廣泛)</td></tr>
+      <tr><td>2026/06/01</td><td>華新科開台廠第一槍</td><td>調漲<b>電阻+部分電容(非全面 MLCC)</b>、非齊頭式</td></tr>
+      <tr><td>2026/06</td><td>KEMET 鉭/聚合物(周邊·非 MLCC)</td><td>高端規格達 +65%;KO-CAP +20-30%。<b>勿混入 MLCC 序列</b></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">用量口徑警示:單板(GB200 6,500/Rubin 12,000,TrendForce 硬錨)、整櫃(GB200 NVL72 ~44 萬)、單機(村田/台媒 2 萬/3 萬顆)三種不可混用、不可相加;對外只用單板硬錨。TechNews「百萬顆」指 Vera Rubin 世代非 GB300。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Keys</span>
+  <h2 class="title">兩大關鍵(壟斷成因 + 用量真相)</h2>
+  <p class="subtitle">為何高容由日韓壟斷、用量口徑如何收斂,是判斷「台廠能切多少、題材有多大」的根本。</p>
+  <h3>關鍵 ①:高容 X6S/X7R 高層數為何日韓壟斷(製程四關)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>卡關環節</th><th>為何難</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>① 奈米配方粉</td><td>BaTiO3 抗還原摻雜+四方相/core-shell,堺化學供粉+日韓自有配方;粒徑越小介電常數越低,要靠摻雜補回</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>② sub-1μm 流延</td><td>對針孔/團聚零容忍(一顆團聚穿層短路),漿料分散+流延設備 know-how;層越薄良率懸崖越陡</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>③ 千層疊層</td><td>1000+ 層(vs 早年 ~50 層)對位精度+不斷線薄 Ni 電極;層數越多累積誤差/分層風險越大</td><td><span class="stars">★★★★☆</span></td></tr>
+      <tr><td>⑤ 還原氣氛共燒</td><td>氧分壓窗口極窄(太高 Ni 氧化、太低陶瓷漏電)+共縮匹配+再氧化;把前三關挑戰高溫一次引爆</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>關鍵 ②:用量口徑收斂(整櫃 45 萬顆驗證)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>口徑</th><th>數值</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>單板(硬錨,對外只用此)</td><td>GB200 ~6,500 / Rubin ~12,000 顆</td><td>TrendForce press 5/18,最乾淨可引用</td></tr>
+      <tr><td>整櫃</td><td>GB200 NVL72 ~44 萬 / VR200 ~60 萬</td><td>板數×單板驗證:18 tray×2 板×6,500≈23.4 萬(運算板下界)→ 含 PSU/BBU/全尺寸小容 ~45 萬(上界)。台媒「45 萬」從無出處<b>升級為 TrendForce 區間佐證</b></td></tr>
+      <tr><td>單機(村田/台媒)</td><td>一般 2,200 → AI 2 萬 → 次世代 3 萬顆</td><td>單機節點口徑,與單板不可直接相加</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩關鍵的投資意涵:① 高容壟斷四關(①②③⑤)台廠卡在材料與熱製程天險,故吃外溢+利基而非最高端;② 用量真相是「單板硬錨可信、整櫃 45 萬量級成立但非乾淨公式」——別被「百萬顆」「整櫃幾十萬」混世代口徑放大題材。</div>
+</div></section>
+
+<!-- 05 製程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Process Flow</span>
+  <h2 class="title">完整製程鏈(粉末 → 嵌入式基板)</h2>
+  <p class="subtitle">八道環節。台廠 alpha 在上游瓷粉(信昌電)、利基高壓(禾伸堂)與後段;最高容卡在 ①②③⑤。</p>
+  <div class="stack">
+    <div class="layer"><b>① 介電陶瓷粉末配方(BaTiO3 摻雜)★ 最深護城河</b><div class="uses">奈米粒徑+抗還原 core-shell;信昌電自製、堺化學 ~25% 龍頭</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② 薄層流延 sub-1μm ★ 良率天險</b><div class="uses">針孔/團聚零容忍;漿料分散+設備 know-how 日系</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ 內電極 Ni 膏印刷 + 千層疊層</b><div class="uses">1000+ 層對位;BME 台廠已掌握、超高容層數追趕</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ 壓合 / 切割</b><div class="uses">等靜壓消孔隙+精密切割;成熟製程</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ 共燒 co-firing(還原氣氛)★ 決勝環節</b><div class="uses">氧分壓窄窗+再氧化;前三關挑戰高溫一次引爆</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 端電極 + 電鍍(Cu/Ni/Sn)</b><div class="uses">阻障層+軟端電極防裂;台廠可切入</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 分選 / 測試 / 可靠度</b><div class="uses">AEC-Q200/800V 篩選;真門檻在客戶認證</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ 嵌入式基板(LSC 低電感,新支線)</b><div class="uses">埋入載板降 ESL、CPO 前置;三星電機越南線領先、欣興競合</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:台廠卡在 ①②⑤(材料與熱製程天險,最高容由日韓壟斷);相對能切=上游瓷粉(信昌電稀缺)、利基高壓 NP0(禾伸堂 800V)、後段端電極/測試。缺席於奈米配方粉(堺化學)、Ni 膏(昭榮)、共燒爐(則武 RHK)。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯(依真受惠純度分層)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>MLCC 利基核心(華新科/禾伸堂/信昌電)</td><td>外溢轉單+利基高壓+漲價</td><td>現在就有營收;華新科外溢+X6S(自述)、禾伸堂 NP0 800V(Vera Rubin)、信昌電上游瓷粉(六甲 2027Q3)</td></tr>
+      <tr><td>其他品類真受惠(光頡/臺慶科)</td><td>AI 電源高功率電阻/TLVR 電感</td><td><b>佐證最紮實</b>(光頡 AI 占 12%/漲 30-35%/交期 5→15 週;臺慶科切美系原廠共同開發 TLVR)。屬電阻/電感非 MLCC</td></tr>
+      <tr><td>通路套利(蜜望實/日電貿)</td><td>代理稀缺料漲價+配貨</td><td>缺貨經濟最直接;但無自有技術,<b>通路囤貨/庫存反噬風險高</b></td></tr>
+      <tr><td>平台型(國巨,僅計 MLCC)</td><td>MLCC 占營收 13.5%</td><td>純 MLCC 視角受惠被稀釋;磁件/超容已在 AI 伺服器電源題,本題不重複計</td></tr>
+      <tr><td>周邊電容/上游/沾光(立隆電/鈺邦/凱美/金山電/天二/鈞寶/興勤/千如/九豪/立敦)</td><td>族群漲價+庫存重估題材</td><td>多屬鋁電容/電感/熱敏電阻/上游材料,<b>AI/MLCC 真受惠未證實=待查、留意沾光</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>真受惠 vs 族群沾光</b>(本題最大陷阱;高功率電阻/電感是真受惠但非 MLCC、鋁電容等多為沾光);② <b>台廠非主菜</b>(高端日韓 &gt;80%、台廠全球 1-2 成);③ <b>通路庫存反噬</b>(無製造、交期拉長易重複下單);④ <b>已大漲一段</b>(5/20-22 16 檔漲停、華新科 3 週翻倍);⑤ <b>H2 訂單修正</b>(TrendForce 警告 OEM 未上修全年、通路囤 X5R)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手 <span class="conf c-med">中</span>=公司自述/單一券商 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="maker">MLCC 原廠/利基</button><button data-f="other">其他品類真受惠</button>
+    <button data-f="channel">通路</button><button data-f="intl">國際</button><button data-f="watch">觀察待查</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="maker"><h4>華新科 <span class="code">2492</span></h4><p>台廠 MLCC 純度最高。Q1'26 MLCC 占營收 46.4%、營收 95.6 億 +9.5%;AI 相關約 10%(自述)、2026 估翻倍;X6S/中高壓 630V→1000V+ 供 EMS/電源廠;6/1 開台廠第一槍(調漲電阻+部分電容,非全面 MLCC)。<b>X6S 進 AI 電源待第三方佐證</b>。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="maker"><h4>禾伸堂 <span class="code">3026</span></h4><p>利基高壓 NP0(AI 電源 LLC 諧振用)。Q1'26 EPS 2.86 創四年高;交期 &gt;20 週;3/24 法說啟動第二個「4 年 30 億」資本計畫、台日擴 AI 電源 MLCC、點名 Vera Rubin/Rubin Ultra;今年底前 +20-30%、2027 再 +30-40%。<b>「全球僅三家」窄口徑自述(Kyocera-AVX 亦做 600V+)、量產規模/客戶未獨立佐證</b>。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="maker"><h4>信昌電 <span class="code">6173</span></h4><p>上游瓷粉+高壓 MLCC。媒體稱全台唯一自製介電瓷粉(類比堺化學在台);Q1'26 毛利率 28.4%(+6.1pp)、特殊品交期 8→16 週;六甲新廠 2027Q3 投產、粉末 +50%、未來三年 capex 約 20 億;粉末 250nm→朝 200/100nm。<b>新廠時程風險(商轉 2027)</b>。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>國巨 <span class="code">2327</span></h4><p>平台型被動龍頭(本題僅計 MLCC 暴露)。MLCC 占營收約 13.5%、全球第三;晶片電阻與鉭質電容全球居首。其磁件/超容/KEMET 鉭電容已在「AI 伺服器電源」題,本題刻意不重複計,純 MLCC 視角受惠被稀釋。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="other"><h4>光頡 <span class="code">3624</span></h4><p>其他品類:高功率/高壓電阻(非 MLCC)。Q1'26 AI 占營收 12%(去年不到 5%)、毛利率 28.56%、EPS 0.75;部分產品漲 30-35%;產能近滿載、交期 5→15 週。<b>佐證最紮實(法說具體數字),但屬電阻、規模小</b>。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="other"><h4>臺慶科 <span class="code">3357</span></h4><p>其他品類:TLVR/一體成型電感(非 MLCC)。領先量產 TLVR 切 AI 伺服器高階電源、切美系原廠共同開發下一代 TLVR;2025 營收 66.25 億 +20.3%、2026 AI 占比邁向 14%;馬來廠過美系認證、引進 Bourns 為策略投資者。<b>佐證紮實但屬電感(股號 3357 非 6155)</b>。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="channel"><h4>蜜望實 <span class="code">8043</span></h4><p>通路套利(太陽誘電代理)。MLCC 約 9 成營收、AI/伺服器約 4 成;Q1'26 營收 19.03 億、EPS 1.35、淨值比約 4.3 倍。受惠代理稀缺料漲價+配貨,<b>無自有技術、通路囤貨/庫存反噬風險</b>。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="channel"><h4>日電貿 <span class="code">3090</span></h4><p>通路套利(三星電機 A 級代理)。三星產品占營收近 4 成、MLCC 約 44%;高階 MLCC 交期由 1.5-2 個月延至 3-4 個月;Q1 EPS 約 1.7。<b>同蜜望實:交期拉長期易重複下單、原廠正常化後修正風險高</b>。上市非上櫃。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>村田 / 三星電機 <span class="code">日韓·高端</span></h4><p>村田全球第一(~40%、高容主導),4/1 漲 15-35%、高端訂單=產能 2 倍、估 AI MLCC FY30 3.3 倍;三星電機第二(與村田高端合計 &gt;80%),評估漲 5-10%、越南設 MLCC 嵌入式基板專線。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>太陽誘電 / TDK / Kyocera-AVX <span class="code">日·高容/車規</span></h4><p>太陽誘電第三、4 月漲 6-13%、FY25 BB 1.31;TDK 車規 AEC-Q200 主力;Kyocera-AVX 低 ESL 倍增供 AI GPU 板、軟端電極,且量產 600V+ 高壓品(反證禾伸堂「僅三家」需窄口徑)。</p><span class="conf c-med">中-高</span></div>
+    <div class="card" data-cat="intl"><h4>Vishay / Knowles / KEMET <span class="code">美·廣線/周邊</span></h4><p>Vishay 多元被動(受惠整體缺貨非高容主菜);Knowles 精密/高可靠 MLCC(國防/醫療,非 AI 量);KEMET(國巨子)鉭質/聚合物 6 月漲達 +65%——<b>周邊非 MLCC、勿混</b>。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="watch"><h4>周邊電容/上游 <span class="code">立隆電/鈺邦/九豪/立敦</span></h4><p>(觀察)立隆電 2472/鈺邦 6449=鋁電解/固態/超級電容(非 MLCC,GB300 BBU 題材待佐證);九豪 6127=陶瓷基板/立敦 6175=化成鋁箔(上游材料、間接拉動)。AI 真受惠待逐檔查證。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="watch"><h4>族群沾光待查 <span class="code">凱美/金山電/天二/鈞寶/興勤/千如</span></h4><p>(觀察)凱美 2375(鋁電容)/金山電 8042/天二 6834(被動)/鈞寶 6155(電感)/興勤 2428(熱敏電阻)/千如 3236(電感)。多為 5/20-22 族群漲停+庫存重估題材,AI/MLCC 真受惠未證實,列待查不錯殺(千如=3236 非 3032)。</p><span class="conf c-un">待查</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 細顆粒地圖 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 台灣吃得到定位 + 細顆粒材料/設備地圖 + 路線之爭</h2>
+  <p class="subtitle">一句話:<b>上游瓷粉=利基稀缺卡位(信昌電);標準品=外溢轉單;高容 X6S/X7R=追趕(最高端日韓壟斷);800V 高壓=利基領先(窄口徑);通路=領先;嵌入式基板=競合落後三星電機。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>等級/型號取自官網/法說/研報;個股實際營收強弱不一,投資前自行查證。市佔、入鏈、用量、漲幅均標分歧/待查。</div>
+  <h3>台灣吃得到多少(逐環節定位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節/品項</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>介電瓷粉(上游)</td><td>信昌電 6173/禾伸堂集團</td><td><span class="badge b-warn">利基稀缺卡位</span></td><td>信昌電全台唯一自製瓷粉(250nm→朝 200/100nm);全球龍頭仍堺化學 ~25%</td></tr>
+      <tr><td>標準品/消費級 MLCC</td><td>華新科 2492/國巨 2327</td><td><span class="badge b-warn">外溢轉單(非主菜)</span></td><td>日韓轉高容→標準品缺口轉單;台灣製造市占約 35%、高端僅 1-2 成</td></tr>
+      <tr><td>高容 X6S/X7R 高層數 ⭐</td><td>華新科 2492/國巨 2327</td><td><span class="badge b-danger">追趕,最高端日韓壟斷</span></td><td>華新科供 X6S/中高壓(AI 占約 10% 自述);最高容仍村田/三星主導</td></tr>
+      <tr><td>800V 高壓/AI 電源 NP0 ⭐</td><td>禾伸堂 3026/信昌電 6173</td><td><span class="badge b-warn">利基領先(窄口徑)</span></td><td>禾伸堂 NP0 點名 Vera Rubin、30 億擴產;「僅三家」窄口徑自述</td></tr>
+      <tr><td>通路/代理</td><td>蜜望實 8043/日電貿 3090</td><td><span class="badge b-ok">領先(缺貨經濟直接)</span></td><td>日韓缺貨+漲價直接拉升代理營收利差;但無製造、有反噬風險</td></tr>
+      <tr><td>嵌入式 MLCC 基板</td><td>欣興(準備進)/台系 MLCC 協作</td><td><span class="badge b-warn">競合,落後三星電機</span></td><td>三星電機越南線領先;Ibiden/欣興追,2026 競爭關鍵年(CPO 前置)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>細顆粒材料/設備地圖</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程 / 材料·設備</th><th>供應商</th><th>台廠地位</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">上游材料 ★日系寡占</td></tr>
+      <tr><td>介電粉末 BaTiO3(0.2μm→朝 200/100nm)</td><td>堺化學 Sakai(~25% 龍頭)/日本化學/Ferro/國瓷(中)</td><td><span class="badge b-warn">信昌電(全台唯一自製,全球第8)/禾伸堂(全球第9)</span></td></tr>
+      <tr><td>內電極鎳膏 Ni paste(BME)</td><td>昭榮 Shoei(龍頭)/村田自製/國瓷/豐華(前五大 ~73%)</td><td><span class="badge b-danger">採購為主(無自製領導者)</span></td></tr>
+      <tr><td>端電極銀漿/銅漿</td><td>昭榮/賀利氏 Heraeus/杜邦</td><td><span class="badge b-danger">採購/缺席</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">製程設備 ★日系為主</td></tr>
+      <tr><td>流延機(超薄帶 sub-1μm)</td><td>日系(Creative Coatings/JTEKT)</td><td><span class="badge b-warn">設備採購、製程 know-how 自有</span></td></tr>
+      <tr><td>網印/疊層機(數百-上千層對位)</td><td>日系(Takatori 等)</td><td><span class="badge b-warn">中低層成熟、高層追趕</span></td></tr>
+      <tr><td>共燒/燒結爐(還原氣氛)</td><td>則武 Noritake(RHK 龍頭)/JTEKT/Koyo</td><td><span class="badge b-danger">爐具全採購日系,氣氛 know-how 自有</span></td></tr>
+      <tr><td>切割/分選/測編</td><td>日系/通用(Takatori、LINTEC)</td><td><span class="badge b-ok">後段台廠較易切入</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>主流技術路線(4 條)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>路線</th><th>取捨</th><th>玩家</th></tr></thead>
+    <tbody>
+      <tr><td><b>A. 小型化(0201/01005)</b></td><td>最小體積塞最大容值;村田/三星累積最深、台廠代差最大。AI 主菜不在此,但消費級缺口是台廠轉單來源</td><td>村田/三星電機/太陽誘電;台廠華新科/國巨跟進中低階</td></tr>
+      <tr><td><b>B. 高容高層數(AI 電源 X6S/X7R)⭐</b></td><td>sub-1μm×1000+ 層,AI 結構短缺核心主菜、價格最硬;卡點 ①②③⑤ 四關。台廠吃外溢轉單而非最高端本身</td><td>村田/三星/太陽誘電(壟斷);台廠華新科/信昌電追趕(高端 1-2 成)</td></tr>
+      <tr><td><b>C. 車規(NP0/C0G、AEC-Q200)</b></td><td>單車用量 5000-10000 顆(傳統車 1000-2000);門檻在可靠度數據+認證+軟端電極;NP0 容值密度低、與小型化衝突</td><td>村田/TDK/太陽誘電/Kyocera-AVX;台廠禾伸堂/華新科/國巨切車規</td></tr>
+      <tr><td><b>D. 800V 高壓(HVDC/Kyber)⭐ 台廠最能切</b></td><td>NVIDIA 800V HVDC(2027 Kyber)帶動高壓 NP0/AC LLC;耐壓要厚介電層、與小型化方向相反=另闢蹊徑。台廠代差最小、最有定價權,但市場小於主流高容、要等 2027</td><td>能規模量產 800V+ 者稀:村田/TDK;台系禾伸堂(800V+/Vera Rubin)、華新科(630→1000V+)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">🔬 <b>⑧ 嵌入式基板支線(對台系載板=競合非純競爭):</b>三星電機(Semco)越南建 MLCC 嵌入式基板產線(對應集團越南約 12 億美元 FC-BGA/AI 基板投資,reportedly)。嵌入式=把 MLCC 埋入載板內層、提升訊號完整性+釋放表面空間以容納光學元件(<b>CPO 前置鋪路</b>)。Semco 已率先商業化、領先;Ibiden、欣興準備進入,2026 為競爭關鍵年。對欣興等台系 ABF 載板廠=「新增值環節+與三星競合」:三星具「MLCC×載板」垂直整合綜效且先行,台系載板廠缺自家高端 MLCC、須與信昌電/禾伸堂/國巨協作補位;對台系 MLCC 廠是「被埋進基板=打入封裝鏈新通路」(惟規格仍日韓主導)。信心:中(越南線金額/時程/欣興進度待查)。</div>
+  <p class="disclaimer">資料整合自各家官網/法說(一手)+ TrendForce/DigiTimes/Chemical Research Insight 等。延伸:華新科 X6S 進 AI 電源第三方佐證、禾伸堂 800V 量產規模/客戶、嵌入式基板欣興導入進度、奈米配方粉/Ni 膏台廠自製缺口、posheng28 待查 12 檔逐檔 MLCC 真曝險。</p>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場口徑 + 逐環節難度 + 公司受惠評分</h2>
+  <p class="subtitle">市場規模口徑分歧達 2.4 倍(Persistence vs Mordor),勿混用。</p>
+  <h3>市場規模多口徑(逐家獨立勿加總)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調/來源</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR</th></tr></thead>
+    <tbody>
+      <tr><td>Persistence</td><td>MLCC 市場(值,保守)</td><td>2026 US$13.1B</td><td>2033 US$18.8B</td><td>5.3%</td></tr>
+      <tr><td>Mordor</td><td>MLCC 市場(值,寬)</td><td>2026 US$31.87B</td><td>2031 US$64.19B</td><td>15.03%</td></tr>
+      <tr><td>CICC(經 TrendForce)</td><td>出貨量(顆數)</td><td>2025 &gt;5 兆顆</td><td>—</td><td>AI 佔 2-3% 顆數/~10% 產能</td></tr>
+      <tr><td>村田(IR 2025/12)</td><td>AI 伺服器 MLCC 需求</td><td>FY25=1.0x</td><td>FY30=3.3x</td><td>~30%</td></tr>
+      <tr><td>TrendForce</td><td>單板/整櫃用量(硬錨)</td><td>單板 GB200 6,500</td><td>單板 Rubin 12,000</td><td>整櫃 NVL72 ~44 萬</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:Persistence US$13.1B vs Mordor US$31.87B 差 2.4 倍(方法/口徑差,勿混);用量單板/整櫃/單機三口徑勿相加;周邊鉭電容(KEMET/Panasonic)非 MLCC。</p>
+  <h3>逐環節技術難度評分</h3>
+  <p class="subtitle">維度:技術門檻 / 良率挑戰 / 材料設備稀缺 / 高容高層數門檻,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>良率挑戰</th><th>材料設備稀缺</th><th>高容門檻</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>② 薄層流延 sub-1μm</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>① 介電粉末配方</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>⑤ 還原氣氛共燒</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>③ Ni 內電極+千層疊層</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>⑧ 嵌入式基板</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>④ 壓合 / 切割</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>⑥ 端電極 / 電鍍</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+      <tr><td>⑦ 分選 / 測試</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台廠卡在 ①②⑤(材料與熱製程天險);相對能切=上游瓷粉、利基高壓 NP0、後段端電極/測試。評分為推估。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺/利基壁壘 / 規模財務,0~5 分。只列有查證信心者(holds);觀察股不列。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>華新科 2492</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">19</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>臺慶科 3357</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>禾伸堂 3026</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>光頡 3624</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">17</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>國巨 2327</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">17</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>信昌電 6173</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>蜜望實 8043</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:20%"></div></div><span class="num">1</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">14</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>日電貿 3090</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:20%"></div></div><span class="num">1</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">14</span></td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">華新科=台廠 MLCC 純度最高(X6S 進 AI 電源待第三方佐證);臺慶科=TLVR 電感(非 MLCC,佐證紮實);禾伸堂=NP0 高壓(800V/Vera Rubin,「僅三家」窄口徑自述);光頡=高功率電阻(非 MLCC,佐證最紮實);國巨=平台型只計 MLCC 暴露;信昌電=上游瓷粉稀缺但六甲新廠 2027 才投產;蜜望實/日電貿=通路套利(有庫存反噬風險)。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 催化劑時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2026/04→2027 催化劑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>華新科 2492</td><td>MLCC 純度最高</td><td>Q1'26 MLCC 占營收 46.4%;6/1 漲電阻+部分電容;AI 占約 10% 自述、2026 估翻倍</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>禾伸堂 3026</td><td>利基高壓 NP0</td><td>30 億擴產、今年底前 +20-30%/2027 再 +30-40%;交期&gt;20 週;Q1 EPS 2.86 創四年高</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>信昌電 6173</td><td>上游瓷粉</td><td>六甲新廠 2027Q3 投產、粉末 +50%;特殊品交期 8→16 週;Q1 毛利率 28.4%</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>村田/太陽誘電(事件)</td><td>漲價主推手</td><td>村田 4/1 +15-35%、太陽誘電 5/1 +6-13%;均價跌幅縮至近三年最小、三雄 BB&gt;1</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>三星電機(事件)</td><td>嵌入式基板</td><td>越南設 MLCC 嵌入式基板專線+約 10 億美元矽電容大單;欣興/Ibiden 追</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>TrendForce 警告(事件)</td><td>H2 修正風險</td><td>4/28+5/18:OEM 全年預測未上修、通路囤 X5R、H2 旺季不旺+訂單修正、需求偏 55:45</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2027 800V/CSP ASIC</td><td>結構催化</td><td>NVIDIA 800V HVDC(Rubin Ultra Kyber)拉高高壓 MLCC;CSP 自研 ASIC Q3 末放量</td><td><span class="conf c-un">展望</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有營收(漲價已落地)=華新科/禾伸堂/信昌電、通路(蜜望實/日電貿)、其他品類佐證紮實者(光頡電阻/臺慶科 TLVR 電感)。結構選擇權=禾伸堂/華新科 800V(2027 Kyber)、信昌電六甲新廠(2027Q3)、嵌入式基板(欣興競合)。⚠ 真受惠 vs 族群沾光要分清,且行情已大漲一段、H2 有訂單修正風險。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入華新科量級<b>示意數字</b>(非財測),請依個股真實財務調整。本輪核心=漲價轉嫁 → 毛利率上行 → EPS 槓桿;但須先分清「真受惠 vs 族群沾光」「MLCC vs 其他被動品類」。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>利基/原廠</td><td>上行期 PE 拉升;族群沾光股低 PE 多為陷阱</td></tr>
+      <tr><td><b>毛利率擴張槓桿</b></td><td>漲價/ASP 升 → 毛利率上行 → EPS 放大</td><td>本輪核心</td><td>利基高壓/上游瓷粉毛利彈性大(信昌電 28.4%)</td></tr>
+      <tr><td><b>通路價差模型</b></td><td>代理稀缺料漲價×配貨量</td><td>通路套利</td><td>蜜望實/日電貿;注意庫存反噬</td></tr>
+      <tr><td><b>利基溢價選擇權</b></td><td>800V/NP0 利基壁壘 × 用量升級折現</td><td>利基高壓</td><td>禾伸堂 800V(2027 Kyber);「僅三家」窄口徑待證</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=華新科量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="380"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="30"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="15"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="8.4"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="20"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="50"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為華新科量級示意、非財測。禾伸堂/信昌電/通路商/光頡股數與毛利差異大,務必填入標的真實數字。通路套利型(蜜望實/日電貿)與族群沾光股的高 EPS/低 PE 含週期與庫存利益成分,勿直接外推。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>TrendForce press(2026/04/28、05/18)</b> — BB 0.89→0.92/三雄&gt;1/H2 修正警告;太陽誘電 +6-13%、GB200 6,500/Rubin 12,000 顆、均價跌幅 &lt;0.5%、整櫃用量區間<span class="q">primary</span></li>
+    <li><b>村田 Murata IR Day(2025/12)</b> — AI 伺服器 MLCC FY30=FY25 3.3 倍(~30% CAGR)、每板用量上修、4/1 漲 15-35%<span class="q">primary</span></li>
+    <li><b>華新科/禾伸堂/信昌電/國巨/蜜望實/日電貿/光頡/臺慶科 2026Q1 法說與月營收</b>(公開申報)<span class="q">primary</span></li>
+    <li><b>TechNews finance(6/2)/ Digitimes / 經濟日報 / 工商時報</b> — 華新科 6/1 調漲(電阻+部分電容)、KEMET 鉭電容、三星電機嵌入式基板<span class="q">secondary</span></li>
+    <li><b>Persistence(US$13.1B)/ Mordor(US$31.87B)</b>市場規模、Chemical Research Insight(瓷粉全球前 10)、passive-components.eu / BigGo(整櫃 45 萬顆佐證)<span class="q">secondary</span></li>
+    <li><b><a href="https://posheng28.github.io/Passive-component/" target="_blank">posheng28《被動元件供應鏈彙整》</a></b> — 供應鏈分層與台廠逐環節清單(電容/電阻/電感/保護/上游/通路);當初篩線索用、逐檔仍經對抗式查證<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① 華新科「X6S 已大量導入 AI 電源」=僅公司自述、缺第三方佐證;② 禾伸堂「全球僅三家」=Kyocera-AVX 亦做 600V+,僅窄口徑自述;③ 華新科 6/1「全面漲 MLCC」=實為電阻+部分電容;④「GB300 百萬顆」=指 Vera Rubin 世代非 GB300(GB300 整櫃約 44 萬);⑤「太陽誘電針對中國代理」=兩版 TrendForce 口徑分歧、附口徑引用;⑥「Panasonic 漲 5-65%」=實為 KEMET 鉭電容(非 MLCC);⑦「BB 0.89→0.92 出自 TechNews」=實 TrendForce 4/28;⑧ 菲律賓地震致村田位移/菲佔全球 30%=自媒體無證實、剔除;⑨ 千如股號=3236(非 3032)。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。本題族群沾光與真受惠須嚴格區分、行情已大漲一段、H2 有訂單修正風險;數據請以最新官方法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>MLCC 被動元件供給衝擊 × AI 用量升級 研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
