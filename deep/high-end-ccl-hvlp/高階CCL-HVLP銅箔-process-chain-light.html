@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高階 CCL/HVLP 銅箔(M8/M9)製程鏈 × 供應鏈研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#b45309; --accent-soft:#fef3c7;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#fffbeb,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:780px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">高階 CCL/HVLP 銅箔<span> 製程鏈研究</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">雙循環</a>
+    <a href="#categories">兩黑盒</a><a href="#application">製程鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">市場+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>高階 CCL/HVLP 銅箔(M8/M9)<em>供應鏈研究指南</em> 2026</h1>
+  <p class="lead">AI 板材「漲價 + 規格升級」雙循環,且是台灣定價權最強的一段——CCL 三雄(台光電/台燿/聯茂)掌全球高速 CCL 約 37%、台光電 M9 首家量產認證供輝達;上游 HVLP 銅箔被日本三井近壟斷(最高階 &gt;90%),金居是三井外少數已認證 HVLP4 二供。本題切在已研究 T-Glass(布)與 ABF/BT 載板(下游)之間,增量在「布之後」兩環節:銅箔處理層、CCL 配方壓合認證。⚠ 本題市場小作文密度高,須嚴格區分已查證 vs 傳言。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:漲價+M8 放量/M9 認證轉量產</span>
+    <span class="badge">台灣吃:CCL 約 37%+HVLP 二供</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:台灣定價權最強的一段</h2>
+  <p class="subtitle"><b>切分:</b>玻纖布/石英布「織造本身」見 T-Glass 玻纖布專篇(本篇只引投料)、下游高層數 PCB/載板見 ABF/BT 載板專篇(止於 CCL 交貨點)。台燿/南亞跨 T-Glass 題,勿重複計。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🟫</span>CCL 三雄(配方+認證主場)</h4><p>台光電/台燿/聯茂掌全球高速 CCL 約 37%(台光電 18.9% 居冠);台光電 M9 首家量產認證供輝達 GPU 主板/加速卡/mid-plane。CCL 配方壓合與認證是台灣 alpha 所在。</p></div>
+    <div class="card"><h4><span class="ico">🥉</span>HVLP 銅箔(金居二供)</h4><p>HVLP 銅箔被日本三井近壟斷(最高階 &gt;90%);金居是 Goldman 點名「第二家合格供應商/台版三井」,憑 RTF/ARTF know-how 切入 HVLP4 二供,稀缺性最高。</p></div>
+    <div class="card"><h4><span class="ico">🔒</span>兩大技術黑盒</h4><p>① HVLP 銅箔「低粗糙度 vs 附著力」物理矛盾(微銅瘤+矽烷窗口極窄,三井壟斷因);② M8→M9 樹脂配方(碳氫:PPO≈2:1+石英布)+認證壁壘(台光電首家)。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(三層結構)</h2>
+  <p class="subtitle">上游材料(樹脂/銅箔/布,日系獨佔多)→ CCL 製造(台日韓中)→ 下游 PCB/載板。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝公司自述/單一券商</span> <span class="conf c-un">灰＝市場傳言</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游材料<small>日系獨佔多</small></div><div class="items"><span class="badge b-accent">味之素無關;PPO SABIC/旭化成</span><span class="badge b-tw">金居 8358(HVLP 二供)</span><span class="badge b-accent">三井(HVLP 龍頭)</span><span class="badge b-accent">球矽 Admatechs/Denka</span></div></div>
+    <div class="chain-row"><div class="lvl">CCL 製造<small>台灣主場(約37%)</small></div><div class="items"><span class="badge b-tw">台光電 2383</span><span class="badge b-tw">台燿 6274</span><span class="badge b-tw">聯茂 6213</span><span class="badge b-tw">南亞 1303(垂直)</span><span class="badge b-accent">松下/Resonac/生益</span></div></div>
+    <div class="chain-row"><div class="lvl">製程設備<small>台廠 alpha</small></div><div class="items"><span class="badge b-tw">亞泰金屬 AMI(含浸機)</span><span class="badge b-tw">志聖 3567・群翊 6664(壓合)</span></div></div>
+    <div class="chain-row"><div class="lvl">下游<small>PCB/載板交界</small></div><div class="items"><span class="badge b-tw">臻鼎/欣興/南電</span><span class="badge b-ok">→ ABF/BT 載板專篇</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:CCL 配方壓合認證(三雄約 37%、台光電居冠)+ HVLP 二供(金居)+ 製程設備(含浸亞泰、壓合志聖/群翊)三段卡位;缺席於上游高純單體樹脂(日美)、球形矽微粉(日系)、最高階 HVLP4(三井)。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">漲價 + 規格升級雙循環</h2>
+  <p class="subtitle">速率 800G→1.6T 推 CCL M7→M8→M9、銅箔 HVLP3→HVLP4;每升一級 Df 遞降、ASP 跳升。</p>
+  <div class="flow">
+    <div class="step"><b>規格升級</b><small>M7→M8(2026 主流)→M9(2026H2 小量/2027 放量);M9 ASP &gt;$400 約 M7 的 4 倍</small></div><div class="arrow">→</div>
+    <div class="step"><b>漲價落地</b><small>台光電 Q2 至少 +10%、三井 MicroThin 4 月漲 12%;HVLP3+ 加工費約 10 倍、毛利 40-60%</small></div><div class="arrow">→</div>
+    <div class="step"><b>缺口撐單</b><small>HVLP3+ 供給缺口 2026-28 28%/39%/38%(Goldman),前兩大僅滿足 50-60%</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>高速 CCL 2024(Prismark)</p><h4>$41.8 億 / +50.4%</h4></div>
+    <div class="card"><p>台光電全球專業 CCL 市佔</p><h4>18.9%(居冠)</h4></div>
+    <div class="card"><p>M9 vs M7 ASP</p><h4>約 4 倍(&gt;$400 vs $100-110)</h4></div>
+    <div class="card"><p>HVLP3+ 需求 2025→2028</p><h4>679 → 5,206 噸/月(Goldman)</h4></div>
+  </div>
+  <p class="disclaimer">M9 ASP「5 倍」、台光電「M9 市佔 70-75%」、金居「2028 市佔 53%/EPS 14.58」、缺口「1,000-1,500 噸」均為券商估或市場小作文,標待查;市場規模口徑分歧見市場頁。標來源、非成交數。</p>
+  <h3>市場小作文警示(本題特有)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>流傳說法</th><th>查證後</th></tr></thead>
+    <tbody>
+      <tr><td>金居 2026 EPS 14.58、HVLP4 缺口 1,000-1,500 噸/月</td><td>出自 X 自標「#市場小作文 #RUMOR」;另有 EPS「2026 上看 15」、缺口「約 600 噸」口徑衝突 → 待查</td></tr>
+      <tr><td>金居 2028 HVLP 市佔 53%</td><td>Goldman 原文僅「第二家合格供應商」、未見 53% → 待查</td></tr>
+      <tr><td>三井 HVLP 市佔 &gt;90% 一家獨大</td><td>&gt;90% 屬最高階窄口徑;整體 HVLP 約 26.7%、HVLP4 已認證 3-4 家 → 勿混用</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Black Boxes</span>
+  <h2 class="title">兩大技術黑盒(台廠 alpha 與護城河所在)</h2>
+  <p class="subtitle">HVLP 銅箔的物理矛盾、與 M8→M9 的配方/認證,是「為何三井壟斷、為何台光電獨家」的根本。</p>
+  <h3>黑盒 ①:HVLP 銅箔「低粗糙度 vs 附著力」+ 三井近壟斷</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>面向</th><th>內容</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>物理矛盾</td><td>高頻訊號集中表面(1GHz 趨膚深度 ~2.1μm),Rz 大於趨膚深度就增損耗→須降粗糙度;但銅箔靠銅瘤+矽烷與樹脂咬合,降粗糙度=瘤變小=附著力下降</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>解法(機密)</td><td>種比趨膚深度還小的微銅瘤+特殊矽烷鈍化(傳統用鎳會升損耗),窗口極窄;Rz 階梯 RTF 2.5→HVLP 1.6→HVLP4 ~0.5μm</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>三井壟斷因 / 金居切入</td><td>奈米銅晶粒+處理層配方+客戶認證綁定(良率僅 70-80%、設備不外賣);金居憑 RTF/ARTF know-how 過 HVLP4 驗證成二供</td><td><span class="stars">★★★★☆</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>黑盒 ②:M8→M9 樹脂/填料配方 + 認證壁壘</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>面向</th><th>內容</th><th>門檻</th></tr></thead>
+    <tbody>
+      <tr><td>樹脂</td><td>環氧→M8 PPO/PPE+BMI→M9 碳氫為主(碳氫:PPO≈2:1)+BCB,頂階摻 PTFE</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>填料/補強</td><td>球形矽微粉占比拉到 &gt;40%(控 CTE/Df);M9 補強材由 Low-Dk 玻纖布升級石英布 Q-glass(Dk≈2.3/Df≈0.0009)</td><td><span class="stars">★★★★☆</span></td></tr>
+      <tr><td>認證 / 台光電獨家</td><td>三難同解(低 Df 又黏住超平滑 HVLP4 又不翹);認證 &gt;9 個月、切換成本高→台光電首家量產認證取得領先定價權(聯茂亦過認證、非唯一)</td><td><span class="stars">★★★★★</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩黑盒共同點:核心是「材料配方+處理層 know-how」(買得到設備、買不到良率與認證);這既是日本/三井壟斷的根源,也是台光電(CCL)、金居(HVLP)能卡位的護城河。</div>
+</div></section>
+
+<!-- 05 製程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Process Flow</span>
+  <h2 class="title">完整製程鏈(布之後 → CCL 交貨)</h2>
+  <p class="subtitle">一張高階 CCL 從樹脂到交貨的七道環節。台廠 alpha 在 CCL 配方壓合認證、HVLP 二供與製程設備。</p>
+  <div class="stack">
+    <div class="layer"><b>① 樹脂系統配方(環氧→PPO/PPE→碳氫→BMI)★ 黑盒2</b><div class="uses">M9 碳氫:PPO≈2:1+球矽 &gt;40%;台光電/台燿配方自調</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② 玻纖布/石英布投料(交叉引 T-Glass)</b><div class="uses">M9 用 Q-glass 石英布;織造見 T-Glass 篇</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ HVLP 銅箔處理層 ★ 整鏈最卡(黑盒1)</b><div class="uses">Rz RTF 2.5→HVLP4 ~0.5μm;金居二供、三井龍頭</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ 含浸 prepreg(含浸機)</b><div class="uses">B-stage 半固化;含浸機交期 1-2 年(亞泰受惠)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ 壓合 CCL(真空高溫高壓)</b><div class="uses">分層/爆板/翹曲;志聖/群翊設備</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 客戶認證(M8/M9)★ 龍頭護城河</b><div class="uses">&gt;9 個月、切換成本高;台光電首家量產 M9</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 下游高層數 PCB/載板交界</b><div class="uses">M9 mid-plane 傳達 104 層;見 ABF/BT 篇</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:漲價循環的價值,台灣在「CCL 配方壓合認證」吃最大份額(三雄約 37%、台光電 M9 首發),銅箔段正從 &lt;10% 往 30-50% 移動(金居二供);上游單體樹脂/球矽/最高階 HVLP4 仍是日系的天下。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>CCL 三雄(台光電/台燿/聯茂)</td><td>M8 放量+M9 認證+漲價</td><td>現在就有營收;台光電 M9 首發龍頭、台燿純 AI(M9 落後一梯)、聯茂 M9 過認證待放量</td></tr>
+      <tr><td>HVLP 銅箔(金居)</td><td>HVLP4 二供+結構缺口</td><td>真受惠、稀缺性最高;但市場小作文最多、HVLP4 良率僅約 50% 是實質風險</td></tr>
+      <tr><td>垂直整合/利基(南亞/騰輝)</td><td>全鏈自給 / 利基高階</td><td>南亞 HVLP3 量產但落後金居、石化稀釋(選擇權);騰輝利基+航太、AI 純度低</td></tr>
+      <tr><td>製程設備(亞泰/志聖/群翊)</td><td>CCL 擴產設備荒</td><td>含浸機交期 1-2 年(亞泰 &gt;70%、訂單至 2028);壓合志聖/群翊隨擴產拉貨</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>市場小作文最多=金居</b>(EPS/缺口/市佔傳言密集,須區分已查證 vs 傳言);② <b>M9 放量時間風險</b>(2026 多小量、2027 才放量,當期靠 M8);③ <b>上游隱性卡脖子</b>(單體樹脂/球矽日系);④ <b>市場規模口徑陷阱</b>(四層口徑勿加總);⑤ <b>跨題重疊</b>(台燿/南亞跨 T-Glass、下游跨 ABF/BT)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手 <span class="conf c-med">中</span>=公司自述/單一券商 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="ccl">CCL</button><button data-f="copper">HVLP 銅箔</button>
+    <button data-f="vni">垂直·利基</button><button data-f="equip">製程設備</button>
+    <button data-f="intl">國際</button><button data-f="watch">觀察</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="ccl"><h4>台光電 <span class="code">2383</span></h4><p>高速 CCL 全球龍頭(專業 CCL 18.9% 居冠、台廠高階合計 37.4%);M8/M9 首家量產認證供輝達;M9 2026H2 小量、2027 放量(Q-glass 版 ASP &gt;$400);產能 2026 底 750→2027 底 945 萬張;Q2 至少 +10%;2025 EPS 41.67。AI 純度極高、漲價彈性最強。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="ccl"><h4>台燿 <span class="code">6274</span></h4><p>CCL 三雄,2026Q1 ELL+SLL 占 38%、高速合計約 70%;跨 M7/M8→M9(認證測試中、規劃 2027 量產,落後台光電一梯次);泰國廠 2026H1 擴產月增約 30 萬張;受惠 20-40% 漲價。純 CCL 曝險。跨 T-Glass 題。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="ccl"><h4>聯茂 <span class="code">6213</span></h4><p>M9 Extreme-Low-Loss/Low-CTE 基板 2025H2 通過主要美系 AI GPU 大廠+多家 PCB 板廠認證、2026 起逐步貢獻;2026Q1 單季營收創新高;泰國廠擴產。第二梯隊追兵,放量規模待 2026H2 驗證。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="copper"><h4>金居 <span class="code">8358</span></h4><p>Goldman 定調「第二家合格供應商/台版三井」;HVLP3/4 產能 200(25Q4)→500(26Q4)→三廠後 800-1,200 噸/月;2025/12 停接低階全轉 HVLP、二廠 HVLP4 26Q1 投產、毛利 &gt;40%;目標價 900。稀缺最高但小作文最多、HVLP4 良率約 50% 是風險。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="vni"><h4>南亞 <span class="code">1303</span></h4><p>垂直整合(銅箔+CCL+玻纖布+樹脂+載板,電子材料約占 6 成);HVLP3 已量產、HVLP4 開發中;CCL 延伸至 M9/M10、與日東紡合作。HVLP 落後金居、石化稀釋 AI 純度,屬未來選擇權。跨 T-Glass 題。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="vni"><h4>騰輝電子-KY <span class="code">6672</span></h4><p>利基 CCL:高階特殊材料營收 &gt;50%;以 M9/特殊低損耗組合取得新世代 AI 資料中心認證,並切入低軌衛星/火箭地面站高速材料;2026/5 月營收 5.3 億 YoY +35%。利基真受惠但 AI 主軸佔比低、規模難與三雄相提並論。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="equip"><h4>製程設備 <span class="code">含浸/壓合</span></h4><p>亞泰金屬 AMI(高階含浸機 &gt;70%、訂單能見度至 2028,CCL 擴產設備荒直接受惠);志聖 3567・群翊 6664(真空壓合/塗佈烘烤製程設備,隨台光電/欣興東南亞擴廠拉貨)。高階大噸位壓機部分仍日德。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>三井 / 古河 / 福田 <span class="code">日·HVLP</span></h4><p>三井金屬最高階 HVLP4/電路銅箔近壟斷(最高階 &gt;90%/整體 26.7%);古河 21.2%、福田 17.1%、Solus(韓)14.3%;日韓合計掌 85%+;三井 MicroThin 2026/4 漲 12%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>松下 / Resonac / Doosan <span class="code">日韓·CCL</span></h4><p>Panasonic Megtron 系列(M8 R-5785、M9 鎖 224G);Resonac 樹脂技術領先;Doosan 伺服器板。技術強但擴產被視為保守,高階份額被台廠侵蝕。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>生益 / 建滔 / Admatechs <span class="code">中·材料</span></h4><p>建滔規模龍頭、生益前四大(CR4 約 49.7%),中低階強、追最高階卡認證;Admatechs/Denka(日)球形矽微粉壟斷(M8/M9 隱性卡脖子)。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="watch"><h4>榮科 <span class="code">4989</span></h4><p>(觀察)HVLP 銅箔認證中、尚無顯著營收貢獻;為金居外的潛在第三供候選,待認證落地。長春(未上市)為上游樹脂/電子材料化學品供應者,無代號不評分。</p><span class="conf c-un">待查</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 細顆粒地圖 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 細顆粒材料/設備地圖 + 台灣吃得到定位</h2>
+  <p class="subtitle">一句話:<b>CCL 配方壓合認證+HVLP 二供+製程設備=台灣卡位;上游單體樹脂、球矽、最高階 HVLP4=日系主場。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>等級/型號取自官網/法說/研報(Rz 階梯、M6-M9 Df、三井 MicroThin 已查證);個股實際營收強弱不一,投資前自行查證。</div>
+  <h3>台灣吃得到多少(逐環節定位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>上游單體樹脂(PPO/碳氫)</td><td>長春(未上市)/(多缺席)</td><td><span class="badge b-danger">多缺席 · 日美主導</span></td><td>SABIC/旭化成/MGC;長春台系少數</td></tr>
+      <tr><td>球形矽微粉填料</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 日系壟斷</span></td><td>Admatechs/Denka;M8/M9 隱性卡脖子</td></tr>
+      <tr><td>HVLP 銅箔處理層 ⭐</td><td>金居 8358 / 南亞銅箔 1303</td><td><span class="badge b-warn">二供切入 · 三井主導</span></td><td>金居 HVLP4 已認證(ARTF);最高階仍三井</td></tr>
+      <tr><td>玻纖布/石英布(投料)</td><td>台玻/富喬/建榮/德宏</td><td><span class="badge b-warn">織布段卡位(見 T-Glass)</span></td><td>高階 Low-Dk 布日東紡近 90%</td></tr>
+      <tr><td>CCL 配方壓合認證 ⭐</td><td>台光電 2383 / 台燿 6274 / 聯茂 6213</td><td><span class="badge b-ok">主導 · 全球約 37%</span></td><td>台光電 18.9% 居冠、M9 首家量產認證</td></tr>
+      <tr><td>製程設備(含浸/壓合)</td><td>亞泰金屬 AMI / 志聖 3567 / 群翊 6664</td><td><span class="badge b-ok">設備 alpha</span></td><td>亞泰含浸機 &gt;70%、訂單至 2028;志聖/群翊壓合</td></tr>
+    </tbody>
+  </table></div>
+  <h3>細顆粒材料/設備地圖(逐製程 × 具體等級/型號)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程 / 材料·等級·型號</th><th>供應商(代號/別)</th><th>台廠地位</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">樹脂系統 ★黑盒2</td></tr>
+      <tr><td>環氧→PPO/PPE(M7/M8)→碳氫(M9 碳氫:PPO≈2:1)→BMI/PTFE;Df M6≈0.004/M8≈0.002/M9≈0.0008-0.001</td><td>PPO:SABIC/旭化成/MGC;碳氫:長春(台·未上市)、台光電/台燿自調</td><td><span class="badge b-warn">配方 alpha;單體樹脂日美</span></td></tr>
+      <tr><td>低 Df 填料:液相法球形矽微粉(M8/M9 填充 &gt;40%)</td><td>Admatechs(日)/ Denka / Tatsumori;中:聯瑞新材</td><td><span class="badge b-danger">缺席 · 日系壟斷</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">CCL 等級 ★台廠主導</td></tr>
+      <tr><td>M7(800G 2025)/ M8(0.002,2026 全面)/ M9(0.0008-0.001+Q-glass,1.6T/CPO/Rubin,2026H2 小量/2027 放量)</td><td>M7/M8:台光電/台燿/聯茂/松下;M9:台光電(首家量產)、聯茂(過認證)、台燿/南亞(跟進)</td><td><span class="badge b-ok">主導(三雄約 37%、台光電居冠)</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">HVLP 銅箔等級 ★黑盒1 · 整鏈最卡</td></tr>
+      <tr><td>Rz:RTF 2.5→HVLP 1.6→HVLP2 1.4→HVLP4 ~0.5μm;三井 MicroThin(載體式 1.5-5μm);處理層=銅瘤+矽烷(APTES)</td><td>三井(&gt;90% 最高階/26.7% 整體)/古河 21.2%/福田 17.1%/Solus(韓)14.3%;台:<b>金居 8358(9.9%,ARTF)</b>/南亞銅箔</td><td><span class="badge b-warn">金居二供;最高階日系</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">補強材 玻纖布/石英布(交叉引 T-Glass)</td></tr>
+      <tr><td>Low-Dk/T-glass→Q-glass 石英布(Dk≈2.3/Df≈0.0009/CTE≤3,Rubin mid-plane/CX-9 首導)</td><td>日東紡(~90%)/台玻 1802/富喬 1815/建榮 5340;石英:旭化成/信越/德宏 5475</td><td><span class="badge b-warn">織布段卡位(見 T-Glass)</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">製程設備 ★台廠 alpha</td></tr>
+      <tr><td>含浸機(M9 高 Df 含浸窗口窄,交期 1-2 年)</td><td><b>亞泰金屬 AMI(高階含浸機 &gt;70%、訂單至 2028)</b></td><td><span class="badge b-ok">台廠 alpha(設備瓶頸受惠)</span></td></tr>
+      <tr><td>真空壓合機 / 高層數對位</td><td><b>志聖 3567 / 群翊 6664</b>;Bürkle(德)/北川精機(日,大噸位)</td><td><span class="badge b-ok">台廠 alpha(大噸位仍日德)</span></td></tr>
+      <tr><td>HVLP 處理線(箔機+粗化+矽烷)</td><td>三井/古河自有 know-how(設備不外賣=壟斷主因);台:金居/南亞銅箔自建</td><td><span class="badge b-warn">金居自建(整廠 know-how 是壁壘)</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>主流技術路線(4 條)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>路線</th><th>取捨</th><th>玩家</th></tr></thead>
+    <tbody>
+      <tr><td><b>M8 vs M9 CCL</b></td><td>M8(PPO/PPE+BMI、Df≈0.002)=現金牛、認證成熟多供;M9(碳氫為主+石英布、Df≈0.0008-0.001)=溢價題材、換骨架換補強布、壓合窗口窄、認證壁壘高→首發寡</td><td>M8:台光電/台燿/聯茂/松下;M9:台光電(首家)/聯茂(過認證)/南亞(認證階段)</td></tr>
+      <tr><td><b>HVLP 銅箔 vs 載體極薄銅箔</b></td><td>HVLP(電解低稜)供高速 PCB 大板;載體極薄(三井 MicroThin)走 mSAP/SAP 細線、用於載板/HDI。非替代而是不同層段</td><td>HVLP:三井/古河/福田/金居/南亞銅箔;載體極薄:三井近獨大(台廠著墨少)</td></tr>
+      <tr><td><b>玻纖布 vs 石英布(交叉引 T-Glass)</b></td><td>Low-Dk 玻纖布=M8 主力、成本可控;石英布=Dk/Df/CTE 最佳但脆、織造難、價貴,僅 M9 mid-plane 等頂規用</td><td>玻纖布:日東紡/台玻/富喬;石英布:旭化成/信越/德宏(台光電領先導入)</td></tr>
+      <tr><td><b>台廠二供切入 vs 日本壟斷</b></td><td>日本壟斷=粗化配方+矽烷+處理線整廠 know-how 內製不外流+專利+逐客戶長認證;台廠切入=金居收掉低階全轉 HVLP+自建產線過驗證、南亞垂直整合。結構缺口撐單但有擴產/良率/驗證時間風險</td><td>壟斷:三井/古河/福田;切入:金居/南亞;CCL 端台光電/台燿/聯茂搶松下份額</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">資料整合自各家官網/法說/研報(一手)+ Prismark/Goldman/TechNews 等,為研究線索、非投資背書。市佔、缺口、ASP 倍數均標分歧/待查。延伸:球矽台廠自製缺口、金居 HVLP4 良率爬坡、M10 次世代 CCL(輝達測試中、隱藏供應商待查)。</p>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場規模 + 逐環節難度 + 公司受惠評分</h2>
+  <p class="subtitle">市場口徑分四層(硬式 CCL/高速 CCL/HVLP 金額/HVLP 噸數)勿加總。</p>
+  <h3>市場規模(四層口徑務必區分,逐家獨立勿加總)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調</th><th>口徑(四層)</th><th>基準</th><th>目標</th><th>CAGR</th></tr></thead>
+    <tbody>
+      <tr><td>Prismark</td><td>硬式 CCL 整體</td><td>2024 $150 億(+17.9%)</td><td>—</td><td>—</td></tr>
+      <tr><td>Prismark</td><td>高速 CCL(本題核心)</td><td>2023 $27.8 億</td><td>2024 $41.8 億</td><td>+50.4%</td></tr>
+      <tr><td>Goldman</td><td>HVLP 銅箔金額(HVLP3+ 窄)</td><td>2025 $2.16 億</td><td>2028 $24 億</td><td>+122%</td></tr>
+      <tr><td>Dataintelo / 360iResearch</td><td>HVLP 銅箔金額(寬/最寬)</td><td>2025 $18 億 / $27.2 億</td><td>2034 $42 億 / 2032 $38.8 億</td><td>9.8% / 5.2%</td></tr>
+      <tr><td>Goldman</td><td>HVLP 噸數(缺口)</td><td>2025 需求 679 噸/月</td><td>2028 5,206 噸/月</td><td>+97%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:高速 CCL「$41.8 億(Prismark)」≠「$38-42 億(GMInsights/TBRC 高頻+高速)」;HVLP 銅箔「$3-6 億(窄)vs $18 億(寬)vs $27.2 億(最寬)」分屬三種定義,逐家獨立、嚴禁加總。缺口 Goldman 2026-28 28%/39%/38%、三井+二供僅滿足 50-60%;中國券商另估 HVLP4 2026 缺口約 48%(等級界定/良率假設不同)。</p>
+  <h3>逐環節技術難度評分</h3>
+  <p class="subtitle">維度:技術門檻 / 良率挑戰 / 認證壁壘 / 材料設備稀缺,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>良率挑戰</th><th>認證壁壘</th><th>材料設備稀缺</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>③ HVLP 銅箔處理層</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>① 樹脂系統配方</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>② 玻纖布/石英布投料</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>⑤ 壓合 lamination</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>⑥ 客戶認證</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>④ 含浸 prepreg</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>⑦ 下游 PCB/載板交界</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台廠 alpha 在 CCL 配方壓合認證(①⑤⑥)、HVLP 二供(③)、製程設備;缺席於上游單體樹脂、球矽、最高階 HVLP4。評分為推估。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者(holds);觀察股不列。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>台光電 2383</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">25</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>金居 8358</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">22</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>台燿 6274</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">21</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>聯茂 6213</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>騰輝電子-KY 6672</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">14</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>南亞 1303</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">13</span></td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台光電=CCL 龍頭+M9 首發、五維最強;金居=HVLP 唯一二供、稀缺最高但小作文最多;台燿=純 AI(M9 落後一梯);聯茂=M9 過認證;騰輝=利基/AI 純度低;南亞=垂直整合但 HVLP4 落後、石化稀釋(未來選擇權)。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2025→2028 催化劑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>台光電 2383</td><td>CCL 龍頭+M9 首發</td><td>M9 2026H2 小量、2027 放量;產能 2026 底 750→2027 底 945 萬張;Q2 至少 +10%</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>金居 8358</td><td>HVLP4 二供</td><td>產能 200→500(26Q4)→800-1,200 噸/月;停產低階全轉 HVLP;2026Q1 EPS 2.06(YoY +96%)</td><td><span class="conf c-high">高(產能);待查(EPS 傳言)</span></td></tr>
+      <tr><td>台燿 6274 / 聯茂 6213</td><td>CCL 三雄追兵</td><td>台燿 M9 規劃 2027 量產;聯茂 M9 2025H2 過認證、2026 逐步貢獻;泰國廠擴產</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>三井(事件)</td><td>HVLP 龍頭漲價</td><td>MicroThin 2026/4 漲 12%;VSP 2026/9 設備轉換擴至約 840 噸/月</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Rubin/M9+石英布(事件)</td><td>規格升級</td><td>2026H2 M8.5/M9+石英布首進 AI 伺服器(Rubin CPX/mid-plane);2027 1.6T 全面導入 M9</td><td><span class="conf c-un">展望</span></td></tr>
+      <tr><td>缺口(事件)</td><td>結構性短缺</td><td>Goldman HVLP3+ 缺口 2026-28 28%/39%/38%;金居市佔 5%→53%(2028,券商估待佐證)</td><td><span class="conf c-un">展望/待查</span></td></tr>
+      <tr><td>M10(延伸)</td><td>次世代</td><td>郭明錤指輝達已測 M10(三供應商=台光電+一中廠+一台廠,2027H2,隱藏供應商待查)</td><td><span class="conf c-un">待查</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有營收(漲價已落地)=台光電/台燿/聯茂(M8 現金流)、金居(HVLP4 二供放量);規格升級選擇權=台光電/聯茂 M9(2026H2-2027)、金居 HVLP4 擴產(2027)、南亞 HVLP4(開發中)。受惠核心=台光電(CCL 龍頭+M9 首發)、金居(HVLP 唯一二供、稀缺最高但小作文最多)。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入金居量級<b>示意數字</b>(非財測),請依個股真實財務調整。本輪核心=漲價轉嫁 → 毛利率上行 → EPS 槓桿。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>高速 CCL/HVLP 上行期 PE 拉升</td></tr>
+      <tr><td><b>毛利率擴張槓桿</b></td><td>漲價/ASP 升 → 毛利率上行 → EPS 放大</td><td>本輪核心</td><td>HVLP3+ 毛利 40-60%、加工費 10 倍</td></tr>
+      <tr><td><b>規格升級 ASP 階梯</b></td><td>M7→M8→M9 每代 ASP 跳升</td><td>CCL</td><td>M9 約 M7 的 4 倍(非 5 倍,待查)</td></tr>
+      <tr><td><b>缺口溢價選擇權</b></td><td>結構缺口下二供份額轉移折現</td><td>HVLP</td><td>金居市佔 5→53% 為券商估、待佐證</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="90"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="45"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="16"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="2.4"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="25"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="90"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為金居量級示意、非個股財測。台光電量級遠大(2025 EPS 41.67)、各家股數/毛利差異大,務必填入標的真實數字。金居 EPS 市場流傳數(14.58)未獲獨立佐證,勿直接套用。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/市場小作文已標註。</p>
+  <ul class="refs">
+    <li><b>Prismark CCL Market Update(2025/10)</b> — 硬式 CCL 2024 $150 億、高速 CCL $41.8 億(+50.4%)、台光電專業 CCL 18.9%/前四大 49.7%<span class="q">primary</span></li>
+    <li><b>台光電/台燿/聯茂/金居/南亞/騰輝 2026Q1 法說與月營收</b>(公開申報)— 台光電 M9 首家量產、台燿 ELL+SLL 38%、金居停產低階轉 HVLP<span class="q">primary</span></li>
+    <li><b>三井金屬 MicroThin 漲價文件</b>(2026/03,經 MoneyDJ/CMoney 轉述)<span class="q">primary</span></li>
+    <li><b>TechNews finance / 工商時報 / 經濟日報</b> — M7/M8/M9 規格演進、Q2 漲價、石英布首進 Rubin、Q-glass 規格<span class="q">secondary</span></li>
+    <li><b>Goldman Sachs(經 Bitget/BigGo 轉述)</b> — HVLP3+ 需求 679→5,206 噸/月、缺口 28/39/38%、$2.16 億→$24 億、金居目標價 900/市佔 5→53%(券商估,標中/待查)<span class="q">secondary</span></li>
+    <li><b>槓桿學院</b>(HVLP 市佔)/ <b>materialsnet</b>(Rz/skin effect)/ <b>陸券商</b>(M9 碳氫:PPO)/ <b>Admatechs·Denka</b>(球矽);<b>X「#市場小作文 #RUMOR」</b>(金居 EPS 14.58/缺口 1,000-1,500 噸,列待查)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後的口徑修正(請勿當既成事實):</b>① 金居「EPS 14.58/缺口 1,000-1,500 噸/TPU·Trainium·Rubin 確定採用」=X 自標市場小作文,口徑彼此衝突;② 金居「2028 市佔 53%」=Goldman 原文未見;③ 台光電「M9 市佔 70-75%」=高階 HDI 標題口徑、未獨立佐證(方向對數字未證實);④ 三井「&gt;90%」=最高階窄口徑,整體 HVLP 約 26.7%、HVLP4 已認證 3-4 家(勿混用);⑤ M9 ASP「5 倍」=實算約 4 倍(量級對倍數偏高);⑥ 台燿/南亞跨 T-Glass、下游跨 ABF/BT,勿重複計。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。本題市場傳言密度高,務必區分已查證 vs 傳言;數據請以最新官方法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>高階 CCL/HVLP 銅箔(M8/M9)製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
