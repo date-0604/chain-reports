@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>利基記憶體缺貨潮 × 台系原廠定價權 研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#6d28d9; --accent-soft:#ede9fe;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#f5f3ff,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:860px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:860px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:140px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">利基記憶體缺貨潮<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何缺</a>
+    <a href="#categories">兩大論戰</a><a href="#application">缺貨品項鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">市場+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>利基記憶體缺貨潮 × 台系原廠定價權<em> 研究指南</em> 2026</h1>
+  <p class="lead">NOR、SLC/MLC NAND、DDR3/DDR4、LPDDR4 等老製程記憶體,正逢「原廠結構性退場 × 台系原廠首度握定價權」的超級缺貨循環——三星(MLC 2026/6 最終出貨、LPDDR4 4/17 停接單)、Kioxia(2D NAND 2029 全退)、SK海力士/美光 為追 HBM/DDR5 棄守老製程,台廠旺宏/華邦電/南亞科 罕見從跟漲者翻身為定價者。受惠分三型不可混:結構定價者(旺宏/華邦電/南亞科/群聯)、週期庫存利益(威剛/十銓)、代工受惠(力積電/晶豪科)。⚠ 最大爭點是漲價持續性,且須區分公司自述 vs 已查證。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:原廠退場+台廠定價權</span>
+    <span class="badge">台灣吃:NOR/NAND 寡占+DRAM 領先</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:受惠分三型,混淆=買在循環頂</h2>
+  <p class="subtitle"><b>本質:</b>這是「供需週期 × 台系原廠定價權」判斷題,非純製程鏈。<b>切分:</b>HBM 本體未做(台灣參與少、另題);企業級 eSSD/CXL 屬高階資料中心另題,群聯為兩題唯一重疊(本題吃 NAND 搶料/eSSD 題吃主控)。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🏭</span>結構定價者(自有產能)</h4><p>旺宏(NOR/MLC/eMMC 近獨佔)、華邦電(利基 DRAM/NOR)、南亞科(本土 DRAM 龍頭)。原廠退場+自有產能=漲價持久、毛利結構性上移。群聯為跨題雙引擎(主控卡位+搶料庫存)。</p></div>
+    <div class="card"><h4><span class="ico">📦</span>週期庫存利益(無晶圓)</h4><p>威剛、十銓。靠低價庫存×漲價,漲價初期爆發最強、但<b>反轉時跌價損失也最猛(對稱風險)</b>。把它當結構財估值(看低本益比)=經典「景氣循環股低 PE 陷阱」。</p></div>
+    <div class="card"><h4><span class="ico">🔧</span>代工 / 設計受惠</h4><p>晶豪科(fabless、DDR3 大宗)、力積電(純代工)。賺投片價差/補漲,無自有定價權;且力積電 2027 以美光 1Y/1z 放量 DDR4 時,自己又變成供給增量端(雙面)。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(退場原廠 → 台系補位 → 終端)</h2>
+  <p class="subtitle">國際大廠退老製程 → 台系利基原廠補位 → 控制 IC/模組 → 下游終端。<span class="conf c-high">綠＝財報/官方</span> <span class="conf c-med">橙＝公司自述/單一券商</span> <span class="conf c-un">灰＝市場傳言</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">退場原廠<small>追 HBM/DDR5 棄老製程</small></div><div class="items"><span class="badge b-accent">三星(MLC 6 月退/LPDDR4 4/17 停接)</span><span class="badge b-accent">Kioxia(2D NAND 2029 全退)</span><span class="badge b-accent">SK海力士/美光</span></div></div>
+    <div class="chain-row"><div class="lvl">台系利基原廠<small>首度握定價權</small></div><div class="items"><span class="badge b-tw">旺宏 2337</span><span class="badge b-tw">華邦電 2344</span><span class="badge b-tw">南亞科 2408</span></div></div>
+    <div class="chain-row"><div class="lvl">控制+模組+代工<small>綁料/庫存利益</small></div><div class="items"><span class="badge b-tw">群聯 8299(主控)</span><span class="badge b-tw">威剛 3260·十銓 4967(模組)</span><span class="badge b-tw">力積電 6770·晶豪科 3006(代工/設計)</span></div></div>
+    <div class="chain-row"><div class="lvl">供給增量變數<small>空方來源</small></div><div class="items"><span class="badge b-warn">CXMT 長鑫(2027 DDR4 倍增)</span><span class="badge b-warn">兆易(委 CXMT 代工)</span><span class="badge b-warn">YMTC(NAND 跨 DRAM)</span></div></div>
+    <div class="chain-row"><div class="lvl">下游終端<small>成本承壓方</small></div><div class="items"><span class="badge">IPC(研華/樺漢)</span><span class="badge">車用/網通/edge AI/家電</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:NOR/SLC/MLC NAND=寡占或近獨家(旺宏/華邦,定價權最強);DDR3/DDR4=本土領先(南亞科首度定價權)但有中系追趕;主控/模組=台灣強但屬綁料/庫存利益;HBM 本體=幾近缺席(另題)。空方破口在 2027H1 中系供給增量。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何缺:結構性退場 → 台廠定價權 → 漲價兌現</h2>
+  <p class="subtitle">漲價驅動力不是新技術,而是原廠把晶圓全押 HBM/DDR5(毛利高、排擠 &gt;3× wafer),結構性退出老製程。</p>
+  <div class="flow">
+    <div class="step"><b>結構性退場</b><small>三星 MLC 2026/6 退/LPDDR4 4/17 停接;Kioxia 2029 全退;MLC 產能 2026 -41.7%</small></div><div class="arrow">→</div>
+    <div class="step"><b>台廠定價權</b><small>旺宏/華邦/南亞科 自有產能補位,從跟漲者變定價者;產能售罄+月報價+預付長約</small></div><div class="arrow">→</div>
+    <div class="step"><b>漲價兌現</b><small>2Q26 合約 DRAM +58-63%/NAND +70-75%;MLC 現貨 +300%;台廠 1Q26 EPS 多創高</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>2Q26 合約價(TrendForce QoQ)</p><h4>DRAM +58~63% · NAND +70~75%</h4></div>
+    <div class="card"><p>MLC NAND 64Gb 現貨</p><h4>+約 300%(2025 底→26/5)</h4></div>
+    <div class="card"><p>MLC NAND 產能 2026</p><h4>YoY -41.7%(全題最陡)</h4></div>
+    <div class="card"><p>DDR4 8Gb 累計(DigiTimes)</p><h4>一年漲約 18 倍</h4></div>
+  </div>
+  <p class="disclaimer">口徑警示:合約價(2Q26 DRAM +58-63%/NAND +70-75%)、現貨(MLC 64Gb +300%)、累計(DDR4 一年 18 倍)、單月(南亞科 DDR4 8Gb +50%)為四種不同口徑,勿混用、勿加總。「DDR4 +752%」單一報價未獲權威源直接證實、改用 18 倍口徑。</p>
+  <h3>大摩立場演變(空方代表已翻多,引用須標注)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時點</th><th>動作</th><th>對台股</th></tr></thead>
+    <tbody>
+      <tr><td>2026/03/20</td><td>三大理由唱衰 DDR4、點名「2H27 轉弱」</td><td>降評南亞科(350→298)、華邦電(155→140),升評旺宏</td></tr>
+      <tr><td><b>2026/05/29</b></td><td><b>反手認錯翻多</b>:DDR4 2H26 缺口 14%→19-20%、延續到 2028</td><td>華邦電列首選(100→222/樂觀 264)、南亞科(278→380/樂觀 805)、旺宏/力積電增持</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">⚠ 空方原始論點「2H27 DDR4 轉弱」的提出者(大摩)本人已於 5/29 撤回近端看空;引用空方時務必並列此翻多事實。多方「缺到 2030」為群聯潘健成引述原廠內部報告(待查),非共識。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Debates</span>
+  <h2 class="title">兩大論戰(賺不賺得到、撐不撐得久的核心)</h2>
+  <p class="subtitle">漲價持續性、與受惠型態判斷,是「能不能賺、會不會買在頂」的根本。</p>
+  <h3>論戰 ①:漲價能撐多久?「缺到 2030」 vs 「2H27 轉弱」</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>立場</th><th>論點</th><th>信心</th></tr></thead>
+    <tbody>
+      <tr><td>多方「缺到 2030」</td><td>群聯潘健成:AI 剛需、原廠產能僅約 +50%/年、十年難解,某 Flash 廠首見要求「預付三年現金」。<b>實為引述原廠內部報告、非本人定論</b></td><td><span class="conf c-med">中-待查(自述)</span></td></tr>
+      <tr><td>空方「2H27 轉弱」</td><td>大摩原版(3/20):CXMT 2027 DDR4 倍增+力積電 1Y/1z 放量。<b>⚠ 大摩 5/29 已認錯翻多撤回近端看空</b></td><td><span class="conf c-low">已被提出者撤回</span></td></tr>
+      <tr><td>勝負手</td><td>2027H1 中系(CXMT)+ 力積電位元增量能否追上 AI 對老製程的排擠速度;2026 內幾乎不影響、CXMT 自身正撤 DDR4</td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>論戰 ②:結構財還是週期財?(估值方法之爭)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>型態</th><th>特性</th><th>估值要點</th></tr></thead>
+    <tbody>
+      <tr><td>結構定價者(旺宏/華邦/南亞科)</td><td>自有產能+原廠退場,漲價持久、毛利結構性上移</td><td><span class="stars">★★★★★</span> 可給較高 PE/結構溢價</td></tr>
+      <tr><td>週期庫存利益(威剛/十銓)</td><td>無晶圓,低價庫存×漲價;爆發最強但反轉跌價最猛</td><td><span class="stars">★★☆☆☆</span> 低 PE 多為循環陷阱、盯斜率拐點</td></tr>
+      <tr><td>代工/設計(力積電/晶豪科)</td><td>賺投片價差/補漲,2027 力積電又是供給增量端</td><td><span class="stars">★★★☆☆</span> 受代工配額/產能牽制</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩論戰共同心法:① 漲價持續性的多方是公司自述(待查)、空方已被提出者撤回,故 <b>2026-2027H1 賣方市場高信心、2027 下半才是爭點</b>;② 型態決定估值方法,把庫存利益型當結構財看是最常見的誤判。</div>
+</div></section>
+
+<!-- 05 製程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Shortage Chain</span>
+  <h2 class="title">缺貨品項鏈(依供給斷崖陡度排序)</h2>
+  <p class="subtitle">從斷崖最陡、台廠定價權最強的 MLC/SLC/NOR,到主升段 DDR4/LPDDR4,再到綁料/吃庫存利益的控制晶片/模組,最後是成本承壓的下游終端。</p>
+  <div class="stack">
+    <div class="layer"><b>③ MLC NAND ★ 斷崖最陡(產能 -41.7%)</b><div class="uses">三星 EOL、旺宏近獨家;現貨 +約 300%</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② SLC NAND ★ Kioxia 退場大贏家</b><div class="uses">Kioxia 2029 全退;華邦產出增逾 80%、工控認證綁死</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>① NOR Flash ★ 台系最純定價權</b><div class="uses">三星/美光已淡出;華邦居冠、車用/AMOLED 黏性最強</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ DDR3/DDR4 ★ 主升段、交易最熱</b><div class="uses">大摩缺口 14%→19-20%;南亞科首度定價權</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ LPDDR4/4X(疊 NVIDIA SOCAMM 題材)</b><div class="uses">三星 4/17 停接單;南亞科×NVIDIA 入鏈待查</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 控制晶片(主控):稀缺在綁料能力</b><div class="uses">群聯/慧榮;預付三年現金搶 NAND 裸晶</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 模組/通路:庫存利益最猛、反轉最險</b><div class="uses">威剛/十銓;斜率交易、盯合約價拐點</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ 下游終端(工控/車用/edge AI):成本承壓</b><div class="uses">設計黏性=上游定價權根基;景氣轉弱=缺口破口</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:價值最厚在 MLC/SLC/NOR(旺宏/華邦,寡占近獨家、漲價持久);DDR4 彈性最大但也是供給增量最早出現處(斜率最陡也最先轉弱);模組/通路爆發猛但反轉最險。⑧ 下游終端是成本承壓方,但其高設計黏性(車規/工控認證綁死)正是上游台廠定價權能撐多久的根本。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
+    <tbody>
+      <tr><td>結構定價者(旺宏/華邦電/南亞科)</td><td>原廠退場+自有產能定價權</td><td>現在就有營收且持久;旺宏 MLC/eMMC 近獨家、華邦 DDR4+NOR、南亞科最大規模 DRAM</td></tr>
+      <tr><td>主控雙引擎(群聯)</td><td>NAND 主控卡位+搶料庫存</td><td>1Q26 EPS 68.8、手握逾 350 億低價庫存;⚠ 一檔兩題(eSSD 主控屬另題)</td></tr>
+      <tr><td>週期庫存利益(威剛/十銓)</td><td>低價庫存×漲價</td><td>爆發最強(威剛 EPS 30、十銓 27)但反轉最險;十銓 4 月營收 MoM -59% 為最早示警</td></tr>
+      <tr><td>代工/設計(力積電/晶豪科)</td><td>老製程投片漲價+轉單</td><td>力積電 2Q 毛利率跳升、5 個月遞延(但 2027 又是供給增量端);晶豪科 DDR3 補漲、靠代工配額</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>型態混淆</b>(把庫存利益型當結構財=循環股低 PE 陷阱);② <b>供給回補</b>(三星暫緩減產、AI capex 降溫則 wafer 回流老製程);③ <b>中系供給增量</b>(CXMT 2027 DDR4 倍增、YMTC 跨 DRAM,2027-2028 威脅);④ <b>口徑陷阱</b>(合約/現貨/累計/單月勿混);⑤ <b>跨題重疊</b>(群聯一檔兩題、HBM 本體未做)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手 <span class="conf c-med">中</span>=公司自述/單一券商 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="maker">利基原廠</button><button data-f="ctrl">控制 IC</button>
+    <button data-f="module">模組通路</button><button data-f="foundry">代工·設計</button>
+    <button data-f="intl">國際</button><button data-f="watch">觀察</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="maker"><h4>旺宏 <span class="code">2337</span></h4><p>結構受惠最純一檔。NOR+SLC/MLC NAND+eMMC IDM;三星 MLC EOL 後高密度 MLC/eMMC 僅剩旺宏能做。1Q26 終結連 10 季虧損、NAND 營收季增 90%/年增 382%、eMMC 年增 3,993%;2026 法人估營收年增約 278% 至約 1,091 億、EPS 約 19。NOR↔MLC 設備可彈性挪移=動態追最缺品項。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>華邦電 <span class="code">2344</span></h4><p>結構受惠+定價者,三題通吃(利基 DRAM+NOR+SLC)。1Q26 毛利率 53.4%、EPS 創近五年高;法說稱 DDR4/LPDDR4 缺口延續至 2028 後。高雄 15K→24-25K wpm(2027 Q1、轉 16nm)。大摩 5/29 列 DDR4 族群首選、目標 100→222(樂觀 264)。CUBE 邊緣 AI 2027 大爆發(展望)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="maker"><h4>南亞科 <span class="code">2408</span></h4><p>本土 DRAM 龍頭,規模最大但週期屬性較重。1Q26 營收 490.87 億、毛利率 67.9% 創高、EPS 8.41、淨利率 53.1%。4/8 完成 787 億私募(SanDisk/Kioxia/Solidigm/Cisco 全是客戶)。法人估 2026 EPS 36.2/目標 365(大摩 380、樂觀 805)。LPDDR5X 送 NVIDIA 驗證(入鏈待查)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="ctrl"><h4>群聯 <span class="code">8299</span></h4><p>跨題雙引擎(NAND 主控卡位+搶料庫存利益)。1Q26 營收 409.67 億季增 79.7%、毛利率 61.3%、EPS 68.8 創高;手握逾 350 億低價 NAND 庫存、備逾 400 億搶料。潘健成預言 2H NAND 缺更嚴重、需預付三年現金。⚠ 一檔兩題:eSSD 主控屬高階資料中心另題。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="module"><h4>威剛 <span class="code">3260</span></h4><p>週期財(庫存利益)代表。1Q26 營收 261 億年增 163%、毛利率 55.69% 創高、EPS 30、單季獲利超越 2025 全年。4 月底庫存 400 億、6 月底目標 500 億;預告 2Q 合約再漲逾 4 成。本益比約 9 倍(市場爭點:循環股低 PE 陷阱?)。反轉時跌價風險最高。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="module"><h4>十銓 <span class="code">4967</span></h4><p>週期財(庫存利益),波動示警最明顯。1Q26 EPS 27、年增約 26 倍;但 4 月營收 MoM -59% 劇烈回檔=模組鏈<b>最早反轉訊號</b>。布局企業級/軍規/工控利基抗波動,但規模較小、緩衝弱於威剛。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="foundry"><h4>力積電 <span class="code">6770</span></h4><p>代工轉盈受惠。記憶體代工約 5 個月遞延,管理層估 2Q 毛利率大跳升、有機會不亞於 2021 高峰。美光技轉 1Y/1z(2027 量產)。<b>純代工、不推自有 DDR4、不回銷美光</b>。⚠ 2027 1Y/1z DDR4 放量時自己又變供給增量端=「2H27 轉弱」劇本關鍵變數(雙面)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="foundry"><h4>晶豪科 <span class="code">3006</span></h4><p>代工受惠+補漲。利基記憶體 IC 設計(約 9 成成熟記憶體、DDR3 大宗,fabless)。2025 全年 EPS 僅 0.87、4Q25 逆轉 3.68、1Q26 EPS 7.22、4 月營收年增 349%。2026 法人估 EPS 區間約 24.6-37.1。護城河在代工產能綁定,2026 產能供給為最大變數。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>三星 / Kioxia <span class="code">退場主推手</span></h4><p>三星 MLC NAND 2026/6 最終出貨、LPDDR4 2026/4/17 停接單(2027 停產);Kioxia 2D NAND 2026/3 EOL、最後接單 2026/9、2029 全退。是引爆缺貨潮與台系定價權的最大單一變數。三星因「DDR4 印鈔機」2025/12 暫緩減產(供給可機會性回補)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>CXMT / 兆易 / YMTC <span class="code">中·供給增量</span></h4><p>本題最大空方變數。CXMT 2026 底 DDR4 規劃由 2 萬→1 萬片/月(自身撤 DDR4)、2027 計畫倍增,月產能衝 30 萬片;兆易 2026 砸 $8.25 億委 CXMT 代工填三星缺口;YMTC 武漢 Phase III 提前 2026 下半、約 50% 轉 DRAM。真正衝擊普遍落在 2027-2028。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>SK海力士 / 美光 <span class="code">韓美·退老製程</span></h4><p>SK海力士轉 HBM/DDR5、老製程加速縮減但延後全退(無錫舊廠續產 DDR4),HBM4 提前 2026/2;美光停產 legacy DDR4 模組、收掉消費品牌 Crucial,Fab6 回頭擴產 1α LPDDR4/DDR4(TrendForce 認為不改短缺格局)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="watch"><h4>慧榮 / 模組四檔 <span class="code">觀察</span></h4><p>慧榮 SiliconMotion=全球 NAND 主控領導廠(NASDAQ ADR,無台股代號、不進 holds);創見 2451/宇瞻 8271/宜鼎 5289/品安 8088=模組通路廠,本輪未逐檔深查受惠幅度(工規/車規利基者抗波動較佳),屬庫存利益型、反轉風險高,待個別查證再升級。</p><span class="conf c-un">待查</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 細顆粒地圖 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 台灣吃得到定位 + 逐廠產能盤點 + 路線之爭</h2>
+  <p class="subtitle">一句話:<b>NOR/SLC/MLC NAND=台灣寡占或近獨家;DDR3/DDR4=本土領先但有中系追趕;主控/模組=台灣強但屬綁料/庫存利益;HBM=幾近缺席(另題)。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>節點/產能取自法說/媒體(已查證);個股實際營收強弱不一,投資前自行查證。市佔、缺口、入鏈、EPS 估值均標分歧/待查。</div>
+  <h3>台灣吃得到多少(逐品項定位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>品項</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>NOR Flash</td><td>華邦電 2344(居冠)/旺宏 2337</td><td><span class="badge b-ok">寡占 · 定價權最強</span></td><td>三星/美光已淡出,賽局剩台系雙雄+兆易</td></tr>
+      <tr><td>MLC NAND</td><td>旺宏 2337</td><td><span class="badge b-ok">近獨家 · 三星退場補位</span></td><td>高密度 MLC 幾乎只剩旺宏;產能年減 41.7%</td></tr>
+      <tr><td>SLC NAND</td><td>華邦電 2344/旺宏 2337</td><td><span class="badge b-ok">寡占 · Kioxia 退場大贏家</span></td><td>華邦 SLC 產出未來一年增逾 80%、工控認證綁死</td></tr>
+      <tr><td>DDR3/DDR4</td><td>南亞科 2408/華邦電 2344</td><td><span class="badge b-warn">本土領先 · 中系追趕</span></td><td>南亞科首度定價權;CXMT/兆易/力積電增量變數</td></tr>
+      <tr><td>LPDDR4/SOCAMM</td><td>南亞科 2408/華邦電 2344</td><td><span class="badge b-warn">追趕 · SOCAMM 題材待查</span></td><td>三星退出迎轉單;南亞科×NVIDIA 入鏈公司不證實</td></tr>
+      <tr><td>主控 IC / 模組</td><td>群聯 8299/威剛 3260/十銓 4967</td><td><span class="badge b-warn">強 · 綁料/庫存利益型</span></td><td>稀缺在綁 NAND 裸晶/低價庫存,非供給定價權</td></tr>
+      <tr><td>HBM 本體</td><td>(幾近缺席)</td><td><span class="badge b-danger">缺席 · 另題</span></td><td>主體 SK海力士/三星/美光;台廠多在測試/載板邊角</td></tr>
+    </tbody>
+  </table></div>
+  <h3>逐廠產能盤點(Fab × 製程節點 × 彈性)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>廠商</th><th>產品線 / 節點</th><th>Fab · 產能 · 彈性</th><th>台廠 alpha</th></tr></thead>
+    <tbody>
+      <tr><td>旺宏 2337</td><td>NOR+SLC/MLC NAND(2D)+eMMC</td><td>新竹 12 吋;NOR/SLC/MLC 設備共通可互轉;20K→30K wpm(+10K 全 MLC),組合朝 NOR:NAND 約 50:50</td><td><span class="badge b-ok">最高純度:NOR↔MLC 挪移彈性</span></td></tr>
+      <tr><td>華邦電 2344</td><td>利基 DRAM+NOR+SLC</td><td>高雄 12 吋 ~15K→24-25K wpm(2027 Q1、皆 16nm);2026 資本支出 405+73 億、另砸 23 億買 ASML</td><td><span class="badge b-ok">三題通吃;DDR4 退場+NOR 龍頭</span></td></tr>
+      <tr><td>南亞科 2408</td><td>DDR4/DDR3+LPDDR4、DDR5 ~10%</td><td>1B 已量產 16Gb DDR5/8Gb DDR4(貢獻約 40% 晶粒);1C 2026H2 完驗、1D 2026 Q2 試產;資本支出逾 520 億</td><td><span class="badge b-ok">DDR4/LPDDR4 最大宗純 DRAM;DDR5 起步晚</span></td></tr>
+      <tr><td>力積電 6770</td><td>DRAM/NAND 代工(25/38nm)+1Y/1Z 升級</td><td>美光技轉一年內取得 1Y、後續 1Z;2027 量產、台南首期 2027H2 約美光 2026 Q4 全球產能 10%</td><td><span class="badge b-warn">缺貨期受惠;但 2027 DDR4 增量端(雙面)</span></td></tr>
+      <tr><td>晶豪科 3006</td><td>利基 DRAM(半營收 DDR3)+SLC/2D NAND+NOR(fabless)</td><td>無自有 fab;投片綁代工(力積電等)產能保障協議,受配額限制</td><td><span class="badge b-warn">DDR3+SLC 受惠;2027 配額恐被美光技轉擠壓</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>缺貨週期路線之爭(5 品項:最前沿 → 主升段 → 中段)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>品項(週期位置)</th><th>取捨 / 特性</th><th>玩家</th></tr></thead>
+    <tbody>
+      <tr><td><b>MLC NAND(最前沿、斷崖最陡)</b></td><td>三星停產、4-32GB 高密度幾近獨家;現貨 +約 300%(待查/媒體)。缺最久;但被動受惠,旺宏自身 +10K 全 MLC 放量則供給轉寬</td><td>旺宏(近獨家)、晶豪科(靠代工配額)</td></tr>
+      <tr><td><b>SLC NAND(前段、結構退場)</b></td><td>工控/車用/網通剛需、認證黏性高轉單難,吳敏求明示「續漲」;黏性高=漲價持久,但量體小於 DRAM</td><td>旺宏、華邦電、晶豪科</td></tr>
+      <tr><td><b>NOR(前-中段、排擠型)</b></td><td>2026 缺口估 5%→~8%;小設計商漲幅達 50%。華邦龍頭定價權佳;但單價低、兆易等中系利基玩家為潛在供給</td><td>華邦電(居冠)、旺宏(NOR↔MLC 挪移)</td></tr>
+      <tr><td><b>DDR4(主升段、最受關注)</b></td><td>大摩缺口 14%→19-20%;8Gb 模組 5 月 ~$119(+40%)。彈性最大;但也是供給增量最早出現處——「斜率最陡也最先轉弱」候選</td><td>南亞科(最大宗)、華邦電、力積電(2027 增量端)</td></tr>
+      <tr><td><b>LPDDR4(中段、隨手機/車用)</b></td><td>南亞科 1B 推 LPDDR4/5;多一層 LPDDR5X 想像空間;但 6/10 NVIDIA SOCAMM2 砍半壓抑增量預期,題材波動大</td><td>南亞科(主力+NVIDIA 題材)、華邦電</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">🔬 <b>NVIDIA SOCAMM 里程碑(南亞科 LPDDR 入 Vera Rubin,媒體多源+公司間接證實,非正式公告):</b>① 南亞科 LPDDR5X 在台積電亞利桑那廠做供應鏈相容性+先進封裝驗證、報導指「邁入出貨階段」(中);② 走 SOCAMM2 模組,NVIDIA 官方 Vera 整櫃約 54TB LPDDR5X(高,官方規格);③ 總座李培瑛股東會鬆口「與不只一家國際 AI 公司合作」、未具名 NVIDIA(中)。<b>【6/10 砍半】</b>SOCAMM2 由 192GB→96GB/模組,整櫃 ~54→~28TB;<b>被砍的是 Vera CPU 旁的 SOCAMM(系統記憶體),不是 GPU 的 HBM4(每 GPU 288GB 未動);模組顆數不變、單顆容量砍半</b>,屬供給管理非需求消失,南亞科/華邦一度被「錯殺」。對南亞科=題材+潛在增量、非已落袋營收,標待查、不採信不否定。</div>
+  <p class="disclaimer">資料整合自各家官網/法說(一手)+ TrendForce/DigiTimes/SemiAnalysis 等。延伸:南亞科×NVIDIA SOCAMM 出貨確認、CXMT/YMTC 2027 良率與真實時點、模組廠每月合約價環比拐點、企業級 eSSD/CXL(群聯/慧榮主控)、HBM 在台後段(測試/載板)邊角。</p>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場口徑 + 逐環節缺貨強度 + 公司受惠評分</h2>
+  <p class="subtitle">市場口徑分四層(合約/現貨/累計/單月)勿混用。</p>
+  <h3>市場與漲價口徑(逐家標源,嚴格區分)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調/來源</th><th>口徑</th><th>基準</th><th>目標/現值</th></tr></thead>
+    <tbody>
+      <tr><td>TrendForce</td><td>傳統 DRAM 合約價(QoQ)</td><td>1Q26 +90~95%</td><td>2Q26 +58~63%</td></tr>
+      <tr><td>TrendForce</td><td>NAND Flash 合約價(QoQ)</td><td>1Q26 約 +60%</td><td>2Q26 +70~75%</td></tr>
+      <tr><td>TrendForce</td><td>MLC NAND 64Gb 現貨</td><td>2025 底 $6</td><td>2026/5 $20~28(+約 300%)</td></tr>
+      <tr><td>DigiTimes</td><td>DDR4 8Gb(累計漲幅)</td><td>2024 底</td><td>一年漲約 18 倍</td></tr>
+      <tr><td>Mordor Intelligence</td><td>NOR Flash 市場規模</td><td>2026 $32.3 億</td><td>2031 $42.7 億(CAGR 5.74%)</td></tr>
+      <tr><td>群聯潘健成(自述)</td><td>記憶體產值(待查)</td><td>2026</td><td>2027 全球 $8,427 億(YoY +53%)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:合約價(2Q26 DRAM +58-63%/NAND +70-75%,高)、現貨(MLC 64Gb +300%,高)、累計(DDR4 18 倍,高)、單月(南亞科 DDR4 8Gb +50%,中)為四種口徑,勿混用、勿加總。「DDR4 +752%」「SLC Q2-Q4 +120%」「eMMC 180-200%」未獲權威源證實,標待查。</p>
+  <h3>逐環節缺貨強度評分</h3>
+  <p class="subtitle">維度:供給斷崖陡度 / 台廠定價權 / 下游黏性 / 漲價兌現度,各 0~5 分(5＝最強/最陡)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>缺貨品項</th><th>供給斷崖</th><th>台廠定價權</th><th>下游黏性</th><th>漲價兌現</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>③ MLC NAND</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>② SLC NAND</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>① NOR Flash</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>④ DDR3 / DDR4</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>⑤ LPDDR4 / LPDDR4X</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>⑥ 控制晶片(主控)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>⑦ 模組 / 通路</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:20%"></div></div><span class="num">1</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">10</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">⑧ 下游終端為成本承壓方,不列入受惠評分;其高設計黏性(車規/工控認證綁死)是上游台廠定價權的根基,反之終端景氣轉弱=缺口破口。評分為推估。</p>
+
+  <h3>公司受惠強度評分(含總分排序)</h3>
+  <p class="subtitle">維度:缺貨受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者(holds);觀察股不列。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>缺貨受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>群聯 8299</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">22</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>旺宏 2337</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">21</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>華邦電 2344</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">20</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>南亞科 2408</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>力積電 6770</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>威剛 3260</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>十銓 4967</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">14</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>晶豪科 3006</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">14</span></td><td><span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">群聯=主控卡位+搶料庫存雙引擎(一檔兩題);旺宏=最純結構受惠(NOR/MLC 近獨佔);華邦=三題通吃;南亞科=規模最大但週期屬性重;力積電=代工受惠但 2027 又是供給增量端;威剛/十銓=庫存利益最猛、反轉最險;晶豪科=fabless 受惠、靠代工配額。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2026/04→2027H1 催化劑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>旺宏 2337</td><td>MLC/eMMC 近獨家</td><td>1Q26 轉盈、NAND 年增 382%;產能 20K→30K wpm(+10K 全 MLC);NOR/SLC 下半年續漲</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>華邦電 2344</td><td>DDR4+NOR+SLC</td><td>高雄 15K→24-25K(2027 Q1、16nm);1Q26 毛利率 53.4%;DDR4 缺口稱延續至 2028 後</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>南亞科 2408</td><td>本土 DRAM 龍頭</td><td>1Q26 EPS 8.41、毛利率 67.9%;1C 2026H2 完驗、1D Q2 試產;LPDDR5X 送 NVIDIA 驗證</td><td><span class="conf c-high">高(財報);待查(入鏈)</span></td></tr>
+      <tr><td>大摩(事件)</td><td>空方翻多</td><td>5/29 認錯上修:DDR4 2H26 缺口 14%→19-20%、華邦列首選(222)、南亞科(380)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>三星/Kioxia(事件)</td><td>退場時間表</td><td>三星 MLC 2026/6 最終出貨、LPDDR4 4/17 停接;Kioxia 最後接單 2026/9、2029 全退</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>NVIDIA SOCAMM(事件)</td><td>LPDDR 題材</td><td>6/10 Vera SOCAMM2 容量砍半(因 LPDDR 短缺);南亞科入鏈題材待查</td><td><span class="conf c-un">待查</span></td></tr>
+      <tr><td>2027H1 ⚔ 勝負手</td><td>供給增量對決</td><td>力積電 1Y/1z DDR4 放量 vs CXMT 2027 DDR4 倍增+YMTC 跨 DRAM</td><td><span class="conf c-un">未發生</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有營收(漲價已兌現)=旺宏(MLC/eMMC)、華邦電(DDR4/NOR)、南亞科(DDR4)、群聯(搶料庫存)、威剛/十銓(庫存利益但反轉風險高);結構選擇權=旺宏 NOR↔MLC 挪移、華邦 16nm 擴產(2027)、南亞科 LPDDR5X×NVIDIA(2027,待查)。最純結構受惠=旺宏;最大規模=南亞科;最該盯反轉=威剛/十銓(看每月合約價環比由正轉平的拐點)。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入南亞科量級<b>示意數字</b>(非財測),請依個股真實財務調整。本輪核心=漲價轉嫁 → 毛利率上行 → EPS 槓桿;但須先分清「結構財 vs 週期庫存利益」再選方法。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>結構定價者</td><td>上行期 PE 拉升;週期股低 PE 多為陷阱</td></tr>
+      <tr><td><b>毛利率擴張槓桿</b></td><td>漲價/ASP 升 → 毛利率上行 → EPS 放大</td><td>本輪核心</td><td>原廠自有產能槓桿最大(南亞科毛利率 67.9%)</td></tr>
+      <tr><td><b>庫存利益模型</b></td><td>低價庫存厚度 × 報價斜率</td><td>模組通路</td><td>斜率交易、非水位;盯合約價環比轉平拐點</td></tr>
+      <tr><td><b>供給斷崖溢價</b></td><td>原廠退場留白份額 × 漲價持續性折現</td><td>MLC/SLC/NOR</td><td>旺宏近獨家;持續性「缺到 2030」待查</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=南亞科量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="1200"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="60"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="50"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="31"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="10"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="100"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為南亞科量級示意、非財測(南亞科 1Q26 毛利率 67.9%、淨利率 53.1%、約 31 億股,大摩估 2026 EPS 61.5/目標 380)。旺宏/華邦/模組廠股數與毛利差異大,務必填入標的真實數字。週期庫存利益型(威剛/十銓)的高 EPS/低 PE 為循環性,勿直接外推。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>TrendForce 新聞稿(2026/03/31、04/28、05/13)</b> — 2Q26 合約 DRAM +58-63%/NAND +70-75%、MLC 64Gb 現貨 +300%、旺宏 NAND 營收 YoY +382%、MLC 產能 -41.7%<span class="q">primary</span></li>
+    <li><b>旺宏/華邦電/南亞科/威剛/十銓/群聯/晶豪科/力積電 1Q26 法說與月營收</b>(公開申報)— 各家 EPS、毛利率、庫存、產能與漲價自述<span class="q">primary</span></li>
+    <li><b>TechNews/科技新報</b> — 三星 2D NAND EOL、Kioxia 2029 全退、三星 LPDDR4 4/17 停接單、NVIDIA Vera 6/10、美光 Fab6 1α LPDDR4/DDR4<span class="q">secondary</span></li>
+    <li><b>經濟日報/聯合/工商時報/旺得富</b> — 旺宏華邦法說、SLC/eMMC 缺口、南亞科 LPDDR 入鏈、大摩 3/20 降評與 5/29 認錯上修目標價<span class="q">secondary</span></li>
+    <li><b>DigiTimes / Tom's Hardware / Blocks&amp;Files / SemiAnalysis / The Elec</b> — Kioxia EOL、CXMT/兆易/YMTC 供給增量、DDR4 現貨 18 倍、SOCAMM2 砍半<span class="q">secondary</span></li>
+    <li><b>Mordor Intelligence</b>(NOR $32.3 億)/ <b>StockFeel·股感</b>(威剛十銓庫存利益)/ <b>群聯潘健成專訪</b>(缺到 2030/預付三年現金/2027 產值 $8,427 億,公司自述+社群,列中-待查)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① 「南亞科已確認打入 NVIDIA Vera Rubin LPDDR 鏈」=媒體多源、公司未證實;NVIDIA 6/10 砍 SOCAMM 容量為雙面刃,標待查、不採信不否定;② 「缺到 2030」=潘健成引述原廠內部報告、非本人定論,標待查;③ 「晶豪科 2026 EPS 約 63.54」=法人估區間實為 24.6-37.1,逾 60 屬高估,refuted;④ 「eMMC 漲 180-200%」=實為 1Q26 約 150%、4 月各容量逾 100%,口徑混淆,refuted;⑤ 引用空方「2H27 DDR4 轉弱」務必並列大摩 5/29 已翻多;⑥ 群聯一檔兩題(eSSD 主控另題)、HBM 本體未做。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。本質為供需週期判斷,須區分公司自述 vs 已查證、結構財 vs 週期財;數據請以最新官方法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>利基記憶體缺貨潮 × 台系原廠定價權 研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
