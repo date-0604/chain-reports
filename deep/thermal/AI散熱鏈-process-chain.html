@@ -111,7 +111,6 @@
     <li><b>晶片級:</b>單 GPU TDP H100 700W(氣冷 4U 實務上限 ~400W/GPU)→ B200 ~1,000W → GB300 1.4kW → Rubin ~1,800W → Rubin Ultra 上看 2,300W → 2029 超過 4,000W。</li>
     <li><b>封裝級:</b>熱通量破 1 kW/cm²,連 TIM2 那層都成瓶頸 → 微通道直接做進封裝蓋(MCL)、把 coolant 拉到離電晶體數十微米。</li>
   </ul>
-  <div class="callout warn"><b>與既有題的關係:</b>本報告是<b>完整散熱鏈母題</b>,涵蓋候選清單原「液冷散熱鏈」(冷板/CDU/UQD/manifold/浸沒,系統水路);新增的是它未深做的<b>封裝級(MCL/TIM)+ 2-phase(VC/熱導管)</b>。兩者合一,不再分兩篇。</div>
 </div>
 
 <!-- 2 -->
@@ -197,7 +196,7 @@
   <tr><td>奇鋐 3017</td><td>散熱龍頭(VC/冷板/CDU)</td><td>全球散熱出貨龍頭;水冷板 GB200/GB300 市占 40-50%、月產能 20 萬→100 萬組(年增 4 倍)、分歧管 1000→7000 套;2026Q1 營收 490 億 +110% YoY、EPS 20.17 創高、毛利率 29.77%、高毛利 Thermal 占比 63.6%</td><td><span class="conf c-high">高</span></td></tr>
   <tr><td>雙鴻 3324</td><td>VC/冷板/CDU/快接(整套)</td><td>冷板+CDU+快接整套,客戶 Meta/AWS/Microsoft、NVIDIA GB300 認證;液冷占比 2024 12%→25Q4 ~40%→2026 預期 &gt;55%;2026Q1 EPS 12.61(季增 +25%)、2025 EPS 28.26</td><td><span class="conf c-high">高</span></td></tr>
   <tr><td>健策 3653</td><td>晶片封裝級(IHS/均熱片→MCL)</td><td>熱階層最上游(貼 GPU die 的 IHS、未來 MCL);均熱片 ASP 因金屬 TIM2 升、傳率先取得 NVIDIA Rubin MCL 認證(2026H2 導入);2026 前 5 月營收 99.3 億 +20%。<b>風險:液態金屬退回石墨使 2026 營收估減、IHS 單價 $150→$50,股價回檔逾 20%</b></td><td><span class="conf c-high">高(均熱片)/中(MCL)</span></td></tr>
-  <tr><td>高力 8996</td><td>BPHE / CDU(系統熱交換)</td><td>台灣唯一、全球少數量產高品質真空硬銲板式熱交換器(BPHE,CDU 最核心件)、市佔逾 9 成;向 CDU/分歧管升級、橋頭新廠擴產、3-5 年倍增期。<b>股號:高力=8996(非 1465=偉全紡織)</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>高力 8996</td><td>BPHE / CDU(系統熱交換)</td><td>台灣唯一、全球少數量產高品質真空硬銲板式熱交換器(BPHE,CDU 最核心件)、市佔逾 9 成;向 CDU/分歧管升級、橋頭新廠擴產、3-5 年倍增期。</td><td><span class="conf c-high">高</span></td></tr>
   <tr><td>富世達 6805</td><td>UQD 快接</td><td>UQD 通過 NVIDIA(GB200/300/VR200)認證、<b>首家正式出貨快接的台廠</b>;2026Q1 營收 41.84 億、EPS 13.38 創高、伺服器占比 36%→50%+</td><td><span class="conf c-high">高</span></td></tr>
   <tr><td>建準 2421</td><td>風扇龍頭→液冷泵/水冷板</td><td>伺服器風扇/大型 EC 風扇/液冷泵 + 水冷板新進;2026Q1 營收 50.2 億創高、EPS 2.36、伺服器占比 47%;水冷板 Q4 放量</td><td><span class="conf c-high">高</span></td></tr>
   <tr><td>泰碩 3338</td><td>熱導管/VC→CDM/CDU</td><td>熱導管/均溫板向液冷模組延伸;但 2026Q1 EPS 僅 0.27(年減 -56%)、平台轉換期承壓</td><td><span class="conf c-med">中</span></td></tr>
@@ -238,9 +237,8 @@
 
 <!-- 6 -->
 <h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
-<div class="callout warn"><b>口徑/股號修正(對抗式查證後):</b>
+<div class="callout warn"><b>口徑修正(對抗式查證後):</b>
   <ul>
-    <li><b>高力 = 8996</b>(非 1465;1465 是偉全/紡織,務必勿混)</li>
     <li>健策 MCL ASP 3-4 倍/AMD MI450 10 倍、Rubin MCL 認證、TAM 數字——<b>多為研調/媒體估、非健策法說親口</b>,不錯殺亦不採信</li>
     <li>奇鋐/雙鴻「液冷占比 50%+」部分為法人推估非公司揭露;液冷滲透率 50-76% 口徑分歧大,不宜當硬數字</li>
   </ul>
@@ -267,7 +265,7 @@
 </div>
 
 <footer>
-  <p><b>研究方法：</b>Workflow 多 agent 研究(熱階層/台廠/國際市場)+ 對抗式查證(股號修正、口徑、風險);對標 AI伺服器電源 黃金樣本。</p>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(熱階層/台廠/國際市場)+ 對抗式查證(股號修正、口徑、風險)。</p>
   <p>本報告以「已通過查證」內容為主幹,口徑修正與待查項目已標明。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
   <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
 </footer>
