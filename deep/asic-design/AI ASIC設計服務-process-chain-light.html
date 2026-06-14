@@ -237,6 +237,54 @@ p,li,td{overflow-wrap:anywhere}
   <div class="callout insight">💡 核心結論:<b>世芯=AWS 軸</b>(Trainium 系列後段+封裝)、<b>創意=Google/Meta/Tesla 軸</b>(Axion 通用 CPU 現在進行式、MTIA-3/AI5 在後)、<b>聯發科=Google TPU 推論軸</b>(Q4'26 起)。三家客戶軸不同、互不直接衝突,是台股難得的「分軸卡位」。</div>
 </div></section>
 
+<!-- 05b 設計分工黑箱 + 台灣吃得到 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">05+ · Fine-grained Design-Split Map</span>
+  <h2 class="title">🔬 台灣吃得到定位 + CSP × 逐晶片世代 設計分工(黑箱)</h2>
+  <p class="subtitle">台廠 alpha 集中在 <b>④ 後段實體設計 + ⑤ chiplet 封裝 co-design</b>(世芯/創意護城河);架構/前端=CSP 自研天花板、尖端 IP=Synopsys/Cadence 主導。</p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>份額多為媒體/研調彙整、CSP-台廠對應未必兩造證實。高信心(一手/研調):Trainium3 分工(SemiAnalysis)、MTIA-3 GUC(TrendForce)、OpenAI×Broadcom;中信心:創意=Tesla 設計夥伴、Maia GUC 含金量、Google 洽 Marvell;待查:精確份額%。</div>
+  <h3>台灣吃得到多少(逐環節定位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>① 規格/架構定義</td><td>聯發科(少量協同)</td><td><span class="badge b-danger">缺席/邊緣 · COT 天花板</span></td><td>CSP 自研(Annapurna/Google/微軟)主導;聯發科 v7 I/O 少量協同</td></tr>
+      <tr><td>② 前端 RTL 設計與驗證</td><td>智原 3035 / 聯發科 2454(部分)</td><td><span class="badge b-warn">追趕/局部</span></td><td>驗證佔 80-90% 工時、CSP 視為差異化核心想自掌</td></tr>
+      <tr><td>③ 矽智財 IP(SerDes/PCIe/UCIe/HBM PHY)</td><td>創意 3443 / 力旺 3529 / M31 6643</td><td><span class="badge b-warn">利基寡占(eNVM)· 尖端 SerDes 輸國際</span></td><td>力旺 eNVM/OTP 近寡占(毛利近 100%、深整合 Vera Rubin);尖端 SerDes 仍 Synopsys/Cadence</td></tr>
+      <tr><td>④ 後段實體設計(P&amp;R/signoff)⭐</td><td>世芯 3661 / 創意 3443 / 智原 3035</td><td><span class="badge b-ok">領先 · 台廠核心戰場</span></td><td>世芯 Trainium3 bakeoff 擊敗前代 Marvell;能搶 prime 對手案</td></tr>
+      <tr><td>⑤ chiplet 封裝 co-design ⭐</td><td>世芯 3661 / 創意 3443</td><td><span class="badge b-ok">領先 · 護城河最深</span></td><td>TSMC 3DFabric Alliance 少數能代客設計整顆 SiP;綁 CoWoS=護城河也是地緣集中</td></tr>
+      <tr><td>⑥ 光罩/量產投片(turnkey)</td><td>世芯 / 創意 / 聯發科</td><td><span class="badge b-warn">領先量 · 被 COT 稀釋認列</span></td><td>Trainium3 Anita(世芯自有 mask)~30-37%、其餘 Mariana 走 COT</td></tr>
+      <tr><td>⑦ 客製記憶體 / 矽電容(邊緣)</td><td>愛普 6531(S-SiCap)</td><td><span class="badge b-warn">利基領先</span></td><td>S-SiCap 矽電容隨 AI 先進封裝量產;與 HBM 本體切開</td></tr>
+    </tbody>
+  </table></div>
+  <h3>CSP × ASIC 逐晶片世代 設計分工(比客戶地圖更細)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>CSP / ASIC 晶片(世代)</th><th>主設計商 / IP</th><th>後段·封裝·代工 · 台廠</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">① Google(四夥伴,Broadcom 寡占已現裂縫)</td></tr>
+      <tr><td>TPU v7 Ironwood(推論,N3P,2026 數百萬顆)</td><td>主設計 Broadcom;聯發科 2454 設計 I/O 模組</td><td>TSMC N3P+CoWoS;聯發科兼供應鏈協調(高)</td></tr>
+      <tr><td>TPU v8i Zebrafish(推論,傳 2nm)</td><td>主設計 聯發科 2454</td><td>TSMC 傳 N2;Q4'26 單季~$2B、量產時點口徑分歧(中)</td></tr>
+      <tr><td>TPU v8t Sunfish(訓練,傳 2nm)</td><td>主設計 Broadcom</td><td>TSMC 傳 N2;2026/4 預覽、量產未定(中)</td></tr>
+      <tr><td>Axion CPU(Arm 通用,3nm,GA)</td><td>turnkey 創意 3443(GUC)</td><td>TSMC 3nm;占創意 2026 營收 50%+(高)</td></tr>
+      <tr><td>傳新推論 TPU + MPU</td><td>傳 Marvell(2026/4 洽談)</td><td>CNBC 傳聞未證實;Broadcom 寡占首現裂縫(低-中)</td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">② AWS(世芯主軸,前段 Annapurna 自製)</td></tr>
+      <tr><td>Trainium3(訓練,N3,2025/12 GA)</td><td>前段 Annapurna 自製;後段+封裝 世芯 3661</td><td>TSMC N3;Anita(世芯~30-37%)/Mariana(自有大宗);世芯 2026~$2.3B/50 萬顆(高)</td></tr>
+      <tr><td>Trainium2(前代,N5)</td><td>設計 Marvell</td><td>TSMC N5;世芯 T3 世代從 Marvell 拿下後段(高)</td></tr>
+      <tr><td>Trainium4(N2 級,2026 底/2027)</td><td>世芯 N2 加速器案(年底 tape-out)</td><td>TSMC N2;與 T4 對應為合理推測、未明證(中)</td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">③ Meta(創意/GUC 後段封裝,Broadcom 運算)</td></tr>
+      <tr><td>MTIA-2(H1'26,3nm)</td><td>運算/IO 設計 Broadcom</td><td>TSMC 3nm+CoWoS(中)</td></tr>
+      <tr><td>MTIA-3(H2'26,3nm)</td><td>主設計 Broadcom;晶心科 6533 RISC-V CPU IP</td><td>後段封裝+晶圓製程 GUC 創意 3443(TrendForce 證實,中-高)</td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">④ Microsoft / ⑤ Tesla / OpenAI</td></tr>
+      <tr><td>Microsoft Maia 200 Braga(推論,3nm,延 2026)</td><td>微軟自架構;Marvell 供 IP/後段</td><td>GUC 創意 3443 + Marvell + TSMC 共同 enable;微軟自架構、GUC 含金量有限(中)</td></tr>
+      <tr><td>Tesla AI5(3nm 級,2026/4 tape-out)</td><td>設計夥伴 創意 3443(媒體口徑)</td><td>TSMC AZ + Samsung Taylor 雙代工;HVM late'26/early'27(中)</td></tr>
+      <tr><td>OpenAI 自研推論(10GW,3/2nm)</td><td>主設計 Broadcom($10B)</td><td>TSMC;機櫃 H2'26→2029 完成 10GW(高)</td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">⑥ 工具層:EDA + 矽智財(跨所有 CSP)</td></tr>
+      <tr><td>EDA(P&amp;R/signoff/驗證,所有案子都過)</td><td>Synopsys SNPS / Cadence CDNS(雙寡占)+ Siemens EDA</td><td>工具層議價權在它們、台廠難撼(高)</td></tr>
+      <tr><td>矽智財 IP(CPU/介面/記憶體,跨案授權)</td><td>Arm + 力旺 3529(eNVM/OTP)+ M31 6643 + 晶心科 6533</td><td>力旺 NeoFuse OTP 深整合 NVIDIA Vera Rubin、毛利近 100%(高)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">資料整合自 SemiAnalysis/TrendForce/各家法說/官方新聞稿;CSP-台廠精確份額%多為推估、未逐項兩造證實,為研究線索、非投資背書。</p>
+</div></section>
+
 <!-- 06 -->
 <section class="block" id="stocklogic"><div class="container">
   <span class="eyebrow">06 · Stock Logic</span>
