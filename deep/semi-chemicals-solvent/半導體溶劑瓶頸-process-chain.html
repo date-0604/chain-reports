@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半導體化學品/溶劑瓶頸 × 全球斷鏈漲價 深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#e879f9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#2a1028);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#08111d;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(232,121,249,.10)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}.tag{white-space:normal;overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>半導體化學品/溶劑瓶頸 × 全球斷鏈漲價 深度研究報告</h1>
+  <div class="sub">石腦油 → 丙烯 → PO → PGME/PGMEA → 電子級提純 → 光阻配方 → 晶圓廠 PCN 認證;瓶頸定位、漲價方向釐清(成本端 vs 售價端)、台股窄口、WF6 支線切分、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
+    <span class="pill">本質：<b>事件驅動斷鏈漲價(成本端確認、受惠端待證)</b></span>
+    <span class="pill">配對淺色版：<b>半導體溶劑瓶頸-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/瓶頸定位</a>
+    <a href="#s2">2. 製程鏈(8 環節)</a>
+    <a href="#s3">3. 難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. 市場/漲價方向/時程</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>這是<b>事件驅動的全球斷鏈漲價題</b>:2026/3-4 美伊衝突/荷莫茲斷供令日本石腦油現貨 $600→$1,190/噸(+92%)、12 座裂解廠 6 座減產,掐住 丙烯→環氧丙烷 PO→PGME/PGMEA 光阻溶劑鏈;信越/TOK/JSR/富士軟片/日產化學 4/21-23 通知三星/海力士原料採購中斷風險(信越並撤回財測)。<b>但兩個關鍵釐清:</b>① <b>真瓶頸不在 PO 原料</b>(全球+中國 PO/丙烯供過於求、中國是全球最大粗 PGMEA 產地約 35%),而在「<b>達 ppt 級金屬雜質的電子級提純產能 + 換料需重走 PCN 認證約 1 年</b>」——這是把投資焦點放原料端的最大誤判;② 已證實的 <b>+40~50% 是「原料端(杜邦/陶氏/LG 化學)對 PGMEA 廠提價=成本上升」,非 PGMEA 售價端跟漲</b>。台股直接對口窄——<b>只有勝一 1773 一檔查實</b>(供台積 8 項電子級/4 項唯一、涵蓋 2-7nm),但其電子級售價跟漲幅度未揭露,受惠邏輯應建立在「短缺轉單放量+結構占比+毛利改善」三路徑、非把成本漲幅直套。⚠ WF6 特氣支線與本題切開(屬特氣題、台股無對口);台積電 2026/1 已驗證「廢液再製電子級 PGME/PGMEA」對沖斷供。</div>
+<div class="kpi">
+  <div class="box"><div class="v">$600 → $1,190 / +92%</div><div class="l">日本石腦油現貨(斷鏈源頭,The Elec 2026/4)</div></div>
+  <div class="box"><div class="v">≤10 ppt / 約 1 年</div><div class="l">電子級提純雜質規格 / PCN 換料認證(真瓶頸)</div></div>
+  <div class="box"><div class="v">+40~50%(成本端)</div><div class="l">原料端對 PGMEA 廠提價(非售價跟漲、單一引述鏈)</div></div>
+  <div class="box"><div class="v">勝一 1773</div><div class="l">台股唯一直接對口(供台積 4 項唯一供應、2-7nm)</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、瓶頸定位 ＋ 兩大釐清 <span class="conf c-high">高信心(事件)</span></h2>
+<div class="card">
+  <h3>斷鏈事件與本質</h3>
+  <ul>
+    <li><b>瓶頸品:</b>PGME/PGMEA(丙二醇甲醚/醋酸酯)是微影製程無法繞過的光阻溶劑——光阻、Thinner、BARC、SOH、HBM 暫時接著劑都要用(市場彙整稱佔光阻溶劑 80-90%);先進製程(3nm 以下)每片用量增約 25%。</li>
+    <li><b>斷鏈事件(硬,The Elec 韓國產業媒體 2026/4/23 原始報導):</b>美伊衝突/荷莫茲斷供 → 日本石腦油 +92%、12 座裂解廠 6 座減產 → 丙烯→PO→PGME/PGMEA 在地供給被掐;日系光阻五廠通知三星/海力士斷供風險。</li>
+    <li><b>結構壁壘:</b>換原料來源需重走 PCN(製程變更通知)認證約 1 年、先進製程更久 = 「<b>認證壁壘 × 區域供給集中</b>」(全球 PGME/PGMEA 產能約 950kt/yr、電子級年需求 &gt;200kt/yr、CR10=73%),短缺無法快速回補。</li>
+    <li><b>台股定位:</b>直接對口窄——只有勝一 1773 查實;三福化 4755 間接;達興 5234 為 PSPI 平行受惠(非 PGMEA);長興 1717 PGMEA 是其成本端=偏負面。</li>
+  </ul>
+  <div class="g2 grid">
+    <div class="callout warn" style="margin:0"><b>🔍 釐清 1:真瓶頸在哪?——不是 PO 原料,是電子級提純+認證</b><br>市場敘事把斷鏈講成「PO 原料缺→PGMEA 缺」,但對抗式查證顯示:全球+中國 PO/丙烯 2025-2026 <b>供過於求</b>(中國 PO 866 萬噸、國際退出 106 萬噸利好中國 HPPO),中國更是全球最大<b>粗 PGMEA 產地(約 35%)</b>——粗料不缺。真正結構瓶頸在 ⑥ <b>把粗料提純到 ppt 級金屬雜質的電子級產能+合格供應集中</b>(中國高階電子級仍在建)與 ⑧ <b>PCN 認證</b>。<b>把焦點放原料端=錯置;焦點應在電子級提純產能與已認證資格的卡位者。</b></div>
+    <div class="callout info" style="margin:0"><b>🔍 釐清 2:漲價是「成本端」還是「受惠端」?</b><br>已證實的 <b>+40~50% 是「原料端(杜邦/陶氏/LG 化學)對 PGMEA 製造商」的提價通知 = PGMEA 廠成本先上升</b>(新浪 2026/4/22 引韓媒 The Elec,單一引述鏈、The Elec 英文版未載此數)。<b>不等於 PGMEA 廠售價端已跟漲</b>。勝一電子級 PGMEA 售價跟漲幅度未揭露——唯一查實的勝一價量傳導是「<b>工業級</b>因美伊戰爭量價齊揚」,電子級成長公司歸因「先進製程放量」。把成本端 +40~50% 直接當成勝一受惠幅度 = 本題最易誤讀處。</div>
+  </div>
+  <div class="callout warn"><b>切分(鐵則):</b>① 與「先進製程材料本土化」題切分——那題追台積電在地多品類採購進程(特氣/前驅體/CMP/光阻),本題只追「全球斷鏈漲價事件 → 價量傳導 → 轉單時點」事件線,個股重疊僅勝一。② <b>WF6/溴支線併「特氣題」、本題不展開</b>(WF6 由中國鎢出口管制驅動、台股無本土製造對口、韓系 SK Specialty/Foosung 受惠;關東電化+中央硝子傳 7/1 停產為待查傳聞)。</div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>製程鏈拆解(石腦油 → PGMEA → 晶圓廠認證)<span class="conf c-high">高信心</span></h2>
+<p class="sub">八環節:① 石腦油裂解 → ② 丙烯 → ③ 環氧丙烷 PO → ④ PGME 合成 → ⑤ PGMEA 合成 → ⑥ 電子級提純(ppt 級,真瓶頸)→ ⑦ 光阻配方 → ⑧ 晶圓廠 PCN 認證(轉單時點閘門)。台廠 alpha 集中在 ⑥(勝一電子級提純);①②③ 上游原料台廠缺席、且非真瓶頸。</p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>① 石腦油裂解(中東/日本,斷鏈源頭)</h4>
+    <p>原油/凝析油→石腦油,蒸汽裂解成乙烯/丙烯/丁二烯。日本約 40% 石腦油靠進口、相當比例經荷莫茲海峽。</p>
+    <div class="diff">卡在「<b>區域物流/地緣</b>」非技術:荷莫茲斷供→日本石腦油現貨 $600→$1,190(+92%)、12 座裂解廠 6 座減產。注意這是日本「<b>在地</b>」烯烴供給衝擊、不是全球丙烯短缺(全球丙烯/PO 其實供過於求)。瓶頸本質=日系 PGMEA 廠的在地原料線被掐、屬事件驅動非結構缺料。</div>
+    <div class="who">對應:<span class="tag t-tw">(台塑化等做石腦油但非本題傳導對象、無直接受惠)</span> <span class="tag t-intl">日本裂解廠(出光/三井/三菱,減產方)/ 中東煉廠</span> <span class="conf c-high">高(The Elec+Seoul Economic 雙源)</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>② 丙烯 / ③ 環氧丙烷 PO(被掐住、但非真瓶頸)</h4>
+    <p>丙烯(裂解/PDH)→ 環氧丙烷 PO(氯醇法/PO-SM/HPPO),PO 是 PGME 的直接原料(PO+甲醇→PGME)。日本裂解減產→在地丙烯/PO 供給收緊。</p>
+    <div class="diff"><b>對抗式釐清(關鍵):</b>市場把 PO 講成瓶頸,但全球+中國 PO 供過於求(中國 PO 2025 約 866 萬噸、國際 殼牌/LyondellBasell/科思創/陶氏 2025Q1 退出約 106 萬噸利好中國 HPPO);<b>原料端瓶頸(PO)是偽命題、提純端才是真瓶頸</b>。PO 下游中丙二醇醚/酯類(含 PGME/PGMEA)僅約佔 6%。</div>
+    <div class="who">對應:<span class="tag t-tw">(台灣無規模 PO 自產、缺席)</span> <span class="tag t-intl">陶氏 Dow / LyondellBasell / LG 化學 / 杜邦(提價方)/ 中國萬華(HPPO 供過於求)</span> <span class="conf c-high">高(供過於求多源)</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>④ PGME 合成 / ⑤ PGMEA 合成(成本端提價發生點)</h4>
+    <p>PO + 甲醇醚化 → PGME(CAS 107-98-2);PGME + 醋酸酯化 → PGMEA(CAS 108-65-6,全球工業主流法)。PGMEA 是光阻/Thinner/BARC/SOH 主溶劑。</p>
+    <div class="diff">合成本身不難(成熟酯化),真瓶頸在「電子級純度+合格供應集中」。<b>此環節即 +40~50% 原料端提價發生點 = 製造商成本上升點、非售價端</b>。中國是全球最大粗 PGMEA 產地(約 35%)=證明粗 PGMEA 不缺、缺的是達晶圓廠規格且已認證的電子級供給(見 ⑥⑧)。</div>
+    <div class="who">對應:<span class="tag t-tw">勝一 1773(合成+提純一體,持 PGME 製法專利 TWI554494B)/ 三福化 4755(產品頁列 PGMEA、自製待查)</span> <span class="tag t-intl">陶氏/Eastman/Shell;怡達(中,電子級 PM 供中芯)/ 晶瑞(中,G5 級攻 14nm)</span> <span class="conf c-high">高(官網雙證)</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>⑥ 電子級提純(ppt 級金屬雜質)⭐ 全鏈真正結構瓶頸</h4>
+    <p>把工業級 PGMEA(純度約 99.5%)提純至金屬雜質 ≤10 ppt、顆粒 ≤0.05μm、水分 ≤10ppm 的超淨等級——多級真空精餾+離子交換+超精密過濾。約 62% 光刻製程用 &gt;99.9% 高純 PGMEA。</p>
+    <div class="diff">★這是「把大宗化學品變半導體材料」的真價值與真壁壘★:<b>達 ppt 級雜質的電子級提純產能+know-how 集中在少數合格廠</b>。中國粗 PGMEA 全球第一但高階電子級仍在建(怡達/晶瑞補)=印證瓶頸在提純+認證、非上游原料。技術門檻最高+合格產能集中+認證壁壘+替代極難,本鏈最硬。</div>
+    <div class="who">對應:<span class="tag t-tw">勝一 1773(電子級占營收 75.8%、供台積 2-7nm)/ 三福化(溶劑回收/提純,間接)/ 台積電(廢液再製自助,非標的)</span> <span class="tag t-intl">信越/TOK/JSR/富士軟片/日產化學(提純+配方一體)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>⑦ 光阻配方(信越/TOK/JSR 用 PGMEA 為主溶劑)</h4>
+    <p>光阻廠把樹脂+光酸產生劑(PAG)+添加劑溶於 PGMEA(配方佔 60-95wt%、搭乳酸乙酯/環己酮/EEP),配成光阻、Thinner、BARC、SOH、HBM 暫時接著劑。</p>
+    <div class="diff">配方 know-how 與 PAG/樹脂壁壘極高(EUV 更甚),但本題瓶頸不在配方本身、在「配方廠的 PGMEA 溶劑斷供」把整個光阻供給亮紅燈。<b>信越 4/21-23 通知斷供風險並撤回全年財測 = 斷鏈衝擊已具體化</b>。此為「光阻配方題」、台廠對口弱。</div>
+    <div class="who">對應:<span class="tag t-tw">崇越 5434(信越光阻通路/配額,光阻液漲幅最大達 20%)/ 長興 1717(乾膜光阻,PGMEA 是成本端=偏負面)</span> <span class="tag t-intl">信越(撤回財測)/ TOK / JSR / 富士軟片 / 日產化學</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>⑧ 晶圓廠導入 PCN 認證 ⭐ 轉單時點核心閘門</h4>
+    <p>晶圓廠(台積/三星/海力士)導入新溶劑來源或配方變更須走 PCN(製程變更通知)+逐項認證(成分圖譜/雜質/良率),約 1 年、先進製程(2-3nm)更久。</p>
+    <div class="diff">★全鏈最終卡點與本題投資時點關鍵★:日系斷鏈→想轉韓/中/台替代→但 PCN 約 1 年=<b>短期轉不動、長期才釋放</b>。已認證合格供應商(勝一供台積 2-7nm、含唯一/唯二)佔位優勢=斷鏈時最可能優先放量;未認證者卡 1 年。<b>台積電 2026/1 自驗證「廢液再製 PGME/PGMEA」、排 Q2 多廠導入</b>=客戶端自建替代,削弱對外鏈依賴(供給韌性新事實)。</div>
+    <div class="who">對應:<span class="tag t-tw">勝一 1773(已認證合格供應商、PCN 內側、轉單最可能插隊;售價跟漲幅待驗)/ 三福化(進料合約先鎖定)</span> <span class="tag t-intl">台積/三星/海力士(PCN 閘門)/ 信越等(換溶劑來源需重認證)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐環節難度 ＋ 公司受惠強度評分</h2>
+<p class="sub">難度維度:技術門檻 / 供給集中 / 認證壁壘 / 替代難度,各 0~5 分(5＝最難)。評分為推估。真瓶頸在 ⑥ 電子級提純 + ⑧ PCN 認證,不在 ①②③ 上游原料(供過於求)。</p>
+<table>
+  <tr><th>製程環節</th><th>技術門檻</th><th>供給集中</th><th>認證壁壘</th><th>替代難度</th><th>總分/20</th><th>最關鍵原因</th></tr>
+  <tr><td><b>⑥ 電子級提純(ppt 級)</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>達 ppt 級雜質的提純產能+合格供應集中=「把大宗化學品變半導體材料」的真壁壘</td></tr>
+  <tr><td><b>⑦ 光阻配方(EUV/先進)</b></td><td>5</td><td>5</td><td>5</td><td>4</td><td><b>19</b></td><td>配方+PAG/樹脂門檻頂格、日系高度集中;惟屬光阻配方題、台廠對口弱</td></tr>
+  <tr><td><b>⑧ 晶圓廠 PCN 認證</b></td><td>4</td><td>4</td><td>5</td><td>4</td><td><b>17</b></td><td>換料需重走 PCN 約 1 年、先進製程更久=決定轉單時點的核心閘門</td></tr>
+  <tr><td>⑤ PGMEA 合成</td><td>3</td><td>4</td><td>3</td><td>3</td><td><b>13</b></td><td>酯化成熟、粗 PGMEA 易得(中國佔 35%);缺的是電子級+認證</td></tr>
+  <tr><td>④ PGME 合成</td><td>3</td><td>4</td><td>3</td><td>3</td><td><b>13</b></td><td>合成成熟、瓶頸在電子級純度與在地原料</td></tr>
+  <tr><td>① 石腦油裂解</td><td>2</td><td>4</td><td>1</td><td>2</td><td><b>9</b></td><td>大宗石化、地緣物流衝擊(荷莫茲);非技術/認證壁壘</td></tr>
+  <tr><td>③ 環氧丙烷 PO</td><td>2</td><td>3</td><td>1</td><td>2</td><td><b>8</b></td><td>全球+中國供過於求、替代來源多;市場誤判為瓶頸</td></tr>
+  <tr><td>② 丙烯</td><td>2</td><td>2</td><td>1</td><td>2</td><td><b>7</b></td><td>大宗、全球供給充裕;僅日本在地事件性收緊</td></tr>
+</table>
+<div class="callout"><b>台廠的位置:</b>卡位集中在 ⑥ <b>電子級提純(勝一,台股唯一窄口)</b>;⑤④ 合成有勝一/三福化(自製待查);①②③ 上游原料台廠<b>缺席</b>(且非真瓶頸);⑦ 光阻配方台廠缺席(崇越通路、長興成本端);⑧ PCN 勝一是已認證合格供應商(佔位優勢)。台積電廢液再製=客戶端自助提純、削弱鏈依賴。</div>
+<h3>公司受惠強度評分(報酬,含型態釐清)</h3>
+<p class="sub">維度:半導體/缺貨受惠 / 技術卡位 / 漲價兌現時程 / 供給稀缺·認證壁壘 / 規模財務,各 0~5 分;總分由高到低。型態釐清是本題重點(直接瓶頸品/間接傳導/平行受惠/通路/成本端負面/概念股)。評分為推估,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>型態</th><th>半導體受惠</th><th>技術卡位</th><th>漲價時程</th><th>稀缺壁壘</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>勝一 1773</td><td>直接瓶頸品(唯一窄口)</td><td>5</td><td>5</td><td>3</td><td>5</td><td>4</td><td><b>22</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>三福化 4755</td><td>間接傳導</td><td>4</td><td>4</td><td>4</td><td>3</td><td>4</td><td><b>19</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>達興材料 5234</td><td>平行受惠(PSPI,非 PGMEA)</td><td>4</td><td>4</td><td>3</td><td>4</td><td>3</td><td><b>18</b></td><td><span class="conf c-high">高(平行)</span></td></tr>
+  <tr><td>台特化 4772</td><td>概念股(特氣外溢、WF6 不成立)</td><td>4</td><td>4</td><td>3</td><td>4</td><td>3</td><td><b>18</b></td><td><span class="conf c-un">外溢(非本題)</span></td></tr>
+  <tr><td>崇越 5434</td><td>通路(信越光阻代理)</td><td>3</td><td>2</td><td>2</td><td>3</td><td>4</td><td><b>14</b></td><td><span class="conf c-med">中(間接)</span></td></tr>
+  <tr><td>長興 1717</td><td>成本端負面(非受惠股)</td><td>2</td><td>4</td><td>2</td><td>2</td><td>4</td><td><b>14</b></td><td><span class="conf c-high">高(成本端)</span></td></tr>
+</table>
+<p class="sub"><b>勝一</b>=台股唯一直接 PGMEA/PGME 製造對口(電子級占 75.8%、供台積 8 項電子級/4 項唯一/2-7nm、Q1'26 EPS 2.02、4 月營收創高),但<b>電子級售價跟漲未揭露</b>、受惠須靠「短缺轉單放量+結構占比+毛利改善」三路徑論證,PM 5→17 萬噸擴產 2027 底/2028 量產時程偏晚(故漲價時程僅 3);<b>三福化</b>=間接傳導(TMAH/CoWoS 化學品、年初已自主調漲、官網列 PGMEA 但自製待查);<b>達興</b>=平行受惠(PSPI 日系缺貨轉單為真,但非 PGMEA 瓶頸品=不錯殺亦不錯買進本題);<b>台特化</b>=特氣外溢(WF6×台特化已證偽、成長來自矽烷/AHF);<b>崇越</b>=信越光阻通路(配額角色、光阻液漲 20% 但通路偏中性);<b>長興</b>=PGMEA 是其乾膜光阻成本端=本題對它<b>偏負面、非受惠股</b>(列入僅不錯殺也不錯買)。受惠評分為推估,僅供參考。</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 韓媒原始報導/公司官網/法說</span>
+  <span><span class="conf c-med">中</span> 公司自述/中港媒體彙整</span>
+  <span><span class="conf c-un">待查</span> 單一引述鏈/傳聞/概念股(不否定)</span>
+</div>
+<h3>台廠 × 角色對照(依「真受惠純度」分層)</h3>
+<table>
+  <tr><th>公司(股號·掛牌)</th><th>型態</th><th>角色 / 最新數字</th><th>查證</th></tr>
+  <tr><td>勝一 1773(上市)</td><td>直接瓶頸品(唯一窄口)</td><td>台灣唯一查實 PGMEA/PGME 製造商(官網 CAS 108-65-6/107-98-2、持 PGME 製法專利);電子級溶劑佔營收 72.3%→2026Q1 75.8%、供台積 8 項電子級/4 項唯一/3 項唯二、涵蓋 2-7nm(部分進 2nm)。Q1'26 營收 30.44 億 +10.6%、EPS 2.02 創高、毛利率 37.55%;4 月營收 11.86 億 +31.81% 創歷史新高。鴻勝彰濱電子級 IPA 兩套線 2026/9 完工、PM 5→17 萬噸(2027 底/2028)。⚠ 電子級 PGMEA 售價跟漲幅度未揭露;「承接日系轉單」無公開佐證</td><td><span class="conf c-high">高(製造);待查(售價/轉單)</span></td></tr>
+  <tr><td>三福化 4755(上市)</td><td>間接傳導</td><td>半導體特化(TMAH 顯影劑/剝離/蝕刻/稀釋/清洗/溶劑回收/CoWoS 化學品)。官網產品頁列 PGMEA/PGME(歸光阻稀釋劑與洗邊劑)但<b>自製 vs 代理/電子級規格未揭露</b>。2026/1 營收 4.21 億 +20.67%、已自主調漲化學品、進料合約先鎖定;2026 展望整體 +10-12%、半導體 +20-30%、CoWoS 化學品需求年增 30-40%。主受惠主軸=CoWoS 化學品+TMAH 回收,與 PGMEA 斷鏈為兩條線</td><td><span class="conf c-med">中(間接、是否直產 PGMEA 待查)</span></td></tr>
+  <tr><td>達興材料 5234(上市)</td><td>平行受惠(非 PGMEA)</td><td>半導體材料=感光性聚醯亞胺 PSPI/剝離液/蝕刻液——<b>非 PGMEA 光阻溶劑、本題瓶頸品受惠不成立</b>。但平行受惠為真:因日本 Asahi PSPI 產能吃緊、公司 PSPI 接獲多家客戶驗證(法說自述)、半導體材料 2025 營收 7.73 億 +107.8%、2 項進 2nm 供亞利桑那;2025 EPS 7.37、毛利率破 40%。屬「日系材料缺口的平行受惠」、可獨立題</td><td><span class="conf c-high">高(PSPI 平行受惠);refuted(PGMEA)</span></td></tr>
+  <tr><td>崇越 5434(上市)</td><td>通路(信越光阻代理)</td><td>信越產品佔營收逾 5 成、光阻液約佔 3-4 成、台灣光阻市佔約 5 成、最大客戶台積電、握信越中國代理權市佔約六成。信越正是斷鏈通知方之一,崇越作為台灣通路在缺料時握配額分配權(光阻液漲幅最大達 20%);惟<b>無直接漲價製造受惠之公開佐證</b>、通路毛利受代理合約限制=間接</td><td><span class="conf c-med">中(通路、間接)</span></td></tr>
+  <tr><td>長興 1717(上市)</td><td>成本端負面(非受惠股)</td><td>全球乾膜光阻龍頭、亞洲合成樹脂龍頭。<b>PGMEA/醇醚溶劑是其成本端投入——本題斷鏈漲價對長興偏負面、非受惠股</b>。其成長來自先進封裝材料(CoWoS 液態封裝材/高階乾膜/矽光子)放量、屬另題。列入僅「不錯殺也不錯買」</td><td><span class="conf c-high">高(成本端負面)</span></td></tr>
+  <tr><td>台特化 4772(上櫃)</td><td>(觀察)特氣外溢</td><td>高純度矽乙烷/矽丙烷/AHF(<b>不做鎢系氣體/WF6——本題 WF6 受惠不成立</b>)。Q1'26 EPS 0.7 +92%、2026/4 營收 +210% 來自矽烷/AHF 放量(非 WF6)。受惠主軸=AI/先進製程特氣,與本題 PGMEA 斷鏈無涉、僅特氣題材外溢。留觀察不錯殺、不列本題受惠</td><td><span class="conf c-un">外溢(非本題)</span></td></tr>
+  <tr><td>國精化 4722(上市)</td><td>(觀察)題材外溢概念</td><td>不飽和聚酯樹脂/塗料樹脂/UV 光固化/PSMA 特用樹脂/面板級光阻/導電銀漿,與 JSR 合作切入半導體;<b>產品線非 PGMEA/PGME 醇醚溶劑</b>。雖被特化股彙整文與勝一/三福化並列,但與本題瓶頸品無直接對口=題材外溢概念、待查不採信</td><td><span class="conf c-un">待查(題材外溢)</span></td></tr>
+</table>
+<p class="sub">⚠ 股號核對:勝一 1773、三福化 4755、達興 5234、崇越 5434、長興 1717、國精化 4722(上市);台特化 4772(上櫃)。<b>本題真受惠純度排序:勝一(直接)&gt; 三福化(間接)&gt;&gt; 通路/平行/概念。</b>台股直接對口窄、是「小池子大波動+單一標的彈性高」型題材。</p>
+<h3>國際 × 角色(斷鏈源頭 + 光阻五廠 + 原料提價方)</h3>
+<table>
+  <tr><th>公司</th><th>國別/環節</th><th>角色</th><th>查證</th></tr>
+  <tr><td>日系裂解/PO 廠</td><td>日 · 斷鏈源頭</td><td>石腦油 +92% 後 12 座裂解廠 6 座減產,掐住丙烯→PO 供給=整條斷鏈起點(The Elec 未逐家具名)</td><td><span class="conf c-med">中高</span></td></tr>
+  <tr><td>陶氏 Dow / 杜邦 / LG 化學</td><td>美/韓 · PGMEA 原料端</td><td>對 PGMEA 製造商發出 +40~50% 提價通知=<b>成本端傳導、非售價端</b>;中港媒體單一引述鏈(The Elec 英文版未載此數)</td><td><span class="conf c-un">待查(成本端、單一引述鏈)</span></td></tr>
+  <tr><td>信越 / TOK / JSR / 富士軟片 / 日產化學</td><td>日 · 光阻五廠</td><td>4/21-23 經韓國子公司通知三星/海力士 PGME/PGMEA 原料採購中斷風險;<b>信越並撤回全年財測</b>=斷鏈衝擊具體化</td><td><span class="conf c-high">高(The Elec 原始報導)</span></td></tr>
+  <tr><td>怡達 / 晶瑞(中)</td><td>中 · 電子級在建</td><td>怡達電子級 PM 1 萬噸供中芯;晶瑞 G5 級 5000 噸攻 14nm 以下=補中國高階電子級缺口(印證瓶頸在提純+認證、非粗料)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>SK Specialty / Foosung / 關東電化 / 中央硝子</td><td>韓/日 · WF6 支線(切開)</td><td>WF6 2025/10 通知三星/海力士漲 70-90%、2026 生效;關東+中央硝子約佔全球 WF6 25%、傳 7/1 永久停產(多源「預期」、待查)。<b>屬特氣題、台股無對口、韓系受惠</b></td><td><span class="conf c-med">中(漲價);待查(7/1 停產)</span></td></tr>
+</table>
+<h3>台灣吃得到多少(逐環節定位)</h3>
+<p class="sub">一句話:<b>電子級 PGMEA 製造=台灣唯一窄口(勝一);上游石腦油/PO=缺席;半導體特化/CoWoS 化學品=間接(三福化);PSPI=平行受惠(達興);光阻配方=台廠缺席(崇越通路、長興成本端);WF6=缺席(韓系受惠)。</b>定位為質化判斷。</p>
+<table>
+  <tr><th>環節/品項</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>石腦油/丙烯/PO(源頭與原料)</td><td>(無本土規模對口)</td><td><span class="conf c-low">缺席</span></td><td>台塑化做石腦油但非本題傳導對象;台灣無規模 PO 自產(IEK 稱機會分析階段)</td></tr>
+  <tr><td>電子級 PGMEA/PGME 製造 ⭐</td><td>勝一 1773</td><td><span class="conf c-high">直接製造(唯一窄口)</span></td><td>官網列 PGMEA CAS 108-65-6;電子級占 75.8%、供台積 4 項唯一/2-7nm;PM 5→17 萬噸擴產</td></tr>
+  <tr><td>半導體特化:TMAH/CoWoS 化學品/溶劑回收</td><td>三福化 4755</td><td><span class="conf c-med">間接受惠</span></td><td>2026 半導體 +20-30%、CoWoS 化學品需求年增 30-40%、年初已調漲;是否直產 PGMEA 待查</td></tr>
+  <tr><td>PSPI/剝離液/蝕刻液(日系材料缺口)</td><td>達興材料 5234</td><td><span class="conf c-med">平行受惠(另一條線)</span></td><td>日本 Asahi PSPI 產能吃緊→達興 PSPI 多客戶驗證、半導體材料 +107.8%、2 項進 2nm</td></tr>
+  <tr><td>光阻液/電子級溶劑通路</td><td>崇越 5434</td><td><span class="conf c-med">通路(間接)</span></td><td>信越產品佔營收逾 5 成、握信越中國代理權市佔約六成、光阻液漲幅最大 20%</td></tr>
+  <tr><td>WF6 六氟化鎢特氣</td><td>(無本土製造對口)</td><td><span class="conf c-low">缺席(僅成本/題材外溢)</span></td><td>受惠方韓系 SK Specialty/Foosung、A 股中船特氣;台特化不做鎢系氣體</td></tr>
+</table>
+<h3>🔬 細顆粒材料/製程地圖(電子級提純 × 認證等級)</h3>
+<div class="callout warn">把鏈拆到提純規格與認證層。<b>電子級提純(勝一)是台股唯一窄口;上游 PO/石腦油、光阻配方=日美主場/缺席。</b>規格/型號取自官網/法說/產業文獻;為研究線索、非投資背書。</div>
+<table>
+  <tr><th>製程/材料</th><th>細節</th><th>台廠地位</th></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">電子級提純 ★真瓶頸·台灣唯一窄口</td></tr>
+  <tr><td>電子級 PGMEA 提純(半導體 grade)</td><td>金屬雜質 ≤10 ppt、顆粒 ≤0.05μm、水分 ≤10ppm;約 62% 光刻用 &gt;99.9%;工序=過濾→真空蒸餾→精餾→離子交換→精密過濾;換料須重走 PCN 約 1 年</td><td><b>勝一 1773(直接製造、台灣唯一查實、供台積 2-7nm)</b></td></tr>
+  <tr><td>勝一電子級產品線(PM/PMA/IPA)</td><td>PM(PGME)/PMA(PGMEA)/高純 IPA;電子級占營收 75.8%、半導體約 55%、先進製程約 40%;供台積 8 項電子級/4 項唯一/3 項唯二</td><td><b>直接製造、本題唯一窄口;短缺轉單放量=最實受惠邏輯</b></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">上游原料 ★非真瓶頸·台廠缺席</td></tr>
+  <tr><td>PO 環氧丙烷製程</td><td>氯醇法/PO-SM/HPPO(Evonik+Uhde/Dow+BASF);PO 下游丙二醇醚酯類僅約佔 6%;全球+中國供過於求</td><td>缺席(台灣無規模 PO 自產);Dow/BASF/Evonik 主導</td></tr>
+  <tr><td>PGME/PGMEA 合成(提價發生點)</td><td>PO+甲醇/醋酸→PGME→酯化→PGMEA;+40~50% 原料端提價在此=製造商成本上升點、非售價端</td><td>勝一(合成+提純一體);原料端杜邦/陶氏/LG 化學</td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">下游配方/認證 ★台廠對口弱</td></tr>
+  <tr><td>光阻溶劑在微影製程角色</td><td>PGMEA 為光阻主溶劑(配方 60-95wt%)+Thinner/EBR/BARC/SOH/HBM 暫時接著劑;台積 2026/1 廢液再製 PGME/PGMEA、Q2 多廠導入(循環經濟對沖)</td><td>間接/通路(崇越代理信越光阻);台積廢液回收壓抑外購</td></tr>
+</table>
+<div class="callout info"><b>🔬 漲價方向釐清模型(誰成本上升 vs 誰售價受惠):</b><br><b>成本錨:</b>已證實 +40~50% 是「原料端(杜邦/陶氏/LG 化學)對 PGMEA 製造商」提價=<b>勝一進料成本先上升、非售價跟漲</b>。<b>逐環節:</b>① 石腦油 +92%(源頭、台廠缺席)→ ②③ PO(台廠缺席)→ ④⑤ PGMEA 合成(<b>+40~50% 提價發生點=製造商成本上升</b>)→ ⑥ 勝一售價端<b>=成本端負面 vs 受惠的關鍵分水嶺(售價跟漲未揭露)</b>→ ⑦⑧ 光阻廠/晶圓廠(成本上升方;台積以廢液再製對沖)。<b>勝一三條受惠路徑(皆非已揭露售價跟漲):</b>(a) 轉嫁(電子級長約鎖定、有時滯,待驗);(b) <b>短缺驅動日系斷供轉單放量(最實邏輯,量增&gt;價漲)</b>;(c) 電子級占比結構右移+毛利改善(72.3%→75.8%、估升向 80%)。<b>勿把成本端 +40~50% 直接當成勝一受惠幅度。</b></div>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>市場規模、催化劑與漲價方向</h2>
+<div class="card">
+  <h3>市場規模多口徑(小池子大波動)</h3>
+  <table>
+    <tr><th>研調/來源</th><th>口徑</th><th>基準</th><th>目標/現值</th><th>口徑說明</th></tr>
+    <tr><td>360researchreports / SMR</td><td>PGME+PGMEA 全球市場(合併)</td><td>2026 US$10.85 億</td><td>2035 US$19.48 億(CAGR 6.8%)</td><td>電子應用約佔 54%;<b>本題核心品市場本身不大=「小池子大波動」型題材</b></td></tr>
+    <tr><td>市場彙整(多家分歧)</td><td>電子級 PGMEA 細分(半導體用)</td><td>2025 US$1.8~5.3 億</td><td>—(約 11% CAGR)</td><td>口徑分歧大(Verified 約 1.8 億/另 3.0 億/種子 3.42 億/360iResearch 約 5.32 億);差異來自「電子級 vs 半導體高純」定義,引用須標細分口徑</td></tr>
+    <tr><td>The Elec(原始報導)</td><td>日本石腦油現貨(斷鏈成本起點)</td><td>2026/03 $600/噸</td><td>2026/04 $1,190/噸(+92%)</td><td>美伊衝突/荷莫茲斷供、12 座裂解廠 6 座減產=硬佐證事件起點</td></tr>
+    <tr><td>新浪/ChemNet 引 The Elec</td><td>PGMEA 原料端提價(對 PGMEA 廠)</td><td>2026/04</td><td>+40~50%(通知口徑)</td><td>⚠ <b>原料端對 PGMEA 廠提價=成本端、非售價端跟漲</b>;單一引述鏈、The Elec 英文版未載、標待查</td></tr>
+    <tr><td>勝一(財報/法說)</td><td>勝一 2026 業績</td><td>Q1'26 EPS 2.02</td><td>券商估 2026 營收 125 億/EPS 8 元(台新 TP 200)</td><td>看多論述建立於先進製程放量+擴產+組合優化,<b>未把 PGMEA 售價跟漲/日系轉單列為驅動</b></td></tr>
+  </table>
+  <h3>催化劑時間軸(2026/03 → 2027)</h3>
+  <ul>
+    <li><b>2026/03-04:</b>美伊衝突/荷莫茲→日本石腦油 +92%、6 座裂解廠減產→掐住 PGMEA 鏈(硬事件)<span class="conf c-high">已發生</span></li>
+    <li><b>2026/04/21-23:</b>信越/TOK/JSR/富士軟片/日產化學通知三星/海力士斷供風險、信越撤回財測<span class="conf c-high">已發生</span></li>
+    <li><b>2026/04/22:</b>杜邦/陶氏/LG 化學對 PGMEA 廠提價 +40~50% 通知見諸媒體(成本端、非售價端)<span class="conf c-un">已報導/待查</span></li>
+    <li><b>2026/05/20:</b>勝一股東會:配發現金股利 4 元;2025 創高、Q1'26 EPS 2.02、4 月營收 +31.81% 創歷史新高<span class="conf c-high">已發生</span></li>
+    <li><b>2026/Q3(9 月):</b>勝一子公司鴻勝彰濱兩套電子級 IPA 高純度產線完工<span class="conf c-un">已排程</span></li>
+    <li><b>2026/H2 ⚔ 關鍵驗證窗:</b>PGME/PGMEA 替代來源 PCN 認證進度(換料需約 1 年)=轉單時點是否到來的關鍵<span class="conf c-un">待觀察</span></li>
+    <li><b>2026/07/01:</b>關東電化+中央硝子傳 WF6 永久停產(約佔全球 25%)→驗證真偽(多源「預期」、未經公司確認、屬特氣支線)<span class="conf c-un">傳聞/待查</span></li>
+    <li><b>待定 ⚔ 決定性催化劑:</b>勝一 PGMEA/PGME <b>售價端調漲幅度揭露 or 短缺轉單實證</b>=把「成本題」變「受惠題」的決定性環節(看多懸而未決處)<span class="conf c-low">待查/未證實</span></li>
+    <li><b>2027 底:</b>勝一 PM(PGME)第二產線完工、年產能 5→17 萬噸、規劃 2028 量產<span class="conf c-un">已排程(中長期)</span></li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>本題台股<b>單一標的彈性高</b>——核心=勝一(唯一直接對口、4 月營收創高已加速);間接=三福化(CoWoS 化學品+TMAH、年初已調漲);平行/通路/概念須區分(達興 PSPI 另一條線、崇越通路、長興成本端負面)。<b>⚠ 決定性未證環節=勝一售價跟漲/轉單實證</b>;在該證據出現前,視為「成本端確認、受惠端待證」的事件驅動題,緊盯 H2 PCN 認證與售價揭露兩個驗證窗。</div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
+  <ul>
+    <li><b>「PGMEA +40~50% 漲價 = 勝一售價端受惠」(誤讀):</b>已證實的 +40~50% 是「原料端(杜邦/陶氏/LG 化學)對 PGMEA 廠」提價=<b>勝一成本先上升</b>(新浪引韓媒、單一引述鏈、英文版未載);勝一電子級售價跟漲幅度未揭露,唯一查實的是「工業級」量價齊揚、電子級歸因先進製程放量。勿把成本漲幅直接當成受惠幅度</li>
+    <li><b>「真瓶頸在 PO 原料」:</b>全球+中國 PO/丙烯供過於求、中國是全球最大粗 PGMEA 產地(約 35%);真瓶頸在 ⑥ 電子級提純(ppt 級)+ ⑧ PCN 認證、非上游原料。把焦點放原料端=錯置</li>
+    <li><b>達興材料 5234「PGMEA 受惠」:</b>其半導體材料為剝離液/蝕刻液/PSPI、非 PGMEA;受惠來源是「日系 Asahi PSPI 缺貨轉單」(平行受惠、法說自述為真)=屬另一條日系材料缺口線、不錯殺亦不錯買進本題</li>
+    <li><b>台特化 4772「WF6 受惠」:</b>主力矽乙烷/矽丙烷/AHF、不做鎢系氣體;2026/4 +210% 來自矽烷/AHF 放量。WF6 受惠者為韓系 SK Specialty/Foosung、台股無對口。台特化僅特氣題材外溢、留觀察不錯殺</li>
+    <li><b>長興 1717「PGMEA 漲價受惠」:</b>PGMEA/醇醚溶劑是其乾膜光阻成本端、本題漲價對它<b>偏負面=非受惠股</b>;其成長來自先進封裝材料、屬另題。列入僅「不錯殺也不錯買」</li>
+    <li><b>「WF6 永久停產 2026/7/1」與「WF6 漲價 2026/6 生效」:</b>WF6 漲價為 2025/10 通知、2026 生效(非 6 月);7/1 永久停產為搜狐→經濟日報轉載傳聞(已升級為 TrendForce/ChemNet 6/12 多源「預期」、仍未經公司確認、待查);屬特氣支線、與本題切開</li>
+    <li><b>國精化 4722「PGMEA 受惠概念股」:</b>主力樹脂/UV/PSMA/面板光阻/銀漿、非 PGMEA 醇醚溶劑;雖被彙整文與勝一並列、但與本題瓶頸品無直接對口=題材外溢、待查不採信</li>
+  </ul>
+</div>
+<div class="card"><h3>漲價持續性兩劇本</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>多方:斷鏈+認證壁壘+供給集中(事件本身為真)</b><br>① 事件起點硬(石腦油 +92%、裂解廠減產=The Elec 原始報導);② 認證壁壘真實(換料 PCN 約 1 年、EUV 更久,缺口無法快速回補);③ 區域供給高度集中(日本裂解/PO→PGMEA、電子級提純門檻高、新進者切不進、CR10=73%);④ 需求剛性(PGMEA 佔光阻溶劑 80-90%、AI/CoWoS/2nm 用量升級);⑤ 台股唯一窄口勝一已認證(供台積 2-7nm、4 項唯一)、短缺一旦驅動轉單/售價跟漲,彈性集中於單一標的。</div>
+    <div class="callout warn" style="margin:0"><b>空方:受惠端待證+事件性+小市場(證據鏈未閉合)</b><br>① 漲價方向是「原料端對 PGMEA 廠提價=成本上升」、非售價跟漲,勝一售價跟漲/轉嫁能力未揭露未證;② +40-50% 為單一引述鏈(英文版未載)、口徑待查;③ <b>事件驅動性強——若荷莫茲緩和、石腦油價回穩,則成本壓力與短缺敘事同步解除</b>;④ 轉單時點未到(PCN 約 1 年,2026 內不一定看到實質轉單);⑤ 核心品市場小(PGME+PGMEA 全球約 US$10.85 億、電子級數億美元且口徑分歧)=絕對受惠金額有限;⑥ 台積廢液再製對沖外購;⑦ 勝一估值已反映期待(隱含連兩年雙位數成長)。</div>
+  </div>
+  <p><b>裁決(verdict):</b>事件本身(斷鏈/認證壁壘/供給集中)為真且具結構性,<b>但目前可證實的只到「成本端對 PGMEA 廠提價」——「勝一售價跟漲 or 短缺轉單」這個把成本題變受惠題的關鍵環節尚未證實</b>。基準情境:<b>中性偏多但需確認</b>。看多有效的前提是出現「勝一售價端調漲揭露 or 轉單實證」(決定性催化劑),且石腦油價未快速回穩;在該證據出現前,應視為「<b>成本端確認、受惠端待證</b>」的事件驅動題,市場規模小+單一標的彈性高=高 β 但證據鏈未閉合,部位宜控管、緊盯 H2 PCN 認證與售價揭露兩個驗證窗。WF6 支線維持與本題切開、僅標題材外溢。</p>
+</div>
+<div class="card"><h3>結構性風險與開放問題</h3>
+  <ul>
+    <li><b>成本端 vs 受惠端:</b>本題最大判斷;+40~50% 是成本端、勝一售價跟漲未證,勿直套受惠幅度</li>
+    <li><b>瓶頸定位:</b>真瓶頸在電子級提純+PCN 認證、非 PO 原料(供過於求);別追沒對口的上游或概念股</li>
+    <li><b>事件性風險:</b>石腦油價若回穩、荷莫茲緩和,短缺敘事同步解除;追高後事件緩解價格易回落</li>
+    <li><b>小市場/單一標的:</b>核心品市場小(US$10.85 億)、台股直接對口僅勝一=高 β、部位宜控管</li>
+    <li><b>供給韌性新事實:</b>台積電廢液再製 PGME/PGMEA(2026/1 驗證、Q2 多廠導入)壓抑外購需求</li>
+    <li><b>跨題:</b>WF6/溴併特氣題;達興 PSPI 為平行受惠可獨立題;與先進製程材料本土化題切分(重疊僅勝一)</li>
+    <li><b>開放問題(延伸 backlog):</b>勝一電子級售價跟漲/轉單實證、認證等級(G4/G5)、PM 擴產相對全球需求份量、三福化是否直產 PGMEA、WF6 7/1 停產驗證</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item"><a href="https://www.thelec.net/" target="_blank">The Elec(韓國產業媒體 2026/4/23 原始報導)</a> — 石腦油 $600→$1,190(+92%)、12 座裂解廠 6 座減產、信越/TOK/JSR/富士軟片/日產化學 4/21-23 通知三星/海力士斷供風險、PCN 約 1 年(本題核心短缺敘事)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">勝一官網產品頁(PGMEA CAS 108-65-6/PGME)、PGME 製法專利 TWI554494B;三福化官網產品頁(列 PGMEA/PGME);台積電 ESG 官網(廢液再製電子級 PGME/PGMEA、2026/1 驗證)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">勝一 5/20 股東會+工商時報 5/26(EPS 2.02、電子級 75.8%、台積 8 項/4 唯一、2-7nm、IPA Q3、PM 5→17 萬噸);公開月營收(勝一 4 月 11.86 億 +31.81%);三福化/達興/崇越法說<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://technews.tw/2026/04/24/asia-chipmakers-naphtha-photoresist-supply/" target="_blank">科技新報(2026/4/24 轉載)</a> / 經濟日報 / 富果 / MoneyDJ — 斷鏈轉述、勝一擴產、達興 PSPI、三福化展望<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">360researchreports/SMR/Verified(PGME+PGMEA 市場規模、口徑分歧);TrendForce 2026/6/12(WF6 中國現貨 +200%、7/1 停產「預期」)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">新浪財經/ChemNet 引述 The Elec(+40~50% 原料端對 PGMEA 廠提價=成本端、單一引述鏈、英文版未載、列待查);搜狐(WF6 7/1 停產傳聞)<span class="src-q q-blog">blog</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(PGMEA 製程鏈 8 環節+瓶頸定位 / 台廠逐檔查證+受惠評分 / 國際供給+市場多口徑+持續性兩劇本 / 電子級提純地圖+漲價方向釐清模型+WF6 支線切分)＋ 對抗式查證(成本端 vs 售價端釐清、瓶頸定位修正、refuted 7 條、達興/台特化/長興/國精化 型態釐清、五級來源分流)。</p>
+  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明(漲價方向=成本端確認受惠端待證、事件性風險、台股窄口高 β)。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>

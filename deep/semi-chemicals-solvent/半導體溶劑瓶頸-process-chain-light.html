@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半導體化學品/溶劑瓶頸 × 全球斷鏈漲價 研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#a21caf; --accent-soft:#fae8ff;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#fdf4ff,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:880px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:880px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">半導體溶劑瓶頸<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何缺</a>
+    <a href="#categories">兩大釐清</a><a href="#application">製程鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">市場+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>半導體化學品/溶劑瓶頸 × 全球斷鏈漲價<em> 研究指南</em> 2026</h1>
+  <p class="lead">事件驅動的全球斷鏈漲價題:美伊衝突/荷莫茲斷供令日本石腦油 +92%、裂解廠減產,掐住 PGME/PGMEA 光阻溶劑鏈,日系光阻五廠通知三星/海力士斷供風險。但兩大釐清:① 真瓶頸不在 PO 原料(供過於求),在電子級提純(ppt 級)+ PCN 認證(約 1 年);② +40~50% 是「原料端對 PGMEA 廠提價=成本上升」、非售價跟漲。台股直接對口窄——只有勝一 1773 一檔查實,但售價跟漲未揭露=「成本端確認、受惠端待證」。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:石腦油斷鏈+認證壁壘</span>
+    <span class="badge">台灣吃:勝一唯一直接對口(窄)</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:事件驅動、台股窄口、受惠端待證</h2>
+  <p class="subtitle"><b>切分:</b>與「先進製程材料本土化」題切分(那題追台積在地多品類採購,本題只追全球斷鏈事件→價量傳導→轉單時點,個股重疊僅勝一);WF6/溴併特氣題(台股無對口)。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🛢️</span>斷鏈事件(硬)</h4><p>美伊衝突/荷莫茲斷供→日本石腦油 $600→$1,190(+92%)、12 座裂解廠 6 座減產,掐住 丙烯→PO→PGME/PGMEA 鏈;日系光阻五廠 4/21-23 通知三星/海力士斷供風險、信越撤回財測(The Elec 原始報導)。</p></div>
+    <div class="card"><h4><span class="ico">🎯</span>真瓶頸在提純+認證</h4><p>不是 PO 原料(全球+中國供過於求、中國是最大粗 PGMEA 產地約 35%),而在「達 ppt 級金屬雜質的電子級提純產能+換料需重走 PCN 約 1 年」。把焦點放原料端=最大誤判。</p></div>
+    <div class="card"><h4><span class="ico">⚖️</span>成本端 vs 受惠端</h4><p>+40~50% 是「原料端對 PGMEA 廠提價=成本上升」、非售價跟漲。勝一電子級售價跟漲未揭露,受惠須靠「短缺轉單放量+結構占比+毛利改善」三路徑、非把成本漲幅直套。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(石腦油 → PGMEA → 光阻 → 晶圓廠)</h2>
+  <p class="subtitle">上游原料(日美主場/台廠缺席)→ 電子級 PGMEA 製造(勝一唯一窄口)→ 光阻配方(日系)→ 晶圓廠 PCN 認證。<span class="conf c-high">綠＝韓媒原報導/官網/法說</span> <span class="conf c-med">橙＝公司自述/中港彙整</span> <span class="conf c-un">灰＝單一引述/傳聞/概念股</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">上游原料<small>日美主場·台廠缺席</small></div><div class="items"><span class="badge b-accent">日系裂解廠(石腦油 +92% 減產)</span><span class="badge b-accent">Dow/DuPont/LG 化學(PO·提價方)</span></div></div>
+    <div class="chain-row"><div class="lvl">電子級 PGMEA<small>台灣唯一窄口</small></div><div class="items"><span class="badge b-tw">勝一 1773(直接製造、供台積 2-7nm)</span></div></div>
+    <div class="chain-row"><div class="lvl">半導體特化<small>間接/平行</small></div><div class="items"><span class="badge b-tw">三福化 4755(TMAH/CoWoS·間接)</span><span class="badge b-tw">達興 5234(PSPI·平行受惠)</span></div></div>
+    <div class="chain-row"><div class="lvl">光阻配方<small>日系·台廠缺席</small></div><div class="items"><span class="badge b-accent">信越(撤回財測)/TOK/JSR/富士/日產</span><span class="badge b-tw">崇越 5434(信越通路)</span><span class="badge b-danger">長興 1717(成本端負面)</span></div></div>
+    <div class="chain-row"><div class="lvl">晶圓廠認證<small>轉單時點閘門</small></div><div class="items"><span class="badge">台積/三星/海力士(PCN 約 1 年)</span><span class="badge b-ok">台積廢液再製對沖</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:電子級 PGMEA 製造(勝一,唯一窄口)+半導體特化間接(三福化)+PSPI 平行受惠(達興);缺席於上游石腦油/PO、光阻配方(崇越通路、長興成本端負面)、WF6(韓系受惠)。本題是「小池子大波動+單一標的彈性高」型題材。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何缺:石腦油斷鏈 → 溶劑斷供 → 認證壁壘鎖死</h2>
+  <p class="subtitle">PGME/PGMEA 是光阻/Thinner/BARC/SOH 主溶劑(佔光阻溶劑 80-90%),先進製程用量升級。</p>
+  <div class="flow">
+    <div class="step"><b>石腦油斷鏈</b><small>荷莫茲斷供→日本石腦油 +92%、裂解廠 6/12 減產</small></div><div class="arrow">→</div>
+    <div class="step"><b>溶劑斷供風險</b><small>日系光阻五廠通知三星/海力士、信越撤回財測</small></div><div class="arrow">→</div>
+    <div class="step"><b>認證壁壘鎖死</b><small>換料需重走 PCN 約 1 年=短缺無法快速回補</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>日本石腦油現貨</p><h4>$600 → $1,190(+92%)</h4></div>
+    <div class="card"><p>電子級提純雜質 / 換料認證</p><h4>≤10 ppt / PCN 約 1 年</h4></div>
+    <div class="card"><p>PGMEA 佔光阻溶劑</p><h4>80~90%(市場彙整)</h4></div>
+    <div class="card"><p>PGME+PGMEA 全球市場</p><h4>US$10.85 億(小池子)</h4></div>
+  </div>
+  <p class="disclaimer">瓶頸定位警示:市場把斷鏈講成「PO 原料缺」,但全球+中國 PO/丙烯供過於求、中國是全球最大粗 PGMEA 產地(約 35%);<b>真瓶頸在電子級提純(ppt 級)+PCN 認證、非上游原料</b>。+40~50% 是原料端對 PGMEA 廠提價(成本端)、非售價跟漲。WF6 支線併特氣題、不展開。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Clarifications</span>
+  <h2 class="title">兩大釐清(避免誤判的核心)</h2>
+  <p class="subtitle">瓶頸定位、漲價方向,是判斷「誰真受惠、受惠多少」的根本。</p>
+  <h3>釐清 ①:真瓶頸在哪?——不是 PO 原料,是電子級提純+認證</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>是否瓶頸</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>① 石腦油/丙烯/PO(原料)</td><td><span class="conf c-un">非真瓶頸(市場誤判)</span></td><td>全球+中國 PO/丙烯供過於求(中國 PO 866 萬噸、國際退出 106 萬噸);僅日本在地事件性收緊</td></tr>
+      <tr><td>⑤ PGMEA 合成</td><td><span class="conf c-med">非瓶頸(粗料不缺)</span></td><td>中國是全球最大粗 PGMEA 產地(約 35%)、酯化成熟</td></tr>
+      <tr><td>⑥ 電子級提純(ppt 級)⭐</td><td><span class="conf c-high">★真瓶頸★</span></td><td>達 ppt 級雜質的提純產能+合格供應集中;中國高階電子級仍在建(怡達/晶瑞補)</td></tr>
+      <tr><td>⑧ PCN 認證</td><td><span class="conf c-high">★轉單時點閘門★</span></td><td>換料需重走 PCN 約 1 年、先進製程更久;已認證者佔位優勢</td></tr>
+    </tbody>
+  </table></div>
+  <h3>釐清 ②:漲價是「成本端」還是「受惠端」?</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>性質</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>+40~50%(杜邦/陶氏/LG→PGMEA 廠)</td><td><span class="conf c-low">成本端(非受惠)</span></td><td>原料端對 PGMEA 製造商提價=勝一進料成本先上升;單一引述鏈、英文版未載</td></tr>
+      <tr><td>勝一電子級售價端</td><td><span class="conf c-un">受惠端·未揭露</span></td><td>售價跟漲幅度未揭露;唯一查實的是「工業級」量價齊揚、電子級歸因先進製程放量</td></tr>
+      <tr><td>勝一三路徑受惠</td><td><span class="conf c-med">待驗證</span></td><td>(a) 轉嫁(長約有時滯);(b) <b>短缺轉單放量(最實、量增&gt;價漲)</b>;(c) 電子級占比右移+毛利改善</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩釐清的投資意涵:① 焦點應放電子級提純+認證的卡位者(勝一),而非追沒對口的原料端或概念股;② 把成本端 +40~50% 直接當成勝一受惠幅度=本題最易誤讀處,看多須建立在「短缺轉單放量+結構占比+毛利改善」三路徑、緊盯售價揭露/轉單實證。</div>
+</div></section>
+
+<!-- 05 製程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Process Flow</span>
+  <h2 class="title">完整製程鏈(石腦油 → PGMEA → 晶圓廠認證)</h2>
+  <p class="subtitle">八環節。台廠 alpha 集中在 ⑥ 電子級提純(勝一);①②③ 上游原料台廠缺席、且非真瓶頸。</p>
+  <div class="stack">
+    <div class="layer"><b>① 石腦油裂解(中東/日本,斷鏈源頭)</b><div class="uses">荷莫茲斷供→ +92%、6/12 廠減產;地緣非技術</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② 丙烯 / ③ 環氧丙烷 PO(被掐住、非真瓶頸)</b><div class="uses">全球+中國供過於求;PO 瓶頸是偽命題</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ PGME 合成 / ⑤ PGMEA 合成(成本端提價發生點)</b><div class="uses">+40~50% 原料端提價=製造商成本上升;粗 PGMEA 中國佔 35%</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 電子級提純(ppt 級)★ 全鏈真瓶頸</b><div class="uses">金屬雜質 ≤10 ppt;勝一台股唯一窄口</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 光阻配方(信越/TOK/JSR)</b><div class="uses">PGMEA 主溶劑;信越撤回財測;台廠對口弱</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ 晶圓廠 PCN 認證 ★ 轉單時點閘門</b><div class="uses">換料約 1 年;勝一已認證佔位;台積廢液再製對沖</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:價值最厚在 ⑥ 電子級提純(勝一,台股唯一窄口、供台積 2-7nm)+ ⑧ PCN 認證(已認證者插隊優勢);①②③ 上游原料台廠缺席且非真瓶頸(別追);⑦ 光阻配方台廠缺席(崇越通路、長興成本端負面)。台積廢液再製=客戶端自助提純、削弱鏈依賴。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯(依真受惠純度+型態釐清)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>型態</th><th>台廠</th><th>受惠邏輯 / 釐清</th></tr></thead>
+    <tbody>
+      <tr><td>直接瓶頸品(唯一窄口)</td><td>勝一 1773</td><td>台股唯一直接 PGMEA/PGME 製造對口、供台積 2-7nm;受惠靠「短缺轉單放量+結構占比+毛利改善」三路徑,<b>售價跟漲未揭露</b></td></tr>
+      <tr><td>間接傳導</td><td>三福化 4755</td><td>TMAH/CoWoS 化學品+溶劑回收、年初已自主調漲;官網列 PGMEA 但自製待查;主受惠主軸非 PGMEA 斷鏈</td></tr>
+      <tr><td>平行受惠(非 PGMEA)</td><td>達興 5234</td><td>PSPI 受惠日本 Asahi 產能吃緊轉單(法說自述為真)=<b>另一條日系材料缺口線、不錯殺亦不錯買進本題</b></td></tr>
+      <tr><td>通路(間接)</td><td>崇越 5434</td><td>信越光阻代理、握配額;光阻液漲幅最大 20% 但通路毛利受合約限制、無直接製造受惠佐證</td></tr>
+      <tr><td>成本端負面(非受惠股)</td><td>長興 1717</td><td>PGMEA 是其乾膜光阻成本端=<b>本題漲價對它偏負面</b>;成長來自先進封裝材料(另題)。列入僅「不錯殺也不錯買」</td></tr>
+      <tr><td>概念股/外溢(非本題)</td><td>台特化 4772 / 國精化 4722</td><td>台特化 WF6 不成立(矽烷/AHF);國精化非 PGMEA(樹脂/面板光阻)。題材外溢、待查不採信</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>成本端 vs 受惠端</b>(+40~50% 是成本端、勝一售價跟漲未證);② <b>瓶頸定位</b>(真瓶頸在提純+認證、非 PO,別追上游/概念股);③ <b>事件性</b>(石腦油價回穩/荷莫茲緩和則短缺敘事同步解除);④ <b>小市場/單一標的</b>(US$10.85 億、台股對口僅勝一=高 β);⑤ <b>台積廢液再製對沖</b>外購。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=韓媒原報導/官網/法說 <span class="conf c-med">中</span>=自述/彙整 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="maker">直接製造</button><button data-f="related">間接·相關</button>
+    <button data-f="negative">成本端</button><button data-f="intl">國際</button><button data-f="watch">觀察</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="maker"><h4>勝一 <span class="code">1773</span></h4><p>台灣唯一查實 PGMEA/PGME 製造商(官網 CAS 108-65-6/107-98-2、持 PGME 製法專利)。電子級溶劑佔營收 72.3%→2026Q1 75.8%、供台積 8 項電子級/4 項唯一/3 項唯二、涵蓋 2-7nm。Q1'26 EPS 2.02 創高、4 月營收 11.86 億 +31.81% 創歷史新高;鴻勝 IPA 2026/9 完工、PM 5→17 萬噸(2027 底)。⚠ 電子級售價跟漲未揭露、「承接日系轉單」無公開佐證。受惠評分 22/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="related"><h4>三福化 <span class="code">4755</span></h4><p>半導體特化(TMAH 顯影劑/剝離/蝕刻/稀釋/清洗/溶劑回收/CoWoS 化學品)。官網列 PGMEA/PGME 但<b>自製 vs 代理/電子級規格未揭露</b>;2026/1 營收 +20.67%、已自主調漲、進料合約先鎖定;2026 半導體 +20-30%、CoWoS 化學品需求年增 30-40%。主受惠主軸=CoWoS+TMAH 回收、與 PGMEA 斷鏈兩條線=間接傳導。受惠評分 19/25。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="related"><h4>達興材料 <span class="code">5234</span></h4><p>半導體材料=PSPI/剝離液/蝕刻液——<b>非 PGMEA、本題瓶頸品受惠不成立</b>。但平行受惠為真:日本 Asahi PSPI 產能吃緊→達興 PSPI 多客戶驗證(法說自述)、半導體材料 2025 +107.8%、2 項進 2nm 供亞利桑那、EPS 7.37。屬另一條日系材料缺口線、可獨立題。受惠評分 18/25。</p><span class="conf c-high">高(平行)</span></div>
+    <div class="card" data-cat="related"><h4>崇越 <span class="code">5434</span></h4><p>信越產品佔營收逾 5 成、光阻液約佔 3-4 成、台灣光阻市佔約 5 成、最大客戶台積、握信越中國代理權市佔約六成。信越是斷鏈通知方之一,崇越握配額分配權(光阻液漲幅最大 20%);<b>惟無直接漲價製造受惠佐證、通路毛利受合約限制=間接</b>。受惠評分 14/25。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="negative"><h4>長興 <span class="code">1717</span></h4><p>全球乾膜光阻龍頭。<b>PGMEA/醇醚溶劑是其成本端投入——本題斷鏈漲價對長興偏負面、非受惠股</b>。成長來自先進封裝材料(CoWoS 液態封裝材/高階乾膜/矽光子)、屬另題。列入僅「不錯殺也不錯買」。受惠評分 14/25(成本端)。</p><span class="conf c-high">高(成本端負面)</span></div>
+    <div class="card" data-cat="intl"><h4>日系裂解 / Dow·DuPont·LG <span class="code">源頭/原料</span></h4><p>日系裂解廠:石腦油 +92% 後 6/12 減產=斷鏈起點(The Elec 未逐家具名)。Dow/DuPont/LG 化學:對 PGMEA 製造商發出 +40~50% 提價通知=<b>成本端傳導、非售價端</b>;中港媒體單一引述鏈、英文版未載=待查。</p><span class="conf c-un">待查(成本端)</span></div>
+    <div class="card" data-cat="intl"><h4>信越/TOK/JSR/富士/日產 <span class="code">日·光阻五廠</span></h4><p>4/21-23 經韓國子公司通知三星/海力士 PGME/PGMEA 原料採購中斷風險;<b>信越並撤回全年財測</b>=斷鏈衝擊具體化。光阻配方+電子級提純一體、台廠對口弱。怡達/晶瑞(中)補高階電子級缺口。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>SK Specialty/Foosung/關東 <span class="code">WF6 支線</span></h4><p>WF6 支線(屬特氣題、與本題切開):2025/10 通知三星/海力士漲 70-90%、2026 生效;關東電化+中央硝子約佔全球 WF6 25%、傳 7/1 永久停產(多源「預期」、待查)。受惠方韓系、<b>台股無 WF6 本土製造對口</b>。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="watch"><h4>台特化 <span class="code">4772</span></h4><p>(觀察)高純度矽乙烷/矽丙烷/AHF——<b>不做鎢系氣體/WF6、本題受惠不成立</b>。Q1'26 EPS 0.7 +92%、2026/4 營收 +210% 來自矽烷/AHF 放量(非 WF6)。受惠主軸=AI/先進製程特氣、與本題無涉、僅特氣題材外溢。留觀察不錯殺、不列本題受惠。</p><span class="conf c-un">外溢(非本題)</span></div>
+    <div class="card" data-cat="watch"><h4>國精化 <span class="code">4722</span></h4><p>(觀察)不飽和聚酯樹脂/UV 光固化/PSMA/面板級光阻/導電銀漿,與 JSR 合作切入半導體;<b>產品線非 PGMEA/PGME 醇醚溶劑</b>。雖被特化股彙整文與勝一/三福化並列、但與本題瓶頸品無直接對口=題材外溢概念、待查不採信。</p><span class="conf c-un">待查</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 細顆粒地圖 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 台灣吃得到定位 + 電子級提純地圖 + 漲價方向模型</h2>
+  <p class="subtitle">一句話:<b>電子級 PGMEA 製造=台灣唯一窄口(勝一);上游石腦油/PO=缺席;特化/CoWoS=間接(三福化);PSPI=平行受惠(達興);光阻配方=台廠缺席;WF6=缺席(韓系受惠)。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>規格/型號取自官網/法說/文獻;漲價方向=成本端確認、受惠端待證;事件性風險高、台股窄口高 β,投資前自行查證。</div>
+  <h3>台灣吃得到多少(逐環節定位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節/品項</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>石腦油/丙烯/PO(源頭與原料)</td><td>(無本土規模對口)</td><td><span class="badge b-danger">缺席</span></td><td>台塑化做石腦油但非本題傳導對象;台灣無規模 PO 自產</td></tr>
+      <tr><td>電子級 PGMEA/PGME 製造 ⭐</td><td>勝一 1773</td><td><span class="badge b-ok">直接製造(唯一窄口)</span></td><td>官網列 PGMEA CAS 108-65-6;電子級占 75.8%、供台積 4 項唯一/2-7nm</td></tr>
+      <tr><td>特化:TMAH/CoWoS 化學品/溶劑回收</td><td>三福化 4755</td><td><span class="badge b-warn">間接受惠</span></td><td>2026 半導體 +20-30%、CoWoS 化學品需求年增 30-40%、年初已調漲;是否直產 PGMEA 待查</td></tr>
+      <tr><td>PSPI/剝離液/蝕刻液(日系材料缺口)</td><td>達興材料 5234</td><td><span class="badge b-warn">平行受惠(另一條線)</span></td><td>Asahi PSPI 產能吃緊→達興 PSPI 多客戶驗證、半導體材料 +107.8%、2 項進 2nm</td></tr>
+      <tr><td>光阻液/電子級溶劑通路</td><td>崇越 5434</td><td><span class="badge b-warn">通路(間接)</span></td><td>信越產品佔逾 5 成、握信越中國代理權市佔約六成、光阻液漲幅最大 20%</td></tr>
+      <tr><td>WF6 六氟化鎢特氣</td><td>(無本土製造對口)</td><td><span class="badge b-danger">缺席(僅外溢)</span></td><td>受惠方韓系 SK Specialty/Foosung、A 股中船特氣;台特化不做鎢系氣體</td></tr>
+    </tbody>
+  </table></div>
+  <h3>電子級提純地圖(真瓶頸·台股唯一窄口)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程/材料</th><th>細節</th><th>台廠地位</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">電子級提純 ★真瓶頸·台灣唯一窄口</td></tr>
+      <tr><td>電子級 PGMEA 提純(半導體 grade)</td><td>金屬雜質 ≤10 ppt、顆粒 ≤0.05μm、水分 ≤10ppm;約 62% 光刻用 &gt;99.9%;工序=過濾→真空蒸餾→精餾→離子交換→精密過濾;換料須 PCN 約 1 年</td><td><span class="badge b-ok">勝一(直接製造、台灣唯一、供台積 2-7nm)</span></td></tr>
+      <tr><td>勝一電子級產品線(PM/PMA/IPA)</td><td>電子級占營收 75.8%、半導體約 55%、先進製程約 40%;供台積 8 項電子級/4 項唯一/3 項唯二</td><td><span class="badge b-ok">直接製造、本題唯一窄口;短缺轉單放量=最實受惠</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">上游原料 ★非真瓶頸·台廠缺席</td></tr>
+      <tr><td>PO 環氧丙烷製程</td><td>氯醇法/PO-SM/HPPO;PO 下游丙二醇醚酯類僅約佔 6%;全球+中國供過於求</td><td><span class="badge b-danger">缺席(台灣無規模 PO 自產)</span></td></tr>
+      <tr><td>PGME/PGMEA 合成(提價發生點)</td><td>+40~50% 原料端提價在此=製造商成本上升點、非售價端</td><td><span class="badge b-warn">勝一(合成+提純一體);原料端杜邦/陶氏/LG</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">下游配方/認證 ★台廠對口弱</td></tr>
+      <tr><td>光阻溶劑在微影製程角色</td><td>PGMEA 主溶劑(60-95wt%)+Thinner/BARC/SOH;台積 2026/1 廢液再製、Q2 多廠導入(循環經濟對沖)</td><td><span class="badge b-warn">間接/通路(崇越代理信越);台積廢液回收壓抑外購</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">🔬 <b>漲價方向釐清模型(誰成本上升 vs 誰售價受惠):</b>成本錨=+40~50% 是「原料端對 PGMEA 廠」提價=<b>勝一進料成本先上升、非售價跟漲</b>。逐環節:① 石腦油 +92%(台廠缺席)→ ②③ PO(台廠缺席)→ ④⑤ 合成(<b>+40~50% 提價=成本上升</b>)→ ⑥ <b>勝一售價端=成本端負面 vs 受惠的分水嶺(售價跟漲未揭露)</b>→ ⑦⑧ 光阻廠/晶圓廠(成本上升方、台積廢液對沖)。<b>勝一三受惠路徑(皆非已揭露售價跟漲):</b>(a) 轉嫁(長約有時滯);(b) <b>短缺轉單放量(最實、量增&gt;價漲)</b>;(c) 電子級占比右移+毛利改善。<b>勿把成本端 +40~50% 直接當成勝一受惠幅度。</b></div>
+  <p class="disclaimer">資料整合自 The Elec(韓媒原報導)+勝一/三福化官網+各家法說+360researchreports/TrendForce。延伸:勝一售價跟漲/轉單實證、認證等級(G4/G5)、PM 擴產相對全球需求份量、三福化是否直產 PGMEA、WF6 7/1 停產驗證、達興 PSPI 可獨立題。</p>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場口徑 + 逐環節難度 + 公司受惠評分</h2>
+  <p class="subtitle">核心品市場小(US$10.85 億)=「小池子大波動」;真瓶頸在 ⑥⑧。</p>
+  <h3>市場規模多口徑(逐家標源)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調/來源</th><th>口徑</th><th>基準</th><th>目標/現值</th></tr></thead>
+    <tbody>
+      <tr><td>360researchreports/SMR</td><td>PGME+PGMEA 全球(合併)</td><td>2026 US$10.85 億</td><td>2035 US$19.48 億(CAGR 6.8%)</td></tr>
+      <tr><td>市場彙整(分歧)</td><td>電子級 PGMEA 細分</td><td>2025 US$1.8~5.3 億</td><td>—(約 11% CAGR、口徑分歧)</td></tr>
+      <tr><td>The Elec</td><td>日本石腦油現貨</td><td>2026/03 $600/噸</td><td>2026/04 $1,190/噸(+92%)</td></tr>
+      <tr><td>新浪/ChemNet 引 The Elec</td><td>PGMEA 原料端提價(成本)</td><td>2026/04</td><td>+40~50%(通知、單一引述鏈、待查)</td></tr>
+      <tr><td>勝一(券商台新)</td><td>勝一 2026</td><td>Q1'26 EPS 2.02</td><td>營收 125 億/EPS 8 元(TP 200)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:PGME+PGMEA 全球僅約 US$10.85 億=絕對受惠金額有限;電子級細分口徑分歧大(US$1.8-5.3 億);+40~50% 是成本端對 PGMEA 廠、非售價端;券商看多建立於先進製程放量+擴產、未把 PGMEA 售價跟漲列驅動。</p>
+  <h3>逐環節難度評分</h3>
+  <p class="subtitle">維度:技術門檻 / 供給集中 / 認證壁壘 / 替代難度,各 0~5 分(5＝最難)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>供給集中</th><th>認證壁壘</th><th>替代難度</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>⑥ 電子級提純(ppt 級)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>⑦ 光阻配方(EUV/先進)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>⑧ 晶圓廠 PCN 認證</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>⑤ PGMEA 合成</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>④ PGME 合成</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>① 石腦油裂解</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:20%"></div></div><span class="num">1</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">9</span></td></tr>
+      <tr><td>③ 環氧丙烷 PO</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:20%"></div></div><span class="num">1</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">8</span></td></tr>
+      <tr><td>② 丙烯</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:20%"></div></div><span class="num">1</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">7</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">真瓶頸在 ⑥ 電子級提純(勝一唯一窄口)+ ⑧ PCN 認證;①②③ 上游原料供過於求、非真瓶頸。評分為推估。</p>
+
+  <h3>公司受惠強度評分(含型態釐清)</h3>
+  <p class="subtitle">維度:半導體受惠 / 技術卡位 / 漲價兌現時程 / 稀缺·認證壁壘 / 規模財務,0~5 分。型態釐清是本題重點。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>型態</th><th>半導體</th><th>技術</th><th>時程</th><th>稀缺</th><th>規模</th><th>總分 /25</th></tr></thead>
+    <tbody>
+      <tr><td>勝一 1773</td><td>直接瓶頸品</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td>三福化 4755</td><td>間接傳導</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>達興材料 5234</td><td>平行受惠(非 PGMEA)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>台特化 4772</td><td>概念股(特氣外溢)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>崇越 5434</td><td>通路(間接)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>長興 1717</td><td>成本端負面(非受惠股)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">勝一=唯一直接 PGMEA 製造對口(售價跟漲未揭露、受惠靠三路徑、PM 擴產時程偏晚故時程僅 3);三福化=間接(CoWoS/TMAH、是否直產 PGMEA 待查);達興=平行受惠 PSPI(非 PGMEA、不錯殺亦不錯買進本題);台特化=特氣外溢(WF6 不成立、非本題);崇越=信越光阻通路(間接);長興=成本端負面=非受惠股。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 催化劑時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2026/03→2027 催化劑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>勝一 1773</td><td>直接瓶頸品·唯一窄口</td><td>Q1'26 EPS 2.02、4 月營收 +31.81% 創高;IPA 2026/9、PM 5→17 萬噸(2027 底);⚠ 售價跟漲未揭露</td><td><span class="conf c-high">高(製造);待查(售價)</span></td></tr>
+      <tr><td>三福化 4755 / 達興 5234</td><td>間接 / 平行</td><td>三福化 CoWoS 化學品+30-40%、年初已調漲;達興 PSPI 日系缺貨轉單(平行受惠、非 PGMEA)</td><td><span class="conf c-med">中-高</span></td></tr>
+      <tr><td>石腦油斷鏈(事件)</td><td>斷鏈源頭</td><td>2026/3-4 美伊衝突→日本石腦油 +92%、6/12 廠減產;荷莫茲若緩和則敘事解除</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>日系光阻五廠(事件)</td><td>斷供風險</td><td>4/21-23 通知三星/海力士斷供風險、信越撤回財測</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>+40~50% 提價(事件)</td><td>原料端對 PGMEA 廠</td><td>4/22 杜邦/陶氏/LG 提價通知=成本端、非售價端;單一引述鏈</td><td><span class="conf c-un">待查</span></td></tr>
+      <tr><td>2026/H2 ⚔ PCN 認證</td><td>轉單時點關鍵</td><td>替代來源 PCN 約 1 年;轉單是否落地的關鍵驗證窗</td><td><span class="conf c-un">待觀察</span></td></tr>
+      <tr><td>待定 ⚔ 決定性催化劑</td><td>受惠端證實</td><td>勝一售價端調漲揭露 or 短缺轉單實證=把成本題變受惠題的決定性環節</td><td><span class="conf c-low">待查/未證實</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:本題台股<b>單一標的彈性高</b>——核心=勝一(唯一直接對口、4 月營收創高已加速);間接=三福化(CoWoS 化學品+TMAH);平行/通路/概念須區分(達興 PSPI、崇越通路、長興成本端負面)。⚠ <b>決定性未證環節=勝一售價跟漲/轉單實證</b>;在該證據出現前視為「成本端確認、受惠端待證」、緊盯 H2 PCN 認證與售價揭露兩驗證窗;石腦油價若回穩則敘事解除。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入勝一量級<b>示意數字</b>(非財測),請依個股真實財務調整。本輪核心=電子級占比右移+毛利改善+短缺轉單放量;但須分清成本端 vs 售價端。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>勝一</td><td>事件題 PE 易先反映期待、後待證實;台新 TP 200/EPS 估 8</td></tr>
+      <tr><td><b>結構占比+毛利改善</b></td><td>電子級占比右移 → 毛利率上行 → EPS</td><td>本輪核心</td><td>電子級占 72.3%→75.8%→估升向 80%(非靠 PGMEA 售價跟漲)</td></tr>
+      <tr><td><b>短缺轉單放量</b></td><td>既有合格供應商吃日系斷供轉單(量增)</td><td>最實受惠邏輯</td><td>量增&gt;價漲;但 PCN 約 1 年、轉單時點未到</td></tr>
+      <tr><td><b>成本轉嫁(待驗)</b></td><td>進料漲幅能否轉嫁售價</td><td>分水嶺</td><td>+40~50% 是成本端;電子級長約有時滯、售價跟漲未揭露</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=勝一量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="125"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="8"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="20"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="3"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="20"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="15"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為勝一量級示意、非財測(勝一 Q1'26 EPS 2.02、約 3 億股、券商台新 TP 200/EPS 估 8)。三福化/達興股數與毛利差異大,務必填入標的真實數字。本題受惠端待證(售價跟漲未揭露)、事件性風險高,勿把成本端 +40~50% 直套受惠。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。五級來源分流;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>The Elec(韓國產業媒體 2026/4/23 原始報導)</b> — 石腦油 +92%、12 座裂解廠 6 座減產、信越/TOK/JSR/富士軟片/日產化學 4/21-23 通知三星/海力士斷供風險、PCN 約 1 年(本題核心短缺敘事)<span class="q">primary</span></li>
+    <li><b>勝一官網產品頁</b>(PGMEA CAS 108-65-6/PGME)、PGME 製法專利 TWI554494B;<b>三福化官網</b>(列 PGMEA/PGME);<b>台積電 ESG 官網</b>(廢液再製電子級 PGME/PGMEA、2026/1 驗證)<span class="q">primary</span></li>
+    <li><b>勝一 5/20 股東會+工商時報 5/26</b>(EPS 2.02、電子級 75.8%、台積 8 項/4 唯一、2-7nm、IPA Q3、PM 5→17 萬噸);公開月營收;三福化/達興/崇越法說<span class="q">primary</span></li>
+    <li><b><a href="https://technews.tw/2026/04/24/asia-chipmakers-naphtha-photoresist-supply/" target="_blank">科技新報(2026/4/24 轉載)</a> / 經濟日報 / 富果 / MoneyDJ</b> — 斷鏈轉述、勝一擴產、達興 PSPI、三福化展望<span class="q">secondary</span></li>
+    <li><b>360researchreports/SMR/Verified</b>(PGME+PGMEA 市場規模、口徑分歧);<b>TrendForce 2026/6/12</b>(WF6 中國現貨 +200%、7/1 停產「預期」)<span class="q">secondary</span></li>
+    <li><b>新浪財經/ChemNet 引述 The Elec</b>(+40~50% 原料端對 PGMEA 廠提價=成本端、單一引述鏈、英文版未載、待查);<b>搜狐</b>(WF6 7/1 停產傳聞)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① 「+40~50% = 勝一售價受惠」=誤讀(是原料端對 PGMEA 廠提價=成本上升、勝一售價跟漲未揭露);② 「真瓶頸在 PO 原料」=PO 供過於求、真瓶頸在電子級提純+PCN 認證;③ 達興 5234「PGMEA 受惠」=非 PGMEA(PSPI 平行受惠為真);④ 台特化 4772「WF6 受惠」=不做鎢系氣體(矽烷/AHF 放量);⑤ 長興 1717=PGMEA 成本端、本題偏負面=非受惠股;⑥ WF6「7/1 永久停產」=多源「預期」未經公司確認、待查;⑦ 國精化 4722=非 PGMEA、題材外溢。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。漲價方向=成本端確認、受惠端待證;事件性風險(石腦油價回穩則敘事解除)、台股窄口高 β;WF6 支線與本題切開。數據請以最新官方法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>半導體化學品/溶劑瓶頸 × 全球斷鏈漲價 研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
