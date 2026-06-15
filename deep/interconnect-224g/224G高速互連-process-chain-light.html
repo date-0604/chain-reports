@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>224G 世代高速互連(連接器/AEC/MCIO/銅背板)研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#0284c7; --accent-soft:#e0f2fe;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#f0f9ff,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:880px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:880px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">224G 高速互連<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱</a>
+    <a href="#categories">兩大判斷</a><a href="#application">訊號鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">cableless+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>224G 世代高速互連<em> 研究指南</em> 2026</h1>
+  <p class="lead">224G 世代 AI 伺服器「電氣銅互連」題(連接器/AEC/MCIO/銅背板,排除光模組/CPO)。用量結構性暴增:NVL72 單櫃 5,184 條 224G 銅纜、scale-out AEC 每伺服器 1→9 條。但台廠價值捕捉分層:晶片端(SerDes/AEC DSP)幾乎缺席(Credo 88%/Marvell 壟斷)、NVLink 銅背板美中主導台股陪跑;台廠 alpha 在「連接器+線纜組裝」(貿聯/嘉澤/宏致)。⚠ 最大變數=Rubin cableless 是「層級重分配」非全砍(spine 沿用、tray 內 flyover 改 PCB midplane)。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:224G 用量暴增(5,184 條/1→9 條)</span>
+    <span class="badge">台灣吃:連接器+線纜組裝(晶片端缺席)</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:用量暴增、台廠吃實體互連端</h2>
+  <p class="subtitle"><b>切分:</b>排除光模組/CPO 本體(另一條鏈);與「AI 伺服器整機組裝」題交界(那題的 NVLink 銅背板已標台股陪跑、歸本 224G 題深做);PCB midplane 板材歸 CCL 鏈;嘉澤(母)/嘉基(子)同集團勿重複計。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">📈</span>用量結構性暴增</h4><p>scale-up NVL72 單櫃 5,184 條 224G 銅纜;scale-out AEC 每伺服器 1→9 條(650/CNBC);PCIe Gen6/MCIO Gen6 2026 放量;1.6T AEC 2026-27。銅互連是訊號出晶片後不可繞過、隨 GPU 密度線性放大。</p></div>
+    <div class="card"><h4><span class="ico">🎯</span>台廠吃實體互連端</h4><p>晶片端(224G SerDes/retimer/AEC DSP)台廠幾乎缺席(Credo 88%/Marvell 壟斷);NVLink 銅背板=Amphenol 獨大、台股陪跑(FIT 港股)。台廠 alpha 在連接器+線纜組裝:貿聯/嘉澤/宏致。</p></div>
+    <div class="card"><h4><span class="ico">⚠️</span>cableless 是層級重分配</h4><p>Rubin「cableless」只動 compute-tray 內 flyover 線纜(改 PCB midplane+Paladin B2B);rack 級 spine(5,184 條銅纜)沿用。是「層級重分配」非全砍;「Amphenol 被殺死」是誤讀。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(晶片 → 連接器 → 線纜 → 背板)</h2>
+  <p class="subtitle">SerDes/AEC 晶片(美中壟斷)→ 連接器/線纜組裝(台廠卡位)→ 銅背板(美中主導)。<span class="conf c-high">綠＝NVIDIA 官方/10-K</span> <span class="conf c-med">橙＝研調/自述/法人估</span> <span class="conf c-un">灰＝概念/早期送樣</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">晶片端<small>美中壟斷·台廠缺席</small></div><div class="items"><span class="badge b-accent">Credo(AEC 88%)</span><span class="badge b-accent">Marvell/Astera(AEC DSP)</span><span class="badge b-accent">NVIDIA(NVLink SerDes)</span></div></div>
+    <div class="chain-row"><div class="lvl">連接器/線纜<small>台廠 alpha</small></div><div class="items"><span class="badge b-tw">貿聯 3665(AEC)</span><span class="badge b-tw">嘉澤 3533(socket/UQD)</span><span class="badge b-tw">宏致 3605(MCIO)</span><span class="badge b-tw">嘉基 6715(線材)</span></div></div>
+    <div class="chain-row"><div class="lvl">NVLink 銅背板<small>美中主導·台股陪跑</small></div><div class="items"><span class="badge b-accent">Amphenol(獨大)</span><span class="badge b-warn">Luxshare 立訊(二供)</span><span class="badge">鴻騰 FIT(港股)</span></div></div>
+    <div class="chain-row"><div class="lvl">cableless 變數<small>層級重分配</small></div><div class="items"><span class="badge b-accent">Amphenol Paladin HD2(B2B)</span><span class="badge">PCB midplane(歸 CCL 鏈)</span></div></div>
+    <div class="chain-row"><div class="lvl">概念/交界<small>待查</small></div><div class="items"><span class="badge">宣德 5457(MCIO 二線)</span><span class="badge">PCB 板材 台光電/聯茂(CCL 題)</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:連接器+線纜組裝(貿聯 AEC/嘉澤 socket·插槽·UQD/宏致 MCIO)是重要供應商/快速挑戰者;缺席/陪跑於 224G SerDes/AEC 晶片(美系)、NVLink 銅背板(Amphenol/Luxshare)、B2B 連接器(Amphenol)。PCB midplane 板材受惠歸 CCL 鏈。勝負手=台廠能否從線纜組裝升級到 B2B/CPC 連接器。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何熱:224G 用量暴增,但台廠吃量大利薄端</h2>
+  <p class="subtitle">銅互連是訊號出晶片後不可繞過的環節,隨 GPU 密度線性放大。</p>
+  <div class="flow">
+    <div class="step"><b>scale-up 暴增</b><small>NVL72 單櫃 5,184 條 224G 同軸銅纜(NVIDIA 官方)</small></div><div class="arrow">+</div>
+    <div class="step"><b>scale-out 暴增</b><small>AEC 每伺服器 1→9 條(650/CNBC);AEC 狹義 $7.38 億→35.7 億</small></div><div class="arrow">→</div>
+    <div class="step"><b>台廠吃實體互連</b><small>連接器+線纜組裝(量大利薄);晶片端高毛利區吃不到</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>NVL72 單櫃 224G 銅纜</p><h4>5,184 條(NVIDIA 官方)</h4></div>
+    <div class="card"><p>scale-out AEC 用量</p><h4>1 → 9 條/伺服器</h4></div>
+    <div class="card"><p>Credo AEC 晶片市佔</p><h4>約 88%→70%(台廠缺席)</h4></div>
+    <div class="card"><p>AEC 狹義市場(2025→2034)</p><h4>$7.38 億→35.7 億(CAGR 23.8%)</h4></div>
+  </div>
+  <p class="disclaimer">口徑警示:AEC 市場差 10 倍(採 Intel Market Research 狹義 $7.38 億 CAGR 23.8%、與 650 Group 一致;$87 億 CAGR 8% 是廣義含 AOC/工業、可信度低勿用);NVLink6 448G 靠雙向 SerDes(224G TX+224G RX)非真 448G=224G 通道延續;Credo 88% 為單一研調(650 Group)。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Judgments</span>
+  <h2 class="title">兩大判斷(誰吃得到、cableless 真相)</h2>
+  <p class="subtitle">價值量歸屬、cableless 衝擊,是判斷「台廠吃多少、會不會被砍」的根本。</p>
+  <h3>判斷 ①:價值量歸屬——晶片端(美中)vs 實體互連端(台)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>誰捕捉</th><th>台廠</th></tr></thead>
+    <tbody>
+      <tr><td>晶片端(SerDes/retimer/AEC DSP)</td><td>NVIDIA/Broadcom/Marvell/Credo/Astera(美)</td><td><span class="conf c-low">零切入(高毛利、吃不到)</span></td></tr>
+      <tr><td>實體互連端(連接器/線纜組裝)</td><td>Amphenol/Molex/TE(美)+Luxshare(中)+台廠</td><td><span class="conf c-high">重要供應商/挑戰者(量大利薄)</span></td></tr>
+      <tr><td>唯一能往上吃的台廠</td><td>貿聯(自有 224G AEC 方案、co-design)</td><td><span class="conf c-med">自有方案+Credo 代工並進</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>判斷 ②:Rubin cableless 是「層級重分配」非全砍</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>層級</th><th>Rubin 變化</th><th>銅纜價值</th></tr></thead>
+    <tbody>
+      <tr><td>(A) Rack 級 NVLink spine(5,184 條)</td><td><b>沿用銅纜 cartridge</b>(官方頁仍載 5,000 銅纜/2 英里)</td><td><span class="conf c-high">持平至微增</span></td></tr>
+      <tr><td>(B) Compute-tray 內 flyover 線纜</td><td>改 PCB midplane+Paladin HD2 B2B(2h→5min)</td><td><span class="conf c-med">板內飛線歸零→PCB+B2B</span></td></tr>
+      <tr><td>對 Amphenol</td><td>spine 保留+B2B 連接器暴增</td><td><span class="conf c-ok">雙重受惠(被殺死是誤讀)</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩判斷的投資意涵:① 台廠贏在「量」(用量暴增讓實體互連端營收結構性成長)、難跨進晶片端高毛利區;② cableless 是層級重分配——對台廠淨衝擊:貿聯(scale-out AEC)中性偏正、嘉澤(socket/UQD)正面、嘉基(線材)中性偏負小。勝負手=台廠能否從線纜組裝升級到 B2B/CPC 連接器(2026-27)。</div>
+</div></section>
+
+<!-- 05 訊號鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Signal Chain</span>
+  <h2 class="title">訊號鏈(SerDes → 背板/midplane)</h2>
+  <p class="subtitle">七環節。台廠 alpha 在 ③④⑦(實體互連端);晶片端 ①② 與銅背板 ⑤ 缺席/陪跑。</p>
+  <div class="stack">
+    <div class="layer"><b>① SerDes/PHY 224G PAM4 — 台廠缺席</b><div class="uses">NVIDIA/Broadcom/Marvell;聯發科切 Google TPU 唯一觸點</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② retimer/AEC 晶片 — 台廠缺席</b><div class="uses">Credo(88%)+Marvell+Astera 美系壟斷</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ 高速連接器 MCIO/B2B/PCIe Gen6 ★ 台廠最有地位</b><div class="uses">宏致 MCIO/嘉澤 socket·插槽·UQD/宣德二線</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ AEC/DAC 線纜組裝 ★ 台廠有自有方案</b><div class="uses">貿聯 Credo AEC 代工霸主+自有 224G;晶片外購</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ NVLink 銅背板(5,184 條)— 台股陪跑</b><div class="uses">Amphenol 獨大、Luxshare 二供;FIT 港股</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ PCB midplane(Rubin cableless)— 線纜端受損/PCB 受惠</b><div class="uses">板材歸 CCL 鏈;連接器 Amphenol B2B 主導</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ scale-out AEC(1→9 條)★ 最大受惠環節</b><div class="uses">貿聯/嘉基/宏致;cableless 不影響 rack 間</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:台廠 alpha 在 ③④⑦(連接器+線纜組裝,難度較低、量大、可切入);晶片端 ①② 與銅背板 ⑤ 台廠缺席/陪跑。即「題材真實、用量暴增,但台廠吃量大利薄的實體互連端、晶片端高毛利區吃不到」。⑥ PCB midplane 受惠主體在高階 CCL/HVLP(歸 CCL 鏈)。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯(依環節+佐證強度)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節/型態</th><th>台廠</th><th>受惠邏輯 / 釐清</th></tr></thead>
+    <tbody>
+      <tr><td>AEC 線纜組裝(scale-out)</td><td>貿聯 3665</td><td>台股最確定主軸=Credo AEC 主要/唯一第三方代工(10-K 硬佐證)+自有 224G AEC;AEC 1→9 條放量;⚠ 純自有龍頭口徑須加註(主要靠 Credo 代工)</td></tr>
+      <tr><td>CPU socket/插槽/UQD</td><td>嘉澤 3533</td><td>連接器平台龍頭、規模財務最強(全球前三大 socket、伺服器營收破 5 成、爭 B300 二供、UQD 出貨逾 1 萬顆);⚠ NVIDIA 占比 2%→5-8% 為自述、與嘉基同集團</td></tr>
+      <tr><td>MCIO 連接器(挑戰者)</td><td>宏致 3605</td><td>MCIO pure-play 份額故事最強(1%→10% 法人估、2Q26 量產);⚠ <b>但 1Q26 EPS 僅 0.67 年減 51%=AI 動能尚未反映當期</b></td></tr>
+      <tr><td>AEC 線材(嘉澤子)</td><td>嘉基 6715</td><td>NVIDIA 平台供應鏈名單、高速線材模組;⚠⚠ 與嘉澤同集團、動能高度重疊=勿重複計</td></tr>
+      <tr><td>MCIO 二線(概念)</td><td>宣德 5457</td><td>AI MCIO 送樣;⚠ 2026/04 法說自列主力為工控/遊戲機/低軌衛星=AI MCIO 非當前動能、概念早期</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>晶片端缺席</b>(AEC DSP/SerDes 被 Credo/Marvell 壟斷、台廠只吃線纜組裝、無 IP 護城河);② <b>cableless 重分配</b>(tray 內線纜被 PCB midplane 取代、B2B 主導 Amphenol);③ <b>銅背板陪跑</b>(Amphenol/Luxshare 主導、FIT 港股);④ <b>法人估值低可信</b>(嘉澤 EPS 95/宏致 130 億、宏致當期 EPS 弱);⑤ <b>口徑陷阱</b>(AEC 差 10 倍採狹義、公司自述市佔缺第三方、嘉澤/嘉基勿雙計)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=NVIDIA 官方/10-K/法說 <span class="conf c-med">中</span>=研調/自述/法人估 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="aec">AEC 線纜</button><button data-f="mcio">MCIO 連接器</button>
+    <button data-f="socket">Socket·插槽</button><button data-f="intl">國際</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="aec"><h4>貿聯-KY <span class="code">3665</span></h4><p>AEC 線纜組裝霸主(scale-out)。<b>Credo 10-K 揭露貿聯為 Credo AEC 主要/唯一第三方代工製造商</b>(Foxlink 二供)=88% AEC 晶片背後的線纜組裝主力;另自有 224G 電纜量產、400G 放量、1.6T 研發中(自述)。1Q26 營收 208.6 億、EPS 11.66(新舊交替陣痛期);COMPUTEX 2026 展 800V HVDC、1.6T 銅纜、CPC/CPO。受惠評分 22/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="socket"><h4>嘉澤 <span class="code">3533</span></h4><p>連接器平台龍頭、規模財務最強。1Q26 營收 93.28 億創高、伺服器業務年增約 60%、<b>伺服器營收占比首破 50%</b>;GPU socket 驗證中、爭 NVIDIA B300 插槽二供、UQD 出貨逾 1 萬顆並推進 MP Ready、CPU socket 針腳 2027 由 5,000→7,000+ 帶 ASP +15%。⚠ NVIDIA 占比 2%→5-8% 為自述、EPS 95 法人估、與嘉基同集團。受惠評分 22/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="mcio"><h4>宏致 <span class="code">3605</span></h4><p>MCIO 連接器最大台股 pure-play、挑戰者份額故事最強。法人估 MCIO 市佔 1%→10%(目標 20%)、營收約 4.3 億;獲多家 CSP/ODM 認證、MCIO 線材 2Q26 大量出貨、800G AEC 2026-27 雙引擎。⚠ <b>但 1Q26 EPS 僅 0.67(年減 51%)=AI 動能屬法人預估、尚未反映當期</b>;市佔缺第三方研調。受惠評分 17/25。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="aec"><h4>嘉基 <span class="code">6715</span></h4><p>嘉澤(3533)子公司(母為嘉澤端子、集團持股近五成),下游模組/線材廠,與嘉澤同列 NVIDIA 次世代(Vera Rubin)平台供應鏈名單;客製化高階連接模組 2026 上半起放量、全球少數獲 Intel TBT5 認證、800G LPO 進美系驗證。⚠⚠ <b>與嘉澤同集團、動能高度重疊,評分已壓抑以避免雙計</b>;AEC/JPC/CPO 線材逐料號未獨立佐證。受惠評分 15/25。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="mcio"><h4>宣德 <span class="code">5457</span></h4><p>(觀察)MCIO 二線挑戰者、目前偏概念。2025/08 法說切 AI 用 MCIO、已送樣、2026 期望大量出貨。⚠ <b>但 2026/04 最新法說自陳主要成長動能為工控/遊戲機組裝/既有連接器/低軌衛星——AI MCIO 並非當前領銜動能</b>=歸概念/早期送樣、未成實質營收引擎;2026 全年目標年增約 20%。受惠評分 10/25。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="intl"><h4>Amphenol <span class="code">美·連接器/背板</span></h4><p>連接器/銅背板/B2B 龍頭。Paladin HD/HD2 224G 銅背板獨大、NVL72 5,184 條銅纜 cartridge 核心;<b>Rubin cableless 改 Paladin board-to-board+PCB midplane=從 cable cartridge 轉 B2B、仍是 cableless 世代最大受惠者</b>(spine 保留+B2B 暴增)。台股最強對手。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Credo / Marvell / Astera <span class="code">美·AEC 晶片</span></h4><p>AEC retimer/DSP 晶片壟斷群。Credo 約 88%(650 Group,2026/04 估降至約 70%)、$500「紫色線」雙位數環比成長;Marvell(Alaska A,FY27 估年增逾倍)挑戰;Astera 第三。<b>台廠在 AEC 晶片端幾乎缺席的關鍵壟斷者</b>。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Molex/TE/Luxshare/FIT <span class="code">連接器/銅纜</span></h4><p>Molex(美,chip-to-chip 224G 全產品線/Impress CPC)、TE(美,224G 方案)、Luxshare 立訊(中,銅背板二供/448G CPC=貿聯競爭者)、鴻騰 FIT(港股,鴻海系,224G CPC,非台股本體)。MCIO/插槽/背板主導群,台廠多陪跑或快速挑戰。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 07b cableless 模型 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 Rubin cableless 衝擊模型 + 台灣吃得到定位</h2>
+  <p class="subtitle">一句話:<b>AEC 線纜組裝=重要供應商(貿聯);MCIO/socket=挑戰者/重要供應商(宏致/嘉澤);NVLink 銅背板=陪跑;224G 晶片=缺席;PCB midplane=連接器陪跑/PCB 板材受惠(歸 CCL 鏈)。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>cableless 為「層級重分配」非全砍;AEC 市場採狹義口徑;公司自述市佔/法人 EPS 低可信;個股實際營收強弱不一,投資前自行查證。</div>
+  <h3>Rubin cableless midplane 對銅纜背板價值量衝擊模型</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>層級</th><th>GB200/GB300</th><th>Vera Rubin(2H26)</th><th>銅纜價值</th></tr></thead>
+    <tbody>
+      <tr><td>(A) Rack 級 NVLink spine</td><td>銅纜 cartridge:約 5,000(GB200=5,184)條、2 英里、Amphenol</td><td><b>沿用銅纜 cartridge</b>(官方頁仍載 5,000 銅纜/2 英里)</td><td>持平至微增</td></tr>
+      <tr><td>(B) Compute-tray/canister 內</td><td>flyover cables(板內飛線)</td><td><b>改 PCB midplane+Paladin HD2 B2B</b>(2h→5min,18-20×)</td><td>板內飛線歸零→PCB+B2B</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">🔬 <b>價值量重分配與台廠淨衝擊:</b><b>受損(相對):</b>tray 內銅纜組裝/飛線工序;但對 Amphenol 淨正面(spine 保留+新增大量 Paladin HD2 B2B)=「Amphenol 被殺死」是誤讀。<b>受惠(高確定):</b>① 高階 PCB/板材(板面積 ×2.3、M8/M9 CCL+HVLP4,歸 CCL 題);② B2B 連接器(Paladin HD2,Amphenol);③ NVLink6 仍 224G class(BiDi)。<b>對台廠:</b>貿聯(scale-out AEC)<b>幾乎無衝擊·中性偏正</b>(cableless 改 scale-up tray 內、與 scale-out 不同層);宏致/宣德(MCIO)<b>中性偏正</b>;嘉澤(socket/UQD)<b>正面</b>(PCIe Gen6 over PCB 對插槽不減、UQD 因液冷一體需求增);嘉基(線材)<b>中性偏負小</b>。<b>⚠ 最大不確定:</b>TheValueist(X)激進說「spine 也被 PCB 取代」與官方+SemiAnalysis「spine 沿用」衝突;本模型採 spine 保留為主說。<b>2027 Rubin Ultra(Kyber NVL576)銅 midplane 更徹底——若 spine 亦 PCB 化、Amphenol 銅纜量才真受損=2027 觀察點、非 2026 事實。</b></div>
+  <h3>台灣吃得到多少(逐環節定位)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <tbody>
+      <tr><td>AEC 線纜組裝(scale-out)⭐</td><td>貿聯 3665/宏致 3605/嘉基 6715</td><td><span class="badge b-ok">重要供應商(貿聯)+挑戰者</span></td><td>貿聯=Credo AEC 主要代工(10-K)+自有 224G;AEC 1→9 條;晶片端被 Credo/Marvell 壟斷</td></tr>
+      <tr><td>MCIO 連接器(Gen5/Gen6)</td><td>宏致 3605/宣德 5457</td><td><span class="badge b-warn">快速挑戰者(宏致)+二線</span></td><td>宏致市佔自述 1%→10%、單一 ODM 滲透 30-40%;主導 Amphenol/Molex/TE/FIT</td></tr>
+      <tr><td>CPU socket/PCIe 插槽/UQD</td><td>嘉澤 3533</td><td><span class="badge b-ok">重要供應商(全球前三)</span></td><td>全球前三大 CPU socket、伺服器營收破 5 成、UQD 送 NVIDIA 驗證</td></tr>
+      <tr><td>NVLink 銅背板(5,184 條)</td><td>(鴻騰 FIT 港股;台股缺席)</td><td><span class="badge b-danger">陪跑/缺席</span></td><td>Amphenol 獨大、Luxshare 二供;FIT 港股台股吃不到</td></tr>
+      <tr><td>224G SerDes/AEC 晶片</td><td>(缺席;聯發科切 Google TPU)</td><td><span class="badge b-danger">缺席</span></td><td>Credo(88%)+Marvell+Astera 主導;聯發科 224G SerDes 打入 Google TPU 唯一台系觸點</td></tr>
+      <tr><td>PCB midplane/B2B(cableless)</td><td>(連接器 Amphenol;PCB 歸 CCL 鏈)</td><td><span class="badge b-warn">連接器陪跑/PCB 受惠(間接)</span></td><td>Paladin HD2 B2B Amphenol;cableless 推升高階 PCB 板面積 ×2.3→CCL 間接受惠</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">資料整合自 NVIDIA 官方/OCP/CES 2026+Credo 10-K+SemiAnalysis+650 Group/CNBC+各家法說。延伸:貿聯自有 224G AEC(非 Credo 代工)出貨規模/客戶、1.6T 時程;Rubin cableless 逐家量化淨衝擊;2027 Kyber spine 是否亦 PCB 化;PCB midplane 板材受惠(CCL 鏈)。</p>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場口徑 + 逐環節難度 + 公司受惠評分</h2>
+  <p class="subtitle">AEC 市場口徑差 10 倍採狹義;難度高的環節台廠反而缺席。</p>
+  <h3>市場規模多口徑(AEC 採 Intel 狹義)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR</th></tr></thead>
+    <tbody>
+      <tr><td>Intel Market Research</td><td>資料中心 AEC(狹義·<b>主口徑</b>)</td><td>2025 US$7.38 億</td><td>2034 US$35.74 億</td><td>23.8%</td></tr>
+      <tr><td>彙整(疑含廣義)</td><td>AEC 廣義(含 AOC/工業)</td><td>US$87 億</td><td>US$174 億</td><td>約 8%(<b>低可信勿用</b>)</td></tr>
+      <tr><td>Intel Market Research</td><td>800G AEC(細分)</td><td>2025 US$3.29 億</td><td>2034 US$11.24 億</td><td>18.2%</td></tr>
+      <tr><td>LightCounting</td><td>高速銅纜整體(DAC+AEC)</td><td>2024</td><td>2029 US$67 億</td><td>約 25%+</td></tr>
+      <tr><td>SNS Insider</td><td>SerDes 收發(台廠缺席)</td><td>2025 US$27.9 億</td><td>2033 US$61.4 億</td><td>10.45%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:AEC 採 Intel 狹義 $7.38 億 CAGR 23.8%(與 650 Group 一致);$87 億 CAGR 8% 廣義低可信勿用;背板連接器整體 R&M $24.3 億→34.3 億 CAGR 5%(被傳統基數稀釋);SerDes 收發台廠缺席。</p>
+  <h3>逐環節難度評分(高=台廠越被卡)</h3>
+  <p class="subtitle">維度:技術門檻/晶片依賴/規模認證壁壘/台廠進入難度,各 0~5 分(5＝最被卡)。⚠ 台廠 alpha 在難度較低的 ③④⑦。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>訊號鏈環節</th><th>技術門檻</th><th>晶片依賴</th><th>規模認證壁壘</th><th>台廠進入難度</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>① SerDes/PHY 224G(缺席)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>② retimer/AEC 晶片(缺席)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>⑤ NVLink 銅背板(陪跑)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>⑥ PCB midplane(cableless)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>③ 高速連接器 MCIO/B2B ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">11</span></td></tr>
+      <tr><td>④ AEC/DAC 線纜組裝 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">10</span></td></tr>
+      <tr><td>⑦ scale-out AEC ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">9</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">⚠ 本題特殊:台廠 alpha 在難度較低、量大的 ③④⑦(連接器+線纜組裝);難度最高的晶片端 ①② 與銅背板 ⑤ 台廠缺席/陪跑。⑥ PCB midplane 受惠主體在高階 CCL/HVLP(歸 CCL 鏈)。評分為推估。</p>
+
+  <h3>公司受惠強度評分(只列有查證信心之 holds)</h3>
+  <p class="subtitle">維度:AI互連受惠/技術卡位/放量時程/利基壁壘/規模財務,0~5 分。宣德(概念/早期送樣)見公司圖譜、不列評分。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>型態</th><th>AI受惠</th><th>技術卡位</th><th>放量時程</th><th>利基壁壘</th><th>規模</th><th>總分 /25</th></tr></thead>
+    <tbody>
+      <tr><td>貿聯-KY 3665</td><td>AEC 線纜組裝</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td>嘉澤 3533</td><td>CPU socket·插槽·UQD</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td>宏致 3605</td><td>MCIO 連接器(挑戰者)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>嘉基 6715</td><td>AEC 線材(嘉澤子,勿雙計)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">貿聯=AEC 線纜組裝霸主(Credo 10-K 硬佐證+自有方案、規模最強);嘉澤=連接器平台龍頭(socket/插槽/UQD、規模財務最強、NVIDIA 占比自述);宏致=MCIO 挑戰者(份額故事最強但 1Q26 EPS 弱待兌現);嘉基=嘉澤子(壓抑勿雙計)。宣德(概念/早期送樣、2026/04 法說主力非 MCIO)見公司圖譜、不列評分。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 催化劑時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2025H2→2027 催化劑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>貿聯-KY 3665</td><td>AEC 線纜組裝霸主</td><td>Credo AEC 主要代工(10-K)+自有 224G;1Q26 EPS 11.66;1.6T 研發、800V HVDC</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>嘉澤 3533</td><td>CPU socket/插槽/UQD</td><td>伺服器營收破 5 成、爭 B300 二供、UQD 出貨逾 1 萬顆;占比 2%→5-8% 自述</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>宏致 3605</td><td>MCIO 挑戰者</td><td>MCIO 1%→10% 法人估、2Q26 量產、800G AEC;⚠ 1Q26 EPS 僅 0.67(年減 51%)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>AEC 用量(事件)</td><td>scale-out 暴增</td><td>2025/10 每伺服器 1→9 條(Credo 88% 受惠);AEC 狹義 $7.38 億→35.7 億</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>NVLink6(事件)</td><td>規格確認</td><td>CES 2026:448G/lane 靠雙向 SerDes(224G TX+RX)非真 448G=224G 通道延續</td><td><span class="conf c-high">已確認</span></td></tr>
+      <tr><td>2026H2 ⚔ cableless</td><td>最大結構變數</td><td>Vera Rubin canister 內改 PCB midplane+Paladin B2B;spine 5,184 條沿用</td><td><span class="conf c-med">確認在即</span></td></tr>
+      <tr><td>2027H2 Kyber NVL576</td><td>銅 midplane</td><td>每櫃消除約 2 英里銅纜佈線+retimer 減少;spine 是否亦 PCB 化=觀察點</td><td><span class="conf c-un">路線圖</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有營收(GB300 出貨中)=貿聯(AEC scale-out)、嘉澤(socket/插槽/UQD);多棒動能(PCIe Gen6/MCIO Gen6+800G→1.6T AEC)2026-27=宏致(但當期 EPS 弱待兌現)。<b>勝負手=台廠能否從線纜組裝升級到 B2B/CPC 連接器+midplane 組裝</b>(2026-27)。⚠ 對 cableless 重分配與晶片端缺席保持折價;宣德概念待放量;嘉澤/嘉基同集團勿雙計。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入貿聯量級<b>示意數字</b>(非財測)。本輪核心=224G 用量暴增 × 連接器/線纜組裝放量;但須分清量(確定)vs 晶片端缺席+cableless 重分配。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>連接器/線纜</td><td>用量放大期 PE 拉升;晶片端缺席+cableless 風險折價</td></tr>
+      <tr><td><b>用量 × ASP</b></td><td>單櫃條數/連接器數 × 單價</td><td>本輪核心</td><td>5,184 條銅纜/AEC 1→9 條;台廠吃組裝量、晶片價值外購</td></tr>
+      <tr><td><b>升級溢價</b></td><td>224G→1.6T AEC、Gen5→Gen6 MCIO</td><td>多棒動能</td><td>貿聯 1.6T、宏致 800G AEC、嘉澤針腳 5000→7000+</td></tr>
+      <tr><td><b>cableless 重分配折價</b></td><td>tray 內線纜砍量 vs scale-out 補回</td><td>風險</td><td>勝負手=升級到 B2B/CPC 連接器;晶片端無 IP 護城河</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=貿聯量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="850"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="15"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="11"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="2"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="18"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="20"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為貿聯量級示意、非財測。嘉澤(規模最強)/宏致(當期 EPS 弱)股數與毛利差異大,務必填入標的真實數字。法人 EPS 目標(嘉澤 95/宏致 6)低可信、勿直接套用;晶片端缺席+cableless 重分配=保持折價。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。四級來源分流;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>NVIDIA 官方/OCP/CES 2026</b> — NVL72 5,184 條銅纜 cartridge、VR NVL72 spine 沿用 5,000 銅纜/2 英里、NVLink6 448G(雙向 SerDes)、cableless midplane、Kyber NVL576<span class="q">primary</span></li>
+    <li><b>Credo 10-K(SEC)</b> — 揭露貿聯為 Credo AEC 主要/唯一第三方代工製造商(Foxlink 二供)<span class="q">primary</span></li>
+    <li><b>貿聯/嘉澤/宏致/嘉基/宣德 2026 法說與月營收</b>(公開申報)<span class="q">primary</span></li>
+    <li><b>SemiAnalysis / wheelersnetwork / ServeTheHome / DCD</b> — Rubin cableless midplane、Paladin HD2 B2B、PCB 板面積 ×2.3、Kyber 銅 midplane<span class="q">secondary</span></li>
+    <li><b>650 Group / CNBC(2025/10)</b> — Credo AEC 約 88%、1→9 條;Intel Market Research(AEC $7.38 億→35.7 億)/LightCounting(2029 $67 億)/SNS Insider(SerDes)<span class="q">secondary</span></li>
+    <li><b>vocus/cmoney/經濟日報/工商</b>(嘉澤伺服器破 5 成/UQD、宏致 MCIO 1→10% 法人估、宣德 MCIO 送樣);TheValueist(X,spine 亦 PCB 化激進說、待查)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① 貿聯「自有 AEC 龍頭」=實為 Credo AEC 代工霸主(10-K)、自有方案部分自述;② Rubin「沿用 5,184 條銅纜」須分層(spine 沿用、canister 內 cableless);③ 嘉澤「NVIDIA 占比 2%→5-8%」=公司自述非已證;④ 宏致「市佔 1%→10%、營收 130 億」=法人估(1Q26 EPS 僅 0.67 年減 51%);⑤ 宣德「AI MCIO 實質受惠」=與其 2026/04 法說(主力工控/遊戲機/低軌衛星)矛盾、概念;⑥ AEC 市場採狹義(廣義 $87 億低可信);⑦「Amphenol 被 cableless 殺死」=誤讀(雙重受惠)。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。台廠晶片端缺席、cableless 重分配、法人估值低可信須注意;PCB midplane 板材歸 CCL 鏈、NVLink 銅背板與 #26 整機組裝題交界。數據請以最新官方法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>224G 世代高速互連(連接器/AEC/MCIO/銅背板)研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
