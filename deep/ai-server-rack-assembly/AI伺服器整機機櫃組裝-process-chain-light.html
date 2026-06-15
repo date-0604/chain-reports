@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 伺服器整機 / 機櫃組裝 研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#4f46e5; --accent-soft:#e0e7ff;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#eef2ff,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:880px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:880px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">AI 伺服器整機/機櫃組裝<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱</a>
+    <a href="#categories">兩大攻防</a><a href="#application">製造分層</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">BOM+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>AI 伺服器整機 / 機櫃組裝<em> 研究指南</em> 2026</h1>
+  <p class="lead">AI 資本支出「落地成硬體」的整機/機櫃組裝環節,台系 ODM 是全球(中國以外)唯一具規模供應集團。量價雙升:大摩拆 VR200 NVL72 單櫃 BOM 約 US$7.80M(較 GB300 +95% 近翻倍)、出貨量又由 29k→70-80k 櫃。⚠ 但核心未定變數=「單櫃毛利歸屬」:L10 三家限定(鴻海/廣達/緯創,進入障礙)vs NVIDIA 自 Vera Rubin 起擬直供已組裝 L10(占成本 9 成、壓 ODM 回低毛利 L11)。機構件單價可隨規格變更單向砍價(健策 -66%)。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動力:單櫃 BOM +95% × 出貨翻倍</span>
+    <span class="badge">台灣吃:ODM 全球主導(毛利歸屬待定)</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:量確定、毛利歸屬待定</h2>
+  <p class="subtitle"><b>切分:</b>本題只取組裝財+機構結構件+ODM 份額毛利之爭;排除 224G 連接器(NVLink 銅背板本體歸該題)、電源、液冷;BOM 中記憶體/PCB/ABF/MLCC 各歸既有題、只引用單櫃價值放大、不重複計受惠主體。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">📈</span>量價雙升(高信心)</h4><p>單櫃 BOM +95%(GB300 $3.99M→VR200 $7.80M、GPU 占比 65%→51% 價值轉移)× 出貨量近翻倍(NVL72 2025 29k→2026 70-80k 櫃)=量×價同向。台系 ODM 全球(中國外)唯一規模供應集團。</p></div>
+    <div class="card"><h4><span class="ico">⚔️</span>L10 攻防(核心未定)</h4><p>力量①(正向已確立):NVIDIA L10 運算托盤限定鴻海/廣達/緯創三家=進入障礙。力量②(前瞻風險):自 Vera Rubin 起擬直供已組裝 L10(占成本 9 成)、壓 ODM 回低毛利 L11(量化未定、2026-27 觀察)。</p></div>
+    <div class="card"><h4><span class="ico">⚠️</span>機構件可單向砍價</h4><p>機構含量隨機櫃化純增(滑軌川湖/機殼勤誠/均熱片健策),但 NVIDIA 握規格定義權——健策均熱片自雙蓋鍍金 $150 改回單片 $50(-66%)、連吞跌停。勿假設只漲不跌。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(規則制定 → ODM → 機構 → 交付)</h2>
+  <p class="subtitle">NVIDIA 定義 MGX/L10 → 台系 ODM L10-L11 組裝 → 機構結構件 → L12 交付。<span class="conf c-high">綠＝NVIDIA 官方/法說</span> <span class="conf c-med">橙＝研調/媒體/券商</span> <span class="conf c-un">灰＝ceremony 名單/概念股</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">規則制定者<small>握價值歸屬</small></div><div class="items"><span class="badge b-accent">NVIDIA(MGX/L10 限定/直供風險)</span></div></div>
+    <div class="chain-row"><div class="lvl">ODM 組裝層<small>台灣主導</small></div><div class="items"><span class="badge b-tw">鴻海 2317</span><span class="badge b-tw">緯穎 6669</span><span class="badge b-tw">廣達 2382</span><span class="badge b-tw">緯創 3231</span></div></div>
+    <div class="chain-row"><div class="lvl">機構結構件<small>利基·含量增</small></div><div class="items"><span class="badge b-tw">川湖 2059(滑軌)</span><span class="badge b-tw">勤誠 8210(機殼/tray)</span><span class="badge b-tw">健策 3653(均熱片·砍價風險)</span></div></div>
+    <div class="chain-row"><div class="lvl">被排除/概念<small>敘事風險</small></div><div class="items"><span class="badge b-warn">技嘉 2376·英業達 2356(被 L10 排除)</span><span class="badge">可成 2474·臻鼎 4958(MGX 名單)</span></div></div>
+    <div class="chain-row"><div class="lvl">既有題交界<small>不重複計</small></div><div class="items"><span class="badge">板材 欣興/台光電(PCB 鏈)</span><span class="badge">銅背板 Amphenol(224G)</span><span class="badge">記憶體/ABF/MLCC/電源/液冷</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:ODM 組裝(三家限定+緯穎 hyperscaler)+機構結構件(川湖/勤誠/健策)主導;缺席/陪跑於 NVLink 銅背板(Amphenol)、PCB midplane 板材(歸 CCL 鏈交界)。最大價值環節(L10,占成本 9 成)捕捉確定性被 Vera Rubin 直供風險侵蝕。中國對照=FII(鴻海子公司、份額重疊)。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何熱:單櫃 BOM 近翻倍 × 出貨量近翻倍</h2>
+  <p class="subtitle">AI capex 落地成硬體,單櫃價值與出貨量同向放大;但毛利歸屬是真風險。</p>
+  <div class="flow">
+    <div class="step"><b>單櫃 BOM +95%</b><small>GB300 $3.99M→VR200 $7.80M;GPU 占比 65%→51%、價值往記憶體/PCB/機構轉移</small></div><div class="arrow">×</div>
+    <div class="step"><b>出貨量近翻倍</b><small>NVL72 2025 29k→2026 70-80k 櫃;月產約 6,500</small></div><div class="arrow">→</div>
+    <div class="step"><b>=量×價同向</b><small>台系 ODM 全球唯一規模供應;鴻海份額 43%→55-60%</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>單櫃 BOM(GB300→VR200)</p><h4>$3.99M → $7.80M(+95%)</h4></div>
+    <div class="card"><p>NVL72 出貨量(2025→2026)</p><h4>29k → 70-80k 櫃</h4></div>
+    <div class="card"><p>L10 占整機成本</p><h4>約 9 成(直供風險標的)</h4></div>
+    <div class="card"><p>ODM 單櫃增值 / 機構砍價</p><h4>+35~40% / 健策 -66%</h4></div>
+  </div>
+  <p class="disclaimer">口徑警示:單櫃 BOM 為大摩單一券商 bottom-up 估(vs Tom's $8.8M 區間)、非成交價;記憶體 +435%(大摩)vs +485%(Tom's)框架分歧;鴻海份額三口徑(公司 40%/研調 55-60%/GB300 代工 57%)勿混;出貨量 29k vs 大摩下修 27.3k。多口徑並列。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Battles</span>
+  <h2 class="title">兩大價值攻防(誰守得住價值的核心)</h2>
+  <p class="subtitle">L10 歸屬、組裝財 vs 機構財,是判斷「量價放大紅利落不落 ODM」的根本。</p>
+  <h3>攻防 ①:L10 三家限定(正向)vs Vera Rubin 直供 L10(風險)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>力量</th><th>內容</th><th>性質</th></tr></thead>
+    <tbody>
+      <tr><td>① L10 三家限定</td><td>NVIDIA L10 運算托盤組裝限定鴻海/廣達/緯創三家,排除技嘉/英業達/OEM 直購托盤</td><td><span class="conf c-high">偏正向·已確立(進入障礙)</span></td></tr>
+      <tr><td>② Vera Rubin 直供 L10</td><td>NVIDIA 自 Vera Rubin 起擬直供已組裝 L10 系統(占整機成本約 9 成),壓 ODM 回低毛利 L11</td><td><span class="conf c-low">前瞻風險·量化未定(2026-27)</span></td></tr>
+      <tr><td>雙面性佐證</td><td>VR200 隱含毛利率約 1.9%(低於 GB300 2.7%),但 ODM 單櫃增值絕對值升 +35-40%($108k→$149.6k)</td><td><span class="conf c-med">毛利率壓縮但絕對金額成長並存</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>攻防 ②:組裝財(量大利薄)vs 機構財(含量增但可砍價)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>型態</th><th>特性</th><th>守得住度</th></tr></thead>
+    <tbody>
+      <tr><td>組裝財(L11)</td><td>量穩成長確定(規模壁壘),但毛利薄(緯創 Q1 GM 5.21%);單櫃金額放大 ≠ 毛利率放大</td><td><span class="stars">★★★☆☆</span> 量在·利薄</td></tr>
+      <tr><td>機構財</td><td>含量隨機櫃化純增(滑軌/機殼/均熱片),但 NVIDIA 握規格定義權、可單向砍價(健策 -66%)</td><td><span class="stars">★★★☆☆</span> 規格制定者抗壓·均熱片脆弱</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 守得住價值者排序:① <b>鴻海</b>(垂直整合 L6→L12+在地化+規模份額,最抗壓);② <b>緯穎</b>(hyperscaler 自有設計+ASIC,脫離純 NVIDIA L10 直供框架,相對絕緣);③ 規格制定者機構財(川湖滑軌/勤誠機殼客製化高)。相對脆弱:單一料號可被砍的均熱片(健策)、被 L10 排除的二線(技嘉/英業達)。</div>
+</div></section>
+
+<!-- 05 製造分層 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Manufacturing Layers</span>
+  <h2 class="title">製造分層鏈(L6 → L12)</h2>
+  <p class="subtitle">八環節。台廠 alpha 在 ②⑥(三家限定 ODM)與 ⑤(機構財)。</p>
+  <div class="stack">
+    <div class="layer"><b>① L6 模組(GPU baseboard 子組裝)</b><div class="uses">緯創隱形獲利源;Vera Rubin 後設計自由度被壓縮</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② L10 運算托盤(占整機成本約 9 成)★ 價值最集中</b><div class="uses">三家限定進入障礙;Vera Rubin 直供風險侵蝕價值捕捉</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ NVLink 交換托盤</b><div class="uses">晶片 NVIDIA、連接器 Amphenol;台廠吃機構 tray(勤誠)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ NVLink 背板(銅纜 spine → PCB midplane)</b><div class="uses">組裝 2 小時→5 分鐘(最高 20 倍);價值轉板材(歸 CCL 鏈)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ MGX 機構件(機殼/滑軌/均熱片/結構)★ 機構財核心</b><div class="uses">含量隨機櫃化純增;但規格變更可單向砍價(健策 -66%)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ L11 整機/機櫃系統整合(組裝財本體)</b><div class="uses">量大利薄(緯創 GM 5.21%);Vera Rubin 後恐只剩此</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ L12 交付資料中心(on-site 部署)</b><div class="uses">鴻海整廠+在地化美國產能;服務價值易被稀釋</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ 價值歸屬攻防 ★ 全鏈最難判定</b><div class="uses">L10 三家限定 vs Vera Rubin 直供;2026-27 見真章</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:台廠主導 ②L10 組裝(三家限定)、⑥L11 整合(全球唯一規模供應集團)、⑤機構件(川湖/勤誠/健策利基);但最大價值環節(②L10,占成本 9 成)的捕捉確定性正被 Vera Rubin 直供風險侵蝕。④板材/PCB 價值大增歸 CCL 鏈(交界);③NVLink 銅背板歸 224G 題(陪跑)。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯(依受惠四型)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>型態</th><th>台廠</th><th>受惠邏輯 / 釐清</th></tr></thead>
+    <tbody>
+      <tr><td>L10 指定 ODM(進入障礙)</td><td>鴻海 2317/廣達 2382/緯創 3231</td><td>L10 托盤限定三家=進入障礙;鴻海最抗壓(規模+垂直整合)、緯創 L6→L10 升級故事最強但風險最高(升級紅利正是被上收那段)</td></tr>
+      <tr><td>hyperscaler ODM(相對絕緣)</td><td>緯穎 6669</td><td>自有設計+ASIC、脫離純 NVIDIA L10 直供框架;大摩老 AI 首選;⚠ 記憶體代購不認列營收=比較成長率須還原口徑</td></tr>
+      <tr><td>機構件(利基壁壘)</td><td>川湖 2059/勤誠 8210/健策 3653</td><td>含量隨機櫃化純增;川湖滑軌規格制定者抗壓、勤誠機殼客戶 1→3 家;<b>健策均熱片規格變更砍價 -66%=機構件可單向砍價</b></td></tr>
+      <tr><td>被 L10 排除 OEM(敘事風險)</td><td>技嘉 2376/英業達 2356</td><td>GB300 代工群但被 L10 三家限定排除;兩劇本皆不利;技嘉有品牌出海口、英業達切 Google TPU(L6)=非完全出局</td></tr>
+      <tr><td>概念股/PCB 交界(待查)</td><td>可成 2474/臻鼎 4958</td><td>5/29 MGX 名單首入=列名 ≠ 逐料號;臻鼎屬 PCB 鏈交界(不評本題主體)、可成機殼概念=未來選擇權</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>Vera Rubin 直供 L10</b>(占成本 9 成、壓 ODM 回低毛利 L11、量化未定);② <b>組裝財量大利薄</b>(單櫃金額放大≠毛利率放大);③ <b>機構件可砍價</b>(健策 -66%、勿假設只漲不跌);④ <b>概念股雜訊</b>(可成/臻鼎 ceremony 名單待逐料號);⑤ <b>口徑陷阱</b>(BOM/份額多口徑並列、FII 與鴻海份額重疊)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=NVIDIA 官方/法說 <span class="conf c-med">中</span>=研調/媒體 <span class="conf c-un">待查</span></p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="odm">ODM 組裝</button><button data-f="struct">機構件</button>
+    <button data-f="risk">被排除·概念</button><button data-f="intl">國際</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="odm"><h4>鴻海 <span class="code">2317</span></h4><p>本題最大贏家。份額三口徑:公司約 40%(劉揚偉 5/14 法說)、研調 55-60%、GB300 代工 57%(JPM)。5 月營收 8,594 億 YoY +39.57%、1Q26 獲利創同期高。VR200 主力(估 4Q26 量產)、美國 12 州逾 40 據點。VR200 隱含毛利率約 1.9% 但 ODM 單櫃增值 +35-40%。垂直整合+規模+在地化=最抗壓。受惠評分 24/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="odm"><h4>緯穎 <span class="code">6669</span></h4><p>hyperscaler 自有設計 ODM,AI 伺服器營收破兆級(2026 估 1.25-1.35 兆,法人)。大摩 5/22 列老 AI 首選(緯穎&gt;緯創&gt;廣達&gt;鴻海)。1Q26 EPS 75.95;ASIC+GPU 雙動能、砸 5 億美元擴產。⚠ 記憶體代購不認列營收(約 4 月起)=比較成長率須還原口徑;相對絕緣於 NVIDIA L10 直供框架。受惠評分 23/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="odm"><h4>廣達 <span class="code">2382</span></h4><p>L10 三家指定之一。組裝代工比重 JPM 約 21%、估份額 25-30%。大摩 5/22 outperform。VR200/Vera Rubin 進設計測試、下半年量產整機。⚠ 被 TrendForce 首位點名「直供 L10 壓縮毛利」風險,靠雲端白牌+L11 規模緩衝。受惠評分 22/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="odm"><h4>緯創 <span class="code">3231</span></h4><p>L10 三家指定之一,由 L6 升 L10、毛利改善敘事最強。AI 占 2025 近 7 成、組裝代工比重 JPM 約 18%。大摩排序純 ODM 中最前。⚠ Q1'26 毛利率僅 5.21%;<b>升級紅利正是 Vera Rubin 直供恐上收那段=守價最弱、風險最高</b>。受惠評分 22/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="struct"><h4>川湖 <span class="code">2059</span></h4><p>機構件:伺服器滑軌/導軌龍頭、AI 導軌規格制定者地位確立(GB300 與新平台放量驅動獲利非線性)。1Q26 營收創高、突破淡季;MGX 5/29 名單列名。規格制定者=高進入障礙、高毛利利基壁壘;機構件含量增純度高、規格相對穩定。受惠評分 21/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="struct"><h4>勤誠 <span class="code">8210</span></h4><p>機構件:GB200/GB300 reference 機殼主力、Switch tray 主供;GB300 客戶 1→3 家。AI 機殼/機櫃占 2026 估 60-65% 營收;法人估 2026 營收約 351 億、EPS 挑戰近 50;2025/12 月營收 27.1 億 YoY +68.38% 創高;GB300 機殼 2026 估上看 30 萬台。MGX 名單列名。受惠評分 20/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="struct"><h4>健策 <span class="code">3653</span></h4><p>機構件:高階 GPU 均熱片。<b>規格變更砍價實例(已多源確認):</b>雙片鍍金 $150→2026/5 改回單片 $50(-66%)、連吞跌停(估影響 2026 營收約 60 億)。1Q26 毛利率 21%→27%、EPS 3.67 創同期高;法人估 2026 Rubin GPU 出貨 150-200 萬顆。⚠「獨家」待查、水冷板歸散熱另題。受惠評分 18/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="risk"><h4>技嘉 / 英業達 <span class="code">2376/2356</span></h4><p>(被排除)GB300 代工群但<b>被 NVIDIA L10 三家限定排除直購運算托盤</b>=本題核心敘事風險。技嘉有 GIGABYTE 品牌出海口、英業達切 Google TPU(L6)=非完全出局,但 L10 高毛利環節擋在門外;兩劇本皆不利。定偏中性偏空。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="risk"><h4>可成 / 臻鼎-KY <span class="code">2474/4958</span></h4><p>(概念/交界)5/29 MGX ceremony 首入「背板股/生態夥伴」名單(150 家夥伴)=<b>列名 ≠ 逐料號出貨佐證</b>。可成=機殼概念(未來選擇權);臻鼎=PCB 身分,Vera Rubin PCB midplane 屬「與 PCB/CCL 鏈交界」、<b>本題不評為整機/機構組裝財受惠主體</b>(避免重複計)。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="intl"><h4>NVIDIA <span class="code">規則制定者</span></h4><p>非本題受惠主體但決定 ODM 價值歸屬。制定 MGX 標準(VR200 每櫃逾 100 萬零件/25 廠/兩公噸);L10 限定三家;<b>報導擬自 Vera Rubin 直供已組裝 L10(占成本 9 成)</b>=台 ODM 最大前瞻風險。Rubin 六晶片已 tape-out、2026 H2 出貨。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Amphenol / Dell·Lenovo·HPE·Supermicro <span class="code">美·背板/OEM</span></h4><p>Amphenol=NVLink 銅纜 spine 背板主導(台股陪跑、歸 224G 題);Vera Rubin cableless 後價值轉台廠板材。Dell/Lenovo/HPE/Supermicro=Vera 夥伴但只提供 standalone CPU 配置、<b>未獲 L10 直購資格</b>=被排除一方、份額被稀釋。</p><span class="conf c-med">中高</span></div>
+    <div class="card" data-cat="intl"><h4>工業富聯 FII <span class="code">中·鴻海子公司</span></h4><p>全球最大 AI 伺服器代工(自稱)、鴻海集團旗下、月產能約 12 萬台(含一般伺服器)、獨家組裝 GB200;2025 營收人民幣 9,029 億 +48%、1Q26 淨利 +102%。<b>屬鴻海體系、與母公司份額重疊,非「中國以外台系」敘事的真對手</b>。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 細顆粒地圖 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 單櫃 BOM 放大模型 + 價值歸屬攻防 + 台灣吃得到定位</h2>
+  <p class="subtitle">一句話:<b>L10 組裝/L11 整合=主導(L10 被上收風險);滑軌/機殼/均熱片=利基(均熱片規格風險最高);PCB midplane 板材=交界(歸 CCL 鏈);NVLink 銅背板=陪跑(Amphenol);ceremony 名單=選擇權待佐證。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>單櫃 BOM 為大摩單一券商估(非成交價)、多口徑並列;機構件可單向砍價(健策);概念股 ceremony 名單待逐料號;個股實際營收強弱不一,投資前自行查證。</div>
+  <h3>VR200 單櫃 BOM 逐項(大摩 5/22,須標源)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>項目</th><th>GB300</th><th>VR200</th><th>增幅</th><th>歸屬</th></tr></thead>
+    <tbody>
+      <tr><td>整櫃 BOM 總額</td><td>約 $3.99M</td><td>約 $7.80M</td><td><b>+95%</b></td><td>本題分母(Tom's 另 $8.8M)</td></tr>
+      <tr><td>GPU</td><td>約 $2.52M(65%)</td><td>約 $3.96M(51%)</td><td>+57%</td><td>NVIDIA 自留(占比下滑=價值轉移)</td></tr>
+      <tr><td>記憶體 HBM4+LPDDR5X</td><td>約 $374k</td><td>約 $2.00M(25-30%)</td><td>+435%(Tom's +485%)</td><td>歸 HBM/利基記憶體題</td></tr>
+      <tr><td>PCB</td><td>約 $35.1k</td><td>約 $116.7k</td><td><b>+233%(最大)</b></td><td>歸 CCL/PCB 鏈(本題交界)</td></tr>
+      <tr><td>NVLink Switch</td><td>約 $65k</td><td>約 $144k</td><td>+122%</td><td>晶片 NVIDIA、tray 勤誠</td></tr>
+      <tr><td>MLCC / ABF</td><td>$1,530 / $11.2k</td><td>$4,320 / $20.3k</td><td>+182% / +82%</td><td>歸 MLCC / ABF 載板題</td></tr>
+      <tr><td>電源/液冷/Vera CPU</td><td>—</td><td>電源 +32%/液冷 +12%/CPU $180k 持平</td><td>—</td><td>電源/液冷歸既有題;CPU NVIDIA</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">🔬 <b>本題可捕捉價值放大(估算):</b>單櫃 $7.80M × 70-80k 櫃 → 2026 ODM 採購市場約 <b>US$546-624 億</b>;扣除 NVIDIA 自留(GPU+記憶體+CPU 約 $6.14M=占 79%)後,純整機/機櫃組裝+機構結構件可捕捉約單櫃 US$1.0-1.3M 量級 × 70-80k 櫃 → <b>本題台廠可捕捉市場約 US$70-100 億級/年</b>(估算,分母為券商單一來源 BOM、敏感度高)。大摩另判斷 <b>ODM added value 較市場預期升 35-40%</b>(絕對金額放大部分抵銷百分比毛利壓縮)。</div>
+  <div class="callout warn">🔬 <b>L10 價值歸屬攻防(逐家 × 兩劇本):</b><br><b>鴻海 2317:</b>劇本①最大贏家(份額+規模+美國廠)、劇本②衝擊最大但靠 L11 整廠+垂直整合守住絕對金額=<b>最抗壓</b>。<br><b>緯創 3231:</b>劇本①受惠最明顯(L6→L10 升級毛利改善)、劇本②<b>風險最高</b>(升級紅利正是被上收那段)、守價最弱。<br><b>廣達 2382:</b>劇本①穩居第二、劇本②被 TrendForce 首位點名、靠白牌+L11 規模緩衝。<br><b>緯穎 6669:</b>相對絕緣(hyperscaler 自有設計+ASIC、非 NVIDIA L10 限定體系)。<br><b>技嘉/英業達:</b>兩劇本皆不利(①已排除、②直供更弱化差異化)。<b>時點:</b>GB300 現行=劇本①生效;VR200 2H26=劇本②開始驗證,2026-27 為毛利歸屬決勝觀察期。</div>
+  <p class="disclaimer">資料整合自 NVIDIA 官方/OCP+大摩 BOM+TrendForce/JPMorgan/Digitimes。延伸:各 ODM VR200 具體份額(待 4Q26)、Vera Rubin L10 直供量化、健策「獨家」程度、可成/臻鼎逐料號實證、PCB midplane 板材受惠(CCL 鏈)、L12 整廠交付/在地化題。</p>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">逐環節難度 + 公司受惠評分</h2>
+  <p class="subtitle">難度維度:組裝複雜度/良率瓶頸/規模壁壘/價值捕捉確定,各 0~5 分。⑧ 價值攻防為商業判斷不列。</p>
+  <h3>逐環節難度評分</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製造環節</th><th>組裝複雜度</th><th>良率瓶頸</th><th>規模壁壘</th><th>價值捕捉確定</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>② L10 運算托盤(占成本 9 成)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>④ NVLink 背板 PCB midplane</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>⑥ L11 機櫃系統整合</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>⑤ MGX 機構件</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>③ NVLink 交換托盤</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>① L6 模組</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+      <tr><td>⑦ L12 交付部署</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">11</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台廠主導 ②L10/⑥L11/⑤機構;但最大價值環節(②L10,占成本 9 成)捕捉確定性被 Vera Rubin 直供風險侵蝕。④板材歸 CCL 鏈、③連接器歸 224G 題。評分為推估。</p>
+
+  <h3>公司受惠強度評分(只列有查證信心之 holds)</h3>
+  <p class="subtitle">維度:AI受惠/份額卡位/放量時程/進入障礙/規模財務,0~5 分。被排除 OEM(技嘉/英業達)與概念股(可成)見公司圖譜,不列評分。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>型態</th><th>AI受惠</th><th>份額卡位</th><th>放量時程</th><th>進入障礙</th><th>規模</th><th>總分 /25</th></tr></thead>
+    <tbody>
+      <tr><td>鴻海 2317</td><td>L10 ODM</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">24</span></td></tr>
+      <tr><td>緯穎 6669</td><td>hyperscaler ODM</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">23</span></td></tr>
+      <tr><td>廣達 2382</td><td>L10 ODM</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td>緯創 3231</td><td>L10 ODM</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td>川湖 2059</td><td>機構件(滑軌)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">21</span></td></tr>
+      <tr><td>勤誠 8210</td><td>機構件(機殼)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>健策 3653</td><td>機構件(均熱片·砍價風險)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">大摩 5/22「老 AI」相對偏好 緯穎&gt;緯創&gt;廣達&gt;鴻海(相對偏好非份額排序、份額仍鴻海最大)。鴻海=最抗壓;緯穎=脫離 L10 直供框架;緯創=升級故事最強但風險最高;川湖/勤誠=規格制定/客製化高;健策=均熱片但規格砍價 -66%。臻鼎(PCB 交界)/技嘉·英業達(被排除)/可成(概念)見公司圖譜、不列受惠評分。評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 催化劑時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2026 H1→2027 催化劑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>鴻海 2317</td><td>L10 ODM·最大贏家</td><td>份額三口徑(40%/55-60%/57%);VR200 主力估 4Q26 量產、美國廠;單櫃增值 +35-40%</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>緯穎/廣達/緯創</td><td>ODM</td><td>緯穎大摩首選(營收破兆);廣達 L10 三家;緯創 L6→L10 升級(風險最高)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>川湖/勤誠/健策</td><td>機構件</td><td>川湖滑軌規格制定;勤誠機殼客戶 1→3 家;健策均熱片 -66% 砍價</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>大摩 BOM(事件)</td><td>單櫃量價</td><td>5/22 VR200 $7.80M(+95%)、記憶體 +435%、PCB +233%(Tom's $8.8M 區間)</td><td><span class="conf c-med">中(券商估)</span></td></tr>
+      <tr><td>VR200 量產(事件)</td><td>放量主力</td><td>Rubin 六晶片 tape-out;2026 Q3 首批出貨、Q4 全速;全年 70-80k 櫃</td><td><span class="conf c-un">前瞻</span></td></tr>
+      <tr><td>2026 H2 ⚔ L10 直供</td><td>毛利歸屬決勝</td><td>Vera Rubin 直供已組裝 L10(占成本 9 成)是否落地+量化(TrendForce/JPMorgan)</td><td><span class="conf c-un">前瞻風險</span></td></tr>
+      <tr><td>健策規格變更(事件)</td><td>機構砍價實例</td><td>5/6 均熱片 $150→$50(-66%)、連吞跌停=機構件可單向砍價</td><td><span class="conf c-high">已實現(利空)</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有營收(GB300 量產中)=鴻海/廣達/緯創/緯穎(ODM)、川湖/勤誠/健策(機構);量價放大主力 2H26(VR200 $7.8M)。守得住價值=鴻海(規模+垂直整合+在地化)、緯穎(自有設計脫離 L10 直供框架)、川湖/勤誠(規格制定/客製化高)。⚠ 緊盯 2026 H2 Vera Rubin L10 直供是否落地+量化;機構件勿假設只漲不跌(健策);技嘉/英業達被排除敘事風險;可成/臻鼎 ceremony 名單待逐料號。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入廣達量級<b>示意數字</b>(非財測,ODM「量大利薄」特性、淨利率僅約 3%)。本輪核心=出貨量×單櫃 BOM 放大;但須分清量(確定)vs 毛利(歸屬待定)。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>ODM/機構</td><td>量價放大期 PE 拉升;毛利歸屬風險壓 PE</td></tr>
+      <tr><td><b>單櫃 BOM × 出貨量</b></td><td>單櫃自 ODM 採購額 × 櫃數</td><td>ODM 營收</td><td>VR200 $7.8M × 70-80k 櫃;但組裝財量大利薄(GM 5.21%)</td></tr>
+      <tr><td><b>ODM 增值模型</b></td><td>ODM added value(自採權+整合費)</td><td>毛利</td><td>大摩:added value +35-40% 抵銷毛利率壓縮</td></tr>
+      <tr><td><b>機構件含量 ×ASP</b></td><td>含量增 × 單價(可被砍)</td><td>機構件</td><td>滑軌/機殼規格穩;均熱片 ASP 可單向砍(健策 -66%)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=廣達量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="18000"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="20"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="3"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="38.6"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="18"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="25"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為廣達量級示意、非財測(ODM 淨利率僅約 3%=量大利薄)。鴻海/緯穎(營收破兆)/機構件(川湖/勤誠/健策,高毛利)股數與毛利差異極大,務必填入標的真實數字。ODM 毛利歸屬受 Vera Rubin L10 直供風險影響、機構件 ASP 可被砍,勿直接外推。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>NVIDIA 官方 newsroom/技術 blog/OCP</b> — MGX 標準、Vera Rubin POD(NVL72=18 運算托盤/72 GPU/9 NVLink 交換托盤)、PCB midplane 組裝 2 小時→5 分鐘(最高 20 倍)、逾 100 萬零件/25 廠、六晶片 tape-out<span class="q">primary</span></li>
+    <li><b>鴻海/廣達/緯創/緯穎/川湖/勤誠/健策 2026 法說與月營收</b>(公開申報)<span class="q">primary</span></li>
+    <li><b>Morgan Stanley(Howard Kao,2026/5/21-22)</b>經 Tom's Hardware/PCGamer/wccftech 轉述 — VR200 單櫃 BOM $7.80M(+95%)、逐項放大、ODM added value +35-40%<span class="q">secondary</span></li>
+    <li><b>TrendForce</b>(L10 直供風險 2025/11、AI 伺服器 +28.3%)/ <b>JPMorgan</b> / <b>Digitimes</b>(L10 三家限定、份額逾 40%、FII)/ 經濟日報<span class="q">secondary</span></li>
+    <li><b>科技新報/財報狗/vocus</b>(健策 $150→$50)、<b>SemiAnalysis</b>(PCB midplane)、<b>blog.104.com.tw</b>(GB300 代工比重 鴻海 57%/廣達 21%/緯創 18%)<span class="q">secondary</span></li>
+    <li><b>自由時報/今周刊/businesstoday</b>(5/29 MGX ceremony 名單,可成/臻鼎首入=列名生態夥伴、非逐料號佐證)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① 大摩老 AI 首選實為<b>緯穎居首</b>(緯穎&gt;緯創&gt;廣達&gt;鴻海、相對偏好非份額排序);② 鴻海份額三口徑並列(公司 40%/研調 55-60%/GB300 代工 57%)勿混;③ 可成/臻鼎=ceremony 名單列名 ≠ 逐料號出貨(概念股待查);④ 健策均熱片<b>可單向砍價</b>($150→$50、-66%)、勿假設只漲不跌;⑤ 緯穎記憶體代購不認列營收=比較成長率須還原口徑;⑥ 臻鼎屬 PCB 鏈交界、不評本題受惠主體;⑦ 單櫃 BOM $7.8M 為券商估非成交價(vs Tom's $8.8M);⑧ Vera Rubin 直供 L10=前瞻風險、量化未定。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。量確定 vs 毛利歸屬待定、機構件可砍價、概念股雜訊、口徑多版本須注意;BOM 中記憶體/PCB/ABF/MLCC/電源/液冷各歸既有題、不重複計。數據請以最新官方法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>AI 伺服器整機 / 機櫃組裝 研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>

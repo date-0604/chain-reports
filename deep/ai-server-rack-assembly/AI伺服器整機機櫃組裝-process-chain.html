@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 伺服器整機 / 機櫃組裝 深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#818cf8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#1a1a33);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#08111d;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(129,140,248,.10)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}.tag{white-space:normal;overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>AI 伺服器整機 / 機櫃組裝 深度研究報告</h1>
+  <div class="sub">L6→L10→L11→L12 製造分層 × MGX 機構/背板 × 單櫃 BOM 近翻倍;組裝難度、價值歸屬攻防(L10 三家限定 vs Vera Rubin 直供)、台系 ODM 份額/毛利、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
+    <span class="pill">本質：<b>組裝財+機構財+ODM 份額/毛利之爭(量確定·毛利歸屬待定)</b></span>
+    <span class="pill">配對淺色版：<b>AI伺服器整機機櫃組裝-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/兩大攻防</a>
+    <a href="#s2">2. 製造分層鏈(8 環節)</a>
+    <a href="#s3">3. 難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. BOM放大/市場/時程</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>這是 AI 資本支出「<b>落地成硬體</b>」的整機/機櫃組裝環節,台系 ODM 是全球(中國以外)唯一具規模供應集團。<b>量價雙升結構罕見:</b>大摩(Howard Kao,5/22)拆 VR200 NVL72 單櫃 BOM 約 <b>US$7.80M、較 GB300 約 US$3.99M 升 +95%(近翻倍)</b>;NVL72 出貨量又由 2025 約 29k 櫃升至 2026 估 70-80k 櫃=量×價同向。<b>但核心未定變數=「單櫃毛利歸屬」:</b>① NVIDIA 把 GB200/GB300 的 L10 運算托盤組裝<b>限定鴻海/廣達/緯創三家</b>(進入障礙、偏正向、已確立,排除技嘉/英業達/OEM);② 報導 NVIDIA 自 Vera Rubin 起擬<b>直供已組裝完成的 L10 系統(占整機成本約 9 成)</b>,恐把 ODM 壓回低毛利 L11(前瞻風險、量化未定、2026-27 觀察期)。⚠ 機構件單價可隨規格變更<b>單向砍價</b>(健策均熱片 $150→$50、-66%)。切分:本題只取組裝財+機構結構件;BOM 中記憶體/PCB/ABF/MLCC/電源/液冷各歸既有題,只引用單櫃價值放大、不重複計受惠主體。</div>
+<div class="kpi">
+  <div class="box"><div class="v">$3.99M → $7.80M / +95%</div><div class="l">單櫃 BOM(GB300→VR200,大摩 5/22)</div></div>
+  <div class="box"><div class="v">29k → 70-80k 櫃</div><div class="l">NVL72 出貨量(2025→2026,近翻倍)</div></div>
+  <div class="box"><div class="v">約 9 成</div><div class="l">L10 運算托盤占整機成本(Vera Rubin 直供風險標的)</div></div>
+  <div class="box"><div class="v">+35~40% / -66%</div><div class="l">ODM 單櫃增值(大摩)/ 健策均熱片規格砍價</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、製造分層 ＋ 兩大價值攻防 <span class="conf c-high">高信心(量)</span></h2>
+<div class="card">
+  <h3>製造分層(L6 → L12)與本題範圍</h3>
+  <ul>
+    <li><b>分層:</b>L6 模組(GPU baseboard 子組裝)→ L10 運算托盤組裝(占整機成本約 9 成)→ L11 整機/機櫃系統整合測試 → L12 交付資料中心(現場部署)。本題=「<b>整機+機櫃+背板機構</b>」的組裝財+機構結構件+ODM 份額/毛利之爭。</li>
+    <li><b>量價雙升:</b>單櫃 BOM +95%(GPU 占比 65%→51%,價值往記憶體/PCB/機構轉移)× 出貨量近翻倍(NVL72 2025 29k→2026 70-80k 櫃、月產約 6,500);全球 AI 伺服器 2026 +28.3%。</li>
+    <li><b>台廠主導:</b>台系 ODM 是全球(中國以外)唯一具規模供應集團;鴻海份額自 43%→55-60%(研調/媒體估,Digitimes 保守逾 40%)。中國對照=工業富聯/FII(鴻海子公司、份額與母公司重疊)。</li>
+    <li><b>切分:</b>排除 224G 連接器(NVLink 銅背板本體歸該題、Amphenol 主導台股陪跑)、電源(power shelf/BBU/800VDC)、液冷(冷板/CDU/manifold);BOM 中記憶體/PCB/ABF/MLCC 各歸既有題、只引用單櫃放大。</li>
+  </ul>
+  <div class="g2 grid">
+    <div class="callout warn" style="margin:0"><b>⚔ 攻防 1:L10 三家限定(正向)vs Vera Rubin 直供 L10(風險)</b><br><b>力量①(偏正向、已確立):</b>NVIDIA 把 GB200/GB300 的 L10 運算托盤組裝<b>限定鴻海/廣達/緯創三家台 ODM</b>=進入障礙,把技嘉/英業達/OEM(Dell/HPE/Lenovo/Supermicro)排除直購托盤。<b>力量②(前瞻風險、量化未定):</b>TrendForce/JPMorgan/Tom's 報導 NVIDIA 自 Vera Rubin 起擬<b>直供已組裝完成的 L10 系統(占整機成本約 9 成)</b>,恐把 ODM 壓回低毛利 L11 機櫃整合。佐證雙面性:VR200 隱含毛利率約 1.9%(低於 GB300 約 2.7%),<b>但 ODM 單櫃增值絕對值仍升 +35-40%</b>($108k→約 $149.6k/櫃)=毛利率壓縮但絕對金額成長並存。時點:GB300 現行=力量①生效;VR200 2H26=力量②開始驗證。</div>
+    <div class="callout info" style="margin:0"><b>🔍 攻防 2:組裝財(量大利薄)vs 機構財(含量增但可砍價)</b><br><b>組裝財(L11):</b>整櫃系統整合,量穩成長確定(規模壁壘=護城河),但<b>毛利薄</b>(緯創 Q1'26 毛利率僅 5.21%);單櫃金額放大 ≠ 毛利率放大。<b>機構財:</b>含量隨機櫃化純增(滑軌川湖/機殼勤誠/均熱片健策),但<b>NVIDIA 握規格定義權、可單向砍價</b>——健策均熱片自雙蓋鍍金($150)改回單片設計($50、-66%)、連吞跌停,估影響 2026 營收約 60 億/2027 約 130 億。<b>勿假設機構件只漲不跌。</b>守得住者:規格制定者地位(川湖滑軌、勤誠機殼客製化高)抗壓 > 單一料號議價權低的均熱片。</div>
+  </div>
+  <div class="callout warn"><b>守得住價值者排序(綜合兩攻防):</b>① <b>鴻海 2317</b>(垂直整合 L6→L12+在地化美國產能+VR200 主力、規模份額護城河最強,即便毛利率受壓仍吃量);② <b>緯穎 6669</b>(hyperscaler 自有設計+ASIC,脫離純 NVIDIA L10 直供框架,相對絕緣);③ 規格制定者機構財(川湖滑軌/勤誠機殼)。相對脆弱:單一料號可被砍的機構件(健策)、被 L10 排除的二線(技嘉/英業達)。</div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>製造分層鏈拆解(L6 → L12)<span class="conf c-high">高信心</span></h2>
+<p class="sub">八環節:① L6 模組 → ② L10 運算托盤(占成本 9 成)→ ③ NVLink 交換托盤 → ④ NVLink 背板(銅纜 spine → PCB midplane)→ ⑤ MGX 機構件 → ⑥ L11 機櫃整合測試 → ⑦ L12 交付 → ⑧ 價值歸屬攻防。台廠 alpha 在 ②⑥(三家限定 ODM)與 ⑤(機構財)。</p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>① L6 模組(GPU baseboard / 運算子板)</h4>
+    <p>把 GPU 封裝(Rubin GPU+HBM4)、Vera CPU、VRM、ABF 載板組到 baseboard/Bianca 子板=整機「心臟基板」,供上層 L10 托盤組裝。ODM 從筆電代工切入 AI 伺服器的傳統起點。</p>
+    <div class="diff">難點:SMT 高密度貼裝+ABF 大載板翹曲控制+HBM4 共封裝良率敏感(記憶體占單櫃 BOM 升至 25-30%、料貴使重工成本高);屬板級量產製程、規模壁壘中等。<b>緯創 L6 為「隱形獲利引擎」;但 Vera Rubin 直供 L10 後 L6 設計自由度被壓縮、價值捕捉前瞻轉弱。</b></div>
+    <div class="who">對應:<span class="tag t-tw">緯創 3231(L6 關鍵供應商)/ 鴻海 2317(垂直整合)/ 廣達 2382 / 緯穎 6669(自有設計)</span> <span class="tag t-intl">NVIDIA(baseboard 規格)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>② L10 運算托盤組裝(compute tray,占整機成本約 9 成)⭐ 價值最集中</h4>
+    <p>把 L6 子板+Vera CPU+散熱冷板+blind-mate 連接器整合成 compute tray=整機價值最集中環節(TrendForce/Tom's 稱占整機成本約 9 成)。Vera Rubin 改 cable-free/hose-free/fanless 純 PCB+連接器設計。</p>
+    <div class="diff">難點:GB200/GB300 時代 CSP 高度客製托盤、組裝/驗證複雜、良率與 lead time 是瓶頸(GB200 量產曾延後);Vera Rubin 走標準化參考設計拉良率/縮 lead time。<b>NVIDIA 把 L10 托盤組裝限定鴻海/緯創/廣達三家(進入障礙);但 Vera Rubin「NVIDIA 直供已組裝 L10」前瞻風險正侵蝕價值捕捉確定性=本題最大攻防點。</b></div>
+    <div class="who">對應:<span class="tag t-tw">鴻海 2317 / 緯創 3231 / 廣達 2382(三家限定)</span> <span class="tag t-intl">NVIDIA(L10 標準參考設計/直供風險)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>③ NVLink 交換托盤(NVLink Switch tray)</h4>
+    <p>組裝 NVLink Switch 晶片+承載 PCB+blind-mate 連接器的交換托盤=機櫃內 GPU 全互連交換節點。VR200 NVLink Switch 單櫃 BOM 約 $144k(+122%,單一轉述);NVLink 6 達 448G/lane(雙倍於 GB300 的 224G)。</p>
+    <div class="diff">難點:448G/lane 用雙向 SerDes 使 Switch 晶片與 PCB 繞線複雜度大增=PCB 層數/材料升級;組裝機構化但訊號完整性驗證難。<b>交換晶片本體=NVIDIA、銅背板連接器=Amphenol(台股陪跑、屬 224G 題);台廠在本題只吃機構 tray(勤誠)+承載 PCB 外溢。</b></div>
+    <div class="who">對應:<span class="tag t-tw">勤誠 8210(Switch tray 機構)</span> <span class="tag t-intl">NVIDIA(Switch 晶片)/ Amphenol(連接器/銅背板)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>④ NVLink 背板(銅纜 spine 匣 → Vera Rubin PCB midplane)</h4>
+    <p>機櫃背部 GPU 全互連背板。GB200/GB300=銅纜 cable-cartridge spine 匣(約 5,000 條銅纜);Vera Rubin「cableless」改中央 rack-scale PCB midplane+blind-mate 連接器。本題只取背板的機構承載+PCB midplane 本體。</p>
+    <div class="diff">難點:銅纜 spine 時代大量手工接線(托盤組裝近 2 小時);改 PCB midplane 後 blind-mate 一插即合(約 5 分鐘)=<b>NVIDIA 官方稱組裝/可維護性最高 20 倍</b>(另 18 倍口徑);但 midplane 本體=超大尺寸高層數 PCB、板材翹曲+阻抗+盲插對位難度極高。<b>價值由銅纜(Amphenol)→PCB midplane(板材/PCB 鏈,欣興/台光電等,本題只標交界);機構承載捕捉者(可成/臻鼎)為 ceremony 列名待逐料號佐證。</b></div>
+    <div class="who">對應:<span class="tag t-tw">(板材:欣興 3037/台光電 2383 交界)/ 可成 2474·臻鼎 4958(MGX 名單待查)</span> <span class="tag t-intl">NVIDIA(midplane 規格)/ Amphenol(既有銅纜)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>⑤ MGX 機構件(機殼/滑軌/均熱片/結構件/Switch tray)⭐ 機構財核心</h4>
+    <p>第三代 MGX 標準化機構:機殼、機櫃鈑金、伺服器滑軌、GPU 均熱片(vapor chamber)、結構件、Switch tray。單櫃 BOM 近翻倍+機櫃化使機構件含量隨之純增(量增邏輯)。</p>
+    <div class="diff">難點:機構件製程成熟、組裝難度中等;<b>真正風險不在組裝難度而在「規格變更可單向砍價」</b>——健策 2026/3 Rubin 雙蓋鍍金版均熱片約 $150,2026/5 NVIDIA 改回單片設計、去鍍金、單價降至約 $50(-66%)、連吞跌停。良率非瓶頸、ASP 波動才是。</div>
+    <div class="who">對應:<span class="tag t-tw">川湖 2059(滑軌龍頭)/ 勤誠 8210(機殼/Switch tray)/ 健策 3653(均熱片,規格風險)/ 可成·臻鼎(名單待查)</span> <span class="tag t-intl">NVIDIA(MGX 機構規格/可單向改規)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>⑥ L11 整機/機櫃系統整合+測試(組裝財本體)</h4>
+    <p>把 L10 托盤+NVLink 背板/交換托盤+電源+液冷+機構整合成整櫃 NVL72,做系統級燒機/壓力測試後出整櫃。VR200 整櫃自 ODM 採購約 $7.8M(vs GB300 &lt;$4M、+95%),量大但毛利薄。</p>
+    <div class="diff">難點:整櫃整合涉數千條互連+液冷+高功率(800VDC)系統級驗證,工程量大但屬規模化;瓶頸在 lead time 與整櫃良率(一料壞=整櫃重工成本高)。<b>毛利結構薄:緯創 Q1'26 毛利率僅 5.21%。單櫃金額放大 ≠ 毛利率放大;Vera Rubin 直供 L10 後 ODM 恐被壓回只剩此環節。</b></div>
+    <div class="who">對應:<span class="tag t-tw">鴻海 2317 / 廣達 2382 / 緯創 3231(三強)/ 緯穎 6669(hyperscaler)</span> <span class="tag t-intl">(被 L10 排除:技嘉 2376/英業達 2356)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">7</div><div class="body">
+    <h4>⑦ L12 交付資料中心(on-site 部署)</h4>
+    <p>整櫃運抵資料中心後的現場部署、上電、上水(液冷接管)、叢集級聯調與交付。從單櫃走向 gigawatt「AI 工廠」整廠交付。</p>
+    <div class="diff">難點:現場大規模機櫃叢集互連、液冷灌注/洩漏測試、電力基建(800VDC)、管理軟體上線;工程協調複雜但非精密製造良率題,瓶頸在現場 lead time、人力與資料中心基建(電/水/冷)。<b>鴻海垂直整合+在地化(美國廠)=整廠交付差異化;但價值以服務/整合費為主、易被 NVIDIA AI 工廠標準化稀釋。</b></div>
+    <div class="who">對應:<span class="tag t-tw">鴻海 2317(整廠+在地化)/ 廣達 2382·緯創 3231(美國設廠 2026)/ 緯穎 6669(隨 hyperscaler 全球部署)</span> <span class="tag t-intl">NVIDIA(AI 工廠/POD 參考設計)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+  <div class="step"><div class="num">8</div><div class="body">
+    <h4>⑧ 價值歸屬攻防(L10 三家限定 vs Vera Rubin 直供 L10)⭐ 全鏈最難判定</h4>
+    <p>本題核心攻防(見區塊 1):兩股相反力量在不同時點作用,台廠 ODM 處於「進入障礙保護」與「被上收壓力」的夾縫。非製造難度,而是商業/價值鏈攻防——標準化(拉良率/縮 lead time)是 NVIDIA 上收 L10 的正當理由,但量化/時程/ODM 反制皆未定。</p>
+    <div class="diff">難點:價值捕捉確定性最低(前瞻風險未量化、NVIDIA 握決策權)、攸關整題 9 成成本歸屬、結果雙向(限定=護城河 vs 直供=侵蝕並存)。守得住=看垂直整合深度(鴻海最強)+機構/在地化差異化+自有設計綁 hyperscaler(緯穎),2026-27 見真章。</div>
+    <div class="who">對應:<span class="tag t-tw">鴻海 2317(最抗壓)/ 緯穎 6669(相對絕緣)/ 緯創 3231(風險最高,升級紅利正是被上收那段)/ 廣達 2382</span> <span class="tag t-intl">NVIDIA(L10 直供決策方)</span> <span class="conf c-low">低(前瞻、量化未定)</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐環節難度 ＋ 公司受惠強度評分</h2>
+<p class="sub">難度維度:組裝複雜度 / 良率瓶頸 / 規模壁壘 / 價值捕捉確定性,各 0~5 分(5＝最難/最強)。評分為推估。⑧ 價值歸屬攻防為商業判斷、不列製程難度表(見區塊 1)。</p>
+<table>
+  <tr><th>製造環節</th><th>組裝複雜度</th><th>良率瓶頸</th><th>規模壁壘</th><th>價值捕捉確定</th><th>總分/20</th><th>最關鍵原因</th></tr>
+  <tr><td><b>② L10 運算托盤(占成本 9 成)</b></td><td>5</td><td>5</td><td>5</td><td>3</td><td><b>18</b></td><td>價值最集中、三家限定壁壘極強;但 Vera Rubin 直供侵蝕價值捕捉確定性</td></tr>
+  <tr><td><b>④ NVLink 背板 PCB midplane</b></td><td>4</td><td>4</td><td>4</td><td>4</td><td><b>16</b></td><td>超大板+盲插+高速 midplane 最難件;價值轉移板材/PCB 鏈(本題只標交界)</td></tr>
+  <tr><td>⑥ L11 機櫃系統整合</td><td>4</td><td>3</td><td>5</td><td>2</td><td><b>14</b></td><td>規模壁壘高、量穩;但低毛利組裝財(緯創 GM 5.21%),Vera Rubin 後恐只剩此</td></tr>
+  <tr><td>⑤ MGX 機構件</td><td>3</td><td>3</td><td>4</td><td>3</td><td><b>13</b></td><td>組裝中等、含量增;但規格變更可單向砍價(健策 -66%)=價值捕捉不確定</td></tr>
+  <tr><td>③ NVLink 交換托盤</td><td>3</td><td>4</td><td>3</td><td>3</td><td><b>13</b></td><td>高速訊號驗證難;台廠只吃機構 tray+承載板材外溢、捕捉量小</td></tr>
+  <tr><td>① L6 模組</td><td>3</td><td>3</td><td>3</td><td>3</td><td><b>12</b></td><td>板級量產成熟、規模壁壘中等;Vera Rubin 後設計自由度被壓縮</td></tr>
+  <tr><td>⑦ L12 交付部署</td><td>2</td><td>2</td><td>4</td><td>3</td><td><b>11</b></td><td>現場協調為主非製造良率題;在地化壁壘正向但服務價值易被稀釋</td></tr>
+</table>
+<div class="callout"><b>台廠的位置:</b>主導 ②L10 組裝(三家限定)、⑥L11 整合(全球唯一規模供應集團)、⑤機構件(川湖/勤誠/健策利基);<b>但最大價值環節(②L10,占成本 9 成)的捕捉確定性正被 Vera Rubin 直供風險侵蝕</b>。④板材/PCB 價值大增歸 CCL/PCB 鏈(交界);③NVLink 連接器/銅背板歸 224G 題(台股陪跑)。</div>
+<h3>公司受惠強度評分(報酬,含型態釐清)</h3>
+<p class="sub">維度:AI受惠 / 技術·份額卡位 / 放量時程 / 進入障礙·利基壁壘 / 規模財務,各 0~5 分;總分由高到低。型態:L10 指定 ODM/hyperscaler ODM/機構件/被排除 OEM/概念股·PCB 交界。評分為推估,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>型態</th><th>AI受惠</th><th>份額卡位</th><th>放量時程</th><th>進入障礙</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>鴻海 2317</td><td>L10 指定 ODM(最大贏家)</td><td>5</td><td>5</td><td>4</td><td>5</td><td>5</td><td><b>24</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>緯穎 6669</td><td>hyperscaler ODM(相對絕緣)</td><td>5</td><td>5</td><td>4</td><td>4</td><td>5</td><td><b>23</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>廣達 2382</td><td>L10 指定 ODM</td><td>5</td><td>4</td><td>4</td><td>4</td><td>5</td><td><b>22</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>緯創 3231</td><td>L10 指定 ODM(L6→L10 升級)</td><td>5</td><td>4</td><td>5</td><td>4</td><td>4</td><td><b>22</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>川湖 2059</td><td>機構件(滑軌龍頭/規格制定)</td><td>4</td><td>5</td><td>4</td><td>5</td><td>3</td><td><b>21</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>勤誠 8210</td><td>機構件(機殼/Switch tray)</td><td>5</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>20</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>健策 3653</td><td>機構件(均熱片,規格風險最高)</td><td>4</td><td>4</td><td>4</td><td>3</td><td>3</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>臻鼎-KY 4958</td><td>PCB 板材交界(ceremony 名單)</td><td>3</td><td>3</td><td>3</td><td>2</td><td>4</td><td><b>15</b></td><td><span class="conf c-un">待查(PCB 交界)</span></td></tr>
+  <tr><td>技嘉 2376</td><td>被 L10 排除 OEM(品牌出海口)</td><td>3</td><td>2</td><td>3</td><td>2</td><td>3</td><td><b>13</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>英業達 2356</td><td>被 L10 排除 OEM(敘事風險)</td><td>3</td><td>2</td><td>3</td><td>1</td><td>3</td><td><b>12</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>可成 2474</td><td>概念股名單(機殼/MGX 列名)</td><td>2</td><td>2</td><td>2</td><td>2</td><td>3</td><td><b>11</b></td><td><span class="conf c-un">待查(概念)</span></td></tr>
+</table>
+<p class="sub">⚠ 大摩 5/22「老 AI」相對偏好排序為 <b>緯穎 &gt; 緯創 &gt; 廣達 &gt; 鴻海</b>(hyperscaler ODM 緯穎居首；注意此為相對偏好非份額排序,份額仍鴻海最大)。鴻海=份額+規模+垂直整合最抗壓;緯穎=自有設計/ASIC 脫離 NVIDIA L10 直供框架;緯創=L6→L10 升級毛利改善故事最強(但升級紅利正是被上收那段、風險最高);川湖=滑軌規格制定者(高進入障礙);勤誠=機殼/Switch tray(GB300 客戶 1→3 家);健策=均熱片但規格變更砍價 -66%;臻鼎=PCB 板材交界(歸 PCB 鏈、本題不重複計);技嘉/英業達=被 L10 排除敘事風險;可成=ceremony 概念名單未逐料號。受惠評分為推估,僅供參考。</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> NVIDIA 官方/法說/多源</span>
+  <span><span class="conf c-med">中</span> 研調/媒體/單一券商</span>
+  <span><span class="conf c-un">待查</span> ceremony 名單/概念股(不否定)</span>
+</div>
+<h3>台廠 × 角色對照(依受惠四型)</h3>
+<table>
+  <tr><th>公司(股號)</th><th>型態</th><th>角色 / 最新數字</th><th>查證</th></tr>
+  <tr><td>鴻海 2317</td><td>L10 指定 ODM(最大贏家)</td><td>本題最大贏家。份額三口徑並列:公司口徑全球 AI 伺服器約 40%(劉揚偉 5/14 法說、業界最高)、研調/媒體 2026 估 55-60%、GB300 組裝代工比重 JPM 約 57%。5 月營收 8,594.09 億 YoY +39.57%、1Q26 獲利創同期新高。VR200 主力(估 4Q26 量產)、美國 12 州逾 40 據點(週產能 1,000→年底逾 2,000 櫃為目標非現況)。VR200 隱含毛利率約 1.9% 但 ODM 單櫃增值 +35-40%</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>緯穎 6669</td><td>hyperscaler ODM(相對絕緣)</td><td>hyperscaler 自有設計 ODM,AI 伺服器營收破兆級(2026 估約 1.25-1.35 兆,法人)。大摩 5/22 列老 AI 首選(緯穎&gt;緯創&gt;廣達&gt;鴻海)。1Q26 EPS 75.95。⚠ 部分客戶記憶體採「代購、不認列營收」(約 4 月起)=表面營收增速受壓抑、單位含金量提升,比較成長率須還原口徑。ASIC+GPU 雙動能、砸 5 億美元擴產;相對絕緣於 NVIDIA L10 直供框架</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>廣達 2382</td><td>L10 指定 ODM</td><td>L10 三家指定之一。組裝代工比重 JPM 約 21%、估份額 25-30%。大摩 5/22 outperform。VR200/Vera Rubin 進設計測試、下半年量產整機。⚠ 被 TrendForce 首位點名「直供 L10 壓縮毛利」風險,靠雲端白牌+L11 規模緩衝。VR200 隱含毛利率約 1.9%</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>緯創 3231</td><td>L10 指定 ODM(L6→L10 升級)</td><td>L10 三家指定之一,由 L6 模組升 L10、毛利改善敘事最強。AI 占 2025 近 7 成、組裝代工比重 JPM 約 18%。大摩排序緯創為純 ODM 中最前(僅次緯穎)。⚠ Q1'26 毛利率僅 5.21%(系統整合結構);升級紅利正是 Vera Rubin 直供恐上收那段=守價最弱、風險最高</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>川湖 2059</td><td>機構件(滑軌龍頭/規格制定)</td><td>伺服器滑軌/導軌龍頭、AI 導軌規格制定者地位確立(GB300 與新平台放量驅動獲利非線性)。1Q26 營收創高、突破淡季。MGX 5/29 名單列名。規格制定者=高進入障礙、高毛利利基壁壘;機構件含量增純度高、壁壘強、規格相對穩定</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>勤誠 8210</td><td>機構件(機殼/Switch tray)</td><td>GB200/GB300 reference 機殼主力。Switch tray 單價高於 compute tray、為主供;ASIC 機殼 1Q26 顯著貢獻;GB300 客戶 1→3 家(含 CSP+品牌)。AI 機殼/機櫃占 2026 估 60-65% 營收;法人估 2026 營收約 351 億、EPS 挑戰近 50;2025/12 月營收 27.1 億 YoY +68.38% 創高;GB300 機殼 2026 出貨估上看 30 萬台。MGX 名單列名</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>健策 3653</td><td>機構件(均熱片,規格風險最高)</td><td>高階 GPU 均熱片廠。<b>規格變更砍價實例(已多源確認):</b>原雙片鍍金版單價約 $150(前代 5 倍)→2026/5 NVIDIA 改回單片、取消鍍金、降至約 $50(-66%)、連吞 2-3 跌停(估影響 2026 營收約 60 億/2027 約 130 億)。1Q26 毛利率 21%→27%、EPS 3.67 創同期高;4 月營收 23.11 億 YoY +27%。法人估 2026 Rubin GPU 出貨 150-200 萬顆。⚠「獨家/唯一」為公司/媒體說法、NVIDIA 未官方背書=待查;水冷板部分歸散熱另題</td><td><span class="conf c-high">高(砍價已證);待查(獨家)</span></td></tr>
+  <tr><td>臻鼎-KY 4958</td><td>PCB 板材交界(ceremony 名單)</td><td>PCB 龍頭,5/29 MGX 名單首入(PCB 身分);大摩 5/21 另列 Vera Rubin 最受惠 5 檔之一。⚠ <b>切分:</b>主體為 PCB/軟板,Vera Rubin 改 PCB midplane 後板材/PCB 價值量大增屬「與 PCB/CCL 鏈交界」,本題只標交界、<b>不評為整機/機構組裝財受惠主體</b>(避免與 CCL/PCB 鏈重複計);ceremony 列名屬概念股名單、非逐料號直供佐證</td><td><span class="conf c-un">待查(PCB 交界)</span></td></tr>
+  <tr><td>技嘉 2376 / 英業達 2356</td><td>被 L10 排除 OEM(敘事風險)</td><td>GB300 代工群但<b>被 NVIDIA L10 三家限定排除直購運算托盤</b>=本題核心敘事風險檔。技嘉有 GIGABYTE 品牌自有出海口(與純被排除不同);英業達亦切 Google TPU 模組(L6)。⚠ 兩劇本皆不利(①已排除、②直供更弱化差異化);仍可承接非 L10 代工=非完全出局,定偏中性偏空</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>可成 2474</td><td>概念股名單(機殼/MGX 列名)</td><td>機殼廠,5/29 MGX Ecosystem Ceremony 首入「背板股/生態夥伴」20+ 家名單(150 家夥伴、每套 MGX 約 130 萬零件/重 2 噸)。⚠ 屬 ceremony 列名生態夥伴=概念股名單、<b>非逐料號直供佐證</b>;實質出貨料號/金額未公開、驗證度低於川湖/勤誠/健策=未來選擇權</td><td><span class="conf c-un">待查(概念)</span></td></tr>
+</table>
+<p class="sub">⚠ 股號核對(皆上市):鴻海 2317、廣達 2382、緯創 3231、緯穎 6669、英業達 2356、技嘉 2376、川湖 2059、勤誠 8210、健策 3653、可成 2474、臻鼎-KY 4958;PCB 交界欣興 3037/台光電 2383/台燿 6274/金像電 2368(歸 CCL/PCB 鏈、不在本題評)。</p>
+<h3>國際 × 角色(規則制定者 + 背板 + 被排除 OEM)</h3>
+<table>
+  <tr><th>公司</th><th>國別/角色</th><th>關鍵事實</th><th>查證</th></tr>
+  <tr><td>NVIDIA</td><td>美 · 平台定義/規則制定者</td><td>非本題受惠主體但決定 ODM 價值歸屬。制定 MGX 標準(VR200 每櫃逾 100 萬零件、跨 25 廠、約兩公噸);L10 限定鴻海/廣達/緯創三家;<b>報導擬自 Vera Rubin 直供已組裝 L10(占成本約 9 成)</b>=台 ODM 最大前瞻風險。Rubin 六晶片已 tape-out、2026 H2/Q3 出貨</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Amphenol</td><td>美 · NVLink 銅纜 spine 背板</td><td>NVL72 銅背板/spine cartridge 主導(Paladin HD 224G、5,184 條銅纜直連 72 GPU、PaladinHD2 連接器),台股陪跑(歸 224G 題、本題切分排除)。Vera Rubin 改 PCB midplane 後價值轉移台廠板材。TE Connectivity 為備援(每介面認證 2-3 家)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Dell / Lenovo / HPE / Supermicro</td><td>美 · OEM(被 L10 排除一方)</td><td>Vera 平台夥伴名單在列,但只提供 standalone Vera CPU 配置、<b>未獲 L10 運算托盤直購資格</b>(限鴻海/廣達/緯創 EMS);大摩指經 OEM 採購整櫃價更高($&gt;7.8M)。在 ODM 集中化下份額被稀釋</td><td><span class="conf c-med">中高</span></td></tr>
+  <tr><td>工業富聯 FII</td><td>中(港/A 股,鴻海子公司)· 中國側代工</td><td>全球最大 AI 伺服器代工(自稱),鴻海集團旗下、月產能約 12 萬台(含一般伺服器)、獨家組裝 GB200;2025 營收人民幣約 9,029 億 +48%、1Q26 淨利 +102%。<b>屬鴻海體系、與母公司份額重疊,非「中國以外台系」敘事的真對手</b></td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<h3>台灣吃得到多少(逐環節定位)</h3>
+<p class="sub">一句話:<b>L10 組裝/L11 整合/ODM 份額=主導(但 L10 被上收風險);滑軌/機殼/均熱片=利基(均熱片規格風險最高);PCB midplane 板材=交界(歸 CCL 鏈);NVLink 銅背板=陪跑(Amphenol);ceremony 名單=選擇權待佐證。</b>定位為質化判斷。</p>
+<table>
+  <tr><th>環節/品項</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>L10 運算托盤組裝 ⭐</td><td>鴻海 2317/緯創 3231/廣達 2382</td><td><span class="conf c-high">主導(被上收風險)</span></td><td>NVIDIA 限定三家直購 L10、排除技嘉/英業達(已確立);但 Vera Rubin 直供風險、2026-27 觀察</td></tr>
+  <tr><td>L11 機櫃系統整合</td><td>鴻海/緯創/廣達/緯穎 6669</td><td><span class="conf c-high">主導(量大利薄)</span></td><td>台系 ODM=全球(中國以外)唯一規模供應集團;絕對金額隨單櫃 BOM +95% 放大、毛利率薄</td></tr>
+  <tr><td>伺服器滑軌</td><td>川湖 2059</td><td><span class="conf c-high">主導(利基龍頭)</span></td><td>滑軌龍頭、規格制定者、GB300 提前放量、規格相對穩定</td></tr>
+  <tr><td>機殼/Switch tray/結構件</td><td>勤誠 8210</td><td><span class="conf c-med">利基</span></td><td>機殼/機櫃/Switch tray 利基放量、GB300 客戶 1→3 家、隨櫃數放量</td></tr>
+  <tr><td>GPU 均熱片</td><td>健策 3653</td><td><span class="conf c-med">利基(規格風險最高)</span></td><td>2026/5 改單片+取消鍍金=單價 $150→$50(-66%);機構件可單向砍價實例</td></tr>
+  <tr><td>PCB midplane 板材</td><td>台光電 2383/台燿 6274/欣興 3037/金像電 2368</td><td><span class="conf c-med">利基(交界·歸 CCL 鏈)</span></td><td>OCP 證實 VR 改 PCB midplane(M8/M9 CCL/HVLP4);單櫃 PCB $117k(+233%);本題只引用不重複計</td></tr>
+  <tr><td>NVLink 銅纜 spine 背板</td><td>(Amphenol 主導)</td><td><span class="conf c-low">陪跑(歸 224G 題)</span></td><td>銅纜匣 spine Amphenol 主導;Vera Rubin 起 cableless 取消;台股陪跑</td></tr>
+  <tr><td>MGX ceremony 概念名單</td><td>可成 2474/臻鼎-KY 4958</td><td><span class="conf c-un">選擇權(待佐證)</span></td><td>5/29 首入 MGX 生態名單;列名 ≠ 逐料號出貨佐證=未來選擇權</td></tr>
+</table>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>單櫃 BOM 放大模型、市場與催化劑</h2>
+<div class="card">
+  <h3>VR200 單櫃 BOM 逐項(大摩 5/22,券商單一來源,須標源)</h3>
+  <table>
+    <tr><th>項目</th><th>GB300</th><th>VR200</th><th>增幅</th><th>歸屬</th></tr>
+    <tr><td>整櫃 BOM 總額</td><td>約 $3.99M(&lt;$4M)</td><td>約 $7.80M($7,803,148)</td><td><b>+95%(近翻倍)</b></td><td>本題分母(Tom's 另 $8.8M 區間)</td></tr>
+    <tr><td>GPU</td><td>約 $2.52M(占 65%)</td><td>約 $3.96M(占 51%、單顆 $55k)</td><td>+57%</td><td>NVIDIA 自留(占比下滑=價值轉移)</td></tr>
+    <tr><td>記憶體 HBM4+LPDDR5X</td><td>約 $374k(占 5-10%)</td><td>約 $2.00M(占 25-30%)</td><td>+435%(Tom's +485% 框架)</td><td>歸 HBM/利基記憶體題</td></tr>
+    <tr><td>PCB</td><td>約 $35.1k</td><td>約 $116.7k</td><td><b>+233%(逐項最大)</b></td><td>歸 CCL/PCB 鏈(本題交界)</td></tr>
+    <tr><td>NVLink Switch</td><td>約 $65k</td><td>約 $144k</td><td>+122%(單一轉述)</td><td>晶片 NVIDIA、tray 機構勤誠</td></tr>
+    <tr><td>MLCC</td><td>約 $1,530</td><td>約 $4,320</td><td>+182%</td><td>歸 MLCC 被動元件題</td></tr>
+    <tr><td>ABF 載板</td><td>約 $11.2k</td><td>約 $20.3k</td><td>+82%</td><td>歸 ABF 載板題</td></tr>
+    <tr><td>電源 / 液冷 / Vera CPU</td><td>—</td><td>電源 +32% / 液冷 +12% / CPU $180k(持平)</td><td>—</td><td>電源/液冷歸既有題;CPU NVIDIA 自留</td></tr>
+  </table>
+  <div class="callout info"><b>本題可捕捉價值放大(估算):</b>單櫃自 ODM 採購 $7.80M × 70-80k 櫃 → 2026 ODM 採購市場約 <b>US$546-624 億</b>。扣除 NVIDIA 自留(GPU+記憶體+CPU 約 $6.14M=占 79%)後,純「整機/機櫃組裝+機構結構件+L11 整合」可捕捉約單櫃 US$1.0-1.3M 量級(PCB/ABF/MLCC/電源/液冷另歸既有題)× 70-80k 櫃 → <b>本題台廠可捕捉市場約 US$70-100 億級/年</b>(估算,分母為券商單一來源 BOM、敏感度高);機構件(滑軌/機殼/均熱片/Switch tray)為其中利基放量段。大摩另判斷:<b>ODM added value 較市場預期升 35-40%</b>(絕對金額放大可部分抵銷百分比毛利壓縮)。</div>
+  <h3>催化劑時間軸(2026 H1 → 2027)</h3>
+  <ul>
+    <li><b>2026 H1(進行中):</b>GB300 NVL72 量產放量、成 AI 伺服器主流;鴻海 2 月交付約 2,400 櫃、全球月產約 6,500 櫃<span class="conf c-high">進行中</span></li>
+    <li><b>2026/1(CES):</b>NVIDIA Rubin 六晶片全平台 tape-out 完成、TSMC 量產中、樣品已交付、2026 H2 partners 出貨<span class="conf c-high">已實現</span></li>
+    <li><b>2026/05/06:</b>健策均熱片規格變更利空(雙蓋鍍金 $150→單片 $50、-66%)、連吞跌停=機構件可單向砍價實例<span class="conf c-high">已實現(利空)</span></li>
+    <li><b>2026/05/21-22:</b>大摩 VR200 單櫃 bottom-up BOM:$7.80M(+95%)、記憶體 +435%、PCB +233%(Tom's 另 +485%/$8.8M)<span class="conf c-high">已實現(券商估)</span></li>
+    <li><b>2026/05/29(COMPUTEX 前夕):</b>黃仁勳 MGX 生態名單(逾 500 家夥伴、逾 100 萬零件/25 廠);可成/臻鼎首入(列名 ≠ 逐料號)<span class="conf c-med">已實現(名單列舉)</span></li>
+    <li><b>2026/Q3:</b>VR200 NVL72 進量產、首批出貨北美雲端(AWS/Google/MS/OCI+CoreWeave 等);單櫃 BOM 升 $7.8M<span class="conf c-un">前瞻</span></li>
+    <li><b>2026/Q4:</b>VR200 全速量產 ramp(秋季);全年 NVL72 出貨估上看 70-80k 櫃<span class="conf c-un">前瞻</span></li>
+    <li><b>2026 H2 ⚔ 關鍵驗證:</b>Vera Rubin 直供已組裝 L10 系統(占成本 9 成)是否落地+量化=ODM 毛利歸屬決勝點(TrendForce/JPMorgan,2025/11 風險浮現)<span class="conf c-un">前瞻風險</span></li>
+    <li><b>2027:</b>Rubin Ultra/Kyber 機架平台;Rubin GPU 出貨估 2026 約 200 萬→2027 約 400-450 萬顆,單櫃 BOM 與機構含量續升、但規格變更砍價風險延續<span class="conf c-un">前瞻</span></li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>現在就有營收(GB300 量產中)=鴻海/廣達/緯創/緯穎(ODM)、川湖/勤誠/健策(機構);量價放大主力 2H26(VR200 $7.8M)。守得住價值=鴻海(規模+垂直整合+在地化)、緯穎(自有設計脫離 L10 直供框架)、川湖/勤誠(規格制定/客製化高)。⚠ <b>緊盯 2026 H2 Vera Rubin L10 直供模式是否落地+量化;機構件勿假設只漲不跌(健策);技嘉/英業達被 L10 排除敘事風險;可成/臻鼎 ceremony 名單待逐料號。</b></div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
+  <ul>
+    <li><b>「大摩老 AI 首選是緯創(緯創&gt;廣達&gt;鴻海)」:</b>修正——大摩 5/22 實際排序為 <b>緯穎(6669)居首</b>,即緯穎&gt;緯創&gt;廣達&gt;鴻海(hyperscaler ODM 緯穎居首);此為相對偏好非份額排序(份額仍鴻海最大)</li>
+    <li><b>「鴻海 2026 份額 55-60% 為定論」:</b>三口徑須並列、勿混用——公司口徑約 40%(劉揚偉 5/14 法說)、研調/媒體 55-60%、Digitimes 保守逾 40%、GB300 組裝代工比重 JPM 57%(此為 GB300 非 VR200 全平台)</li>
+    <li><b>「可成 2474/臻鼎 4958 為 NVIDIA 逐料號直接列入的背板/機構供應商」:</b>實為 5/29 ceremony 名單列名(生態夥伴 20+ 家/合計 150 家)=概念股名單、非逐料號出貨佐證;首入列、實質料號/金額未公開,維持待查(un)、不升格為實質出貨</li>
+    <li><b>「健策均熱片單價只會隨規格升級上漲」:</b>已被 2026/5 實例否決——NVIDIA 改回單片設計、取消鍍金,單價 $150→$50(-66%)、連吞跌停;<b>機構件單價可隨規格變更單向砍價、勿假設只漲不跌</b>(本題機構件估值關鍵風險錨點)</li>
+    <li><b>「緯穎營收成長率可與其他 ODM 直接比較」:</b>口徑差異——緯穎部分客戶記憶體採「代購、不認列營收」(約 4 月起),表面營收增速受壓抑但單位含金量提升;比較成長率須還原口徑、否則低估緯穎實質出貨</li>
+    <li><b>「臻鼎-KY 應評為本題核心受惠主體」:</b>切分鐵則——臻鼎主體為 PCB/軟板,PCB midplane 價值放大屬「與 PCB/CCL 鏈交界」,本題只取整機/機構組裝財、PCB 板材只標交界、不評為本題受惠主體(避免與 CCL/PCB 鏈重複計)</li>
+    <li><b>「單櫃 BOM $7.8M = 成交價」:</b>為大摩單一券商 bottom-up 估(vs Tom's $8.8M 區間)、非成交價;記憶體 +435%(大摩框架)vs +485%(Tom's 頭條框架)為不同框架;出貨量 29k vs 大摩下修 27.3k——多口徑並列</li>
+  </ul>
+</div>
+<div class="card"><h3>持續性兩劇本(量確定 vs 毛利歸屬)</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>多方:量價雙升+台系 ODM 主導+進入障礙(量高信心)</b><br>① 單櫃 BOM +95%(逐項記憶體+435%/PCB+233%/MLCC+182% 全面放大)× 出貨量近翻倍(29k→70-80k 櫃)=量×價同向;② 台系 ODM 全球(中國以外)唯一規模供應集團;③ L10 限定鴻海/廣達/緯創三家=進入障礙,排除技嘉/英業達/OEM;④ 機構含量隨機櫃化純增(滑軌/機殼價值量上行)、鴻海份額 43%→55-60%;⑤ ODM 獲 10-15% 自採權、L6→L10 升級毛利改善。</div>
+    <div class="callout warn" style="margin:0"><b>空方:毛利歸屬是真風險(中性偏風險)</b><br>① <b>NVIDIA 自 Vera Rubin 直供已組裝 L10(占成本 9 成)</b>,恐把 ODM 壓回低毛利 L11=量在、單櫃毛利被收割(量化未定、2026-27 觀察);② 機構件可單向砍價(健策 -66%);③ 二線 ODM/OEM 被 L10 排除(技嘉/英業達/Dell/HPE/Lenovo/Supermicro);④ 單櫃 BOM 為單一券商估($7.8M vs $8.8M)、非成交價;⑤ BOM 放大最大受惠其實在記憶體/PCB/ABF/MLCC(各自獨立題)、整機組裝財若毛利被壓,放大紅利未必落 ODM。</div>
+  </div>
+  <p><b>裁決(verdict):</b><b>分層判斷:「量」高度確定(出貨近翻倍+單櫃 BOM +95%,NVIDIA 官方+大摩+研調多源交叉),台系 ODM 短期受惠明確、L10 三家限定是真進入障礙;但「單櫃毛利歸屬」是核心未定變數。</b>Vera Rubin 直供 L10(占成本 9 成)若落地,ODM 恐由整機組裝財退化為 L11 機櫃代工(高營收、低毛利率),機構件(健策實例)又證明規格可單向砍價。<b>守得住價值者偏向:</b>① 規模+份額護城河(鴻海,即便毛利率受壓仍吃量+美國產能優勢);② 規格標準制定者(川湖滑軌、勤誠機殼客製化高);③ 自有設計綁 hyperscaler/ASIC 的緯穎(脫離純 NVIDIA 直供框架)。<b>相對脆弱:單一料號議價權低、易被砍的機構件(健策),與被 L10 排除的二線。等級:量=高信心受惠,毛利=中性偏風險,須緊盯 2026 H2 VR200 L10 直供是否落地與量化。</b></p>
+</div>
+<div class="card"><h3>結構性風險與開放問題</h3>
+  <ul>
+    <li><b>量確定 vs 毛利歸屬:</b>本題最大判斷;Vera Rubin 直供 L10(占成本 9 成)是 ODM 毛利最大前瞻風險(量化未定)</li>
+    <li><b>組裝財量大利薄:</b>單櫃金額放大 ≠ 毛利率放大(緯創 GM 5.21%);BOM 放大最大受惠其實在記憶體/PCB(各自題)</li>
+    <li><b>機構件可砍價:</b>健策 -66% 證明 NVIDIA 握規格定義權、機構件單價可單向下修、勿假設只漲不跌</li>
+    <li><b>概念股雜訊:</b>可成/臻鼎 ceremony 名單列名 ≠ 逐料號出貨;臻鼎屬 PCB 鏈交界、不評本題主體</li>
+    <li><b>口徑陷阱:</b>單櫃 BOM/份額/出貨量多口徑(大摩 vs Tom's、公司 vs 研調)須並列;FII 與鴻海份額重疊</li>
+    <li><b>跨題交界:</b>記憶體/PCB/ABF/MLCC/電源/液冷各歸既有題(只引用單櫃放大);NVLink 銅背板歸 224G 題;健策水冷板歸散熱題</li>
+    <li><b>開放問題(延伸 backlog):</b>各 ODM VR200 具體份額(待 4Q26 量產)、Vera Rubin L10 直供量化衝擊、健策「獨家」程度、可成/臻鼎逐料號實證、PCB midplane 板材受惠(CCL 鏈)、L12 整廠交付/在地化題</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item"><a href="https://www.nvidia.com/" target="_blank">NVIDIA 官方 newsroom/技術 blog/OCP</a> — MGX 標準、Vera Rubin POD(NVL72=18 運算托盤/72 GPU/36 CPU/9 NVLink 交換托盤)、PCB midplane 組裝 2 小時→5 分鐘(最高 20 倍)、逾 100 萬零件/25 廠、六晶片 tape-out<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">鴻海/廣達/緯創/緯穎/川湖/勤誠/健策 2026 法說與月營收(公開申報)— 份額、毛利率、AI 占比、機構件出貨<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Morgan Stanley(Howard Kao,2026/5/21-22,經 Tom's Hardware/PCGamer/wccftech/Bitget 轉述)— VR200 單櫃 BOM $7.80M(+95%)、逐項放大、ODM added value +35-40%<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">TrendForce(L10 直供風險 2025/11、AI 伺服器 +28.3% 2026/1)/ JPMorgan / Digitimes(L10 三家限定、份額逾 40%、FII)/ 經濟日報<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">科技新報/財報狗/vocus(健策規格變更 $150→$50)、SemiAnalysis(PCB midplane)、blog.104.com.tw(GB300 組裝代工比重 鴻海 57%/廣達 21%/緯創 18%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">自由時報/今周刊/businesstoday(5/29 MGX ceremony 名單,可成/臻鼎首入=列名生態夥伴、非逐料號佐證)<span class="src-q q-blog">blog</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(製造分層鏈 L6→L12+價值攻防 / 台廠逐檔查證+受惠評分 / 國際對照+市場多口徑+持續性兩劇本 / 單櫃 BOM 放大模型+價值歸屬攻防+台灣吃得到定位)＋ 對抗式查證(大摩排序修正、份額三口徑並列、健策砍價實例、可成/臻鼎概念股、臻鼎 PCB 交界切分、BOM 切分歸屬)。</p>
+  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明(量確定 vs 毛利歸屬待定、機構件可砍價、概念股雜訊)。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>
