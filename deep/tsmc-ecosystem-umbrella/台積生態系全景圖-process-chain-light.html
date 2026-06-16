@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台積電本土供應鏈生態系全景圖(廠務工程鏈 × AI 三層蛋糕 × 供應鏈出海)研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#3f6593; --accent-soft:#e6eef6;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#eef3f9,#f6f7f9)}
+.hero h1{font-size:34px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:880px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:880px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:27px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:22px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">台積生態系全景圖<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱</a>
+    <a href="#categories">兩大判斷</a><a href="#application">廠務工程鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">三層蛋糕+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>台積電本土供應鏈生態系<em> 全景圖</em> 2026</h1>
+  <p class="lead">索引/分層地圖卡:用台積官方「AI 三層蛋糕」(Compute→System Integration→Photonics)為縱軸 × 廠務→設備→材料→檢測→封裝為橫軸,把已完成 20 條深度鏈串成一張全景圖。<b>唯一原創深度=廠務工程與機電鏈(#10 製程材料、#11 設備零組件兩卡都漏掉的整段、台灣全球領先環節);其餘只索引既有深度卡、不重複計。</b>總開關=台積 2026 capex US$52-56B(創新高)。誠實畫線:台灣領先嚴格限「無塵室+機電整合」,UPW/氣體/AMC 本體仍日歐美主導;廠務五雄屬成熟共識題、alpha 有限。</p>
+  <div class="meta">
+    <span class="badge b-accent">總開關:台積 2026 capex US$52-56B 創高</span>
+    <span class="badge">原創:廠務工程鏈(其餘索引)</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:索引地圖卡,唯一原創=廠務工程鏈</h2>
+  <p class="subtitle"><b>定位:</b>本卡是「索引/分層地圖卡」非「個股 alpha 卡」。橫軸五段只有「廠務工程鏈」是原創(holds 放這段);材料→#10、設備→#11、檢測 MA/FA→AI 測試鏈、封裝→#2、CPO/COUPE→#1 只索引、不重複計受惠主體。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">🏗️</span>廠務工程鏈(原創)</h4><p>#10/#11 兩卡都漏的整段、台灣全球領先環節。holds=漢唐 2404/亞翔 6139/聖暉 5536/帆宣 6196/洋基 6691 五雄 + 銳澤/漢科/信紘科/兆聯 + AOI 由田 3455。在手訂單創高、能見度至 2027-2029。</p></div>
+    <div class="card"><h4><span class="ico">🗺️</span>三層蛋糕索引地圖</h4><p>台積官方 2026/05/14 提出 AI 三層蛋糕(Compute 2nm/A16 → System Integration 3D IC/CoWoS → Photonics CPO),把 20 條深度鏈串成全景圖、標每格台廠戰隊+落在哪張既有深度卡。</p></div>
+    <div class="card"><h4><span class="ico">🚢</span>供應鏈出海抱團</h4><p>德鑫 18 家(2023/07 八家+2025/03 十家)共同持有美國家登股權、利益共擔,於亞利桑那設共同辦公室。總開關=台積 2026 capex US$52-56B 創高(灌全本土供應鏈)。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(廠務原創 → 三層蛋糕索引 → 國際對手)</h2>
+  <p class="subtitle">廠務工程鏈是本卡原創 holds、其餘索引既有卡。<span class="conf c-high">綠＝財報/在手訂單</span> <span class="conf c-med">橙＝法人估/研調</span> <span class="conf c-un">灰＝興櫃/媒體</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">廠務工程鏈<small>★ 本卡原創 holds</small></div><div class="items"><span class="badge b-tw">漢唐 2404</span><span class="badge b-tw">亞翔 6139</span><span class="badge b-tw">聖暉 5536</span><span class="badge b-tw">帆宣 6196</span><span class="badge b-tw">洋基 6691</span><span class="badge b-tw">銳澤 7703</span><span class="badge b-tw">漢科 3402</span><span class="badge b-tw">信紘科 6667</span><span class="badge b-tw">兆聯 6944</span><span class="badge b-tw">由田 3455</span></div></div>
+    <div class="chain-row"><div class="lvl">三層蛋糕索引<small>導流既有深度卡</small></div><div class="items"><span class="badge">材料→#10</span><span class="badge">設備→#11</span><span class="badge">檢測 MA/FA→AI 測試</span><span class="badge">封裝→#2/載板/CCL/玻璃</span><span class="badge">CPO/COUPE→#1</span></div></div>
+    <div class="chain-row"><div class="lvl">國際對手<small>廠務工程對照</small></div><div class="items"><span class="badge b-accent">Exyte(德 EPC)</span><span class="badge b-accent">高砂/新菱/大氣社(日)</span><span class="badge b-accent">Kurita/Veolia(UPW)</span><span class="badge b-accent">Samsung C&T(韓體系內)</span></div></div>
+    <div class="chain-row"><div class="lvl">出海/興櫃<small>抱團+觀察</small></div><div class="items"><span class="badge b-warn">德鑫 18 家(亞利桑那)</span><span class="badge">和淞 6826(興櫃)</span><span class="badge">奇鼎 6849(興櫃)</span><span class="badge">熊本聚落(媒體估)</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:廠務工程鏈台廠主導「無塵室統包+機電空調整合+二次配」三段(vs 德 Exyte/日 高砂);氣體·化學供應系統/AOI 為利基;UPW 水(日 Kurita/歐 Veolia)、AMC 濾材本體(Entegris)台廠非全球主角。本卡 holds 只放廠務工程鏈原創段;材料/設備/測試/封裝/CPO 受惠主體導流既有 #10/#11/AI 測試/#2/#1 不重複計。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何熱:capex 創高+全球三線擴產,廠務五雄訂單滿手</h2>
+  <p class="subtitle">台積 capex 創高是總開關,直接灌進整條本土供應鏈(廠務五雄在手訂單同步創高即傳導證據)。</p>
+  <div class="flow">
+    <div class="step"><b>capex 創高(總開關)</b><small>台積 2026 US$52-56B、YoY +37%、創歷史新高</small></div><div class="arrow">→</div>
+    <div class="step"><b>全球三線擴產</b><small>亞利桑那 US$65B 三廠 / 熊本 JASM / 德勒斯登 ESMC</small></div><div class="arrow">→</div>
+    <div class="step"><b>廠務五雄訂單創高</b><small>漢唐在手 1,322 億/亞翔逾 1,753 億/能見度至 2029</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>台積 2026 capex(總開關)</p><h4>US$52-56B(創新高、+37%)</h4></div>
+    <div class="card"><p>漢唐在手訂單</p><h4>1,322 億(能見度估至 2029)</h4></div>
+    <div class="card"><p>亞翔在手訂單</p><h4>逾 1,753 億(東協+台灣占 98%)</h4></div>
+    <div class="card"><p>洋基接美光大單</p><h4>逾 200 億(在手 553 億創高)</h4></div>
+  </div>
+  <p class="disclaimer">口徑警示:capex US$52-56B(中文 520-560 億美元)=⚠ 部分報導誤植「52-56 億 vs 520-560 億」差 10 倍、以 US$52-56B 為準;在地化零配件 46%→60%/間接原物料 65%→68% 為「2030 目標、非現況」(官方 ESG 另有原物料 50%/設備 38% 口徑待覆核);熊本台廠「約 44 家/逾 50 家」為媒體估算、非台積官方名單;市場規模(無塵室/氣體系統)口徑分歧 2-3 倍。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Judgments</span>
+  <h2 class="title">兩大判斷(唯一原創廠務、台灣領先有邊界)</h2>
+  <p class="subtitle">本卡是索引地圖卡——分清「原創 vs 索引」「台灣領先的邊界」,才不會把成熟共識當新 alpha、把台灣領先無限上綱。</p>
+  <h3>判斷 ①:唯一原創=廠務工程鏈(其餘索引)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>橫軸五段</th><th>歸屬</th><th>本卡角色</th></tr></thead>
+    <tbody>
+      <tr><td>廠務工程鏈(無塵室/機電/氣化/水/二次配/AOI)</td><td>★ 本卡原創 holds</td><td><span class="conf c-high">原創(#10/#11 都漏的整段、台灣全球領先)</span></td></tr>
+      <tr><td>設備零組件 / 製程材料 / 檢測 MA·FA</td><td>#11 / #10(溶劑#23)/ AI 測試鏈</td><td><span class="conf c-un">索引、不重複計</span></td></tr>
+      <tr><td>先進封裝 / CPO·COUPE</td><td>#2·載板·CCL·玻璃 / #1·COUPE</td><td><span class="conf c-un">索引、不重複計</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>判斷 ②:台灣領先有邊界 + 成熟共識題</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節</th><th>台廠定位</th><th>邊界</th></tr></thead>
+    <tbody>
+      <tr><td>無塵室+機電空調整合 turnkey+二次配</td><td><span class="conf c-high">全球領先(五雄、vs Exyte/高砂)</span></td><td>系統整合+在地工程+隨客出海</td></tr>
+      <tr><td>UPW 水 / 氣體本體 / AMC 濾材</td><td><span class="conf c-low">本體日歐美主導(非全球主角)</span></td><td>Kurita/Veolia、Air Liquide/Linde、Entegris</td></tr>
+      <tr><td>廠務五雄股價</td><td><span class="conf c-med">成熟共識題(已反映建廠循環)</span></td><td>「買在共識」、單一客戶集中</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩判斷的投資意涵:① 本卡是「產業地圖型卡」——廠務是原創 holds、其餘看對應深度卡;② 台灣全球領先嚴格限「無塵室+機電整合 turnkey」、不可外溢到水/氣/濾材本體;③ 廠務五雄是「現在就有營收+在手訂單創高的真受惠」但屬成熟共識、股價已反映、alpha 有限;單一客戶(台積 capex)集中、建廠遞延/AI 降溫直接衝擊。</div>
+</div></section>
+
+<!-- 05 廠務工程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Fab Engineering Chain</span>
+  <h2 class="title">廠務工程鏈(8 環節,本卡原創)</h2>
+  <p class="subtitle">八環節。台廠主導=建廠統包/HVAC/二次配;利基=氣體·化學供應/AOI;本體進口=UPW 水/AMC 環控。</p>
+  <div class="stack">
+    <div class="layer"><b>① 建廠統包/無塵室 ★ 台廠主導(五雄主場)</b><div class="uses">整廠 Turnkey/FFU/潔淨度/hook-up;漢唐/亞翔/聖暉/洋基;vs 德 Exyte</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② HVAC 空調溫濕控 — 台廠主導</b><div class="uses">精密空調/微震污染控;聖暉/洋基/漢唐;設備本體大金部分進口</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ 高純度氣體供應系統 gas/VMB — 利基</b><div class="uses">GDS/閥箱/純度監控;銳澤/漢科/信紘科;氣體本體歸 #10</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ 化學供應系統 CCSS/CDS — 利基</b><div class="uses">光阻/顯影/蝕刻化學中央供應;信紘科/帆宣;化學本體歸 #10/#23</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ 二次配管路 ★ 台廠主導(人力密集在地)</b><div class="uses">最後一哩配管/機台 hook-up;帆宣市占高;國際對手少</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 超純水 UPW/廢水回收 — 利基(本體日歐主導)</b><div class="uses">兆聯台積水隱形冠軍(占 82.8%);高階 UPW/膜 Kurita/Veolia</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 環境監控 FMCS/AMC — 混合(濾材進口)</b><div class="uses">漢科 FMCS;AMC 化學濾網 Camfil/Entegris;和淞/奇鼎興櫃小廠</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ AOI 在線檢測 — 利基(由田原創)</b><div class="uses">由田載板 AOI 90%、切入 CoWoS/FOPLP AOI;⚠ ≠探針卡(電性 CP)</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:本卡原創的廠務工程鏈,台廠 alpha 最強在 ① 建廠統包/⑤ 二次配/② HVAC(系統整合+人力密集+隨客出海);③④ 氣體/化學供應系統、⑧ AOI 為利基;⑥ UPW 水、⑦ AMC 環控的「本體」(膜/樹脂/濾材)仍日歐美主導=台廠做的是廠內 turnkey 工程、非本體技術。即「廠務工程整合是台灣全球領先環節、但領先有邊界、不可外溢到水/氣/濾材本體」。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯(廠務原創 holds + 分層)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>環節/型態</th><th>台廠</th><th>受惠邏輯 / 釐清</th></tr></thead>
+    <tbody>
+      <tr><td>無塵室統包/機電(五雄核心)</td><td>漢唐 2404 / 亞翔 6139 / 聖暉 5536 / 帆宣 6196 / 洋基 6691</td><td>台積本土擴產近乎包給台廠、在手訂單創高/能見度至 2029;漢唐台積純度最高、亞翔海外王(⚠ 半導體 97%/地域集中)、帆宣設備線歸 #11、洋基接美光 200 億</td></tr>
+      <tr><td>氣體/化學供應系統(二線)</td><td>銳澤 7703 / 漢科 3402 / 信紘科 6667</td><td>GDS/CCSS+二次配利基;⚠ 氣體/化學「本體」歸 #10、銳澤集團內(朋億 6613 持股)勿與聖暉重複計</td></tr>
+      <tr><td>超純水 UPW(隱形冠軍)</td><td>兆聯 6944</td><td>台積水系統隱形冠軍(占 Q1 82.8%、統包+O&M+耗材);⚠ 高階 UPW/膜本體 Kurita/Veolia 主導、單一客戶集中</td></tr>
+      <tr><td>AOI 在線檢測(原創)</td><td>由田 3455</td><td>載板 AOI 90%、切入先進封裝 AOI(CoWoS/FOPLP)突破外商;⚠ ≠探針卡(電性 CP)、高階量測 KLA/Camtek 仍主導</td></tr>
+      <tr><td>環境監控/AMC(興櫃觀察)</td><td>和淞 6826 / 奇鼎 6849</td><td>FMCS/AMC 微環境;⚠ 興櫃、流動性差、和淞與漢科監控角色重疊=不進核心 holds、僅觀察;奇鼎為德鑫一成員</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>索引地圖非新 alpha</b>(原創只在廠務一段、材料/設備/測試/封裝看對應深度卡);② <b>成熟共識題</b>(廠務五雄股價已反映建廠循環、買在共識);③ <b>單一客戶集中</b>(亞翔半導體 90%/兆聯台積 82.8%、capex 降溫/建廠遞延直接衝擊);④ <b>台灣領先有邊界</b>(UPW/氣體/AMC 本體日歐美主導);⑤ <b>二三線規模小/興櫃流動性差</b>(和淞/奇鼎);⑥ <b>口徑</b>(在地化 60%/68% 是 2030 目標、熊本家數媒體估)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜(廠務工程鏈)</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/在手訂單 <span class="conf c-med">中</span>=法人估/研調 <span class="conf c-un">待查</span>=興櫃。材料/設備/測試/封裝股不在此(見三層蛋糕索引地圖)。</p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="turnkey">建廠統包/機電</button><button data-f="supply">氣體/化學/水供應</button>
+    <button data-f="check">監控/AOI 檢測</button><button data-f="intl">國際對手</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="turnkey"><h4>漢唐 <span class="code">2404</span></h4><p>無塵室統包龍頭(United Integrated Services)、台積本土擴產純度最高。<b>2025 EPS 48.08(連四年新高)、擬配 40 元;在手訂單 1,322 億創高、法人估能見度延伸至 2029</b>。整廠建廠+無塵室+機電+hook-up。受惠評分 25/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="turnkey"><h4>亞翔 <span class="code">6139</span></h4><p>無塵室工程(L&K)、海外廠務王。<b>2025 營收 774.85 億/EPS 30.51、在手逾 1,753 億創高;星國最深(聯電 Fab12i/美光星國 HBM/240 億 NAND)</b>。⚠ 真 caveat=客戶/地域集中、新簽約半導體約 97%、東協+台灣占約 98%。受惠評分 24/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="turnkey"><h4>聖暉 <span class="code">5536</span></h4><p>機電/HVAC/化學氣體供應系統整合。<b>2025 營收 414.82 億(+37.1%)/EPS 28.42、在手逼近 600 億、2026 估雙位數成長再創高</b>。⚠ 為銳澤 7703 母集團之一(朋億 6613 持股結構)、海外擴張中。受惠評分 23/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="turnkey"><h4>帆宣 <span class="code">6196</span></h4><p>廠務+設備整合+二次配(半導體廠務二次配市占高)。<b>2025 營收 515.67 億(歷史第三高)/淨利 +近 8 成創高/EPS 15.5(新高)、在手創高至 2027 後</b>。⚠ 設備整合線(代理/零組件)部分屬 #11、本卡只計廠務/二次配段。受惠評分 22/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="turnkey"><h4>洋基工程 <span class="code">6691</span></h4><p>無塵室/Turnkey/精密機電空調。<b>2025 EPS 24.76 創高/營收 223.5 億(+47%)、未認列營收 553.19 億創高;接美光逾 200 億大單;台積嘉義 AP7+大立光+數據中心</b>。2026 擴編消化訂單、營運估成長 6-7 成。受惠評分 22/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="supply"><h4>銳澤 <span class="code">7703</span></h4><p>高純度/特殊氣體供應系統(GDS)+二次配(二線、聖暉+朋億集團子、朋億 6613 持股 45.59%)。<b>2025 EPS 8.72/擬配 7 元;2024 興櫃轉上櫃、跨日/星/美設子公司搶擴產</b>。⚠ 規模相對五雄小、集團內營收勿重複計。受惠評分 16/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="supply"><h4>漢科 <span class="code">3402</span></h4><p>製程管路二次配+特氣供應+環境監控統包(二線)。<b>氣體/特殊管路、高真空、無塵室機電統包、特氣供應及監控整合、濕製程化學系統;2025 營收 52.46 億/EPS 7.5</b>。⚠ 2026Q1 EPS 年減為 caveat;環境監控與和淞重疊。受惠評分 17/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="supply"><h4>信紘科 <span class="code">6667</span></h4><p>化學品中央供應系統 CCSS/CDS+機能水/特殊廢液 turnkey(二三線)。<b>2026/1-4 累計營收 20.21 億(+9.66%)/Q1 EPS 3.63、在手訂單創高;2023 在美/日設辦公室拚海外</b>。⚠ 做供應系統非化學分子本體(本體歸 #10);股號 6667(非 6957 裕慶-KY)。受惠評分 17/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="supply"><h4>兆聯實業 <span class="code">6944</span></h4><p>超純水 UPW+廢水回收/再生水(台積水系統隱形冠軍)。<b>2024 營收 103 億/EPS 22.33、在手未交 149 億;2026/2 營收 18.17 億(YoY+100.6%);UPW+O&M+RO 膜/樹脂耗材一條龍</b>。⚠ 台積占 Q1 達 82.8%(單一客戶最集中);高階 UPW/膜本體 Kurita/Veolia 主導。受惠評分 18/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="check"><h4>由田 <span class="code">3455</span></h4><p>先進封裝 AOI 在線光學檢測(本卡原創、兩岸最大 AOI)。<b>IC 載板 AOI 市占約 90%/顯示器逾 50%;先進封裝 AOI 涵蓋 CoWoS/FOPLP/TGV/CoPoS、2025 半導體設備占比 45-50% 拚過五成、全球前十大 OSAT 半數為客戶</b>。⚠ ≠漢民測試探針卡(電性 CP);高階量測 KLA/Camtek 仍主導。受惠評分 19/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="check"><h4>和淞 <span class="code">6826</span></h4><p>(觀察·興櫃)環境監控 FMCS+氣體過濾淨化+廠務供應系統監控。<b>高科技廠房廠務供應系統工程+監控設備測試、化學/氣體過濾淨化器</b>。⚠ 興櫃(2021/6/17)、流動性低、不進核心;FMCS 與漢科 3402 重疊;股號 6826(非 8444 綠河-KY)。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="check"><h4>奇鼎 <span class="code">6849</span></h4><p>(觀察·興櫃)微環境環控 AMC+精密溫濕控 TCU+曝光機鏡組防護 TAU。<b>製程精密溫濕度控制機組、AMC 去除設備;為德鑫一出海抱團 8 家發起成員之一</b>。⚠ 興櫃(2024/11/22)、規模小、不進核心;高階微環境技術為利基亮點。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="intl"><h4>Exyte <span class="code">德·高端 EPC</span></h4><p>全球最高端 fab turnkey EPC 之一(前 M+W Group)。<b>主導 ESMC(台積/Bosch/Infineon/NXP)德勒斯登廠無塵室+化學供應+UPW+氣體系統(2026 上半 fab system 安裝)</b>。歐美大案與台廠競合;台廠五雄在亞洲/隨台積出海的成本與彈性具差異化。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>高砂熱学 / 新菱冷熱 / 大気社 <span class="code">日·無塵室</span></h4><p>日系廠務空調對手。<b>高砂=日本最大無塵室公司(逾 80% IC 業務)=漢唐/亞翔最直接對手</b>;新菱冷熱(⚠ 種子誤標「NTT 系」、實為獨立公司)、大氣社(無塵室+汽車塗裝雙主軸)。台廠以成本/速度/隨客出海貼身服務佔上風、日系在日本本土(JASM 熊本)有地緣優勢。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Kurita / Organo / Veolia <span class="code">日法·UPW</span></h4><p>超純水 UPW 全球三強(Veolia+Kurita+Ecolab)。<b>Kurita/Organo/野村微科學(日利基)+Veolia(歐龍頭);UPW 是台廠相對弱、日歐主導的環節</b>,兆聯多在台積本土 UPW 配套,海外大案常由日歐主導(亞利桑那帶動 Kurita/Organo 在美布局)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Samsung C&T <span class="code">韓·體系內自建</span></h4><p>三星集團內製建廠主力、主導平澤園區、自研工法/無塵室/IT 自動化(2026 P5 Shell First)。<b>韓系「體系內自建」vs 台灣「獨立廠務工程商隨客出海」開放生態——韓系廠務多綁集團內、外溢市場小,這正是台灣能形成可投資獨立上市廠務群(五雄)的結構性差異</b>。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 三層蛋糕全景索引地圖 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Three-Layer Cake Map</span>
+  <h2 class="title">🗺️ AI 三層蛋糕全景索引地圖 + capex 總開關 + 供應鏈出海</h2>
+  <p class="subtitle">台積官方 2026/05/14 技術論壇(張曉強)提出 Compute→System Integration→Photonics 三層;把 20 條深度鏈串成全貌、標每格落在哪張既有深度卡。</p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>本卡是索引地圖卡——材料/設備/測試/封裝的個股 alpha 請看對應深度卡;在地化 60%/68% 為 2030 目標非現況、熊本家數為媒體估、德鑫日本複製放緩;廠務五雄成熟共識、單一客戶集中。投資前自行查證。</div>
+  <h3>AI 三層蛋糕(縱軸)× 每層台廠戰隊 → 索引既有深度卡</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>蛋糕層</th><th>做什麼 / 關鍵技術</th><th>台廠戰隊 → 索引深度卡</th></tr></thead>
+    <tbody>
+      <tr><td><b>① Compute 運算(底層)</b></td><td>算力本體=N2/A16/N2P GAA+晶背供電,台積近乎獨佔</td><td>材料(台特化/新應材/中砂/三福化)→ <b>#10 製程材料</b>;設備(京鼎/世禾/千附)→ <b>#11 設備零組件</b></td></tr>
+      <tr><td><b>② System Integration 系統整合(中層)</b></td><td>2.5D/3D 整合放大算力;2026 晶圓級→面板級典範轉移</td><td>封裝→ <b>#2 CoWoS</b>;載板→ <b>ABF</b>;CCL→ <b>高階 CCL</b>;布→ <b>T-Glass</b>;基板→ <b>玻璃基板</b>;測試→ <b>AI 測試鏈</b></td></tr>
+      <tr><td><b>③ Photonics 光子(頂層)</b></td><td>銅線轉光互連;2026 CPO 商轉元年、COUPE 量產</td><td>CPO→ <b>#1 CPO</b>;光引擎→ <b>COUPE</b>;雷射→ <b>InP</b>;互連→ <b>224G</b></td></tr>
+    </tbody>
+  </table></div>
+  <h3>橫軸五段 × 台廠定位 × 索引深度卡(本卡原創 vs 索引)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>橫軸段</th><th>台廠戰隊</th><th>定位</th><th>對應深度卡</th></tr></thead>
+    <tbody>
+      <tr><td>★ 廠務工程鏈</td><td>漢唐/亞翔/聖暉/帆宣/洋基+銳澤/漢科+信紘科/兆聯+由田 AOI</td><td><span class="badge b-ok">主導(本卡原創 holds)</span></td><td>★ 本卡(無對應既有卡)</td></tr>
+      <tr><td>設備零組件</td><td>京鼎/世禾/千附/翔名/瑞耘</td><td><span class="badge b-warn">重要供應商(索引)</span></td><td>→ #11 設備零組件國產化</td></tr>
+      <tr><td>製程材料</td><td>台特化/新應材/中砂/三福化/達興</td><td><span class="badge b-warn">利基(索引)</span></td><td>→ #10 製程材料(溶劑→#23)</td></tr>
+      <tr><td>檢測驗證</td><td>閎康(MA/FA)/漢民測試(探針卡)/由田(AOI 原創)</td><td><span class="badge b-warn">重要供應商(MA/FA 索引)</span></td><td>MA/FA→ AI 測試鏈;AOI 由田=本卡原創</td></tr>
+      <tr><td>先進封裝</td><td>台積/矽品/日月光;欣興/聯茂/台光電/富喬;CPO 日月光/訊芯</td><td><span class="badge b-ok">主導(索引)</span></td><td>→ #2/載板/CCL/T-Glass/玻璃;CPO→#1/COUPE</td></tr>
+    </tbody>
+  </table></div>
+  <h3>capex 總開關 + 在地化政策 + 供應鏈出海</h3>
+  <div class="callout insight">🔬 <b>總開關:</b>台積 2026 capex <b>US$52-56B</b>(中文 520-560 億美元、YoY +37%、創新高、遠超原估 US$46-50B;2025 約 US$40.9B、70-80% 先進製程)=灌全本土供應鏈。⚠ 部分報導誤植「52-56 億 vs 520-560 億」差 10 倍。<b>在地化(2030 目標非現況):</b>零配件 46%→60%、間接原物料 65%→68%(官方 ESG 另有原物料 50%/設備 38% 口徑待覆核);設備零配件在地化計畫 12 家/22 案/年產值約 NT$20 億(2026/02、硬數據)。<b>供應鏈出海抱團:</b>德鑫 18 家=德鑫一(2023/07 八家:家登 3680/迅得 6438/奇鼎 6849/科嶠 4542/微程式 7721/意德士 7556/濾能 6823)+德鑫貳(2025/03 十家:友威 3580/印能 7734/邑昇 5291/新應材 4749/聯策 6658/維田 6570/頌勝 7768),共同持有美國家登股權、利益共擔、於亞利桑那(US$65B 三廠)設共同辦公室;⚠ 日本熊本複製 2026/06 報導放緩(先美國試行)、熊本聚落「約 44 家/逾 50 家」為媒體估(崇越/閎康個別屬實)。⚠ 修正:奇鼎/濾能屬德鑫一、新應材/印能/頌勝屬德鑫貳(種子反了)。</div>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場口徑 + 逐環節台廠卡位 + 公司受惠評分</h2>
+  <p class="subtitle">市場口徑分歧 2-3 倍;廠務台廠卡位最強在統包/二次配;受惠評分只列廠務原創段。</p>
+  <h3>市場規模多口徑(⚠ 無塵室/氣體系統分歧 2-3 倍)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調</th><th>口徑</th><th>規模</th></tr></thead>
+    <tbody>
+      <tr><td>TSMC 官方</td><td>capex 總開關(需求源頭)</td><td>2026 US$52-56B(創高)/2025 US$40.9B</td></tr>
+      <tr><td>MarketsandMarkets</td><td>半導體無塵室(窄)</td><td>2025 約 80.8 億美元→2030 118.8 億(8.0%)</td></tr>
+      <tr><td>Mordor / Coherent / GGI</td><td>無塵室技術(全產業·寬)</td><td>2026 約 61.9-107.2 億美元(⚠ 三家差 60-110 億)</td></tr>
+      <tr><td>Intel Market Research</td><td>半導體 UPW 系統</td><td>2025 約 18.1 億美元→2032 30.86 億(8.1%)</td></tr>
+      <tr><td>VMR / 多家</td><td>化學/氣體供應系統</td><td>化學約 25 億;氣體系統 ⚠ 2026 估 7.3/16.4/26.8 億(差 3 倍)</td></tr>
+      <tr><td>VMR / Valuates</td><td>AMC 濾材</td><td>2024 約 6.98-15 億美元(⚠ 差 2 倍)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:無塵室半導體窄口徑(80.8 億)vs 全產業寬口徑(含製藥 61.9-107.2 億)不可直比;氣體供應系統三家差 3 倍以上(本研究最不一致子項);AMC 濾材差 2 倍;capex US$52-56B 以官方法說為準(部分報導 10 倍單位混淆)。引用單一數字務必標研調與口徑。</p>
+  <h3>逐環節台廠卡位強度(高=台廠越主導)</h3>
+  <p class="subtitle">維度:台廠主導度/在地工程壁壘/出海延伸性/訂單能見度,各 0~5 分(5＝台廠越主導/最有利)。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>廠務環節</th><th>主導度</th><th>在地壁壘</th><th>出海延伸</th><th>訂單能見度</th><th>強度<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>① 建廠統包/無塵室 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>⑤ 二次配管路 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>② HVAC 空調溫濕控</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>③ 高純度氣體供應系統</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>④ 化學供應系統 CCSS</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>⑧ AOI 在線檢測 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>⑥ 超純水 UPW</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>⑦ 環境監控 FMCS/AMC</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">⚠ 廠務台廠 alpha 最強在 ① 建廠統包/⑤ 二次配/② HVAC;③④⑧ 為利基;⑥ UPW、⑦ AMC 環控「本體」(膜/樹脂/濾材)日歐美主導=台廠做廠內工程非本體技術。評分為推估。</p>
+
+  <h3>公司受惠強度評分(holds 10 檔,廠務工程鏈原創)</h3>
+  <p class="subtitle">維度:AI capex 受惠/工程技術卡位/在手訂單能見度/利基壁壘/規模財務,0~5 分。材料/設備/測試/封裝股不在此(索引既有卡)。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>環節</th><th>AI受惠</th><th>技術卡位</th><th>能見度</th><th>利基壁壘</th><th>規模</th><th>總分 /25</th></tr></thead>
+    <tbody>
+      <tr><td>漢唐 2404</td><td>無塵室統包龍頭</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">25</span></td></tr>
+      <tr><td>亞翔 6139</td><td>海外廠務王</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">24</span></td></tr>
+      <tr><td>聖暉 5536</td><td>機電/HVAC/化學氣體</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">23</span></td></tr>
+      <tr><td>帆宣 6196</td><td>廠務+二次配</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td>洋基工程 6691</td><td>Turnkey/空調</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22</span></td></tr>
+      <tr><td>由田 3455</td><td>先進封裝 AOI(原創)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>兆聯實業 6944</td><td>超純水 UPW</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>漢科 3402</td><td>二次配+特氣+監控</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>信紘科 6667</td><td>化學供應 CCSS+機能水</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>銳澤 7703</td><td>高純度氣體供應(二線)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">漢唐(無塵室統包龍頭、台積純度最高)、亞翔(海外王、⚠ 地域集中)、聖暉/帆宣/洋基為五雄核心(成熟共識、在手訂單創高);由田 AOI/兆聯 UPW/漢科/信紘科/銳澤為二三線(補完邊角、規模小)。watch(和淞/奇鼎興櫃)見公司圖譜、不列評分。⚠ 多家單一客戶集中、台灣領先有邊界。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 催化劑時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2026 催化劑(已發生 vs 進行中)。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 數字</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>2026/01 台積法說</td><td>總開關</td><td>2026 capex US$52-56B(估近高標、創歷史新高、遠超原估)=灌全本土供應鏈</td><td><span class="conf c-high">已發生</span></td></tr>
+      <tr><td>2026/05/14 三層蛋糕</td><td>縱軸骨架</td><td>台積技術論壇提出 Compute→System Integration→Photonics;CoWoS 良率 98%</td><td><span class="conf c-high">已發生</span></td></tr>
+      <tr><td>漢唐 2404 / 亞翔 6139</td><td>廠務五雄核心</td><td>漢唐 EPS 48.08/在手 1,322 億;亞翔在手逾 1,753 億/星國最深</td><td><span class="conf c-high">已發生</span></td></tr>
+      <tr><td>洋基 6691 / 聖暉 5536</td><td>廠務五雄核心</td><td>洋基接美光逾 200 億/在手 553 億;聖暉在手近 600 億</td><td><span class="conf c-high">已發生</span></td></tr>
+      <tr><td>2026 亞利桑那擴產</td><td>出海催化</td><td>台積總投資加碼 US$65B、規劃 2030 前建第三廠(可望提前量產)</td><td><span class="conf c-med">進行中</span></td></tr>
+      <tr><td>德鑫 18 家出海</td><td>抱團敘事</td><td>8+10 兩批共同持家登股權、亞利桑那共同辦公室;⚠ 日本熊本 2026/06 放緩</td><td><span class="conf c-med">進行中</span></td></tr>
+      <tr><td>2026/08(預估)責任供應鏈報告</td><td>在地化更新</td><td>2025 年度在地採購實績更新(46%→朝 60% 目標、65%→朝 68%)</td><td><span class="conf c-un">待發生</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:真受惠核心=廠務五雄(漢唐/亞翔/聖暉/帆宣/洋基、現在就有營收+在手訂單創高、能見度至 2027-2029);二三線(由田 AOI/兆聯 UPW/信紘科/漢科/銳澤)補完邊角、規模小;興櫃(和淞/奇鼎)僅觀察。<b>核心鐵則:本卡是「產業地圖型卡」非「個股 alpha 型卡」——廠務五雄成熟共識、股價已反映建廠循環,材料/設備/測試/封裝看對應深度卡(#10/#11/AI 測試/#2/#1)。</b>對單一客戶集中、台灣領先邊界保持留意。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入廠務工程廠(中型量級)<b>示意數字</b>(非財測;廠務工程屬低毛利工程業、PE 通常 12-18)。本輪核心=台積 capex 創高 × 廠務在手訂單能見度;但須留意成熟共識+單一客戶集中。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>廠務工程廠</td><td>建廠循環旺期 PE 拉升;成熟共識+單一客戶折價</td></tr>
+      <tr><td><b>在手訂單 × 認列</b></td><td>在手訂單 ÷ 認列年數</td><td>本輪核心</td><td>漢唐 1,322 億/亞翔 1,753 億/能見度至 2029</td></tr>
+      <tr><td><b>出海延伸</b></td><td>海外建廠占比 × 毛利</td><td>選擇權</td><td>亞利桑那/熊本;德鑫抱團;海外毛利通常較高</td></tr>
+      <tr><td><b>共識折價</b></td><td>已反映建廠循環 / 單一客戶</td><td>風險</td><td>買在共識;capex 降溫/建廠遞延直接衝擊</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=廠務工程廠量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="400"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="15"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="8"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="2"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="14"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="12"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為廠務工程廠量級示意、非財測。漢唐(高 EPS 千金股)、亞翔/帆宣(規模大)、二三線(規模小)股數與毛利差異大,務必填入標的真實數字。廠務工程屬低毛利工程業(npm 約 7-10%、PE 約 12-18);成熟共識+單一客戶集中=保持折價。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。四級來源分流;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>台積電 2026/01 法說 + 2026/05/14 技術論壇(張曉強)</b> — 2026 capex US$52-56B 創高;AI 三層蛋糕 Compute→System Integration→Photonics;CoWoS 良率 98%<span class="q">primary</span></li>
+    <li><b>台積責任供應鏈/永續報告(2025/08 首發)+ 2026/02 公告</b> — 在地採購零配件 46%→60%、間接原物料 65%→68%、設備零配件在地化 12 家/22 案/年產值約 20 億<span class="q">primary</span></li>
+    <li><b>漢唐/亞翔/聖暉/帆宣/洋基/銳澤/漢科/信紘科/兆聯/由田 2025 年報與月營收</b>(公開申報)<span class="q">primary</span></li>
+    <li><b>工商時報/經濟日報/中央社/TechNews/Semiwiki</b> — 三層蛋糕、capex、廠務工程廠在手創高、亞利桑那三廠、由田 AOI<span class="q">secondary</span></li>
+    <li><b>MarketsandMarkets/Mordor/Intel Market Research/VMR</b> — 無塵室/UPW/化學供應市場量級(⚠ 口徑分歧 2-3 倍、僅量級參考)<span class="q">secondary</span></li>
+    <li><b>數位時代/林宏文/鉅亨/壹蘋</b> — 德鑫 18 家(8+10)成員、亞利桑那/熊本出海;⚠ 熊本「逾 50 家」為媒體估、逐項已對抗式查證<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① capex「52-56 億」誤植→US$52-56B(520-560 億美元)差 10 倍;② 亞翔地域分散=半導體 97% 集中、真分散在地域(東協 84%/+台灣 98%);③ 由田 AOI ≠ 漢民測試探針卡(光學外觀 vs 電性 CP);④ 信紘科=6667(非 6957 裕慶-KY)、和淞=6826(非 8444 綠河-KY)死代號剔除;⑤ 德鑫成員歸屬反了(奇鼎/濾能屬德鑫一、新應材/印能/頌勝屬德鑫貳);⑥ 新菱冷熱非 NTT 系(NTT Facilities 才是);⑦ 在地化 60%/68% 為 2030 目標非現況、熊本家數為媒體估、日本複製放緩;⑧ 銳澤為朋億 6613 持股集團子(非聖暉直接子)。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。本卡為「索引/分層地圖卡」:唯一原創=廠務工程鏈(holds 只放這段),材料/設備/測試/封裝只索引既有深度卡、不重複計受惠主體。成熟共識、單一客戶集中、台灣領先有邊界須注意。數據請以最新官方/法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>台積電本土供應鏈生態系全景圖(廠務工程鏈 × AI 三層蛋糕 × 供應鏈出海)研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
