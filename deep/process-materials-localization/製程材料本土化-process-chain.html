@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半導體先進製程材料本土化(特氣/前驅體/CMP/光阻,台積 N2/A16 在地採購)深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#a3e635;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#1c2810);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#1a2408;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(163,230,53,.10)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}.tag{white-space:normal;overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>半導體先進製程材料本土化(特氣/前驅體/CMP/光阻,台積 N2/A16 在地採購)深度研究報告</h1>
+  <div class="sub">前段晶圓製造耗材四(+一)大類逐類拆 × 用在 N2/A16 哪製程站 × 技術難度 × 在地化現況;台廠 vs 日美韓現任者、台積在地採購政策、韓國本土化對照、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
+    <span class="pill">本質：<b>台廠吃「在地利基品項」財(非全球市占);高端日美韓壟斷</b></span>
+    <span class="pill">配對淺色版：<b>製程材料本土化-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/兩大判斷</a>
+    <a href="#s2">2. 材料鏈(8 站)</a>
+    <a href="#s3">3. 難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. 政策/市場/催化劑</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>這是「前段晶圓製造耗材」在地化題(<b>聚焦材料本體:特用氣體/前驅體/CMP 耗材/光阻及周邊四大類;溶劑歸 #23、供應系統工程歸 #27、設備零件歸 #11、封裝材料歸各題</b>)。<b>驅動力雙底盤:</b>① 台積 N2(2025Q4 已量產)/N2P+A16(2026H2、晶背供電)先進製程材料消耗強度跳升(新應材 Rinse N2 用量約 N3 兩倍);② 台積在地採購政策(零配件 46%→60%、間接原物料 65%→68%,<b>皆為 2030 目標、非當下達成</b>)→ 2026-2028 國產替代放量期。<b>但必須誠實分層:台廠吃的是「在地利基品項+在地供應」財、不是全球市占財,且三層分化明顯——</b>真利基主導(台特化矽基特氣/中砂 CMP 鑽石碟/新應材 N2 光阻周邊)、在地中毛利替代(三福化/達興/晶呈)、遠期選擇權(宇川 ALD 前驅體興櫃)。<b>兩大高值環節 CMP slurry/pad 與 EUV/ArF 光阻本體台廠仍實質缺席</b>(日美韓把持、台積甚至引日商 JSR 來台設光阻廠=「在地生產的外商」非台廠國產替代)。韓國 Soulbrain/Hansol/Dongjin 已用財團力量做到中高端,是台廠可追趕的對照組。</div>
+<div class="kpi">
+  <div class="box"><div class="v">$45.8B (+5.4%)</div><div class="l">晶圓製造材料 2025(SEMI;微影+濕化學雙位數成長)</div></div>
+  <div class="box"><div class="v">2025Q4 → 2026H2</div><div class="l">N2 → A16 量產(材料消耗強度跳升)</div></div>
+  <div class="box"><div class="v">+266%</div><div class="l">台特化 2026 前 4 月營收(在地放量元年實例)</div></div>
+  <div class="box"><div class="v">缺席 2 環</div><div class="l">CMP slurry/pad + EUV/ArF 光阻本體(台灣高端缺席)</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、材料分類 ＋ 兩大判斷 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>四(+一)大類與本題範圍</h3>
+  <ul>
+    <li><b>四大類(+濕化學):</b>① 特用氣體(矽基特氣 乙矽烷 Si2H6/三矽烷/DCS + 蝕刻特氣 C4F8/C4F6/SF6/NF3/WF6/AHF)→ ② 前驅體(ALD/CVD precursors:TMAl/HfCl4/TSA,high-k/metal gate)→ ③ CMP 耗材(slurry 研磨液 + pad 拋光墊 + diamond disc 鑽石碟 + 再生晶圓)→ ④ 光阻及周邊(KrF/ArF/EUV 光阻本體 + Rinse/BARC/EBR/TMAH 顯影液)→ ⑤ 濕式化學品/清洗液(蝕刻液/剝離液/SC1·SC2)。</li>
+    <li><b>切分鐵則(判準一句話):</b>分子/研磨液/光阻=本題;<b>溶劑供需=#23</b>(PGME/PGMEA/IPA、勝一/三福化溶劑線只引用不重複計);<b>金屬零件=#11</b>(腔體/石英/ESC,含零配件 46%→60% 政策主體);<b>輸送系統=#27</b>(特氣/化學供應系統工程);<b>封裝載板=各封裝題</b>(玻璃/T-Glass/ABF/CCL/晶呈 TGV)。</li>
+    <li><b>主場成長:</b>SEMI 2026/5/12:2025 全球材料 US$73.2B(+6.8%)、晶圓製造材料 US$45.8B(+5.4%)、<b>微影材料與濕化學品雙位數成長</b>=四大類中「光阻周邊+濕化學」是成長最快子段(正中新應材/三福化題眼)。台灣連 16 年最大材料消費地(US$21.7B)。</li>
+  </ul>
+  <div class="g2 grid">
+    <div class="callout warn" style="margin:0"><b>🔍 判斷 1:台廠吃「在地利基品項」財、非全球市占——三層分化</b><br>政策保證的是「在台積框架內角色上升」、<b>不是「打破全球天花板」</b>。三層分化必須分清:<b>第一層(真利基/接近主導、有當期硬數據):</b>台特化 4772(乙矽烷全球僅 4 家量產之一、月營收 +266%)、中砂 1560(CMP 鑽石碟 3nm 約 70%→2nm 約 80%,台廠在 CMP 唯一全球級切入點)、新應材 4749(N2 周邊 Rinse/BARC/EBR 在地獨家)。<b>第二層(在地替代、中毛利、對手日韓):</b>三福化/達興/晶呈(濕化學/蝕刻特氣混配)。<b>第三層(遠期選擇權、規模極小、興櫃):</b>宇川 7887(ALD 前驅體、2025 營收僅約 1.2 億、放大要等 2028)=高賠率高風險、不宜進核心。</div>
+    <div class="callout warn" style="margin:0"><b>🔍 判斷 2:兩大高值環節台廠缺席,且「在地化≠國產化」</b><br><b>CMP slurry(Entegris/CMC ~23%+日 Fujimi/Resonac+韓)與 pad(DuPont 近寡占)台灣本體實質缺席</b>(中砂主導的是鑽石碟 conditioner、非 slurry/pad);頌勝 7768 子公司智勝雖突破 pad 壟斷(全球市占約 4%),但規模仍小。<b>EUV/ArF 光阻本體日商寡占(JSR/TOK/信越/住友,EUV 近 85%),台灣完全缺席、新應材僅切 KrF 低階陪跑(2026 中裝機、2027 才貢獻)。</b>更關鍵:台積為縮短 EUV 材料鏈,<b>引日商 JSR 來台設首座 production-scale 光阻廠=「在地生產的外商」、非台廠國產替代</b>。即 EUV 升級對台廠是「<b>耗材用量題</b>」(Rinse/BARC/鑽石碟/特氣用量倍增)、不是「光阻技術切入題」。</div>
+  </div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>材料鏈拆解(沉積 → 清洗,8 站)<span class="conf c-high">高信心</span></h2>
+<p class="sub">八站。<b>台廠 alpha 集中在 ① 矽基特氣(台特化)、③ CMP 鑽石碟(中砂全球>70%)、④ 光阻周邊(新應材 N2 獨家)、⑤ 濕化學(三福化/達興);難度最高的 CMP slurry/pad、EUV/ArF 光阻本體、ALD 前驅體台廠缺席/極小。</b>難度 5=最難/最被卡。</p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>① 特用氣體 — 矽基特氣(乙矽烷/三矽烷/DCS)⭐ 台特化利基主導</h4>
+    <p>沉積用含矽前體氣體,在 N2/A16 GAA 奈米片堆疊的薄膜沉積(CVD/ALD 形成 SiN/SiO2/犧牲層與間隔層)大量消耗;GAA 由 FinFET 轉 nanosheet→A16 晶背供電,薄膜沉積道數跳升、矽基特氣為剛性需求。乙矽烷(Si2H6)符合低熱預算+原子級緻密度,純度需 6N(99.9999%)以上。</p>
+    <div class="diff">難點(16/20):純度 6N+、爆炸性氣體安全處理、單一客戶認證週期長;全球僅四家具量產能力(Air Liquide/三井化學/SK Materials/台特化)=極高進入壁壘。<b>台特化 4772 為全球少數矽乙烷量產者、台廠唯一,2026 前 4 月營收 +266%(矽烷+AHF 雙引擎);乙矽烷在台積先進製程供應量達全球第一(媒體說法、台積不證實)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">台特化 4772(矽基特氣全球四家之一、台廠唯一)</span> <span class="tag t-intl">Air Liquide(法)/ 三井化學(日)/ 大陽日酸(日)/ SK Materials(韓)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>② 特用氣體 — 蝕刻特氣(C4F8/C4F6/SF6/AHF/NF3/WF6)— 晶呈混配在地化</h4>
+    <p>電漿乾蝕刻與腔體清潔用氟碳/氟系氣體,在 N2/A16 高深寬比蝕刻(GAA nanosheet release、接觸孔、A16 晶背 Nano-TSV)與腔體清潔大量使用;製程微縮使蝕刻選擇比與混配精度要求升高。</p>
+    <div class="diff">難點(15/20):高純度氟系氣體腐蝕性+毒性處理、混配比例 know-how、認證集中單一客戶。<b>晶呈科技 4768 蝕刻特氣 C4F8/C4F6/SF6/AHF 混配(特氣占營收約 90%、C4F8 全球市占約 30-40%);台特化 4772 供 AHF(2026 第二成長引擎)。⚠ 混配偏配方/調配、壁壘低於分子合成;WF6 鎢系高階品台廠缺席、全球仍日(關東電化/Resonac)韓(SK)把持。</b></div>
+    <div class="who">對應:<span class="tag t-tw">晶呈科技 4768(C4F8 全球 30-40%) / 台特化 4772(AHF)</span> <span class="tag t-intl">關東電化(日)/ 中央硝子(日)/ SK Specialty(韓)/ Air Products(美)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>③ 前驅體 — ALD/CVD precursors(high-k/metal gate)— 宇川極小、規模 2028 才見</h4>
+    <p>原子層/化學氣相沉積用金屬有機(MO)前驅體,在 N2/A16 GAA 閘極堆疊最關鍵:先氧化 Si nanosheet 成 interfacial SiO2,再以 ALD 沉積 high-k 介電與 metal gate,需精準厚度+全包覆 conformality;GAA→CFET 使沉積道數大增=前驅體用量與品項升級。材料 TMAl/TSA/HfCl4 等,純度 6N+。</p>
+    <div class="diff">難點(19/20):high-k/metal gate 前驅體是先進製程最核心材料、純度與分子設計門檻最高、認證最嚴、全球僅四家(Merck/Air Liquide/Hansol+宇川)。<b>宇川精材 7887 自述全球四家之一、台灣唯一切入台積 ALD 前驅體(1H25 台積占營收 54%);⚠⚠ 但興櫃、2025 營收僅約 1.2 億、二廠 2027 底完工/2028 投產(產能 6-10 倍)=規模兌現要等 2028=遠期選擇權、不進核心;「全球四家」來源為 vocus AI 整理未證實。</b></div>
+    <div class="who">對應:<span class="tag t-tw">宇川精材 7887(興櫃、ALD 前驅體) / 台特化 4772(2027 規劃)</span> <span class="tag t-intl">Merck/默克(德)/ Air Liquide(法)/ Hansol(韓)/ Adeka(日)/ DNF(韓)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>④ CMP 耗材 — slurry 研磨液 / pad 拋光墊 — 台灣本體缺席(被卡最深)</h4>
+    <p>化學機械研磨的研磨液與拋光墊,在 N2/A16 每層金屬/介電沉積後的平坦化消耗;A16 晶背供電(BSPDN)導入後晶圓需背面薄化+多次 CMP,N2P 2026 導入晶背供電使 CMP 更不可或缺。slurry=奈米研磨粒(矽溶膠/氧化鈰/氧化鋁)+化學添加劑;pad=聚氨酯 PU 墊。</p>
+    <div class="diff">難點(全鏈最高=20/20):研磨粒分散/缺陷控制+配方 know-how 極深、單顆粒污染即報廢晶圓、認證最久。<b>slurry 由美 Entegris(收 CMC、市占約 23% 居首)/日 Fujimi/Resonac/韓主導、pad 由 DuPont 近寡占=台灣本體實質缺席。⚠ 修正:頌勝 7768 子公司智勝突破 pad 壟斷(全球市占約 4%、軟墊 2026Q2 試產)=台廠在 pad 本體有卡位但規模仍小;slurry 本體仍台灣缺席。</b></div>
+    <div class="who">對應:<span class="tag t-tw">頌勝 7768(智勝 CMP pad、市占約 4%);slurry 本體台灣缺席</span> <span class="tag t-intl">Entegris/CMC(美 ~23%)/ Fujimi(日)/ Resonac(日)/ DuPont(美 pad)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>⑤ CMP 耗材 — diamond disc 鑽石碟/conditioner + 再生晶圓 ⭐ 中砂全球主導</h4>
+    <p>鑽石碟(conditioner)修整 CMP pad 表面維持研磨率穩定;再生晶圓回收用過晶圓再加工供測試/製程驗證。在 N2/A16 CMP 站搭配 pad 使用;晶背供電與 2nm 擴產帶動鑽石碟與再生晶圓(測試片)需求。</p>
+    <div class="diff">難點(對台廠最有利=11/20):鑽石碟為 CMP 耗材中台廠唯一全球主導環節。<b>中砂 1560 鑽石碟 3nm 市占約 70%(已超越美 3M 成 3nm 最大供應商)、2nm 估破 80%;三大產品線=再生晶圓 46%/鑽石碟 31%/砂輪 23%、2024 營收創高 70.19 億 +10%、EPS 7.1。對手 3M(美)/韓新韓(Saesol)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">中砂 1560(鑽石碟全球市占>70%+再生晶圓)</span> <span class="tag t-intl">3M(美)/ Saint-Gobain·新韓(韓)/ Asahi Diamond(日)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>⑥ 光阻本體 — KrF/ArF/EUV 光阻 — 日商壟斷、EUV 台灣完全缺席</h4>
+    <p>微影曝光用感光材料,在 N2/A16 微影站(EUV+多重曝光)核心消耗;製程微縮使光罩層數由 7nm 4-5 層增至 3nm 23-25 層,光阻用量與品項升級。EUV 為 N2/A16 關鍵層曝光材料,含光酸產生劑/樹脂/淬滅劑;EUV 向金屬氧化物光阻(MOR,Sn/Hf 基)演進。</p>
+    <div class="diff">難點(19/20):光阻本體(尤其 EUV)是材料皇冠、分子設計+純度+與曝光機共優化門檻全鏈最高。<b>JSR(EUV 逾 22%、收 Inpria 主導 EUV-MOR)/TOK/信越/住友占 EUV 光阻近 85%、日商整體控全球光阻約 80%。台廠新應材 4749 KrF 光阻 2026 中裝機、2027 才貢獻=切 DUV 低階陪跑;ArF/EUV/high-NA 本體台灣完全缺席,連在地化都是日商 JSR 來台設光阻廠。⚠ EUV 光阻市場規模兩來源差逾 10 倍勿引用。</b></div>
+    <div class="who">對應:<span class="tag t-tw">新應材 4749(KrF 開發中、2027 貢獻、EUV/ArF 缺席)</span> <span class="tag t-intl">JSR(日)/ TOK 東京應化(日)/ 信越(日)/ 住友(日)/ 富士軟片(日)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">7</div><div class="body">
+    <h4>⑦ 光阻周邊 — Rinse/BARC/EBR/顯影液 TMAH ⭐ 新應材 N2 獨家(微影段最強著力點)</h4>
+    <p>微影周邊特化品:Rinse(洗邊/表面改質)防圖案坍塌、BARC(底抗反射)抑制反射、EBR(邊緣去除)、TMAH(顯影液)。在 N2/A16 黃光微影站環繞光阻使用;線寬微縮使 N2 節點 Rinse 用量約 N3 近兩倍、光罩層數增帶動周邊需求。</p>
+    <div class="diff">難點(對台廠較友善=12/20):光阻周邊特化品門檻低於光阻本體、台廠已實質卡位且 N2 獨家=台廠在微影段 alpha 所在。<b>新應材 4749 為台積 2nm Rinse 獨家(2026 再增約 60%)、BARC/EBR 過 2nm 驗證、半導體營收占比約 83%(註:公司簡報另有「產能比重 16%→18%」口徑、「破 80%」採營收占比);TMAH 顯影+廢液回收=三福化 4755(<4ppt、T 公司 Q1'26 驗證→Q2 量產)。⚠ 「獨家」為媒體/公司口徑、台積不證實。</b></div>
+    <div class="who">對應:<span class="tag t-tw">新應材 4749(N2 Rinse 獨家/BARC/EBR) / 三福化 4755(TMAH/回收)</span> <span class="tag t-intl">JSR(日)/ 信越(日)/ Brewer Science(美 BARC)/ Merck(德)/ Fujifilm(日)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">8</div><div class="body">
+    <h4>⑧ 濕式化學品/清洗液(與 #23 溶劑切分)— 三福化/達興 在地供應</h4>
+    <p>前段晶圓清洗/蝕刻/剝離用濕化學品(材料本體、非供應系統工程)。在 N2/A16 清洗(每道製程間)、濕蝕刻、光阻剝離站消耗;2nm 擴產(2026 底月產能 9-10 萬片)帶動高純度蝕刻液/清洗液需求。⚠ PGME/PGMEA/IPA 光阻溶劑歸 #23、本題只引用聚焦材料本體;供氣/供液系統工程歸 #27。</p>
+    <div class="diff">難點(14/20):電子級純度(ppt)+認證週期長,但濕化學品台廠已是台積重要在地供應、多項進 2nm=在地化程度高。<b>三福化 4755(蝕刻/剝離/SoIC etchant 2H26、半導體占比 19→23→26%、TMAH 回收)、達興材料 5234(友達+長興 JV、半導體材料 2025 +107.8%、占比 9%→16.7%、2 項進 2nm)、勝一 1773(電子級溶劑龍頭、已入 2nm、IPA 新廠 2026 中——與 #23 重疊只引用)。對手日韓(關東化學/Soulbrain)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">三福化 4755 / 達興材料 5234 / 勝一 1773(歸 #23 引用)</span> <span class="tag t-intl">關東化學(日)/ BASF(德)/ Soulbrain(韓)/ Entegris(美)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐站難度 ＋ 公司受惠強度評分</h2>
+<p class="sub">難度維度:技術門檻 / 純度·良率要求 / 認證壁壘 / 台廠進入難度,各 0~5 分(5＝最難/最被卡)。⚠ <b>台廠 alpha 在難度「較低」的 ⑤ 鑽石碟、⑦ 光阻周邊、① 矽基特氣;難度最高的 ④ CMP slurry/pad、⑥ EUV 光阻本體、③ ALD 前驅體台廠缺席/極小。</b>評分為推估。</p>
+<table>
+  <tr><th>材料站</th><th>技術門檻</th><th>純度/良率</th><th>認證壁壘</th><th>台廠進入難度</th><th>總分/20</th><th>台廠位置</th></tr>
+  <tr><td><b>④ CMP slurry/pad</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>缺席(slurry 台灣無、pad 頌勝市占約 4%)</td></tr>
+  <tr><td><b>⑥ 光阻本體 KrF/ArF/EUV</b></td><td>5</td><td>5</td><td>5</td><td>4</td><td><b>19</b></td><td>陪跑(KrF 切入)/EUV 缺席(日商 85%)</td></tr>
+  <tr><td><b>③ ALD 前驅體</b></td><td>5</td><td>5</td><td>5</td><td>4</td><td><b>19</b></td><td>極小(宇川興櫃、2028 才見規模)</td></tr>
+  <tr><td>① 矽基特氣 ⭐</td><td>4</td><td>5</td><td>4</td><td>3</td><td><b>16</b></td><td>利基主導(台特化全球四家之一)</td></tr>
+  <tr><td>② 蝕刻特氣</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>15</b></td><td>在地供應(晶呈 C4F8 混配)</td></tr>
+  <tr><td>⑧ 濕化學/清洗</td><td>3</td><td>4</td><td>4</td><td>3</td><td><b>14</b></td><td>重要在地供應(三福化/達興)</td></tr>
+  <tr><td>⑦ 光阻周邊 ⭐</td><td>3</td><td>4</td><td>3</td><td>2</td><td><b>12</b></td><td>N2 獨家(新應材 Rinse/BARC/EBR)</td></tr>
+  <tr><td>⑤ CMP 鑽石碟/再生 ⭐</td><td>3</td><td>3</td><td>3</td><td>2</td><td><b>11</b></td><td>全球主導(中砂鑽石碟>70%)</td></tr>
+</table>
+<div class="callout"><b>台廠的位置(關鍵):</b>本題 alpha 在難度「較低」、台廠已卡位的 <b>⑤ 鑽石碟(中砂全球>70%)、⑦ 光阻周邊(新應材 N2 獨家)、① 矽基特氣(台特化全球四家之一)、⑧ 濕化學(三福化/達興)</b>;難度最高、最高價值的 <b>④ CMP slurry/pad、⑥ EUV/ArF 光阻本體、③ ALD 前驅體 台廠缺席/極小(日美韓把持)</b>。即「在台積在地採購框架內角色快速上升、訂單實質落地,但全球天花板仍日美韓、最高值環節吃不到」。</div>
+<h3>公司受惠強度評分(holds 8 檔)</h3>
+<p class="sub">維度:先進製程/AI 受惠 / 材料技術卡位 / 在地化放量時程 / 利基壁壘·獨家性 / 規模財務,各 0~5 分;總分由高到低。雷射晶片/溶劑歸他題。評分為推估,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>型態/類別</th><th>受惠</th><th>技術卡位</th><th>放量時程</th><th>利基壁壘</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>台特化 4772</td><td>矽基特氣/AHF(① 真主導)</td><td>5</td><td>5</td><td>5</td><td>5</td><td>3</td><td><b>23</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>新應材 4749</td><td>N2 光阻周邊 Rinse 獨家(⑦)</td><td>5</td><td>4</td><td>5</td><td>4</td><td>3</td><td><b>21</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>中砂 1560</td><td>CMP 鑽石碟全球>70%(⑤)</td><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td><td><b>20</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>達興材料 5234</td><td>濕化學/蝕刻清洗 進 2nm(⑧)</td><td>4</td><td>3</td><td>5</td><td>3</td><td>3</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>晶呈科技 4768</td><td>蝕刻特氣 C4F8 混配(②)</td><td>4</td><td>3</td><td>4</td><td>3</td><td>3</td><td><b>17</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>頌勝 7768</td><td>CMP pad 突破壟斷(④、智勝)</td><td>4</td><td>4</td><td>3</td><td>4</td><td>2</td><td><b>17</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>光洋科 1785</td><td>濺鍍靶材(四大類外·沉積)</td><td>3</td><td>3</td><td>4</td><td>3</td><td>4</td><td><b>17</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>三福化 4755</td><td>濕化學/TMAH 回收(⑧·#23 重疊)</td><td>3</td><td>3</td><td>4</td><td>3</td><td>3</td><td><b>16</b></td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<p class="sub"><b>台特化 4772</b>=本題最強利基(矽乙烷全球四家之一、台積 N2 供應全球第一、月營收 +266%、AHF 第二引擎);<b>新應材 4749</b>=N2 光阻周邊 Rinse 在地獨家(光阻本體 KrF/ArF/EUV 仍日商壟斷、定價力侷限周邊);<b>中砂 1560</b>=CMP 鑽石碟全球主導(台廠在 CMP 唯一全球級切入點、規模財務最穩);<b>達興 5234</b>=面板轉半導體放量(2025 半導體 +107.8%、毛利首破 40%);<b>晶呈 4768</b>=蝕刻特氣 C4F8 混配(⚠ 先進製程占比破 90% 為公司自述、TGV 屬封裝需切出);<b>頌勝 7768</b>=智勝突破 CMP pad 壟斷(推翻 pad 缺席、但市占約 4% 規模小);<b>光洋科 1785</b>=濺鍍靶材(四大類外相鄰沉積材料、營收受貴金屬價放大須看 VAS);<b>三福化 4755</b>=TMAH 回收循環經濟利基(本題新增點、溶劑線歸 #23)。⚠ 多家規模小、單一客戶集中;受惠評分為推估。</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐類對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> SEMI 協會/月營收財報</span>
+  <span><span class="conf c-med">中</span> 研調市占/公司自述</span>
+  <span><span class="conf c-un">待查</span> 媒體「獨家/全球四家」(台積不證實)</span>
+</div>
+<h3>台廠 × 角色對照(依材料類別)</h3>
+<table>
+  <tr><th>公司(股號)</th><th>類別/型態</th><th>角色 / 最新數字</th><th>查證</th></tr>
+  <tr><td>台特化 4772(上櫃)</td><td>① 矽基特氣/AHF(真主導)</td><td>矽基特氣在地龍頭。<b>2026/5 營收 3.08 億 +241%、前 5 月 14.49 億 +260.78%(矽烷+AHF 雙引擎)、2026Q1 EPS 1.33 年增 90%</b>;乙矽烷全球僅四家量產(Air Liquide/三井/SK Materials/台特化);AHF 2026 第二成長引擎;2027 規劃 ALD 前驅體。⚠「台積 N2 乙矽烷供應全球第一」為媒體說法、台積不證實供應商關係</td><td><span class="conf c-high">高;供應全球第一待硬證</span></td></tr>
+  <tr><td>新應材 4749(上櫃)</td><td>⑦ 光阻周邊 Rinse 獨家</td><td>台積 N2 光阻周邊在地供應。<b>2025E 總營收約 42 億(+27%)、半導體占比約 83%;Rinse 為 N2 獨家、N2 用量約 N3 近兩倍、Rinse 2025 +約 45%/2026 +60%;BARC/EBR 過 2nm 驗證;KrF 光阻 2026 中裝機、2027 顯著貢獻</b>。⚠「N2 Rinse 獨家」為媒體/法人口徑、台積不證實;光阻本體 KrF/ArF/EUV 仍日商壟斷、台灣陪跑</td><td><span class="conf c-high">高;獨家為媒體口徑</span></td></tr>
+  <tr><td>中砂 1560(上市)</td><td>⑤ CMP 鑽石碟全球主導</td><td>CMP 鑽石碟(conditioner)全球主要供應商。<b>鑽石碟 3nm 市占約 70%(超越美 3M 成 3nm 最大供應商)、2nm 估達 80%;2024 營收創高 70.19 億 +10%、EPS 7.1;產品線 再生晶圓 46%/鑽石碟 31%/砂輪 23%;DBU 2025Q3 起小量出貨美系大 IDM、再生晶圓 2026Q3 拚 40 萬片/月</b>。對手 3M/韓新韓。⚠ 主導的是鑽石碟非 slurry/pad 本體;毛利率受台幣升值波動</td><td><span class="conf c-high">高(財報);市占為研報</span></td></tr>
+  <tr><td>達興材料 5234(上市)</td><td>⑧ 濕化學/蝕刻清洗(進 2nm)</td><td>由面板化學轉型半導體。<b>2025 營收 46.3 億(+12.4% 創高)、毛利率首破 40%(40.6%)、EPS 7.37;半導體材料營收 7.73 億(+107.8%)、占比 9%→16.7%;2 項已導入 2nm(供亞利桑那)、2026 擬新增 3-5 項、目標半導體占比拚破 25%</b>。母公司友達 2409、合資方長興 1717。含 PSPI(平行受惠線)</td><td><span class="conf c-high">高(2025 年報硬數據)</span></td></tr>
+  <tr><td>晶呈科技 4768(上櫃)</td><td>② 蝕刻特氣 C4F8 混配</td><td>蝕刻特氣混配在地供應。<b>約 90% 營收來自特殊氣體、C4F8 全球市占約 30-40%;2025/12 法說 2026 營收估成長逾 30%(C4F6/TGV/去光阻液三引擎)</b>。⚠⚠「先進製程占比 2026 破 90%」為公司自述、信心最低;TGV 玻璃載板屬封裝題須切出;蝕刻特氣全球仍日韓主導</td><td><span class="conf c-med">中(占比自述待查)</span></td></tr>
+  <tr><td>頌勝 7768(上市)</td><td>④ CMP pad 突破壟斷(智勝)</td><td>(本題新增、推翻 pad 缺席)以 PU 材料技術切入 CMP 研磨墊,<b>子公司智勝科技(iVT)為台灣首家自有技術突破國際大廠壟斷的 CMP 研磨墊製造商、半導體研磨墊全球市占約 4%、挑戰 10%</b>;三引擎=台灣新廠/軟質拋光墊 2026Q2 試產/中國合肥廠 2026Q3 量產。2026/5/7 掛牌(承銷 130/掛牌 258)。⚠ 對手 DuPont/Fujibo、市占仍小、台積驗證關係未獨立證實</td><td><span class="conf c-med">中(媒體;市占小)</span></td></tr>
+  <tr><td>光洋科 1785(上市)</td><td>(四大類外)濺鍍靶材/沉積</td><td>(相鄰沉積材料)全球最大硬碟靶材+台灣最大功能性研磨半導體靶材廠、貴金屬回收閉環。<b>2025 合併營收創 10 年高(+約 32%)、2026 前 2 月營收 +60%;2nm 靶材+高容量硬碟靶材雙引擎;原料 70-80% 內部回收</b>。⚠ 靶材是 PVD 沉積金屬源、不在四大類內(相鄰補充);營收受貴金屬報價放大須看 VAS</td><td><span class="conf c-med">中(VAS 須扣金屬價)</span></td></tr>
+  <tr><td>三福化 4755(上市)</td><td>⑧ 濕化學/TMAH 回收</td><td>半導體濕化學在地供應+TMAH 廢液回收。<b>半導體業務營收占比 2024=19%→2025E=23%→2026E=26%;TMAH 回收自 2011 累積 12 萬噸、2H26 新增產能;CoWoS 化學品 2026 +60-80%(屬封裝需切出)</b>。⚠ 與 #23 溶劑題重疊(本題只引用、新增點=TMAH 顯影液回收循環經濟利基)。對手日韓濕化學廠</td><td><span class="conf c-high">高;與 #23 重疊</span></td></tr>
+  <tr><td>宇川精材 7887(⚠ 興櫃)</td><td>③ ALD 前驅體(觀察/未來選擇權)</td><td>(觀察)ALD 前驅體在地小廠、已入台積。<b>2025 前 11 月累計營收僅約 1.21 億(約 66% 來自先進製程 ALD 前驅物、台積 1H25 占 54%)；TSA 可取代矽甲烷、取得台美韓日陸五國專利;二廠投資約 30 億、2026H1 動工/2027 底完工/2028 投產、產能 6-10 倍</b>。⚠「全球四家」來源 vocus 自註「AI 整理未證實」;興櫃不進核心 holds、單一客戶集中度最高(54%)</td><td><span class="conf c-un">待查(興櫃/2028 見規模)</span></td></tr>
+  <tr><td>勝一 1773(上市)</td><td>⑧ 電子級溶劑(觀察、#23)</td><td>(觀察、主歸 #23)電子級溶劑龍頭。2026Q1 營收 30.44 億(+10.57%)、毛利率 37.6%、電子級溶劑占比 72.7%、10 項先進製程、已導入 2nm;IPA 新廠 2026 中、PM 2028 拚 17 萬噸。⚠ 核心溶劑線歸 #23『溶劑瓶頸』、本題只引用 EBR/清洗剝離卡位 2nm 的在地化角度、不重複計</td><td><span class="conf c-high">高;主歸 #23</span></td></tr>
+  <tr><td>崇越 5434(上市)</td><td>(通路代理、非原廠)</td><td>(觀察、代理通路)日本信越在台主要代理(光阻液/矽晶圓/研磨液/石英)+廠務工程。2026/3 營收 70.15 億(+30.64% 創高)、Q1 EPS 6.86。⚠ 是「代理通路+廠務工程」、<b>非材料分子原廠——代理的光阻液/研磨液技術與定價權在信越/日商,崇越吃通路價差(毛利遠低於原廠)、不算在地化技術突破</b>;工程業務與 #27 重疊</td><td><span class="conf c-med">中(代理、非技術擁有者)</span></td></tr>
+</table>
+<p class="sub">⚠ 股號核對(基準 2026/06):台特化 4772(上櫃)、新應材 4749(上櫃)、中砂 1560(上市)、三福化 4755(上市)、勝一 1773(上市)、達興 5234(上市)、晶呈 4768(上櫃)、頌勝 7768(上市)、光洋科 1785(上市)、崇越 5434(上市);<b>⚠ 興櫃僅宇川 7887(不進核心 holds);台特化/新應材/晶呈確認上櫃非興櫃。</b>排除/弱相關:長興 1717(乾膜光阻 PCB/CoWoS 液態封裝、前段曝險低)、國精化 4722(PCB/樹脂弱相關)、聯仕(查無明確上市櫃股號、疑未上市、待查)。<b>本題受惠主體與 #23(溶劑勝一/三福化)部分重疊=同股不同視角的 chain 標籤、純加法不雙計</b>(詳見 guide.json notes)。</p>
+<h3>國際 × 角色(高端現任者 + 韓國本土化對照)</h3>
+<table>
+  <tr><th>公司</th><th>國別/類別</th><th>角色</th><th>查證</th></tr>
+  <tr><td>Air Liquide / Linde / Air Products / 大陽日酸 / 關東電化 / SK Materials</td><td>法/德/美/日/韓 · 特氣/前驅體</td><td>特氣全球天花板。<b>Air Liquide 兼前驅體全球四家之一;大陽日酸=台特化矽基特氣直接對手;關東電化=晶呈蝕刻特氣對標;SK Materials=韓財團力量做 NF3/WF6 國產替代成功樣板。</b>台廠在分子本體層面難正面競爭、吃在地利基</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Merck(默克/收 Versum)/ Hansol / Adeka / DNF</td><td>德/韓/日/韓 · ALD 前驅體</td><td>ALD/CVD 前驅體全球四家=Merck/Air Liquide/Hansol(+宇川)。<b>Merck 整併 Versum 後特氣/前驅體/CMP 全線;Hansol(韓)以財團力量把前驅體做到較高毛利=台廠「在地化財」的韓國對照組。</b>宇川「全球四家」敘事的頭號對照玩家</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Entegris(收 CMC)/ DuPont / Fujimi / Resonac / 3M</td><td>美/美/日/日/美 · CMP</td><td>CMP 寡占群。<b>Entegris(收 CMC)slurry+pad 全球領導(CMP 耗材市占約 22-25%)、DuPont pad 近寡占、Fujimi/Resonac slurry 要角=台灣 slurry/pad 本體缺席的天花板;3M=中砂鑽石碟的頭號對手(此環節是台廠少數能全球主導的切入點)。</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>JSR / TOK / 信越 / 住友 / Fujifilm</td><td>日 · 光阻(EUV 寡占)</td><td>光阻日商寡占。<b>JSR(EUV 逾 22%、收 Inpria 主導 EUV-MOR、與 Entegris 交叉授權 MOR 專利)/TOK/信越/住友占 EUV 光阻近 85%、整體控全球光阻約 80%;TOK/信越/JSR 來台設廠貼台積。</b>台灣光阻本體最高天花板、EUV 完全缺席</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Soulbrain / Hansol / Dongjin / SK Materials / DNF</td><td>韓 · 本土化對照組</td><td><b>韓國半導體材料本土化最成功代表:Soulbrain(蝕刻液/高純 HF 12 個 9、收 DNF、赴美 Taylor 跟三星)、Hansol(前驅體)、Dongjin(KrF/ArF 光阻)。2019 日韓貿易戰後加速國產替代並赴美設廠、做到較高毛利+部分中高端</b>=台廠路徑相近但仍落後一個身位、是最佳可追趕對照組</td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<h3>台灣吃得到多少(逐材料類別定位)</h3>
+<p class="sub">一句話:<b>矽基特氣=利基主導(台特化);CMP 鑽石碟=全球主導(中砂>70%);光阻周邊=N2 獨家(新應材);蝕刻特氣/濕化學=在地供應(晶呈/三福化/達興);ALD 前驅體=極小(宇川興櫃);CMP slurry/pad=缺席(頌勝 pad 市占 4%);EUV/ArF 光阻本體=缺席(日商 85%)。</b>定位為質化判斷。</p>
+<table>
+  <tr><th>材料類別</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>矽基特氣(Si2H6/Si3H8/DCS/AHF)⭐</td><td>台特化 4772 / 晶呈 4768</td><td><span class="conf c-high">利基主導</span></td><td>台特化全球四家之一、前 4 月營收 +266%、矽烷+AHF 雙引擎;對手日大陽日酸/美 REC</td></tr>
+  <tr><td>CMP 鑽石碟/conditioner+再生晶圓 ⭐</td><td>中砂 1560</td><td><span class="conf c-high">全球主導(利基耗材)</span></td><td>3nm 約 70%(超越 3M)、2nm 估 80%;CMP 唯一台廠全球主導環節;對手 3M/韓新韓</td></tr>
+  <tr><td>光阻周邊(Rinse/BARC/EBR/TMAH)⭐</td><td>新應材 4749 / 三福化 4755</td><td><span class="conf c-high">N2 獨家(微影段最強)</span></td><td>新應材 N2 Rinse 獨家、2026 再增約 60%、BARC/EBR 過 2nm;N2 用量約 N3 兩倍</td></tr>
+  <tr><td>蝕刻特氣/濕化學(C4F8/蝕刻清洗)</td><td>晶呈 4768 / 三福化 4755 / 達興 5234</td><td><span class="conf c-med">在地供應</span></td><td>晶呈 C4F8 全球 30-40%;三福化/達興濕化學進 2nm;對手日(關東電化/Resonac)韓(Soulbrain)</td></tr>
+  <tr><td>ALD/CVD 前驅體(TMAl/HfCl4/TSA)</td><td>宇川 7887(興櫃)/ 台特化 2027</td><td><span class="conf c-un">極小/未來選擇權</span></td><td>宇川台積占 54% 但 2025 營收僅 1.2 億、2028 才見規模;對手 Merck/Air Liquide/Hansol</td></tr>
+  <tr><td>CMP slurry / pad 本體</td><td>頌勝 7768(pad 市占約 4%)/ slurry 缺席</td><td><span class="conf c-low">陪跑/缺席</span></td><td>頌勝智勝突破 pad 壟斷但市占小;slurry 由 Entegris/Fujimi 主導台灣缺席</td></tr>
+  <tr><td>EUV/ArF 光阻本體 + 高階前驅體</td><td>(新應材僅 KrF;EUV 缺席)</td><td><span class="conf c-low">缺席</span></td><td>JSR/TOK/信越占 EUV 近 85%;台積引日商 JSR 來台設光阻廠=在地外商非台廠;新應材 KrF 2027 才貢獻</td></tr>
+</table>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>在地化政策、市場與催化劑</h2>
+<div class="card">
+  <h3>🔬 台積在地採購政策量化(國產替代制度底盤)</h3>
+  <p>政策數字已查證(2025/08 責任供應鏈/永續報告 + 2026/02 公告,均有獨立佐證),<b>須標明為「2030 目標、非當下達成」:</b></p>
+  <table>
+    <tr><th>政策項</th><th>2024 基準</th><th>2030 目標</th><th>歸屬</th></tr>
+    <tr><td>零配件在地化率</td><td>約 46%</td><td>60%(+15pp)</td><td>主體歸 #11 設備零組件(本題只引用)</td></tr>
+    <tr><td>間接原物料(含特化材料)在地化率</td><td>約 65%</td><td>68%(+3pp)</td><td><b>本題材料台廠對應線(增量有限、已 65%)</b></td></tr>
+    <tr><td>海外子公司間接原物料</td><td>約 33.1%</td><td>52.5%</td><td>海外新廠在地材料延伸選擇權</td></tr>
+    <tr><td>設備零配件在地化創新計畫(2026/02)</td><td colspan="2">攜手 12 家供應商、22 項持續改善流程方案、驗證/開發時程縮短 50%、估帶動年產值約 NT$20 億</td><td>主體歸 #11</td></tr>
+  </table>
+  <div class="callout warn"><b>政策傳導與誠實基調:</b>① 台積把 N2/A16 材料消耗強度跳升優先給在地通過驗證的台廠(台特化/新應材/中砂/三福化/達興)直接吃量;② <b>間接原物料目標 68% 相對保守(已 65%)、增量有限</b>,真正彈性在零配件 46%→60%(歸 #11);③ <b>政策是「在框架內角色上升」而非「打破全球天花板」</b>——slurry/pad/EUV 光阻仍由日美韓供應,台積甚至引日商 JSR 來台設光阻廠、日商來台設先進封裝電鍍添加劑廠(週期 60 天→20 天)=「在地生產的外商」而非台廠國產替代。<b>政策利多兌現對象是「利基品項+在地供應」的台廠營收、非全球市占翻盤。</b></div>
+  <h3>市場規模多口徑(⚠ 特氣差 3 倍、EUV 光阻差 10 倍)</h3>
+  <table>
+    <tr><th>研調</th><th>口徑</th><th>基準</th><th>目標/CAGR</th><th>口徑說明</th></tr>
+    <tr><td>SEMI</td><td>晶圓製造材料(<b>本題主場</b>)</td><td>2025 US$45.8B</td><td>+5.4% YoY</td><td>硬數據;微影材料與濕化學品雙位數成長</td></tr>
+    <tr><td>SEMI</td><td>全球半導體材料總盤</td><td>2025 US$73.2B</td><td>+6.8% YoY</td><td>硬數據;台灣連 16 年最大消費地 US$21.7B</td></tr>
+    <tr><td>Persistence / MRFR</td><td>電子特用氣體</td><td>US$5.1B 窄 / US$16.56B 寬</td><td>~4% / ~3.6%</td><td>⚠ 窄寬差約 3 倍(寬口徑疑含大宗/工業氣體)、僅量級參考</td></tr>
+    <tr><td>BRI / Mordor</td><td>CMP slurry / pad</td><td>slurry US$3.08-3.5B / pad US$4.32B</td><td>~6.9% / ~7.6%</td><td>台灣 slurry/pad 本體缺席(Entegris/Fujimi/DuPont 主導)</td></tr>
+    <tr><td>Mordor</td><td>光阻(全口徑)</td><td>2026 US$3.24B</td><td>→2031 US$5.53B / 11.3%</td><td>基期已從種子 US$2.91B 更新;JSR 2024 市占逾 22%</td></tr>
+    <tr><td>多源</td><td>EUV 光阻(⚠ 勿直接引用)</td><td>US$168M-246M 窄 / US$1.8B 寬</td><td>~25%</td><td>⚠⚠ 兩口徑差逾 10 倍、僅標記分歧、不作分析基礎;日商寡占台灣缺席</td></tr>
+  </table>
+  <h3>催化劑時間軸(2025Q4 → 2028)</h3>
+  <ul>
+    <li><b>2025Q4(已確認):</b>台積 N2(2nm GAA)正式量產;材料消耗強度跳升(N2 用量約 N3 兩倍,以新應材 Rinse 為例)=四大類在地材料放量起跑訊號<span class="conf c-high">已確認</span></li>
+    <li><b>2026 全年(已確認·月營收):</b>台特化 AHF 放量(2026Q1 累計營收 +約 290%、3 月 +289.69%)=繼矽乙烷後第二成長引擎<span class="conf c-high">已確認</span></li>
+    <li><b>2026/05/12(SEMI 硬數據):</b>2025 全球材料 US$73.2B(+6.8%)、晶圓製造 US$45.8B(+5.4%)、微影+濕化學雙位數=新應材/三福化題眼佐證<span class="conf c-high">已確認</span></li>
+    <li><b>2026Q2(部分確認/前瞻):</b>新應材四座 N2 廠陸續量產,Rinse/BARC/EBR 放量(Rinse 2026 +約 60%);KrF 光阻 2026 中裝機、顯著貢獻要 2027<span class="conf c-med">部分確認</span></li>
+    <li><b>2026H2(已確認排程):</b>台積 N2P+A16(Super Power Rail 晶背供電)量產=新材料/新製程步驟、進一步推升前段耗材消耗強度與品項數<span class="conf c-high">已確認</span></li>
+    <li><b>2025 全年(部分確認):</b>達興半導體材料 +107.8%、2 項入 2nm;勝一電子級溶劑占比 85%+、入 2nm、IPA 新廠 2026 中;三福化 TMAH 回收 2H26<span class="conf c-med">部分確認</span></li>
+    <li><b>2027(公司前瞻):</b>台特化矽基 ALD/CVD 前驅體預期量產=從矽基特氣往高階前驅體升級的關鍵兌現點<span class="conf c-un">前瞻</span></li>
+    <li><b>2028(前瞻·風險最高):</b>宇川二廠投產(2027 底完工)、產能 6-10 倍=ALD 前驅體規模兌現要等 2028;⚠ 興櫃、2025 營收僅 1.2 億<span class="conf c-un">遠期</span></li>
+    <li><b>2026-2027(產業趨勢):</b>美日台積新廠(亞利桑那/熊本)在地材料複製需求(Soulbrain 等赴美設廠);海外 fab 拉動 NF3/silane/濕化學在地化=台廠海外延伸選擇權<span class="conf c-un">待證</span></li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>現在就有營收+高速成長(非純題材)=台特化(矽烷/AHF +266%)、新應材(N2 Rinse)、中砂(鑽石碟>70%)、達興(半導體 +107.8%)、三福化(TMAH);<b>選股看「自製 IP+在地產能+已過認證」三條件齊備度</b>(代理通路如崇越無定價權、漲價偏中性)。<b>核心鐵則:在地化財為真但須分層——第一層真利基(台特化/中砂/新應材)、第二層中毛利在地替代(三福化/達興/晶呈)、第三層遠期選擇權(宇川興櫃不宜核心)。</b>對 CMP slurry/pad 與 EUV 光阻缺席、單一客戶集中、公司自述前瞻保持折價。</div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
+  <ul>
+    <li><b>「CMP pad 台灣本體完全缺席」(種子):</b>修正——頌勝 7768(2026/5/7 上市)子公司智勝為台灣首家突破 CMP pad 國際壟斷者(全球市占約 4%、挑戰 10%、軟墊 2026Q2 試產);<b>pad 本體有台廠卡位、非完全缺席,但市占仍小;slurry 本體仍台灣缺席</b></li>
+    <li><b>宇川「全球四家 ALD 前驅體之一、唯一台廠」:</b>降為待查——主要來源(vocus)文章標題自註「由 AI 整理、未經證實」、台積不證實供應商關係;台積占比 54%/先進製程占 66% 為登興櫃公開資訊(可信度較高)。<b>興櫃不進核心 holds</b></li>
+    <li><b>宇川「2027 二廠投產/見規模」:</b>更新——實為 2026H1 動工/2027 底完工/<b>2028 正式投產</b>,規模兌現要到 2028=遠期選擇權、非近期放量,scoreTiming 下修</li>
+    <li><b>新應材「半導體占比破 80%」:</b>口徑校正——公司簡報另有「半導體產能比重 16%→18%」口徑;「破 80%」為半導體營收占比(約 83%)、與產能比重不同口徑,勿混用</li>
+    <li><b>在地採購「46%→60%、65%→68%」:</b>須標明為「<b>2030 目標、非當下達成</b>」(2024 基準 46%/65%);零配件 46%→60% 主體歸 #11、本題對應線是間接原物料 65%→68%(增量僅 +3pp、相對保守)</li>
+    <li><b>晶呈「2026 先進製程占比破 90%」:</b>公司自述、信心最低——搜尋僅證實「營收約 90% 來自特殊氣體」屬不同口徑;且 TGV 玻璃載板屬封裝題、非前段範圍須切出</li>
+    <li><b>達興「25 項中 10 項量產」(種子):</b>修正——2026 資料未佐證此口徑;實為「2 項已導入 2nm、2026 擬新增 3-5 項量產」</li>
+    <li><b>N2「2025H2 量產」:</b>修正為「2025Q4 量產」;EUV 光阻市場規模兩來源差逾 10 倍(US$1.8B vs US$168M)不引用;勝一/三福化溶劑線歸 #23、本題只引用不重複計受惠主軸;台特化/新應材/晶呈確認上櫃(非興櫃)</li>
+  </ul>
+</div>
+<div class="card"><h3>持續性兩劇本(在地化政策確定 vs 高端日美韓壟斷)</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>多方:在地化財是真的、制度+技術雙底盤</b><br>① N2(2025Q4 已量產)/N2P+A16(2026H2)材料消耗強度跳升,每片特氣/前驅體/光阻周邊/濕化學用量與品項同步上升(新應材 Rinse N2 約 N3 兩倍);② 台積在地化採購政策確定(間接原物料 65%→68%、零配件 46%→60% 到 2030)=制度性需求底盤;③ 多檔「現在就有營收且高速成長」非純題材:台特化 2026Q1 +約 290%、達興半導體 +107.8%、新應材半導體占比約 83%、中砂鑽石碟>70%;④ 催化劑 2026-2028 密集;⑤ SEMI 點名微影材料與濕化學雙位數成長=正中本題主軸。</div>
+    <div class="callout warn" style="margin:0"><b>空方:高端日美韓壟斷、台廠多吃中低端在地利基</b><br>① EUV 光阻日商寡占(JSR/TOK/信越 近 85%)、台灣 EUV 無人涉足、KrF 才起步(韓 Dongjin 先行);② CMP slurry(Entegris/Fujimi)與 pad(DuPont)台灣本體缺席(頌勝 pad 僅 4%);③ 高階前驅體 Merck/Air Liquide/Hansol 把持、宇川興櫃規模 2028 才見;④ <b>單一客戶(台積)集中度極高(宇川 54% 最極端)</b>、議價/認證風險集中;⑤ 認證週期長、在地替代多中低毛利;⑥ 市場口徑嚴重分歧(特氣 3 倍、EUV 光阻 10 倍)估值錨不穩;⑦ 多家「獨家/全球四家」來自媒體/vocus(部分明標 AI 未證實)、台積不證實供應商關係。</div>
+  </div>
+  <p><b>裁決(verdict):</b><b>在地化財為真但須嚴格分層、不可一視同仁。【第一層:真利基/接近主導、有當期硬數據】台特化(矽基特氣/AHF、全球四家之一、月營收 +約 290%)、中砂(CMP 鑽石碟全球主要之一、台廠在 CMP 唯一全球級切入點)、新應材(N2 周邊 Rinse/BARC/EBR 在地獨家)。【第二層:重要在地供應、中毛利、對手日韓】三福化/達興(濕化學/蝕刻清洗、對標韓 Soulbrain)、晶呈(蝕刻特氣混配、占比 90% 為自述)、光洋科(靶材、看 VAS)、頌勝(pad 突破但市占 4%)。【第三層:遠期選擇權、規模極小、興櫃】宇川精材(ALD 前驅體、當期營收僅約 1.2 億、放大要等 2028)=高賠率高風險、不宜進核心持股。【對照韓國】Soulbrain/Hansol/Dongjin 已用財團力量把「在地替代」做到較高毛利+部分中高端(HF/前驅體/KrF-ArF 光阻),台廠路徑相近但整體仍落後一個身位——既是天花板警訊、也是 2026-2028 國產替代放量元年的可追趕方向。鐵則:CMP slurry 與 EUV/ArF 光阻本體兩大高值環節台廠仍實質缺席,須以公司月營收財報與 SEMI 協會數據為硬錨、對公司前瞻(晶呈 90%/宇川 6-10 倍/新應材 KrF 時點)保持折價、寧標待查不錯殺。</b></p>
+</div>
+<div class="card"><h3>結構性風險與開放問題</h3>
+  <ul>
+    <li><b>高端缺席:</b>CMP slurry/pad 本體、EUV/ArF 光阻本體、高階前驅體=日美韓把持、台灣最高值環節吃不到;在地化≠國產化(台積引日商 JSR 來台設光阻廠)</li>
+    <li><b>單一客戶集中:</b>幾乎全壓台積在地化政策節奏(宇川 54% 最極端);客戶 capex/製程時程風險集中</li>
+    <li><b>口徑/自述:</b>特氣(3 倍)/EUV 光阻(10 倍)市場口徑分歧;「獨家/全球四家」(新應材/宇川/台特化)為媒體/vocus、台積不證實;晶呈占比 90%/宇川 6-10 倍為公司前瞻</li>
+    <li><b>分層:</b>真利基(台特化/中砂/新應材)vs 中毛利在地替代(三福化/達興/晶呈)vs 遠期選擇權(宇川興櫃);代理通路(崇越)無定價權</li>
+    <li><b>跨題去重:</b>溶劑(勝一/三福化溶劑)歸 #23、設備零件歸 #11、供應系統歸 #27、封裝載板(晶呈 TGV/長興 CoWoS)歸各封裝題;本題聚焦材料本體、純加法不雙計</li>
+    <li><b>開放問題(延伸 backlog):</b>ALD/CVD 金屬前驅體(high-k/CFET 世代)、CMP slurry/pad 國產替代(有無更多可投資標的)、EUV 光阻本體國產化(日商 85% 壟斷)、矽基特氣下游擴產;聯仕掛牌狀態確認</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item"><a href="https://www.semi.org/" target="_blank">SEMI(2026/05/12)</a> — 2025 全球半導體材料 US$73.2B(+6.8%)、晶圓製造材料 US$45.8B(+5.4%)、微影材料與濕化學品雙位數成長、台灣連 16 年最大消費地 US$21.7B<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">台積電 2025/08 責任供應鏈/永續報告 + 2026/02 公告 — 在地採購零配件 46%→60%(2030)、間接原物料 65%→68%、12 家/22 案/年產值約 20 億(官方目標)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">台特化/新應材/中砂/三福化/勝一/達興/晶呈/頌勝/光洋科 2026 法說與月營收(公開申報)— 各家營收年增、占比、毛利、進 2nm 進度<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.techcet.com/" target="_blank">TECHCET / Mordor / Persistence / MRFR / BRI</a> — 電子特氣/CMP/光阻市場多口徑(⚠ 口徑分歧大、僅量級參考)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Tom's Hardware / SemiEngineering — JSR 收 Inpria 主導 EUV-MOR、與 Entegris 交叉授權、JSR 來台設 production-scale 光阻廠;韓 Soulbrain/Hansol/Dongjin 本土化路徑<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">cnyes/cmoney/經濟日報/vocus/財報狗/優分析/技術新報 — 台廠在地化概念與「獨家/全球四家」說法(⚠ 部分明標 AI 整理未證實、台積不證實供應商關係、逐檔已對抗式查證)<span class="src-q q-blog">blog</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(材料鏈 8 站+4 路線之爭 / 台廠逐檔查證+受惠評分+台灣吃得到誠實分層 / 國際對照+市場多口徑+持續性兩劇本+韓國對照 / 逐製程站材料牌號地圖+在地化政策量化+EUV 升級+切分模型)＋ 對抗式查證(頌勝推翻 pad 缺席、宇川興櫃/2028 修正、新應材占比口徑校正、在地化 2030 目標標明、晶呈/宇川自述標待查、溶劑歸 #23 去重)。</p>
+  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明(高端缺席、單一客戶集中、公司自述前瞻、口徑分歧)。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>

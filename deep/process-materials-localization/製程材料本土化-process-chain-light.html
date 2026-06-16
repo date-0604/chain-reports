@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半導體先進製程材料本土化(特氣/前驅體/CMP/光阻,台積 N2/A16 在地採購)研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#4d7c0f; --accent-soft:#ecfccb;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#f7fee7,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:880px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:880px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">製程材料本土化<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱</a>
+    <a href="#categories">兩大判斷</a><a href="#application">材料鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">市場+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>半導體先進製程材料本土化<em> 研究指南</em> 2026</h1>
+  <p class="lead">前段晶圓製造耗材在地化題(聚焦材料本體:特用氣體/前驅體/CMP 耗材/光阻及周邊;溶劑歸 #23、供應系統歸 #27、設備零件歸 #11)。驅動雙底盤:台積 N2(2025Q4 量產)/A16(2026H2)材料消耗強度跳升 × 在地採購政策(間接原物料 65%→68%、零配件 46%→60%,2030 目標)。<b>但誠實分層:台廠吃「在地利基品項」財非全球市占——真利基(台特化矽基特氣/中砂 CMP 鑽石碟/新應材 N2 光阻周邊)、中毛利在地替代(三福化/達興)、遠期選擇權(宇川興櫃);CMP slurry/pad 與 EUV/ArF 光阻本體台廠仍缺席。</b></p>
+  <div class="meta">
+    <span class="badge b-accent">驅動:N2/A16 消耗強度+在地化政策</span>
+    <span class="badge">台灣吃:利基品項(高端日美韓壟斷)</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:在地利基財是真的、但高端日美韓壟斷</h2>
+  <p class="subtitle"><b>切分(判準一句話):</b>分子/研磨液/光阻=本題;溶劑供需=#23;金屬零件=#11;輸送系統=#27;封裝載板=各封裝題。本題聚焦「材料本體」四(+一)大類:特氣/前驅體/CMP 耗材/光阻周邊/濕化學。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">⚗️</span>雙底盤驅動</h4><p>台積 N2(2025Q4 量產)/N2P+A16(2026H2 晶背供電)材料消耗強度跳升(新應材 Rinse N2 用量約 N3 兩倍);在地採購政策(間接原物料 65%→68%、零配件 46%→60%,2030 目標)=制度性需求底盤。SEMI 2025 晶圓製造材料 $45.8B、微影+濕化學雙位數成長。</p></div>
+    <div class="card"><h4><span class="ico">📊</span>三層分化</h4><p>真利基/接近主導(台特化矽基特氣 +266%、中砂 CMP 鑽石碟>70%、新應材 N2 光阻周邊獨家);中毛利在地替代(三福化/達興/晶呈);遠期選擇權(宇川 ALD 前驅體興櫃、2028 才見規模)。不可一視同仁。</p></div>
+    <div class="card"><h4><span class="ico">🧱</span>高端缺席</h4><p>CMP slurry(Entegris/Fujimi)與 pad(DuPont)台灣本體缺席(頌勝智勝突破 pad 但市占約 4%);EUV/ArF 光阻本體日商寡占(JSR/TOK/信越 近 85%)、台灣完全缺席。在地化≠國產化:台積引日商 JSR 來台設光阻廠=「在地外商」。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(四大類材料 → 國際高端 → 韓國對照)</h2>
+  <p class="subtitle">台廠卡在地利基品項、國際把持高端、韓國本土化先行對照。<span class="conf c-high">綠＝SEMI/月營收財報</span> <span class="conf c-med">橙＝研調/自述</span> <span class="conf c-un">灰＝媒體「獨家」待查</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">特氣/前驅體<small>台特化主導·宇川極小</small></div><div class="items"><span class="badge b-tw">台特化 4772(矽基特氣)</span><span class="badge b-tw">晶呈 4768(蝕刻特氣)</span><span class="badge">宇川 7887(ALD·興櫃)</span><span class="badge b-tw">光洋科 1785(靶材)</span></div></div>
+    <div class="chain-row"><div class="lvl">CMP 耗材<small>鑽石碟主導·slurry缺席</small></div><div class="items"><span class="badge b-tw">中砂 1560(鑽石碟>70%)</span><span class="badge">頌勝 7768(pad 4%)</span><span class="badge b-danger">slurry/pad 本體缺席</span></div></div>
+    <div class="chain-row"><div class="lvl">光阻周邊<small>N2獨家·本體陪跑</small></div><div class="items"><span class="badge b-tw">新應材 4749(N2 Rinse 獨家)</span><span class="badge b-tw">三福化 4755(TMAH)</span><span class="badge b-danger">EUV/ArF 本體缺席</span></div></div>
+    <div class="chain-row"><div class="lvl">濕化學<small>在地供應·對手日韓</small></div><div class="items"><span class="badge b-tw">達興 5234(進 2nm)</span><span class="badge">勝一 1773(溶劑歸 #23)</span><span class="badge">崇越 5434(代理通路)</span></div></div>
+    <div class="chain-row"><div class="lvl">國際/韓對照<small>高端壟斷·財團本土化</small></div><div class="items"><span class="badge b-accent">JSR/TOK/信越(光阻 85%)</span><span class="badge b-accent">Entegris/DuPont(CMP)</span><span class="badge b-accent">Merck/Hansol(前驅體)</span><span class="badge b-warn">Soulbrain(韓·HF)</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:利基主導=矽基特氣(台特化全球四家之一)、CMP 鑽石碟(中砂>70%,CMP 唯一全球級切入點)、N2 光阻周邊(新應材獨家);在地供應=蝕刻特氣(晶呈 C4F8)、濕化學(三福化/達興);缺席/極小=CMP slurry/pad(頌勝 pad 僅 4%)、EUV/ArF 光阻本體(日商 85%)、ALD 前驅體(宇川興櫃 2028 才見規模)。韓 Soulbrain/Hansol/Dongjin 已做到中高端=台廠落後一個身位的對照組。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何熱:N2/A16 消耗強度+在地化政策,台廠吃利基</h2>
+  <p class="subtitle">製程微縮使每片晶圓材料用量與品項跳升,台積在地採購政策把量優先給通過驗證的台廠。</p>
+  <div class="flow">
+    <div class="step"><b>消耗強度跳升</b><small>N2 用量約 N3 兩倍、光罩 7nm 4-5 層→3nm 23-25 層</small></div><div class="arrow">+</div>
+    <div class="step"><b>在地化政策</b><small>間接原物料 65%→68%、零配件 46%→60%(2030 目標)</small></div><div class="arrow">→</div>
+    <div class="step"><b>台廠吃在地利基</b><small>台特化/新應材/中砂/三福化/達興 訂單實質落地(高端日美韓)</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>晶圓製造材料 2025</p><h4>$45.8B(+5.4%,微影+濕化學雙位數)</h4></div>
+    <div class="card"><p>N2→A16 量產</p><h4>2025Q4 → 2026H2</h4></div>
+    <div class="card"><p>台特化 2026 前 4 月營收</p><h4>+266%(矽烷+AHF 雙引擎)</h4></div>
+    <div class="card"><p>台灣高端缺席</p><h4>CMP slurry/pad + EUV/ArF 光阻</h4></div>
+  </div>
+  <p class="disclaimer">口徑警示:在地化 46%→60%/65%→68% 為「2030 目標、非當下達成」(2024 基準 46%/65%);N2「2025Q4 量產」(非 2025H2);市場口徑嚴重分歧——電子特氣 Persistence $5.1B 窄 vs MRFR $16.56B 寬(差 3 倍)、EUV 光阻 $168M vs $1.8B(差逾 10 倍、勿引用);新應材「占比破 80%」為半導體營收占比(約 83%)、公司簡報另有「產能比重 16%→18%」不同口徑。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Judgments</span>
+  <h2 class="title">兩大判斷(三層分化、高端缺席)</h2>
+  <p class="subtitle">分層與高端缺席,是判斷「該不該買、買誰、給多少估值」的根本。</p>
+  <h3>判斷 ①:台廠吃「在地利基」財——三層分化</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>層級</th><th>台廠</th><th>定位</th></tr></thead>
+    <tbody>
+      <tr><td>第一層:真利基/接近主導(當期硬數據)</td><td>台特化 4772 / 中砂 1560 / 新應材 4749</td><td><span class="conf c-high">矽基特氣全球四家/CMP 鑽石碟>70%/N2 光阻周邊獨家</span></td></tr>
+      <tr><td>第二層:在地替代/中毛利(對手日韓)</td><td>三福化/達興/晶呈/光洋科/頌勝</td><td><span class="conf c-med">濕化學/蝕刻特氣/靶材/pad(市占小)</span></td></tr>
+      <tr><td>第三層:遠期選擇權/規模極小/興櫃</td><td>宇川精材 7887</td><td><span class="conf c-un">ALD 前驅體、2025 營收僅 1.2 億、2028 才見規模、不宜核心</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>判斷 ②:兩大高值環節缺席 + 在地化≠國產化</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>高值環節</th><th>誰主導</th><th>台廠</th></tr></thead>
+    <tbody>
+      <tr><td>CMP slurry / pad 本體</td><td>Entegris/CMC、Fujimi、DuPont(美日)</td><td><span class="conf c-low">slurry 缺席;pad 頌勝市占約 4%</span></td></tr>
+      <tr><td>EUV/ArF 光阻本體</td><td>JSR/TOK/信越/住友(日,EUV 近 85%)</td><td><span class="conf c-low">缺席(新應材僅 KrF 2027 才貢獻)</span></td></tr>
+      <tr><td>在地化≠國產化</td><td>台積引日商 JSR 來台設光阻廠</td><td><span class="conf c-med">「在地外商」非台廠;EUV 是耗材用量題非切入題</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩判斷的投資意涵:① 在地化財為真但須分層——第一層真利基(台特化/中砂/新應材)可給較高估值、第三層遠期選擇權(宇川興櫃)以「催化劑/賠率」對待勿核心重押;② 最高值環節(CMP slurry/EUV 光阻)台廠缺席=天花板,EUV 升級對台廠是「耗材用量題」(Rinse/BARC/鑽石碟/特氣用量倍增)不是「光阻技術切入題」。選股看「自製 IP+在地產能+已過認證」三條件齊備度(代理通路如崇越無定價權)。</div>
+</div></section>
+
+<!-- 05 材料鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Material Chain</span>
+  <h2 class="title">材料鏈(沉積 → 清洗,8 站)</h2>
+  <p class="subtitle">八站。台廠 alpha 在 ⑤ 鑽石碟/⑦ 光阻周邊/① 矽基特氣/⑧ 濕化學;難度最高的 ④ slurry/pad、⑥ EUV 光阻本體、③ ALD 前驅體台廠缺席/極小。</p>
+  <div class="stack">
+    <div class="layer"><b>① 矽基特氣(Si2H6/Si3H8/DCS)★ 台特化利基主導</b><div class="uses">GAA 薄膜沉積;台特化全球四家之一、+266%;對手日大陽日酸/美 REC</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② 蝕刻特氣(C4F8/C4F6/SF6/AHF)— 晶呈混配</b><div class="uses">高深寬比蝕刻/腔清;晶呈 C4F8 全球 30-40%;WF6 等高階缺席</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ ALD 前驅體(TMAl/HfCl4/TSA)— 宇川極小(2028 見規模)</b><div class="uses">high-k/metal gate;宇川興櫃、台積占 54%;對手 Merck/Hansol</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ CMP slurry/pad — 台灣本體缺席(被卡最深)</b><div class="uses">Entegris/Fujimi(slurry)、DuPont(pad);頌勝智勝突破 pad 但市占 4%</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ CMP 鑽石碟/再生晶圓 ★ 中砂全球主導</b><div class="uses">中砂鑽石碟 3nm 約 70%→2nm 80%;CMP 唯一台廠全球主導環節</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 光阻本體 KrF/ArF/EUV — 日商壟斷、EUV 缺席</b><div class="uses">JSR/TOK/信越 EUV 近 85%;新應材僅 KrF 2027 貢獻</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 光阻周邊 Rinse/BARC/EBR/TMAH ★ 新應材 N2 獨家</b><div class="uses">N2 用量約 N3 兩倍;新應材 Rinse 獨家+三福化 TMAH;微影段最強著力點</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ 濕化學/清洗(與 #23 切分)— 三福化/達興 在地供應</b><div class="uses">蝕刻/剝離/SC1·SC2;達興半導體 +107.8% 進 2nm;溶劑歸 #23 引用</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:台廠 alpha 在難度「較低」、已卡位的 ⑤ 鑽石碟(中砂>70%)、⑦ 光阻周邊(新應材 N2 獨家)、① 矽基特氣(台特化全球四家)、⑧ 濕化學(三福化/達興);難度最高、最高值的 ④ CMP slurry/pad、⑥ EUV/ArF 光阻本體、③ ALD 前驅體台廠缺席/極小(日美韓把持)。即「在台積在地採購框架內角色快速上升、訂單實質落地,但全球天花板仍日美韓、最高值環節吃不到」。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯(依類別+分層)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>類別/型態</th><th>台廠</th><th>受惠邏輯 / 釐清</th></tr></thead>
+    <tbody>
+      <tr><td>矽基特氣(第一層真利基)</td><td>台特化 4772</td><td>乙矽烷全球四家之一、台積 N2 供應全球第一(媒體);2026 前 4 月營收 +266%、AHF 第二引擎;⚠「供應全球第一」台積不證實</td></tr>
+      <tr><td>CMP 鑽石碟(第一層真利基)</td><td>中砂 1560</td><td>鑽石碟 3nm 約 70%→2nm 80%、CMP 唯一台廠全球主導環節、規模財務最穩;⚠ 主導的是鑽石碟非 slurry/pad、毛利受台幣升值波動</td></tr>
+      <tr><td>N2 光阻周邊(第一層真利基)</td><td>新應材 4749 / 三福化 4755</td><td>新應材 N2 Rinse 獨家(2026 +60%)、BARC/EBR 過 2nm;三福化 TMAH 回收;⚠ 光阻本體 KrF/ArF/EUV 仍日商壟斷、定價力侷限周邊</td></tr>
+      <tr><td>蝕刻特氣/濕化學(第二層在地替代)</td><td>晶呈 4768 / 達興 5234 / 光洋科 1785 / 頌勝 7768</td><td>晶呈 C4F8 全球 30-40%(占比 90% 為自述)、達興半導體 +107.8% 進 2nm、光洋科靶材(看 VAS)、頌勝 pad 突破(市占 4%)；中毛利在地替代</td></tr>
+      <tr><td>ALD 前驅體(第三層遠期選擇權)</td><td>宇川 7887(興櫃)</td><td>台積占 54% 但 2025 營收僅 1.2 億、2028 才見規模;⚠「全球四家」vocus AI 未證實、興櫃不宜核心;勝一 1773(溶劑歸 #23)、崇越 5434(代理無定價權)為觀察</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>高端缺席</b>(CMP slurry/pad、EUV/ArF 光阻本體、高階前驅體=日美韓把持);② <b>單一客戶集中</b>(全壓台積在地化節奏、宇川 54% 最極端);③ <b>口徑/自述</b>(特氣 3 倍/EUV 光阻 10 倍分歧;獨家/全球四家為媒體/vocus、台積不證實;晶呈 90%/宇川 6-10 倍為前瞻);④ <b>在地化≠國產化</b>(台積引日商 JSR 來台設光阻廠);⑤ <b>分層</b>(真利基 vs 中毛利替代 vs 遠期選擇權、代理通路無定價權)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=SEMI/月營收財報 <span class="conf c-med">中</span>=研調/自述 <span class="conf c-un">待查</span>=媒體獨家/興櫃</p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="gas">特氣/前驅體</button><button data-f="cmp">CMP 耗材</button>
+    <button data-f="resist">光阻周邊</button><button data-f="wet">濕化學/溶劑</button><button data-f="intl">國際</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="gas"><h4>台特化 <span class="code">4772</span></h4><p>矽基特氣在地龍頭(第一層真利基)。<b>2026/5 營收 3.08 億 +241%、前 5 月 14.49 億 +260.78%(矽烷+AHF 雙引擎)、Q1 EPS 1.33 +90%;乙矽烷全球僅四家量產(Air Liquide/三井/SK/台特化);AHF 2026 第二引擎、2027 規劃 ALD 前驅體</b>。⚠「台積 N2 供應全球第一」台積不證實。受惠評分 23/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="gas"><h4>晶呈科技 <span class="code">4768</span></h4><p>蝕刻特氣混配在地供應。<b>約 90% 營收來自特殊氣體、C4F8 全球市占約 30-40%;2026 營收估成長逾 30%(C4F6/TGV/去光阻液三引擎)</b>。⚠「先進製程占比 2026 破 90%」為公司自述信心最低;TGV 玻璃載板屬封裝題須切出;蝕刻特氣全球仍日韓主導。上櫃。受惠評分 17/25。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="gas"><h4>宇川精材 <span class="code">7887</span></h4><p>(觀察·興櫃·第三層)ALD 前驅體在地小廠。<b>2025 前 11 月營收僅約 1.21 億(台積 1H25 占 54%);TSA 可取代矽甲烷、五國專利;二廠 2027 底完工/2028 投產、產能 6-10 倍</b>。⚠「全球四家」vocus 自註 AI 未證實、台積不證實供應商關係;興櫃不進核心、單一客戶集中度最高。受惠評分 待查。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="gas"><h4>光洋科 <span class="code">1785</span></h4><p>(四大類外·相鄰沉積)濺鍍靶材+貴金屬回收閉環。<b>全球最大硬碟靶材+台灣最大半導體靶材廠;2025 合併營收創 10 年高(+約 32%)、2026 前 2 月 +60%;2nm 靶材+硬碟靶材雙引擎、原料 70-80% 內部回收</b>。⚠ 靶材不在四大類內(相鄰補充);營收受貴金屬價放大須看 VAS。受惠評分 17/25。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="cmp"><h4>中砂 <span class="code">1560</span></h4><p>CMP 鑽石碟全球主導(第一層真利基)。<b>鑽石碟 3nm 市占約 70%(超越美 3M)、2nm 估達 80%;2024 營收創高 70.19 億、EPS 7.1;產品線 再生晶圓 46%/鑽石碟 31%/砂輪 23%;再生晶圓 2026Q3 拚 40 萬片/月</b>。⚠ 主導的是鑽石碟非 slurry/pad、毛利受台幣升值波動。受惠評分 20/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="cmp"><h4>頌勝 <span class="code">7768</span></h4><p>(本題新增·推翻 pad 缺席)CMP 研磨墊。<b>子公司智勝(iVT)為台灣首家突破 CMP pad 國際壟斷者、半導體研磨墊全球市占約 4%、挑戰 10%;三引擎=台灣新廠/軟墊 2026Q2 試產/合肥廠 2026Q3</b>。2026/5/7 掛牌(承銷 130/掛牌 258)。⚠ 對手 DuPont/Fujibo、市占小、台積驗證未獨立證實。受惠評分 17/25。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="resist"><h4>新應材 <span class="code">4749</span></h4><p>台積 N2 光阻周邊在地供應(第一層真利基)。<b>2025E 營收約 42 億(+27%)、半導體占比約 83%;Rinse 為 N2 獨家、N2 用量約 N3 近兩倍、Rinse 2025 +約 45%/2026 +60%;BARC/EBR 過 2nm;KrF 光阻 2026 中裝機、2027 顯著貢獻</b>。⚠「N2 獨家」媒體口徑、台積不證實;光阻本體 EUV 仍日商壟斷、台灣陪跑。上櫃。受惠評分 21/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="resist"><h4>三福化 <span class="code">4755</span></h4><p>半導體濕化學在地供應+TMAH 回收。<b>半導體營收占比 2024=19%→2025E=23%→2026E=26%;TMAH 回收自 2011 累積 12 萬噸、2H26 新增產能</b>。⚠ 與 #23 溶劑題重疊(本題只引用、新增點=TMAH 顯影液回收循環經濟利基);CoWoS 化學品屬封裝須切出。受惠評分 16/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="wet"><h4>達興材料 <span class="code">5234</span></h4><p>由面板化學轉型半導體(第二層放量加速)。<b>2025 營收 46.3 億(+12.4% 創高)、毛利率首破 40%、EPS 7.37;半導體材料 +107.8%、占比 9%→16.7%;2 項已導入 2nm(供亞利桑那)、2026 擬新增 3-5 項</b>。母公司友達 2409、合資方長興 1717、含 PSPI。上市。受惠評分 18/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="wet"><h4>勝一 <span class="code">1773</span></h4><p>(觀察·主歸 #23)電子級溶劑龍頭。2026Q1 營收 30.44 億(+10.57%)、毛利率 37.6%、電子級溶劑占比 72.7%、10 項先進製程、已導入 2nm;IPA 新廠 2026 中。⚠ 核心溶劑線歸 #23『溶劑瓶頸』、本題只引用 EBR/清洗剝離卡位 2nm 角度、不重複計。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="wet"><h4>崇越 <span class="code">5434</span></h4><p>(觀察·代理通路、非原廠)日本信越在台主要代理(光阻液/矽晶圓/研磨液/石英)+廠務工程。2026/3 營收 70.15 億(+30.64% 創高)、Q1 EPS 6.86。⚠ <b>代理的光阻液/研磨液技術與定價權在信越/日商,崇越吃通路價差(毛利遠低於原廠)、不算在地化技術突破</b>;工程業務與 #27 重疊。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>JSR / TOK / 信越 / 住友 <span class="code">日·光阻 85%</span></h4><p>光阻日商寡占。<b>JSR(EUV 逾 22%、收 Inpria 主導 EUV-MOR、與 Entegris 交叉授權)/TOK/信越/住友占 EUV 光阻近 85%、整體控全球光阻約 80%;來台設廠貼台積</b>。台灣光阻本體最高天花板、EUV 完全缺席。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Entegris / DuPont / Fujimi / 3M <span class="code">美日·CMP</span></h4><p>CMP 寡占群。<b>Entegris(收 CMC)slurry+pad 全球領導(市占約 22-25%)、DuPont pad 近寡占、Fujimi slurry 要角=台灣 slurry/pad 本體缺席的天花板;3M=中砂鑽石碟頭號對手</b>(此環節是台廠少數能全球主導的切入點)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Air Liquide / 大陽日酸 / Merck / Hansol <span class="code">法日德韓·氣體前驅體</span></h4><p>特氣/前驅體天花板。Air Liquide(兼前驅體全球四家)、大陽日酸(台特化矽基特氣對手)、關東電化(晶呈對標)、Merck(收 Versum、前驅體全球四家)、Hansol(韓·前驅體)。台廠分子本體層面難正面競爭、吃在地利基。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Soulbrain / Dongjin / SK Materials <span class="code">韓·本土化對照</span></h4><p>韓國本土化最成功代表。<b>Soulbrain(蝕刻液/高純 HF 12 個 9、收 DNF、赴美 Taylor 跟三星)、Dongjin(KrF/ArF 光阻)、SK Materials(NF3/WF6)。2019 日韓貿易戰後加速國產替代並赴美設廠、做到較高毛利+部分中高端</b>=台廠路徑相近但仍落後一個身位的對照組。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 政策+切分+定位 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Policy & Split</span>
+  <h2 class="title">🔬 在地採購政策量化 + 切分模型 + 台灣吃得到</h2>
+  <p class="subtitle">一句話:<b>矽基特氣/CMP 鑽石碟/N2 光阻周邊=主導或利基;蝕刻特氣/濕化學=在地供應;ALD 前驅體=極小;CMP slurry/pad、EUV/ArF 光阻本體=缺席。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>在地化 46%→60%/65%→68% 為 2030 目標非現況;市占/獨家/全球四家多媒體/vocus(部分 AI 未證實)、台積不證實供應商關係;市場口徑差 3-10 倍;公司前瞻(晶呈 90%/宇川 6-10 倍)風險最高。個股實際營收強弱不一,投資前自行查證。</div>
+  <h3>台積在地採購政策量化(2030 目標、非當下達成)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>政策項</th><th>2024 基準</th><th>2030 目標</th><th>歸屬</th></tr></thead>
+    <tbody>
+      <tr><td>零配件在地化率</td><td>約 46%</td><td>60%(+15pp)</td><td>主體歸 #11(本題只引用)</td></tr>
+      <tr><td>間接原物料(含特化材料)</td><td>約 65%</td><td>68%(+3pp)</td><td><b>本題對應線(增量僅 +3pp、保守)</b></td></tr>
+      <tr><td>海外子公司間接原物料</td><td>約 33.1%</td><td>52.5%</td><td>海外新廠在地材料延伸</td></tr>
+      <tr><td>設備零配件在地化創新計畫(2026/02)</td><td colspan="2">12 家供應商、22 項持續改善方案、時程縮短 50%、年產值約 NT$20 億</td><td>主體歸 #11</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn">⚠️ <b>政策誠實基調:</b>政策是「在框架內角色上升」而非「打破全球天花板」。間接原物料目標 68% 相對保守(已 65%、增量有限);slurry/pad/EUV 光阻仍由日美韓供應,台積甚至引日商 JSR 來台設光阻廠、日商來台設電鍍添加劑廠=「在地生產的外商」而非台廠國產替代。<b>政策利多兌現對象是「利基品項+在地供應」的台廠營收、非全球市占翻盤。</b></div>
+  <h3>切分模型(避免雙計受惠主體)</h3>
+  <div class="callout insight">🔬 <b>判準一句話:</b>分子/研磨液/光阻=本題;溶劑供需=#23;金屬零件=#11;輸送系統=#27;封裝載板=封裝題。<b>本題增量(材料本體)</b>=① 特氣本體(矽基/蝕刻特氣)② 前驅體本體(TMAl/HfCl4/TSA)③ CMP 耗材本體(slurry/pad/鑽石碟/再生晶圓)④ 光阻及周邊本體(光阻/BARC/EBR/Rinse/TMAH)。<b>只引用不重複拆:</b>溶劑(PGME/PGMEA/IPA、勝一/三福化溶劑線)歸 #23、設備零配件歸 #11、特氣供應系統工程歸 #27、玻璃/T-Glass/ABF/CCL/晶呈 TGV 歸封裝題。<b>去重鐵則:同一受惠主體只在「最貼近其價值來源」的題計一次,純加法不雙計。</b></div>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場口徑 + 逐站難度 + 公司受惠評分</h2>
+  <p class="subtitle">市場口徑差 3-10 倍;難度高的環節台廠反而缺席。</p>
+  <h3>市場規模多口徑(⚠ 特氣差 3 倍、EUV 光阻差 10 倍)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調</th><th>口徑</th><th>基準</th><th>目標/CAGR</th></tr></thead>
+    <tbody>
+      <tr><td>SEMI</td><td>晶圓製造材料(<b>本題主場</b>)</td><td>2025 US$45.8B</td><td>+5.4% YoY(微影+濕化學雙位數)</td></tr>
+      <tr><td>SEMI</td><td>全球半導體材料總盤</td><td>2025 US$73.2B</td><td>+6.8%(台灣最大消費 US$21.7B)</td></tr>
+      <tr><td>Persistence / MRFR</td><td>電子特用氣體</td><td>US$5.1B 窄 / US$16.56B 寬</td><td>⚠ 差約 3 倍、僅量級</td></tr>
+      <tr><td>BRI / Mordor</td><td>CMP slurry / pad</td><td>slurry US$3.08-3.5B / pad US$4.32B</td><td>~7%(台灣本體缺席)</td></tr>
+      <tr><td>Mordor</td><td>光阻(全口徑)</td><td>2026 US$3.24B</td><td>→2031 US$5.53B / 11.3%</td></tr>
+      <tr><td>多源</td><td>EUV 光阻(⚠ 勿引用)</td><td>US$168M 窄 / US$1.8B 寬</td><td>⚠ 差逾 10 倍、僅標記分歧</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:本題主場採 SEMI 晶圓製造材料 US$45.8B(+5.4%、微影+濕化學雙位數);電子特氣窄寬差約 3 倍(寬口徑疑含大宗氣體);EUV 光阻兩來源差逾 10 倍(US$168M vs US$1.8B)、不作分析基礎;CMP slurry/pad 台灣本體缺席。</p>
+  <h3>逐材料站難度評分(高=台廠越被卡)</h3>
+  <p class="subtitle">維度:技術門檻/純度·良率/認證壁壘/台廠進入難度,各 0~5 分(5＝最被卡)。⚠ 台廠 alpha 在難度較低的 ⑤⑦①⑧。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>材料站</th><th>技術門檻</th><th>純度/良率</th><th>認證壁壘</th><th>台廠進入難度</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>④ CMP slurry/pad(缺席)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>⑥ 光阻本體 KrF/ArF/EUV(陪跑)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>③ ALD 前驅體(極小)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>① 矽基特氣 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+      <tr><td>② 蝕刻特氣</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>⑧ 濕化學/清洗</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">14</span></td></tr>
+      <tr><td>⑦ 光阻周邊 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+      <tr><td>⑤ CMP 鑽石碟/再生 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">11</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">⚠ 台廠 alpha 在難度較低、已卡位的 ⑤ 鑽石碟/⑦ 光阻周邊/① 矽基特氣/⑧ 濕化學;難度最高、最高值的 ④ CMP slurry/pad、⑥ EUV/ArF 光阻本體、③ ALD 前驅體台廠缺席/極小。評分為推估。</p>
+
+  <h3>公司受惠強度評分(holds 8 檔)</h3>
+  <p class="subtitle">維度:先進製程受惠/材料技術卡位/在地化放量時程/利基壁壘/規模財務,0~5 分。watch(宇川/勝一/崇越)見公司圖譜、不列評分。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>類別</th><th>受惠</th><th>技術卡位</th><th>放量時程</th><th>利基壁壘</th><th>規模</th><th>總分 /25</th></tr></thead>
+    <tbody>
+      <tr><td>台特化 4772</td><td>矽基特氣(真主導)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">23</span></td></tr>
+      <tr><td>新應材 4749</td><td>N2 光阻周邊獨家</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">21</span></td></tr>
+      <tr><td>中砂 1560</td><td>CMP 鑽石碟全球>70%</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>達興材料 5234</td><td>濕化學進 2nm</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>晶呈科技 4768</td><td>蝕刻特氣 C4F8</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>頌勝 7768</td><td>CMP pad 突破(智勝)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>光洋科 1785</td><td>濺鍍靶材(相鄰)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>三福化 4755</td><td>濕化學/TMAH 回收</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">台特化(矽基特氣全球四家、月營收 +266%)、新應材(N2 Rinse 獨家、光阻本體陪跑)、中砂(CMP 鑽石碟全球主導、規模最穩)為第一層真利基;達興/晶呈/頌勝/光洋科/三福化為第二層在地替代(中毛利)。watch(宇川興櫃/勝一歸 #23/崇越代理)見公司圖譜、不列評分。⚠ 多家規模小、單一客戶集中、公司前瞻保持折價。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 催化劑時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2025Q4→2028 催化劑(已確認 vs 公司前瞻)。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>2025Q4 N2 量產</td><td>放量起跑訊號</td><td>材料消耗強度跳升(N2 用量約 N3 兩倍);N2P+A16 2026H2 量產</td><td><span class="conf c-high">已確認</span></td></tr>
+      <tr><td>台特化 4772</td><td>矽基特氣(真主導)</td><td>2026Q1 累計營收 +約 290%、AHF 放量;乙矽烷全球四家之一;2027 規劃 ALD 前驅體</td><td><span class="conf c-high">已確認(月營收)</span></td></tr>
+      <tr><td>新應材 4749</td><td>N2 光阻周邊獨家</td><td>Rinse N2 獨家(2026 +60%)、BARC/EBR 過 2nm;KrF 2026 中裝機、2027 貢獻</td><td><span class="conf c-med">部分前瞻</span></td></tr>
+      <tr><td>中砂 1560</td><td>CMP 鑽石碟全球主導</td><td>鑽石碟 3nm 約 70%→2nm 80%;再生晶圓 2026Q3 拚 40 萬片/月</td><td><span class="conf c-high">已確認</span></td></tr>
+      <tr><td>2026/05/12 SEMI</td><td>市場硬數據</td><td>2025 材料 $73.2B(+6.8%)、晶圓製造 $45.8B、微影+濕化學雙位數=新應材/三福化題眼</td><td><span class="conf c-high">已確認</span></td></tr>
+      <tr><td>達興/三福化</td><td>濕化學在地供應</td><td>達興半導體 +107.8% 進 2nm;三福化 TMAH 回收 2H26</td><td><span class="conf c-med">部分確認</span></td></tr>
+      <tr><td>2028 宇川二廠</td><td>遠期選擇權(興櫃)</td><td>2027 底完工/2028 投產、產能 6-10 倍;⚠ 2025 營收僅 1.2 億、台積占 54%</td><td><span class="conf c-un">遠期/前瞻</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有營收+高速成長=台特化(+266%)、新應材(N2 Rinse)、中砂(鑽石碟>70%)、達興(+107.8%)、三福化(TMAH);<b>選股看「自製 IP+在地產能+已過認證」三條件齊備度</b>(代理通路如崇越無定價權)。<b>核心鐵則:在地化財為真但須分層——第一層真利基(台特化/中砂/新應材)、第二層中毛利在地替代(三福化/達興/晶呈)、第三層遠期選擇權(宇川興櫃不宜核心)。</b>對 CMP slurry/pad 與 EUV 光阻缺席、單一客戶集中、公司自述前瞻保持折價。</div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入利基材料原廠(台特化量級)<b>示意數字</b>(非財測)。本輪核心=N2/A16 在地化放量;但須分清真利基(定價力)vs 中毛利在地替代 vs 高端缺席。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>利基材料原廠</td><td>放量期 PE 拉升;高端缺席+單一客戶集中折價</td></tr>
+      <tr><td><b>占比 × 滲透</b></td><td>半導體營收占比 × 先進製程滲透</td><td>本輪核心</td><td>台特化矽烷+AHF、新應材 Rinse N2 用量翻倍、達興占比 9→16.7%</td></tr>
+      <tr><td><b>自製 IP 溢價</b></td><td>分子/配方專利 + 在地產能 + 已過認證</td><td>真利基(第一層)</td><td>台特化/中砂/新應材享稀缺溢價;代理通路(崇越)無定價權</td></tr>
+      <tr><td><b>分層折價</b></td><td>高端缺席/單一客戶/口徑分歧</td><td>風險</td><td>CMP slurry/EUV 光阻缺席;宇川遠期選擇權勿核心</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=台特化量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="30"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="80"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="22"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="1"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="28"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="60"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為台特化量級示意、非財測。中砂(規模大、毛利穩)、新應材/晶呈/頌勝(規模小、毛利波動)、宇川(興櫃、2028 才見規模)股數與毛利差異大,務必填入標的真實數字。第一層真利基享稀缺溢價、第三層遠期選擇權(宇川)勿用近期估值;高端缺席+單一客戶集中=保持折價。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。四級來源分流;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>SEMI(2026/05/12)</b> — 2025 全球半導體材料 US$73.2B(+6.8%)、晶圓製造材料 US$45.8B(+5.4%)、微影+濕化學雙位數成長、台灣連 16 年最大消費地 US$21.7B<span class="q">primary</span></li>
+    <li><b>台積電 2025/08 責任供應鏈報告 + 2026/02 公告</b> — 在地採購零配件 46%→60%(2030)、間接原物料 65%→68%、12 家/22 案/年產值約 20 億(官方目標)<span class="q">primary</span></li>
+    <li><b>台特化/新應材/中砂/三福化/勝一/達興/晶呈/頌勝/光洋科 2026 法說與月營收</b>(公開申報)<span class="q">primary</span></li>
+    <li><b>TECHCET / Mordor / Persistence / MRFR / BRI</b> — 電子特氣/CMP/光阻市場多口徑(⚠ 口徑分歧大、僅量級參考)<span class="q">secondary</span></li>
+    <li><b>Tom's Hardware / SemiEngineering</b> — JSR 收 Inpria 主導 EUV-MOR、來台設 production-scale 光阻廠;韓 Soulbrain/Hansol/Dongjin 本土化路徑<span class="q">secondary</span></li>
+    <li><b>cnyes/cmoney/經濟日報/vocus/財報狗/優分析</b>(台廠在地化概念與「獨家/全球四家」說法;⚠ 部分明標 AI 整理未證實、台積不證實供應商關係、逐檔已對抗式查證)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① 頌勝 7768(智勝)突破 CMP pad 壟斷=推翻種子「pad 台灣缺席」(但市占約 4%、slurry 仍缺席);② 宇川「全球四家」vocus 自註 AI 未證實、台積不證實、興櫃不進核心、2028 才見規模;③ 新應材「占比破 80%」為半導體營收占比(約 83%)、公司簡報另有「產能比重 16%→18%」;④ 在地化 46%→60%/65%→68% 為「2030 目標、非當下達成」;⑤ 晶呈「占比破 90%」/達興「25 項中 10 項」為公司自述/過時口徑、已修正;⑥ N2「2025Q4 量產」;⑦ EUV 光阻市場差逾 10 倍勿引用;⑧ 溶劑(勝一/三福化溶劑線)歸 #23、不重複計受惠主軸。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。高端(CMP slurry/pad、EUV/ArF 光阻本體)台廠缺席、單一客戶集中、公司自述前瞻、市場口徑分歧須注意;溶劑歸 #23、設備零件歸 #11、供應系統歸 #27、封裝載板歸各封裝題,本題只引用不重複計。數據請以最新官方/法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>半導體先進製程材料本土化(特氣/前驅體/CMP/光阻,台積 N2/A16 在地採購)研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
