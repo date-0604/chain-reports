@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>矽光子 EIC-on-PIC 3D 共整合(TSMC COUPE / SoIC-X)深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#fb7185;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#2a1622);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#2a0a12;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(251,113,133,.10)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}.tag{white-space:normal;overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>矽光子 EIC-on-PIC 3D 共整合(TSMC COUPE / SoIC-X)深度研究報告</h1>
+  <div class="sub">把電子 IC(EIC)用 hybrid bonding/SoIC-X 垂直疊在光子 IC(PIC)上;製程鏈 7 站逐站難度、四大技術黑盒、COUPE 世代路線圖(1.6T→6.4T→12.8T)、台廠卡位、對抗式查證。<b>使用者稱「CIO」,業界正名=EIC-on-PIC 3D 共整合</b></div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
+    <span class="pill">本質：<b>CPO 的「引擎內部 3D 共整合」上游使能層(台積獨大)</b></span>
+    <span class="pill">配對淺色版：<b>COUPE-EIC-on-PIC共整合-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/正名/兩大判斷</a>
+    <a href="#s2">2. 製程鏈(7 站)</a>
+    <a href="#s3">3. 難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. COUPE 路線圖/市場/黑盒</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>這是「<b>把電子 IC(EIC=驅動器/TIA/SerDes)用 SoIC-X hybrid bonding 垂直疊在光子 IC(PIC)上</b>」的 3D 共整合製程/平台題,旗艦=<b>台積電 COUPE(Compact Universal Photonic Engine)</b>。它是 <b>CPO(共封裝光學,把光引擎共封裝進交換器)的「引擎內部」上游使能技術</b>——CPO #1 講系統層、本題講引擎內部把 EIC 疊 PIC 的製程層。<b>技術方向確定性高:</b>銅互連(224G/CPC)逼物理極限、AI 光互連需求只增,真 3D 垂直疊給最短電性路徑(SoIC 光引擎頻寬密度 iso-power >23x bump、5-10x 功效、10-20x 低延遲,台積官方)。<b>但兩個冷水必須先講:</b>① <b>商轉時程未定</b>——2026 是量產「元年」非放量年,受熱串擾/雷射整合/光子晶圓級測試「三大黑盒」+CPO 自身導入遞延牽制(SemiAnalysis 2026/6/9 示警系統良率僅約 19%、量產恐延 2028-29;NVIDIA 反駁稱 2H 放量);② <b>台積獨大、台廠衛星零星</b>——最核心的站①-③(PIC 製造/EIC/EIC-on-PIC 鍵合)幾乎全在台積電內部,本題最大且唯一無重疊 alpha=台積電 2330,台積以外真受惠只有上詮 3363(FAU)等少數利基衛星。<b>切分:</b>雷射晶片歸 InP #19、鍵合設備歸 CoWoS #2、系統共封裝/玻璃基板歸 CPO #1,本題只引用不重複計。</div>
+<div class="kpi">
+  <div class="box"><div class="v">&gt;23x</div><div class="l">SoIC 光引擎頻寬密度(iso-power vs bump,台積官方)</div></div>
+  <div class="box"><div class="v">1.6T→6.4T→12.8T</div><div class="l">COUPE gen1→gen2→gen3 路線圖</div></div>
+  <div class="box"><div class="v">2026</div><div class="l">COUPE 量產元年(gen1 1.6T OSFP)</div></div>
+  <div class="box"><div class="v">台積獨大</div><div class="l">台廠 alpha 集中 2330 + 上詮 FAU 次主軸</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、名詞正名 ＋ 兩大判斷 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>名詞正名(「CIO」非業界標準縮寫)</h3>
+  <ul>
+    <li><b>「CIO」=使用者/口語稱呼,業界不用</b>(易與財務長 CIO 混淆)。正確分層:<b>COUPE</b>=台積電專屬「平台/產品」名(用 SoIC-X 把 EIC 疊上矽光 PIC);<b>EIC-on-PIC 3D 異質整合</b>=其所屬「製程類別」(hybrid bonding 垂直疊);<b>CPO(Co-Packaged Optics)</b>=業界最通用「系統層」詞(把光引擎共封裝進交換器/ASIC 旁),COUPE 是 CPO 的使能/上游引擎技術,gen2 起 COUPE 進 CoWoS 即落入 CPO 系統。</li>
+    <li><b>與相鄰詞區別:</b>SiPh/矽光子=上位材料技術大類(波導/調變器/光偵測器),PIC 是其產物;OIO(Optical I/O)=封裝原生光鏈路,對應 COUPE gen3「光進處理器封裝」願景;monolithic 單體整合(EIC+PIC 同片)因良率/製程衝突高,COUPE 才走 3D 異質疊。<b>本報告稱法=「EIC-on-PIC 3D 共整合(COUPE/SoIC-X)」。</b></li>
+  </ul>
+  <h3>製程鏈與本題範圍</h3>
+  <ul>
+    <li><b>製程鏈(7 站):</b>① PIC 矽光製造 → ② EIC 製造 → ③ EIC-on-PIC 3D hybrid bonding(SoIC-X,共整合核心)→ ④ 雷射光源整合(外接 CW DFB/InP)→ ⑤ 光耦合/FAU 光纖陣列 → ⑥ 封裝/co-package CoWoS → ⑦ 光子測試(光電 KGD/晶圓級光學探測)。</li>
+    <li><b>核心特徵:</b>EIC=先進 CMOS(driver/TIA,gen1 65nm-class、新世代往 N6/N7),PIC=65nm SOI 矽光;用 SoIC-X 做 Cu-Cu+介電直接鍵合(無 microbump、間距<10μm)=die-to-die 最短電性路徑、最低寄生。這是與 2.5D side-by-side(EIC/PIC 並排打線/覆晶)的根本分野。</li>
+    <li><b>切分:</b>雷射晶片(CW DFB/InP)受惠歸 InP #19、鍵合設備(BESI/EVG/ASMPT/均華)歸 CoWoS #2、系統共封裝/玻璃基板/系統測試歸 CPO #1,本題只引用、不重複計受惠主體。<b>本題淨增量=台積 COUPE 平台 + FAU(上詮)+ metalens(采鈺)+ ELSFP 封裝(眾達)+ SiP/OSAT(訊芯/日月光)。</b></li>
+  </ul>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>🔍 判斷 1:技術方向確定(長線必經)vs 商轉時程未定(三黑盒+延宕爭議)</b><br><b>技術層該確定:</b>112G→224G→448G SerDes 在銅上已逼物理極限(損耗/功耗陡升)、AI scale-up/scale-out 互連頻寬密度與每 bit 功耗需求只增,光互連是唯一解;真 3D 垂直疊(SoIC-X)給最低 pJ/bit、最高頻寬密度=CPO 邁向更高頻寬的使能上游。<b>但商轉時程不該樂觀:</b>2026 是量產「元年」非放量年,受 ① 熱串擾(EIC 發熱疊在對溫度極敏 PIC 上)② 雷射整合(InP gain-on-Si 未過關)③ 光耦合 FAU 次微米對位 ④ 光子晶圓級 KGD 測試不成熟 四黑盒牽制;<b>SemiAnalysis 2026/6/9 示警 NVIDIA CPO 系統良率僅約 19%、量產恐延 2028-29(曾致台股光通訊 9 檔跌停);NVIDIA 反駁稱 2H 放量</b>。gen2(6.4T 進 CoWoS)/gen3(12.8T on-package)為前瞻、勿當現況。</div>
+    <div class="callout warn" style="margin:0"><b>🔍 判斷 2:台積獨大、台廠衛星零星(誠實面)</b><br>這是「<b>台積電獨大、台廠衛星零星</b>」的典型題。最核心、不可替代的價值在站①-③(矽光 PIC 自製、EIC 製造、EIC-on-PIC 3D hybrid bonding/SoIC-X),<b>這三站幾乎全在台積電 2330 內部,設備又是國際大廠(ASML/Lam/AMAT/BESI/EVG),本題最大且唯一無重疊 alpha 就是台積電。</b>台積以外真正能在「本題新增點」吃到的只有少數利基:<b>上詮 3363(FAU 光纖陣列、ReLFACon 解高溫耦合損耗、傳 COUPE gen1/2 獨家、2026Q3 認證為兌現分水嶺)=台積以外最實質 alpha;聯鈞 3450(COS 雷射封裝、媒體稱 COUPE 策略夥伴);日月光投控 3711(後段光電封測)。</b>其餘(采鈺 metalens、眾達 ELSFP、訊芯/精材、光聖/波若威)多屬利基/沾光、前瞻未兌現;雷射與設備受惠歸 InP #19/CoWoS #2 去重。<b>方向買台積、節奏看 2026H2-2027 客戶放量與測試良率,其餘以「催化劑交易」而非「基本面重押」對待。</b></div>
+  </div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>製程鏈拆解(PIC → 光子測試,7 站)<span class="conf c-high">高信心</span></h2>
+<p class="sub">七站。<b>台積電 2330 主導站①②③⑥(PIC/EIC/共整合鍵合/CoWoS 進封裝);台廠衛星卡 ⑤ 光耦合 FAU(上詮)、④ 雷射封裝(聯鈞/眾達);四大黑盒在 ③(熱串擾)④(雷射整合)⑤(光耦合)⑦(光子測試)。</b>難度 5=最難/最被卡。</p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>① PIC 矽光製造(SOI/波導/調變器/Ge 光偵測器/耦合器)— 台積主導</h4>
+    <p>在 SOI 晶圓(頂層 Si ~220nm/埋氧 BOX)+SiN 介電上,以 CMOS 兼容製程做光路:單模波導、Mach-Zehnder(MZM)或微環(MRM)調變器、Ge-on-Si 光偵測器、光柵/邊緣耦合器、熱光加熱器。輸出=PIC 晶圓(光引擎的「光」半邊)。COUPE 之 PIC 由台積以 65nm 矽光特化製程在 300mm 線製,目標 PIC 產能 2027Q1 上看 1 萬片/月。</p>
+    <div class="diff">難點(17/20):波導側壁粗糙度→傳輸損耗、Ge-PD 暗電流/良率、<b>MRM 微環的製程變異(半徑/耦合間隙 nm 級誤差→共振波長飄移、對製程與溫度雙敏感)=良率隱形殺手;MZM 較寬鬆但面積大</b>。MRM vs MZM 路線未收斂(NVIDIA 走 MRM/Broadcom 走 MZM)。設備全進口(ASML DUV/Lam/AMAT),台積以製程 know-how 卡價值、非機台。</div>
+    <div class="who">對應:<span class="tag t-tw">台積電 2330(矽光 fab 全球領先=最大 alpha)</span> <span class="tag t-intl">ASML(DUV)/ Lam / AMAT / ASMI / TEL</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>② EIC 製造(CMOS driver/TIA/SerDes)— 台積成熟節點、門檻最低</h4>
+    <p>做電子 IC=調變器驅動器(driver)、跨阻放大器(TIA,把 PD 微弱光電流放大)、SerDes。COUPE gen1 用成熟 65nm-class(類比/驅動電路對節點不敏感、兼顧成本與良率,新世代往 N6/N7 推進)。輸出=EIC 晶粒,待垂直疊到 PIC 上。</p>
+    <div class="diff">難點(全鏈最低=10/20):65nm 成熟 CMOS 是台積強項、良率高、設備折舊完畢=成本優勢,難點不在「做 EIC」而在後續鍵合介面準備(hybrid bonding pad 平坦度/銅凹陷 dishing 控制)+EIC 發熱量(熱問題在③站爆發)。此站對台積=COUPE 良率的「安全半邊」,無台廠衛星增量。</div>
+    <div class="who">對應:<span class="tag t-tw">台積電 2330(自家成熟節點產線)</span> <span class="tag t-intl">ASML / AMAT / Lam(成熟節點設備)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>③ EIC-on-PIC 3D hybrid bonding / SoIC-X ⭐ 共整合核心、全鏈最硬</h4>
+    <p>用 SoIC-X(台積前段 3D 堆疊)做 Cu-Cu+介電直接鍵合(hybrid bonding、無凸塊、間距<10μm),把已薄化的 EIC 垂直「疊」在 PIC 上,die-to-die 介面阻抗最低、寄生最小(iso-power 下頻寬密度 >23x bump 方案)。輸出=EIC-on-PIC 共整合光引擎(COUPE 本體)。這是 CIO 的定義性製程站、與 2.5D side-by-side 的根本分野。</p>
+    <div class="diff">難點(全鏈最高=20/20):亞微米對位+Cu-Cu 直接鍵合,且底層是脆弱光學 PIC(微粒/熱/應力都殺良率)、鍵合整機 100% 進口。<b>核心黑盒=熱管理:EIC 是發熱源、疊在對溫度極敏 PIC 上,EIC 還當「熱擴散板」反拖垮 PIC 加熱器效率→微環調變器/雷射熱串擾(微環操作溫度窗 <1°C vs MZI/EAM >30°C)=良率殺手</b>;鍵合面微粒/空洞、Cu dishing、退火翹曲亦致命(玻璃中介層隔熱為前瞻解)。台積 SoIC-X know-how 主導(護城河最深處),設備 BESI/EVG/ASMPT/Shibaura 寡占。</div>
+    <div class="who">對應:<span class="tag t-tw">台積電 2330(SoIC-X 主導);均華 6640(取放周邊,引用 CoWoS #2)</span> <span class="tag t-intl">BESI / EV Group / ASMPT / Shibaura / SUSS</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>④ 雷射光源整合(外接 CW DFB / InP gain-on-Si)⭐ 第二硬</h4>
+    <p>把外購 InP 基 CW DFB 雷射(連續波光源)整合到光引擎:主流=外接可插拔光源(ELS/ELSFP,可維護、可換、避熱)或 flip-chip/butt-coupling 貼到 PIC 邊緣;前瞻=heterogeneous InP gain-on-Si(把 III-V 增益層異質鍵合到 Si 波導上)。<b>雷射「不」單體做在 Si 上=矽間接能隙不發光、必須 InP,是物理天花板。</b></p>
+    <div class="diff">難點(19/20):InP gain-on-Si 異質整合最難(可靠度/耦合損耗/熱)、外接 vs 整合路線未定;雷射對溫度與耦合誤差極敏感、資料中心壽命要求極高。<b>ELS 整模組由 Lumentum/Coherent 寡占(NVIDIA 各注資 $20 億),台廠在整模組基本缺席、只吃 InP 晶粒料(歸 InP #19);本題增量=ELSFP 外置封裝(眾達-KY 4977 與 Broadcom Bailey 備量產)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">眾達-KY 4977(ELSFP 封裝,增量);雷射晶片 聯亞 3081/全新 2455/華星光 4979/聯鈞 3450 歸 InP #19、只引用</span> <span class="tag t-intl">Lumentum / Coherent / ficonTEC / ASMPT</span> <span class="conf c-med">中</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>⑤ 光耦合 / FAU 光纖陣列(次微米對位)⭐ 台積以外最實質台廠 alpha</h4>
+    <p>把外部光纖以 FAU(Fiber Array Unit,V-Groove 排列多根光纖的精密元件)對準耦合到 PIC 的光柵耦合器(垂直)或邊緣耦合器(水平),核心纖距精度 ~0.5μm、對位次微米級。FAU 基板用石英/耐熱玻璃(CTE 匹配 PIC、抗 280°C reflow)。輸出=可接光纖的完整光引擎 I/O。</p>
+    <div class="diff">難點(15/20):次微米對位 HVM 良率+FAU-PIC 的 CTE 失配溫循應力+光柵(易對位/損耗高)vs 邊緣(損耗低/對位更難)耦合權衡(每 0.5μm 偏移損耗劇增)。<b>但台廠在 FAU 製作端有實質獨家卡位=上詮 3363(ReLFACon 專利解矽光高溫封裝損耗、與台積 COUPE 深度共研、傳 gen1/gen2 獨家、2026 投 >10 億購 FAU 自動化機台)=台積以外最實質 alpha;采鈺 metalens 微透鏡耦合(潛在獨家)。對位「造機」仍 ficonTEC/PI(德)主導。</b></div>
+    <div class="who">對應:<span class="tag t-tw">上詮 3363(FAU 領先) / 采鈺 6789(metalens,概念待查)</span> <span class="tag t-intl">ficonTEC / Physik Instrumente (PI)</span> <span class="conf c-high">高(上詮);中(采鈺)</span></div>
+  </div></div>
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>⑥ 封裝 / co-package(光引擎 → OSFP 模組 / CoWoS 共封裝)— 台積主導、OSAT 沾光</h4>
+    <p>封裝分兩路線:gen1 把光引擎封進 OSFP/光連接器=1.6T 可插拔光收發(2025 qual/2026 prod);gen2 把 COUPE 光引擎與 GPU/Switch ASIC 一起進 CoWoS 封裝(co-package、光到主板級,6.4T,2026-27);gen3 整合進處理器封裝(on-package,12.8T,探索期)。輸出=可上系統的 CPO 光引擎/模組。此站是 CIO→CPO 的交棒處。</p>
+    <div class="diff">難點(12/20):CoWoS 共封裝設備/製程台廠已有相對成熟卡位(歸 CoWoS #2)、台積 CoWoS 平台領先;難點在加入光引擎後的<b>翹曲(大尺寸+光學對位敏感)、可拆卸光連接器標準未收斂(US Conec/SENKO,≤0.4dB/260°C)、gen2 co-package 良率(光引擎+ASIC 同封,任一壞=整顆報廢=KGD 前置更關鍵)</b>。</div>
+    <div class="who">對應:<span class="tag t-tw">台積電 2330(CoWoS/SoIC);日月光投控 3711 / 訊芯-KY 6451(SiP/光引擎封測);弘塑/辛耘/印能/志聖/萬潤 引用 CoWoS #2</span> <span class="tag t-intl">US Conec / SENKO / Amkor</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">7</div><div class="body">
+    <h4>⑦ 光子測試(光電 KGD / 晶圓級光學探測)— 全鏈最不成熟、台廠陪跑</h4>
+    <p>做光電同步測試:晶圓級光學探測(光從光柵/邊緣耦合進出晶片、量損耗/調變器特性/PD 響應)、光電 KGD(Known-Good-Die,鍵合/封裝前先篩好的光晶粒,避免把壞 PIC 疊進昂貴 SoIC/CoWoS=浪費)。輸出=KGD 篩選/良率數據。</p>
+    <div class="diff">難點(16/20、技術不成熟):光電同步、次微米光學對位探針、量產吞吐量、<b>邊緣耦合晶圓級自動對位難、缺業界統一 KGD 標準=產業公認量產瓶頸在「測試」非製造</b>。跳過晶圓測試→把壞 PIC 疊進 SoIC/CoWoS=昂貴材料浪費;測太慢/太貴又拖累量產經濟性=兩難。台廠造機卡位淺(多進口 ficonTEC/FormFactor/Jenoptik),誠實標陪跑。</div>
+    <div class="who">對應:<span class="tag t-tw">(台廠光測衛星待逐項佐證、多陪跑;致茂 2360 光電測試、精材 3374 晶圓級封測為潛在切入、待查)</span> <span class="tag t-intl">ficonTEC / FormFactor / MPI / Jenoptik</span> <span class="conf c-med">中</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐站難度 ＋ 公司受惠強度評分</h2>
+<p class="sub">難度維度:技術門檻 / 設備被美日歐卡(台廠自製度低=分高) / 良率·熱·光耦合挑戰 / 台廠進入難度,各 0~5 分(5＝最難/最被卡)。⚠ <b>本題台廠 alpha 高度集中在台積電(站①②③⑥)+上詮(站⑤ FAU);難度最高的 ③ 共整合鍵合與 ④ 雷射整合台廠衛星參與極淺。</b>評分為推估。</p>
+<table>
+  <tr><th>製程站</th><th>技術門檻</th><th>設備被卡</th><th>良率/熱/光耦</th><th>台廠進入難度</th><th>總分/20</th><th>台廠位置</th></tr>
+  <tr><td><b>③ EIC-on-PIC hybrid bonding</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>台積製程主導;設備全進口、熱串擾黑盒</td></tr>
+  <tr><td><b>④ 雷射光源整合</b></td><td>5</td><td>4</td><td>5</td><td>5</td><td><b>19</b></td><td>整模組缺席(Lumentum/Coherent);眾達 ELSFP 增量</td></tr>
+  <tr><td>① PIC 矽光製造</td><td>4</td><td>5</td><td>4</td><td>4</td><td><b>17</b></td><td>台積主導製程;設備 ASML/Lam/AMAT 全進口</td></tr>
+  <tr><td>⑦ 光子測試(KGD)</td><td>4</td><td>4</td><td>4</td><td>4</td><td><b>16</b></td><td>不成熟黑盒;台廠陪跑、造機進口</td></tr>
+  <tr><td>⑤ 光耦合 FAU ⭐</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>15</b></td><td>上詮 FAU 領先(台積以外最實質)</td></tr>
+  <tr><td>⑥ 封裝 co-package</td><td>3</td><td>3</td><td>3</td><td>3</td><td><b>12</b></td><td>台積 CoWoS 主導;OSAT 沾光</td></tr>
+  <tr><td>② EIC 製造(成熟節點)</td><td>3</td><td>3</td><td>2</td><td>2</td><td><b>10</b></td><td>台積成熟節點、門檻最低</td></tr>
+</table>
+<div class="callout"><b>台廠的位置(關鍵):</b>本題不是「設備鏈雨露均霑」型,而是「<b>台積電壟斷製程核心</b>」型。難度最高的 ③ EIC-on-PIC 鍵合(SoIC-X)與 ① PIC 製造由台積以製程能力卡死全球領先;② EIC 是台積成熟節點安全半邊;台積以外的真實 alpha 只在 ⑤ FAU 光耦合(上詮 3363,難度中、有獨家)、④ 雷射封裝(聯鈞/眾達,利基)、⑥ 後段封測(日月光/訊芯,沾光)。④ 雷射整合與 ⑦ 光子測試是兩大未解黑盒、台廠造機缺席。</div>
+<h3>公司受惠強度評分(holds 4 檔,誠實下修台積以外)</h3>
+<p class="sub">維度:矽光/COUPE 受惠 / 製程技術卡位 / 商轉時程 / 利基壁壘 / 規模財務,各 0~5 分;總分由高到低。<b>台積以外台廠誠實下修</b>;雷射晶片(聯亞/全新/華星光)受惠歸 InP #19、不在本題評。評分為推估,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>型態</th><th>受惠強度</th><th>技術卡位</th><th>商轉時程</th><th>利基壁壘</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>台積電 2330</td><td>COUPE 平台主導(製程核心)</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>25</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>上詮 3363</td><td>FAU 光纖陣列(台積以外最實質)</td><td>4</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>19</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>日月光投控 3711</td><td>後段光電封測(OSAT)</td><td>4</td><td>3</td><td>4</td><td>3</td><td>4</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>聯鈞 3450</td><td>COS 雷射封裝(COUPE 策略夥伴)</td><td>4</td><td>3</td><td>4</td><td>3</td><td>3</td><td><b>17</b></td><td><span class="conf c-med">中</span></td></tr>
+</table>
+<p class="sub"><b>台積電 2330</b>=本題壓倒性、唯一無重疊 alpha(PIC fab+EIC fab+SoIC-X 3D 鍵合一條龍、COUPE 全球領先);<b>上詮 3363</b>=台積以外最實質(FAU/ReLFACon 解高溫耦合、傳 COUPE gen1/2 獨家、2026Q3 1.6T 系統廠認證為「夢想估值→實績兌現」分水嶺、法人估 EPS 年增 175-260%);<b>日月光投控 3711</b>=後段光電封測(FoCoS、CPO 相關估 2026 貢獻約 10 億美元、先進封裝占封測 2026 達 14%→2027 上看 33%,但非 3D 鍵合核心、與 CoWoS #2 重疊);<b>聯鈞 3450</b>=COS 雷射封裝(全球前三大 LD 封裝、2026/4 月營收 +45.5% 創高、訂單看到 2027 底、⚠「COUPE 策略夥伴」為媒體/法人語非台積官方名單)。受惠評分為推估,僅供參考。</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐站對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 官方/法說/具名客戶</span>
+  <span><span class="conf c-med">中</span> 研調/媒體彙整/公司自述</span>
+  <span><span class="conf c-un">待查</span> 概念/沾光(不否定)</span>
+</div>
+<h3>台廠 × 角色對照(依製程站)</h3>
+<table>
+  <tr><th>公司(股號)</th><th>製程站/型態</th><th>角色 / 最新數字</th><th>查證</th></tr>
+  <tr><td>台積電 2330(上市)</td><td>站①②③⑥ 平台主導</td><td>本題唯一全鏈主導者。<b>COUPE 以 SoIC-X 把 EIC 用 Cu-Cu hybrid bonding 垂直疊上 PIC(65nm SOI 矽光);三層結構約 2.2 億電晶體+1000+光學元件</b>。gen1 OSFP 1.6T 2025 驗證/2026 量產、gen2 CoWoS 共封裝 6.4T 2026 進入;客戶綁定 Broadcom(TH6-Davisson 2025/10 採 COUPE)、NVIDIA(Rubin H2 2026)。Intel 自 2023 矽光專利驟減後龍頭易主台積</td><td><span class="conf c-high">高(官方+具名客戶)</span></td></tr>
+  <tr><td>上詮 3363(上市)</td><td>站⑤ 光耦合 FAU</td><td>台積以外最實質 alpha。<b>ReLFACon 專利解 FAU 在矽光高溫封裝(280°C reflow)下的耦合損耗、與台積 COUPE 深度技術整合、傳 gen1/gen2 獨家;已完成 1.6T-6.4T FAU 佈局、2026 資本支出約 15.8 億(>10 億購 FAU 自動化生產/測試機台)</b>。關鍵里程碑:2026Q3 1.6T 模組系統廠認證=「夢想估值→實績兌現」分水嶺(對應 NVIDIA Rubin H2 2026);法人估 EPS 年增 175-260%。⚠「獨家」程度與二供風險待查</td><td><span class="conf c-high">高;獨家程度待查</span></td></tr>
+  <tr><td>日月光投控 3711(上市)</td><td>站⑥⑦ 後段光電封測</td><td>負責後端光學封裝與精密測試,與台積分工(台積前端 PIC/EIC,日月光把光引擎+ASIC+FAU+散熱做成可量產平台)。<b>FoCoS 封裝估 2026H2 放量、2026 CPO 相關可望貢獻約 10 億美元;先進封裝占封測 2026 達 14%、2027 上看 33%</b>。⚠ 與 CoWoS #2/CPO #1 重疊,吃的是 OSFP/光引擎模組級封測,非 COUPE 3D 鍵合核心(該核心在台積內部)</td><td><span class="conf c-high">高;非鍵合核心</span></td></tr>
+  <tr><td>聯鈞 3450(上市)</td><td>站④⑥ COS 雷射封裝</td><td>全球前三大雷射二極體(LD)封裝代工,轉型「光通訊整合平台」。<b>媒體稱台積 COUPE 平台少數具 COS(Chip-on-Submount 雷射封裝)能力的策略夥伴</b>;2026/4 月營收 8.78 億(MoM +20.6%/YoY +45.5%)創高、Q1 毛利 24.8%;董座宋天增:COS 訂單看到 2027 底、下半年產能倍增。⚠「COUPE 策略夥伴」為媒體/法人語、非台積官方名單;核心風險=1.6T 客戶驗證 Q3 放量能否如期</td><td><span class="conf c-med">中(夥伴為媒體語)</span></td></tr>
+  <tr><td>眾達-KY 4977(上市)</td><td>站④ ELSFP 外置雷射封裝</td><td>(觀察/本題增量)與 Broadcom 51.2T Bailey CPO 之 ELSFP(外置雷射光源封裝)備量產;外置光源解微環調變器溫敏熱管理。屬本題淨增量(封裝角度、非雷射晶片本身)。⚠ 公司自述+媒體層級、放量待兌現</td><td><span class="conf c-med">中(公司自述)</span></td></tr>
+  <tr><td>采鈺 6789(上市)</td><td>站⑤ metalens 微透鏡耦合</td><td>(觀察)台積系晶圓級光學廠,與光程研創 Artilux 發表 12 吋矽基 metalens;傳台積 COUPE 用 metalens 作光耦合元件(grating/edge coupler/mode transformer)。⚠ 微透鏡源自 CIS、對 COUPE 具體量產 BOM 導入無明確佐證=台積系沾光聯想、前瞻;⚠ 股號以 6789 為準(報導偶見筆誤、待複查)</td><td><span class="conf c-un">待查(概念)</span></td></tr>
+  <tr><td>訊芯-KY 6451(上市)</td><td>站⑥ SiP/光引擎模組封裝</td><td>(觀察)鴻海系,子公司訊芸 SiP/transceiver 封裝,2021 起與美客戶開發 CPO、規劃 3.2T 光引擎/102.4T 路線。⚠ 後段 SiP 沾光、核心 SoIC/CoWoS 仍台積掌控,對 COUPE(非泛 CPO)實際訂單待查</td><td><span class="conf c-un">待查(沾光)</span></td></tr>
+</table>
+<p class="sub">⚠ 股號核對(基準 2026/06):台積電 2330、上詮 3363、聯鈞 3450、日月光投控 3711、眾達-KY 4977、采鈺 6789、訊芯-KY 6451 皆上市。<b>聯亞光電正確股號=3081(上櫃),非 6747(種子誤植已更正);COUPE 節點=EIC 先進 CMOS(往 N6/N7)疊在 65nm PIC 上,非「65nm EIC」。</b>雷射晶片(聯亞 3081/全新 2455/華星光 4979/聯鈞 3450 之 LD)受惠歸 InP #19/CPO #1、本題只引用;鍵合設備(均華 6640)歸 CoWoS #2;采鈺 6789 亦在玻璃基板/CoWoS guide 計入。<b>本題受惠主體與 CPO #1 部分重疊=同生態的「引擎內部製程層」視角、淨增量=台積 COUPE 平台+上詮 FAU+采鈺 metalens+眾達 ELSFP+訊芯/日月光 SiP,純加法不雙計(詳見 guide.json notes)。</b></p>
+<h3>國際 × 角色(平台對照 + 具名客戶 + 競爭路線)</h3>
+<table>
+  <tr><th>公司</th><th>國別/環節</th><th>角色</th><th>查證</th></tr>
+  <tr><td>Broadcom(AVGO)</td><td>美 · CPO 系統(交換器)+採 COUPE</td><td>CPO 量產先行者。<b>Tomahawk 6-Davisson(200G/lane、102.4T 交換器)明確採用 TSMC COUPE 光引擎做 3.5D 異質整合、光互連功耗較可插拔降 70%=COUPE 最關鍵的具名外部客戶=驗證 COUPE 商轉性</b>。自有矽光 PIC 設計但封裝/3D 共整合用 COUPE/SoIC</td><td><span class="conf c-high">高(官方新聞稿)</span></td></tr>
+  <tr><td>NVIDIA(NVDA)</td><td>美 · CPO 交換器(需求拉動)</td><td>把矽光 CPO 帶入 scale-out/scale-up 的需求拉動者。Quantum-X Photonics(InfiniBand)2025H2 出貨、Spectrum-X1600 Ethernet Photonics(409.6T)2026H2 鎖定 Rubin 級百萬 GPU 叢集;採可拆式光學子組件(OSA)回應可維護性。⚠ Gilad Shainer 反駁 SemiAnalysis 延宕說、稱 2H 放量</td><td><span class="conf c-high">高(需求端 alpha)</span></td></tr>
+  <tr><td>GlobalFoundries(GFS)</td><td>美 · GF Fotonix 矽光代工(對照組)</td><td>台積在矽光 PIC 代工的主要對手。<b>GF Fotonix=首個 300mm 整合光子+300GHz-class RF-CMOS 單片平台</b>、design win 含 Broadcom/Marvell/NVIDIA+Ayar/Lightmatter/PsiQuantum。路線偏「單片/2.5D 共封裝」而非台積 SoIC-X 真 3D 垂直疊=製程哲學不同</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Intel(INTC)</td><td>美 · 整合光子 OCI(整合雷射路線)</td><td>矽光老牌(出貨多年)。OFC 2024 展首個與 CPU 共封裝 OCI chiplet:4Tbps 雙向、8 波長 DWDM、5 pJ/bit。<b>關鍵差異=PIC 內建 on-chip 雷射(混合矽雷射 III-V 鍵合),與 COUPE/多數對手外接 CW 路線不同</b>;商轉偏前瞻、AI 聲量不及 Broadcom/NVIDIA</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Ayar Labs / Lightmatter / Marvell</td><td>美 · 光 I/O / 光子 interposer / 客製 CPO</td><td>Ayar TeraPHY 光 I/O chiplet(PIC 由 GF 代工、2026/3 募 5 億、與 Alchip 在台積歐洲 OIP 展首個 COUPE-based 光連接);Lightmatter Passage M1000 主動光子 interposer(GF+Amkor 製);Marvell 6.4T 3D SiPho 光引擎(GF Fotonix)。為光子互連架構對照與潛在 COUPE 替代/競爭路線</td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<h3>台灣吃得到多少(逐製程站定位)</h3>
+<p class="sub">一句話:<b>PIC 製造/EIC/EIC-on-PIC 鍵合/CoWoS 進封裝=主導(台積獨佔級);FAU 光耦合=重要供應商/利基領先(上詮);metalens/ELSFP/SiP=利基/沾光(采鈺/眾達/訊芯);雷射光源=利基但歸 InP #19;光子測試/前段設備=陪跑/缺席(國際)。</b>定位為質化判斷。</p>
+<table>
+  <tr><th>製程站</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>PIC 矽光製造 / EIC / EIC-on-PIC SoIC-X ⭐</td><td>台積電 2330</td><td><span class="conf c-high">主導(獨佔級)</span></td><td>COUPE 自有矽光 fab 製 PIC、SoIC-X 把 EIC 疊上 PIC、2026 量產;全球矽光製造中心。前段設備 ASML/AMAT/Lam,台廠缺席</td></tr>
+  <tr><td>光耦合 / FAU 光纖陣列 ⭐</td><td>上詮 3363</td><td><span class="conf c-high">重要供應商/利基領先</span></td><td>FAU 市場絕對領先、ReLFACon 解高溫耦合、傳 COUPE gen1/2 獨家、2026 投 >10 億購自動化機台;對位造機仍 ficonTEC/PI</td></tr>
+  <tr><td>metalens 微透鏡耦合</td><td>采鈺 6789</td><td><span class="conf c-med">利基(潛在獨家、前瞻)</span></td><td>采鈺×Artilux 12 吋矽基 metalens、傳 COUPE 微透鏡供應;惟 CIS 出身、量產 BOM 導入待證</td></tr>
+  <tr><td>ELSFP 外置雷射封裝 / COS 雷射封裝</td><td>眾達-KY 4977 / 聯鈞 3450</td><td><span class="conf c-med">利基/重要供應商(增量)</span></td><td>眾達 Broadcom Bailey ELSFP 備量產;聯鈞 COS 媒體稱 COUPE 策略夥伴。雷射晶片本身歸 InP #19</td></tr>
+  <tr><td>封裝/OSAT(光引擎/SiP/CoWoS 進封裝)</td><td>日月光投控 3711 / 訊芯-KY 6451</td><td><span class="conf c-med">台積主導;OSAT 沾光</span></td><td>日月光後段光電封測(CPO 估 2026 約 10 億美元)、訊芯 SiP 3.2T 光引擎;核心 SoIC/CoWoS 仍台積</td></tr>
+  <tr><td>雷射光源(CW DFB/InP 磊晶)</td><td>(聯亞 3081/全新 2455/華星光 4979,歸 InP #19)</td><td><span class="conf c-med">利基但受惠歸 InP #19</span></td><td>COUPE 用外接 CW、與 InP #19/CPO #1 同一顆雷射,本題只引用不重複計;2026/6 延宕傳聞曾致 9 檔跌停</td></tr>
+  <tr><td>光子晶圓級測試 / KGD / 前段設備</td><td>(致茂 2360/精材 3374 潛在切入、待查;造機國際)</td><td><span class="conf c-low">陪跑/缺席</span></td><td>光子晶圓級 KGD 標準未成熟、設備 ficonTEC/FormFactor/Jenoptik 主導;台廠光測多利基/沾光、缺大佐證</td></tr>
+</table>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>COUPE 世代路線圖、市場與四大黑盒</h2>
+<div class="card">
+  <h3>🔬 COUPE 世代路線圖(gen1 → gen3)</h3>
+  <table>
+    <tr><th>世代</th><th>時程</th><th>形態</th><th>速率/整合</th><th>狀態</th></tr>
+    <tr><td><b>gen1 OSFP 光連接器</b></td><td>2025 qual / 2026 量產</td><td>OSFP 可插拔光收發(放交換器面板、尚非封裝內)</td><td>1.6T/引擎;SoIC-X EIC-on-PIC、外接 CW DFB、FAU 耦合</td><td><span class="conf c-high">已發生/量產倒數</span></td></tr>
+    <tr><td><b>gen2 co-package with CoWoS</b></td><td>官方 2026 進封裝、交換器級放量偏 2027</td><td>COUPE 光引擎與 switch ASIC 一起進 CoWoS(真 CPO、光到主板級)</td><td>6.4T/引擎;引擎內仍 SoIC-X、再以 CoWoS interposer 與 switch 並封</td><td><span class="conf c-med">前瞻(時程有爭議)</span></td></tr>
+    <tr><td><b>gen3 on-package processor</b></td><td>探索期、無明確時程(對應 CoWoS 8x reticle ~2027+)</td><td>光 I/O 直接整合進 GPU/CPU on-package(近似 OIO)</td><td>12.8T/引擎願景;面對更大封裝/更嚴熱預算/雷射可靠度</td><td><span class="conf c-un">遠期願景(勿當現況)</span></td></tr>
+  </table>
+  <div class="callout warn"><b>⚠ 最大 swing factor(估值核心變數):</b>SemiAnalysis(2026/6/9)示警 NVIDIA 800VDC+CPO 量產恐延至 2028-2029——<b>32 顆光引擎上一顆 switch、系統良率僅約 19%</b>+雲端商維修性疑慮(光學壞了要換整台交換器);曾引發美/台光通訊股重挫(AAOI -17%、台股 9 檔跌停)。NVIDIA(Gilad Shainer)反駁稱 2H 放量、台積 200k-300k switch(2027)→600k-800k(2028)。<b>多空未定——熱串擾+FAU+光子 KGD 三黑盒能否如期突破=2026H2-2027 兌現觀察點。受惠股估值對時程極敏感。</b></div>
+  <h3>四大技術黑盒(量產瓶頸)</h3>
+  <table>
+    <tr><th>黑盒</th><th>所在站</th><th>為何難</th><th>解法/狀態</th></tr>
+    <tr><td><b>① hybrid bonding 熱串擾</b></td><td>③ 共整合鍵合</td><td>EIC 發熱疊在對溫度極敏 PIC 上、EIC 當「熱擴散板」反拖垮 PIC 加熱器效率→微環調變器/雷射熱串擾(微環溫度窗 <1°C vs MZI/EAM >30°C)</td><td>玻璃中介層隔熱(低熱導)為前瞻解;選 MZM 較寬鬆但面積大</td></tr>
+    <tr><td><b>② 雷射整合</b></td><td>④ 雷射光源</td><td>InP gain-on-Si 異質整合可靠度/耦合損耗未過關;雷射必須 InP(矽不發光、物理鐵則);外接 vs 整合之爭未收斂</td><td>主流外接 CW/ELSFP(避熱、可維護);整合雷射(Intel)未成熟</td></tr>
+    <tr><td><b>③ 光耦合 FAU 對位</b></td><td>⑤ 光耦合</td><td>次微米對位(~0.5μm)HVM 良率、FAU-PIC 的 CTE 失配溫循應力、光柵 vs 邊緣耦合損耗權衡</td><td>上詮 ReLFACon 解高溫耦合;對位造機進口</td></tr>
+    <tr><td><b>④ 光子 KGD/晶圓級測試</b></td><td>⑦ 光子測試</td><td>邊緣耦合晶圓級自動對位難、光電同步吞吐量低、無統一 KGD 標準=產業公認量產瓶頸在「測試」</td><td>跳過→壞 PIC 疊進昂貴 SoIC/CoWoS 浪費;測太慢又拖累經濟性=兩難,未成熟</td></tr>
+  </table>
+  <h3>市場規模多口徑(⚠ 三口徑差一個量級、務必標明)</h3>
+  <table>
+    <tr><th>研調</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR</th><th>口徑說明</th></tr>
+    <tr><td>MarketsandMarkets</td><td>矽光子(整體)</td><td>2024 US$2.16B</td><td>2030 US$9.65B</td><td>29.5%</td><td>含 transceiver/sensing;與 Mordor/Wissen 同量級(~27-29%)</td></tr>
+    <tr><td>Yole</td><td>矽光子模組(AI 高速)</td><td>2024 早期基期</td><td>2029 US$10.3B</td><td>~45%</td><td>鎖定 AI 拉動高速模組子集、基期窄=高 CAGR</td></tr>
+    <tr><td>Yole</td><td>共封裝光學 CPO(資料中心)</td><td>2024 US$46M</td><td>2030 US$8.1B</td><td>137%</td><td>近零基期放大;CPO=系統層、COUPE/EIC-on-PIC 為其使能製程層、非同一口徑</td></tr>
+    <tr><td>LightCounting</td><td>CPO(含 scale-up+out)</td><td>2024</td><td>2030 US$10B</td><td>—</td><td>含機內+跨機架;指 2026 矽光 transceiver 首度過半(總 ~US$40B)</td></tr>
+    <tr><td>SNS Insider</td><td>CPO(保守口徑)</td><td>2025 US$91M</td><td>2035 US$1.92B</td><td>35.7%</td><td>2035 僅 ~19 億、與 Yole/LightCounting 差一個量級=口徑是否含全鏈</td></tr>
+    <tr><td>GMInsights</td><td>Chiplet 互連(最貼近光 I/O)</td><td>2026 US$2.89B</td><td>2031 US$12.42B</td><td>34.4%</td><td>純「in-package 光 I/O」獨立口徑稀少、多以 chiplet 互連代理、含電性互連</td></tr>
+  </table>
+  <h3>催化劑時間軸(2024 → 2027+)</h3>
+  <ul>
+    <li><b>2024/03(OFC):</b>TSMC 首展 COUPE/OCI gen1 chiplet(4Tbps 雙向、8 波長 DWDM、5 pJ/bit),確立 SoIC-X EIC-on-PIC 路線<span class="conf c-high">已實現</span></li>
+    <li><b>2025/09(SEMICON Taiwan):</b>TSMC 揭露 COUPE 完整三世代路線圖(1.6T OSFP→6.4T CoWoS→12.8T on interposer)<span class="conf c-high">已實現</span></li>
+    <li><b>2025/10:</b>Broadcom 第3代 CPO Tomahawk 6-Davisson(102.4T)明確採 TSMC COUPE、功耗降 70%=COUPE 首個量產級具名客戶<span class="conf c-high">已實現</span></li>
+    <li><b>2026/02:</b>NVIDIA Spectrum-X1600 Ethernet Photonics(409.6T)鎖定 Rubin 級百萬 GPU 叢集<span class="conf c-high">已實現</span></li>
+    <li><b>2026/03(OFC/歐洲 OIP):</b>Alchip+Ayar Labs 展首個 TSMC COUPE-based 光連接方案(每加速器 100Tb/s、UCIe);Samsung 揭 2027 TC-bonding、2029 CPO turnkey<span class="conf c-high">已實現</span></li>
+    <li><b>2026(量產元年):</b>COUPE 平台量產;200G 微環調變器量產;矽光 transceiver 首度過半總 transceiver 市場<span class="conf c-med">進行中</span></li>
+    <li><b>2026H2:</b>NVIDIA Spectrum-X Photonics 上市+Vera Rubin 放量;上詮 ReLFACon FAU 出貨、台廠 FAU/光源/測試鏈同步放量<span class="conf c-un">前瞻</span></li>
+    <li><b>2026-2027:</b>COUPE gen2(6.4T)與 CoWoS 共封裝<span class="conf c-un">前瞻(時程未定)</span></li>
+    <li><b>2027+:</b>COUPE gen3(12.8T)on-package;Samsung 2029 CPO turnkey 對手成形;光子晶圓級 KGD 測試成熟度為放量瓶頸<span class="conf c-un">遠期</span></li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>方向買台積電 2330(壓倒性 alpha、PIC+EIC+SoIC+CoWoS 一條龍);次主軸=上詮 3363(FAU、2026Q3 認證為兌現分水嶺);<b>節奏看 2026H2-2027 客戶放量與測試良率</b>。聯鈞/眾達/采鈺/訊芯/日月光屬利基/沾光、以「催化劑交易」而非「基本面重押」對待;雷射晶片受惠歸 InP #19。⚠ 對 SemiAnalysis 延宕爭議與三黑盒保持時程折價。</div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
+  <ul>
+    <li><b>聯亞股號為 6747(種子原文):</b>更正——聯亞(聯亞光電)正確代號為 <b>3081、上櫃(TPEx)</b>,非 6747(多源財報狗/鉅亨/Goodinfo 一致)。CPO #1/InP #19 亦用 3081</li>
+    <li><b>COUPE 用「65nm EIC」疊上 PIC(種子原文):</b>節點寫反——<b>PIC=65nm SOI 矽光、EIC=先進 CMOS(gen1 65nm-class、新世代往 N6/N7)</b>;類比/驅動電路對節點不敏感故 EIC 用成熟節點兼顧成本良率</li>
+    <li><b>雷射台廠(聯亞/全新/華星光)是本題新增 alpha:</b>誤判——COUPE 雷射採外接 CW DFB,與 CPO #1+InP #19 供同一顆雷射/磊晶,受惠在既有兩題已計,<b>本題基本不新增、只引用避免重複計分</b>(本題雷射軸增量只在 ELSFP 封裝=眾達)</li>
+    <li><b>采鈺/精材/華星光/均華對 COUPE 有實質訂單受惠:</b>待查、未證實——采鈺微透鏡源自 CIS、精材一般 12 吋測試、華星光自有矽光偏低階可插拔、均華是通用 SoIC 設備,均屬台積系或矽光族群「沾光聯想」,非 COUPE 鏈實質。寧標待查不錯殺、但不可當真受惠</li>
+    <li><b>台廠(台積以外)在站③ EIC-on-PIC 3D 鍵合核心有實質參與:</b>未獲佐證——站③在台積電內部完成、設備為國際大廠(BESI/EVG/ASMPT),台廠僅周邊。共整合核心台廠衛星參與度極低</li>
+    <li><b>「CIO」是業界標準縮寫:</b>否——非標準、易與財務長混淆,2026 文獻幾乎不用。正名=EIC-on-PIC 3D 共整合(COUPE/SoIC-X);CPO=系統層、COUPE=引擎使能層</li>
+    <li><b>COUPE gen2/3(6.4T/12.8T)、CPO 已大規模放量:</b>前瞻——2026 是量產「元年」非放量年;gen2 偏 2027、gen3 探索期無時程;SemiAnalysis 示警系統良率約 19%、恐延 2028-29(NVIDIA 反駁),時程高度不確定</li>
+  </ul>
+</div>
+<div class="card"><h3>持續性兩劇本(技術必經 vs 時程未定+台積以外參與薄)</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>多方:CIO/EIC-on-PIC 是真實長線必經路徑</b><br>① 物理:銅互連(224G/448G SerDes)逼物理極限、AI 光互連頻寬密度與每 bit 功耗需求只增,光是唯一解;② 製程:真 3D 垂直疊(SoIC-X)給最短電性路徑、最低寄生、最高頻寬密度(iso-power >23x bump、5-10x 功效、10-20x 低延遲)=CPO 邁向更高頻寬的使能上游;③ 台積定位獨強:COUPE 全球領先、SoIC/hybrid bonding 異質整合台積主導(與 CoWoS 同設備鏈)、PIC+EIC+3D 鍵合一條龍;④ 客戶驗證實打實:Broadcom TH6-Davisson 具名採 COUPE、NVIDIA 生態連動、Alchip+Ayar 首個 COUPE 商用方案;⑤ 台積以外確有真 alpha:上詮 3363(FAU/ReLFACon)。2026 量產元年、catalysts 密集。</div>
+    <div class="callout warn" style="margin:0"><b>空方:商轉時程與良率風險高、台積以外參與分層薄</b><br>① 四黑盒未全解(熱串擾/雷射整合/FAU 對位/光子 KGD 測試=業界共識瓶頸在「測試」);② 需求面:CPO 導入時程一再遞延(serviceability 疑慮)、LPO(線性可插拔,Arista 力推)與銅互連(CPC/224G 續命)壓縮光的急迫性;③ SemiAnalysis 示警系統良率約 19%、恐延 2028-29;④ 市場口徑混亂(CPO vs 矽光子 vs 光 I/O 差一個量級)、估值難精準對應;⑤ <b>除台積與上詮外,多數台廠概念股「沾邊式」參與、實質訂單待 2026H2-2027 兌現</b>;gen2/3 為前瞻路線、勿當現況。</div>
+  </div>
+  <p><b>裁決(verdict):</b><b>分層判斷。【技術層】CIO/EIC-on-PIC(COUPE/SoIC-X)是真實長線、結構性必經技術,銅互連物理極限+AI 光互連需求使方向確定性高——這點不該懷疑。【商轉時程層】2026 是量產「元年」而非放量年,真正規模化受熱串擾/雷射整合/光子晶圓級測試三大未成熟黑盒+CPO 自身導入遞延(LPO/銅續命)牽制,gen2/3 為前瞻、時點高度不確定(SemiAnalysis vs NVIDIA 多空未定)。【台廠參與層(關鍵誠實面)】台積電 2330 是壓倒性、全球領先的最大且最確定 alpha;上詮 3363 為罕見的台積 COUPE FAU 共同開發真夥伴(ReLFACon)、有具體出貨路徑(2026H2)、值得單獨看待;日月光/聯鈞/眾達/采鈺/訊芯屬封測/雷射封裝/光耦合「衛星廠零星」參與、訂單與良率貢獻待兌現、勿過度外推。一句話:方向買台積(+上詮為次主軸),節奏看 2026H2-2027 客戶放量與測試良率,其餘台廠概念股以「催化劑交易」而非「基本面重押」對待。</b></p>
+</div>
+<div class="card"><h3>結構性風險與開放問題</h3>
+  <ul>
+    <li><b>台積獨大、台廠衛星零星:</b>製程核心(站①-③)幾乎全在台積電內部、設備國際大廠;台積以外真 alpha 只有上詮(FAU),其餘多沾光</li>
+    <li><b>時程未定:</b>2026 量產元年非放量年;gen2 偏 2027、gen3 探索期;SemiAnalysis 示警系統良率約 19% 恐延 2028-29(NVIDIA 反駁),受惠股估值對時程極敏感</li>
+    <li><b>四黑盒:</b>熱串擾(EIC 疊 PIC)、雷射整合(InP gain-on-Si)、FAU 次微米對位、光子晶圓級 KGD 測試不成熟=業界共識瓶頸在「測試」</li>
+    <li><b>口徑混亂:</b>CPO vs 矽光子 vs 光 I/O 三口徑差一個量級,引用單一數字務必標研調與口徑</li>
+    <li><b>跨題去重:</b>雷射晶片歸 InP #19、鍵合設備歸 CoWoS #2、系統共封裝/玻璃基板歸 CPO #1;本題淨增量=台積 COUPE+上詮 FAU+采鈺 metalens+眾達 ELSFP+訊芯/日月光 SiP,純加法不雙計</li>
+    <li><b>開放問題(延伸 backlog):</b>上詮「獨家」程度與二供風險;采鈺 metalens 是否確進 COUPE 量產 BOM;訊芯/日月光在 COUPE(非泛 CPO)實際訂單;光子晶圓級測試台廠具體名單;gen3 on-package 時程;MRM vs MZM 路線收斂</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item">TSMC 官方(OFC 2024/SEMICON Taiwan 2025/09/OIP/法說)— COUPE 三世代路線圖(1.6T→6.4T→12.8T)、SoIC-X EIC-on-PIC、頻寬密度 >23x/5-10x 功效、2026 量產<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.broadcom.com/" target="_blank">Broadcom 官方新聞稿</a>(Tomahawk 6-Davisson 採 TSMC COUPE、功耗降 70%);NVIDIA 官方(Quantum-X/Spectrum-X Photonics)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">上詮 3363/聯鈞 3450/日月光 3711/眾達 4977 法說與月營收(公開申報)— FAU/ReLFACon、COS 雷射封裝、FoCoS、ELSFP 進度<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/" target="_blank">TrendForce / Yole / LightCounting / SemiEngineering / SemiWiki</a> — 矽光子/CPO 市場多口徑、COUPE 量產時程、矽光三強對照<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.semianalysis.com/" target="_blank">SemiAnalysis(2026/06/09)</a> — NVIDIA 800VDC+CPO 系統良率約 19%、量產恐延 2028-29(vs NVIDIA Gilad Shainer 反駁 2H 放量);SPIE/researchgate 熱串擾模型;FormFactor/Jenoptik/USPTO 光子 KGD 測試<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">商周/工商時報/鉅亨/cmoney/數位時代(台廠概念股:上詮/聯鈞/采鈺/眾達/訊芯/精材);⚠ 概念股清單多沾光、逐檔已對抗式查證分真受惠/沾光<span class="src-q q-blog">blog</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(EIC-on-PIC 製程鏈 7 站+4 路線之爭+4 黑盒 / 台廠逐檔查證+受惠評分+台積以外誠實下修 / 國際對照+市場多口徑+持續性兩劇本 / COUPE 世代路線圖+機台地圖+名詞釐清+切分模型+台灣吃得到定位)＋ 對抗式查證(聯亞股號 3081 更正、EIC/PIC 節點修正、雷射歸 InP #19 去重、概念股分真受惠/沾光、CIO 正名 EIC-on-PIC、gen2/3 標前瞻)。</p>
+  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明(台積獨大、商轉時程未定、SemiAnalysis 延宕爭議、概念股沾光)。屬時間敏感領域,數據請以最新官方/法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>
