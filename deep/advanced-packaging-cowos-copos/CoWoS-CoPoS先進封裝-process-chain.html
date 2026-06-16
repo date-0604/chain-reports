@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoWoS→CoPoS 先進封裝設備鏈(設備/OSAT/台積電擴產)深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#34d399;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#0e2a22);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#08111d;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(52,211,153,.10)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}.tag{white-space:normal;overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>CoWoS→CoPoS 先進封裝設備鏈(設備/OSAT/台積電擴產)深度研究報告</h1>
+  <div class="sub">中介層/TSV/凸塊/CoW 鍵合/塑封/壓力除泡/磨切/檢測 逐站 × 各站設備 × 晶圓級→面板級(CoPoS/FOPLP)典範轉移;逐站難度、台廠卡位、台積電擴產時程、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
+    <span class="pill">本質：<b>設備資本支出鏈+OSAT+台積電擴產(材料端另研究只銜接)</b></span>
+    <span class="pill">配對淺色版：<b>CoWoS-CoPoS先進封裝-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/兩大判斷</a>
+    <a href="#s2">2. 製程鏈(8 站)</a>
+    <a href="#s3">3. 難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. 面板轉移/市場/時程</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>這是 AI 加速器產能瓶頸從晶圓前段移到「<b>先進封裝</b>」後的設備資本支出鏈題(<b>聚焦設備+OSAT+台積電擴產時程,材料端玻璃基板/T-Glass/ABF/CCL 已另研究、本題只銜接不重複計</b>)。<b>兩條主線:</b>① <b>現在式=CoWoS 擴產</b>:月產能 2025 底約 80K→2026 底 <b>120-130K 片</b>(口徑略異)、台積 2026 CapEx 上修 US$52-56B、委外 24-27 萬片/年給 Amkor+矽品,<b>濕製程(弘塑/辛耘)、壓力除泡(印能)、點膠檢測(萬潤)、die bonder(均華)、OSAT(日月光投控/力成)訂單實質落地</b>(印能前 5 月營收 +83%、弘塑 2025 出機 +70-100%);② <b>未來式=CoPoS/FOPLP 面板級典範轉移</b>:750×620mm 矩形面板取代 12 吋圓晶圓、整套設備重新洗牌,是台廠憑面板/PCB 設備經驗「卡進更核心環節」的世代交替窗口——但魏哲家 2026/6/4 股東會親口「<b>沒有捷徑、還要 2-3 年</b>」=量產 2028 底-2029、屬公司前瞻、勿當現況。<b>天花板:</b>核心曝光/鍵合/磨切/塑封仍美日歐寡占(Applied/TEL/DISCO/EVG/BESI/ASMPT/TOWA),台廠占先進封裝設備 capex 約 <b>1-2 成</b>、贏在客製/價格/在地服務。</div>
+<div class="kpi">
+  <div class="box"><div class="v">80K → 120-130K</div><div class="l">CoWoS 月產能 2025 底→2026 底(口徑略異)</div></div>
+  <div class="box"><div class="v">$46B → 79.4B</div><div class="l">先進封裝市場 2024→2030(Yole,CAGR 9.5%)</div></div>
+  <div class="box"><div class="v">約 1-2 成</div><div class="l">台廠占先進封裝設備 capex(媒體估、贏在客製/在地)</div></div>
+  <div class="box"><div class="v">2028 底-2029</div><div class="l">CoPoS 量產(魏哲家 6/4「2-3 年無捷徑」)</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、製程鏈分層 ＋ 兩大判斷 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>製程鏈與本題範圍</h3>
+  <ul>
+    <li><b>製程鏈:</b>2.5D/3D 先進封裝逐站=① 矽中介層/RDL 重布線 → ② TSV 矽穿孔 → ③ 凸塊 bump/microbump → ④ CoW(Chip-on-Wafer)鍵合 → ⑤ molding 塑封 → ⑥ 壓力除泡/翹曲控制 → ⑦ 磨切 grinding/dicing → ⑧ 檢測/量測。CoWoS 分 -S(全矽中介層,密度最高、上限約 3.3X reticle)/-R(有機 RDL)/-L(局部矽橋 LSI+RDL,超大封裝、Rubin 達 4X reticle、掛 12-24 顆 HBM)。</li>
+    <li><b>典範轉移(核心增量):</b>晶圓級(CoWoS,12 吋圓)→ 面板級(CoPoS/FOPLP,矩形大面板,分階段 310×310→515×510→750×620mm)。面積利用率大增(515×510=12 吋的 4.5 倍、600×600=6 倍)、可做超大封裝,但整套曝光/塗佈/烘烤/檢測設備重新洗牌、翹曲控制變極難。</li>
+    <li><b>台廠定位:</b>台積電「主導」全球 2.5D/3D 高階產能、委外溢出由矽品(日月光投控)承接;設備端台廠卡濕製程(弘塑/辛耘)、壓力除泡烘烤(印能/志聖/群翊)、點膠貼合檢測(萬潤/均華/由田/牧德)、die bonder(均華),核心曝光/鍵合/磨切/塑封仍美日歐;FOPLP OSAT(力成/日月光/群創)台灣進度領先韓中。</li>
+    <li><b>切分:</b>材料端(玻璃基板 GCS/T-Glass/ABF/CCL/底膠塑封料)已各自獨立研究、本題只做一頁銜接、不重複計受惠主體(味之素/Resonac/JSR 主導底膠/塑封/介電,台廠材料端陪跑);本題從「設備 capex 鏈+OSAT+台積擴產時程」角度補強製程站別與訂單佐證。</li>
+  </ul>
+  <div class="g2 grid">
+    <div class="callout info" style="margin:0"><b>🔍 判斷 1:現在式(CoWoS 擴產確定)vs 未來式(CoPoS 選擇權)——時序與確定性必須拆開</b><br>把「<b>CoWoS 現在擴產</b>」與「<b>CoPoS 未來典範轉移</b>」分層看,是本題對投資定位最重要的區分。<b>短中期(2026-2027)=確定性題:</b>台積 CoWoS 擴約 5 成(80K→120-130K)+委外 24-27 萬片是已下單的硬擴產、能見度到 2027,台廠設備股「當下的營收」幾乎全來自此(印能前 5 月 +83%、弘塑 2025 出機 +70-100% 是實質落地非概念)。<b>中長期(2028-2029)=選擇權題:</b>晶圓→面板級 CoPoS/FOPLP 確給台廠卡進更核心環節的機會(面板設備經驗+翹曲控制),但魏哲家 6/4「2-3 年沒捷徑」定調量產 2028 底-2029、良率未驗證、市場規模小且口徑分歧。<b>鐵則:勿把 2028-29 前瞻當現況灌估值。</b></div>
+    <div class="callout warn" style="margin:0"><b>🔍 判斷 2:設備價值量天花板——核心進口(美日歐)vs 台廠周邊(1-2 成)</b><br>先進封裝設備資本支出兩極化。<b>核心高門檻、價值量大、台廠吃不到:</b>曝光(ASML/Nikon/Canon)、電鍍/CMP(Applied/Lam)、hybrid bonding/die bonder(BESI/ASMPT/EVG/SUSS/Shibaura/K&S)、磨切(DISCO 近獨占)、塑封(TOWA)、精密量測(KLA/Onto)。<b>台廠卡周邊:</b>濕製程(弘塑/辛耘)、壓力除泡烘烤(印能/志聖/群翊)、點膠貼合檢測(萬潤/均華/由田/牧德),媒體估占先進封裝設備 capex 約 <b>1-2 成、無硬數字</b>,贏在客製化/價格/在地服務而非技術主導。<b>晶圓→面板化是台廠唯一的結構性升級窗口</b>(面板/PCB 設備 know-how 可移植),但放量在 2027 後設備招標、量產 2028-29。</div>
+  </div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>製程鏈拆解(中介層 → 檢測,8 站)<span class="conf c-high">高信心</span></h2>
+<p class="sub">八站:① 矽中介層/RDL → ② TSV 矽穿孔 → ③ 凸塊 bump → ④ CoW 鍵合 → ⑤ molding 塑封 → ⑥ 壓力除泡/翹曲 → ⑦ 磨切 → ⑧ 檢測。<b>台廠 alpha 在 ⑥(壓力除泡/翹曲,印能自述市佔約 80%)與 ⑧(檢測 AOI 供應鏈完整)、面板級的 ⑤(真空層壓);難度最高的 ① 中介層(曝光/電鍍/CMP 全進口、die shift/翹曲)與 ⑦ 磨切(DISCO 近獨占)台廠陪跑。</b></p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>① 矽中介層 / RDL 重布線 — 全鏈技術密度最高、台廠最淺</h4>
+    <p>先進封裝的「地基」:在 12 吋晶圓(CoWoS-S)或 RDL 載板(-R/-L)上建多層金屬重布線,把上方多顆 GPU/HBM die 的數萬條 I/O 重新繞線到下方基板。含光阻塗佈/曝光顯影/電鍍銅/CMP 多次堆疊。-S 全矽密度最高(上限約 3.3X reticle、~2700mm²)、-L 嵌局部矽橋突破 reticle 做超大封裝。</p>
+    <div class="diff">難點(全鏈最高=20/20):多層微影+電鍍+CMP 堆疊、最細線寬;設備自製度對台廠最低(曝光 ASML/Nikon、電鍍/CMP Applied/Lam/Ebara 全進口)。面板化雖開升級窗口,但 <b>die shift/翹曲導致對位漂移是面板級最難啃的良率殺手</b>(群創 RDL-first 2026 才拚認證)。<b>台廠僅卡濕製程清洗周邊(弘塑/辛耘),核心微影/電鍍/CMP 缺席。</b></div>
+    <div class="who">對應:<span class="tag t-tw">弘塑 3131 / 辛耘 3583(濕製程清洗周邊);面板級 RDL:群創 3481 / 志聖 2467 / 群翊 6664</span> <span class="tag t-intl">ASML / Nikon / Canon / Applied / Lam / TEL / SCREEN / Ebara</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>② TSV 矽穿孔(蝕刻+電鍍填孔)— 核心進口、台廠卡清洗周邊</h4>
+    <p>在矽中介層/晶片上垂直鑽微米級深孔並填銅,做 3D 垂直互連的「電梯井」。流程:深矽蝕刻(Bosch DRIE)挖孔→介電/阻障沉積→電鍍銅填孔→CMP 磨平→背面薄化露出 TSV(reveal)。孔徑越小、深寬比越大,挖孔與無孔洞填銅越難。面板級對應走 TGV(玻璃穿孔、雷射鑽孔)=屬玻璃基板供應鏈(已另研究)。</p>
+    <div class="diff">難點(高=17/20):高深寬比挖孔+無孔洞填銅+背面 reveal 薄化,核心 DRIE/電鍍/CMP 全在 Lam/Applied/Ebara/DISCO;面板級走 TGV「換跑道」但屬玻璃基板供應鏈、本題不重複計。<b>台廠僅卡濕製程清洗(弘塑)、再生晶圓與部分濕蝕刻(辛耘)、缺陷檢測周邊。</b></div>
+    <div class="who">對應:<span class="tag t-tw">弘塑 3131 / 辛耘 3583(濕製程/再生晶圓周邊)</span> <span class="tag t-intl">Lam / Applied / KLA-SPTS / TEL / Ebara / DISCO / ACCRETECH</span> <span class="conf c-high">中高</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>③ 凸塊 Bump / Microbump — 周邊吃得到、核心吃不到</h4>
+    <p>在晶片/中介層接點長出焊接凸塊做 die 對 die、die 對中介層的連接點。流程:UBM 濺鍍→光阻定義→電鍍銅柱(Cu pillar)+焊料(SnAg)→去光阻→回焊成球。AI 大晶片 microbump 上看數十萬顆、間距(pitch)微縮到 40μm 以下,是邁向 hybrid bonding(無凸塊銅對銅直接鍵合)的過渡。凸塊均勻度與共面性直接決定下一站鍵合良率。</p>
+    <div class="diff">難點(中高=15/20):凸塊電鍍核心設備在 Lam/Applied/ASMPT(NEXX),但 microbump 微縮與面板級大面積均勻度是真難題。<b>台廠卡濕製程清洗去膠(弘塑/辛耘)、凸塊 AOI 檢測(由田/牧德)、回焊除泡(印能);面板化放大檢測與除泡需求對台廠正向。</b></div>
+    <div class="who">對應:<span class="tag t-tw">弘塑 3131 / 辛耘 3583 / 印能 7734 / 由田 / 牧德 3563(周邊濕製程+檢測+除泡)</span> <span class="tag t-intl">Lam / Applied / ASMPT(NEXX) / TEL / SCREEN / BTU / KLA / Onto</span> <span class="conf c-high">中高</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>④ CoW Chip-on-Wafer 鍵合 / hybrid bonding — 對準精度最高、均華卡取放</h4>
+    <p>把已測試良好的 GPU/HBM 晶片一顆顆精準放到中介層/晶圓上並鍵合(CoWoS 的「Chip-on-Wafer」)。傳統熱壓鍵合(TCB:凸塊+焊料+加壓加熱);次世代 hybrid bonding(銅對銅+介電對介電直接鍵合、無凸塊、間距<10μm、頻寬密度躍升,SoIC/3D 堆疊用)。對位精度次微米級(<1μm),是全鏈「取放+對準」精度最高的設備站、直接決定 AI 大晶片良率。含暫時鍵合/解鍵合(載板供薄化)。</p>
+    <div class="diff">難點(高=18/20):次微米對位+hybrid bonding 整機由 BESI(Applied 持股 9%)/EVG/SUSS/ASMPT/Shibaura/K&S 壟斷,台廠難自製整機。<b>台廠最有機會=均華 6640(高精度 die bonder/取放,台積 chip sorter 自述市佔逾 95%、G2C+ 聯盟負責面板級 chip-on-panel 鍵合)+辛耘 3583(暫時鍵合載板/解鍵合服務);面板化是均華卡進更核心環節的跳板。</b></div>
+    <div class="who">對應:<span class="tag t-tw">均華 6640(die bonder/取放) / 辛耘 3583(暫時鍵合載板)</span> <span class="tag t-intl">BESI / EVG / SUSS / ASMPT / Shibaura / K&S</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>⑤ Molding 塑封 / 真空層壓 — 晶圓級進口、面板級台廠有實質卡位</h4>
+    <p>用環氧塑封料(EMC)包覆鍵合好的晶片提供機械/散熱/絕緣保護,並決定封裝體翹曲行為。晶圓級用壓縮成型(compression molding);面板級 FOPLP 多用真空層壓把樹脂膜壓合到大面板。填充均勻度、無孔洞(void)、CTE 匹配是控制下游翹曲的源頭。塑封料(底膠/EMC)材料端由日商(味之素/Resonac)主導=屬另研究、本站不展開材料。</p>
+    <div class="diff">難點(中=13/20):晶圓級壓縮成型整機由 TOWA/ASMPT 主導,台廠較難切;但 <b>面板級真空層壓是台廠強項——志聖 2467(G2C+ 負責大面積真空層壓+熱烘烤)、印能 7734(真空壓合除泡)、萬潤 6187(底膠點膠);這套 know-how 與顯示器/PCB 層壓相通,台廠有面板產業經驗優勢。</b></div>
+    <div class="who">對應:<span class="tag t-tw">志聖 2467 / 印能 7734 / 萬潤 6187 / 群翊 6664(面板級真空層壓/點膠)</span> <span class="tag t-intl">TOWA / Apic Yamada / ASMPT;材料(另研究)味之素 / Resonac</span> <span class="conf c-high">中高</span></div>
+  </div></div>
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>⑥ 壓力除泡 / 翹曲控制 ⭐ 台廠卡位最深、定價權最強</h4>
+    <p>封裝過程中底膠填充、塑封、回焊都會夾帶氣泡(void)並因 CTE 不匹配產生翹曲(warpage),用高溫高壓烤箱(壓力除泡爐)把氣泡壓潰排出、同步控制翹曲與助焊劑殘留。這是 AI 大晶片良率的隱形關卡——晶片越大、孔洞與翹曲越致命。印能科技 7734 自述全球先進封裝除泡設備市佔約 8 成,是台廠在先進封裝設備鏈中市佔最高、最具話語權的單一環節。</p>
+    <div class="diff">難點(對台廠最有利=12/20):面板級翹曲控制是典範轉移最難工程問題之一(大面板剛性低、CTE 失配下翹曲被面積放大、角落最嚴重),但 <b>台廠自製度與卡位深度最高——印能除泡自述市佔約 80%(2026 前 5 月營收 +83%、訂單到 2026 底)、第四代 EvoRTS 獲 2025 R&D 100 Awards(亞洲唯一);志聖/群翊熱烘烤、均豪 5443 翹曲量測;G2C+ 聯盟整套衝著面板級翹曲控制而來=「難題即商機」。</b></div>
+    <div class="who">對應:<span class="tag t-tw">印能 7734(除泡,自述市佔約 80%) / 志聖 2467 / 群翊 6664 / 均豪 5443(翹曲量測)</span> <span class="tag t-intl">(此環節國際對手相對分散、台廠印能為自述市佔領導者)</span> <span class="conf c-high">中高</span></div>
+  </div></div>
+  <div class="step"><div class="num">7</div><div class="body">
+    <h4>⑦ 磨切 Grinding / Dicing(薄化與切割)— DISCO 近獨占、台廠陪跑</h4>
+    <p>封裝完成後把晶圓/面板背面研磨減薄(thinning,讓 TSV reveal、降厚度與翹曲),再切割(dicing)成單顆封裝體。AI 大晶片要求超薄化(<50μm)又不能破裂、切割道極窄又要零崩裂(chipping),是機械精度與良率硬仗。DISCO 在薄化與切割幾近獨占、ACCRETECH 居次,Yole 估薄化設備市場 2025 約 5.82 億美元→2030 約 8.45 億美元。</p>
+    <div class="diff">難點(高=18/20):超薄化+零崩裂切割機械門檻高、DISCO 近獨占使台廠自製度極低、卡位淺(僅量測/周邊);面板化雖開量測機會但核心整機仍進口。<b>台廠卡面板級磨切量測(均豪 5443 G2C+ 分工)、雷射切割(鈦昇)、磨切前後清洗(弘塑/辛耘)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">均豪 5443(磨切量測) / 弘塑 3131 / 辛耘 3583 / 鈦昇(雷射切割)</span> <span class="tag t-intl">DISCO(近獨占) / ACCRETECH</span> <span class="conf c-high">中高</span></div>
+  </div></div>
+  <div class="step"><div class="num">8</div><div class="body">
+    <h4>⑧ 檢測 / 量測(AOI/X-ray/SAM)⭐ 台廠卡位第二深</h4>
+    <p>貫穿全鏈的良率守門員:RDL 線寬/疊對量測、凸塊共面性 3D 量測、鍵合對位檢查、翹曲量測、塑封 void/裂紋檢測(AOI/X-ray/超音波 SAM)、最終電性測試。AI 大晶片單價極高、一顆報廢損失大,先進封裝把「早檢、勤檢、面板級量越多」推到極致。</p>
+    <div class="diff">難點(對台廠較友善=11/20):高階缺陷量測(KLA/Onto)門檻高仍進口,但 <b>台廠在 AOI/光學檢測卡位深(由田/牧德/萬潤完整供應鏈);面板化是「量的爆發」——面板越大、單片待檢 die/凸塊/RDL 越多,AOI 設備吞吐量與台數需求倍增=最即時、最確定的台廠受惠</b>;面板級檢測量測由均豪 5443(G2C+)承接。</div>
+    <div class="who">對應:<span class="tag t-tw">萬潤 6187 / 由田 / 牧德 3563 / 均華 6640 / 均豪 5443(AOI/3D/面板級量測)</span> <span class="tag t-intl">KLA / Onto / CyberOptics / Nordson / Sonoscan</span> <span class="conf c-high">中高</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐站難度 ＋ 公司受惠強度評分</h2>
+<p class="sub">難度維度:技術門檻 / 設備被美日歐卡(台廠自製度低=分高) / 良率·翹曲挑戰 / 台廠進入難度,各 0~5 分(5＝最難/最被卡)。⚠ <b>本題特殊:台廠 alpha 在難度「較低」的 ⑥ 除泡/⑧ 檢測/⑤ 面板級層壓;難度最高的 ① 中介層、⑦ 磨切、④ 鍵合台廠陪跑/卡周邊。</b>評分為推估。</p>
+<table>
+  <tr><th>製程站</th><th>技術門檻</th><th>設備被卡</th><th>良率/翹曲</th><th>台廠進入難度</th><th>總分/20</th><th>台廠位置</th></tr>
+  <tr><td><b>① 矽中介層/RDL</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>陪跑(曝光/電鍍/CMP 全進口、僅濕製程周邊)</td></tr>
+  <tr><td><b>④ CoW 鍵合/hybrid bonding</b></td><td>5</td><td>4</td><td>5</td><td>4</td><td><b>18</b></td><td>利基(均華卡取放;BESI/EVG/ASMPT 整機壟斷)</td></tr>
+  <tr><td><b>⑦ 磨切 grinding/dicing</b></td><td>4</td><td>5</td><td>4</td><td>5</td><td><b>18</b></td><td>陪跑(DISCO 近獨占、僅量測周邊)</td></tr>
+  <tr><td>② TSV 矽穿孔</td><td>4</td><td>5</td><td>4</td><td>4</td><td><b>17</b></td><td>陪跑(Lam/Applied 主導、濕製程周邊)</td></tr>
+  <tr><td>③ 凸塊 bump</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>15</b></td><td>周邊(電鍍進口;檢測/除泡台廠卡)</td></tr>
+  <tr><td>⑤ molding 塑封 ⭐</td><td>3</td><td>4</td><td>3</td><td>3</td><td><b>13</b></td><td>面板級台廠卡(志聖真空層壓)</td></tr>
+  <tr><td>⑥ 壓力除泡/翹曲 ⭐</td><td>4</td><td>2</td><td>4</td><td>2</td><td><b>12</b></td><td>台廠主導(印能自述市佔約 80%)</td></tr>
+  <tr><td>⑧ 檢測/量測 ⭐</td><td>3</td><td>3</td><td>3</td><td>2</td><td><b>11</b></td><td>重要供應商(由田/牧德/萬潤 AOI 完整)</td></tr>
+</table>
+<div class="callout"><b>台廠的位置(關鍵):</b>台廠 alpha 在 <b>⑥ 壓力除泡/翹曲(印能自述市佔約 80%、面板化難題即商機)、⑧ 檢測(AOI 供應鏈完整、面板化量爆發最即時)、⑤ 面板級真空層壓(志聖 G2C+)</b>——都是難度「較低」、面板化升級機會最直接的站。難度最高的 <b>① 中介層(曝光/電鍍/CMP 全進口)、⑦ 磨切(DISCO 近獨占)、② TSV(Lam/Applied)、④ 鍵合(BESI/EVG/ASMPT 整機)台廠陪跑/卡周邊</b>。即「台積電擴產確定、台廠設備鏈有量吃,但核心高價值站仍美日歐、台廠占設備 capex 約 1-2 成」。</div>
+<h3>公司受惠強度評分(報酬,holds 10 檔)</h3>
+<p class="sub">維度:AI 封裝受惠 / 技術卡位 / 放量時程(CoWoS 現在 vs CoPoS 2028-29) / 利基壁壘 / 規模財務,各 0~5 分;總分由高到低。皆 verification=high。評分為推估,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>型態</th><th>AI受惠</th><th>技術卡位</th><th>放量時程</th><th>利基壁壘</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>弘塑 3131</td><td>CoWoS 濕製程設備</td><td>5</td><td>4</td><td>5</td><td>4</td><td>3</td><td><b>21</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>印能科技 7734</td><td>壓力除泡/烤箱(自述市佔約 80%)</td><td>5</td><td>4</td><td>5</td><td>5</td><td>2</td><td><b>21</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>均華 6640</td><td>die bonder/chip sorter(逾 95%)</td><td>5</td><td>5</td><td>4</td><td>5</td><td>2</td><td><b>21</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>辛耘 3583</td><td>濕製程+再生晶圓/載板(自製>60%)</td><td>4</td><td>4</td><td>5</td><td>4</td><td>3</td><td><b>20</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>日月光投控 3711</td><td>OSAT 委外承接+FOPLP(規模最大)</td><td>4</td><td>4</td><td>4</td><td>3</td><td>5</td><td><b>20</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>志聖 2467</td><td>烤箱/Carrier Bonder/真空層壓</td><td>4</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>19</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>群創 3481</td><td>FOPLP 面板級(chip-first 已量產)</td><td>4</td><td>4</td><td>4</td><td>3</td><td>4</td><td><b>19</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>萬潤 6187</td><td>點膠/貼合/檢測(台積合格)</td><td>4</td><td>4</td><td>4</td><td>3</td><td>3</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>力成 6239</td><td>FOPLP OSAT 先行者(2027 量產)</td><td>4</td><td>4</td><td>3</td><td>3</td><td>4</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>群翊 6664</td><td>塗佈/烘烤(高階接單 75%)</td><td>4</td><td>3</td><td>4</td><td>3</td><td>2</td><td><b>16</b></td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<p class="sub"><b>弘塑/印能/均華(並列 21)</b>=各自卡最強利基:弘塑(CoWoS 濕製程、訂單到 2027H1、2026Q1 EPS 16.11)、印能(壓力除泡自述市佔約 80%、前 5 月 +83%)、均華(台積 chip sorter 逾 95%、先進封裝占比 93-95%);<b>辛耘 20</b>(自製設備>60%+再生晶圓雙引擎、本輪自玻璃題 watch 升核心);<b>日月光投控 20</b>(委外承接 OSAT 規模最大、ASE+SPIL+Amkor 類 CoWoS 月產能上看 40 萬片);<b>志聖 19</b>(Carrier Bonder 現在 CoWoS 營收+G2C+ 領銜);<b>群創 19</b>(chip-first FOPLP 已量產、G3.5 700×700mm);<b>萬潤 18</b>(台積合格、點膠檢測+CPO 選擇權);<b>力成 18</b>(FOPLP 先行者、2027 量產、現在營收貢獻仍小);<b>群翊 16</b>(塗佈烘烤、面板級選擇權)。⚠ 印能/均華/群翊規模小(scoreScale 2)、毛利與客戶集中度須留意;受惠評分為推估。</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐站對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 法說/官方/月營收實績</span>
+  <span><span class="conf c-med">中</span> 研調/媒體彙整/公司自述</span>
+  <span><span class="conf c-un">待查</span> 概念/選擇權(不否定)</span>
+</div>
+<h3>台廠 × 角色對照(依製程站)</h3>
+<table>
+  <tr><th>公司(股號)</th><th>製程站/型態</th><th>角色 / 最新數字</th><th>查證</th></tr>
+  <tr><td>弘塑 3131(上市)</td><td>濕製程設備(CoWoS 現在營收)</td><td>半導體濕製程設備主力,卡 CoWoS/SoIC/整面板電鍍周邊。2026Q1 合併營收 15.96 億、年增 28.65%、EPS 16.11;<b>訂單能見度延伸至 2027H1、2025 設備出貨 170-200 台(年增 70-100%)</b>;香山二期上半年起貢獻。媒體稱「CoWoS 三傑之首」(無官方排名)</td><td><span class="conf c-high">高;三傑為彙整說法</span></td></tr>
+  <tr><td>印能科技 7734(上櫃)</td><td>壓力除泡/烤箱(CoWoS 現在營收)</td><td>先進封裝除泡(壓合/VTS/EvoRTS)設備,解 Void/Warpage/Flux Residue 三痛點。<b>2026 前 5 月累計營收 15.6 億、年增 83.17%(5 月單月 +137%)、訂單能見度至 2026 底</b>;CPO 設備 2026Q2 末量產;第四代 EvoRTS 獲 2025 R&D 100 Awards(亞洲唯一)。⚠ 除泡市佔約 80% 為公司自述、缺第三方</td><td><span class="conf c-high">高(月營收實績);市佔自述</span></td></tr>
+  <tr><td>均華 6640(上市)</td><td>die bonder/chip sorter(CoWoS+CoPoS)</td><td>高精度晶粒挑揀/黏晶/沖切/雷射檢測設備;<b>台積電 chip sorter 主供應商、該品自述市占逾 95%</b>。2026 Die Bonder 占比 38%→47%(H2 放量)、先進封裝占比拉至 93-95%;<b>台積 CoPoS 首波設備供應鏈 13 家之一、G2C+ 聯盟成員(志聖/均豪/均華)負責面板級 chip-on-panel 鍵合</b></td><td><span class="conf c-high">高;sorter 逾 95% 自述</span></td></tr>
+  <tr><td>辛耘 3583(上市)</td><td>濕製程+再生晶圓/貼合剝離(現在營收)</td><td>濕製程與貼合/剝離(debonding)中段設備,對應台積南科/亞利桑那 CoWoS;<b>自製設備占比逾 60%(非代理為主)、2026 自製設備+再生晶圓營收比重首度逾 5 成</b>。2025 營收 113.71 億、EPS 13.82;2026Q1 EPS 4.14 創同期新高。<b>本輪自玻璃題 watch 升核心受惠</b></td><td><span class="conf c-high">高(法說)</span></td></tr>
+  <tr><td>日月光投控 3711(上市)</td><td>OSAT 委外承接+FOPLP(規模最大)</td><td>全球前 2 大 OSAT,含矽品(SPIL)承接台積 CoWoS 委外溢出。<b>2026 ASE+SPIL+Amkor 類 CoWoS 月產能合計上看約 40 萬片</b>;矽品二林/斗六新廠 2026 備妥;FOPLP 高雄路竹線 2025 底試產(投 2 億美元、300×300→規劃 600×600mm)。2026 CapEx 創高約 US$70 億</td><td><span class="conf c-high">高;委外片數口徑略異</span></td></tr>
+  <tr><td>志聖 2467(上市)</td><td>烤箱/Carrier Bonder/真空層壓(CoWoS+CoPoS)</td><td>壓合、貼膜/撕膜、烘烤設備,橫跨半導體/IC 載板/PCB/面板。<b>提供 CoWoS 用 Carrier Bonder=現在就有 CoWoS 營收;先進封裝營收占比 40%→朝 54%</b>、2026Q1 獲利年增逾 2 倍。<b>領 G2C+ 聯盟(志聖+均豪+均華)攻面板級翹曲控制;CoPoS 大尺寸熱製程為 2027-2029 增量選擇權</b></td><td><span class="conf c-high">高;CoPoS 份額待招標</span></td></tr>
+  <tr><td>群創 3481(上市)</td><td>FOPLP 面板級(chip-first 已量產)</td><td><b>Chip-first FOPLP 已量產:用既有 G3.5 玻璃載板(700×700mm、業界最大量產尺寸),面板面積為 FOWLP 7 倍、成本降約 20-30%、已克服翹曲</b>。2026 FOPLP 出貨估年增逾 10 倍;Chip-First→RDL-First→TGV 三階段。⚠ 傳以 FOPLP 切入 SpaceX RF 晶片地面端為媒體傳聞、未具名證實;尺寸 700×700 vs 620×750 兩來源並存</td><td><span class="conf c-high">高;SpaceX 為傳聞</span></td></tr>
+  <tr><td>萬潤 6187(上櫃)</td><td>點膠/貼合/檢測/散熱(CoWoS+CPO)</td><td>台積電合格供應鏈,封測設備占營收 8-9 成;產品涵蓋點膠、貼合、檢測、散熱,CoWoS 設備鏈具高市占並延伸 SoIC/CoPoS;<b>矽光子(CPO)高精度點膠貼合進客戶驗證、CPO 營收占比估 2026 約 9%→2027 約 35%(市場估、非公司指引)</b>。訂單看到 2026H1、下半年優於上半年</td><td><span class="conf c-high">高;CPO 占比為市場估</span></td></tr>
+  <tr><td>力成 6239(上市)</td><td>FOPLP OSAT 先行者(2027 量產)</td><td>全球前五大封測、FOPLP 先行者。<b>FO-PLP 良率逼近 94-95%、2026H2 進客戶產品認證、目標 2027H1 量產;2026 capex 大幅上修至 500 億聚焦 FOPLP+先進封裝</b>(原 400 億偏低)。2026Q1 創三年新高、EPS 2.50;<b>FOPLP 現在營收貢獻仍小</b>;延伸 CPO;AMD 在台擴 AI 基建導入其先進封裝</td><td><span class="conf c-high">高;2027 量產為前瞻</span></td></tr>
+  <tr><td>群翊 6664(上市)</td><td>塗佈/烘烤乾燥(現在營收+面板選擇權)</td><td>塗佈乾燥設備領導者(原 PCB 乾燥)。<b>先進封裝/玻璃基板/IC 載板/AI 伺服器高階設備接單占比達 75%、訂單能見度至 2026H1=現在就有先進封裝(含 CoWoS)營收</b>;面板級 CoPoS/FOPLP 烘烤環節放量等 2027 後設備招標。<b>註:G2C+ 聯盟為志聖+均豪+均華,群翊非該聯盟成員(獨立卡塗佈烘烤)</b></td><td><span class="conf c-high">高;CoPoS 份額待招標</span></td></tr>
+  <tr><td>均豪 5443(上市)</td><td>(觀察)面板級檢測/磨切/翹曲量測</td><td>G2C+ 聯盟第二家(志聖+均豪+均華),負責面板級檢測/磨切/量測與翹曲量測。CoPoS 量產 2028-29 才放量=未來選擇權;與均華 6640 為不同公司、勿混。本輪自玻璃題 watch 沿用觀察</td><td><span class="conf c-un">待查(CoPoS 選擇權)</span></td></tr>
+  <tr><td>采鈺 6789(上市)</td><td>(觀察)台積 CoPoS 首條試產線執行</td><td>台積電子公司(VisEra),<b>設台積 CoPoS 首條試產線(2026/2 進駐、6 月完工)</b>。CoPoS 量產 2028-29、屬未來選擇權;本業影像感測(CIS)。⚠ 已在玻璃基板 guide 計入、本題僅標執行方</td><td><span class="conf c-un">待查(CoPoS 選擇權)</span></td></tr>
+  <tr><td>牧德 3563(上市)</td><td>(觀察)面板級 AOI 檢測選擇權</td><td>AOI/3D 光學檢測,面板級需多角度多相機檢測、面板廠/PCB AOI 經驗可移植=面板化升級選擇權。現以 PCB/載板 AOI 為主、面板級先進封裝為新切入</td><td><span class="conf c-un">待查(面板化選擇權)</span></td></tr>
+</table>
+<p class="sub">⚠ 股號核對(皆上市/上櫃):弘塑 3131、辛耘 3583、印能 7734(上櫃)、萬潤 6187(上櫃)、均華 6640、志聖 2467、群翊 6664、力成 6239、日月光投控 3711、群創 3481、均豪 5443、采鈺 6789、牧德 3563、台積電 2330。<b>G2C+ 聯盟=志聖+均豪(5443)+均華(6640)</b>(種子誤植群翊已更正);<b>均豪 5443 與均華 6640 為不同公司</b>;由田、鈦昇本輪未確認股號(留名不冒填)。<b>本題受惠主體與「玻璃基板 GCS」guide 高度重疊=同一批設備/OSAT 股的「設備 capex 鏈」視角、不另計受惠主體、避免 dashboard 雙計</b>(詳見 guide.json notes);材料端(玻璃/T-Glass/ABF/CCL)歸各自 segment、不在本題評。</p>
+<h3>國際 × 角色(核心設備寡占 + OSAT + 台積電)</h3>
+<table>
+  <tr><th>公司</th><th>國別/環節</th><th>角色</th><th>查證</th></tr>
+  <tr><td>台積電 TSMC(2330)</td><td>台 · 封裝製程/擴產決策方(主導)</td><td>全球 2.5D/3D 高階先進封裝主導者、CoWoS-S/-R/-L 與 CoPoS 規格定義方。決定擴產時程(80K→120-130K/月)、委外配額、CapEx(2026 US$52-56B)、面板級典範轉移(嘉義 AP7 為 CoPoS 主基地)。掌握定價與整套設備認證權,台廠設備/材料/委外皆繞其轉</td><td><span class="conf c-high">高(官方+6/4 股東會)</span></td></tr>
+  <tr><td>Applied / Lam / TEL / SCREEN</td><td>美/日 · 核心設備(沉積/CMP/電鍍/塗佈顯影)</td><td>先進封裝前段核心設備龍頭群。<b>Applied 2025/4 入股 BESI 約 9% 推 die-to-wafer 整合線、與 Resonac/TEL 合攻面板級 interposer</b>;Lam 蝕刻/銅電鍍;SCREEN 清洗/塗佈顯影標竿;TEL 塗佈顯影/蝕刻。台廠在此環節受其主導(弘塑/辛耘僅卡濕製程周邊)</td><td><span class="conf c-high">高(公告+TrendForce)</span></td></tr>
+  <tr><td>DISCO / ACCRETECH / TOWA</td><td>日 · 核心設備(磨切/塑封)</td><td><b>DISCO=晶圓/面板磨削切割絕對龍頭(grinder+dicing saw 近寡占)</b>、ACCRETECH 居次;TOWA=壓縮成型塑封龍頭(ASMPT/Apic Yamada 次)。先進封裝後段磨切與塑封站台廠幾乎無參與</td><td><span class="conf c-high">高(磨切/塑封寡占)</span></td></tr>
+  <tr><td>BESI / ASMPT / EVG / SUSS / Shibaura</td><td>荷/星·港/奧/德/日 · 鍵合(die bonder/hybrid/TCB)</td><td><b>hybrid bonding/TCB/die bonder 國際龍頭群:BESI(die-to-wafer hybrid bonding 龍頭,Applied 入股 9%)、ASMPT(TCB+die bonder)、EVG/SUSS(W2W/D2W 鍵合+暫時鍵合/解鍵合)、Shibaura(CoW FC bonder)、K&S</b>。台廠均華為在地對照但量級懸殊</td><td><span class="conf c-high">高(產業共識)</span></td></tr>
+  <tr><td>Amkor / Samsung / 長電 / 通富</td><td>美/韓/中 · OSAT/2.5D 對手</td><td>Amkor=台積 CoWoS 委外最大承接方(2026 估 18-19 萬片/年、已過 NVIDIA 認證);Samsung=垂直整合對手(I-Cube/HBM/FOPLP)、CoPoS 主要競爭對照;長電 XDFOI 2.5D 量產 4nm 多晶片、通富綁 AMD 做 CoWoS-like。中韓追趕、台灣進度領先</td><td><span class="conf c-high">高(媒體+公司)</span></td></tr>
+</table>
+<h3>台灣吃得到多少(逐製程站定位)</h3>
+<p class="sub">一句話:<b>封裝製程=主導(台積/矽品);壓力除泡=台廠主導(印能自述約 80%);檢測 AOI=重要供應商;濕製程/die bonder/面板級層壓=利基/重要供應商;FOPLP OSAT=重要供應商(台灣領先);曝光/鍵合/磨切/塑封=缺席/陪跑(美日歐)。</b>定位為質化判斷。</p>
+<table>
+  <tr><th>製程站</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>封裝製程(2.5D/3D 高階產能)</td><td>台積電 2330 / 矽品·日月光投控 3711</td><td><span class="conf c-high">主導</span></td><td>台積主導全球 2.5D/3D 高階產能、CoWoS 80K→120-130K、CapEx 近 US$50B;委外矽品承接;對手 Amkor/Samsung</td></tr>
+  <tr><td>壓力除泡/翹曲控制 ⭐</td><td>印能 7734 / 志聖 2467 / 均豪 5443</td><td><span class="conf c-high">台廠主導(利基)</span></td><td>印能除泡自述市佔約 8 成、前 5 月 +83%;面板級翹曲控制 G2C+ 整套,面板化難題即商機</td></tr>
+  <tr><td>檢測/量測 AOI ⭐</td><td>萬潤 6187 / 由田 / 牧德 3563 / 均華 6640</td><td><span class="conf c-high">重要供應商</span></td><td>AOI 光學檢測完整供應鏈;面板化「量爆發」最即時受惠;高階量測 KLA/Onto 仍進口</td></tr>
+  <tr><td>濕製程(清洗/蝕刻/電鍍周邊)</td><td>弘塑 3131 / 辛耘 3583</td><td><span class="conf c-high">重要供應商(現在營收)</span></td><td>卡 CoWoS 清洗/去膠/電鍍周邊;弘塑出機 170-200 台、辛耘自製>60%;電鍍/蝕刻主機仍美日</td></tr>
+  <tr><td>die bonder/取放(鍵合主機)</td><td>均華 6640</td><td><span class="conf c-med">利基(主機被卡)</span></td><td>均華台積 chip sorter 逾 95%、G2C+ 面板級 chip-on-panel 鍵合;TCB/hybrid 整機 ASMPT/BESI 壟斷</td></tr>
+  <tr><td>面板級真空層壓/烘烤</td><td>志聖 2467 / 群翊 6664 / 印能 7734</td><td><span class="conf c-med">面板級台廠強項(選擇權)</span></td><td>面板/PCB 層壓 know-how 可移植;CoPoS 量產 2028-29 才放量=未來選擇權</td></tr>
+  <tr><td>FOPLP OSAT(面板級封裝代工)</td><td>力成 6239 / 日月光投控 3711 / 群創 3481</td><td><span class="conf c-high">重要供應商(台灣領先)</span></td><td>力成 2027 量產(良率 94-95%)、群創 chip-first 已量產、日月光高雄試產;vs 韓 Samsung/中國長電,台灣進度領先</td></tr>
+  <tr><td>曝光/鍵合/磨切/塑封(核心主機)</td><td>(美日歐:ASML/Lam/TEL/DISCO/EVG/BESI/ASMPT/TOWA/KLA)</td><td><span class="conf c-low">缺席/陪跑</span></td><td>核心整機美日歐天下;DISCO 磨切寡占、TOWA 塑封、ASML 曝光;台廠占設備 capex 約 1-2 成(媒體估)</td></tr>
+</table>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>晶圓→面板典範轉移模型、市場與催化劑</h2>
+<div class="card">
+  <h3>🔬 晶圓級(CoWoS)→面板級(CoPoS/FOPLP)設備鏈洗牌模型</h3>
+  <p><b>核心釐清(現在式 vs 未來式):</b>台廠設備股「當下的營收」幾乎全來自 CoWoS 晶圓級擴產;CoPoS 面板級是 2027-2029 才放量的未來選擇權、屬公司自述前瞻——這是本題對投資定位最重要的區分。</p>
+  <table>
+    <tr><th>面向</th><th>晶圓級(CoWoS,現在式)</th><th>面板級(CoPoS/FOPLP,未來式)</th><th>對台廠意義</th></tr>
+    <tr><td><b>載體</b></td><td>12 吋圓晶圓(直徑 300mm)</td><td><b>矩形大面板</b>(分階段 310×310→515×510→750×620mm;515×510=12 吋 4.5 倍面積、600×600=6 倍)</td><td>面積利用率大增、可做超大封裝</td></tr>
+    <tr><td><b>逐站設備重做</b></td><td>圓形步進曝光/旋塗/晶圓腔體,設備成熟但鎖在美日歐</td><td><b>大視野曝光或分段步進(field stitching)、槽式/狹縫塗佈、面板級層壓/烘烤/多角度 AOI</b>,整套重新洗牌</td><td>台廠面板/PCB 設備經驗反成優勢=升級窗口</td></tr>
+    <tr><td><b>良率殺手</b></td><td>成熟、翹曲可控</td><td><b>die shift/翹曲被面積放大(角落最嚴重)、面板級 RDL 線寬/疊對對位漂移</b>=面板級最難啃</td><td>翹曲控制(印能除泡/G2C+)是台廠卡更核心環節的支點</td></tr>
+    <tr><td><b>量產時程</b></td><td>已量產多年、2026 擴 5 成</td><td>CoPoS 2028 底-2029(魏哲家 6/4「2-3 年無捷徑」、嘉義 AP7);FOPLP 力成 2027 放量、群創 chip-first 已量產</td><td>CoWoS=現在式營收;CoPoS=未來選擇權</td></tr>
+  </table>
+  <div class="callout info"><b>台廠升級機會(面板/PCB 設備經驗可移植)vs 仍被卡的站:</b><br><b>有升級機會:</b>志聖/群翊(面板/PCB 塗佈烘烤)、由田/牧德(面板 AOI)、印能(除泡腔體放大)、均華/均豪(G2C+ 取放/量測)在「面板大面積控制」有經驗紅利——這是 wafer 世代被美日歐卡死、面板世代台廠「卡進更核心環節」的世代交替窗口。<br><b>仍被美日歐卡:</b>曝光(ASML)、鍵合 TCB/hybrid(ASMPT/BESI/Shibaura/K&S)、磨切(DISCO)、塑封(TOWA)、精密量測(KLA)——面板化不改變這些主機的技術壁壘。<br><b>⚠ CoWoP 釐清(非主軸):</b>CoWoP=Chip-on-Wafer-on-PCB(P=PCB,以強化 PCB 主機板取代 IC 載板)=仍是晶圓級製程、只換底層載板,與 CoPoS(改中介層載體、圓晶圓→方玻璃面板、仍有 interposer)<b>方向不同、非同義詞</b>;CoWoP 非台積官方標準量產製程名(媒體 DigiTimes 帶出、日月光推),本報告不當主軸,面板級正名以官方 CoPoS 為準。</div>
+  <h3>市場規模多口徑(先進封裝/CoWoS/FOPLP)</h3>
+  <table>
+    <tr><th>研調/來源</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR</th><th>口徑說明</th></tr>
+    <tr><td>Yole Group</td><td>先進封裝整體市場(<b>主口徑</b>)</td><td>2024 US$46B</td><td>2030 US$79.4B</td><td>9.5%</td><td>一級研調最權威;電信/基建(AI 加速器)為最快段 CAGR 14.9%(Yole 2025/09)</td></tr>
+    <tr><td>TSMC(官方/法說)</td><td>台積先進封裝產能倍數</td><td>基準 2023</td><td>2026=10x / 2027=15x</td><td>CoWoS 2023-2028 >50%</td><td>官方前瞻;TrendForce 另估先進封裝 CapEx 2025-27 CAGR 24%</td></tr>
+    <tr><td>媒體彙整(TrendForce/Digitimes 多源)</td><td>CoWoS 月產能(片/月)</td><td>2025 底約 80K</td><td>2026 底 120-130K</td><td>近翻倍</td><td><b>口徑分歧須並列:</b>弘塑鏈引述 7 萬→10 萬→13 萬(2025→2026→2027 底)、媒體另估 12.5 萬/127K/140K/150K,量級接近但落點不同</td></tr>
+    <tr><td>ReAnIn</td><td>FOPLP 扇出面板級封裝</td><td>2025 US$2.41B</td><td>2032 US$7.39B</td><td>17.4%</td><td>二線研調,與 Dataintelo 並列、僅量級參考</td></tr>
+    <tr><td>Dataintelo</td><td>FOPLP 扇出面板級封裝</td><td>2025 US$3.8B</td><td>2034 US$11.2B</td><td>12.8%</td><td>二線研調,基準年/區間不同致差異大、僅量級參考</td></tr>
+    <tr><td>Yole</td><td>薄化(grinding)設備市場</td><td>2025 US$5.82 億</td><td>2030 US$8.45 億</td><td>約 7.7%</td><td>DISCO 近獨占之站、佐證磨切設備量級(台廠陪跑)</td></tr>
+    <tr><td>媒體彙整(36kr/Digitimes)</td><td>CoWoS 委外片數(2026)</td><td>2026</td><td>總委外 24-27 萬片/年</td><td>—</td><td>Amkor 約 18-19 萬+矽品 6-8 萬;聚焦 CoW 高吞吐段、台積保留高毛利前段;NVIDIA 鎖逾 60% 台積 2026 封裝(訂約約 59.5 萬片、CoWoS-L 約 51 萬)</td></tr>
+  </table>
+  <h3>催化劑時間軸(2026 → 2029)</h3>
+  <ul>
+    <li><b>2026/6/4(已發生·官方):</b>台積股東會魏哲家首給 CoPoS 路線圖——「沒有捷徑、還要 2-3 年」(=2028 底-2029)、用玻璃基板解大尺寸翹曲與產能瓶頸、聚焦客戶共驗良率;2026 全年營收估增逾 30%、AI 供給數年仍不足<span class="conf c-high">已發生</span></li>
+    <li><b>2026/6(進行中):</b>CoPoS 試產線完工(2026/2 進駐采鈺 VisEra、6 月完工);750×620mm 面板取代 12 吋圓晶圓、整套面板級設備重新洗牌<span class="conf c-med">即將完成</span></li>
+    <li><b>2026 月度(已發生·實績):</b>印能營收高速成長確認除泡/烤箱拉貨(前 5 月 +83.17%、5 月 +137%、訂單到 2026 底);弘塑 2025 出機 170-200 台(+70-100%)<span class="conf c-high">已發生</span></li>
+    <li><b>2026 全年(已宣布·官方):</b>台積 2026 CapEx 上修至 US$52-56B、先進封裝占比上修,雙倍 CoWoS 產能迎 NVIDIA Rubin;NVIDIA Rubin CoWoS-L 滿載(鎖逾 60% 台積 2026 封裝)<span class="conf c-high">已宣布</span></li>
+    <li><b>2026H2(前瞻):</b>台積 CoWoS 委外放量給 Amkor(18-19 萬片/年)+矽品(6-8 萬片/年),聚焦 CoW 階段;OSAT 設備鏈(弘塑/辛耘/萬潤)同步受惠<span class="conf c-med">排程中</span></li>
+    <li><b>2026 全年(進行中):</b>日月光 ASE 面板級擴產(高雄 FOPLP 已量產 300×300mm→規劃 600×600mm、2026 CapEx 創高約 US$70 億)<span class="conf c-med">進行中</span></li>
+    <li><b>2026H2-2027H1(前瞻):</b>力成 FOPLP 由試產轉量產(良率約 95%、客戶驗證 2026 下半、量產 2027 上半、2026 capex 上修 500 億)<span class="conf c-un">排程中</span></li>
+    <li><b>2027 後(前瞻/選擇權):</b>CoPoS 面板級設備招標啟動(G2C+ 聯盟志聖/均豪/均華攻翹曲控制、群翊塗佈烘烤);台廠面板設備經驗為升級選擇權<span class="conf c-un">選擇權</span></li>
+    <li><b>2028 底-2029(前瞻·勿當現況):</b>CoPoS 量產爬坡(嘉義 AP7 為面板主場、玻璃基板面板級先進封裝典範轉移實質落地)<span class="conf c-un">公司自述前瞻</span></li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>現在就有 CoWoS/先進封裝營收(scoreTiming 高)=弘塑/辛耘(濕製程)、印能/志聖/群翊(除泡烘烤)、萬潤/均華(點膠檢測/die bonder)、日月光投控(OSAT)、群創(FOPLP chip-first 已量產);2027 量產=力成 FOPLP;2028-29 選擇權=CoPoS 面板級(志聖/均華/均豪相關環節)。<b>核心鐵則:CoWoS=現在式確定擴產(估值已部分反映共識)、CoPoS/FOPLP=未來式台廠升級選擇權(勿當現況灌估值)。</b></div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
+  <ul>
+    <li><b>辛耘 3583「以設備代理為主、自製待查」:</b>更正——2026 法說明確自製設備占比逾 60%、自製設備+再生晶圓營收比重首度逾 5 成,對應台積南科/亞利桑那 CoWoS。應自玻璃題 watch <b>升級為核心受惠、且非代理為主</b></li>
+    <li><b>G2C+ 聯盟由「志聖+群翊+均豪」組成(種子原文):</b>更正——G2C+ 為 <b>志聖 2467+均豪 5443+均華 6640</b> 三家(志聖=真空層壓/大面積熱烘烤、均豪=檢測/磨切/量測、均華=高精度 chip-on-panel 取放鍵合);<b>群翊 6664 並非 G2C+ 成員</b>(獨立卡塗佈乾燥、高階接單 75%)。注意 <b>均豪 5443 與均華 6640 為不同公司、勿混</b></li>
+    <li><b>印能 7734 除泡市佔約 80% 已第三方驗證:</b>仍未獲第三方獨立量化佐證——第四代 EvoRTS 獲 2025 R&D 100 Awards(亞洲唯一)是技術獎、可佐證技術領先,但不等於市佔率第三方數據。<b>市佔約 80% 維持「公司自述、缺第三方」標記</b></li>
+    <li><b>力成 6239 2026 capex 為 400 億+(種子下限):</b>更新——2026/4/28 法說明確大幅上修至 <b>500 億元</b>(聚焦 FOPLP+先進封裝),與既有玻璃題研究一致。400 億為較早/偏低口徑</li>
+    <li><b>CoWoS 2026 底「120-130K 片」為單一確定值:</b>口徑並列補充——弘塑法說鏈引述 2025 底約 7 萬→2026 底約 10 萬→2027 底約 13 萬片;另有媒體 2026 底約 12.5 萬(+70%)、127K/140K/150K。各口徑量級接近但年度落點不同,維持區間並列、勿視為單一確定值</li>
+    <li><b>CoWoP 是台積下一代主流面板級封裝平台、可與 CoPoS 並列主軸:</b>否決——CoWoP=Chip-on-Wafer-on-PCB(P=PCB,換底層載板、仍晶圓級),與 CoPoS(換中介層載體、面板級、仍有 interposer)<b>方向不同、非同義詞、非台積官方標準名</b>。依鐵則只查證、不當主軸</li>
+    <li><b>材料端(玻璃基板/T-Glass/ABF/CCL)計入本題受惠主體:</b>排除——已各自獨立研究,本題只銜接、不重複計受惠主體,避免與既有 segment 雙計</li>
+    <li><b>CoPoS 尺寸「750×620mm」為單一規格:</b>分階段並列——310×310mm(試產起點)→515×510mm→750×620mm(終局目標),多尺寸並存、未定於一尊</li>
+  </ul>
+</div>
+<div class="card"><h3>持續性兩劇本(CoWoS 確定擴產 vs CoPoS 未來選擇權+設備天花板)</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>多方:AI 封裝是當前最硬瓶頸、台廠設備鏈訂單實質落地</b><br>① CoWoS 月產能 80K→120-130K(擴約 5 成)仍供不應求、供需缺口從約 20% 才降到約 10%、NVIDIA 鎖逾 60% 產能、魏哲家直言供給數年不足=擴產確定性極高、能見度到 2027;② 委外溢出明確(24-27 萬片/年),OSAT 與設備鏈(弘塑出機 +70-100%、印能除泡約 80%/前 5 月 +83%、辛耘/萬潤)同步吃量=訂單實質落地非概念;③ 晶圓→面板典範轉移=台廠升級選擇權(面板設備經驗+翹曲控制+G2C+),力成 FOPLP 良率約 95%/2027 量產、台灣三路(力成/日月光/群創)進度全球領先;④ 台灣捕獲率最高(台積主導 2.5D/3D、OSAT 與設備在地鏈完整)。</div>
+    <div class="callout warn" style="margin:0"><b>空方:設備核心美日歐+CoPoS 未來式+估值已反映</b><br>① 設備核心仍美日歐天下(曝光/塗佈顯影 Applied/TEL/SCREEN、磨切 DISCO 寡占、鍵合 EVG/SUSS/BESI/ASMPT、塑封 TOWA),台廠只卡濕製程周邊+除泡烘烤+點膠檢測、估僅占設備 capex 約 1-2 成、贏在客製/在地而非技術話語權;② CoPoS 是未來式不是現在式(魏哲家「2-3 年沒捷徑」、量產 2028-29、2027 後才設備招標)=升級機會是「選擇權」、未來 2 年難灌財報;③ 估值已反映共識(CoWoS 擴產是市場一致預期、弘塑已成千金股高本益比、設備股部分 price-in);④ FOPLP 市場小且口徑分歧(ReAnIn US$2.41B vs Dataintelo US$3.8B、二線研調),面板級良率/翹曲尚未大規模驗證;⑤ 韓中追趕(三星 FOPLP/HBM 垂直整合、長電 XDFOI 量產 4nm、通富綁 AMD)。</div>
+  </div>
+  <p><b>裁決(verdict):</b><b>分層判斷——把「CoWoS 現在擴產」與「CoPoS 未來選擇權」拆開看。【短中期(2026-2027)=確定性題】台積 CoWoS 擴約 5 成+委外 24-27 萬片是已下單的硬擴產、能見度到 2027,受惠最實的是濕製程(弘塑/辛耘)、壓力除泡烘烤(印能/志聖)、點膠檢測(萬潤/均華)、委外 OSAT(矽品/日月光)、FOPLP chip-first(群創已量產),但此段共識已部分反映在估值、追高需看交期與毛利轉換。【中長期(2028-2029)=選擇權題】晶圓→面板級 CoPoS/FOPLP 確給台廠卡進更核心環節的機會(面板設備經驗+翹曲控制),但「2-3 年沒捷徑」定調量產 2028 底-2029、良率未驗證、市場規模小且口徑分歧=尚未兌現的前瞻價值。【鐵則不變】先進封裝設備的核心曝光/鍵合/磨切/塑封仍美日歐、台廠占設備支出約 1-2 成、贏在客製與在地;材料端(玻璃/T-Glass/ABF/CCL)已另研究不重複計。結論:CoWoS 是「現在式的確定擴產」、CoPoS/FOPLP 是「未來式的台廠升級選擇權」,兩者都真但時序與確定性不同,勿把 2028-29 前瞻當現況灌估值。</b></p>
+</div>
+<div class="card"><h3>結構性風險與開放問題</h3>
+  <ul>
+    <li><b>設備天花板:</b>核心曝光/電鍍/CMP/鍵合/磨切/塑封/精密量測仍美日歐寡占;台廠占先進封裝設備 capex 約 1-2 成(媒體估、無硬數字)、贏在客製/在地服務,難跨進核心高價值站</li>
+    <li><b>現在式 vs 未來式:</b>台廠設備股當下營收幾乎全來自 CoWoS 晶圓級擴產;CoPoS 面板級量產 2028-29(公司自述前瞻)、屬未來選擇權、勿當現況</li>
+    <li><b>口徑/自述:</b>CoWoS 月產能(80K→120-130K)口徑分歧須並列;印能除泡 80%、均華 sorter 95%、CoWoS 三傑為公司自述/媒體彙整、缺第三方;FOPLP 市場規模二線研調差近 2 倍</li>
+    <li><b>估值/規模:</b>設備股估值已部分反映 AI 共識(候選清單扣 1 分);印能/均華/群翊規模小(scoreScale 2)、毛利與折舊/客戶集中度須留意</li>
+    <li><b>跨題交界(去重):</b>本題受惠主體與「玻璃基板 GCS」guide 高度重疊=同批股「設備 capex 鏈」視角、不另計受惠主體;材料端(玻璃/T-Glass/ABF/CCL)歸各自 segment;HBM 堆疊(TSV/hybrid bonding)拉動 CoWoS 但 HBM 本體另題</li>
+    <li><b>開放問題(延伸 backlog):</b>台廠各站設備單價量級無硬數字(僅設備支出占比 1-2 成);CoPoS 設備招標逐家台廠份額;力成 FOPLP 月產能具體片數;CoPoS 良率/翹曲驗證進度;由田/鈦昇股號確認</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item">台積電 2026/6/4 股東會(魏哲家)/官方法說 — CoPoS「2-3 年無捷徑」(2028 底-2029、嘉義 AP7)、2026 營收估增逾 30%、CapEx US$52-56B、CoWoS-S/-R/-L 與 CoPoS 規格<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">弘塑/辛耘/印能/萬潤/均華/志聖/群翊/力成/日月光投控/群創 2026 法說與月營收(公開申報)— 各家 EPS、出機台數、營收年增、自製占比、市佔自述、CoWoS/FOPLP 進度<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.yolegroup.com/" target="_blank">Yole Group(2025/09)</a> — 先進封裝市場 US$46B(2024)→79.4B(2030) CAGR 9.5%、薄化設備 US$5.82 億→8.45 億<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/" target="_blank">TrendForce / IEK</a> — CoWoS 產能與委外、CoPoS 試產線 2026/2 進駐 6 月完工、先進封裝 CapEx 2025-27 CAGR 24%;Applied 入股 BESI 9%、Resonac/TEL 面板級 interposer 聯盟<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.digitimes.com.tw/" target="_blank">Digitimes / 36kr / 經濟日報 / 鉅亨 / 財報狗</a> — CoWoS 月產能口徑(7→10→13 萬/120-130K)、委外片數(Amkor 18-19 萬+矽品 6-8 萬)、台廠占設備支出 1-2 成、印能月營收 +83%;CoWoP=Chip-on-Wafer-on-PCB(DigiTimes 帶出、非官方)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item">ReAnIn / Dataintelo(FOPLP 市場 US$2.41B vs 3.8B,二線研調口徑分歧);Yole《Panel-Level Packaging 2025》摘要(無單一數字)<span class="src-q q-blog">blog</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(製程鏈 8 站+4 路線之爭 / 台廠逐檔查證+受惠評分 / 國際對照+市場多口徑+持續性兩劇本 / 逐站機台型號地圖+晶圓→面板轉移模型+CoWoP 釐清+台灣吃得到定位)＋ 對抗式查證(辛耘升核心、G2C+ 成員修正、印能市佔自述標記、力成 capex 500 億、CoWoS 產能口徑並列、CoWoP 非主軸、CoPoS 尺寸分階段)。</p>
+  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明(設備核心美日歐、CoPoS 為未來式前瞻、市佔自述缺第三方、估值已部分反映)。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>

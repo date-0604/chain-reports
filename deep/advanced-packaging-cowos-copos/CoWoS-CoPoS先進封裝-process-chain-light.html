@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoWoS→CoPoS 先進封裝設備鏈(設備/OSAT/台積電擴產)研究指南 2026</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#f3f4f6;
+  --ink:#1f2937; --ink-soft:#6b7280; --line:#e5e7eb;
+  --accent:#0e9f6e; --accent-soft:#d8f3e6;
+  --warn:#ff8c42; --warn-soft:#ffedd5;
+  --ok:#10b981; --ok-soft:#d1fae5;
+  --danger:#ef4444; --danger-soft:#fee2e2;
+  --tw:#e11d48; --tw-soft:#ffe4e6;
+  --maxw:1180px; --radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 8px 24px rgba(0,0,0,.08);
+  --font:'Segoe UI','PingFang TC','Microsoft JhengHei',-apple-system,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;align-items:center;gap:18px;height:60px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.brand{font-weight:800;font-size:17px;white-space:nowrap}.brand span{color:var(--accent)}
+.nav-links{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{padding:6px 11px;border-radius:8px;color:var(--ink-soft);font-size:13.5px;font-weight:600;white-space:nowrap}
+.nav-links a:hover{background:var(--accent-soft);color:var(--accent)}
+.hero{padding:54px 0 40px;background:linear-gradient(135deg,#ecfdf5,#f6f7f9)}
+.hero h1{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1.25}.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{margin-top:14px;font-size:17px;color:var(--ink-soft);max-width:880px}
+.hero .meta{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+section.block{padding:52px 0;border-top:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+h2.title{font-size:27px;font-weight:800;margin:6px 0 6px;letter-spacing:-.3px}
+.subtitle{color:var(--ink-soft);font-size:15.5px;margin-bottom:26px;max-width:880px}
+h3{font-size:19px;font-weight:700;margin:28px 0 12px}
+.grid{display:grid;gap:16px}.cols-2{grid-template-columns:repeat(2,1fr)}.cols-3{grid-template-columns:repeat(3,1fr)}.cols-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);transition:.18s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card h4{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.card .ico{font-size:22px}.card p{color:var(--ink-soft);font-size:14px}
+.card .code{font-size:12.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:1px 7px;border-radius:6px;margin-left:auto}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--ink-soft)}
+.badge.b-accent{background:var(--accent-soft);color:var(--accent)}
+.badge.b-tw{background:var(--tw-soft);color:var(--tw)}
+.badge.b-ok{background:var(--ok-soft);color:#047857}
+.badge.b-warn{background:var(--warn-soft);color:#c2410c}
+.badge.b-danger{background:var(--danger-soft);color:#b91c1c}
+.stars{color:#f59e0b;letter-spacing:1px;font-size:14px}
+.conf{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.c-high{background:var(--ok-soft);color:#047857}.c-med{background:var(--warn-soft);color:#c2410c}
+.c-un{background:var(--surface-2);color:var(--ink-soft)}.c-low{background:var(--danger-soft);color:#b91c1c}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);min-width:560px}
+th{background:var(--surface-2);text-align:left;padding:11px 14px;font-weight:700;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
+.chain{display:grid;gap:12px}
+.chain-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow)}
+.chain-row .lvl{font-weight:800;font-size:14px}.chain-row .lvl small{display:block;color:var(--ink-soft);font-weight:600;font-size:11.5px}
+.chain-row .items{display:flex;flex-wrap:wrap;gap:6px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:8px 0}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow);min-width:120px;flex:1}
+.flow .step b{display:block;font-size:14px}.flow .step small{color:var(--ink-soft);font-size:12px}
+.flow .arrow{display:flex;align-items:center;color:var(--accent);font-size:22px;font-weight:800;padding:0 8px}
+.stack{max-width:820px;margin:0 auto}
+.stack .layer{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;box-shadow:var(--shadow);margin-bottom:6px}
+.stack .layer b{font-size:15px}.stack .layer .uses{color:var(--ink-soft);font-size:13px;margin-top:2px}
+.stack .down{text-align:center;color:var(--accent);font-size:18px;line-height:1}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);padding:7px 14px;border-radius:999px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s}
+.filters button:hover{border-color:var(--accent)}
+.filters button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.score-bar{display:flex;align-items:center;gap:8px}
+.score-bar .track{flex:1;height:8px;background:var(--surface-2);border-radius:999px;overflow:hidden;min-width:60px}
+.score-bar .fill{height:100%;background:var(--accent);border-radius:999px}
+.score-bar .num{font-weight:700;font-size:12.5px;width:28px;text-align:right}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.calc label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:var(--font)}
+.calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.calc .out .res{background:var(--accent-soft);border-radius:10px;padding:14px;text-align:center}
+.calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+.calc .out .res b{font-size:22px;color:var(--ink)}
+.callout{border-radius:var(--radius);padding:16px 18px;margin:18px 0;font-size:14.5px}
+.callout.insight{background:var(--accent-soft);border-left:4px solid var(--accent)}
+.callout.risk{background:var(--danger-soft);border-left:4px solid var(--danger)}
+.callout.warn{background:var(--warn-soft);border-left:4px solid var(--warn)}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
+.disclaimer{font-size:12.5px;color:var(--ink-soft);background:var(--surface-2);border-radius:10px;padding:14px 16px;margin-top:20px}
+.tot{display:inline-block;font-weight:800;font-size:15px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:8px}
+.refs{list-style:none;display:grid;gap:8px}
+.refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
+.refs li b{color:var(--ink)}.refs li a{word-break:break-all}
+.refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
+@media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
+@media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
+p,li,td{overflow-wrap:anywhere}
+@media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav-inner">
+  <div class="brand">CoWoS→CoPoS 先進封裝<span> 研究指南</span></div>
+  <nav class="nav-links">
+    <a href="#overview">總覽</a><a href="#industry">供應鏈地圖</a><a href="#whyhot">為何熱</a>
+    <a href="#categories">兩大判斷</a><a href="#application">製程鏈</a><a href="#stocklogic">族群邏輯</a>
+    <a href="#companies">公司圖譜</a><a href="#radar">市場+評分</a><a href="#capacity">進度速查</a>
+    <a href="#model">估值試算</a><a href="#refs">參考資料</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="container">
+  <h1>CoWoS→CoPoS 先進封裝設備鏈<em> 研究指南</em> 2026</h1>
+  <p class="lead">AI 加速器產能瓶頸從晶圓前段移到先進封裝後的「設備資本支出鏈+OSAT+台積電擴產」題(材料端玻璃基板/T-Glass/ABF/CCL 已另研究、本題只銜接)。兩條主線:① <b>現在式=CoWoS 擴產</b>(月產能 80K→120-130K、委外 24-27 萬片,濕製程/除泡/檢測/die bonder/OSAT 訂單實質落地);② <b>未來式=CoPoS/FOPLP 面板級典範轉移</b>(750×620mm 面板取代圓晶圓、設備重新洗牌=台廠升級窗口,但魏哲家 6/4「2-3 年無捷徑」=量產 2028-29)。天花板:核心設備仍美日歐、台廠占 capex 約 1-2 成。</p>
+  <div class="meta">
+    <span class="badge b-accent">驅動:CoWoS 擴 5 成+面板級典範轉移</span>
+    <span class="badge">台灣吃:除泡/檢測/濕製程/OSAT(核心進口)</span>
+    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+  </div>
+</div></div>
+
+<!-- 01 -->
+<section class="block" id="overview"><div class="container">
+  <span class="eyebrow">01 · Overview</span>
+  <h2 class="title">產業總覽:CoWoS 擴產確定、面板級是台廠升級選擇權</h2>
+  <p class="subtitle"><b>切分:</b>聚焦設備 capex 鏈+OSAT+台積擴產時程;材料端(玻璃基板 GCS/T-Glass/ABF/CCL/塑封料)已各自獨立研究、本題只做一頁銜接、不重複計受惠主體。本題受惠主體與「玻璃基板 GCS」guide 高度重疊=同批股的設備視角。</p>
+  <div class="grid cols-3">
+    <div class="card"><h4><span class="ico">📈</span>現在式:CoWoS 擴產</h4><p>月產能 2025 底約 80K→2026 底 120-130K(擴約 5 成)、台積 2026 CapEx 上修 US$52-56B、委外 24-27 萬片/年。濕製程(弘塑/辛耘)、除泡(印能)、點膠檢測(萬潤/均華)、OSAT(日月光/力成)訂單實質落地。</p></div>
+    <div class="card"><h4><span class="ico">🔭</span>未來式:面板級典範轉移</h4><p>750×620mm 矩形面板取代 12 吋圓晶圓、面積利用率大增、整套設備重新洗牌=台廠憑面板/PCB 設備經驗卡進更核心環節的窗口。但魏哲家 6/4「2-3 年無捷徑」=CoPoS 量產 2028-29、屬前瞻勿當現況。</p></div>
+    <div class="card"><h4><span class="ico">🧱</span>天花板:核心進口 1-2 成</h4><p>核心曝光/鍵合/磨切/塑封仍美日歐寡占(Applied/TEL/DISCO/EVG/BESI/ASMPT/TOWA);台廠卡濕製程+除泡+點膠檢測、估占先進封裝設備 capex 約 1-2 成、贏在客製/價格/在地服務。</p></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="block" id="industry"><div class="container">
+  <span class="eyebrow">02 · Supply Chain</span>
+  <h2 class="title">供應鏈地圖(台積製程 → 設備 → OSAT → 面板級)</h2>
+  <p class="subtitle">台積主導製程、設備兩極化(核心進口 vs 台廠周邊)、OSAT 委外+FOPLP。<span class="conf c-high">綠＝法說/官方/實績</span> <span class="conf c-med">橙＝研調/媒體/自述</span> <span class="conf c-un">灰＝概念/選擇權</span></p>
+  <div class="chain">
+    <div class="chain-row"><div class="lvl">封裝製程<small>台積主導·矽品承接</small></div><div class="items"><span class="badge b-accent">台積電 2330(主導)</span><span class="badge b-tw">日月光投控 3711(委外承接)</span></div></div>
+    <div class="chain-row"><div class="lvl">台廠設備<small>濕製程/除泡/點膠檢測/die bonder</small></div><div class="items"><span class="badge b-tw">弘塑 3131</span><span class="badge b-tw">辛耘 3583</span><span class="badge b-tw">印能 7734</span><span class="badge b-tw">萬潤 6187</span><span class="badge b-tw">均華 6640</span><span class="badge b-tw">志聖 2467</span><span class="badge b-tw">群翊 6664</span></div></div>
+    <div class="chain-row"><div class="lvl">核心設備<small>美日歐寡占·台廠缺席</small></div><div class="items"><span class="badge b-accent">Applied/Lam/TEL/SCREEN(電鍍/CMP)</span><span class="badge b-accent">ASML(曝光)</span><span class="badge b-accent">DISCO(磨切)</span><span class="badge b-accent">BESI/ASMPT/EVG(鍵合)</span><span class="badge b-accent">TOWA(塑封)</span></div></div>
+    <div class="chain-row"><div class="lvl">OSAT/FOPLP<small>台灣進度領先</small></div><div class="items"><span class="badge b-tw">力成 6239(FOPLP)</span><span class="badge b-tw">群創 3481(chip-first 已量產)</span><span class="badge b-warn">Amkor(委外)</span><span class="badge b-warn">Samsung/長電(對手)</span></div></div>
+    <div class="chain-row"><div class="lvl">面板級設備<small>CoPoS 選擇權·2028-29</small></div><div class="items"><span class="badge">均豪 5443(G2C+ 量測)</span><span class="badge">采鈺 6789(試產線)</span><span class="badge">牧德 3563(面板 AOI)</span><span class="badge">材料端 玻璃/ABF(另研究)</span></div></div>
+  </div>
+  <div class="callout insight">💡 台廠位置:壓力除泡(印能自述約 80%)、檢測 AOI(由田/牧德/萬潤完整)、面板級真空層壓(志聖 G2C+)、FOPLP OSAT(力成/群創/日月光,台灣領先)是重要供應商/利基;缺席/陪跑於核心曝光/鍵合/磨切/塑封(美日歐)、占設備 capex 約 1-2 成。勝負手=晶圓→面板典範轉移時,台廠能否憑面板/PCB 設備經驗卡進更核心環節(2027 後設備招標、量產 2028-29)。</div>
+</div></section>
+
+<!-- 03 -->
+<section class="block" id="whyhot"><div class="container">
+  <span class="eyebrow">03 · Why Hot</span>
+  <h2 class="title">為何熱:AI 封裝瓶頸,台廠設備鏈吃量、核心吃不到</h2>
+  <p class="subtitle">產能瓶頸從晶圓前段移到先進封裝;CoWoS 擴 5 成+委外讓台廠設備/OSAT 訂單實質落地。</p>
+  <div class="flow">
+    <div class="step"><b>瓶頸轉移</b><small>AI 加速器產能瓶頸從晶圓前段移到先進封裝</small></div><div class="arrow">→</div>
+    <div class="step"><b>CoWoS 擴 5 成+委外</b><small>80K→120-130K/月、委外 24-27 萬片/年(Amkor+矽品)</small></div><div class="arrow">→</div>
+    <div class="step"><b>台廠設備鏈吃量</b><small>除泡/濕製程/檢測/die bonder/OSAT(量大利薄、核心進口)</small></div>
+  </div>
+  <h3>關鍵數據點</h3>
+  <div class="grid cols-4">
+    <div class="card"><p>CoWoS 月產能(2025底→2026底)</p><h4>80K → 120-130K(口徑略異)</h4></div>
+    <div class="card"><p>先進封裝市場(2024→2030)</p><h4>$46B → 79.4B(Yole CAGR 9.5%)</h4></div>
+    <div class="card"><p>台廠占先進封裝設備 capex</p><h4>約 1-2 成(媒體估、贏在客製/在地)</h4></div>
+    <div class="card"><p>印能 2026 前 5 月營收</p><h4>+83%(5 月 +137%、訂單到年底)</h4></div>
+  </div>
+  <p class="disclaimer">口徑警示:CoWoS 月產能口徑分歧須並列(弘塑鏈 7→10→13 萬片[2025→2026→2027 底]、媒體另估 12.5 萬/127K/140K/150K);台積先進封裝產能 2026=2023 的 10 倍/2027=15 倍(官方前瞻);CoWoS 2023-2028 CAGR>50%(媒體推估);印能除泡市佔約 80% 為公司自述、缺第三方;FOPLP 市場 ReAnIn US$2.41B vs Dataintelo US$3.8B(2025)二線研調分歧、僅量級參考。</p>
+</div></section>
+
+<!-- 04 -->
+<section class="block" id="categories"><div class="container">
+  <span class="eyebrow">04 · Two Judgments</span>
+  <h2 class="title">兩大判斷(現在 vs 未來、設備天花板)</h2>
+  <p class="subtitle">時序確定性、設備價值量天花板,是判斷「台廠吃多少、何時兌現」的根本。</p>
+  <h3>判斷 ①:現在式(CoWoS 擴產)vs 未來式(CoPoS 選擇權)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>面向</th><th>CoWoS(現在式·2026-27)</th><th>CoPoS/FOPLP(未來式·2028-29)</th></tr></thead>
+    <tbody>
+      <tr><td>確定性</td><td><span class="conf c-high">高(已下單硬擴產、能見度到 2027)</span></td><td><span class="conf c-un">前瞻(魏哲家「2-3 年沒捷徑」)</span></td></tr>
+      <tr><td>台廠營收</td><td>當下營收幾乎全來自此(印能 +83%、弘塑出機 +70-100%)</td><td>2027 後設備招標、量產 2028-29 才放量=選擇權</td></tr>
+      <tr><td>投資意涵</td><td><span class="conf c-med">共識已部分反映在估值</span></td><td><span class="conf c-un">尚未兌現、勿當現況灌估值</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>判斷 ②:設備價值量天花板——核心進口(美日歐)vs 台廠周邊(1-2 成)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>設備層</th><th>誰主導</th><th>台廠</th></tr></thead>
+    <tbody>
+      <tr><td>核心(曝光/電鍍/CMP/鍵合/磨切/塑封/精密量測)</td><td>ASML/Applied/Lam/TEL/DISCO/EVG/BESI/ASMPT/TOWA/KLA(美日歐)</td><td><span class="conf c-low">缺席/陪跑(價值量大、吃不到)</span></td></tr>
+      <tr><td>周邊(濕製程/除泡烘烤/點膠檢測/die bonder)</td><td>弘塑/辛耘/印能/志聖/群翊/萬潤/均華(台廠)</td><td><span class="conf c-high">重要供應商/利基(約 1-2 成、客製/在地)</span></td></tr>
+      <tr><td>面板級新洗牌(CoPoS/FOPLP)</td><td>台廠面板/PCB 設備經驗 vs 日商主機</td><td><span class="conf c-med">升級選擇權(2028-29 才放量)</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 兩判斷的投資意涵:① 把 CoWoS(現在式確定擴產)與 CoPoS(未來式選擇權)分層——勿把 2028-29 前瞻當現況;② 台廠占設備 capex 約 1-2 成、贏在客製/在地,核心高價值站仍美日歐,晶圓→面板化是唯一的結構性升級窗口(面板設備經驗+翹曲控制),但放量在 2027 後。台廠 alpha 在難度較低、面板化升級最直接的除泡(印能)/檢測(由田/牧德/萬潤)/面板級層壓(志聖)。</div>
+</div></section>
+
+<!-- 05 製程鏈 stack -->
+<section class="block" id="application"><div class="container">
+  <span class="eyebrow">05 · Process Chain</span>
+  <h2 class="title">製程鏈(中介層 → 檢測,8 站)</h2>
+  <p class="subtitle">八站。台廠 alpha 在 ⑥ 除泡/⑧ 檢測/⑤ 面板級層壓(難度較低、面板化升級最直接);難度最高的 ① 中介層、⑦ 磨切、④ 鍵合台廠陪跑/卡周邊。</p>
+  <div class="stack">
+    <div class="layer"><b>① 矽中介層/RDL — 台廠最淺(全鏈最難)</b><div class="uses">曝光 ASML/電鍍 CMP Applied·Lam 全進口;弘塑/辛耘卡濕製程周邊</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>② TSV 矽穿孔 — 核心進口</b><div class="uses">DRIE/電鍍 Lam·Applied;弘塑/辛耘濕製程周邊;面板級走 TGV(玻璃題)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>③ 凸塊 bump — 周邊吃得到</b><div class="uses">電鍍 Lam/ASMPT 進口;檢測(由田/牧德)+除泡(印能)台廠卡</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>④ CoW 鍵合/hybrid bonding — 均華卡取放</b><div class="uses">整機 BESI/EVG/ASMPT/Shibaura 壟斷;均華 die bonder/取放、辛耘暫時鍵合</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑤ molding 塑封/真空層壓 ★ 面板級台廠卡</b><div class="uses">晶圓級 TOWA 進口;面板級志聖真空層壓/印能除泡/萬潤點膠</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑥ 壓力除泡/翹曲控制 ★ 台廠主導</b><div class="uses">印能除泡(自述約 80%)+志聖/群翊烘烤+均豪翹曲量測(G2C+);難題即商機</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑦ 磨切 grinding/dicing — DISCO 近獨占</b><div class="uses">DISCO 磨切寡占;台廠卡量測周邊(均豪)+清洗(弘塑/辛耘)</div></div>
+    <div class="down">↓</div>
+    <div class="layer"><b>⑧ 檢測/量測 AOI ★ 台廠卡位第二深</b><div class="uses">萬潤/由田/牧德 AOI 完整;面板化「量爆發」最即時受惠;高階量測 KLA 進口</div></div>
+  </div>
+  <div class="callout insight">💡 核心結論:台廠 alpha 在難度「較低」、面板化升級最直接的 ⑥ 除泡(印能自述約 80%、難題即商機)、⑧ 檢測(AOI 完整、面板化量爆發)、⑤ 面板級真空層壓(志聖 G2C+);難度最高的 ① 中介層(曝光/電鍍/CMP 全進口)、⑦ 磨切(DISCO 近獨占)、② TSV、④ 鍵合台廠陪跑/卡周邊。即「台積擴產確定、台廠設備鏈有量吃,但核心高價值站仍美日歐、占 capex 約 1-2 成」。</div>
+</div></section>
+
+<!-- 06 -->
+<section class="block" id="stocklogic"><div class="container">
+  <span class="eyebrow">06 · Stock Logic</span>
+  <h2 class="title">受惠族群邏輯(依製程站+時序)</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程站/型態</th><th>台廠</th><th>受惠邏輯 / 釐清</th></tr></thead>
+    <tbody>
+      <tr><td>濕製程設備(現在營收)</td><td>弘塑 3131 / 辛耘 3583</td><td>卡 CoWoS 清洗/去膠/電鍍周邊;弘塑出機 170-200 台(+70-100%)、訂單到 2027H1;辛耘自製>60%+再生晶圓(本輪 watch 升核心);⚠ 電鍍/蝕刻主機仍美日</td></tr>
+      <tr><td>壓力除泡/烘烤(現在營收)</td><td>印能 7734 / 志聖 2467 / 群翊 6664</td><td>台廠卡位最深之站:印能除泡自述市佔約 80%、前 5 月 +83%;志聖 Carrier Bonder 現在 CoWoS 營收+G2C+;群翊高階接單 75%;⚠ 印能/群翊規模小、市佔自述缺第三方</td></tr>
+      <tr><td>點膠檢測/die bonder(現在營收)</td><td>萬潤 6187 / 均華 6640</td><td>萬潤台積合格、點膠檢測+CPO 選擇權;均華台積 chip sorter 逾 95%、先進封裝占比 93-95%、G2C+ 面板級鍵合;⚠ 均華規模小、sorter 95% 自述</td></tr>
+      <tr><td>OSAT 委外/FOPLP(現在+2027)</td><td>日月光投控 3711 / 力成 6239 / 群創 3481</td><td>日月光承接委外(類 CoWoS 月產能上看 40 萬片、規模最大);力成 FOPLP 良率 94-95%/2027 量產(現在貢獻仍小);群創 chip-first 已量產(G3.5 700×700);⚠ 力成 2027 量產為前瞻、群創 SpaceX 為傳聞</td></tr>
+      <tr><td>面板級設備(CoPoS 選擇權)</td><td>均豪 5443 / 采鈺 6789 / 牧德 3563</td><td>均豪 G2C+ 量測/磨切;采鈺設台積 CoPoS 首條試產線;牧德面板 AOI;⚠ CoPoS 量產 2028-29=未來選擇權、勿當現況(均豪/采鈺已在玻璃題計入)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout risk">⚠️ 特有風險:① <b>設備天花板</b>(核心曝光/鍵合/磨切/塑封仍美日歐、台廠占 capex 約 1-2 成、無核心技術話語權);② <b>CoPoS 是未來式</b>(量產 2028-29、2027 後才設備招標、未來 2 年難灌財報);③ <b>估值已反映共識</b>(CoWoS 擴產一致預期、弘塑千金股高本益比);④ <b>市佔/口徑自述</b>(印能除泡 80%、均華 sorter 95%、CoWoS 三傑缺第三方);⑤ <b>FOPLP 市場小+口徑分歧</b>(二線研調差近 2 倍、良率未大規模驗證);⑥ <b>韓中追趕</b>(三星 FOPLP/HBM、長電 XDFOI、通富綁 AMD)。</div>
+</div></section>
+
+<!-- 07 -->
+<section class="block" id="companies"><div class="container">
+  <span class="eyebrow">07 · Companies</span>
+  <h2 class="title">公司圖譜</h2>
+  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=法說/官方/實績 <span class="conf c-med">中</span>=研調/媒體/自述 <span class="conf c-un">待查</span>=概念/選擇權</p>
+  <div class="filters" id="cFilters">
+    <button class="active" data-f="all">全部</button>
+    <button data-f="wet">濕製程</button><button data-f="defoam">除泡/烘烤</button>
+    <button data-f="bond">點膠/檢測/鍵合</button><button data-f="osat">OSAT/FOPLP</button><button data-f="intl">國際</button>
+  </div>
+  <div class="grid cols-3" id="cGrid">
+    <div class="card" data-cat="wet"><h4>弘塑 <span class="code">3131</span></h4><p>半導體濕製程設備主力,卡 CoWoS/SoIC/整面板電鍍周邊。2026Q1 營收 15.96 億(+28.65%)、EPS 16.11;<b>訂單能見度延伸至 2027H1、2025 設備出貨 170-200 台(+70-100%)</b>。媒體稱「CoWoS 三傑之首」(無官方排名)。受惠評分 21/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="wet"><h4>辛耘 <span class="code">3583</span></h4><p>濕製程+貼合/剝離中段設備,對應台積南科/亞利桑那 CoWoS;<b>自製設備占比逾 60%(非代理)、2026 自製+再生晶圓營收比重首破 5 成</b>。2025 營收 113.71 億、EPS 13.82;2026Q1 EPS 4.14 創同期新高。<b>本輪自玻璃題 watch 升核心受惠</b>。受惠評分 20/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="defoam"><h4>印能科技 <span class="code">7734</span></h4><p>先進封裝除泡(壓合/VTS/EvoRTS)設備,解 Void/Warpage/Flux 三痛點。<b>2026 前 5 月營收 +83.17%(5 月 +137%)、訂單能見度至 2026 底</b>;第四代 EvoRTS 獲 2025 R&D 100 Awards(亞洲唯一)。⚠ 除泡市佔約 80% 為公司自述、缺第三方;規模小。受惠評分 21/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="defoam"><h4>志聖 <span class="code">2467</span></h4><p>壓合/貼膜/烘烤設備,橫跨半導體/載板/PCB/面板。<b>提供 CoWoS 用 Carrier Bonder=現在就有 CoWoS 營收;先進封裝占比 40%→朝 54%</b>、2026Q1 獲利年增逾 2 倍。<b>領 G2C+ 聯盟(志聖+均豪+均華)攻面板級翹曲控制;CoPoS 為 2027-29 選擇權</b>。受惠評分 19/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="defoam"><h4>群翊 <span class="code">6664</span></h4><p>塗佈乾燥設備領導者(原 PCB 乾燥)。<b>先進封裝/玻璃基板/IC 載板/AI 高階設備接單占比達 75%、訂單至 2026H1=現在就有先進封裝(含 CoWoS)營收</b>;面板級 CoPoS/FOPLP 烘烤放量等 2027 後招標。⚠ 註:G2C+ 為志聖+均豪+均華、群翊非該聯盟成員(獨立卡塗佈烘烤)。受惠評分 16/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="bond"><h4>萬潤 <span class="code">6187</span></h4><p>台積電合格供應鏈,封測設備占營收 8-9 成;產品涵蓋點膠/貼合/檢測/散熱,CoWoS 設備鏈具高市占並延伸 SoIC/CoPoS;<b>矽光子(CPO)高精度點膠貼合進客戶驗證、CPO 占比估 2026 約 9%→2027 約 35%(市場估)</b>。訂單看到 2026H1。受惠評分 18/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="bond"><h4>均華 <span class="code">6640</span></h4><p>高精度晶粒挑揀/黏晶/沖切/雷射檢測設備;<b>台積電 chip sorter 主供應商、該品自述市占逾 95%</b>;2026 Die Bonder 占比 38%→47%、先進封裝占比 93-95%。<b>台積 CoPoS 首波設備供應鏈 13 家之一、G2C+ 聯盟負責面板級 chip-on-panel 鍵合</b>。⚠ 規模小。受惠評分 21/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="osat"><h4>日月光投控 <span class="code">3711</span></h4><p>全球前 2 大 OSAT,含矽品(SPIL)承接台積 CoWoS 委外溢出。<b>2026 ASE+SPIL+Amkor 類 CoWoS 月產能合計上看約 40 萬片</b>;FOPLP 高雄路竹線 2025 底試產(投 2 億美元、300×300→規劃 600×600mm);2026 CapEx 創高約 US$70 億。受惠評分 20/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="osat"><h4>力成 <span class="code">6239</span></h4><p>全球前五大封測、FOPLP 先行者。<b>FO-PLP 良率逼近 94-95%、2026H2 進客戶認證、目標 2027H1 量產;2026 capex 上修至 500 億聚焦 FOPLP+先進封裝</b>(原 400 億偏低)。2026Q1 創三年新高、EPS 2.50;<b>FOPLP 現在營收貢獻仍小</b>。受惠評分 18/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="osat"><h4>群創 <span class="code">3481</span></h4><p><b>Chip-first FOPLP 已量產:用 G3.5 玻璃載板(700×700mm、業界最大量產尺寸),面板面積為 FOWLP 7 倍、成本降約 20-30%、已克服翹曲</b>。2026 FOPLP 出貨估年增逾 10 倍;Chip-First→RDL-First→TGV 三階段。⚠ SpaceX RF 晶片地面端為媒體傳聞、未具名;尺寸兩來源並存。受惠評分 19/25。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="bond"><h4>均豪 <span class="code">5443</span></h4><p>(觀察)G2C+ 聯盟第二家(志聖+均豪+均華),負責面板級檢測/磨切/翹曲量測。CoPoS 量產 2028-29 才放量=未來選擇權。⚠ 與均華 6640 為不同公司、勿混;已在玻璃題計入。受惠定位待查。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="osat"><h4>采鈺 <span class="code">6789</span></h4><p>(觀察)台積電子公司(VisEra),<b>設台積 CoPoS 首條試產線(2026/2 進駐、6 月完工)</b>。CoPoS 量產 2028-29、屬未來選擇權;本業影像感測(CIS)。⚠ 已在玻璃基板 guide 計入、本題僅標執行方。待查。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="bond"><h4>牧德 <span class="code">3563</span></h4><p>(觀察)AOI/3D 光學檢測,面板級需多角度多相機檢測、面板廠/PCB AOI 經驗可移植=面板化升級選擇權。現以 PCB/載板 AOI 為主、面板級先進封裝為新切入。待查。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="intl"><h4>台積電 TSMC <span class="code">2330·主導</span></h4><p>全球 2.5D/3D 高階先進封裝主導者、CoWoS-S/-R/-L 與 CoPoS 規格定義方。決定擴產時程(80K→120-130K)、委外配額、CapEx(US$52-56B)、面板級典範轉移(嘉義 AP7 為 CoPoS 主基地)。台廠設備/材料/委外皆繞其轉。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Applied/Lam/TEL/SCREEN <span class="code">美日·核心設備</span></h4><p>先進封裝前段核心設備龍頭群(沉積/CMP/電鍍/塗佈顯影)。<b>Applied 2025/4 入股 BESI 約 9% 推 die-to-wafer 整合線、與 Resonac/TEL 合攻面板級 interposer</b>。台廠弘塑/辛耘僅卡濕製程周邊、核心鍍膜仍其天下。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>DISCO/ACCRETECH/TOWA <span class="code">日·磨切/塑封</span></h4><p><b>DISCO=晶圓/面板磨削切割絕對龍頭(近寡占)</b>、ACCRETECH 居次;TOWA=壓縮成型塑封龍頭。先進封裝後段磨切與塑封站台廠幾乎無參與(僅量測周邊)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>BESI/ASMPT/EVG/SUSS <span class="code">荷星奧德·鍵合</span></h4><p>hybrid bonding/TCB/die bonder 國際龍頭群:BESI(die-to-wafer hybrid bonding 龍頭,Applied 入股 9%)、ASMPT(TCB+die bonder)、EVG/SUSS(W2W/D2W+暫時鍵合)、Shibaura(CoW FC bonder)。台廠均華為在地對照但量級懸殊。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Amkor/Samsung/長電/通富 <span class="code">美韓中·OSAT</span></h4><p>Amkor=台積 CoWoS 委外最大承接(2026 估 18-19 萬片/年、已過 NVIDIA 認證);Samsung=垂直整合對手(I-Cube/HBM/FOPLP)、CoPoS 競爭對照;長電 XDFOI 2.5D 量產 4nm、通富綁 AMD 做 CoWoS-like。中韓追趕、台灣領先。</p><span class="conf c-high">高</span></div>
+  </div>
+</div></section>
+
+<!-- 07b 面板轉移模型 -->
+<section class="block"><div class="container">
+  <span class="eyebrow">07+ · Fine-grained Map</span>
+  <h2 class="title">🔬 逐站機台型號地圖 + 晶圓→面板轉移模型</h2>
+  <p class="subtitle">一句話:<b>除泡=台廠主導(印能);檢測 AOI=重要供應商;濕製程/die bonder/面板級層壓=利基;FOPLP OSAT=台灣領先;曝光/鍵合/磨切/塑封=缺席(美日歐)。</b></p>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>台廠各站設備單價量級無硬數字(僅設備支出占比 1-2 成);CoPoS 量產 2028-29 屬公司前瞻;市佔(印能 80%/均華 95%)為自述、缺第三方;FOPLP 市場口徑分歧。個股實際營收強弱不一,投資前自行查證。</div>
+  <h3>逐製程站 × 設備類別 × 機台型號 × 台廠地位</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程站</th><th>機台/型號(國際)</th><th>台廠</th><th>地位</th></tr></thead>
+    <tbody>
+      <tr><td>中介層/RDL 微影曝光</td><td>ASML/Nikon/Canon stepper、面板級 SCREEN/Ushio</td><td>志聖(顯影周邊)</td><td><span class="badge b-danger">陪跑/缺席</span></td></tr>
+      <tr><td>TSV(蝕刻+電鍍填孔)</td><td>Lam(DRIE)、TEL、Applied、ASMPT(NEXX 電鍍)</td><td>弘塑/辛耘(清洗周邊)</td><td><span class="badge b-danger">陪跑</span></td></tr>
+      <tr><td>凸塊 bump(電鍍/植球)</td><td>ASMPT(NEXX)/Lam 電鍍、SCREEN</td><td>弘塑/辛耘(濕製程)</td><td><span class="badge b-warn">重要供應商(濕製程)</span></td></tr>
+      <tr><td>CoW 鍵合(die bonding)</td><td>Shibaura(FC)、ASMPT(TCB)、BESI(hybrid)、K&S</td><td>均華 6640(取放/挑揀)</td><td><span class="badge b-warn">利基(主機被卡)</span></td></tr>
+      <tr><td>molding 塑封</td><td>TOWA(龍頭)、ASMPT、Apic Yamada</td><td>萬潤(點膠周邊)</td><td><span class="badge b-danger">陪跑/缺席</span></td></tr>
+      <tr><td>壓力除泡/熱處理 ★</td><td>(國際分散)</td><td>印能 7734(除泡)/志聖/群翊(烘烤)</td><td><span class="badge b-ok">台廠主導(印能自述約 80%)</span></td></tr>
+      <tr><td>磨切 grinding/dicing</td><td>DISCO(近寡占)、ACCRETECH</td><td>均豪(量測)/鈦昇(雷射)</td><td><span class="badge b-danger">缺席(僅量測周邊)</span></td></tr>
+      <tr><td>檢測/量測 AOI ★</td><td>KLA/Onto/Camtek(精密量測)</td><td>由田/牧德 3563/萬潤 6187/均華</td><td><span class="badge b-ok">利基(AOI 台廠有戲)</span></td></tr>
+      <tr><td>暫時鍵合/解鍵合</td><td>SUSS/EVG(bonder+UV scanner)</td><td>辛耘(再生晶圓/載板服務)</td><td><span class="badge b-warn">周邊利基</span></td></tr>
+    </tbody>
+  </table></div>
+  <h3>晶圓級→面板級設備鏈洗牌模型</h3>
+  <div class="callout insight">🔬 <b>典範轉移與台廠升級機會:</b><b>面積:</b>750×620mm 矩形面板取代 12 吋圓晶圓、有效封裝面積增約 5 倍以上(515×510=4.5x、600×600=6x 12 吋),分階段 310×310(試產起點)→515×510→750×620(終局)。<b>逐站重做:</b>(a) 曝光 wafer stepper 視野不足、需大視野或分段步進(field stitching);(b) 塗佈/烘烤大面積均勻性+固化翹曲控制變難(>100×100mm 封裝高溫像烤魷魚翹曲);(c) AOI 需多角度多相機掃面板;(d) 除泡/molding 腔體放大重做。<b>台廠升級機會(面板/PCB 設備經驗可移植):</b>志聖/群翊(塗佈烘烤)、由田/牧德(面板 AOI)、印能(除泡腔體放大)、均華/均豪(G2C+ 取放/量測)在「面板大面積控制」有經驗紅利=wafer 世代被美日歐卡死、面板世代「卡進更核心環節」的窗口。<b>仍被卡:</b>曝光(ASML)、鍵合(ASMPT/BESI/Shibaura)、磨切(DISCO)、塑封(TOWA)、精密量測(KLA)。<b>⚠ 現在 vs 選擇權:</b>台廠設備股「當下營收」幾乎全來自 CoWoS 晶圓級擴產(現在式、估值已部分反映);CoPoS 面板級是 2027-2029 才放量的未來選擇權(公司自述前瞻、勿當現況)。</div>
+  <div class="callout warn">⚠️ <b>CoWoP 釐清(非主軸):</b>CoWoP=Chip-on-Wafer-on-PCB(P=PCB,以強化 PCB 主機板取代 IC 載板)=仍是晶圓級製程、只換底層載板,與 CoPoS(改中介層載體、圓晶圓→方玻璃面板、仍有 interposer)<b>方向不同、非同義詞、非台積官方標準量產製程名</b>(媒體 DigiTimes 帶出、日月光推)。面板級典範轉移正名以官方 CoPoS 為準;FOWLP(扇出晶圓級)是 FOPLP(扇出面板級)的技術前身、攻成熟製程降成本,與 CoPoS(有 interposer、攻尖端 AI)定位不同。</div>
+</div></section>
+
+<!-- 08 -->
+<section class="block" id="radar"><div class="container">
+  <span class="eyebrow">08 · Scorecard</span>
+  <h2 class="title">市場口徑 + 逐站難度 + 公司受惠評分</h2>
+  <p class="subtitle">先進封裝市場 Yole 為主口徑;FOPLP 二線研調口徑分歧並列;難度高的環節台廠反而陪跑。</p>
+  <h3>市場規模多口徑(先進封裝/CoWoS/FOPLP)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>研調/來源</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR</th></tr></thead>
+    <tbody>
+      <tr><td>Yole Group</td><td>先進封裝整體(<b>主口徑</b>)</td><td>2024 US$46B</td><td>2030 US$79.4B</td><td>9.5%</td></tr>
+      <tr><td>TSMC(官方)</td><td>台積先進封裝產能倍數</td><td>2023</td><td>2026=10x/2027=15x</td><td>CoWoS 2023-28 >50%</td></tr>
+      <tr><td>媒體彙整</td><td>CoWoS 月產能(片/月)</td><td>2025 底約 80K</td><td>2026 底 120-130K</td><td>近翻倍(口徑分歧)</td></tr>
+      <tr><td>ReAnIn</td><td>FOPLP(二線·並列)</td><td>2025 US$2.41B</td><td>2032 US$7.39B</td><td>17.4%</td></tr>
+      <tr><td>Dataintelo</td><td>FOPLP(二線·並列)</td><td>2025 US$3.8B</td><td>2034 US$11.2B</td><td>12.8%</td></tr>
+      <tr><td>Yole</td><td>薄化(grinding)設備</td><td>2025 US$5.82 億</td><td>2030 US$8.45 億</td><td>約 7.7%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">口徑警示:先進封裝市場採 Yole 主口徑(US$46B→79.4B CAGR 9.5%);CoWoS 月產能口徑分歧並列(7→10→13 萬片 vs 12.5 萬/127K/140K/150K);FOPLP 二線研調差近 2 倍(ReAnIn 2.41B vs Dataintelo 3.8B、僅量級參考);委外 24-27 萬片/年(Amkor 18-19 萬+矽品 6-8 萬);NVIDIA 鎖逾 60% 台積 2026 封裝(訂約約 59.5 萬片、CoWoS-L 約 51 萬)。</p>
+  <h3>逐製程站難度評分(高=台廠越被卡)</h3>
+  <p class="subtitle">維度:技術門檻/設備被美日歐卡/良率·翹曲挑戰/台廠進入難度,各 0~5 分(5＝最被卡)。⚠ 台廠 alpha 在難度較低的 ⑥⑧⑤。評分為推估。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>製程站</th><th>技術門檻</th><th>設備被卡</th><th>良率/翹曲</th><th>台廠進入難度</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <tbody>
+      <tr><td>① 矽中介層/RDL(陪跑)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>④ CoW 鍵合/hybrid(利基)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>⑦ 磨切 grinding/dicing(陪跑)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>② TSV 矽穿孔(陪跑)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">17</span></td></tr>
+      <tr><td>③ 凸塊 bump(周邊)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">15</span></td></tr>
+      <tr><td>⑤ molding 塑封 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">13</span></td></tr>
+      <tr><td>⑥ 壓力除泡/翹曲 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">12</span></td></tr>
+      <tr><td>⑧ 檢測/量測 ⭐</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">11</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">⚠ 本題特殊:台廠 alpha 在難度較低、面板化升級最直接的 ⑥ 除泡(印能自述約 80%)、⑧ 檢測(AOI 完整)、⑤ 面板級層壓(志聖 G2C+);難度最高的 ① 中介層、⑦ 磨切、② TSV、④ 鍵合台廠陪跑/卡周邊。評分為推估。</p>
+
+  <h3>公司受惠強度評分(holds 10 檔)</h3>
+  <p class="subtitle">維度:AI 封裝受惠/技術卡位/放量時程/利基壁壘/規模財務,0~5 分。watch(均豪/采鈺/牧德,概念/選擇權)見公司圖譜、不列評分。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>型態</th><th>AI受惠</th><th>技術卡位</th><th>放量時程</th><th>利基壁壘</th><th>規模</th><th>總分 /25</th></tr></thead>
+    <tbody>
+      <tr><td>弘塑 3131</td><td>濕製程設備</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">21</span></td></tr>
+      <tr><td>印能科技 7734</td><td>壓力除泡/烤箱</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">21</span></td></tr>
+      <tr><td>均華 6640</td><td>die bonder/chip sorter</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">21</span></td></tr>
+      <tr><td>辛耘 3583</td><td>濕製程+再生晶圓</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>日月光投控 3711</td><td>OSAT 委外+FOPLP</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">20</span></td></tr>
+      <tr><td>志聖 2467</td><td>烤箱/Carrier Bonder/層壓</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>群創 3481</td><td>FOPLP 面板級(chip-first)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">19</span></td></tr>
+      <tr><td>萬潤 6187</td><td>點膠/貼合/檢測</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>力成 6239</td><td>FOPLP OSAT(2027 量產)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">18</span></td></tr>
+      <tr><td>群翊 6664</td><td>塗佈/烘烤</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">16</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">弘塑/印能/均華(並列 21)=各自卡最強利基(弘塑 CoWoS 濕製程訂單到 2027H1、印能除泡自述約 80%/前 5 月 +83%、均華台積 sorter 逾 95%);辛耘 20(自製>60%+再生晶圓、本輪 watch 升核心);日月光 20(委外 OSAT 規模最大);志聖 19(Carrier Bonder 現在營收+G2C+);群創 19(chip-first 已量產);萬潤 18(點膠檢測+CPO);力成 18(FOPLP 2027 量產、現在貢獻小);群翊 16(面板級選擇權)。⚠ 印能/均華/群翊規模小、市佔自述缺第三方。受惠評分為推估,不構成投資建議。</p>
+</div></section>
+
+<!-- 09 -->
+<section class="block" id="capacity"><div class="container">
+  <span class="eyebrow">09 · Progress</span>
+  <h2 class="title">量產進度速查表 / 催化劑時間軸</h2>
+  <p class="subtitle">各家定位、進度與查證信心;含 2026→2029 催化劑(現在式 CoWoS vs 未來式 CoPoS)。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
+    <tbody>
+      <tr><td>2026/6/4 ⚔ 魏哲家股東會</td><td>CoPoS 路線圖(官方)</td><td>「沒有捷徑、還要 2-3 年」=量產 2028 底-2029、嘉義 AP7;2026 營收估增逾 30%、AI 供給數年不足</td><td><span class="conf c-high">已發生(官方)</span></td></tr>
+      <tr><td>2026/6 CoPoS 試產線</td><td>面板級典範轉移起點</td><td>2026/2 進駐采鈺 VisEra、6 月完工;750×620mm 面板取代圓晶圓、設備重新洗牌</td><td><span class="conf c-med">即將完成</span></td></tr>
+      <tr><td>印能科技 7734</td><td>壓力除泡(現在營收)</td><td>2026 前 5 月 +83%(5 月 +137%)、訂單到 2026 底;除泡自述市佔約 80%</td><td><span class="conf c-high">已發生(實績)</span></td></tr>
+      <tr><td>弘塑 3131</td><td>濕製程(現在營收)</td><td>2025 出機 170-200 台(+70-100%)、訂單到 2027H1;2026Q1 EPS 16.11</td><td><span class="conf c-high">已發生</span></td></tr>
+      <tr><td>2026 台積 CapEx/Rubin</td><td>CoWoS 擴產</td><td>CapEx 上修 US$52-56B、先進封裝占比上修;NVIDIA Rubin CoWoS-L 滿載(鎖逾 60%)</td><td><span class="conf c-high">已宣布</span></td></tr>
+      <tr><td>2026H2 委外放量</td><td>OSAT 受惠</td><td>台積委外 Amkor 18-19 萬+矽品 6-8 萬片/年,聚焦 CoW;設備鏈同步受惠</td><td><span class="conf c-med">排程中</span></td></tr>
+      <tr><td>2026H2-2027H1 力成 FOPLP</td><td>面板級 OSAT 量產</td><td>良率約 95%、客戶驗證 2026 下半、量產 2027 上半;capex 上修 500 億</td><td><span class="conf c-un">排程中</span></td></tr>
+      <tr><td>2027 後 CoPoS 設備招標</td><td>面板級選擇權</td><td>G2C+(志聖/均豪/均華)攻翹曲控制、群翊塗佈烘烤;台廠面板設備經驗升級機會</td><td><span class="conf c-un">選擇權</span></td></tr>
+      <tr><td>2028 底-2029 CoPoS 量產</td><td>典範轉移落地</td><td>嘉義 AP7 為面板主場、玻璃基板面板級先進封裝實質落地</td><td><span class="conf c-un">前瞻(勿當現況)</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 選股節奏:現在就有 CoWoS/先進封裝營收=弘塑/辛耘(濕製程)、印能/志聖/群翊(除泡烘烤)、萬潤/均華(點膠檢測/die bonder)、日月光投控(OSAT)、群創(FOPLP chip-first 已量產);2027 量產=力成 FOPLP;2028-29 選擇權=CoPoS 面板級(志聖/均華/均豪相關環節)。<b>核心鐵則:CoWoS=現在式確定擴產(估值已部分反映共識)、CoPoS/FOPLP=未來式台廠升級選擇權(勿當現況灌估值)。</b></div>
+</div></section>
+
+<!-- 10 -->
+<section class="block" id="model"><div class="container">
+  <span class="eyebrow">10 · Valuation</span>
+  <h2 class="title">受惠股估值試算(工具)</h2>
+  <p class="subtitle">通用估值方法 + 互動計算機。下方預設填入設備龍頭(弘塑量級)<b>示意數字</b>(非財測)。本輪核心=CoWoS 擴產 × 台廠設備鏈放量;但須分清量(現在式確定)vs CoPoS 未來選擇權+設備核心進口。</p>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
+    <tbody>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>設備/OSAT</td><td>擴產期 PE 拉升;設備核心進口+CoPoS 未來式風險折價</td></tr>
+      <tr><td><b>出機台數 × ASP</b></td><td>設備台數 × 單價</td><td>本輪核心(現在式)</td><td>弘塑出機 170-200 台、CoWoS 擴 5 成;台廠吃周邊量、核心價值外購</td></tr>
+      <tr><td><b>面板化升級溢價</b></td><td>晶圓級→面板級(CoPoS/FOPLP)</td><td>未來選擇權</td><td>志聖/均華/印能面板級升級;放量 2028-29、勿當現況</td></tr>
+      <tr><td><b>設備天花板折價</b></td><td>台廠占設備 capex 約 1-2 成</td><td>風險</td><td>核心曝光/鍵合/磨切美日歐;勝負手=面板化卡進更核心環節</td></tr>
+    </tbody>
+  </table></div>
+  <h3>試算計算機(示意預設=弘塑量級,請填真實數字)</h3>
+  <div class="calc">
+    <div class="inputs">
+      <div><label>基期營收(億元)</label><input id="rev" type="number" value="62"></div>
+      <div><label>營收成長率(%)</label><input id="g" type="number" value="25"></div>
+      <div><label>淨利率(%)</label><input id="npm" type="number" value="28"></div>
+      <div><label>流通股數(億股)</label><input id="sh" type="number" value="0.5"></div>
+      <div><label>目標 PE(x)</label><input id="pe" type="number" value="22"></div>
+      <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="30"></div>
+    </div>
+    <div class="out">
+      <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+      <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+      <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+      <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+    </div>
+  </div>
+  <p class="disclaimer">通用試算工具,預設值為弘塑量級示意、非財測。印能/均華/群翊規模小(股數少、毛利波動)、日月光投控/力成規模大(股數多),務必填入標的真實數字。設備股估值已部分反映 CoWoS 擴產共識(弘塑已成千金股);CoPoS 未來式+設備核心進口=保持折價。本頁僅供研究參考,不構成投資建議。</p>
+</div></section>
+
+<!-- refs -->
+<section class="block" id="refs"><div class="container">
+  <span class="eyebrow">Sources · 參考資料</span>
+  <h2 class="title">參考資料來源</h2>
+  <p class="subtitle">經 Workflow 研究與對抗式查證。四級來源分流;口徑修正/待查項已標註。</p>
+  <ul class="refs">
+    <li><b>台積電 2026/6/4 股東會(魏哲家)/官方法說</b> — CoPoS「2-3 年無捷徑」(2028 底-2029、嘉義 AP7)、2026 營收估增逾 30%、CapEx US$52-56B、CoWoS-S/-R/-L 與 CoPoS 規格<span class="q">primary</span></li>
+    <li><b>弘塑/辛耘/印能/萬潤/均華/志聖/群翊/力成/日月光投控/群創 2026 法說與月營收</b>(公開申報)— EPS、出機台數、營收年增、自製占比、市佔自述、CoWoS/FOPLP 進度<span class="q">primary</span></li>
+    <li><b>Yole Group(2025/09)</b> — 先進封裝市場 US$46B(2024)→79.4B(2030) CAGR 9.5%、薄化設備 US$5.82 億→8.45 億<span class="q">secondary</span></li>
+    <li><b>TrendForce / IEK</b> — CoWoS 產能與委外、CoPoS 試產線 2026/2 進駐 6 月完工、先進封裝 CapEx 2025-27 CAGR 24%;Applied 入股 BESI 9%、Resonac/TEL 面板級 interposer 聯盟<span class="q">secondary</span></li>
+    <li><b>Digitimes / 36kr / 經濟日報 / 鉅亨 / 財報狗</b> — CoWoS 月產能口徑(7→10→13 萬/120-130K)、委外片數(Amkor 18-19 萬+矽品 6-8 萬)、台廠占設備支出 1-2 成、印能月營收 +83%;CoWoP=Chip-on-Wafer-on-PCB(非官方)<span class="q">blog</span></li>
+    <li><b>ReAnIn / Dataintelo</b>(FOPLP 市場 US$2.41B vs 3.8B,二線研調口徑分歧);Yole《Panel-Level Packaging 2025》摘要(無單一數字)<span class="q">blog</span></li>
+  </ul>
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>對抗式查證後否決/修正(請勿當既成事實):</b>① 辛耘「以代理為主」=更正,自製>60%、應自玻璃題 watch 升核心;② G2C+ 聯盟=志聖+均豪(5443)+均華(6640),群翊非成員(種子誤植);③ 印能除泡 80% 仍為公司自述、缺第三方(R&D 100 是技術獎非市佔);④ 力成 capex 更新為 500 億(原 400 億偏低);⑤ CoWoS 2026 底「120-130K」非單一值,口徑並列(7→10→13 萬);⑥ CoWoP=Chip-on-Wafer-on-PCB(晶圓級換載板)≠CoPoS(面板級換中介層載體)、非官方名、不當主軸;⑦ 材料端(玻璃/T-Glass/ABF/CCL)已另研究、不重複計受惠主體;⑧ CoPoS 尺寸分階段並列(310×310→515×510→750×620)。</div>
+  <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。設備核心美日歐、CoPoS 為未來式前瞻、市佔自述缺第三方、估值已部分反映須注意;材料端(玻璃/T-Glass/ABF/CCL)歸各自 segment、本題受惠主體與「玻璃基板 GCS」guide 高度重疊(同批股設備視角、不雙計)。數據請以最新官方法說/公告為準,投資人應自行查證,盈虧自負。</p>
+</div></section>
+
+<footer class="container"><p>CoWoS→CoPoS 先進封裝設備鏈(設備/OSAT/台積電擴產)研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+
+<script>
+(function(){
+  const fbar=document.getElementById('cFilters');if(!fbar)return;
+  fbar.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    fbar.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+    const f=b.dataset.f;document.querySelectorAll('#cGrid .card').forEach(c=>{c.style.display=(f==='all'||c.dataset.cat===f)?'':'none';});});
+})();
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+</body>
+</html>
