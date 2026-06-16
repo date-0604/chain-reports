@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半導體設備關鍵零組件國產化(腔體/石英/陶瓷/ESC/密封件,台積零配件 46%→60% 在地化)深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d; --intl:#4aa3ff;
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#d4a843;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,#161b22,#2a2410);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#241c08;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(212,168,67,.10)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:18px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}.tag{white-space:normal;overflow-wrap:anywhere}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>半導體設備關鍵零組件國產化(腔體/石英/陶瓷/ESC/密封件,台積零配件 46%→60% 在地化)深度研究報告</h1>
+  <div class="sub">前段製程設備(蝕刻/沉積/CMP)真空腔體內耗材件與精密模組六(+一)大環節逐類拆 × 用在哪設備站 × 國產化現況 × 技術難度;台廠 vs 日(Kyocera/NGK/Shinko/Tosoh)韓(KoMiCo)美(UCT/Greene Tweed)競局、對抗式查證</div>
+  <div class="meta-row">
+    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
+    <span class="pill">本質：<b>耗材黏性題(跟稼動率非單次capex);台廠吃機械加工+洗淨再生、高階材料配方缺席</b></span>
+    <span class="pill">配對淺色版：<b>設備零組件國產化-process-chain-light.html</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s1">1. 是什麼/兩大判斷</a>
+    <a href="#s2">2. 零組件鏈(7 環節)</a>
+    <a href="#s3">3. 難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照</a>
+    <a href="#s5">5. 政策/市場/催化劑</a>
+    <a href="#s6">6. 投資警示</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0 -->
+<div class="callout info"><b>一句話總結：</b>這是半導體「<b>設備關鍵零組件</b>」國產化題(聚焦前段製程設備真空腔體內的耗材件與精密模組;<b>設備機台歸 #2、廠務歸 #27、材料/晶圓歸 #10</b>)。<b>驅動=台積電零配件在地採購硬指標 46%(2024 超越 41% 目標)→60%(2030 KPI)+「設備零配件在地化創新計畫」(2026/02:12 家/22 案/驗證時程縮短 50%/年產值約 NT$20 億)</b>。<b>特性:零組件是耗材(電漿環境下石英/陶瓷/ESC/O-ring 定期更換)、營收跟「晶圓廠稼動率」走而非單次資本支出、黏性高;2nm 已量產+CoWoS 月產能 2026 衝 11.5-13 萬片=新機台與耗材兩端同放大。</b><b>但必須誠實分層:台廠吃得到「機械加工(腔體/模組)+洗淨再生」的大頭、「石英/陶瓷/ESC」的第二源/選擇權,吃不到「高階材料配方」(FFKM/高純石英原料/陶瓷粉體/ESC 介電配方仍進口);且設計主導權永遠在設備商(AMAT/LAM/TEL)=腔體價值天花板。</b></div>
+<div class="kpi">
+  <div class="box"><div class="v">46% → 60%</div><div class="l">台積零配件在地採購(2030 KPI;2024 已 46%)</div></div>
+  <div class="box"><div class="v">208 億 +26.7%</div><div class="l">京鼎 2025 營收創高(腔體龍頭、AMAT 一階占 8 成)</div></div>
+  <div class="box"><div class="v">12 家/22 案</div><div class="l">在地化創新計畫(2026/02、年產值約 20 億、公司自述)</div></div>
+  <div class="box"><div class="v">ESC/FFKM 缺席</div><div class="l">高階台廠缺席(Shinko ESC 44%/杜邦 FFKM 50%)</div></div>
+</div>
+
+<!-- 1 -->
+<h2 id="s1"><span class="n">1</span>是什麼、零組件分類 ＋ 兩大判斷 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>六(+一)大環節與本題範圍</h3>
+  <ul>
+    <li><b>六大環節:</b>① 腔體/精密金屬模組(蝕刻/CVD/PVD 真空腔體本體與結構件)→ ② 零件精密洗淨/再生/鍍膜 → ③ 石英件(tube/liner/edge ring/window)→ ④ 精密陶瓷 Al2O3/AlN(heater/liner/ring/ESC 基材)→ ⑤ ESC 靜電吸盤(乾式設備最關鍵零件、綁良率)→ ⑥ O-ring/FFKM 密封件(真空潔淨最後防線);另 ⑦ 氟素樹脂 PTFE/PFA 內襯(相鄰、上品)。</li>
+    <li><b>切分鐵則:</b>本題只認「真空腔體內的耗材件/精密件 + 腔體金屬模組 + 零件洗淨再生鍍膜」。<b>設備整機機台</b>(弘塑/辛耘濕製程設備)歸 #2;<b>廠務系統</b>(無塵室/氣化/化學供應/二次配)歸 #27(⚠ 帆宣兩線分計:設備模組代工線歸本題、廠務線約占在手 70% 歸 #27);<b>化學品/材料本體</b>(特氣/前驅體/CMP slurry/光阻/pad)歸 #10/#23;<b>再生晶圓</b>(中砂/辛耘)歸 #10(再生的是晶圓非零件);<b>EUV 載具</b>(家登 EUV POD)屬載具非腔體耗材=本題邊界出局。</li>
+    <li><b>耗材黏性(關鍵特性):</b>零組件營收跟 fab 稼動率(wafer starts)走、不隨單次資本支出,黏性最高(尤其洗淨再生);TECHCET 證實 2025 石英加工件 +9-10% YoY、為最快材料類之一。</li>
+  </ul>
+  <div class="g2 grid">
+    <div class="callout warn" style="margin:0"><b>🔍 判斷 1:台廠吃「機械加工+洗淨再生」、吃不到「高階材料配方」——四層分層</b><br>難度與台廠 alpha 成反比、必須分清:<b>第一層(主導/最確定、有當期硬數據):</b>① 腔體/精密金屬模組(京鼎 AMAT 一階占其 8 成、2025 營收 208 億創高;千附 PVD/CVD 真空腔體、嘉義廠 2026Q2)、② 洗淨再生(世禾本土龍頭、占營收 89.6%、過 2nm 認證、就近服務台積)。<b>第二層(重要第二源/陪跑):</b>③ 石英(翔名加工+離子佈植耗材)、④ 精密陶瓷(翔名/瑞耘加工)——高純石英原料/陶瓷粉體配方仍日德進口。<b>第三層(未來選擇權):</b>⑤ ESC(瑞耘實際核心是 CMP 夾持環逾 25%、自製 ESC 量產/認證待查)。<b>第四層(缺席):</b>⑥ FFKM 密封件(無上市純標的)。</div>
+    <div class="callout warn" style="margin:0"><b>🔍 判斷 2:設計主導權在設備商(優點也是天花板)+ 單一客戶集中</b><br>① <b>設計主導權不在台廠:</b>京鼎/千附是 AMAT/LAM/TEL 的「重要供應商」而非設計主導者——腔體規格/製程窗由設備商定義、料件認證(qualification)權在設備商,台廠是加工/代工角色、議價力受限,<b>這是台廠在零組件題的價值天花板</b>。② <b>認證壁壘=雙面刃:</b>已過認證者(京鼎=AMAT 一階、千附=三大廠在列、帆宣=ASML EUV 模組、世禾=過 2nm)享黏性護城河;ESC/高階陶瓷/FFKM 由設備商自製或綁定日系數十年、認證週期最長,台廠即使做得出也難擠進原廠 BOM。③ <b>單一客戶集中:</b>京鼎 AMAT 占 8-9 成、世禾台積就近、翔名台積/ASML/AMAT=客戶集中風險。④ 政策年產值僅約 NT$20 億、體量偏小;京鼎/世禾市場已認知、超額報酬有限。</div>
+  </div>
+</div>
+
+<!-- 2 -->
+<h2 id="s2"><span class="n">2</span>零組件鏈拆解(腔體 → 密封件,7 環節)<span class="conf c-high">高信心</span></h2>
+<p class="sub">七環節。<b>台廠 alpha 反比於難度:最不被卡的 ② 洗淨再生(世禾)、① 腔體模組(京鼎/千附)最強;最被卡的 ⑤ ESC、⑥ FFKM 台廠高階缺席。</b>難度 5=最難/最被卡。</p>
+<div class="flow">
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>① 腔體/精密金屬模組 ⭐ 台廠最強(但設計主導權在設備商)</h4>
+    <p>蝕刻/沉積(CVD·PVD)設備的真空腔體本體、結構件、傳輸模組、上下蓋、氣體分配座——設備商機台的「骨架」。性質偏「資本財零件」(隨新機台出貨、fab 擴產時拉貨最猛)。是六大環節中台灣最強、規模最大一塊。</p>
+    <div class="diff">難點(最不被卡=10/20):精密機械加工/銲接/真空潔淨度是台廠成熟強項、材料配方門檻低(金屬件非配方材料)、京鼎/千附已過設備商認證。<b>被卡點不在「能不能做」而在「設計主導權」——腔體規格/製程窗由 AMAT/LAM/TEL 定義,台廠=重要代工/協力供應商、非設計主導者,價值受設備商綁定(天花板)。</b>京鼎=AMAT 一階占其 8 成、AMAT 持股 8.4%;千附半導體占 65-70%、嘉義廠 2026Q2。</div>
+    <div class="who">對應:<span class="tag t-tw">京鼎 3413(AMAT 一階龍頭) / 千附精密 6829(PVD/CVD 腔體);帆宣 6196(ASML EUV 模組、衛星)</span> <span class="tag t-intl">UCT(美)/ Ichor(美氣路模組)/ Ferrotec(日)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>② 零件精密洗淨/再生/鍍膜 ⭐ 在地化最確定(世禾本土龍頭)</h4>
+    <p>電漿環境用過的腔體零件(石英/陶瓷/金屬/edge ring)表面沉積副產物、被電漿腐蝕後,送去精密洗淨→表面再生→重新鍍膜(Y2O3/YF3 抗電漿塗層)→送回 fab 重複使用。<b>耗材性質最純、營收跟 fab 稼動率走而非資本支出、黏性最高、就近服務台積最有地利;更換/再生頻率最高。</b></p>
+    <div class="diff">難點(最不被卡=8/20):洗淨/再生製程 know-how 有壁壘但非材料合成、過 2nm 認證有門檻但世禾已過、台廠進入難度最低(就近服務+在地龍頭已成形)。<b>世禾該業務占營收 89.6%、半導體占比約 78%、2025 營收 29.92 億/毛利 36%/EPS 6.12;⚠ 台積具體占比法說未揭露(待查)。對手韓 KoMiCo(2006 已在新竹設子公司、2025 跟台積赴熊本設廠=外商貼身競爭)、日 Mitsubishi Chemical。</b></div>
+    <div class="who">對應:<span class="tag t-tw">世禾 3551(洗淨再生本土龍頭) / 瑞耘 6532(維修再生) / 翔名 8091(表面處理)</span> <span class="tag t-intl">KoMiCo(韓,來台設廠)/ Mitsubishi Chemical(日)/ UCT Services(美)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>③ 石英件(tube/liner/edge ring/window)— 重要第二源(原料進口)</h4>
+    <p>高純度石英製成的腔體內耗材,用在擴散爐/CVD/蝕刻/微影作 liner/爐管/晶舟/視窗/部分 edge ring。電漿/高溫環境定期更換的高頻耗材。難點在「高純度石英原料/合成」掌握在日德手上——台廠多做「加工」與「第二源」而非原料。</p>
+    <div class="diff">難點(中=15/20):高純度石英加工/熔接有壁壘,但<b>高純度合成石英原料台灣不掌握、進口(日 Tosoh/信越、德 Heraeus+AGC 合計逾 35% 市占)</b>。<b>翔名 8091 為加工+第二源(離子佈植關鍵耗材全球少數、客戶台積/ASML/AMAT、2026 前 4 月營收 +37%);崇越 5434 為日商代理通路(非原廠)。台廠吃在地加工+第二源增量、原料仍進口。</b></div>
+    <div class="who">對應:<span class="tag t-tw">翔名 8091(加工/第二源) / 崇越 5434(代理) / 瑞耘 6532</span> <span class="tag t-intl">Tosoh Quartz(日)/ 信越石英(日)/ Heraeus(德)/ AGC</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>④ 精密陶瓷 Al2O3/AlN(heater/liner/ring/ESC 基材)— 陪跑(粉體配方缺席)</h4>
+    <p>氧化鋁/氮化鋁/氮化矽精密陶瓷件,用在蝕刻/CVD/PVD 的腔體 liner、陶瓷加熱器(AlN heater 導熱佳、精密控溫)、絕緣件、抗電漿 ring、ESC 陶瓷基材。難點在「陶瓷粉體配方+高溫燒結+緻密化」know-how 高度集中日系。</p>
+    <div class="diff">難點(高=18/20):高溫燒結/緻密化/抗電漿 know-high、<b>陶瓷粉體配方+AlN 導熱/絕緣特性掌握在日系(NGK/Kyocera/CoorsTek/Niterra/Ferrotec/TOTO/MiCo 前七大合計 >80% 市占)</b>。<b>翔名/瑞耘有切入但屬加工/第二源;陶瓷「粉體」仍進口、台廠在燒結/加工端陪跑、僅次於 ESC 的被卡環節。</b></div>
+    <div class="who">對應:<span class="tag t-tw">翔名 8091 / 瑞耘 6532(加工/第二源)</span> <span class="tag t-intl">NGK Insulators(日)/ Kyocera(日)/ CoorsTek(美)/ NTK CERATEC(日)/ TOTO(日)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>⑤ ESC 靜電吸盤 — 技術門檻最高、台廠高階缺席(未來選擇權)</h4>
+    <p>ESC 是乾式設備(蝕刻/CVD/PVD)中「<b>最關鍵的零組件</b>」——以靜電力吸附固定晶圓、同時提供加熱/冷卻/均溫,直接決定製程均勻度與良率;整合陶瓷基材(AlN/Al2O3)+電極+內埋加熱/冷卻通道+介電層,技術門檻六大環節最高。先進製程(2nm/高深寬比蝕刻)對控溫/夾持精度要求更嚴。</p>
+    <div class="diff">難點(最難=19/20):多層整合+綁良率+介電配方+設備商自製或綁定日系、認證週期最長。<b>全球 Shinko 約 44%+TOTO 約 17%(日系逾六成)+NGK/NTK/Kyocera/設備商自製。⚠ 台廠瑞耘 6532 實際核心是 CMP 晶圓夾持環(retaining ring 全球逾 25% 龍頭)非 ESC;ESC 官網有產品線但「半導體電漿腔體量產/原廠正式認證未見公告」=待查、2025 營收僅 6.75 億規模小。⚠ 媒體點名台廠 ESC「創造科學/科治新技」疑與國際商 Creative Technology(新加坡、研調約 9% 份額)混淆、無台廠純標的佐證、勿當國產化證據。</b></div>
+    <div class="who">對應:<span class="tag t-tw">瑞耘 6532(CMP 夾持環實、ESC 量產/認證待查);台廠 ESC 純標的缺席</span> <span class="tag t-intl">Shinko(日 44%)/ TOTO(日 17%)/ NTK CERATEC / Kyocera / Entegris(美)</span> <span class="conf c-med">中</span></div>
+  </div></div>
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>⑥ O-ring/FFKM 密封件 — 台灣最弱、無上市純標的(缺席)</h4>
+    <p>全氟橡膠(FFKM)密封件用在真空腔體所有接合面、閥件、氣體/化學管路,需耐電漿、耐高溫、耐強腐蝕氣體且不釋氣污染晶圓——是腔體真空與潔淨度的「最後一道防線」、高頻更換耗材。難點在「FFKM 高分子配方+精密成型」,全球由美日歐巨頭把持。</p>
+    <div class="diff">難點(最被卡=20/20、台廠缺席最徹底):FFKM 全氟彈性體高分子配方是核心壁壘、美日歐專利把持、密封失效直接污染晶圓認證極嚴。<b>杜邦 Kalrez 約 50% 市占+Greene Tweed/Valqua/Daikin;3M 已於 2025 完全退出 FFKM。台灣僅代理與小型客製、無具規模上市純標的=本題刻意不列股、誠實標缺席。</b></div>
+    <div class="who">對應:<span class="tag t-tw">(台灣無上市純標的、僅代理/小型客製)</span> <span class="tag t-intl">杜邦 Kalrez(美 ~50%)/ Greene Tweed(美)/ Valqua(日)/ Daikin(日)</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">7</div><div class="body">
+    <h4>⑦ 氟素樹脂 PTFE/PFA 內襯(相鄰補充)— 重要供應商(上品有規模)</h4>
+    <p>氟素樹脂(PTFE/M-PTFE/PFA/FEP)製成的設備內襯板、濕製程零件、襯裡管路與接頭,用於半導體濕製程高純度化學品輸送、廢酸/腐蝕氣體排放——耐強酸鹼腐蝕、高純度不污染。是台灣少數在「氟素材料設備件」有規模的環節(與 FFKM 彈性體密封件不同物:此為氟素「樹脂」內襯/結構件)。</p>
+    <div class="diff">難點(中=12/20):高純度氟素樹脂內襯成型/銲接/不釋出污染有壁壘、氟素樹脂上游原料仍部分國際,但上品有垂直整合。<b>上品 4770(PTFE/M-PTFE/PFA/FEP 內襯板/襯裡管路/PFA tube、從上游氟素材料採購到內襯設備設計製造垂直整合;半導體占營收約 85%、2025 營收 47.26 億、高階氟素設備除上品外僅 2 家日商;彰濱+嘉興+亞利桑那子公司、2026 產能 +40%)。被卡點較淺、台廠卡位較實=優於石英/陶瓷的「第二源陪跑」地位。</b></div>
+    <div class="who">對應:<span class="tag t-tw">上品 4770(氟素樹脂內襯、垂直整合)</span> <span class="tag t-intl">Entegris(美)/ Daikin(日)/ AGC(日);高階僅 2 家日商</span> <span class="conf c-high">高</span></div>
+  </div></div>
+</div>
+
+<!-- 3 -->
+<h2 id="s3"><span class="n">3</span>逐環節難度 ＋ 公司受惠強度評分</h2>
+<p class="sub">難度維度:技術門檻 / 材料配方門檻 / 設備商認證壁壘 / 台廠進入難度,各 0~5 分(5＝最難/最被卡)。⚠ <b>台廠 alpha 反比於難度:最不被卡的 ② 洗淨再生、① 腔體模組最強;最被卡的 ⑤ ESC、⑥ FFKM 台廠高階缺席。</b>評分為推估。</p>
+<table>
+  <tr><th>零組件環節</th><th>技術門檻</th><th>材料配方</th><th>認證壁壘</th><th>台廠進入難度</th><th>總分/20</th><th>台廠位置</th></tr>
+  <tr><td><b>⑥ O-ring/FFKM 密封件</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>缺席(杜邦 50%、無上市純標的)</td></tr>
+  <tr><td><b>⑤ ESC 靜電吸盤</b></td><td>5</td><td>4</td><td>5</td><td>5</td><td><b>19</b></td><td>未來選擇權(Shinko 44%、瑞耘量產待查)</td></tr>
+  <tr><td><b>④ 精密陶瓷 Al2O3/AlN</b></td><td>5</td><td>5</td><td>4</td><td>4</td><td><b>18</b></td><td>陪跑(前七大>80%、粉體進口)</td></tr>
+  <tr><td>③ 石英件</td><td>4</td><td>4</td><td>3</td><td>4</td><td><b>15</b></td><td>重要第二源(翔名加工、原料進口)</td></tr>
+  <tr><td>⑦ 氟素樹脂內襯</td><td>4</td><td>3</td><td>3</td><td>2</td><td><b>12</b></td><td>重要供應商(上品垂直整合)</td></tr>
+  <tr><td>① 腔體/精密金屬模組 ⭐</td><td>3</td><td>1</td><td>4</td><td>2</td><td><b>10</b></td><td>台灣最強(京鼎/千附、設計主導設備商)</td></tr>
+  <tr><td>② 零件洗淨/再生/鍍膜 ⭐</td><td>3</td><td>1</td><td>3</td><td>1</td><td><b>8</b></td><td>在地化最確定(世禾本土龍頭)</td></tr>
+</table>
+<div class="callout"><b>台廠的位置(關鍵):</b>本題 alpha 在難度「最低」、台廠已主導/最確定的 <b>② 洗淨再生(世禾、跟稼動率、就近服務)、① 腔體模組(京鼎/千附、機械加工最強)、⑦ 氟素內襯(上品)</b>;難度最高、最高值的 <b>⑥ FFKM(無上市純標的)、⑤ ESC(瑞耘量產待查)、④ 精密陶瓷(粉體進口)台廠缺席/選擇權/陪跑</b>。即「在台積在地化框架內角色快速上升、訂單實質落地,但設計主導權在設備商、高階材料配方仍日美韓、台廠不可外溢到 ESC/陶瓷/FFKM 本體」。</div>
+<h3>公司受惠強度評分(holds 6 檔,設備零組件)</h3>
+<p class="sub">維度:AI/先進製程受惠 / 零件技術卡位 / 在地化放量時程 / 利基壁壘 / 規模財務,各 0~5 分;總分由高到低。FFKM/EUV 載具不在此(無純標的/邊界出局)。評分為推估,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>環節/型態</th><th>受惠</th><th>技術卡位</th><th>放量時程</th><th>利基壁壘</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>京鼎 3413</td><td>腔體模組龍頭(AMAT 一階)</td><td>5</td><td>4</td><td>4</td><td>4</td><td>5</td><td><b>22</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>世禾 3551</td><td>洗淨再生本土龍頭(最確定)</td><td>4</td><td>3</td><td>5</td><td>4</td><td>3</td><td><b>19</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>千附精密 6829</td><td>PVD/CVD 真空腔體(放量)</td><td>4</td><td>4</td><td>5</td><td>3</td><td>3</td><td><b>19</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>翔名 8091</td><td>離子佈植耗材/石英陶瓷加工</td><td>4</td><td>4</td><td>4</td><td>4</td><td>3</td><td><b>19</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>瑞耘 6532</td><td>CMP 夾持環逾 25%(實)/ESC 選擇權</td><td>3</td><td>5</td><td>3</td><td>4</td><td>2</td><td><b>17</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>上品 4770</td><td>氟素樹脂 PTFE/PFA 內襯</td><td>3</td><td>3</td><td>4</td><td>3</td><td>4</td><td><b>17</b></td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<p class="sub"><b>京鼎 3413</b>=腔體模組龍頭(AMAT 一階協力占其 8 成、AMAT 持股 8.4% 第二大股東、2025 營收 208.4 億 +26.7% 創高/EPS 21.44 連 4 年賺逾 2 股本、泰國廠 2026 量產;⚠ 設計主導權在 AMAT、單一客戶集中);<b>世禾 3551</b>=洗淨再生最確定(占營收 89.6%、過 2nm、就近服務台積、營收綁稼動率黏性高;⚠ 台積占比待查、韓 KoMiCo 來台貼身競爭);<b>千附 6829</b>=腔體放量(半導體 65-70%、嘉義廠 2026Q2、2026 半導體 +20-30%、毛利拚 30%);<b>翔名 8091</b>=離子佈植關鍵耗材全球少數+石英陶瓷加工(客戶台積/ASML/AMAT、2026 前 4 月 +37%;⚠ 高純石英原料進口);<b>瑞耘 6532</b>=CMP 晶圓夾持環逾 25% 龍頭(實)+ESC 選擇權(⚠ 自製 ESC 量產/認證待查、規模小);<b>上品 4770</b>=氟素樹脂內襯(垂直整合、高階三家之一、規模較大;⚠ 非 FFKM 標的)。⚠ 多檔單一客戶集中;受惠評分為推估。</p>
+
+<!-- 4 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 公司財報/月營收/法說</span>
+  <span><span class="conf c-med">中</span> 研調市占/媒體彙整</span>
+  <span><span class="conf c-un">待查</span> ESC 量產/政策名單(台積未公開)</span>
+</div>
+<h3>逐設備站 × 零件地圖(台廠 vs 國際)</h3>
+<table>
+  <tr><th>設備站</th><th>零件</th><th>台廠</th><th>國際/定位</th></tr>
+  <tr><td>蝕刻 Etch</td><td>edge ring/focus ring(Si/SiC/石英)</td><td>翔名 8091 / 瑞耘 6532(第二源/加工)</td><td>UCT/Hana Materials/日石英;高純 SiC 進口</td></tr>
+  <tr><td>蝕刻 Etch</td><td>ESC 靜電吸盤(陶瓷介電)</td><td>瑞耘 6532(再生;自製待查)</td><td><b>Shinko 44%/TOTO 17%+設備商自製=缺席</b></td></tr>
+  <tr><td>沉積 CVD/PVD</td><td>真空腔體/精密金屬模組 ⭐</td><td>京鼎 3413 / 千附 6829</td><td>設計主導 AMAT/LAM/TEL;UCT/Ferrotec 同級</td></tr>
+  <tr><td>沉積 CVD/PVD</td><td>shower head/AlN heater/靶材座</td><td>千附/京鼎(金屬件)/翔名(陶瓷)</td><td>Kyocera/NGK 陶瓷 heater 主導;AlN 進口</td></tr>
+  <tr><td>CMP</td><td>retaining ring/conditioner 機構件</td><td>瑞耘 6532(夾持環逾 25%)/世禾(再生)</td><td>3M/Saesol/Entegris;slurry·pad 歸 #10</td></tr>
+  <tr><td>微影 Litho</td><td>投影鏡頭/雷射/wafer stage</td><td>(核心缺席;帆宣 6196 僅周邊模組)</td><td>ASML/Zeiss/Cymer/Nikon 全壟斷</td></tr>
+  <tr><td>共通 Common</td><td>O-ring/FFKM 密封件</td><td><b>(無上市純標的、缺席)</b></td><td>杜邦 Kalrez 50%/Greene Tweed/Valqua/Daikin</td></tr>
+  <tr><td>共通 Common</td><td>PTFE/PFA 氟素內襯</td><td>上品 4770(垂直整合)</td><td>Entegris/Daikin/AGC;高階僅 2 家日商</td></tr>
+  <tr><td>共通(後段)</td><td>零件洗淨/再生/鍍膜 ⭐</td><td>世禾 3551(89.6%)/瑞耘/翔名</td><td>韓 KoMiCo(來台設廠)/日 Mitsubishi/美 UCT</td></tr>
+</table>
+<h3>國際 × 角色(高階壟斷者 + 韓 KoMiCo 貼身競爭)</h3>
+<table>
+  <tr><th>公司</th><th>國別/環節</th><th>角色</th><th>查證</th></tr>
+  <tr><td>UCT(UCTT)/ Ichor / Ferrotec</td><td>美/日 · 腔體/氣路模組</td><td>UCT=全球最大設備子系統/腔體模組外包整合商(2025 TTM 約 US$20.7 億、一條龍含洗淨+微汙染分析)=京鼎/千附最直接對手但體量遠大;Ichor=氣路模組(台廠較少切入的次環節);Ferrotec=橫跨腔體/陶瓷/ESC/石英綜合材料商(陶瓷前七大)。<b>顯示台廠多單環節專精、缺日廠垂直整合</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Heraeus / Tosoh / 信越石英</td><td>德/日 · 高純石英原料</td><td><b>合成石英三巨頭、掌握高純石英「原料/母材」配方(Heraeus+AGC 逾 35%)</b>=台廠翔名/崇越多在加工與第二源、原料仍仰賴進口的對照點</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>NGK / Kyocera / CoorsTek / Niterra / TOTO</td><td>日/美 · 精密陶瓷</td><td><b>半導體精密陶瓷前七大合計 >80% 份額(NGK 2026 將 HICERAM 氧化鋁產出擴 3 倍;Kyocera 長崎 US$4.54 億新廠 2026)</b>;陶瓷粉體與燒結配方台廠進口、無規模純標的</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Shinko / TOTO / NTK / Kyocera + 設備商自製</td><td>日 · ESC 靜電吸盤</td><td><b>ESC 全球 Shinko 約 44%+TOTO 約 17%(日系逾六成)+設備商(AMAT/LAM)自製=技術門檻最高、最被日廠壟斷的鐵證</b>;台廠 ESC 本體幾乎缺席</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>杜邦 Kalrez / Greene Tweed / Valqua / Daikin / KoMiCo</td><td>美/日/韓 · FFKM/洗淨再生</td><td>FFKM=杜邦 Kalrez 約 50%+Greene Tweed/Valqua/Daikin(半導體最大應用、台廠無上市純標的);<b>韓 KoMiCo=洗淨再生最直接對手、2006 已在新竹設子公司、2025 跟台積赴熊本設廠=連「最確定」環節都有外商貼身搶單</b></td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<h3>台灣吃得到多少(逐環節定位)</h3>
+<p class="sub">一句話:<b>腔體模組=台廠最強(京鼎/千附,設計主導設備商);洗淨再生=主導/最確定(世禾);氟素內襯=重要供應商(上品);石英/陶瓷=重要第二源/陪跑;ESC=未來選擇權(瑞耘量產待查);FFKM=缺席(無上市純標的)。高階材料配方(FFKM/高純石英原料/陶瓷粉體)結構性缺席。</b></p>
+<table>
+  <tr><th>環節</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>腔體/精密金屬模組 ⭐</td><td>京鼎 3413 / 千附 6829</td><td><span class="conf c-high">重要供應商(台灣最強)</span></td><td>京鼎 AMAT 一階占其 8 成、208 億創高;千附嘉義廠 2026Q2;⚠ 設計主導權在設備商</td></tr>
+  <tr><td>零件洗淨/再生/鍍膜 ⭐</td><td>世禾 3551 / 瑞耘 / 翔名</td><td><span class="conf c-high">主導/在地化最確定</span></td><td>世禾占營收 89.6%、過 2nm、就近服務;⚠ 韓 KoMiCo 來台貼身競爭</td></tr>
+  <tr><td>氟素樹脂內襯</td><td>上品 4770</td><td><span class="conf c-high">重要供應商(少數有規模)</span></td><td>PTFE/PFA 垂直整合、半導體 85%、高階三家之一;高純原料仍進口</td></tr>
+  <tr><td>石英件 / 精密陶瓷</td><td>翔名 8091 / 瑞耘 6532</td><td><span class="conf c-med">重要第二源/陪跑</span></td><td>翔名離子佈植耗材+加工;高純石英原料 Tosoh/信越、陶瓷粉體 NGK/Kyocera 進口</td></tr>
+  <tr><td>ESC 靜電吸盤</td><td>瑞耘 6532(夾持環實/ESC 選擇權)</td><td><span class="conf c-un">未來選擇權/缺席</span></td><td>Shinko 44% 壟斷;瑞耘 ESC 量產/認證待查;⚠ 媒體「創造科學」疑與國際 Creative Technology 混淆</td></tr>
+  <tr><td>O-ring/FFKM 密封件</td><td>(無上市純標的)</td><td><span class="conf c-low">缺席/最弱</span></td><td>杜邦 Kalrez 50%+Greene Tweed/Valqua/Daikin;台灣僅代理/小型客製</td></tr>
+</table>
+
+<!-- 5 -->
+<h2 id="s5"><span class="n">5</span>在地化政策、市場與催化劑</h2>
+<div class="card">
+  <h3>🔬 台積零配件在地化政策(本題硬底盤)</h3>
+  <table>
+    <tr><th>政策項</th><th>數字</th><th>說明</th></tr>
+    <tr><td>零配件在地採購(KPI 硬指標)</td><td>46%(2024)→60%(2030)</td><td>2024 已達 46%(超越 41% 目標)=官方已達成;60% 為 2030 目標非現況。⚠ 官方框架另有口徑(「+15pp→約 61%」、或「2030 原物料 50%/零配件 68%/後段設備 38%」)、引用須標</td></tr>
+    <tr><td>間接原物料(不同口徑、勿混)</td><td>65%(2024)→68%(2030)</td><td>對應材料台廠、主歸 #10;與零配件 46%→60% 不同口徑</td></tr>
+    <tr><td>設備零配件在地化創新計畫(2026/02)</td><td>12 家/22 案/縮時 50%/年產值約 NT$20 億</td><td>⚠ 公司自述非第三方審計;年產值約 US$0.65 億規模偏小;<b>12 家具體名單台積未公開揭露——「京鼎/世禾/千附/翔名/瑞耘=核心名單」是媒體彙整、非台積官方逐項認列</b></td></tr>
+  </table>
+  <div class="callout warn"><b>政策誠實畫線:</b>① 政策把「就近服務+快速響應」變成結構性需求——洗淨/再生(世禾/瑞耘、24hr 響應)在地化最確定;② 縮短驗證時程 50% 降低台廠導入門檻(腔體模組/石英陶瓷受惠);③ 60% 目標是「跟稼動率走的耗材性營收」放大器(2nm/CoWoS 放大新機台與耗材兩端)。<b>但政策對「高階缺席」的 ESC/FFKM 幫助有限(輔導補不出材料配方);且 12 家名單未公開=「台積大同盟/在地化核心名單」(財經部落格/媒體彙整)混雜廠務/機台/材料/封裝、京鼎常被誤歸先進封裝、真正零組件純玩家反不顯著=名單 vs 實質落差大、須逐項切分、勿當官方背書。</b></div>
+  <h3>市場規模多口徑(⚠ ESC 差近一倍、腔體無獨立研調)</h3>
+  <table>
+    <tr><th>研調</th><th>口徑</th><th>規模</th><th>口徑說明</th></tr>
+    <tr><td>Intel MR / FactMR vs Persistence</td><td>ESC 靜電吸盤(全球)</td><td>US$12.1 億 vs 19 億(2025)</td><td>⚠ 差近一倍=同環節不同研調差近 1 倍代表案例;陶瓷 ESC 細分另約 US$8.2 億(口徑層級不同)</td></tr>
+    <tr><td>360iResearch / 多家</td><td>半導體石英材料/零件</td><td>US$11.8-25 億(2025-26)</td><td>口徑分歧大(材料 vs 成品件);TECHCET 2025 石英加工件 +9-10% YoY(最快材料類之一、耗材黏性佐證)</td></tr>
+    <tr><td>多家(Verified/Grand View)</td><td>半導體精密陶瓷</td><td>2026 約 US$14.3 億→2034 US$22 億(7.9%)</td><td>前七大 >80% 份額;台廠無規模純標的</td></tr>
+    <tr><td>多家(OpenPR/Valuates)</td><td>FFKM 半導體 O-ring</td><td>半導體占 FFKM 近半(2025 約 US$184M)</td><td>杜邦約 50%;台廠無上市純標的、刻意不列股</td></tr>
+    <tr><td>(資料缺口)</td><td>腔體/精密金屬模組</td><td>無獨立研調</td><td>以 UCT(2025 TTM ~US$20.7 億)/京鼎(208 億)/千附(18 億)公司營收側寫</td></tr>
+    <tr><td>台積電(官方)</td><td>在地化政策(硬指標)</td><td>零配件 46%→60%、12 家 22 案 20 億</td><td>最硬口徑;年產值規模偏小</td></tr>
+  </table>
+  <h3>催化劑時間軸(2025Q4 → 2026)</h3>
+  <ul>
+    <li><b>2025/12(已發生):</b>台積 N2(2nm)如期量產起跑——稼動率拉升直接推升真空腔體耗材(石英/陶瓷/ESC/夾持環/O-ring)定期更換需求(耗材黏性核心邏輯)<span class="conf c-high">已發生</span></li>
+    <li><b>2026/02(已發生):</b>台積公布「設備零配件在地化創新計畫」成果(12 家/22 案/縮時 50%/年產值約 20 億)=本題最硬政策落地事件<span class="conf c-high">已發生</span></li>
+    <li><b>2026 全年(已發生/實績):</b>京鼎 2025 營收 208.4 億 +26.7% 創高;翔名 2026 前 4 月營收 +37% 創高;上品 2026/03 營收 +134.9% MoM<span class="conf c-high">已發生</span></li>
+    <li><b>2026Q2(預期):</b>千附嘉義一期投產(2026 半導體 +20-30%、毛利拚 30%);京鼎泰國羅勇/春武里廠 2026 上半量產、拚損益兩平<span class="conf c-med">排程中</span></li>
+    <li><b>2026Q1(進行中):</b>瑞耘馬來西亞廠完成稽核、進入認證階段(對接 AMAT)=ESC/夾持環/heater 出海認證觀察點<span class="conf c-med">進行中</span></li>
+    <li><b>2026 全年(進行中):</b>CoWoS 月產能 2025 底 7 萬→2026 衝 11.5-13 萬片;先進封裝擴產帶耗材升級(洗淨再生/石英/夾持環)<span class="conf c-med">進行中</span></li>
+    <li><b>2026H2(時程分歧):</b>台積 N2P/A16(背面供電)規劃 2026 下半量產(部分路線圖押後 2027)=放大新機台與耗材兩端<span class="conf c-un">時程分歧</span></li>
+    <li><b>2026/08-09(預期):</b>台積責任供應鏈報告揭露在地採購零配件最新進度(46%→60% 路徑年度校準)<span class="conf c-un">依往年節奏</span></li>
+    <li><b>2026 年底(預期):</b>台積供應鏈管理論壇/優良供應商頒獎(2025 屆 27 家、7 家台廠入列、辛耘首上榜)=在地化官方背書催化劑<span class="conf c-un">依往年節奏</span></li>
+    <li><b>2026 全年(進行中):</b>美日新廠裝機潮帶台製零件出海(京鼎泰國/千附/瑞耘馬廠對接 AMAT;Ichor 2026 追 WFE +15-20% 反映設備模組景氣上行)<span class="conf c-un">進行中</span></li>
+  </ul>
+  <div class="callout"><b>選股節奏:</b>現在就有營收+獲利(非純題材)=京鼎(腔體龍頭 208 億 +26.7%)、世禾(洗淨再生最確定)、翔名(離子佈植 +37%)、上品(氟素內襯);放量時程=千附(嘉義廠 2026Q2)、瑞耘(馬廠認證 2026Q1)。<b>核心鐵則:在地化財為真但須分層——第一層腔體/洗淨再生(主導/最確定、京鼎/世禾/千附)、第二層石英/陶瓷(第二源增量、翔名)、第三層 ESC(選擇權、瑞耘量產待查)、第四層 FFKM(缺席)。</b>對設計主導權在設備商、單一客戶集中、高階材料配方缺席、ESC/政策名單待查保持折價。</div>
+</div>
+
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
+  <ul>
+    <li><b>瑞耘 6532「自製 ESC 已量產供半導體電漿蝕刻腔體、為國產 ESC 替代標的」:</b>否決——<b>瑞耘實際核心是 CMP 晶圓夾持環(retaining ring 全球逾 25% 龍頭)非 ESC</b>;ESC 雖研發逾十年、官網有產品頁,但量產拓展領域為面板/先進封裝/MEMS 非電漿製程,半導體電漿腔體(最硬應用)量產/原廠正式認證未見公告=待查、2025 營收僅 6.75 億/2025Q3 年減 16% 佐證 ESC 尚未放量</li>
+    <li><b>媒體點名台廠 ESC「創造科學/科治新技」是國產化標的:</b>重大警示——<b>研調約 9% 份額的「Creative Technology」是國際(新加坡/日系)廠商、極可能被誤譯/混為台廠「創造科學」;WebSearch 無主流/官方來源佐證有此規模台廠 ESC 純標的=不宜當台廠國產化證據</b></li>
+    <li><b>在地化「46%→60%」當現況/官方唯一口徑:</b>修正——46% 是 2024 已達成、60% 是 2030 目標非現況;官方框架另有口徑(「+15pp→約 61%」、或「2030 原物料 50%/零配件 68%/後段設備 38%」)、引用須標;間接原物料 65%→68% 是不同口徑勿混</li>
+    <li><b>「台積設備大同盟/在地化核心名單」=設備零組件在地化核心名單:</b>否決——媒體名單混雜廠務(漢唐/帆宣)、製程機台(弘塑/辛耘)、材料(中砂/崇越)、先進封裝(家登/精材),且常誤把京鼎歸「先進封裝類」;真正零組件純玩家(世禾/千附/翔名)反不顯著;12 家計畫名單台積未公開=名單 vs 實質落差大、勿當官方背書</li>
+    <li><b>家登 3680 EUV POD 算本題「設備關鍵零組件」:</b>邊界出局——家登主力是 EUV 晶圓/光罩「載具」(廠內物流/站別轉換防護)、非「設備真空腔體內耗材/模組本體」,依切分歸 #27/#2、本題只列示供切分</li>
+    <li><b>辛耘 3583 屬本題「設備零件再生」受惠股:</b>排除——辛耘=設備代理+自製濕製程機台+「再生晶圓」(歸 #2/#10),再生的是「晶圓」非「設備零件」、自製是「設備機台」非「零組件」</li>
+    <li><b>FFKM/O-ring 有可投資的台廠純標的:</b>否——杜邦 Kalrez 50%+Greene Tweed/Valqua/Daikin 全包,台灣僅代理/小型客製、無上市純標的(刻意不列股);上品 4770 是 PTFE/PFA 氟素「樹脂」內襯、非 FFKM「彈性體」密封件、不可混為 FFKM 標的</li>
+    <li><b>世禾「89.6% 為台積占比高」:</b>口徑校正——89.6% 是「精密洗淨及再生處理」營收結構(非台積占比),台積具體占比法說未揭露=待查;另有 93.17%/半導體終端 78% 口徑(業務別 vs 終端別、不衝突)</li>
+  </ul>
+</div>
+<div class="card"><h3>持續性兩劇本(在地化政策+耗材黏性 vs 設計主導權設備商+高階缺席)</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>多方:政策硬指標+耗材黏性+腔體/洗淨主導+多檔現在有營收</b><br>① 政策硬指標背書(零配件 46%→60% 寫進 KPI、2026/02 落地 12 家/22 案/驗證時程砍半)=有官方路徑的結構性題;② 耗材黏性(石英/陶瓷/ESC/O-ring 定期更換、營收跟稼動率而非單次 capex,2nm 已量產+CoWoS 月產能 2026 衝 11.5-13 萬片;TECHCET 2025 石英加工件 +9-10% YoY);③ 台廠在腔體/精密金屬模組(京鼎 208 億 +26.7%、千附嘉義廠 2026Q2)與洗淨再生(世禾占 89.6%、就近服務)兩環節有實質主導/最確定、多檔現在就有營收與獲利;④ 出海動能(京鼎泰國/千附/瑞耘馬廠對接 AMAT、Ichor 2026 追 WFE +15-20%)。</div>
+    <div class="callout warn" style="margin:0"><b>空方:設計主導權設備商+高階日美韓壟斷+客戶集中+成熟認知</b><br>① <b>設計主導權不在台廠(京鼎/千附是 AMAT/LAM/TEL 重要供應商而非主導、京鼎 8-9 成押 AMAT)=議價力受限、價值天花板;</b>② <b>高階材料本體日美韓壟斷台廠缺席:ESC(Shinko 44%/TOTO 17%)、精密陶瓷(前七大 >80%)、FFKM(杜邦 50%)、高純石英原料/陶瓷粉體進口;瑞耘國產 ESC 量產/認證待查=選擇權非現金流;</b>③ 單一客戶集中(京鼎 AMAT/世禾台積/翔名台積);④ 政策年產值僅約 20 億體量偏小、京鼎/世禾市場已認知、超額報酬有限;⑤ 口徑分歧大(ESC 差近一倍、腔體無獨立研調);⑥ 外商貼身競爭(韓 KoMiCo 已在台設廠+赴熊本跟單)。</div>
+  </div>
+  <p><b>裁決(verdict):</b><b>在地化財是真的、但須嚴格分層、不可一視同仁。① 腔體/精密金屬模組=台廠最強、有實質參與(京鼎/千附),但設計主導權在設備商、定位「重要供應商非主導」,看稼動率與全球擴產而非獨佔;② 洗淨再生=在地化最確定、世禾本土龍頭+台積就近服務,惟韓 KoMiCo 已落地台灣並赴日跟單=確定但非無競爭;③ 石英/陶瓷=重要第二源/陪跑,原料母材與配方仍日德主導、增量是選擇權;④ ESC=技術門檻最高、日系逾六成壟斷,瑞耘國產 ESC 屬未來選擇權(量產/認證待查)非現金流、實際核心是 CMP 夾持環;⑤ FFKM/O-ring=台灣最弱、美日全包、無上市純標的、刻意不列股。綜合:把它當「跟著台積稼動率與 2nm/A16/CoWoS 放量的耗材黏性題」可持續(多檔現有營收);但若期待台廠吃下 ESC/陶瓷/FFKM 高階材料本體則過度樂觀。投資序位依台廠實質參與度由 腔體/洗淨再生(核心)→ 石英/陶瓷(第二源增量)→ ESC(選擇權)→ FFKM(缺席)遞減。</b></p>
+</div>
+<div class="card"><h3>結構性風險與開放問題</h3>
+  <ul>
+    <li><b>設計主導權:</b>京鼎/千附是設備商(AMAT/LAM/TEL)重要供應商非主導、腔體規格/認證權在設備商=議價力受限、價值天花板</li>
+    <li><b>高階缺席:</b>ESC(Shinko 44%)、精密陶瓷(前七大 >80%)、FFKM(杜邦 50%)、高純石英原料/陶瓷粉體=日美韓壟斷、台廠無規模純標的/僅選擇權</li>
+    <li><b>單一客戶集中:</b>京鼎 AMAT 8-9 成、世禾台積、翔名台積/ASML=客戶集中風險;政策年產值 20 億體量偏小</li>
+    <li><b>口徑/待查:</b>ESC 研調差近一倍、腔體無獨立研調;瑞耘 ESC 量產/認證待查;政策 12 家名單台積未公開(媒體推論);世禾台積占比未揭露</li>
+    <li><b>切分去重:</b>帆宣兩線分計(設備模組→本題、廠務 70% →#27);設備機台→#2、化學品/slurry/光阻→#10/#23、再生晶圓→#10、EUV 載具(家登)→邊界出局</li>
+    <li><b>開放問題:</b>2026/08 台積在地採購零配件實績更新(46% 是否再升);12 家計畫名單是否公開;瑞耘 ESC 量產/認證進度;ESC 研調為何差近一倍;有無台廠突破 FFKM/高純石英原料/陶瓷粉體本體</li>
+  </ul>
+</div>
+
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card">
+  <div class="src-item">台積責任供應鏈/永續報告 + 2026/02 公告(中央社/經濟日報)— 零配件在地採購 46%→60%(2030)、設備零配件在地化創新計畫 12 家/22 案/驗證時程縮短 50%/年產值約 20 億<span class="src-q q-primary">primary</span></div>
+  <div class="src-item">京鼎/千附/世禾/翔名/瑞耘/上品/帆宣 2025 年報與法說月營收(公開申報)— 京鼎 208.4 億、世禾 89.6% 洗淨、千附嘉義廠、翔名離子佈植、上品氟素內襯<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.techcet.com/" target="_blank">TECHCET</a> — 2025 石英加工件 +9-10% YoY(耗材黏性佐證);Intel MR/Persistence(ESC US$12.1 億 vs 19 億、差近一倍);360iResearch(石英);Verified/Grand View(陶瓷)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">UCT/Ichor 法說 IR;Shinko/TOTO/NGK/Kyocera/杜邦 Kalrez 份額研調 — 國際壟斷者市占(ESC Shinko 44%、FFKM 杜邦 50%、陶瓷前七大 >80%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">DIGITIMES/數位時代 — KoMiCo 來台設廠+赴熊本;台積供應鏈論壇優良供應商(2025 屆 27 家/7 家台廠/辛耘首上榜)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">CMoney/vocus/uanalyze/富果/winvest(京鼎/世禾/千附/翔名/瑞耘 法說彙整;⚠ ESC「創造科學/科治新技」疑與國際 Creative Technology 混淆、瑞耘 ESC 量產待查、「在地化核心名單」為媒體彙整、逐項已對抗式查證)<span class="src-q q-blog">blog</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(零組件鏈 7 環節+4 路線之爭 / 台廠逐檔查證+受惠評分+台灣吃得到誠實分層 / 國際對照+市場多口徑+持續性兩劇本+韓 KoMiCo 對照 / 逐設備站零件地圖+政策量化+ESC/陶瓷認證查證+切分模型)＋ 對抗式查證(瑞耘核心是 CMP 夾持環非 ESC、ESC「創造科學」疑國際商混淆、家登載具邊界出局、辛耘排除、在地化口徑兩套、12 家名單未公開、世禾占比口徑校正、FFKM 無純標的)。</p>
+  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明(設計主導權設備商、高階缺席、ESC/政策名單待查、單一客戶集中)。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+</footer>
+
+</div>
+</body>
+</html>
