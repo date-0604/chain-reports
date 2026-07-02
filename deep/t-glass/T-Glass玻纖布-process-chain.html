@@ -82,28 +82,36 @@
   <div class="sub">完整製程逐環節拆解、逐環節技術難度、台灣與國際供應鏈對照、對抗式查證</div>
   <div class="meta-row">
     <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">增補查證：<b>2026-07-03(二輪)</b></span>
     <span class="pill">研究方法：<b>缺口分析 + 對抗式查證</b></span>
+    <span class="pill">查證統計：<b>33 條主張逐條裁決：19 確認 / 11 待查 / 3 反駁；14 檔股號掛牌逐檔複核</b></span>
     <span class="pill">驅動力：<b>AI 載板缺料漲價(Nittobo 壟斷)</b></span>
     <span class="pill">配對淺色版：<b>T-Glass玻纖布-process-chain-light.html</b></span>
   </div>
   <div class="toc">
     <a href="#s1">1. 是什麼/應用/原理</a>
     <a href="#s2">2. 完整製程環節</a>
+    <a href="#s2f">2.5 材料分級細顆粒地圖</a>
     <a href="#s3">3. 逐環節難度</a>
     <a href="#s4">4. 供應鏈對照</a>
     <a href="#s5">5. 量產時程</a>
-    <a href="#s6">6. 投資警示</a>
+    <a href="#s5y">5.5 法人預估與股價</a>
+    <a href="#s6">6. 投資警示/被反駁說法</a>
     <a href="#s7">7. 資料來源</a>
   </div>
 </header>
 
 <!-- 0：一句話總結 -->
-<div class="callout info"><b>一句話總結：</b>AI 載板高速化把高階玻纖布推成 CCL→載板鏈的最上游瓶頸，<b>日東紡(Nittobo)壟斷 Low-Dk/Low-CTE 玻纖布(T-glass 市佔 ~90%)</b>。台廠吃的是「織布」與「玻纖紗」兩段：台玻、富喬切高階布、建榮是 Nittobo 子公司、德宏轉攻石英纖維。漲價自 2025Q4 起、2026 仍在搶料；但題材已多次發動，需分辨「結構受惠」與「概念股」。</div>
+<div class="callout info"><b>一句話總結：</b>AI 載板高速化把高階玻纖布推成 CCL→載板鏈的最上游瓶頸，<b>日東紡(Nittobo)壟斷 Low-Dk/Low-CTE 玻纖布(T-glass 市佔 ~90%，TrendForce 2026-03 + 日經 2026-03 雙源)</b>。台廠吃的是「織布」與「玻纖紗」兩段：台玻、富喬切高階布、建榮是 Nittobo 持股 47.65% 子公司、德宏轉攻石英纖維。漲價自 2025Q4 起、2026 仍在搶料；但漲價口徑須拆開看——2025/08 的 +20% 僅限複材事業部產品、AI/電子級布不在列(DigiTimes 2025-06/2025 反駁 TrendForce「全線」措辭)。題材已多次發動，需分辨「結構受惠」與「概念股」。</div>
 <div class="kpi">
-  <div class="box"><div class="v">~90%</div><div class="l">Nittobo T-glass 市佔</div></div>
-  <div class="box"><div class="v">+20%→+20-30%</div><div class="l">Nittobo 漲價(25/8→26/4)</div></div>
-  <div class="box"><div class="v">10-30%</div><div class="l">T-Glass 2026 漲幅(Goldman)</div></div>
-  <div class="box"><div class="v">~USD 3.4-3.9B</div><div class="l">電子級玻纖布全球市場</div></div>
+  <div class="box"><div class="v">~90%</div><div class="l">Nittobo T-glass 市佔(TrendForce+日經 雙源,2026-03)</div></div>
+  <div class="box"><div class="v">+20%(限複材)</div><div class="l">Nittobo 25/8 漲價;AI/電子級布除外(DigiTimes)。26/4 再漲 20-30% 為 TrendForce 單源待查</div></div>
+  <div class="box"><div class="v">¥673億→¥2,703億</div><div class="l">高機能玻纖布 2025→2031(富士キメラ総研,2026-04,約4倍)</div></div>
+  <div class="box"><div class="v">15-20%</div><div class="l">Nittobo 供給缺口估(今周刊 2026-01-22)</div></div>
+  <div class="box"><div class="v">¥150億</div><div class="l">Nittobo 福島新棟(2026/12 竣工、2027/1-3 投產,日經 2025-09-02)</div></div>
+  <div class="box"><div class="v">E+30%/FLD2+15%</div><div class="l">富喬 2026/07/01 起漲價(MoneyDJ 2026-06-30)</div></div>
+  <div class="box"><div class="v">2.5x / +30%</div><div class="l">Hopper→Rubin 載板面積/層數放大(TrendForce 2026-04-30,預估)</div></div>
+  <div class="box"><div class="v">2027 年中</div><div class="l">供給紓解最早時點(TrendForce;台玻股東會口徑互證)</div></div>
 </div>
 
 <!-- 1 -->
@@ -111,11 +119,21 @@
 <div class="card">
   <h3>核心定義</h3>
   <p>T-Glass(低介電玻纖布)是織進銅箔基板(CCL)的補強纖維布，決定高速訊號的介電損耗(Dk/Df)與板材熱膨脹(CTE)。AI GPU/ASIC 載板走向 800G→1.6T，需 Low-Dk(低損)與 Low-CTE(抗大尺寸翹曲)高階布。</p>
-  <div class="callout warn"><b>同名不同物界定：</b>本主題是「玻纖紗→玻纖布」的 CCL 補強材料(ABF/BT/高速 PCB 用)，與「玻璃載板 GCS / TGV」(玻璃核心基板、先進封裝)是<b>完全不同</b>的供應鏈，勿混。</p></div>
+  <div class="callout warn"><b>同名不同物界定：</b>本主題是「玻纖紗→玻纖布」的 CCL 補強材料(ABF/BT/高速 PCB 用)，與「玻璃載板 GCS / TGV」(玻璃核心基板、先進封裝)是<b>完全不同</b>的供應鏈，勿混。</div>
   <table><tr><th>應用</th><th>為何需要本技術</th></tr>
     <tr><td>AI 伺服器高速 PCB</td><td>800G→1.6T 訊號完整性，需 Low-Dk 降介電損耗</td></tr>
     <tr><td>ABF/BT IC 載板</td><td>大尺寸載板抗翹曲，需 Low-CTE 低熱膨脹布</td></tr>
-    <tr><td>Rubin 世代 mid-plane</td><td>頂規導入石英布(Q-glass)，介電/熱性能最頂</td></tr>
+    <tr><td>Rubin 世代 mid-plane</td><td>頂規擬導入石英布(Q-glass)，介電/熱性能最頂(法人估;2026-06 另傳 PTFE 方案競逐,未定案)</td></tr>
+  </table>
+  <h3>關鍵應用場景逐級 stack(布→CCL→載板/PCB→AI 伺服器)</h3>
+  <p class="sub">由下而上：玻纖布是最上游補強材，經 CCL 壓合、載板/PCB 製程，最終進 AI 機櫃。需求放大器：TrendForce 估 GPU 載板面積 Hopper 3,190mm² → Blackwell ~4,780mm² → Rubin 預估 8,000mm²、層數 14L→16L→18L(2026-04-30,Rubin 為研調預估)。</p>
+  <table>
+    <tr><th>層</th><th>內容物</th><th>本題對應</th><th>受惠/受壓</th><th>信心</th></tr>
+    <tr><td>Layer 4：AI 伺服器/機櫃</td><td>GB/VR 機櫃、1.6T 交換器、cableless 機架(midplane/正交背板)</td><td>Rubin Mid-Plane 與 CX-9 網卡板為 M9 CCL(石英布)首發應用(豐雲學堂 2026-07,法人估)</td><td>用布量隨面積×層數雙升</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Layer 3：載板/PCB</td><td>ABF/BT 載板、高速多層板</td><td>Low-CTE(T-glass)抗大尺寸翹曲;TrendForce 估漲價傳導 BT +1季/ABF +2季(單源)</td><td>成本轉嫁中繼</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Layer 2：CCL(M6/M7/M8/M9/M10)</td><td>玻纖布+樹脂+HVLP 銅箔壓合</td><td>M8 用 Low-Dk/T-glass 級布;M9 改用石英布(2026H2 小量,法人估);Resonac 因布緊繃宣布 CCL 等材料調漲 &gt;30%(經濟日報 2026-06)</td><td>台燿/台光電/聯茂/南亞;買布方成本端承壓</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Layer 1：玻纖布(本題)</td><td>E-glass→NE→T-glass→Low-Dk(1/2)→Q-glass 分級</td><td>Nittobo T-glass ~90%(雙源);台廠織布五強 2026Q1 全數兌現獲利</td><td>量價齊升主受惠層</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>Layer 0：玻纖紗(最上游)</td><td>玻璃熔煉→拉絲</td><td>Nittobo 垂直自供;福隆玻璃纖維(100% 日資)供建榮;台玻自建 TD 紗廠(22.5 億)</td><td>真正壟斷源頭</td><td><span class="conf c-high">高</span></td></tr>
   </table>
 </div>
 
@@ -126,20 +144,20 @@
   <div class="step"><div class="num">1</div><div class="body">
     <h4>玻璃熔煉</h4>
     <p>調整玻璃配方(降 Dk)後高溫熔融。輸入：玻璃原料/配方；輸出：熔融玻璃。</p>
-    <div class="diff">難點：低 Dk 配方 know-how；石英布需純石英(熔點極高)。</div>
-    <div class="who">對應：<span class="tag t-intl">Nittobo</span> <span class="tag t-tw">南亞 1303</span> <span class="conf c-med">中</span></div>
+    <div class="diff">難點：低 Dk 配方 know-how(降 CaO/MgO、提高 B2O3,PCBMASTER 口徑);石英布需純石英(熔點極高)。</div>
+    <div class="who">對應：<span class="tag t-intl">Nittobo</span> <span class="tag t-tw">南亞 1303</span> <span class="tag t-tw">台玻 1802(TD 紗廠自建中)</span> <span class="conf c-med">中</span></div>
   </div></div>
   <div class="step"><div class="num">2</div><div class="body">
     <h4>拉絲成玻纖紗(上游瓶頸)</h4>
     <p>熔融玻璃拉成極細玻纖紗。輸入：熔融玻璃；輸出：玻纖紗。</p>
-    <div class="diff">難點：拉絲斷紗率、配方控制——這是 Nittobo 壟斷的真正源頭。</div>
-    <div class="who">對應：<span class="tag t-intl">Nittobo(龍頭)</span> <span class="tag t-tw">富隆(代工紗→供建榮)</span> <span class="conf c-high">高</span></div>
+    <div class="diff">難點：拉絲斷紗率、配方控制——這是 Nittobo 壟斷的真正源頭。Nittobo 2024 年已決定在台灣建玻璃熔解爐擴紗產出;福島 ¥150 億新棟紗產能最多擴至 3 倍、2027 上線(DIGITIMES Asia 引日經,2026-02)。</div>
+    <div class="who">對應：<span class="tag t-intl">Nittobo(龍頭)</span> <span class="tag t-tw">福隆玻璃纖維(100% 日資、未上市;代工 Low-Dk 紗→供建榮)</span> <span class="tag t-intl">AGY(L-glass;與 JPS 建北美 Low-CTE 鏈)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">3</div><div class="body">
     <h4>整經織布</h4>
     <p>把紗織成布。輸入：玻纖紗；輸出：玻纖布(各等級)。</p>
     <div class="diff">難點：高階布良率、均勻度;台廠主要在此段切入。</div>
-    <div class="who">對應：<span class="tag t-tw">台玻 1802</span> <span class="tag t-tw">富喬 1815</span> <span class="tag t-tw">建榮 5340</span> <span class="tag t-tw">德宏 5475</span> <span class="conf c-high">高</span></div>
+    <div class="who">對應：<span class="tag t-tw">台玻 1802</span> <span class="tag t-tw">富喬 1815</span> <span class="tag t-tw">建榮 5340</span> <span class="tag t-tw">德宏 5475</span> <span class="tag t-tw">南亞 1303(2027 承接 Nittobo 20% 織造,公司公告)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">4</div><div class="body">
     <h4>開纖 / 表面處理(高速性能關鍵)</h4>
@@ -151,8 +169,44 @@
     <h4>進 CCL 壓合(下游)</h4>
     <p>玻纖布 + 樹脂 + HVLP 銅箔壓合成 CCL(M7/M8/M9)。</p>
     <div class="diff">難點：屬下游 CCL 環節;Low-Dk 布決定高速損耗。</div>
-    <div class="who">對應：<span class="tag t-tw">台燿 6274(垂直整合)</span> <span class="tag t-tw">台光電 2383</span> <span class="tag t-tw">聯茂 6213</span> <span class="conf c-med">中</span>(→高階CCL主題)</div>
+    <div class="who">對應：<span class="tag t-tw">台燿 6274</span> <span class="tag t-tw">台光電 2383</span> <span class="tag t-tw">聯茂 6213</span> <span class="tag t-tw">南亞 1303(布→樹脂→銅箔一條龍)</span> <span class="conf c-med">中</span>(→高階CCL主題)</div>
   </div></div>
+</div>
+
+<!-- 2.5 細顆粒地圖 -->
+<h2 id="s2f"><span class="n">2.5</span>玻纖布材料分級細顆粒地圖(E-glass→NE→T-glass→Low-Dk(1/2)→Q-glass)</h2>
+<p class="sub">逐級 Dk/Df/CTE 參數、價格階梯、逐級供應商、台廠對應與 CCL 投料對照。量測頻率口徑不一(E-glass 標 @1MHz、石英布 datasheet 標 @10GHz),跨級比較看相對量級即可。</p>
+<div class="card">
+  <h3>逐級參數 × 供應商矩陣</h3>
+  <table>
+    <tr><th>分級</th><th>Dk</th><th>Df</th><th>CTE</th><th>價格階梯</th><th>主要供應商</th><th>台廠對應</th><th>信心</th></tr>
+    <tr><td><b>E-glass</b>(標準電子布)</td><td>6-7 @1MHz</td><td>偏高</td><td>~5.5ppm 級(標準)</td><td>1x 基準;富喬 2026/07/01 起 E-glass 布 +30%(供給被高階排擠)</td><td>各家皆有(通用級)</td><td>台玻/富喬/建榮/南亞;富喬 M6 級 E 布用於低軌衛星、供不應求(MoneyDJ 2026-06-30)</td><td><span class="conf c-med">中</span>(參數:PCBMASTER,blog 級)</td></tr>
+    <tr><td><b>NE-glass / L-glass</b>(低介電)</td><td>3.5-4.3</td><td>0.0015-0.002</td><td>—</td><td>NE ≈ E-glass 的 <b>6 倍</b>(TrendForce 2026-04-30)</td><td>Nittobo(NE;NER 市佔 60-70% 為 TrendForce 單一來源 ⚪待查)、AGY(L-glass 同級等效)</td><td>富喬 FLD 系列、建榮(NER-Glass 認證測試中,拚 2027 初量產,2026-05-15 法說)</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td><b>T-glass</b>(Low-CTE)</td><td>—</td><td>—</td><td><b>2.8 ppm/°C</b>(現行);次世代 2028 目標 2.0 ppm(-30%,日經原文確認)</td><td>高於 NE(未有具名倍數)</td><td>Nittobo <b>~90%</b>(TrendForce+日經雙源);替代供應者:台玻/富喬/宏和(TrendForce 並列)</td><td>台玻 Low-CTE(2023 完成)、富喬 FLE(25Q4 小量出貨)、建榮 T-Glass 2026Q2 量產</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td><b>Low-Dk 一代/二代(NER 級)</b></td><td>低於 NE(各家配方,無統一公開值)</td><td>低於 NE</td><td>—</td><td>NER ≈ NE 的 <b>2.5 倍</b>(TrendForce);中媒口徑二代布 130-160 RMB/米(⚪待查)</td><td>Nittobo NER;Low Dk1 二供名單:旭化成/台玻/富喬/泰山玻纖/宏和(TrendForce)</td><td>台玻一代 2018/二代+Low-CTE 2023 完成認證打入 NVIDIA 鏈(MoneyDJ);富喬 FLD1/FLD2(FLD2 單價顯著高於 FLD1)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td><b>Q-glass 石英布</b>(頂規)</td><td><b>3.74 @10GHz</b>(申久 datasheet)</td><td><b>0.0002 @10GHz</b>(約一般玻纖布 1/10~1/5)</td><td><b>~0.5 ppm</b>(旭化成口徑)</td><td>Q 布 260-300 RMB/米 vs 二代布 130-160(中媒彙整 ⚪待查)</td><td>旭化成/信越/Glotech(=台廠德宏 5475)/菲利華/泰山玻纖/宏和(TrendForce Low Dk3 名單,<b>含台廠德宏</b>);中材科技前瞻布局(中國研調,低信心)</td><td>德宏 5475(Glotech)以石英「纖維(紗)」為主、對日送樣(DigiTimes/工商時報/TrendForce 三源);月出貨 100kg→2-3 噸為公司法說自述、缺第三方 ⚪;台廠石英「布」量產尚無獨立佐證</td><td><span class="conf c-med">中</span>(datasheet 參數 高)</td></tr>
+  </table>
+  <div class="callout info"><b>資料口徑澄清(Q 布 Dk)：</b>部分媒體寫 Q 布 Dk~2.3 或 ~3.0,係「含樹脂板材級」或不同頻率口徑混用;纖維/布本體 Dk 以 datasheet 的 3.7 級為準(申久 1035/1078 @10GHz)。德宏自述 Dk 3.7/Df 0.0008 與 datasheet 口徑互證。</div>
+  <h3>上游玻纖紗(熔煉→拉絲)結構</h3>
+  <table>
+    <tr><th>紗源</th><th>結構</th><th>進度/數字</th><th>信心</th></tr>
+    <tr><td>Nittobo 垂直自供</td><td>T/NE 級高階紗長期由 Nittobo 自產自用,壟斷源頭</td><td>福島 ¥150 億新棟紗產能最多 3x、2027 上線;2024 年已決定在台建玻璃熔解爐(DIGITIMES Asia 引日經 2026-02);WSJ/Nikkei 系:2028 年底前產能擴至 2025 年 3 倍</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>福隆玻璃纖維(台,未上市)</td><td>100% 日資(Nittobo 系),依日東紡技術移轉產 Low-Dk 紗,供建榮織布——集團內「紗(福隆)→布(建榮)」垂直分工</td><td>建榮無自有紗廠,靠集團內取得高階紗形成結構性優勢(MoneyDJ/口袋學堂 2026-06)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>台玻 TD 紗廠(自建)</td><td>2025/11 董事會核准約 22.5 億元新建 TD 紗廠,支應高門檻 Low Dk-2 布用紗自製</td><td>高階產線 4→12 條、2026 年底裝機到位(旺得富/CMoney 2026-05-05,公司公告轉述)</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>富喬 玻纖紗事業部</td><td>紗布一體;2026/05 新任總經理張晉碩即出身玻纖紗事業部(資歷 30 年+)</td><td>工商時報/MoneyDJ 2026-05</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>南亞 × Nittobo(公司公告)</td><td>Nittobo 長期供應 NER 二代低介電原紗,南亞協助織造特殊玻纖布、2027 年承接約 20% 產出</td><td>南亞正式新聞稿:經濟日報/TechNews(2025-11-28)/鉅亨;日經獨立報導互證</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>AGY × JPS(北美鏈)</td><td>AGY 南卡 Aiken 產 L-HDI 超低 CTE 紗、JPS 北卡 Statesville 織布——北美第一條 IC 載板用 Low-CTE 布產線(去風險政策脈絡)</td><td>AGY 另投 US$12.1M 擴低 Dk/Df 纖維產能、2026 年初投產(Businesswire 新聞稿 2026-02-25)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>德宏 石英紗</td><td>石英纖維(Q 級紗)打入日本 PCB 鏈;織布機可視訂單將 E-glass 產線轉換為石英布產線</td><td>對日送樣/入列 TrendForce Q 布供應名單(DigiTimes/工商時報/TrendForce 三源);月出貨 100kg→2-3 噸(2025-12-03 法說自述+blog 轉述,缺第三方 ⚪待查)</td><td><span class="conf c-high">高</span>(對日方向) / <span class="conf c-low">低</span>(噸數)</td></tr>
+  </table>
+  <h3>下游 M 級 CCL 投料對照(哪一級布配哪一級 CCL)</h3>
+  <table>
+    <tr><th>CCL 等級</th><th>投料玻纖布</th><th>時程</th><th>台廠對應</th><th>信心</th></tr>
+    <tr><td>M6</td><td>E-glass 級(低軌衛星應用)</td><td>現行</td><td>富喬 M6 級 E 布供不應求、出貨增(MoneyDJ 2026-06-30)</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>M7 / M8(現主流)</td><td>Low-Dk(NE/FLD/一代二代)+ T-glass(Low-CTE)</td><td>M8 為 2025-2026 主流;M8 導入更多 ASIC 平台為高階營收關鍵指標(台燿法說 2026-05-06)</td><td>台光電 M8 龍頭;台燿 2026Q1 ELL&amp;SLL 38%+VLL&amp;LL 32%;南亞近一年取得 M7/M8 訂單</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>M9(次世代)</td><td><b>石英布 Q-glass</b> 取代一般玻纖布,支援 50 層以上疊構</td><td>2026H2 小量導入 1.6T 交換器與 Rubin CPX、2027 放量(大和經豐雲轉述+上海證券/東吳等多源方向一致;屬前瞻法人估非公司財測);<b>風險情境:2026-06 傳 NVIDIA Rubin 轉向 PTFE 方案(理財周刊)、台光電曾因 M9 斜率生變跌停——石英布/NEZ/PTFE 路線競逐中,「M9=石英布」勿當既定事實</b></td><td>台光電 M9 已通過 AI 客戶認證(外資點名);台燿 M9 認證測試中(未過線);南亞 M8/M9 完成認證後 2026H2 逐步放量</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>M10(前瞻)</td><td>材料送樣階段</td><td>認證推進中</td><td>南亞列入 NVIDIA M10 材料送樣名單(媒體載)</td><td><span class="conf c-med">中</span></td></tr>
+  </table>
+  <p class="sub">⚪待查:「NVIDIA Rubin 已定案 M9 樹脂+石英布」僅中國投資社群(韭研公社 2025-12-17)口徑,NVIDIA/供應鏈未證實;「Rubin 每 GPU 石英布用量 0.3-0.4 m²」「Switch Tray 改料妥協」僅雪球/知乎拆解——均不可採信也不錯殺。</p>
 </div>
 
 <!-- 3 -->
@@ -166,18 +220,19 @@
   <tr><td>開纖/表面處理</td><td>4</td><td>4</td><td>3</td><td>3</td><td>14</td><td>決定高速 Df 性能</td></tr>
   <tr><td><b>石英布 Q-glass</b></td><td>5</td><td>5</td><td>4</td><td>5</td><td><b>19</b></td><td>純石英熔點高、良率低</td></tr>
 </table>
-<div class="callout"><b>最卡關：</b>拉絲成紗與石英布(19/20)——這也是 Nittobo 壟斷的真正源頭，台廠多在「織布」段(難度中)切入。</div>
+<div class="callout"><b>最卡關：</b>拉絲成紗與石英布(19/20)——這也是 Nittobo 壟斷的真正源頭，台廠多在「織布」段(難度中)切入。旭化成(2026/03-04 宣布參入)與日本電氣硝子(NEG,計畫中)是 2027 後供給多元化變數,但 2026 內難放量。</div>
 <h3>公司受惠強度評分(報酬,僅列有查證信心者)</h3>
 <p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議。</p>
 <table>
   <tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
-  <tr><td>台玻 1802</td><td>4.5</td><td>4</td><td>4</td><td>3.5</td><td>4</td><td><b>20</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>建榮 5340</td><td>4.5</td><td>4.5</td><td>4</td><td>4</td><td>2.5</td><td><b>19.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>富喬 1815</td><td>4.5</td><td>4</td><td>3.5</td><td>3.5</td><td>2.5</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>德宏 5475</td><td>4</td><td>4</td><td>3.5</td><td>4</td><td>2</td><td><b>17.5</b></td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>台燿 6274</td><td>4</td><td>3.5</td><td>4</td><td>2.5</td><td>3.5</td><td><b>17.5</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>台玻 1802(上市)</td><td>4.5</td><td>4</td><td>4</td><td>3.5</td><td>4</td><td><b>20</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>建榮 5340(上櫃)</td><td>4.5</td><td>4.5</td><td>4</td><td>4</td><td>2.5</td><td><b>19.5</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>富喬 1815(上櫃)</td><td>4.5</td><td>4</td><td>3.5</td><td>3.5</td><td>2.5</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>德宏 5475(上櫃)</td><td>4</td><td>4</td><td>3.5</td><td>4</td><td>2</td><td><b>17.5</b></td><td><span class="conf c-med">中</span>(石英出貨噸數為公司自述)</td></tr>
+  <tr><td>台燿 6274(上櫃)</td><td>4</td><td>3.5</td><td>4</td><td>2.5</td><td>3.5</td><td><b>17.5</b></td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>南亞 1303(上市)</td><td>3.5</td><td>3.5</td><td>4</td><td>2.5</td><td>4</td><td><b>17.5</b></td><td><span class="conf c-med">中</span>(Nittobo 合作為公司公告;彈性被石化本業稀釋)</td></tr>
 </table>
-<p class="sub">台玻量產規模最大、建榮具 Nittobo 集團技術來源、德宏石英差異化稀缺(體量小);台燿屬 CCL 投料受惠(不同鏈)。受惠評分為推估,僅供參考。</p>
+<p class="sub">台玻量產規模最大、建榮具 Nittobo 集團技術來源、德宏石英差異化稀缺(體量小);台燿屬 CCL 投料受惠(不同鏈);南亞為公告級 Nittobo 委外承接者(2027 起 20%)+一條龍防禦,2026H1 電子材料占比已突破五成、5 月營收 47 個月新高,「偏防禦」舊評語已與實績不符。受惠評分為推估,僅供參考。</p>
 
 <!-- 4 -->
 <h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
@@ -185,103 +240,214 @@
   <span><span class="conf c-high">高</span> 有獨立佐證</span>
   <span><span class="conf c-med">中</span> 部分佐證</span>
   <span><span class="conf c-un">未佐證</span> 概念股列舉(不否定、待查)</span>
+  <span><span class="conf c-low">反駁成立/誤列</span></span>
 </div>
 <h3>台廠 × 環節</h3>
 <table>
-  <tr><th>公司(股號)</th><th>對應環節</th><th>角色 / 數字</th><th>查證</th></tr>
-  <tr><td>台玻 1802</td><td>織布/開纖</td><td>Low-Dk(一/二代)+Low-CTE 三產品線打入 NVIDIA 鏈;2026 高階布出貨估增 5 成</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>富喬 1815</td><td>織布(Low-CTE)</td><td>Low-CTE(FLE)2025Q4 小量出貨;高階占比 25Q4 45%→2026 估 60%+</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>建榮 5340</td><td>織布(高階)</td><td>Nittobo 子公司;富隆紗→織高階布,高階占產能 30-40%</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>德宏 5475</td><td>織布+石英纖維</td><td>Low-CTE + 石英纖維;26Q1 營收 +90.87%、毛利率 28.32% 單季轉盈</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>台燿 6274</td><td>CCL 整合</td><td>玻纖布 + 高速 CCL 垂直整合,串接 M8/M9</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>南亞 1303</td><td>玻纖紗→布→CCL</td><td>E-glass/L-Glass 垂直整合;石化本業稀釋 AI 彈性,偏防禦</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>中釉 1809</td><td>玻璃材料(旁支)</td><td>low-loss 玻璃 + 車用 PiG;缺貨比價概念股,非玻纖布本體</td><td><span class="conf c-un">待查</span></td></tr>
-  <tr><td>華宏(疑 8240)</td><td>—</td><td>原概念股列舉;股號待確認、此鏈獨立角色未獲佐證</td><td><span class="conf c-un">待查</span></td></tr>
+  <tr><th>公司(股號/掛牌)</th><th>對應環節</th><th>角色 / 數字</th><th>查證</th></tr>
+  <tr><td>台玻 1802(上市)</td><td>織布/開纖/紗(自建中)</td><td>Low-Dk(一代 2018/二代 2023)+Low-CTE 三產品線通過認證打入 NVIDIA 鏈;2026Q1 由虧轉盈:營收 102.44 億(+6.13%)、EPS 0.2、毛利率 19.22%(+8.27pp)(2026-05-11);5 月營收 39.20 億(+17.71% YoY);22.5 億 TD 紗廠+產線 4→12 條、2026 高階供貨估 +40~50%、全球高階市佔目標 40-45%(公司自述、缺第三方);股東會(2026-06-12)再投 &gt;20 億三期擴產+22.42 億窯爐;注意 2025 全年虧損 5.9 億、不配息</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>富喬 1815(上櫃)</td><td>織布(Low-Dk FLD1/FLD2、Low-CTE FLE)+紗事業部</td><td>FLE 2025Q4 小量出貨、2026 逐季推升;2026Q1 營收 18.81 億、稅後 4.58 億(單季新高)、EPS 0.79、毛利率 35.97% 為五虎之首(工商時報 2026-05-05);4 月營收 7.34 億歷史新高(+53.16%)、5 月 7.08 億(+49.9%)、1-5 月 +42.38%;2026/07/01 起 E-glass +30%/FLD2 +15%(多家媒體同日證實);先進製程(Low-Dk+Low-CTE)產能占比 2025Q4 實績 45%→2026 目標 60% 以上(公司法說;產能口徑,與電子級營收占比為不同分母);獲 Google/Amazon 資料中心訂單(媒體載)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>建榮 5340(上櫃)</td><td>織布(高階,Nittobo 體系)</td><td>Nittobo 持股 47.65% 取得經營權;紗由集團內福隆玻璃纖維(100% 日資、未上市)供應;2026Q1 營收 6.29 億創單季新高(+22.18%)、稅前 +70.92%、毛利率 21.19%;法說(2026-05-15):高階特殊布銷售額已占約 70% 營收、T-Glass 2026Q2 正式量產、NER-Glass 認證測試中拚 2027 初量產、capex +40~60%(公司法說自述);1-5 月累計 10.87 億(+19.98%)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>德宏 5475(上櫃)</td><td>織布+石英纖維(紗)</td><td>Low-CTE+石英纖維;2026Q1 營收 3.19 億(+90.87%)、毛利率 28.32% 單季轉盈(理財周刊 2026-06-01);5 月營收 1.81 億(+214.96% YoY、2021/10 以來新高)、5 月自結稅後 5,500 萬、單月 EPS 0.43 超過 Q1 整季(鉅亨 2026-06);石英纖維對日送樣/入列 TrendForce Q 布供應名單(DigiTimes/工商時報/TrendForce 三源);月出貨 100kg→2-3 噸(公司法說自述、缺第三方 ⚪)</td><td><span class="conf c-high">高</span>(石英噸數 <span class="conf c-un">待查</span>)</td></tr>
+  <tr><td>台燿 6274(上櫃)</td><td>CCL(下游投料)</td><td>高速 CCL 主力:2026Q1 營收 100.54 億(+57.8%)、EPS 4.36(+79.4%)、毛利率 25.2%;產品組合 ELL&amp;SLL 38%/VLL&amp;LL 32%(2026-05-06 法說);1-5 月累計 194.6 億(+80.26%);M9 認證測試中(未過線);前身台灣聯邦玻璃工業有玻璃淵源,但玻纖布自製率查無公開數字、垂直整合程度待查(⚪)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>南亞 1303(上市)</td><td>玻纖紗→布→CCL 一條龍</td><td>與 Nittobo 正式公告合作:Nittobo 供 NER 二代原紗、南亞織造、2027 承接約 20% 產出(經濟日報/TechNews 2025-11-28/日經);2026Q1 營收 685.96 億、EPS 1.80(近年新高)、電子材料占比首破五成(2026-05-26 法說);5 月營收 288.3 億(+31.3%)47 個月新高;M8/M9 2026H2 放量、M10 送樣認證中;總經理鄒明仁:中高階布供需平衡還要一段時間</td><td><span class="conf c-high">高</span>(合作=公司公告)</td></tr>
+  <tr><td>中釉 1809(上市)</td><td>玻璃材料(旁支)</td><td>low-loss 玻璃+車用 PiG;<b>反駁成立</b>:缺貨漲價潮中 2026Q1 EPS 僅 0.05(季減 35.7%)、4 月營收 -10.68% YoY、1-4 月 -1.12%——題材未轉化為營收,2026/1 與台玻/富喬同步漲停純屬比價(財報狗/nStock)</td><td><span class="conf c-low">比價概念、反駁成立</span></td></tr>
+  <tr><td>華宏新技 8240(上櫃)</td><td>—(誤列)</td><td>股號已確認=華宏新技(上櫃);<b>反駁成立</b>:本業 LCD 擴散片/反射片等光學膜材,轉型方向為複合散熱材/鋰電池隔離膜/工程塑膠,查無玻纖布產品線;且缺貨潮中 3 月營收 -8.14%、1-3 月 -14.47%(財報狗)——自受惠名單剔除</td><td><span class="conf c-low">誤列、反駁成立</span></td></tr>
+  <tr><td>榮科 4989(上市)</td><td>—(不同鏈)</td><td>被概念股名單點名(CMoney 2026-02-12),逐項查證:=李長榮科技,本業電解銅箔(RTF/HVLP 高階低損耗銅箔)——非玻纖布,屬 CCL 另一投料;財務有實績(5 月 +33.87%、1-5 月 +61.09%、Q1 EPS 0.13 甫轉盈)但歸高階 CCL-HVLP 銅箔主題</td><td><span class="conf c-low">誤列(銅箔鏈)</span></td></tr>
+  <tr><td>台光電 2383(上市)</td><td>CCL(下游買布方)</td><td>全球高階 CCL 龍頭、M8 龍頭、M9 已通過 AI 客戶認證(外資點名唯一 M9 合格供應商);在本鏈中為「買布方」:玻纖布缺貨漲價對其是<b>成本端壓力</b>而非供給端受惠——受惠邏輯屬 CCL 主題</td><td><span class="conf c-med">中</span>(角色界定)</td></tr>
 </table>
-<p class="sub">⚠「未逐項佐證」= 未取得該公司在本主題的<b>獨立</b>佐證，<b>不代表沒有角色</b>，但也不應直接當事實下單。</p>
+<p class="sub">⚠「未逐項佐證」= 未取得該公司在本主題的<b>獨立</b>佐證，<b>不代表沒有角色</b>，但也不應直接當事實下單。未上市不列受惠名單:福隆玻璃纖維(Nittobo 系)、台灣必成、美國 AGY。</p>
 <h3>國際 × 環節</h3>
 <table>
   <tr><th>公司</th><th>環節</th><th>角色</th><th>查證</th></tr>
-  <tr><td>日東紡 Nittobo(日)</td><td>玻纖紗/布</td><td>龍頭;T-glass ~90%、NE-glass 60-70%;漲價節奏制定者;次世代 Vlex 開發中</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>富隆(日)</td><td>玻纖紗代工</td><td>代工玻纖紗供建榮織布</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>日東紡 Nittobo(日,3110.T 東證)</td><td>玻纖紗/布(垂直一體)</td><td>龍頭;T-glass ~90%(TrendForce+日經雙源)、NER-glass 60-70%(TrendForce 單一來源 ⚪);FY3/26 前三季營收 875.94 億日圓(+7.5%)、營益 149.33 億(+26.4%)、電子材料營益 +39.6%(2026-02-05 決算短信);FY3/26 通期預想 營收 ¥1,200 億/營益 190→200 億,實績 營收 ¥1,182 億(+8.4%)/營益 ¥208 億(+26.6%,創高);純益 ¥375 億(2025/11 上修,<b>含約 ¥341 億東京八重洲土地處分特別利益,本業貢獻遠低於此</b>);FY3/27 財測 營收 ¥1,370 億/營益 ¥260 億/純益 ¥170 億(-59.3%,特益消失;2026-05-12 發布,株探+日經);福島 ¥150 億新棟(2026/12 竣工、2027/1-3 投產、補助上限 ¥24 億);2028 次世代 T-Glass(CTE 2.8→2.0ppm,日經;客戶名單 NVIDIA/Apple 為 reportedly ⚪)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>福隆玻璃纖維(台,未上市)</td><td>玻纖紗代工</td><td>100% 日資(Nittobo 系),依技術移轉產 Low-Dk 紗供建榮織布</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>旭化成 Asahi Kasei(日)</td><td>玻纖布/石英布(新進)</td><td>2026/03-04 宣布跨入 AI 半導體用先端玻纖布,以低熱膨脹技術挑戰 Nittobo ~90% 壟斷(日經+DigiTimes 雙源);石英玻璃布客戶認證目標 FY2026(公司自述、缺第三方);已開發 1.6Tb 乙太網用低介電石英布(MONOist 2026-01-13)</td><td><span class="conf c-high">高</span>(認證時點=公司自述)</td></tr>
+  <tr><td>日本電氣硝子 NEG(日)</td><td>玻纖布(計畫)</td><td>計畫進入 AI 專用玻纖布——2027 後供給多元化變數(DIGITIMES 2026-04)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>AGY × JPS(美)</td><td>紗(L-glass/L-HDI)+織布</td><td>北美首條先進 IC 載板用 Low-CTE 玻纖布產線(AGY 南卡紗+JPS 北卡織布);AGY 投 US$12.1M 擴低 Dk/Df 纖維、2026 年初投產(Businesswire 2026-02-25);AGY 不擴電子級之舊說法已被此公告更新</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>旭化成/信越/Glotech(=台廠德宏 5475)/菲利華/泰山玻纖/宏和(日/中/台)</td><td>石英布(Q-glass/Low Dk3)</td><td>TrendForce Low Dk3 供應名單——<b>含台廠德宏(Glotech)</b>,「0 台廠」說法反駁成立(見第 6 章);菲利華 Q 布 260-300 RMB/米、2026 石英纖維擴至 1,000 噸(中媒彙整 ⚪待查);中材科技前瞻布局石英布(中國研調,低信心)</td><td><span class="conf c-med">中</span>(名單) / <span class="conf c-un">待查</span>(價量)</td></tr>
+  <tr><td>Resonac(日)</td><td>CCL(下游傳導實例)</td><td>因玻纖布等原料緊繃、價格飆漲,宣布 CCL 等 PCB 材料調漲逾 30%——布→CCL 漲價傳導的具名下游實例(經濟日報 2026-06)</td><td><span class="conf c-med">中</span></td></tr>
 </table>
 <h3>台灣吃得到多少(逐環節定位)</h3>
 <p class="sub">台廠在「織布」段是日廠以外最強群聚(領先);真正壟斷源頭「高階電子級玻纖紗」台廠多缺席或外購。定位為質化判斷。</p>
 <table>
   <tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr>
-  <tr><td>玻璃配方熔煉(降 Dk)</td><td>台玻 1802 / 南亞 1303</td><td><span class="conf c-med">追趕</span></td><td>低 Dk 配方為日廠核心壁壘;台廠自普級起家、頂規仍在追</td></tr>
-  <tr><td>拉絲成玻纖紗(上游瓶頸)</td><td>建榮 5340(富隆紗)/ 南亞 / 德宏(石英紗)</td><td><span class="conf c-low">缺席→追趕</span></td><td>NE 級電子紗全球僅 Nittobo(&gt;80%)+AGY、AGY 不擴電子級——真正壟斷源頭;德宏石英紗端有佐證</td></tr>
-  <tr><td>整經織布(台廠主戰場)</td><td>台玻 1802 / 富喬 1815 / 建榮 5340 / 德宏 5475</td><td><span class="conf c-high">領先 · 日廠以外最強</span></td><td>台玻三產品線切入 NVIDIA 鏈訂單到 2027;富喬高階拚 60%;建榮 NE+T-Glass 拚 70%+</td></tr>
+  <tr><td>玻璃配方熔煉(降 Dk)</td><td>台玻 1802 / 南亞 1303</td><td><span class="conf c-med">追趕</span></td><td>低 Dk 配方為日廠核心壁壘;台廠自普級起家、頂規仍在追;台玻 TD 紗廠(22.5 億)補 Low Dk-2 用紗自製</td></tr>
+  <tr><td>拉絲成玻纖紗(上游瓶頸)</td><td>建榮 5340(福隆紗)/ 南亞(Nittobo 供 NER 原紗)/ 德宏(石英紗)</td><td><span class="conf c-low">缺席→追趕</span></td><td>高階 T/NE 級紗長期由 Nittobo 垂直自供——真正壟斷源頭;台廠自有高階紗僅起步(台玻自建中、富喬紗事業部);德宏石英紗端有公司自述+法說佐證</td></tr>
+  <tr><td>整經織布(台廠主戰場)</td><td>台玻 1802 / 富喬 1815 / 建榮 5340 / 德宏 5475 / 南亞 1303</td><td><span class="conf c-high">領先 · 日廠以外最強</span></td><td>TrendForce 將台玻/富喬/宏和並列 T-glass 替代供應者、Low Dk1 二供名單含旭化成/台玻/富喬/泰山玻纖/宏和;台玻三產品線切入 NVIDIA 鏈、訂單能見度到 2027;富喬高階拚 60%(法人估);建榮 T-Glass 26Q2 量產;南亞 2027 承接 Nittobo 20% 織造(公司公告)。市佔數字多屬公司自述、缺第三方量化</td></tr>
   <tr><td>開纖 / 矽烷表面處理</td><td>台玻 1802 / 建榮 5340</td><td><span class="conf c-med">追趕</span></td><td>偶聯配方決定高速 Df 一致性、屬日廠隱形 know-how</td></tr>
-  <tr><td>石英布 Q-glass(M9 頂規)</td><td>德宏 5475</td><td><span class="conf c-med">追趕 · 台廠唯一</span></td><td>純度 99.95%、月出貨 2-3 噸、訂單到 2027;全球 Shin-Etsu/菲利華/CMC 寡占,體量仍小</td></tr>
-  <tr><td>進 CCL 壓合(下游)</td><td>台燿 6274 / 台光電 2383 / 聯茂 6213</td><td><span class="conf c-high">領先(屬不同題)</span></td><td>高階 CCL/M8/M9 台廠強;受惠邏輯為「投料受惠」非玻纖布本體</td></tr>
+  <tr><td>石英布 Q-glass(M9 頂規)</td><td>德宏 5475(纖維端)</td><td><span class="conf c-med">追趕 · 台廠唯一</span></td><td>德宏(Glotech)已具名入列 TrendForce Low Dk3(石英布)供應名單,惟量級仍小(紗為主、布待驗證);對日送樣有 DigiTimes/工商時報/TrendForce 三源佐證;純度 99.95%、月出貨 2-3 噸為公司法說自述、缺第三方 ⚪;「纖維」環節萌芽、「布」環節待驗證</td></tr>
+  <tr><td>進 CCL 壓合(下游)</td><td>台燿 6274 / 台光電 2383 / 聯茂 6213 / 南亞 1303</td><td><span class="conf c-high">領先(屬不同題)</span></td><td>AI 高階 CCL 台廠主導:台燿 Q1 ELL&amp;SLL 38%+VLL&amp;LL 32%、M8 占比攀升;台光電 M8 龍頭+M9 認證過;南亞一條龍+M10 送樣——布→CCL 投料是台灣吃到最大價值量的環節;受惠邏輯為「投料受惠」非玻纖布本體</td></tr>
+</table>
+<h3>受惠族群邏輯表(族群 × 催化 × 受惠點)</h3>
+<table>
+  <tr><th>族群</th><th>代表</th><th>催化</th><th>受惠點</th><th>信心</th></tr>
+  <tr><td>高階織布五強</td><td>台玻 1802 / 富喬 1815 / 建榮 5340 / 德宏 5475 / 南亞 1303</td><td>缺貨(缺口估 15-20%)+漲價(富喬 7/1 生效)+訂單能見度排至 2027</td><td>量價齊升;2026Q1 五虎全數兌現獲利(理財周刊 2026-06-01)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>上游紗自主化</td><td>台玻 TD 紗廠 / 富喬紗事業部 /(福隆:未上市)</td><td>Nittobo 產能已達極限、新產能最快 2027 下半年(台玻股東會口徑)</td><td>紗自製=降成本+保供+切入更高級距門票</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>石英纖維/Q 布(新代際)</td><td>德宏 5475(纖維,Glotech 已具名入列 TrendForce Q 布供應名單);布:旭化成/信越/菲利華等</td><td>M9 CCL 2026H2 小量導入 1.6T 交換器與 Rubin CPX(法人估)</td><td>新材料代際選擇權;台廠僅纖維端卡位</td><td><span class="conf c-med">中</span>(出貨噸數 ⚪)</td></tr>
+  <tr><td>CCL 投料(不同鏈)</td><td>台燿 6274 / 台光電 2383 / 聯茂 6213</td><td>M8→M9 升級+CCL 二度漲價(Resonac +30% 具名實例)</td><td>屬 CCL 主題;台光電為買布方、布漲價反是成本端壓力</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>比價概念(反駁區)</td><td>中釉 1809 / 華宏新技 8240 / 榮科 4989</td><td>盤面比價、名單列舉</td><td>查證後無實質玻纖布營收或屬不同鏈(見第 6 章被反駁說法)</td><td><span class="conf c-low">反駁成立</span></td></tr>
 </table>
 
 <!-- 5 -->
 <h2 id="s5"><span class="n">5</span>量產時程與各家進度</h2>
 <div class="card">
   <h3>市場規模(多研調口徑,差異主因是口徑定義)</h3>
+  <p class="sub">主口徑採已逐字驗證的富士キメラ総研;QYResearch 兩份報告互相矛盾(基期差 3 倍、CAGR 差 3.4 倍),整體降為低可靠參照。</p>
   <table>
-    <tr><th>口徑</th><th>多研調(機構/規模/年)</th><th>分歧主因</th></tr>
-    <tr><td>Low-Dk/Df 電子布(限定低介電布)</td><td>QY Research/Valuates:$4.7 億(2025)→$7.07 億(2032,6.1%);Report Prime:2032 $14.4 億(6.9%);Business Research Insights(廣口徑含纖維):$5.3 億(2026)→$41 億(2035,25.6%)</td><td>是否含玻纖紗/纖維、是否限 AI server;CAGR 6% vs 25% 差近一個量級</td></tr>
-    <tr><td>CCL 用電子布大盤(含普級)</td><td>QYResearch:2032 約 $44.7 億(5.5%);TrendForce:玻纖布占 CCL 成本 ~19%、NE 級價約 E 級 6 倍</td><td>含普級故金額大、CAGR 低,與上方不可相加</td></tr>
-    <tr><td>石英布 Q-glass(M9 頂規)</td><td>中國媒體彙整:2026 需求 &gt;1,800 萬米、缺口 ~300 萬米、單價 250-300 RMB/米(+約 50%)</td><td>缺西方研調具名、未經一手驗證,量級參考(待查)</td></tr>
+    <tr><th>口徑</th><th>機構 / 規模 / 年</th><th>分歧主因 / 可靠度</th></tr>
+    <tr><td><b>高機能玻纖布(含石英布,主口徑)</b></td><td>富士キメラ総研《2026 エレクトロニクス実装ニューマテリアル便覧》:2025 ¥673 億 → 2031 ¥2,703 億(約 4 倍,隱含 CAGR ~26%);石英玻璃自 2026 年起放量(mynavi TECH+ 2026-04-14,原文逐字核對)<span class="conf c-high">高</span></td><td>已納入石英布與次世代 T-glass 量價齊升;同報告大盤(半導體實裝關聯)2025 ¥14.80 兆→2031 ¥24.26 兆,高機能布為成長率最高材料類之一(4x vs 大盤 1.6x)</td></tr>
+    <tr><td>Low-Dk/Df 電子布(窄口徑)</td><td>QYResearch(經 Valuates):報告 A 2025 US$470M→2032 US$707M(CAGR 6.1%);報告 B 2024 US$143M→2031 US$533M(CAGR 20.9%)<span class="conf c-low">低</span></td><td><b>同一研調兩報告互相矛盾</b>、付費牆內無法核對方法論——僅作量級參照,勿引為單一事實</td></tr>
+    <tr><td>CCL 用電子布大盤(含普級,廣口徑)</td><td>Verified Market Reports:2024 US$2.5B→2033 US$4.2B(CAGR 6.5%)<span class="conf c-low">低</span>;TrendForce 供給面錨:玻纖布占 CCL 成本 ~19%、NE 級價約 E 級 6 倍、NER 再 2.5 倍<span class="conf c-high">高</span></td><td>含普級故金額大、CAGR 低,與上方不可相加;Business Research Insights 廣口徑(含纖維)2025 $10.03B→2034 $15.27B 與 AI 電子布窄口徑差兩個量級,引用必須註明口徑</td></tr>
+    <tr><td>石英布 Q-glass(M9 頂規)</td><td>中國媒體彙整:2026 需求 1,500-1,800 萬米、有效產能 &lt;1,500 萬米、Q 布單價 260-300 RMB/米;中國券商米數口徑:Low-Dk 2026 2.1 億米/Low-CTE &gt;1,800 萬米/Q 布 ~800 萬米<span class="conf c-un">⚪待查</span></td><td>無具名西方研調覆核、原始報告不可回溯——量級參考、未經驗證</td></tr>
   </table>
-  <h3>催化劑時間軸(2025-2028)</h3>
+  <h3>量產進度速查表(公司別)</h3>
   <table>
-    <tr><th>時點</th><th>狀態</th><th>事件</th><th>影響</th></tr>
-    <tr><td>2025/08</td><td><span class="conf c-high">已發生</span></td><td>Nittobo 全線漲約 20%、砸 ¥150 億擴 T-Glass(福島)目標三倍產能</td><td>確立漲價週期起點與壟斷者定價權</td></tr>
-    <tr><td>2025/11</td><td><span class="conf c-high">已發生</span></td><td>缺貨題材首波發酵、台廠概念股大漲;TrendForce 發 T-Glass 深度文</td><td>題材首次定價,玻纖布=AI 隱形瓶頸</td></tr>
-    <tr><td>2025/12</td><td><span class="conf c-high">已發生</span></td><td>NVIDIA Rubin 點名 M9+石英布;德宏法說揭石英纖維打入高階 AI 鏈</td><td>石英布從題材變規格需求;德宏成台廠唯一石英玩家</td></tr>
-    <tr><td>2026/01</td><td><span class="conf c-high">已發生</span></td><td>又一波缺貨漲停潮;Resonac 宣布 CCL 漲 30%(玻纖布緊繃為因)</td><td>漲價傳導至 CCL,成本轉嫁鏈成立</td></tr>
-    <tr><td>2026/03</td><td><span class="conf c-high">已發生</span></td><td>Resonac CCL/Prepreg 漲 30% 生效;台玻攻漲停 67.2 元創近 30 年高</td><td>半固化片漲價引爆上游補漲;估值重估</td></tr>
-    <tr><td>2026/04</td><td><span class="conf c-high">已發生</span></td><td>Nittobo 計畫再漲 20-30%;Asahi Kasei 宣布跨入 AI 玻纖布挑戰 Nittobo ~90% 市佔</td><td>二次漲價 + 第二供應源(2026 內難放量)</td></tr>
-    <tr><td>2026/06</td><td><span class="conf c-med">進行中</span></td><td>日東紡淨利估自 ¥130 億上修至 ¥375 億(+188%);台廠訂單能見度排至 2027</td><td>基本面確認;訂單長化支撐 2026-2027</td></tr>
-    <tr><td>2026Q4-2027</td><td><span class="conf c-un">前瞻</span></td><td>Asahi Kasei 目標 2026 內量產石英基布;Nittobo 福島新產能最快 2027 年中開出</td><td>供給制約最快 2027H2 才實質緩解</td></tr>
-    <tr><td>2028</td><td><span class="conf c-un">前瞻</span></td><td>Nittobo 規劃次世代 T-Glass(潛在客戶含 NVIDIA/Apple,reportedly)</td><td>頂規補強材世代再升級,遠期選擇權</td></tr>
+    <tr><th>公司</th><th>進度 / 時程</th><th>來源+日期</th><th>信心</th></tr>
+    <tr><td>Nittobo(福島新棟)</td><td>2025/10 著工 → 2026/12 竣工 → 2027/1-3 投產(2027 稼働);全投 T-glass 布時產能最高 3 倍;2028 年底前總產能擴至 2025 年的 3 倍;獲經濟安保《供給確保計畫》認定、補助上限 ¥24 億</td><td>日經 2025-09-02、福島民報、日刊工業等多獨立日媒交叉</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>Nittobo(次世代 T-Glass)</td><td>2028 年實用化,CTE 2.8→2.0 ppm(-30%);潛在客戶 NVIDIA/Apple 為 reportedly、公司未證實</td><td>日經原文+TrendForce News 2026-02-04</td><td><span class="conf c-high">高</span>(客戶 ⚪)</td></tr>
+    <tr><td>台玻 1802</td><td>高階產線 4→12 條(22.5 億):一期已投產、二期 2026 年底、三期 2027 完工(再投 &gt;20 億+22.42 億窯爐);2026 高階供貨估 +40~50%(公司自述)</td><td>鉅亨(股東會)2026-06-12、旺得富/經濟日報 2026-05-05</td><td><span class="conf c-high">高</span>(供貨增幅=公司自述)</td></tr>
+    <tr><td>富喬 1815</td><td>FLE(Low-CTE)25Q4 小量出貨、2026 逐季推升;先進製程產能占比 2025Q4 實績 45%→2026 目標 60% 以上(公司法說);下半年次世代 Low DK2 出貨比重續升;泰國產能開出(媒體載)</td><td>CMoney 富喬法說、MoneyDJ 2026-06-30</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>建榮 5340</td><td>T-Glass(Low-CTE)已通過客戶認證、2026Q2 正式量產出貨;NER-Glass 認證測試中、拚 2027 初量產;2026 capex +40~60%</td><td>建榮法說 2026-05-15(vocus 逐字+YouTube)</td><td><span class="conf c-high">高</span>(公司自述,事件多源)</td></tr>
+    <tr><td>德宏 5475</td><td>石英纖維對日送樣、入列 TrendForce Q 布供應名單(Glotech);月出貨 100kg→2-3 噸 ⚪;E-glass 織布線可轉換為石英布線</td><td>德宏法說 2025-12-03(vocus)+DigiTimes/工商時報 2025-12-04+TrendForce 名單;913 理財估測站 2026-04(blog)</td><td><span class="conf c-high">高</span>(對日方向) / <span class="conf c-un">⚪待查</span>(噸數=公司自述、缺第三方)</td></tr>
+    <tr><td>南亞 1303</td><td>2027 年承接 Nittobo 約 20% 特殊玻纖布織造(公司公告);M8/M9 認證完成後 2026H2 逐步放量、M10 認證推進中</td><td>經濟日報/TechNews 2025-11-28/日經(公告);CMoney/Yahoo 2026-06</td><td><span class="conf c-high">高</span>(公告) / <span class="conf c-med">中</span>(M9/M10)</td></tr>
+    <tr><td>旭化成(日,新進)</td><td>2026/03-04 宣布參入 AI 玻纖布;石英玻璃布客戶認證目標 FY2026(公司自述)</td><td>日經 2026-03+DigiTimes;MONOist 2026-01-13</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>AGY × JPS(美)</td><td>北美首條 IC 載板用 Low-CTE 布產線;AGY 擴低 Dk/Df 纖維 US$12.1M、2026 年初投產</td><td>Businesswire 新聞稿 2026-02-25(多家獨立轉載)</td><td><span class="conf c-high">高</span></td></tr>
   </table>
-  <div class="callout"><b>選股節奏：</b>現在就有營收=台玻/富喬/建榮/德宏(高階布出貨爬坡);未來選擇權=石英布 Q-glass(德宏布局,2027+ 題材)。</div>
+  <h3>催化劑時間軸(2025-2028,含來源型別)</h3>
+  <table>
+    <tr><th>時點</th><th>狀態</th><th>事件</th><th>影響</th><th>來源型別</th></tr>
+    <tr><td>2025/06-08</td><td><span class="conf c-high">已發生</span></td><td>Nittobo 調漲約 20%——<b>僅限複合材料事業部產品,AI 伺服器用電子級玻纖布(含 T-glass)不在調漲之列</b>;日東紡高層明言暫無調漲 T-glass 計畫、優先擴產穩市佔(DigiTimes 兩篇獨立報導)</td><td>漲價週期起點,但口徑須拆:大宗/複材布 vs AI 級布是兩條線</td><td>產業媒體(DigiTimes)反駁研調「全線」措辭</td></tr>
+    <tr><td>2025/08-09</td><td><span class="conf c-high">已發生</span></td><td>Nittobo 宣布 T-glass 產能三倍化:2026-2027 投資 &gt;¥500 億;9/2 日經:福島 ¥150 億新工場棟+經濟安保補助上限 ¥24 億</td><td>確立壟斷者以「擴產」而非「電子級漲價」回應缺口;供給紓解排到 2027</td><td>官方媒體(日經)+政府認定</td></tr>
+    <tr><td>2025/11</td><td><span class="conf c-high">已發生</span></td><td>缺貨題材首波發酵、台廠概念股大漲;TrendForce 發 T-Glass 深度文;Nittobo 純益預想 130→375 億日圓上修(<b>含約 ¥341 億東京土地處分特別利益</b>);台玻董事會核准 22.5 億 TD 紗廠、產線 4→12 條;南亞×Nittobo 正式公告(11/28):NER 原紗長供+2027 承接 20% 織造</td><td>題材首次定價;公司級擴產與結盟落地</td><td>公司決算/公司公告/研調</td></tr>
+    <tr><td>2025/12</td><td><span class="conf c-high">已發生</span></td><td>NVIDIA Rubin 傳點名 M9+石英布(「定案」說僅中國社群 ⚪待查);德宏法說(12/3)揭石英纖維打入高階 AI 鏈(公司自述)</td><td>石英布自題材走向規格討論;德宏成台廠唯一石英纖維玩家</td><td>法說會/社群(⚪)</td></tr>
+    <tr><td>2026/01</td><td><span class="conf c-high">已發生</span></td><td>1/19 台玻/建榮/富喬爆量漲停(TechNews「史詩級缺貨」);今周刊(1/22):Nittobo 供給缺口估 15-20%、五強 2026 EPS 法人預估出爐;Tom's Hardware(轉日媒):Apple/NVIDIA/Google/Amazon 四大巨頭搶 Nittobo 產能</td><td>缺貨從產業新聞升級為全球 AI 供應鏈風險敘事</td><td>媒體/外媒轉日媒</td></tr>
+    <tr><td>2026/02</td><td><span class="conf c-high">已發生</span></td><td>中國電子布廠按月調價 10-15%、2025 全年累漲 &gt;50%(2/23 經濟日報,帶動台玻/富喬/德宏漲停);AGY×JPS 北美首條 Low-CTE 布產線(2/25 新聞稿);Nittobo FY3/26 前三季決算:營收 875.94 億(+7.5%)、營益 149.33 億(+26.4%)、電子材料營益 +39.6%(2/5 短信)</td><td>漲價從日本外溢到中國供給;美國開始去風險建鏈;龍頭基本面確認</td><td>官方財經媒體/公司新聞稿/公司決算</td></tr>
+    <tr><td>2026/03</td><td><span class="conf c-high">已發生</span></td><td>Resonac CCL/Prepreg 漲 &gt;30% 生效(布緊繃為因);台玻攻漲停 67.2 元創近 30 年高;日經(3 月):旭化成參入 AI 玻纖布、挑戰 Nittobo「世界で9割」壟斷</td><td>漲價傳導至 CCL 成立;第二供應源啟動(2026 內難放量)</td><td>媒體/官方媒體(日經)</td></tr>
+    <tr><td>2026/04</td><td><span class="conf c-med">進行中</span></td><td>TrendForce(4/30)稱 Nittobo 再漲 20-30%、BT +1 季/ABF +2 季傳導——<b>單一來源、且與 DigiTimes「無調漲 T-glass 計畫」相牴觸,是否含電子級布未明 ⚪待查</b>;富士キメラ(4/14):高機能布 2025 ¥673 億→2031 ¥2,703 億</td><td>二次漲價敘事需保留口徑存疑;市場規模主口徑落地</td><td>研調(單源 ⚪)/具名研調(已驗證)</td></tr>
+    <tr><td>2026/05</td><td><span class="conf c-high">已發生</span></td><td>Q1 財報全數兌現:台玻轉盈(EPS 0.2/GM 19.22%)、富喬 EPS 0.79/GM 35.97% 五虎之首、建榮營收 6.29 億新高、德宏 +90.87% 轉盈、台燿 EPS 4.36、南亞 EPS 1.80;建榮法說(5/15):T-Glass 26Q2 量產;工商時報(5/23)反面:「大缺貨為何不漲價」——有大廠棄暴利綁長約</td><td>基本面全面接棒題材;敘事出現具名反面聲音</td><td>公司財報/法說會/媒體(反面)</td></tr>
+    <tr><td>2026/06</td><td><span class="conf c-high">已發生</span></td><td>台玻股東會(6/12):再投 &gt;20 億三期擴產、直言日東紡產能已達極限、新產能最快 2027 下半年;德宏 5 月自結單月 EPS 0.43 超過 Q1 整季;富喬(6/30)發函 7/1 起 E-glass +30%/FLD2 +15%;南亞 6/12 漲停 106.5 元;台廠訂單能見度排至 2027(永豐專文)</td><td>台廠首度成為漲價發動者(富喬);訂單長化支撐 2026-2027</td><td>股東會/公司自結/公司調價函</td></tr>
+    <tr><td>2026H2</td><td><span class="conf c-un">前瞻</span></td><td>M9 CCL(石英布)小量導入 1.6T 交換器與 Rubin CPX(大和/上海證券/東吳等多源方向一致,法人估);<b>風險情境:2026-06 傳 Rubin 轉向 PTFE 方案(理財周刊),M9 導入斜率仍在變動</b>;旭化成石英布認證目標 FY2026(公司自述);6 月營收 7/10 前公告、Nittobo Q2 財報為下一個驗證點</td><td>石英布從討論進入實裝;新代際定價開始</td><td>外資/券商轉述+公司自述</td></tr>
+    <tr><td>2026Q4-2027</td><td><span class="conf c-un">前瞻</span></td><td>Nittobo 福島 2026/12 竣工→2027/1-3 投產;台玻三期 2027 完工;南亞 2027 承接 20% 織造;供給制約最快 2027 年中(TrendForce)~2027 下半年(業界/台玻口徑)實質緩解</td><td>供給反轉時間窗;「利多出盡+供給反轉」時間差風險起算</td><td>官方媒體/公司公告/研調</td></tr>
+    <tr><td>2028</td><td><span class="conf c-un">前瞻</span></td><td>Nittobo 次世代 T-Glass 實用化(CTE 2.8→2.0ppm,日經原文);客戶含 NVIDIA/Apple 之說僅 reportedly ⚪;Nittobo 總產能達 2025 年 3 倍(2028 年底前)</td><td>頂規補強材世代再升級,遠期選擇權</td><td>官方媒體(日經)</td></tr>
+  </table>
+  <div class="callout"><b>選股節奏：</b>現在就有營收=台玻/富喬/建榮/德宏/南亞(高階布出貨爬坡、Q1 全數兌現);未來選擇權=石英布 Q-glass(德宏纖維端布局,M9 2026H2 小量、2027+ 放量)。逐檔節奏見下表。</div>
+  <h3>短期受惠 vs 長期題材(逐檔節奏)</h3>
+  <table>
+    <tr><th>公司</th><th>節奏定位</th><th>2026 當期依據</th><th>2027+ 選擇權</th></tr>
+    <tr><td>台玻 1802</td><td><span class="conf c-high">現在有營收</span></td><td>Q1 轉盈、5 月營收 +17.71%、高階供貨估 +40~50%(公司自述)</td><td>三期擴產 2027 完工、TD 紗廠自主化</td></tr>
+    <tr><td>富喬 1815</td><td><span class="conf c-high">現在有營收</span></td><td>Q1 EPS 0.79 五虎毛利之首、4 月營收歷史新高、7/1 主動漲價</td><td>FLE 逐季放量、先進製程產能占比目標 60% 以上(公司法說)、泰國產能</td></tr>
+    <tr><td>建榮 5340</td><td><span class="conf c-high">現在有營收 → 放量初期</span></td><td>Q1 營收新高;T-Glass 26Q2 起量產(公司自述)</td><td>NER-Glass 2027 初量產(Nittobo 體系內第一順位)</td></tr>
+    <tr><td>德宏 5475</td><td><span class="conf c-med">放量初期</span></td><td>5 月單月 EPS 0.43 超過 Q1 整季;石英纖維出貨爬坡(噸數 ⚪公司自述)</td><td>石英布/M9 題材 2027+(台廠唯一石英卡位)</td></tr>
+    <tr><td>南亞 1303</td><td><span class="conf c-med">現在有營收(集團稀釋)</span></td><td>電材占比 &gt;50%、5 月營收 47 個月新高;M8 訂單</td><td>2027 承接 Nittobo 20% 織造(公告)、M9 放量、M10 送樣</td></tr>
+    <tr><td>台燿 6274(CCL 鏈)</td><td><span class="conf c-high">現在有營收</span></td><td>Q1 EPS 4.36、1-5 月營收 +80.26%、CCL 二度漲價</td><td>M9 認證中(未過線)——過線與否是分水嶺</td></tr>
+  </table>
+</div>
+
+<!-- 5.5 -->
+<h2 id="s5y"><span class="n">5.5</span>受惠股法人預估與股價快照 <span class="conf c-med">法人估非公司財測</span></h2>
+<div class="card">
+  <p class="sub">EPS 預估出自今周刊(2026-01-22)彙整之法人口徑;股價快照為 2026-06-12 收盤(Yahoo 股市盤後報導),YTD 與最終數字需以交易所官方收盤覆核。所有目標價/預估均<b>非公司財測</b>。</p>
+  <table>
+    <tr><th>公司</th><th>2026-06-12 收盤</th><th>股價事件軌跡</th><th>2026 EPS 法人估(今周刊 2026-01)</th><th>法人目標價</th><th>2026Q1 實績對照</th></tr>
+    <tr><td>台玻 1802</td><td>64.1 元(當日 +8.09%)</td><td>2026/1/22 六日漲近 60% 後自 57.4 殺至 51.2;2026/03 漲停 67.2 元創近 30 年高</td><td>2.0-2.5 元</td><td>—(未見具名)</td><td>EPS 0.2(轉盈)、GM 19.22%;注意 2025 全年虧 5.9 億</td></tr>
+    <tr><td>富喬 1815</td><td>96.2 元(+6.77%)</td><td>2026/1 高點約 104.5 元</td><td>1.2-1.6 元</td><td>—(未見具名)</td><td>EPS 0.79、GM 35.97%(Q1 即近法人全年估下緣)</td></tr>
+    <tr><td>建榮 5340</td><td>89.6 元(+4.43%)</td><td>2026/1 高點約 102 元</td><td>3-4 元</td><td>—(未見具名)</td><td>營收 6.29 億新高、稅前 +70.92%</td></tr>
+    <tr><td>德宏 5475</td><td>240 元(+0.84%)</td><td>2026/1 約 102 元 → 6 月 240 元,半年顯著重估</td><td>1.0 元以上</td><td>—(未見具名)</td><td>Q1 +90.87% 轉盈;5 月單月 EPS 0.43(自結)——法人 1 月估值已明顯落後</td></tr>
+    <tr><td>南亞 1303</td><td>106.5 元(漲停)</td><td>今周刊(6/22):年內 57→152 元、漲逾 160%</td><td>2.1-2.5 元</td><td>法人 TP 120(6/12,未具名);外資 TP 200(6/22 報導)——均非財測</td><td>EPS 1.80(近年新高)、電材占比 &gt;50%</td></tr>
+    <tr><td>台燿 6274</td><td>—(未取快照)</td><td>CCL 二度漲價行情</td><td>—(不在五強表)</td><td>大和 TP 2,122 元(2026-06-16,由 1,680 上調、2026 營收成長率預估 76%→98%)——<b>為街上最高極端值</b>;FactSet 最新共識 17 位分析師 TP 1,650/EPS 中位數 31.27(鉅亨 6454746;早前 15 位中位數 870、區間 565-1,020 已過時)</td><td>EPS 4.36、1-5 月營收 +80.26%</td></tr>
+  </table>
+  <div class="callout warn"><b>估值警語：</b>德宏 6 月股價(240 元)對照法人 1 月 EPS 估(1.0 元+)隱含極高本益比——若非法人上修就是價格跑在預估前面;台燿大和 2,122 元仍高於 FactSet 最新共識 TP 1,650(EPS 中位數 31.27;早前中位數 870 已過時),引用單一目標價會嚴重誤導。族群已大漲後,短線催化(漲價/法說)與長線供給開出(2027 紓解)之間存在「利多出盡+供給反轉」時間差風險(今周刊 2026-01-22)。</div>
 </div>
 
 <!-- 6 -->
 <h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
-<div class="callout warn"><b>待查 / 需謹慎(請勿當事實)：</b>
+<div class="callout warn"><b>被反駁說法警示區(經對抗式查證,以下說法不可寫入事實、僅存檔供對照)：</b>
   <ul>
-    <li>華宏股號待確認(疑 8240)、此鏈獨立角色未獲佐證——屬概念股列舉，不應與建榮/德宏並列</li>
-    <li>台玻「全球第三家 Low-Dk、台灣唯一量產」之說，在建榮/富喬高階出貨後是否仍成立，需持續查證</li>
-    <li>「題材已被 2025/11 定價」已過時——2026/1、6 月仍在發動，定價位置須更新</li>
-    <li>市場規模/缺口/漲幅多為券商與研調轉述(Goldman 經媒體轉述、研調口徑分歧)，為量級參考非成交價</li>
+    <li><b>「Nittobo 2025/08 玻纖產品全線漲價 20%」— 反駁成立。</b>DigiTimes 兩篇獨立報導(2025-06-17 及後續)引產業人士:該波 +20% 僅限<b>複合材料事業部</b>產品,AI 伺服器用 IC 載板/PCB 電子級玻纖布不在調漲之列;日東紡高層並明言暫無調漲 T-glass 計畫、優先擴產穩市佔。TrendForce「全線」措辭不精確——引用漲價數據必須區分「一般/複材布」與「AI 級電子布」兩條線。</li>
+    <li><b>「Nittobo FY3/26 財測:營收 1,370 億/營益 260 億/淨利 170 億」(TipRanks 轉述)— 反駁成立(張冠李戴,2026-07-03 二輪確認)。</b>1,370/260/170 三數字逐字吻合 2026-05-12 發布的 <b>FY2027/3(下一年度)業績預想</b>——營收 1,370 億(+15.9%)/營益 260 億(+24.9%)/純益 170 億(-59.3%,特益消失)(株探+日經)——並非隨機轉述錯誤,而是被誤標成 FY3/26 上修。FY3/26 通期預想實為營收 ¥1,200 億/營益 190→200 億/純益 ¥375 億(<b>含約 ¥341 億東京八重洲土地處分特別利益</b>,本業貢獻遠低於此),實績=營收 ¥1,182 億(+8.4%)/營益 ¥208 億(+26.6%,創高)。數字本身可保留但須掛正確年度;本業指標一律看營業利益。</li>
+    <li><b>「華宏=玻纖布概念股」— 反駁成立(誤列)。</b>股號確認為華宏新技(8240,上櫃):本業 LCD 光學膜材,查無玻纖布產品線;且缺貨潮中 2026 年 1-3 月營收年減 14.47%——僅 blog 級名單列舉、無公司佐證。</li>
+    <li><b>「中釉 1809 受惠玻纖布缺貨」— 反駁成立(比價)。</b>2026Q1 EPS 僅 0.05 元(季減 35.7%)、4 月營收年減 10.68%、1-4 月累計年減 1.12%——題材未轉化為任何營收成長,與台玻/富喬同步漲停純屬比價。</li>
+    <li><b>「榮科 4989 玻纖布概念股」— 誤列。</b>=李長榮科技,本業電解銅箔(RTF/HVLP)——屬 CCL 另一投料鏈,與玻纖布供給無關(財務本身有實績,但不在本鏈)。</li>
+    <li><b>「TrendForce Low Dk3(石英布)供應名單全為日中廠、0 台廠」— 反駁成立(2026-07-03 二輪確認)。</b>TrendForce Insights 原文名單=旭化成/信越/Glotech/菲利華/泰山玻纖/宏和,其中 <b>Glotech 即台廠德宏工業(5475)</b>(Yahoo Finance/DigiTimes 確認英文名對應)——「台灣石英布環節缺席」不成立,正確口徑為「德宏已具名入列 TrendForce Q 布供應名單,惟量級仍小(紗為主、布待驗證)」。</li>
+    <li><b>「Goldman Sachs:T-Glass 2026 漲幅 10-30%」— 無法回溯(not_found)。</b>多輪中英文搜尋均找不到高盛原始報告或具名轉述;僅泛媒體稱「年漲 20-30%」未掛高盛名。此說法已自本報告 KPI 移除、降級為「外資報告經媒體轉述、無法回溯原文」。</li>
+    <li><b>反面聲音(平衡「全面暴漲」敘事)：</b>工商時報(2026-05-23)「大缺貨為何不漲價?這玻纖布大廠放棄暴利」——有大廠刻意不追價以綁長約/市佔;漲價敘事並非全行業一致行為;日經(2026-05-13):日東紡因 FY3/27 純利 -59% 財測與「Tガラスの増産なし」股價急落——FY2026 出貨 +20-30% 靠既有線生產性改善而非新產能,與「2027 年中前無實質新產能」互洽,「產能三倍化」多頭敘事已部分反映於日股股價。</li>
+  </ul>
+</div>
+<div class="callout warn"><b>⚪待查 / 需謹慎(請勿當事實)：</b>
+  <ul>
+    <li><b>Nittobo 2026/04 二度漲價 20-30%(BT +1 季/ABF +2 季)</b>:僅 TrendForce Insights(2026-04-30)單一來源,且與 DigiTimes「無調漲 T-glass 計畫」方向牴觸——是否涵蓋電子級/AI 級布未明。</li>
+    <li><b>Nittobo NER-glass 市佔 60-70%</b>:僅 TrendForce 一族來源(付費報告/Insights/社群轉述同源),無獨立第二源——引用需標「TrendForce 單一來源」。</li>
+    <li><b>德宏石英纖維月出貨 2-3 噸、打入日本第一梯隊</b>:全部出處回溯到 2025-12-03 法說公司自述,無第三方(客戶/研調/海關)覆核噸數。</li>
+    <li><b>石英布供需(需求 1,500-1,800 萬米/缺口/260-300 RMB/米)與中國券商米數口徑</b>:東方財富/搜狐彙整、原始券商報告不可回溯,無具名研調交叉。</li>
+    <li><b>「NVIDIA Rubin 定案 M9+石英布」「每 GPU 用量 0.3-0.4m²」「Switch Tray 改料」</b>:中國投資社群(韭研/雪球/知乎)口徑,NVIDIA 與供應鏈均未證實——與法人「2026H2 導入」方向一致故不錯殺,但細節全未驗證。</li>
+    <li><b>台燿玻纖布自製率</b>:2026Q1 法說僅揭露 CCL 產品組合,查無自製率公開數字——「前身玻璃背景、垂直整合程度待查」。</li>
+    <li><b>QYResearch 市場數字</b>:兩份報告基期差 3 倍、CAGR 差 3.4 倍且互相矛盾——低可靠參照,主口徑用富士キメラ。</li>
+    <li>台玻「全球第三家 Low-Dk、台灣唯一量產」之說,在建榮/富喬高階出貨後是否仍成立,需持續查證;台玻市佔目標 40-45%、高階供貨 +40~50% 均為公司自述、缺第三方。</li>
+    <li>「題材已被 2025/11 定價」已過時——2026/1、2、3、6 月仍多次發動,定價位置須持續更新。</li>
+    <li>截至 2026-07-02,各檔 2026 年 6 月營收均未公告(法定 7/10 前),本報告最新月營收=2026 年 5 月。</li>
   </ul>
 </div>
 <div class="card"><h3>數據強度分層 / 開放問題</h3>
   <ul>
-    <li><b>硬來源：</b>德宏 26Q1 財報、台玻/富喬認證與出貨節奏、建榮 Nittobo 子公司關係</li>
-    <li><b>券商/研調估：</b>漲幅、市佔、市場規模、缺口比例(口徑分歧)</li>
-    <li><b>開放問題：</b>上游玻纖紗(富隆/Nittobo)壟斷度、石英布 Q-glass 量產時程、下游高階 CCL(M8/M9)投料對照、Nittobo 擴產後缺料是否緩解</li>
+    <li><b>硬來源：</b>德宏/台玻/富喬/建榮/台燿/南亞 2026Q1 財報與 5 月營收、富喬 7/1 調價函、南亞×Nittobo 公司公告、Nittobo 決算短信與福島投資(多日媒交叉)、AGY×JPS 新聞稿、申久石英布 datasheet、台玻/富喬認證與出貨節奏、建榮 Nittobo 持股 47.65%。</li>
+    <li><b>券商/研調估：</b>漲幅、市佔(NER 單源)、市場規模(富士キメラ為主口徑;QY 互斥)、缺口比例(15-20%)、M9 導入時點、五強 EPS 預估、目標價(大和 2,122 為極端值)。</li>
+    <li><b>開放問題(2026-07 增補後狀態)：</b>上游玻纖紗壟斷結構——<b>已補</b>(Nittobo 垂直自供+福隆→建榮+台玻 TD 紗廠+AGY×JPS);下游 M8/M9 投料對照——<b>已補</b>(M6→M10 對照表);石英布 Q-glass 量產時程——<b>部分補</b>(M9 2026H2 小量/2027 放量為法人估,台廠僅纖維端);仍開放:Nittobo 2027 新產能開出後缺料是否緩解、旭化成/NEG 放量速度、德宏石英出貨第三方驗證、Rubin 石英布實際用量。</li>
   </ul>
 </div>
 
 <!-- 7 -->
-<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
-<p class="sub">品質：<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<h2 id="s7"><span class="n">7</span>資料來源(分層+網址)</h2>
+<p class="sub">品質：<span class="src-q q-primary">primary</span>(公司一手/官方新聞稿/datasheet) <span class="src-q q-secondary">secondary</span>(官方媒體/具名研調) <span class="src-q q-blog">blog</span>(社群/彙整,僅作待查參照)。被反駁來源均標註。</p>
 <div class="card">
-  <div class="src-item">鉅亨 / cnyes — 台玻高階玻纖布認證打入 NVIDIA 鏈、2026 出貨估增 5 成<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">理財周刊 / 財報狗 — 德宏 26Q1 營收 +90.87%、毛利率 28.32% 單季轉盈<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">今周刊 / MoneyDJ — 建榮為 Nittobo 子公司、富隆紗→織高階布<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">Goldman Sachs(經媒體轉述) — T-Glass 2026 漲幅估 10-30%<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">DIGITIMES / 多家研調 — Nittobo 漲價時程、市佔、擴產;電子級玻纖布市場規模<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">TechNews 科技新報(0613 圖卡) — 玻纖布/缺料漲價題材彙整<span class="src-q q-blog">blog</span></div>
-  <div class="src-item">TrendForce — Glass Fiber Cloth shortage(Nittobo ~90%、占 CCL 成本 19%、NE 級價約 E 級 6 倍、新產能 mid-2027) · <a href="https://insights.trendforce.com/p/glass-fiber-cloth-shortage" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
-  <div class="src-item">DigiTimes/Nikkei(2026/04) — Asahi Kasei 跨入 AI 玻纖布挑戰 Nittobo;TrendForce(2026/02) Nittobo 2028 次世代 T-Glass<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">QY Research/Valuates、Business Research Insights、Report Prime — 低介電玻纖布市場多口徑($4.7-5.3 億起、CAGR 6-25%,口徑分歧)<span class="src-q q-blog">blog</span></div>
-  <div class="src-item">鉅亨(台玻股東會)/CMoney(富喬法說)/vocus(德宏法說) — 公司指引:台玻 2026 擴產 20+22.42 億、富喬高階占比 45%→60%、德宏石英月出貨 2-3 噸<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">東方財富 caifuhao — 石英布 Q-glass 2026 需求 &gt;1,800 萬米/缺口 300 萬米(中國媒體彙整,待查)<span class="src-q q-blog">blog</span></div>
+  <h3>Primary(公司一手/官方)</h3>
+  <div class="src-item">建榮 2026-05-15 法說會 — T-Glass 26Q2 量產、NER 認證中、capex +40~60%、高階銷售占比 ~70% · <a href="https://vocus.cc/article/6a06fb3ffd89780001d349d9" target="_blank">vocus 逐字</a> · <a href="https://www.youtube.com/watch?v=JJVzdnFqG6s" target="_blank">影片</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">台燿 2026-05-06 法說(StockFeel 整理)+富果 2026-03-12 法說備忘錄 — ELL&amp;SLL 38%/VLL&amp;LL 32%、M9 認證中 · <a href="https://www.stockfeel.com.tw/%E5%8F%B0%E7%87%BF-6274-ccl-ai-%E4%BC%BA%E6%9C%8D%E5%99%A8-%E4%BA%A4%E6%8F%9B%E5%99%A8/" target="_blank">StockFeel</a> · <a href="https://blog.fugle.tw/post/earnings-call-6274-2026-03-12" target="_blank">富果</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">德宏 2025-12-03 法說會(vocus 轉錄) — Q3 本業轉盈、石英纖維打入高階 AI 鏈(公司自述、缺第三方) · <a href="https://vocus.cc/article/6a06f6bdfd89780001d18d59" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">南亞 2026-05-26 法說(vocus 整理) — 電子材料占比首破五成、EPS 1.80 · <a href="https://vocus.cc/article/6a15bdb6fd89780001633a26" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Businesswire — AGY×JPS 新聞稿(2026-02-25):北美首條 IC 載板用 Low-CTE 布產線、AGY 擴產 US$12.1M · <a href="https://www.businesswire.com/news/home/20260225452697/en/AGY-and-JPS-Composite-Materials-LLC-Partner-to-Produce-North-Americas-First-Low-CTE-Glass-Fiber-Fabric-for-Advanced-IC-Substrates" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">湖南申久 石英布 1035/1078 datasheet — Q 布 Dk 3.74/Df 0.0002 @10GHz(纖維本體口徑錨) · <a href="https://www.hnshenjiu.com/quartz-fiber-fabric-for-high-frequency-pcb-1035-1078-quartz-fabric-product/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Nittobo FY3/26 第 3 四半期決算短信(2026-02-05,原檔未附網址) — 9M 營收 875.94 億(+7.5%)/營益 149.33 億(+26.4%)/通期預想 1,200 億/200 億;純益 375 億含土地特益——用於反駁 TipRanks 轉述數字<span class="src-q q-primary">primary</span></div>
+  <h3>Secondary(官方媒體/具名研調)</h3>
+  <div class="src-item">TrendForce Insights — Glass Fiber Cloth shortage(2026-04-30):Nittobo T-glass ~90%、NE≈6x E/NER≈2.5x NE、占 CCL 成本 ~19%、Rubin 載板 2.5x/+30%、新產能 mid-2027;<b>注意:「2025/08 全線漲價」措辭被 DigiTimes 反駁、「2026/04 再漲 20-30%」為單一來源⚪</b> · <a href="https://insights.trendforce.com/p/glass-fiber-cloth-shortage" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">TrendForce 付費報告 RP260324EB《2026 T-Glass Supply Shortages》(2026-03-24)+TrendForce News(2026-02-04)Nittobo 2028 次世代 T-Glass · <a href="https://www.trendforce.com/research/download/RP260324EB" target="_blank">RP260324EB</a> · <a href="https://www.trendforce.com/news/2026/02/04/news-nittobo-reportedly-plans-2028-next-gen-t-glass-customers-may-include-nvidia-apple-and-others/" target="_blank">2028 次世代</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">日本經濟新聞 — 福島 ¥150 億新棟+補助(2025-09-02)、旭化成參入&amp;「世界で9割」(2026-03)、次世代 T-Glass CTE -30%(2026-02) · <a href="https://www.nikkei.com/article/DGXZQOCC021TM0S5A900C2000000/" target="_blank">福島</a> · <a href="https://www.nikkei.com/article/DGXZQOUC230N40T20C26A3000000/" target="_blank">旭化成/9割</a> · <a href="https://www.nikkei.com/article/DGKKZO94209890U6A200C2TB1000/" target="_blank">次世代</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">富士キメラ総研(經 mynavi TECH+,2026-04-14,原文逐字核對) — 高機能玻纖布 2025 ¥673 億→2031 ¥2,703 億、石英玻璃 2026 起放量、大盤 ¥14.80 兆→¥24.26 兆 · <a href="https://news.mynavi.jp/techplus/article/20260414-4334803/" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">DigiTimes — 日東紡漲價「非針對電子玻纖布/排除 AI 伺服器級」(2025-06-17 及後續,反駁「全線」口徑)、產能三倍化(2025-09-01)、Nittobo 2028(引日經,2026-02-04)、旭化成參入(0000751133) · <a href="https://www.digitimes.com/news/a20250617PD236/glass-fabric-materials-supplier-ai-server-ic.html" target="_blank">漲價排除AI級</a> · <a href="https://www.digitimes.com.tw/tech/dt/n/shwnws.asp?id=0000724748_SJ88Q1Q23BKM3C9GDWV25" target="_blank">口徑校正</a> · <a href="https://www.digitimes.com/news/a20250901PD242/fiberglass-cloth-capacity-ai-server-packaging-production.html" target="_blank">產能</a> · <a href="https://www.digitimes.com/news/a20260204PD225/nittobo-nikkei-2028-launch-materials.html" target="_blank">2028</a> · <a href="https://www.digitimes.com.tw/tech/dt/n/shwnws.asp?id=0000751133_TME2S06A2O3Z7543YDKGC" target="_blank">旭化成</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">鉅亨網 — 台玻 2026 高階出貨估 +5 成(6245545)、台玻股東會三期擴產(6498024)、德宏 5 月自結 EPS 0.43(6482873)、榮科營收(6492610)、德宏營收速報(6415823) · <a href="https://news.cnyes.com/news/id/6245545" target="_blank">出貨</a> · <a href="https://news.cnyes.com/news/id/6498024" target="_blank">股東會</a> · <a href="https://news.cnyes.com/news/id/6482873" target="_blank">德宏自結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">經濟日報 money.udn — 中國電子布月調 10-15%/2025 累漲 &gt;50%(2026-02-23)、Resonac CCL 漲 &gt;30%(9341003)、陸廠再掀漲價潮(9338232)、台玻 22.5 億擴產(9563619);UDN 大和台燿 TP 2,122(9567203,未附完整網址) · <a href="https://money.udn.com/money/story/5607/9338993" target="_blank">月調價</a> · <a href="https://money.udn.com/money/story/5607/9341003" target="_blank">Resonac</a> · <a href="https://money.udn.com/money/story/5612/9563619" target="_blank">台玻擴產</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">工商時報 — 富喬 2026Q1(EPS 0.79/GM 35.97%,2026-05-05)、「大缺貨為何不漲價」反面素材(2026-05-23) · <a href="https://www.ctee.com.tw/news/20260505700244-439901" target="_blank">富喬Q1</a> · <a href="https://www.ctee.com.tw/news/20260523700479-430502" target="_blank">反面</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">MoneyDJ — 富喬 7/1 起 E+30%/FLD2+15%(2026-06-30)、建榮集團紗優勢(福隆→建榮)、台玻三產品線入 NVIDIA 鏈、富喬 FLD/FLE 與股利 · <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=ed333de1-54c8-49be-803a-45a1c82fff16" target="_blank">富喬漲價</a> · <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=35e20bab-187e-4eb9-af13-f0fdf696c731" target="_blank">建榮紗</a> · <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=fa5fd7f3-feeb-4f91-a85f-50be3c1c1b83" target="_blank">台玻認證</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">今周刊(2026-01-22) — 玻纖布五強全解析:缺口 15-20%、五強 2026 EPS 法人估(建榮 3-4/台玻 2.0-2.5/南亞 2.1-2.5/富喬 1.2-1.6/德宏 1.0+)、1 月股價高點;南亞 YTD +160%/外資 TP 200(2026-06-22) · <a href="https://www.businesstoday.com.tw/article/category/183008/post/202601210027/" target="_blank">五強</a> · <a href="https://www.businesstoday.com.tw/article/category/183008/post/202606220010/" target="_blank">南亞</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">理財周刊(230477,2026-06-01) — 玻纖布五虎 Q1 戰報:德宏 +90.87%/GM 28.32%、富喬毛利稱霸 · <a href="https://www.moneyweekly.com.tw/ArticleData/Info/Article/230477" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">NOWnews/PChome(2026-05-11) — 台玻 2026Q1 轉盈(營收 102.44 億/EPS 0.2/GM 19.22%) · <a href="https://news.pchome.com.tw/finance/nownews/20260511/index-77851166872615207003.html" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">旺得富理財網(2026-05-05) — 台玻 22.5 億 TD 紗廠/4→12 條/市佔目標 45%(公司公告轉述) · <a href="https://wantrich.chinatimes.com/news/20260505900353-420101" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">TechNews 科技新報 — 「史詩級缺貨」台玻/建榮/富喬漲停(2026-01-19)、六檔概念股(2025-11-17);2026-06-13 IG 圖卡本體未附網址,以官網二文替代 · <a href="https://finance.technews.tw/2026/01/19/low-cte/" target="_blank">缺貨</a> · <a href="https://finance.technews.tw/2025/11/17/t-glass/" target="_blank">概念股</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">南亞×Nittobo 公告報導 — 經濟日報(9169744)/TechNews(2025-11-28)/鉅亨(6255831)載公司新聞稿;TrendForce News 英文獨立報導 · <a href="https://www.trendforce.com/news/2025/11/28/news-nittobo-expands-glass-fiber-output-with-nan-ya-nan-ya-to-handle-20-by-2027-amid-ai-surge/" target="_blank">TrendForce</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Tom's Hardware(轉日媒,2026-01) — Apple/NVIDIA/Google/Amazon 搶 Nittobo 產能 · <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/glass-cloth-could-be-the-next-great-ai-shortage-as-major-manufacturers-scramble-to-secure-critical-material-japanese-manufacturer-courted-by-apple-nvidia-google-and-amazon" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">永豐豐雲學堂 — M9 時代來襲(2026-07,M8/M9 投料對照)、台燿大和 TP 2,122 轉述、台廠訂單能見度排至 2027(2026-06)、玻纖布概念股專文 · <a href="https://www.sinotrade.com.tw/richclub/industry/AI-%E6%B5%AA%E6%BD%AE%E4%B8%8B%E7%9A%84-PCB-%E4%BE%9B%E6%87%89%E9%8F%88%E9%9D%A9%E5%91%BD-M9-%E6%99%82%E4%BB%A3%E4%BE%86%E8%A5%B2-CCL-%E7%8E%BB%E7%BA%96%E5%B8%83-%E8%BC%89%E6%9D%BF%E5%8F%B0%E8%82%A1%E5%8F%97%E6%83%A0%E8%82%A1%E8%A7%A3%E6%9E%90-%E7%94%A2%E6%A5%AD%E7%86%B1%E8%A9%B1-69086465d74b96117304d3c4" target="_blank">M9</a> · <a href="https://www.sinotrade.com.tw/richclub/hotstock/%E7%A7%91%E6%8A%80%E5%B7%A8%E9%A0%AD%E6%8E%80%E7%8E%BB%E7%BA%96%E5%B8%83%E6%90%B6%E6%96%99%E6%88%B0-%E5%8F%B0%E5%BB%A0%E8%A8%82%E5%96%AE%E8%83%BD%E8%A6%8B%E5%BA%A6%E6%8E%92%E8%87%B32027%E5%B9%B4-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-6968a76fd2222526495713cc" target="_blank">能見度</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">大和證券台燿目標價佐證 — UDN(9567203)+豐雲學堂原文直抓(2026-06-16)證實 1,680→2,122、2026 營收成長率預估 76%→98%;FactSet 最新共識 17 位分析師 TP 1,650/EPS 中位數 31.27(鉅亨 6454746;早前 15 位中位數 870/區間 565-1,020 已過時)——大和為街上最高極端值(未附完整網址者以豐雲轉述頁互證)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">CMoney — 富喬法說(高階占比 60% 目標)、南亞中高階布(cmnews)、M9 放量問答(aigc)、8 檔概念股名單(2026-02-12,榮科/台光電誤列判定的掃描起點) · <a href="https://cmnews.com.tw/article/newsyoudeservetoknow-151487c6-e77e-11f0-a6c1-44c1be0d243c" target="_blank">富喬</a> · <a href="https://cmnews.com.tw/article/cmoney-1067dac6-6dff-11f1-bfb6-5e1dc01d7c83" target="_blank">南亞</a> · <a href="https://aigc.cmoney.tw/answer/m9-ccl-17-11866851/amp" target="_blank">M9</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">口袋學堂 — 建榮 5340 解析:Nittobo 持股 47.65%、福隆紗結構 · <a href="https://www.pocket.tw/school/report/SCHOOL/7035/" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">StockFeel 股感 — 日東紡財測指引與玻纖布概念股解析(純益 130→375 億上修脈絡) · <a href="https://www.stockfeel.com.tw/%E7%8E%BB%E7%BA%96%E5%B8%83-%E7%BC%BA%E8%B2%A8-%E6%A6%82%E5%BF%B5%E8%82%A1/" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">財報狗/nStock/Goodinfo/玩股網 — 各檔月營收與 EPS(台玻 1802、富喬 1815、建榮 5340、中釉 1809 反駁數字、華宏 8240 反駁數字、台燿 1-5 月) · <a href="https://statementdog.com/analysis/1802/monthly-revenue-growth-rate" target="_blank">1802</a> · <a href="https://statementdog.com/analysis/1815/monthly-revenue" target="_blank">1815</a> · <a href="https://statementdog.com/analysis/5340/income-statement" target="_blank">5340</a> · <a href="https://statementdog.com/analysis/1809/eps" target="_blank">1809</a> · <a href="https://statementdog.com/analysis/8240" target="_blank">8240</a> · <a href="https://www.nstock.tw/stock_info?stock_id=6274&amp;status=5" target="_blank">6274</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Yahoo 股市 — 2026-06-12 收盤快照(台玻 64.1/富喬 96.2/建榮 89.6/德宏 240/南亞漲停 106.5)、南亞續看好中高階布、掛牌別後綴核對 · <a href="https://tw.stock.yahoo.com/news/%E7%8E%BB%E7%BA%96%E5%B8%83%E6%97%8F%E7%BE%A4%E5%85%A8%E5%93%A1%E7%81%AB%E7%B4%85-%E9%80%99%E6%AA%94-%E7%9B%AE%E6%A8%99%E5%83%B9%E5%96%8A%E4%B8%8A120%E5%85%83%E7%9B%B4%E8%A1%9D%E6%BC%B2%E5%81%9C-%E5%8F%B0%E7%8E%BB-%E5%AF%8C%E5%96%AC%E9%9B%99%E9%9B%99%E6%BC%B2%E7%A0%B4%E5%8D%8A%E6%A0%B9-105000722.html" target="_blank">快照</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">CompositesWorld — On the radar: The role of T-glass in AI(非投資向第三方技術佐證) · <a href="https://www.compositesworld.com/news/on-the-radar-the-role-of-t-glass-in-ai" target="_blank">連結</a>;Newtalk(2026-06-15)輝達/台積電背後最不能缺的玻纖布 · <a href="https://newtalk.tw/news/view/2026-06-15/1041341" target="_blank">連結</a>;商業周刊供應鏈全景(概念股掃描起點) · <a href="https://www.businessweekly.com.tw/business/blog/3021767" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">市場規模其他口徑 — QYResearch/Valuates 報告 A(13Y18312)與報告 B(35G17308,<b>兩報告互相矛盾、降為低可靠</b>)、QYResearch CCL 電子布(5644980,$44.7 億@2032 未逐字驗證)、Report Prime(r772,$14.4 億@2032 未驗證)、Business Research Insights(126606,廣口徑)、Verified Market Reports · <a href="https://reports.valuates.com/market-reports/QYRE-Auto-13Y18312/global-low-dk-df-electronic-glass-cloth" target="_blank">QY-A</a> · <a href="https://reports.valuates.com/market-reports/QYRE-Auto-35G17308/global-low-dielectric-glass-fabric" target="_blank">QY-B</a> · <a href="https://www.qyresearch.com/reports/5644980/electronic-glass-cloth-for-ccl" target="_blank">CCL布</a> · <a href="https://www.reportprime.com/low-dielectric-glass-fiber-r772" target="_blank">ReportPrime</a> · <a href="https://www.businessresearchinsights.com/market-reports/fiberglass-fabric-market-126606" target="_blank">BRI</a> · <a href="https://www.verifiedmarketreports.com/product/electronic-fiberglass-fabric-for-ccl-market/" target="_blank">VMR</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">TipRanks/MarketScreener — Nittobo 決算轉述;<b>其「營收 1,370 億/營益 260 億/淨利 170 億」實為 2026-05-12 發布之 FY2027/3 業績預想、被誤標成 FY3/26 上修(張冠李戴),僅存檔對照</b> · <a href="https://www.tipranks.com/news/company-announcements/nittobo-delivers-profit-surge-and-raises-full-year-outlook-for-fy2026" target="_blank">連結</a><span class="src-q q-secondary">secondary</span>(被反駁)</div>
+  <div class="src-item">Goldman Sachs「T-Glass 2026 漲幅 10-30%」 — 原文不可回溯(not_found、未附網址):多輪中英文搜尋無法找到原始報告或具名轉述,已自正文降級移除<span class="src-q q-secondary">secondary</span>(not_found)</div>
+  <h3>Blog / 社群(待查參照,不可單獨採信)</h3>
+  <div class="src-item">PCBMASTER — E/NE/T/Quartz 分級參數(E-glass Dk 6-7 @1MHz、NE 3.5-4.3/Df 0.0015-0.002) · <a href="https://www.pcbmaster.com/news/pcb-fiberglass-cloth-types.html" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">913 理財估測站(2026-04-20) — 德宏石英月出貨 2-3 噸轉述(回溯至公司法說自述) · <a href="https://uc913.com/stock-5475/" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">東方財富 caifuhao + 搜狐 — 石英布供需(1,500-1,800 萬米/缺口/260-300 RMB)與中國券商米數口徑(⚪待查未驗證) · <a href="https://caifuhao.eastmoney.com/news/20251106071626965558480" target="_blank">caifuhao</a> · <a href="https://m.sohu.com/a/982545075_121123901" target="_blank">搜狐</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">韭研公社(2025-12-17)Rubin 定案 M9+Q 布(⚪未證實)、雪球/知乎 Q 布壁壘拆解(0.3-0.4m²/GPU ⚪) · <a href="https://www.jiuyangongshe.com/a/2gdw12s3axb" target="_blank">韭研</a> · <a href="https://xueqiu.com/3777610495/365395120" target="_blank">雪球</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">發現報告(fxbaogao) — 中材科技前瞻布局石英布(中國研調摘要,低信心) · <a href="https://www.fxbaogao.com/detail/4920791" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
 </div>
 
 <footer>
-  <p><b>研究方法：</b>缺口分析 + 對抗式查證;嚴格區分有佐證/券商估/概念股列舉。</p>
+  <p><b>研究方法：</b>缺口分析 + 對抗式查證;嚴格區分有佐證/券商估/概念股列舉。2026-07-03 二輪增補:33 條主張逐條裁決(19 確認/11 待查/3 反駁)、14 檔股號掛牌逐檔複核、12 組跨來源矛盾裁決(含 Nittobo 1,370/260/170 實為 FY3/27 財測之張冠李戴、漲價範圍口徑、QY 兩報告互斥、Q 布 Dk 口徑、Glotech=德宏)。</p>
   <p>本報告以「已通過查證」內容為主幹，並標示待查項目。屬時間敏感領域，數據請以最新官方法說/公告為準。<b>本報告為研究整理，非投資建議。</b></p>
-  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+  <p style="color:var(--muted)">產出：2026-06 · 增補：2026-07-03(二輪) · Claude Code · process-chain-research</p>
 </footer>
 
 </div>

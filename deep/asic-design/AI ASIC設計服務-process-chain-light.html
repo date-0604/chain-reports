@@ -96,6 +96,9 @@ tr:last-child td{border-bottom:none}tbody tr:hover{background:#fafbfc}
 .refs li{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 13px}
 .refs li b{color:var(--ink)}.refs li a{word-break:break-all}
 .refs li .q{font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px;background:var(--surface-2);color:var(--ink-soft)}
+.refs li .q.qp{background:var(--ok-soft);color:#047857}
+.refs li .q.qs{background:var(--accent-soft);color:var(--accent)}
+.refs li .q.qb{background:var(--warn-soft);color:#c2410c}
 footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px;text-align:center}
 @media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
 @media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
@@ -118,11 +121,11 @@ p,li,td{overflow-wrap:anywhere}
 
 <div class="hero"><div class="container">
   <h1>雲端 AI ASIC 設計服務台鏈 <em>× 供應鏈研究指南</em> 2026</h1>
-  <p class="lead">當 CSP 自研 ASIC 擺脫 NVIDIA GPU,設計這些晶片的「設計服務商」成了 AI 第二主軸。台股雙雄世芯(AWS Trainium3 後段+turnkey)與創意(Google Axion、Meta MTIA-3、Tesla AI5)卡在最深的後段實體+chiplet 封裝護城河;世芯 Q1'26 谷底、Q3 放量,是「故事確立×股價剛反轉」的甜蜜點。最大風險:CSP 走 COT 化、prime co-design 被 Broadcom+Marvell 壟斷 ~95%。</p>
+  <p class="lead">當 CSP 自研 ASIC 擺脫 NVIDIA GPU,設計這些晶片的「設計服務商」成了 AI 第二主軸。台股雙雄世芯(AWS Trainium3 後段+turnkey)與創意(Google Axion、Meta MTIA-3;Tesla AI5 為供應鏈報導、未經官方證實)卡在最深的後段實體+chiplet 封裝護城河;世芯 Q1'26 谷底、Q3 放量,創意 2026/4-5 月營收已 +130~157% 率先兌現(公開申報)。最大風險:CSP 走 COT 化、prime co-design 被 Broadcom+Marvell 壟斷 ~95%。</p>
   <div class="meta">
     <span class="badge b-accent">驅動力:CSP 自研 ASIC(AI 第二主軸)</span>
     <span class="badge">市場:台灣為主＋國際/客戶對照</span>
-    <span class="badge b-warn">更新:2026/06</span>
+    <span class="badge b-warn">更新:2026/07(6 月營收 7/10 前後公告、2Q26 財報 7-8 月)</span>
     <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
   </div>
 </div></div>
@@ -170,13 +173,36 @@ p,li,td{overflow-wrap:anywhere}
     <div class="card"><p>ASIC 出貨超越 GPU</p><h4>2028 年</h4></div>
     <div class="card"><p>AI 加速器 TAM 2027</p><h4>$70-80B</h4></div>
   </div>
-  <p class="disclaimer">出貨占比/成長率為 TrendForce/Counterpoint(2026,出貨量口徑);TAM $70-80B 為聯發科 2026/4/30 法說自述(由先前 2028 達 $70B 提前一年),最接近的獨立背書是 Broadcom CEO 的 2027 客製加速器 TAM $60-90B。皆樂觀框架,標來源、非成交數。</p>
+  <p class="disclaimer">出貨占比/成長率為 TrendForce/Counterpoint(2026,出貨量口徑;TrendForce 2026/4 更新曾將 ASIC 系統占比微幅下修至約 27%,引用時標明 1 月口徑或改用最新值);TAM $70-80B 為聯發科 2026/4/30 法說自述(由先前 2028 達 $70B 提前一年),最接近的獨立背書是 Broadcom CEO 的 2027 客製加速器 TAM $60-90B。皆樂觀框架,標來源、非成交數。</p>
+  <div class="grid cols-4" style="margin-top:14px">
+    <div class="card"><p>Broadcom FY26Q2 AI 營收(2026/6/3)</p><h4>$10.8B(+143%)</h4></div>
+    <div class="card"><p>Broadcom FY26Q3 AI 指引</p><h4>$16.0B(+200%+)</h4></div>
+    <div class="card"><p>聯發科 2028 AI ASIC 出貨占比(Counterpoint)</p><h4>~1/4 顆數</h4></div>
+    <div class="card"><p>AI ASIC 金額天花板 2030(Omdia)</p><h4>$84.5B</h4></div>
+  </div>
+  <h3>市場規模「多研調口徑」對照表(勿混用)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>機構 / 發布日</th><th>數值</th><th>年份</th><th>涵蓋口徑</th><th>性質 / 注意</th></tr></thead>
+    <tbody>
+      <tr><td><b>TrendForce</b>(2026/1/20 新聞稿)</td><td>ASIC 型 AI 伺服器占比 27.8%;ASIC +44.6% vs GPU +16.1%;AI 伺服器 +28%</td><td>2026</td><td>出貨「台數/系統」占比,非金額</td><td>獨立研調<span class="conf c-high">高</span>;2026/4 更新微幅下修至 ~27%</td></tr>
+      <tr><td><b>Counterpoint</b>(2026/1 insight)</td><td>2028 ASIC >1,500 萬顆超越 DC GPU;2024-28 累計 >4,000 萬顆;Broadcom 設計市占 ~60%(2027);Google 出貨 64%→52%</td><td>2027-28</td><td>加速器「顆數」;設計案市占</td><td>獨立研調<span class="conf c-high">高</span>;「3 倍」=2027 vs 2024、「>15M 交叉」=2028,勿混</td></tr>
+      <tr><td><b>JPMorgan</b>(據 KuCoin 轉述)</td><td>2026 市場 $60-70B、CAGR 40-50%;顆數黃金交叉 2027(12.5M vs 10.9M)</td><td>2026-27</td><td>金額+顆數</td><td>券商預估、原報告不可得,僅一手轉述<span class="conf c-un">⚪待查</span>;與 Counterpoint(2028 交叉)衝突時以後者為主</td></tr>
+      <tr><td><b>Omdia</b>(2025/8 新聞稿)</td><td>AI DC 晶片 2030 $286B(含 GPU);AI ASIC $84.5B、份額 ~25%;支出 2026 見頂</td><td>2030</td><td>「金額」,含 GPU 之全 DC 晶片+ASIC 子口徑</td><td>獨立研調<span class="conf c-high">高</span>;asof 2025/8 較舊,引用標時效</td></tr>
+      <tr><td><b>Bloomberg Intelligence</b>(BI 新聞稿)</td><td>加速器 $116B(2024)→>$600B(2033);custom ASIC $118B(2033)、份額 8%→19%</td><td>2033</td><td>金額,AI 加速器全體+custom 子市場</td><td>獨立研調<span class="conf c-med">中</span></td></tr>
+      <tr><td><b>Marvell</b>(Custom AI Investor Event 2025/6/17)</td><td>DC TAM CY2028 $94B;custom accelerated compute $55.4B(XPU $40.8B+attach $14.6B)</td><td>2028</td><td>公司 TAM 框架</td><td><b>公司自述、非第三方</b><span class="conf c-med">中</span></td></tr>
+      <tr><td><b>聯發科</b>(2026/4/30 法說)</td><td>雲端 ASIC TAM $70-80B、由 2028 提前至 2027;自身市占目標 10-15%</td><td>2027</td><td>公司 TAM 框架</td><td><b>公司自述、缺第三方</b><span class="conf c-med">中</span></td></tr>
+      <tr><td><b>Goldman Sachs</b>(2026/7/2)</td><td>聯發科 2027 AI ASIC $20.3B(占營收 49%)、2028 ~$52.5B(69%);TP 2,454→5,000(5/1)→6,800(7/2)</td><td>2027-28</td><td>單一公司營收預估</td><td><b>券商預估、非公司財測</b>;同一券商連續上修,引用必須帶報告日期(4 月版為 $12.3B)<span class="conf c-med">中</span></td></tr>
+      <tr><td><b>Morgan Stanley</b>(據轉述)</td><td>custom 加速器佔整體 AI 加速器營收 7%(2023)→30%(2027)</td><td>2027</td><td>營收占比</td><td>原報告非公開、據媒體轉述<span class="conf c-un">⚪待查</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn">⚠️ <b>口徑警語:</b>五種口徑並列、不可互換——①含不含 GPU;②系統(台) vs 顆數 vs 金額;③設計服務營收只佔晶片 BOM 一小部分,直接拿 TAM 對台廠營收會高估數倍。來源:TrendForce/Counterpoint/Omdia/BI/Marvell/GS 交叉彙整(2026/7)。</div>
   <h3>商業模式光譜(決定毛利)</h3>
   <div class="table-wrap"><table>
     <thead><tr><th>模式</th><th>認列</th><th>毛利</th><th>實例</th></tr></thead>
     <tbody>
-      <tr><td><b>NRE 一次性設計費</b></td><td>設計期</td><td>高(世芯 1Q26 50.2% 創高)</td><td>tape-out 前的設計工作</td></tr>
-      <tr><td><b>Turnkey 統包量產</b></td><td>量產期</td><td>稀釋(~20%)</td><td>世芯 Trainium3 Q3'26 放量</td></tr>
+      <tr><td><b>NRE 一次性設計費</b></td><td>設計期</td><td>高(世芯 1Q26 毛利率 50.16% 創高,公司簡報口徑;媒體載 50.2%/50.18% 為四捨五入差異)</td><td>tape-out 前的設計工作</td></tr>
+      <tr><td><b>COPD 客戶自有實體設計</b></td><td>設計期(補位)</td><td>中</td><td>客戶做後段、設計商補位</td></tr>
+      <tr><td><b>Turnkey 統包量產</b></td><td>量產期</td><td>稀釋(~20%)</td><td>世芯 Trainium3 Q3'26 放量(2026/6 已開始量產交貨,工商時報 6/16)</td></tr>
       <tr><td><b>COT 客戶自有 tooling</b></td><td>抽成最少</td><td>最低</td><td>Trainium3 Mariana 光罩(Annapurna 自有)</td></tr>
     </tbody>
   </table></div>
@@ -209,7 +235,7 @@ p,li,td{overflow-wrap:anywhere}
     </tbody>
   </table></div>
   <div class="grid cols-2">
-    <div class="card"><h4>創意 <span class="code">3443</span></h4><p>自有 UCIe 64G/HBM4 PHY+Controller(N3P,2026/2 tape-out)、APT 2.5D/3D 平台、與緯穎「晶片到系統」合作(2026/5/4)。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>創意 <span class="code">3443</span></h4><p>自有 UCIe 64G/HBM4 介面 IP:全球首顆 HBM4 IP 於 TSMC N3P tape-out(官方 PR 2025/4/2)、2026/4 再展示 3nm 12Gbps HBM4 PHY+Controller(2.5x 頻寬 vs HBM3E、支援 SoIC face-up 3DIC);APT 2.5D/3D 平台、與緯穎「晶片到系統」合作(2026/5/4)。<span class="conf c-high">高</span></p></div>
     <div class="card"><h4>世芯-KY <span class="code">3661</span></h4><p>Trainium3 封裝設計;台積電 3DFabric Alliance 少數能代客戶設計整顆 SiP 的設計夥伴。<span class="conf c-high">高</span></p></div>
   </div>
 </div></section>
@@ -222,16 +248,21 @@ p,li,td{overflow-wrap:anywhere}
   <div class="table-wrap"><table>
     <thead><tr><th>客戶</th><th>ASIC 專案</th><th>設計夥伴(台廠粗體)</th><th>製程</th><th>時點</th><th>查證</th></tr></thead>
     <tbody>
-      <tr><td>AWS</td><td>Trainium3(訓練)</td><td>前段 Annapurna;<b>後段+封裝 世芯</b></td><td>N3P</td><td>世芯 Q3'26 大量放量</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>AWS</td><td>Trainium2(前代)</td><td>Marvell</td><td>N5</td><td>2025 量產 &gt;50 萬顆</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>Google</td><td>Axion CPU(Arm 通用)</td><td><b>創意 GUC(turnkey)</b></td><td>3nm</td><td>GA 上線;占創意 2026 營收 50%+</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>Google</td><td>TPU v7 Ironwood(推論)</td><td>Broadcom + <b>聯發科</b></td><td>N3P</td><td>2026 數百萬顆放量</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>Google</td><td>TPU v8i『Zebrafish』(推論)</td><td><b>聯發科</b></td><td>傳 2nm</td><td>聯發科自述 Q4'26 單季 ~$2B(量產時點口徑分歧)</td><td><span class="conf c-med">中</span></td></tr>
-      <tr><td>Google</td><td>TPU v8t『Sunfish』(訓練)</td><td>Broadcom</td><td>傳 2nm</td><td>2026 預覽、量產未定</td><td><span class="conf c-med">中</span></td></tr>
-      <tr><td>Meta</td><td>MTIA-2 / MTIA-3</td><td>Broadcom;<b>MTIA-3 後段 創意</b></td><td>3nm,CoWoS</td><td>MTIA-2 H1'26、MTIA-3 H2'26</td><td><span class="conf c-med">中</span></td></tr>
-      <tr><td>Microsoft</td><td>Maia 200(推論/RL)</td><td>MS 自架;Marvell 供 IP/後段;<b>創意=供應鏈/封裝(不參與設計)</b></td><td>3nm</td><td>延至 2026 登場</td><td><span class="conf c-med">中</span></td></tr>
-      <tr><td>OpenAI</td><td>自研推論加速器(10GW)</td><td>Broadcom($10B)</td><td>3nm/2nm</td><td>首批機櫃 H2'26、2029 全 10GW</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>Tesla</td><td>AI5(FSD/ADAS)</td><td><b>創意 GUC 設計夥伴</b>;雙代工三星/台積</td><td>3nm 級</td><td>已 tape-out;2027 中量產</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>AWS</td><td>Trainium3(訓練)</td><td>前段 Annapurna(SerDes=Synopsys);<b>後段+封裝 世芯</b></td><td>N3(P)</td><td>2026/5 量產、6 月出貨(milestone 口徑差一個月);世芯 Q3'26 大量放量</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>AWS</td><td>Trainium2(前代)</td><td>Marvell(RDL interposer 問題、世芯救火)</td><td>N5</td><td>2025 量產 &gt;50 萬顆</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>AWS</td><td>Trainium4(次代,雙軌)</td><td>前段 Annapurna+Synopsys 224G SerDes;<b>後段 世芯 領銜兩軌</b>;NVLink Fusion/MGX(NVIDIA 官方)</td><td>評估 2nm</td><td>test chip 2025、tape-out 2026、量產 2027(媒體拼圖)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Google</td><td>Axion CPU(Arm 通用)</td><td><b>創意 GUC(turnkey)</b></td><td>3nm</td><td>2026 初出貨;與 3nm AI 加速器案「兩案合計」占創意 2026 turnkey 營收 50-55%(法說口徑)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>TPU v7 Ironwood(推論)</td><td>Broadcom + <b>聯發科</b>(I/O 協同)</td><td>N3P</td><td>2026/4/22 GA;Anthropic 2026 可用至 100 萬顆</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>TPU v7e(聯發科首案)</td><td><b>聯發科</b></td><td>N3 級</td><td>1Q26 底 risk production;Q4'26 起認列、2026 全年 ~$2B 的載體;至 2027 約 200 萬顆(DIGITIMES)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>TPU v8i『Zebrafish』(推論)</td><td><b>聯發科</b>(單 compute die+6×HBM3e,成本 -20~30%)</td><td>TSMC 2nm</td><td>late 2027 量產(多源收斂;「4Q26 量產」為誤植,4Q26 認列載體是 v7e)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>TPU v8t『Sunfish』(訓練)</td><td>Broadcom(雙 compute die+8×HBM3e 12-hi)</td><td>TSMC 2nm</td><td>late 2027 量產目標;訓練性價比 2.7x vs v7(公司自述)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Google</td><td>TPU v8e『Humufish』/ v9 代號兩說</td><td><b>聯發科</b>;COT 化風險(郭明錤)vs Triggerfish「獨家」升級說,單一信源自我對沖</td><td>傳 2nm</td><td>2H27-2028;兩說並陳、皆未證實</td><td><span class="conf c-un">⚪待查</span></td></tr>
+      <tr><td>Meta</td><td>MTIA-2 / MTIA-3</td><td>Broadcom(運算/IO);<b>MTIA-3 後段+投片 創意</b>;<b>晶心科 RISC-V 核 IP</b>(官方 PR)</td><td>3nm,CoWoS(8 顆/wafer)</td><td>MTIA-2 大規模部署 2026/2、MTIA-3 2H26 亮相(reportedly)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Microsoft</td><td>Maia 200(推論/RL)</td><td>MS 自架構;分工拼圖(非官方):微軟前段+<b>GUC 創意 後段</b>、其餘 Marvell 前+後段</td><td>TSMC 3nm、216GB HBM3e</td><td>2026/1/26 發表、已量產支撐 M365 Copilot(官方;規格=高、分工=中)</td><td><span class="conf c-med">中(分工)</span></td></tr>
+      <tr><td>Microsoft</td><td>Maia 300(次代)</td><td>傳 Marvell 共同設計;GUC 承接=查無佐證(0 證據)</td><td>傳 2nm+HBM4</td><td>傳 Q4'26 發布、出貨/ASP 皆估算、微軟未證實</td><td><span class="conf c-un">⚪待查</span></td></tr>
+      <tr><td>OpenAI</td><td>Jalapeño 推論晶片(10GW 計畫首顆)</td><td>OpenAI 前段;Broadcom 實體+系統(Ethernet 機櫃)</td><td>3nm/2nm 級</td><td>2026/6/24 發表;9 個月 design→tape-out;2026 底首批部署、2029 完成 10GW</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Tesla</td><td>AI5(FSD/ADAS)</td><td><b>創意 GUC 設計夥伴(供應鏈報導、Tesla/GUC 官方零證實)</b>;雙代工三星/台積</td><td>3nm 級</td><td>2026/4/15 tape-out;量產 late 2026-early 2027</td><td><span class="conf c-low">低</span></td></tr>
+      <tr><td>Tesla</td><td>AI6(次代)</td><td>設計夥伴無公開佐證(待查);Samsung Taylor $16.5B 合約(至 2033)</td><td>2nm GAA @Taylor</td><td>裝機 2026/4/24;AI6 量產 2H27</td><td><span class="conf c-un">⚪待查</span></td></tr>
     </tbody>
   </table></div>
   <div class="callout insight">💡 核心結論:<b>世芯=AWS 軸</b>(Trainium 系列後段+封裝)、<b>創意=Google/Meta/Tesla 軸</b>(Axion 通用 CPU 現在進行式、MTIA-3/AI5 在後)、<b>聯發科=Google TPU 推論軸</b>(Q4'26 起)。三家客戶軸不同、互不直接衝突,是台股難得的「分軸卡位」。</div>
@@ -242,17 +273,17 @@ p,li,td{overflow-wrap:anywhere}
   <span class="eyebrow">05+ · Fine-grained Design-Split Map</span>
   <h2 class="title">🔬 台灣吃得到定位 + CSP × 逐晶片世代 設計分工(黑箱)</h2>
   <p class="subtitle">台廠 alpha 集中在 <b>④ 後段實體設計 + ⑤ chiplet 封裝 co-design</b>(世芯/創意護城河);架構/前端=CSP 自研天花板、尖端 IP=Synopsys/Cadence 主導。</p>
-  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>份額多為媒體/研調彙整、CSP-台廠對應未必兩造證實。高信心(一手/研調):Trainium3 分工(SemiAnalysis)、MTIA-3 GUC(TrendForce)、OpenAI×Broadcom;中信心:創意=Tesla 設計夥伴、Maia GUC 含金量、Google 洽 Marvell;待查:精確份額%。</div>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書(2026/7 依對抗式查證裁決更新):</b>份額多為媒體/研調彙整、CSP-台廠對應未必兩造證實。高信心(一手/研調):Trainium3 分工(SemiAnalysis+多家獨立引述)、OpenAI×Broadcom 10GW/Jalapeño(官方)、Maia 200 規格(官方)、晶心科×MTIA RISC-V 核(官方 PR+ISCA 論文)、聯發科 $2B(法說);中信心:MTIA-3 GUC(TrendForce 單一報導鏈)、Axion GUC(Google 未官方點名)、Maia 分工拼圖、Google 洽 Marvell(未簽約);待查/不採信:創意=Tesla AI5/AI6 設計夥伴(官方零證實)、各 CSP 案台廠光罩佔比(公開來源僅 AWS 一案有拆分)、Humufish COT、Maia 300 量價。</div>
   <h3>台灣吃得到多少(逐環節定位)</h3>
   <div class="table-wrap"><table>
     <thead><tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
     <tbody>
-      <tr><td>① 規格/架構定義</td><td>聯發科(少量協同)</td><td><span class="badge b-danger">缺席/邊緣 · COT 天花板</span></td><td>CSP 自研(Annapurna/Google/微軟)主導;聯發科 v7 I/O 少量協同</td></tr>
+      <tr><td>① 規格/架構定義</td><td>聯發科(少量協同)</td><td><span class="badge b-danger">缺席/邊緣 · COT 天花板</span></td><td>CSP 自研(Annapurna/Google/微軟)主導;聯發科 v7 I/O 少量協同;聯發科自建 400G SerDes/die-to-die、與台積電 3.5D/2nm-1.4nm 合作是台廠往上打的主要嘗試(股東會 2026/5/29)</td></tr>
       <tr><td>② 前端 RTL 設計與驗證</td><td>智原 3035 / 聯發科 2454(部分)</td><td><span class="badge b-warn">追趕/局部</span></td><td>驗證佔 80-90% 工時、CSP 視為差異化核心想自掌</td></tr>
-      <tr><td>③ 矽智財 IP(SerDes/PCIe/UCIe/HBM PHY)</td><td>創意 3443 / 力旺 3529 / M31 6643</td><td><span class="badge b-warn">利基寡占(eNVM)· 尖端 SerDes 輸國際</span></td><td>力旺 eNVM/OTP 近寡占(毛利近 100%、深整合 Vera Rubin);尖端 SerDes 仍 Synopsys/Cadence</td></tr>
-      <tr><td>④ 後段實體設計(P&amp;R/signoff)⭐</td><td>世芯 3661 / 創意 3443 / 智原 3035</td><td><span class="badge b-ok">領先 · 台廠核心戰場</span></td><td>世芯 Trainium3 bakeoff 擊敗前代 Marvell;能搶 prime 對手案</td></tr>
-      <tr><td>⑤ chiplet 封裝 co-design ⭐</td><td>世芯 3661 / 創意 3443</td><td><span class="badge b-ok">領先 · 護城河最深</span></td><td>TSMC 3DFabric Alliance 少數能代客設計整顆 SiP;綁 CoWoS=護城河也是地緣集中</td></tr>
-      <tr><td>⑥ 光罩/量產投片(turnkey)</td><td>世芯 / 創意 / 聯發科</td><td><span class="badge b-warn">領先量 · 被 COT 稀釋認列</span></td><td>Trainium3 Anita(世芯自有 mask)~30-37%、其餘 Mariana 走 COT</td></tr>
+      <tr><td>③ 矽智財 IP(SerDes/PCIe/UCIe/HBM PHY)</td><td>創意 3443 / 力旺 3529 / M31 6643</td><td><span class="badge b-warn">利基寡占(eNVM)· 尖端 SerDes 輸國際</span></td><td>力旺 eNVM/OTP 近寡占(royalty 占營收 65.2%,1Q26 法說;NeoFuse 已過 TSMC N3P 驗證;×NVIDIA Vera Rubin 連結僅部落格級 ⚪待查);尖端 SerDes 仍 Synopsys/Cadence(Trainium3/4 皆用 Synopsys SerDes);創意 HBM4 PHY 12Gbps 為台廠實質卡位(官方 PR)</td></tr>
+      <tr><td>④ 後段實體設計(P&amp;R/signoff)⭐</td><td>世芯 3661 / 創意 3443 / 智原 3035</td><td><span class="badge b-ok">領先 · 台廠核心戰場</span></td><td>世芯 Trainium3 design bakeoff 擊敗前代 Marvell(Trainium2 執行不佳:RDL interposer 問題+時程過長);台灣設計服務同時卡進三大 CSP 當代主力案(世芯=AWS、創意=Meta/Google、聯發科=Google TPU),全球實為美台兩極、Socionext 邊緣化(SemiAnalysis+TrendForce+法說交叉)</td></tr>
+      <tr><td>⑤ chiplet 封裝 co-design ⭐</td><td>世芯 3661 / 創意 3443</td><td><span class="badge b-ok">領先 · 護城河最深</span></td><td>TSMC 3DFabric Alliance 少數能代客設計整顆 SiP;綁 CoWoS=護城河也是地緣集中;MTIA-3 reticle 級 die 執行倚重 GUC(TrendForce,reportedly)</td></tr>
+      <tr><td>⑥ 光罩/量產投片(turnkey)</td><td>世芯 / 創意 / 聯發科</td><td><span class="badge b-warn">領先量 · 被 COT 稀釋認列</span></td><td>Trainium3 量產主力=Annapurna 自有 Mariana 光罩(直接向台積電採購)、世芯自有 Anita 佔少數——COT 稀釋認列實證;Anita 精確佔比為 SemiAnalysis 單一來源 <span class="conf c-un">⚪待查</span>、勿硬填;主流案代工 100% 台積電,唯 Tesla AI6 交三星 Taylor($16.5B)為 2026 唯一具規模第二來源訊號</td></tr>
       <tr><td>⑦ 客製記憶體 / 矽電容(邊緣)</td><td>愛普 6531(S-SiCap)</td><td><span class="badge b-warn">利基領先</span></td><td>S-SiCap 矽電容隨 AI 先進封裝量產;與 HBM 本體切開</td></tr>
     </tbody>
   </table></div>
@@ -260,29 +291,35 @@ p,li,td{overflow-wrap:anywhere}
   <div class="table-wrap"><table>
     <thead><tr><th>CSP / ASIC 晶片(世代)</th><th>主設計商 / IP</th><th>後段·封裝·代工 · 台廠</th></tr></thead>
     <tbody>
-      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">① Google(四夥伴,Broadcom 寡占已現裂縫)</td></tr>
-      <tr><td>TPU v7 Ironwood(推論,N3P,2026 數百萬顆)</td><td>主設計 Broadcom;聯發科 2454 設計 I/O 模組</td><td>TSMC N3P+CoWoS;聯發科兼供應鏈協調(高)</td></tr>
-      <tr><td>TPU v8i Zebrafish(推論,傳 2nm)</td><td>主設計 聯發科 2454</td><td>TSMC 傳 N2;Q4'26 單季~$2B、量產時點口徑分歧(中)</td></tr>
-      <tr><td>TPU v8t Sunfish(訓練,傳 2nm)</td><td>主設計 Broadcom</td><td>TSMC 傳 N2;2026/4 預覽、量產未定(中)</td></tr>
-      <tr><td>Axion CPU(Arm 通用,3nm,GA)</td><td>turnkey 創意 3443(GUC)</td><td>TSMC 3nm;占創意 2026 營收 50%+(高)</td></tr>
-      <tr><td>傳新推論 TPU + MPU</td><td>傳 Marvell(2026/4 洽談)</td><td>CNBC 傳聞未證實;Broadcom 寡占首現裂縫(低-中)</td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">① Google(供應鏈 1→4 夥伴化:Broadcom 訓練+聯發科推論+Marvell 洽談中+GUC 承 CPU;Broadcom 寡占已現裂縫)</td></tr>
+      <tr><td>TPU v7 Ironwood(推論,N3P,2026/4/22 GA)</td><td>主設計 Broadcom;聯發科 2454 設計 I/O 模組</td><td>TSMC N3P+CoWoS;4.6 PFLOPS/chip、9,216 顆 superpod=42.5 EFLOPS(Google 官方);Anthropic 首要客戶(2026 至 100 萬顆、逾 1GW;首期 40 萬顆約 $10B 機櫃由 Broadcom 交付,媒體估算)<span class="conf c-high">高</span></td></tr>
+      <tr><td>TPU v7e 系首案=聯發科第一顆 hyperscaler 加速器(N3)</td><td>主設計 聯發科 2454</td><td>TSMC N3;1Q26 底 risk production(TrendForce 2026/2/5)、Q4'26 起認列、2026 全年 ~$2B(公司財測)——裁決:Q4'26 認列的 $2B 屬本案、非 Zebrafish;光罩佔比未揭露<span class="conf c-med">中</span></td></tr>
+      <tr><td>TPU v8i Zebrafish(推論,TSMC 2nm)</td><td>主設計 聯發科 2454(Google 刻意引入制衡 Broadcom 議價)</td><td>單 compute die+1 I/O die+6×HBM3e、成本 -20~30% vs 訓練版(公司自述);目標 late 2027 量產(多源收斂;原「Q4'26 起量」說已裁決不採);已取得 v8e 訂單(TrendForce)<span class="conf c-high">高(分工)</span></td></tr>
+      <tr><td>TPU v8t Sunfish(訓練,TSMC 2nm)</td><td>主設計 Broadcom(延續歷代分工)</td><td>2 compute die+1 I/O chiplet+8×HBM3e 12-hi;訓練性價比 2.7x vs Ironwood(公司自述);目標 late 2027;光罩佔比未公開 ⚪待查<span class="conf c-high">高</span></td></tr>
+      <tr><td>TPU v8e Humufish(2H27 目標)⚪傳聞</td><td>郭明錤:Google 詢台積電評估 COT(客戶自有光罩直接下單)繞過聯發科;Intel EMIB-T 封裝驗證良率 90%(vs 量產基準 98%)</td><td>單一分析師、原帖僅論壇轉述;Google/台積電/聯發科皆未證實;台積電傾向仍由聯發科下單(據轉述)<span class="conf c-un">⚪待查</span></td></tr>
+      <tr><td>TPU v9 Triggerfish(2028?)⚪傳聞</td><td>郭明錤(2026/6/22 X):聯發科「獨家」承接 v9 升級版——SRAM 2-3 倍、HBM4E、ASP +30%、2027 底投產;增量 1-2 百萬顆(Humufish 生命週期估 4-5 百萬顆,兩口徑勿混)</td><td>單一信源、無第二獨立源;另有外資「Pumafish 取消→Whalefish」兩說並存,代號/節點不可寫死<span class="conf c-low">低</span></td></tr>
+      <tr><td>Axion CPU(Arm 通用,3nm,2026 初出貨)</td><td>turnkey/後段 創意 3443(GUC,TrendForce reportedly;Google 未官方點名)</td><td>TSMC 3nm、Neoverse V2 平台;與 3nm AI 加速器案「兩案合計」占創意 2026 turnkey 營收 50-55%(法說口徑);BofA 稱 Google CPU 佔創意營收 ~40%(券商側面支撐);GUC 已取得次世代 CPU 案(N3/N5)<span class="conf c-med">中</span></td></tr>
+      <tr><td>傳新推論 TPU + MPU(記憶體處理單元)⚪傳聞</td><td>傳 Marvell(CNBC 引 The Information,2026/4/20 洽談)</td><td>截至 2026/7/2 未見簽約證實;同篇提及 Broadcom×Google TPU 長約至 2031(轉述非官方文件);Broadcom 寡占首現裂縫<span class="conf c-low">低-中</span></td></tr>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">② AWS(世芯主軸,前段 Annapurna 自製)</td></tr>
-      <tr><td>Trainium3(訓練,N3,2025/12 GA)</td><td>前段 Annapurna 自製;後段+封裝 世芯 3661</td><td>TSMC N3;Anita(世芯~30-37%)/Mariana(自有大宗);世芯 2026~$2.3B/50 萬顆(高)</td></tr>
-      <tr><td>Trainium2(前代,N5)</td><td>設計 Marvell</td><td>TSMC N5;世芯 T3 世代從 Marvell 拿下後段(高)</td></tr>
-      <tr><td>Trainium4(N2 級,2026 底/2027)</td><td>世芯 N2 加速器案(年底 tape-out)</td><td>TSMC N2;與 T4 對應為合理推測、未明證(中)</td></tr>
-      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">③ Meta(創意/GUC 後段封裝,Broadcom 運算)</td></tr>
-      <tr><td>MTIA-2(H1'26,3nm)</td><td>運算/IO 設計 Broadcom</td><td>TSMC 3nm+CoWoS(中)</td></tr>
-      <tr><td>MTIA-3(H2'26,3nm)</td><td>主設計 Broadcom;晶心科 6533 RISC-V CPU IP</td><td>後段封裝+晶圓製程 GUC 創意 3443(TrendForce 證實,中-高)</td></tr>
+      <tr><td>Trainium3(訓練,N3,2025/12 GA)</td><td>前段 Annapurna 自製(PCIe SerDes=Synopsys 授權);後段實體+封裝 世芯 3661(design bakeoff 擊敗 Marvell)</td><td>TSMC N3;雙光罩 Anita(世芯持有、向台積電投片)/Mariana(Annapurna 持有、直接投片、量產主力)——Anita 精確佔比單源 ⚪待查勿硬填;外資估世芯 2026 貢獻 ~$2.3B、出貨 50 萬/70 萬顆、2027 ~$3.3B(券商預估、非公司財測);2026/5 量產啟動、6 月量產交貨(milestone 口徑差一個月)<span class="conf c-high">高(分工)</span></td></tr>
+      <tr><td>Trainium2(前代,N5)</td><td>設計 Marvell(執行不佳:RDL interposer 問題+時程過長、世芯救火)</td><td>TSMC N5;2025 量產 &gt;50 萬顆;世芯在 T3 世代從 Marvell 手中拿下後段<span class="conf c-high">高</span></td></tr>
+      <tr><td>Trainium4(N2 級,2026 底/2027)</td><td>後段=世芯領銜、依 scale-up 協議分兩軌、多家設計服務商參與(DIGITIMES 2025/12/3)</td><td>TSMC 評估 2nm;整合 NVIDIA NVLink 6/NVLink Fusion+MGX 機架(NVIDIA 官方部落格 2025/12);世芯 N2 案年底 tape-out(與 T4 對應為合理推測、未明證);Marvell 是否回搶份額 ⚪待查<span class="conf c-med">中</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">③ Meta(創意/GUC 後段封裝,Broadcom 運算;至 2027 四顆新加速器接續、記憶體吃緊為制約——TrendForce 2026/3/12)</td></tr>
+      <tr><td>MTIA-2(3nm;2026/2 起大規模部署)</td><td>運算/IO 設計 Broadcom;晶心科 RISC-V 核(gen1=每 PE 2×AX25-V100,Meta ISCA 2023 論文)</td><td>TSMC 3nm+CoWoS-S<span class="conf c-med">中</span></td></tr>
+      <tr><td>MTIA-3(2H26 亮相,3nm)</td><td>主設計 Broadcom;晶心科 6533 RISC-V CPU 核 IP(官方 PR 2026/6/24)</td><td>後段封裝+投片執行 GUC 創意 3443(TrendForce 2026/1/30,reportedly、Meta 未官方證實——全溯源自同一報導鏈);die 逼近 reticle 上限、CoWoS 每晶圓僅 8 顆;Meta 新藍圖命名=MTIA 300/400/450/500<span class="conf c-med">中</span></td></tr>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">④ Microsoft / ⑤ Tesla / OpenAI</td></tr>
-      <tr><td>Microsoft Maia 200 Braga(推論,3nm,延 2026)</td><td>微軟自架構;Marvell 供 IP/後段</td><td>GUC 創意 3443 + Marvell + TSMC 共同 enable;微軟自架構、GUC 含金量有限(中)</td></tr>
-      <tr><td>Tesla AI5(3nm 級,2026/4 tape-out)</td><td>設計夥伴 創意 3443(媒體口徑)</td><td>TSMC AZ + Samsung Taylor 雙代工;HVM late'26/early'27(中)</td></tr>
-      <tr><td>OpenAI 自研推論(10GW,3/2nm)</td><td>主設計 Broadcom($10B)</td><td>TSMC;機櫃 H2'26→2029 完成 10GW(高)</td></tr>
+      <tr><td>Microsoft Maia 200(推論/RL,2026/1/26 官方發表)</td><td>微軟自架構;分工拼圖(非官方):微軟前段+GUC 後段、其餘 Marvell 前+後段;GUC 協作進度慢曾使 tape-out 由 Q1'25 延至 Q2'25(Futurum)</td><td>TSMC 3nm、216GB HBM3e、7TB/s、272MB SRAM、FP4&gt;10PFLOPS、750W(官方);已量產支撐 M365 Copilot;SK hynix 唯一 HBM 供應商(reportedly)<span class="conf c-high">規格高/分工中</span></td></tr>
+      <tr><td>Microsoft Maia 300(次代,2nm+HBM4)⚪部分傳聞</td><td>Marvell 開發中(多家報導支撐,reportedly)</td><td>微軟排程 Q4'26 發布;量(30-40 萬顆→2027 120-150 萬顆)與 ASP ~$8,000 均為供應鏈/分析師估、微軟未證實;GUC 是否分食次代份額 ⚪無佐證<span class="conf c-un">⚪待查</span></td></tr>
+      <tr><td>Tesla AI5(3nm 級,tape-out 2026/4/15)</td><td>「設計夥伴=創意 3443」無公開佐證 ⚪不寫入事實(供應鏈報導、Tesla/GUC 官方零證實)</td><td>雙代工 TSMC(台灣+亞利桑那)+Samsung(Taylor+平澤)(Musk 證實);~5x AI4 有效算力(公司自述);HVM late'26-early'27<span class="conf c-un">代工高/夥伴待查</span></td></tr>
+      <tr><td>Tesla AI6(2nm GAA,2027-28 初)</td><td>設計夥伴無公開佐證 ⚪待查(AI6.5 轉單英特爾說亦未證實)</td><td>Samsung $16.5B 合約(2025/7 簽、8 年至 2033)@Taylor;「Taylor 獨家」vs「分拆三星/台積電」兩說未收斂;性能目標 2×AI5<span class="conf c-med">中(合約)</span></td></tr>
+      <tr><td>OpenAI 自研(10GW)+ Jalapeño(首顆推論晶片)</td><td>前段架構 OpenAI;實體設計+系統+Ethernet 機架 Broadcom(官方)</td><td>10GW 機櫃 2H26 上線→2029 底完成(OpenAI 官方 2025/10/13);Jalapeño 2026/6/24 發表:LLM 推論最佳化、reticle-sized 單晶片、9 個月 design→tape-out、2026 底首批部署(perf/W 為公司自述)<span class="conf c-high">高</span></td></tr>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">⑥ 工具層:EDA + 矽智財(跨所有 CSP)</td></tr>
-      <tr><td>EDA(P&amp;R/signoff/驗證,所有案子都過)</td><td>Synopsys SNPS / Cadence CDNS(雙寡占)+ Siemens EDA</td><td>工具層議價權在它們、台廠難撼(高)</td></tr>
-      <tr><td>矽智財 IP(CPU/介面/記憶體,跨案授權)</td><td>Arm + 力旺 3529(eNVM/OTP)+ M31 6643 + 晶心科 6533</td><td>力旺 NeoFuse OTP 深整合 NVIDIA Vera Rubin、毛利近 100%(高)</td></tr>
+      <tr><td>EDA(P&amp;R/signoff/驗證,所有案子都過)</td><td>Synopsys SNPS / Cadence CDNS(雙寡占)+ Siemens EDA</td><td>工具層議價權在它們、台廠難撼;Trainium3 前段 PCIe SerDes=Synopsys 授權(SemiAnalysis 實證)<span class="conf c-high">高</span></td></tr>
+      <tr><td>矽智財 IP(CPU/介面/記憶體,跨案授權)</td><td>Arm + 力旺 3529(eNVM/OTP)+ M31 6643 + 晶心科 6533(RISC-V,Meta MTIA 核=官方證實)</td><td>力旺 NeoFuse 已完成 TSMC N3P 可靠度驗證、2nm 早期開發(官方法說 2026/5/8)、royalty 佔營收 65.2%;「整合 NVIDIA Vera Rubin」僅投顧/部落格說法 ⚪待查<span class="conf c-high">財務高/Rubin待查</span></td></tr>
+      <tr><td>HBM4 介面 IP(次代記憶體介面)</td><td>創意 3443:全球首顆 HBM4 IP 於 TSMC N3P tape-out(官方 2025/4/2)</td><td>3nm 12Gbps HBM4 PHY+Controller(2026/4 展示):2.5x 頻寬 vs HBM3E、1.5x 能效、CoWoS 實作、支援 SoIC face-up 3DIC——台廠在記憶體介面 IP 段實質卡位、非僅後段代工<span class="conf c-high">高</span></td></tr>
     </tbody>
   </table></div>
-  <p class="disclaimer">資料整合自 SemiAnalysis/TrendForce/各家法說/官方新聞稿;CSP-台廠精確份額%多為推估、未逐項兩造證實,為研究線索、非投資背書。</p>
+  <p class="disclaimer">資料整合自 SemiAnalysis/TrendForce/各家法說/官方新聞稿;CSP-台廠精確份額%多為推估、未逐項兩造證實,為研究線索、非投資背書。<b>光罩佔比透明度(負面查證 2026/7):</b>公開來源中僅 AWS Trainium3 一案有光罩歸屬拆分(1/6 CSP 案),Google/Meta/Microsoft/Tesla 各代台廠光罩佔比皆未揭露——一律標「未揭露/待查」、不填數。</p>
 </div></section>
 
 <!-- 06 -->
@@ -292,38 +329,111 @@ p,li,td{overflow-wrap:anywhere}
   <div class="table-wrap"><table>
     <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
     <tbody>
-      <tr><td>設計服務 turnkey(世芯/創意/智原)</td><td>CSP 自研 ASIC 放量</td><td>世芯 Q3'26 Trainium3 放量;創意 Axion 進行式;智原中階復甦</td></tr>
-      <tr><td>IC 設計跨 ASIC(聯發科)</td><td>Google TPU 推論共構</td><td>Q4'26 單季 ~$2B、2027 放大;新成長曲線(占比小)</td></tr>
-      <tr><td>矽智財 IP 收租(力旺/M31/晶心科)</td><td>先進製程 IP 標配+權利金</td><td>力旺現在收租(NVIDIA Vera Rubin);M31/晶心 2027 權利金/量產選擇權</td></tr>
+      <tr><td>設計服務 turnkey(世芯/創意/智原)</td><td>CSP 自研 ASIC 放量</td><td>世芯 2026/6 起 N3 量產交貨、Q3'26 大量放量(80% 營收在 2H26);創意 Axion 進行式(1-5 月營收 +90.64%,全族群最強當期兌現);智原降級「放量前夕」——5 月營收 -45.07%、兌現繫於 2H26 先進封裝 9 案(裁決更正)</td></tr>
+      <tr><td>IC 設計跨 ASIC(聯發科)</td><td>Google TPU 推論共構</td><td>2026 全年 AI ASIC 目標 ~$2B(由 $1B 上修)、集中 Q4'26 認列(v7e 首案);第二案 2027 底量產、2027 規模「數十億美元」(公司財測);新成長曲線(占整體比重小)</td></tr>
+      <tr><td>矽智財 IP 收租(力旺/M31/晶心科)</td><td>先進製程 IP 標配+權利金</td><td>力旺現在收租(1Q26 royalty 佔 65.2%、N3P 驗證完成;「整合 NVIDIA Vera Rubin」⚪待查);M31 5 月 -18% 回溫未確立、晶心科 2027 權利金/量產選擇權</td></tr>
       <tr><td>客製記憶體/矽電容(愛普)</td><td>先進封裝電源完整性</td><td>S-SiCap 現在量產;VHM 2027-28 選擇權(本題邊緣)</td></tr>
     </tbody>
   </table></div>
-  <div class="callout risk">⚠️ 特有風險:① <b>COT 化天花板</b>(郭明錤:Google 已詢問台積電直接下單晶圓,代號 Humufish H2'27);② <b>客戶集中</b>(世芯單客戶占比 2024 60%→2025 18%,斷一世代殺傷大);③ <b>NRE vs turnkey 毛利波動</b>(50%→20%);④ <b>兩強壟斷</b>(Broadcom 60-80%+Marvell 20-25%≈95% prime co-design);⑤ <b>聯發科 $2B 是 Q4'26 單季非全年</b>,易誤讀。</div>
+  <div class="callout risk">⚠️ 特有風險:① <b>COT 化天花板</b>(郭明錤:Google 已詢問台積電直接下單晶圓,代號 Humufish H2'27——單一分析師 ⚪未證實,列風險情境);② <b>客戶集中</b>(世芯單客戶占比 2024 約 60%→2025 約 18%,斷一世代殺傷大;2026 年 1-5 月 -50.05% 空窗即世代交替實錄);③ <b>NRE vs turnkey 毛利波動</b>(50.16%→~20%);④ <b>兩強壟斷</b>(Broadcom 60-80%+Marvell 20-25%≈95% 為市場估上緣口徑;具名研調口徑=Broadcom 2027 設計市占 ~60%,Counterpoint);⑤ <b>聯發科 $2B 口徑(裁決更正):$2B=「2026 全年 AI ASIC 目標」、實質集中 Q4'26 認列</b>——勿誤讀為單季常態或跨年度數字。</div>
+
+  <h3>短期受惠 vs 長期題材(依兌現度排序,2026/7 增補)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>節奏</th><th>標的 / 事件</th><th>兌現證據 / 追蹤點</th><th>信心</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="5"><b>2026 當期有營收</b><br>(排序=兌現度)</td><td>1. 創意 3443</td><td>4 月 +156.9%/5 月 +132.1%/1-5 月 +90.64%(MOPS)——全族群最早、最猛的當期兌現者;6 月營收 7/10 驗證</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2. 世芯 3661</td><td>6 月 N3 量產交貨已開始(工商時報 6/16);80% 營收在 2H26;Q3 放量=下一驗證點</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>3. 聯發科 2454</td><td>全年 ~$2B 集中 Q4'26 認列(公司財測);Q4 營收兌現與否=追蹤點</td><td><span class="conf c-med">中(公司財測)</span></td></tr>
+      <tr><td>4. 力旺 3529</td><td>royalty 隨投片走(1-5 月 +16.52%),幅度較小但穩</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>5. 愛普 6531</td><td>S-SiCap 出貨中、1-5 月 +104.71%(本題邊緣、動能含 IoT RAM)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td rowspan="7"><b>放量前夕 / 2027+ 選擇權</b></td><td>智原 3035(裁決:自「當期有營收」降至「放量前夕」)</td><td>5 月 -45.07%、1-5 月 -58.59%(硬數據);指引 +11~13% 屬公司展望且對具體百分比回應「以公告為主」;追蹤點=2H26 先進封裝 9 案放量、法人估 2027 EPS +60%+(非公司財測)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>聯發科第二顆 ASIC+Zebrafish 放量</td><td>2027 底量產(公司)+late 2027(多源);GS 2027 $20.3B 為券商口徑</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>世芯 Trainium4/N2 案</td><td>年底 tape-out;與 T4 對應未明證;Marvell 回搶 ⚪待查</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>晶心科 MTIA 世代+損益兩平</td><td>2026 拚損益兩平(公司自述);MTIA 第五代量產進度、Cuzco 2026 上市</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>M31 權利金 2027 / 愛普 VHM 2027-28</td><td>M31 Q2 未回溫(4 月單月反彈後 5 月 -18.0% 回落)、需先看到回溫證據</td><td><span class="conf c-un">⚪待查</span></td></tr>
+      <tr><td>Tesla AI6(2027-28)</td><td>$16.5B 合約真;台廠設計夥伴無佐證 ⚪</td><td><span class="conf c-un">⚪待查</span></td></tr>
+      <tr><td>Humufish COT(2H27)/TPU v9(2028)/Google×Marvell MPU</td><td>全部未證實——是風險觀察點、不是持股理由</td><td><span class="conf c-low">傳聞</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>結構性風險(完整清單,2026/7 自深色版回填)</h3>
+  <div class="card">
+    <ul style="padding-left:20px;color:var(--ink)">
+      <li style="margin:6px 0"><b>COT 化天花板:</b>郭明錤指 Google 已向台積電「詢問直接下單晶圓可行性」(代號 Humufish、2H27),想砍掉中介 markup——對聯發科是中度威脅;反方=CommonWealth English(2025/8/29)稱 Google/CSP 短期反更依賴台鏈。兩面並陳、皆未證實。</li>
+      <li style="margin:6px 0"><b>客戶高度集中:</b>世芯單一客戶占比 2024 約 60% → 2025 約 18%(頂級客戶斷一世代);2026 年 1-5 月 -50.05% 的空窗即是世代交替實錄(MOPS)。</li>
+      <li style="margin:6px 0"><b>NRE vs turnkey 毛利波動:</b>世芯 1Q26 毛利率 50.16% 創高純因高 NRE;turnkey 放量後公司自述回落至 ~20%——估值邏輯需從「設計費」切到「量產抽成」。</li>
+      <li style="margin:6px 0"><b>兩強壟斷 prime co-design:</b>Broadcom ~60%(Counterpoint,2027)+ Marvell 20-25%(市場估)≈壟斷超大規模客戶 prime 共同設計;台廠多承接後段/封裝/通用 CPU/利基——<b>「架構在美、實作在台」</b>是本題台灣曝險的正確框架,單案 ASP 與 IP 抽成低於 prime。</li>
+      <li style="margin:6px 0"><b>Google 供應鏈四夥伴化=議價力稀釋:</b>Broadcom 訓練+聯發科推論+Marvell 洽談中+GUC 承 CPU——台廠入場券變多、但單一夥伴議價力與份額天花板同步下降;BofA 估雙軌設計已為 Google 省 ~30% 成本——「客戶省的就是供應商讓的」是本賽道長期毛利率的結構性壓力(CNBC/TNW 交叉,2026/4-5)。</li>
+      <li style="margin:6px 0"><b>設計服務業內部高度分化:</b>DIGITIMES(2026/4/11)專文指部分 ASIC 設計服務公司缺席 AI 熱潮;月度 tracker(2026/5/12):創意衝高、世芯/智原開年偏弱——「AI ASIC 雨露均霑」與月營收實況不符。</li>
+      <li style="margin:6px 0"><b>地緣與供應鏈集中:</b>全鏈綁台積電 N3P/N2 與 CoWoS 配額——2026 CoWoS 需求推估 ~100 萬片 vs 台積電供給 60-70 萬片/年(月產能 2026 底目標 10-13 萬片),缺口延續至 2027;世芯 2026 CoWoS 訂單 4→5 萬片(媒體推估、非公司財測;「8 千→9 萬片」為晶圓投片口徑、勿與 CoWoS 混用);唯 Tesla AI6 交三星 Taylor 為具規模第二來源訊號。</li>
+    </ul>
+  </div>
+
+  <h3>🚫 被反駁說法警示區(refuted——不得作為事實引用)</h3>
+  <div class="callout risk">
+    <ul style="padding-left:20px;margin:6px 0">
+      <li style="margin:6px 0"><b>✗「台積電 CoWoS 2026 產能約 100 萬片」</b>——反駁:多源交叉後,100 萬片是 2026「需求」推估、非台積電產能;供給上限約 60-70 萬片/年(月產能 2025 底 ~7 萬 → 2026 底目標 10-13 萬片),缺口延續至 2027(2026/7 查證)。</li>
+      <li style="margin:6px 0"><b>✗「世芯預訂 CoWoS ~6 萬片/年」</b>——反駁:6 萬片無直接出處;可查證版本=2026 CoWoS 訂單 4 萬→5 萬片(工商時報外資口徑)vs 60K(+200%,36kr 供應鏈報導單源)兩口徑並陳、標低信心;「8 千→9 萬片」是晶圓投片(wafer starts)口徑、非 CoWoS;量產主力 Mariana 光罩由 Annapurna 直接採購、世芯自訂量僅覆蓋 Anita 份額→偏低版本較合邏輯(裁決)。</li>
+      <li style="margin:6px 0"><b>✗「晶心科 1Q26 每股虧損 3.63 元」</b>——反駁:-3.63 係媒體以含非控制權益之本期淨損 1.84 億直算;官方歸母口徑=歸母虧損 1.66 億、<b>EPS -3.28 元</b>,本報告採 -3.28(另一口徑出處=旺得富 2026/4/20)。</li>
+      <li style="margin:6px 0"><b>✗「Zebrafish(TPU v8i)4Q26 量產」</b>——裁決:v8 兩顆(Sunfish/Zebrafish)皆 TSMC 2nm、目標 <b>late 2027</b>(Next Platform/NAND Research/Wccftech 多源收斂);聯發科 Q4'26 認列的 ~$2B 屬其第一顆 hyperscaler 加速器案(v7e 系、N3),非 Zebrafish。</li>
+      <li style="margin:6px 0"><b>✗「M31 Q2 起回溫(北美遞延案恢復)」</b>——反駁:4 月確有單月反彈(+30.7% YoY,公司法說自述)但 5 月回落(1.28 億、-18% YoY、-24.2% MoM)——回溫未確立;M31 維持 2027+ 選擇權分類。</li>
+      <li style="margin:6px 0"><b>✗「智原屬當期有營收兌現組」</b>——反駁:5 月營收 9.30 億(-45.07% YoY)、1-5 月 -58.59% 為公開申報硬數據;+11~13% 指引屬公司展望且公司對具體百分比回應「以公告為主」——降至「放量前夕/2H26 驗證」組。</li>
+      <li style="margin:6px 0"><b>✗「創意 Google Axion 單案占 2026 總營收 50%+」</b>——反駁:法說口徑=Google 3nm CPU(Axion)+3nm AI 加速器「兩案合計」占 2026 <b>turnkey</b> 營收 50-55%,分母是 turnkey 而非總營收——原寫法單案+全營收分母屬雙重高估,本頁已全數改寫(裁決)。</li>
+      <li style="margin:6px 0"><b>✗「Marvell 2026 AI ASIC $11B」</b>——反駁:$11-11.5B 是 FY27 全公司營收指引(Futurum 轉述),非純 ASIC;custom silicon FY26 實績 ~$1.5B、FY27 +20%+、FY28 翻倍(FY27Q1 法說)——凡引 $11B 為 ASIC 口徑者一律更正。</li>
+    </ul>
+  </div>
+
+  <h3>⚪ 未證實傳聞觀察清單(unverified——只能當觀察、不能當論述主軸)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>傳聞</th><th>現狀 / 為何不採信</th><th>追蹤點</th></tr></thead>
+    <tbody>
+      <tr><td>郭明錤:Google 評估 Humufish(v8e)COT 繞過聯發科;Intel EMIB-T 驗證良率 90%</td><td>單一分析師、X 原帖不可得僅論壇轉述;Google/台積電/聯發科皆未證實;蔡明介股東會回應「自然趨勢,但真正做出一顆晶片不容易」僅證明市場有此疑慮、非證實事實</td><td>2H27 Humufish 下單模式</td></tr>
+      <tr><td>聯發科拿下 Meta AI 加速器訂單</td><td>各報導仍冠「再傳」;GS 7/2 以此為上修理由之一但屬券商 channel check;<b>反向訊號:2026/6/26 高通宣布攜手 Meta 進軍 ASIC、聯發科股價一度跌停</b>——訂單歸屬未定</td><td>聯發科 7/30 前後法說是否鬆口</td></tr>
+      <tr><td>聯發科傳有意入股創意電子</td><td>單一媒體引述、無公司公告;涉台積電持股結構、實現門檻高——維持不採信</td><td>公司公告</td></tr>
+      <tr><td>力旺 PUF/NeoFuse 整合 NVIDIA Vera Rubin、取得訂單</td><td>僅 CMoney/vocus 部落格與投顧彙整,力旺/NVIDIA 官方均未逐項證實;力旺 1Q26 硬數字本身有官方法說簡報佐證、可放心用</td><td>力旺法說是否點名</td></tr>
+      <tr><td>Google TPU v9 Triggerfish(聯發科「獨家」、ASP +30%)</td><td>郭明錤單一信源(2026/6/22 X),無第二獨立源;與同人 5 月 COT 化說自我對沖;另有外資「Pumafish 取消→Whalefish」版本,代號/節點兩說並存</td><td>第二獨立來源</td></tr>
+      <tr><td>Maia 300 量價(30-40 萬→120-150 萬顆、ASP ~$8,000)</td><td>Marvell 參與方向有多家報導(reportedly 可寫);量與價均為供應鏈/分析師估;GUC 分食次代份額查無佐證(0 證據)</td><td>微軟 Q4'26 是否發布</td></tr>
+      <tr><td>Google×Marvell 兩顆晶片(MPU+推論 TPU)</td><td>CNBC 引 The Information(2026/4/20),明言尚未簽約;截至 2026/7 無簽約證實</td><td>簽約公告</td></tr>
+      <tr><td>創意=Tesla AI5/AI6 設計夥伴</td><td>僅 DIGITIMES/BigGo 供應鏈報導,Tesla/GUC 官方零證實;AI6 設計服務誰承接亦無佐證(Tesla ADAS 貢獻時點 2H27 起為 BofA 券商口徑)</td><td>兩造任一方證實</td></tr>
+      <tr><td>世芯 Anita 光罩佔比 30-37%</td><td>SemiAnalysis 單一來源;「量產主力為 Mariana」方向可信,精確比例勿硬填</td><td>世芯法說/第二源</td></tr>
+      <tr><td>JPMorgan:ASIC 顆數 2027 黃金交叉(12.5M vs 10.9M)</td><td>僅 KuCoin News 一手轉述、原報告不可得;與 Counterpoint(2028 交叉)衝突時以有官方 insight 頁的 Counterpoint 為主</td><td>JPM 原報告/第二轉述</td></tr>
+    </tbody>
+  </table></div>
 </div></section>
 
 <!-- 07 -->
 <section class="block" id="companies"><div class="container">
   <span class="eyebrow">07 · Companies</span>
   <h2 class="title">公司圖譜</h2>
-  <p class="subtitle">可篩選;徽章標查證信心。<span class="conf c-high">高</span>=財報/一手佐證 <span class="conf c-med">中</span>=公司自述/部分 <span class="conf c-un">待查</span></p>
+  <p class="subtitle">可篩選;徽章標查證信心與兌現節奏。<span class="conf c-high">高</span>=財報/一手佐證 <span class="conf c-med">中</span>=公司自述/部分 <span class="conf c-un">待查</span>;<b>watch=市場流通「ASIC 概念股」逐檔查核後的反駁/待查清單</b>——列 watch 不代表壞公司,代表「本題(CSP AI ASIC 設計服務)案源無佐證或歸屬其他題」。股號/掛牌狀態已全數核對(0 檔興櫃/死代號;M31=6643 勿與雍智 6683 混淆)。</p>
   <div class="filters" id="cFilters">
     <button class="active" data-f="all">全部</button>
     <button data-f="service">設計服務 turnkey</button><button data-f="ip">矽智財 IP</button>
-    <button data-f="mem">客製記憶體</button><button data-f="intl">國際對手</button>
+    <button data-f="mem">客製記憶體</button><button data-f="intl">國際對手</button><button data-f="watch">watch(反駁/待查)</button>
   </div>
   <div class="grid cols-3" id="cGrid">
-    <div class="card" data-cat="service"><h4>世芯-KY <span class="code">3661</span></h4><p>後段+turnkey 龍頭;AWS Trainium3 後段+封裝獨拿,Q3'26 大量放量;1Q26 谷底(毛利率 50.2% 創高 NRE-driven)。Anita 光罩約佔量 30-37%。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="service"><h4>創意 <span class="code">3443</span></h4><p>全方位設計服務(台積電持股 ~35%);Google Axion 占 2026 營收 50%+、Meta MTIA-3 後段、Tesla AI5;1Q26 EPS 12.28(+71% YoY)。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="service"><h4>智原 <span class="code">3035</span></h4><p>中階/AIoT 設計服務(聯電集團);1Q26 毛利率 47.3% 創 13 季高;5nm 新案+9 個先進封裝案 2026 量產。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="service"><h4>聯發科 <span class="code">2454</span></h4><p>跨雲端 ASIC 協同;Google TPU v8i 共同設計,Q4'26 單季 ~$2B、2027 放大;ASIC 為新成長曲線(占整體小)。</p><span class="conf c-med">中</span></div>
-    <div class="card" data-cat="ip"><h4>力旺 <span class="code">3529</span></h4><p>eNVM/OTP IP 收租龍頭(毛利近 100%);NeoFuse 深整合 NVIDIA Vera Rubin,3nm 權利金爆發前夕。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="ip"><h4>M31/円星 <span class="code">6643</span></h4><p>介面/基礎 IP 授權;3nm 已開發、2nm 啟動;FY26 Q1 小虧(北美案遞延),權利金 2027 里程碑。</p><span class="conf c-med">中</span></div>
-    <div class="card" data-cat="ip"><h4>晶心科 <span class="code">6533</span></h4><p>RISC-V CPU IP 全球指標;Meta MTIA 第五代(估 2026 量產)、Cuzco 瞄資料中心;FY25 仍虧損。</p><span class="conf c-med">中</span></div>
-    <div class="card" data-cat="mem"><h4>愛普* <span class="code">6531</span></h4><p>客製記憶體/矽電容(本題邊緣);S-SiCap 隨 AI 先進封裝量產(1Q26 +115% YoY 創高);VHM 2027-28。與 ASIC 設計服務本業切分。</p><span class="conf c-med">中</span></div>
-    <div class="card" data-cat="intl"><h4>Broadcom <span class="code">AVGO</span></h4><p>全球第一大客製 ASIC 共同設計商;Google/Meta/OpenAI/ByteDance;2027 prime co-design 市占 ~60%、AI backlog $73B。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="intl"><h4>Marvell <span class="code">MRVL</span></h4><p>結構性第二大;AWS Trainium2、Microsoft Maia;2026 AI ASIC $11B;Trainium3 後段已敗給世芯。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="intl"><h4>Synopsys / Cadence <span class="code">SNPS/CDNS</span></h4><p>EDA+IP 雙寡占;尖端 SerDes/PCIe/HBM PHY 與 signoff 工具標準,工具層議價權在它們。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="service"><h4>世芯-KY <span class="code">3661</span></h4><p><span class="badge b-ok">放量啟動(6 月起)</span> 後段+turnkey 龍頭(上市);AWS Trainium3 後段+封裝獨拿。1Q26 谷底:營收 41.9 億(約 -60% YoY)、毛利率 50.16% 創高(NRE-driven)、EPS 17.55(法說 2026/5/8);5 月營收 19.35 億(-33.45%)、1-5 月 -50.05%(MOPS)=空窗尾聲;<b>6 月起 N3 量產交貨</b>(工商時報 6/16)、80% 營收在 2H26;N2 案年底 tape-out。量產主力光罩 Mariana 屬 Annapurna、世芯 Anita 佔少數(比例 ⚪待查)。法人估全年 EPS 126 元+(非公司財測)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="service"><h4>創意 <span class="code">3443</span></h4><p><span class="badge b-ok">當期有營收(最強)</span> 全方位設計服務(上市;台積電持股 ~35%);Google Axion+3nm AI 加速器「兩案合計」占 2026 turnkey 營收 50-55%(法說口徑,裁決更正)、Meta MTIA-3 後段(reportedly);Tesla AI5 夥伴說 ⚪待查。1Q26 營收 114.5 億(+63%)、EPS 12.28;4 月 +156.9%、5 月 +132.13%、1-5 月 204.16 億(+90.64%)(MOPS)。FactSet 共識 2026 EPS 45.3/TP 3,500;BofA TP 7,000、里昂 6,000(券商,分歧大)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="service"><h4>智原 <span class="code">3035</span></h4><p><span class="badge b-warn">放量前夕(2H26 驗證)</span> 中階/AIoT 設計服務(上市;聯電集團);1Q26 EPS 0.4(全年低點)、毛利率 47.3% 創 13 季高;5nm ASIC+14nm AI ASIC 新案、9 個先進封裝案 2H26 起貢獻、2027 放量。5 月營收 9.30 億(-45.07%)、1-5 月 -58.59%(MOPS)——結構改善與營收谷底並存;指引 +11~13% 屬公司展望(裁決:降級「放量前夕」);FactSet 共識 2026 EPS 3.56/TP 190、法人估 2027 EPS +60%+(非公司財測)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="service"><h4>聯發科 <span class="code">2454</span></h4><p><span class="badge b-warn">Q4'26 認列啟動</span> IC 設計大廠跨雲端 ASIC 協同(上市);Google TPU 軸:v7 I/O 協同、v7e 首案(N3,1Q26 底 risk production)、v8i Zebrafish(2nm,late 2027)。<b>2026 全年 AI ASIC 目標 $1B→~$2B、集中 Q4'26 認列</b>(法說 4/30、股東會 5/29 重申);第二案 2027 底、2027「數十億美元」;2027 起擬單獨揭露 ASIC 營收(2026/5/6 報導)。5 月營收 474.34 億(+5.0%)、1-5 月 -1.59%。GS TP 6,800(7/2,券商連續上修、理由含未證實 Meta 傳聞)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="ip"><h4>力旺 <span class="code">3529</span></h4><p><span class="badge b-ok">當期有營收</span> eNVM/OTP IP 收租龍頭(上櫃);1Q26 營收 10.94 億(+20% 創高)、淨利 5.96 億(+29.1%)、royalty 佔 65.2%(官方法說 2026/5/8);NeoFuse 已完成 TSMC N3P 可靠度驗證、2nm 早期開發=權利金放大先行指標;「整合 NVIDIA Vera Rubin」僅投顧/部落格說法 ⚪待查。5 月營收 3.05 億(+12.04%)、1-5 月 +16.52%(MOPS)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="ip"><h4>M31/円星 <span class="code">6643</span></h4><p><span class="badge">2027+ 選擇權</span> 介面/基礎 IP 授權(上櫃);FY26Q1 營收 US$12.47M(-6.8%,北美影像處理大廠案遞延、小虧);foundation IP 400+/3nm 已開發、2nm 啟動;權利金 2027 里程碑。5 月營收 1.28 億(-18.0% YoY、-24.2% MoM)——4 月單月反彈後回落、<b>回溫未確立</b>(裁決),描述維持保守。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="ip"><h4>晶心科 <span class="code">6533</span></h4><p><span class="badge">2027+ 選擇權</span> RISC-V CPU IP 全球指標(上市);Meta MTIA RISC-V 核=官方證實(gen1 每 PE 2×AX25-V100,ISCA 論文;路線圖至第五代);AndesCore SoC 累計出貨破 200 億顆(官方 PR 2026/6/24);Cuzco 高階核 2026 上市瞄資料中心。FY25 EPS -8.19;1Q26 歸母 EPS -3.28(採歸母口徑;媒體 -3.63 含非控制權益、不採);5 月 +2.3%、1-5 月 +17.3%;2026 拚損益兩平(公司自述);投顧曾砍 TP 三成(反方並陳)。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="mem"><h4>愛普* <span class="code">6531</span></h4><p><span class="badge b-ok">當期有營收(邊緣)</span> 客製記憶體/矽電容(上市;*為財報監理註記、非下市風險);S-SiCap 隨 AI 先進封裝量產;1Q26 營收 20.99 億(+115% 創高)、EPS 4.15;5 月 7.49 億(+89.34%)、1-5 月 36.53 億(+104.71%)(MOPS;動能含 IoT RAM);VHM 2027-28 選擇權。與 ASIC 設計服務本業切分、防雙計。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="intl"><h4>Broadcom <span class="code">AVGO</span></h4><p>全球第一大客製 AI ASIC 共同設計商;Google(七代 TPU,長約至 2031 為轉述)/Meta/OpenAI/ByteDance;2027 prime co-design 市占 ~60%(Counterpoint)。FY26Q2(2026/6/3 官方):AI 營收 $10.8B(+143%)、Q3 指引 $16.0B(+200%+);AI backlog &gt;$73B=FY25Q4 口徑、FY26Q2 另提 AI bookings &gt;$30B——不同季不同口徑勿混用;2026/6/24 與 OpenAI 發表 Jalapeño。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Marvell <span class="code">MRVL</span></h4><p>結構性第二大、雙源制衡者;AWS Trainium2(執行不佳輸掉 T3)、Microsoft Maia(Maia 300 開發中,reportedly)。FY27Q1(2026/5/27):營收 $2.418B(+28%)、DC $1.833B;custom silicon FY26 ~$1.5B、FY27 +20%+、FY28 翻倍、20+ design wins;「2026 AI ASIC $11B」為誤植(=FY27 全公司指引,裁決更正)。NVIDIA 2026/3/31 投資 $2B 綁 NVLink Fusion。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>NVIDIA <span class="code">NVDA</span></h4><p>生態鎖定者(對 ASIC 陣營的「軟鎖定」):投資 Marvell $2B、授權 NVLink Fusion(官方新聞稿 2026/3/31);AWS Trainium4 整合 NVLink 6/NVLink Fusion 與 MGX 機架(NVIDIA 官方部落格 2025/12)——自研 ASIC 也被拉進 NVIDIA 互連生態。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Synopsys / Cadence <span class="code">SNPS/CDNS</span></h4><p>EDA+IP 雙寡占;尖端 SerDes/PCIe/HBM PHY 與 signoff 工具(PrimeTime/Tempus)標準,工具層議價權在它們;Trainium3 前段 PCIe SerDes 即授權自 Synopsys(SemiAnalysis 實證)。日本 Socionext 於雲端 CSP 著墨少,全球格局實為美台兩極。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="watch"><h4>金麗科 <span class="code">3228</span></h4><p><span class="badge b-danger">watch·反駁</span> RISC-V CPU 概念常被點名 → <b>反駁:無任何已證實 CSP AI ASIC 案</b>;2026/4 月營收僅 3,236.9 萬(-13.38%)、1Q26 EPS -0.55、FY25 -2.03 連年虧損,量級與世芯/創意差 2 個數量級(Goodinfo 彙整,2026/5)。上櫃。</p><span class="conf c-low">概念點名·無案源</span></div>
+    <div class="card" data-cat="watch"><h4>矽統 <span class="code">2363</span></h4><p><span class="badge b-danger">watch·題材錯位</span> 併紘康/山東聯暻轉型 ASIC 設計服務+自有 IC;1Q26 本業 2010Q4 以來首度轉盈(EPS 0.17、GM 28.79%)、1-5 月 +107.89%(併購並表)→ <b>反駁:客戶未揭露、以中國成熟製程客製為主、非 CSP AI ASIC</b>;GM 遠低於先進製程設計服務(理財周刊 2026/6/25)。上市。</p><span class="conf c-low">真轉型·非本題</span></div>
+    <div class="card" data-cat="watch"><h4>祥碩 <span class="code">5269</span></h4><p><span class="badge b-danger">watch·非 AI ASIC</span> 真 ASIC 業務:第二家 ASIC 客戶 2H26 貢獻(法說 2026/5/12)、1Q26 EPS 24.85 創高 → <b>反駁:該客戶應用為 NB/DT/IPC,非 CSP AI 加速器</b>;其 AI 關聯屬高速互連題(壹蘋 2026/5/13)。上市。</p><span class="conf c-low">有 ASIC·非 AI 題</span></div>
+    <div class="card" data-cat="watch"><h4>譜瑞-KY <span class="code">4966</span></h4><p><span class="badge b-warn">watch·時程未至</span> ASIC-like 新案 Q1'26 入手(執行期&gt;1 年)、公司估 2027 年底顯著貢獻(公司自述、缺第三方)→ 現階段主軸為 retimer/高速介面(224G 互連題),貢獻未至、歸屬交界(MoneyDJ 2026/4)。上櫃。</p><span class="conf c-un">2027 選擇權</span></div>
+    <div class="card" data-cat="watch"><h4>群聯 <span class="code">8299</span></h4><p><span class="badge b-danger">watch·錯掛</span> 5 月營收 228.28 億(+301.23%)、1Q26 EPS 68.8——數字驚人但為真 → <b>反駁:動能=NAND 漲價循環+企業級 SSD,屬利基記憶體/儲存題;aiDAPTIV+ 為軟體授權非晶片設計服務;無 CSP ASIC 案</b>(財報狗/公開申報)。上櫃。</p><span class="conf c-low">儲存題·非本題</span></div>
+    <div class="card" data-cat="watch"><h4>創惟 <span class="code">6104</span></h4><p><span class="badge b-danger">watch·錯掛</span> USB hub/橋接晶片,被 HPC 概念清單列名(豹投資)→ <b>反駁:2026H1 查核無任何 CSP ASIC/AI 加速器案佐證,純清單錯掛</b>。上櫃。</p><span class="conf c-low">純清單錯掛</span></div>
+    <div class="card" data-cat="watch"><h4>聯詠 <span class="code">3034</span></h4><p><span class="badge b-warn">watch·升格候選</span> 與 Arm(Neoverse CSS)+台積電合作切入 ASIC 設計服務、4nm HPC POC 2025 底完成、AI 佔 SoC 線營收 ~20%(法說 2026/5/7)→ <b>能力建置中:公司明示 4nm ASIC 今年無營收貢獻、尚無公開 CSP 訂單</b>;觀察 2026H2-2027 首案(富果法說備忘錄)。上市。</p><span class="conf c-un">能力真·訂單未落地</span></div>
+    <div class="card" data-cat="watch"><h4>神盾 <span class="code">6462</span></h4><p><span class="badge b-warn">watch·未驗證</span> 併乾瞻科技組「先進製程端到端 IP/ASIC 平台」(官方新聞稿佐證);2026 前 4 月營收 26.42 億(+87.36%);董座稱「IP 與 ASIC 設計服務 2026 爆發性成長」→ <b>公司自述缺第三方、先前年度鉅虧、無具名 AI/CSP 客戶——AI ASIC 訂單可查證為 0 件</b>(經濟日報 2026)。上櫃。</p><span class="conf c-un">佈局真·訂單未驗證</span></div>
   </div>
+  <div class="callout warn" style="margin-top:16px">🧭 <b>防雙計備註:</b>Growin(2026/4/22)「台股 7 檔 ASIC 受惠股」清單中,除聯發科外其餘 6 檔——台光電 2383/精成科 6191/旺矽 6223/精測 6510/京元電 2449/日月光投控 3711——均屬 CCL/載板/探針卡/測試/封裝鏈,已分別歸屬「AI 晶片測試鏈」「高階 CCL」「ABF 載板」等其他題,不納入本題 holds/watch(避免跨 guide 雙計)。</div>
 </div></section>
 
 <!-- 08 -->
@@ -380,18 +490,11 @@ p,li,td{overflow-wrap:anywhere}
   </table></div>
   <p class="disclaimer">台廠甜蜜點在 ④+⑤(後段+封裝,17-19);①②(架構/前端)是 CSP 自研天花板。評分為推估,僅供參考。</p>
 
-  <h3>公司受惠強度評分(含總分排序)</h3>
-  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。</p>
+  <h3>公司受惠強度評分(holds 全 8 檔,總分排序)</h3>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分;總分由高到低。2026/7 增補 M31/晶心科/愛普三檔並依總分重排(補 audit 缺口)。</p>
   <div class="table-wrap"><table>
     <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
     <tbody>
-      <tr><td>世芯-KY 3661</td>
-        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
-        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
-        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
-        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-        <td><span class="tot">22</span></td><td><span class="conf c-high">高</span></td></tr>
       <tr><td>創意 3443</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
@@ -399,6 +502,13 @@ p,li,td{overflow-wrap:anywhere}
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
         <td><span class="tot">22.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>世芯-KY 3661</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><span class="tot">22</span></td><td><span class="conf c-high">高</span></td></tr>
       <tr><td>力旺 3529</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
@@ -406,6 +516,13 @@ p,li,td{overflow-wrap:anywhere}
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:90%"></div></div><span class="num">4.5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
         <td><span class="tot">20.5</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>聯發科 2454</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
+        <td><span class="tot">17.5</span></td><td><span class="conf c-high">高</span></td></tr>
       <tr><td>智原 3035</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
@@ -413,35 +530,84 @@ p,li,td{overflow-wrap:anywhere}
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
         <td><span class="tot">17</span></td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>聯發科 2454</td>
+      <tr><td>愛普* 6531</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><span class="tot">16.5</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>晶心科 6533</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
-        <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
-        <td><span class="tot">17.5</span></td><td><span class="conf c-med">中</span></td></tr>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">14</span></td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>M31/円星 6643</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:50%"></div></div><span class="num">2.5</span></div></td>
+        <td><span class="tot">13.5</span></td><td><span class="conf c-med">中</span></td></tr>
     </tbody>
   </table></div>
-  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。聯發科 ASIC 占整體營收比重小,規模分高但 ASIC 純度低。</p>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。聯發科 ASIC 占整體營收比重小,規模分高但 ASIC 純度低。新增三檔評分依據:愛普 1Q26 EPS 4.15、1-5 月營收 +104.71%(當期有兌現、但屬本題邊緣);晶心科 1Q26 歸母 EPS -3.28 仍虧、Meta MTIA IP 層卡位真但兌現遠(2026 拚損益兩平,公司自述);M31 2026/5 營收 -18.0% YoY、北美案遞延未見恢復證據(權利金里程碑在 2027)。</p>
 </div></section>
 
 <!-- 09 -->
 <section class="block" id="capacity"><div class="container">
   <span class="eyebrow">09 · Progress</span>
   <h2 class="title">量產進度速查表 / 時間軸</h2>
-  <p class="subtitle">各家定位、進度與查證信心。</p>
+  <p class="subtitle">各家定位、進度與查證信心(2026/7 依 verdicts 校正)。</p>
   <div class="table-wrap"><table>
     <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
     <tbody>
-      <tr><td>世芯-KY 3661</td><td>AWS 軸後段+turnkey</td><td>1Q26 谷底→Q2 出貨→Q3'26 Trainium3 大量放量;N2 案年底 tape-out</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>創意 3443</td><td>Google/Meta/Tesla 軸</td><td>Axion 進行式(占 2026 營收 50%+);MTIA-3 H2'26;Tesla AI5 2027 中量產</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>聯發科 2454</td><td>Google TPU 推論軸</td><td>TPU v8i 首案 Q4'26 單季 ~$2B、第二案 2027 底</td><td><span class="conf c-med">中</span></td></tr>
-      <tr><td>智原 3035</td><td>中階/AIoT</td><td>5nm 新案 1Q26 拿下;9 個先進封裝案 2026 內量產</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>力旺 3529</td><td>eNVM IP 收租</td><td>現在收租(NVIDIA Vera Rubin);3 個 3nm AI 案、權利金 2027 放大</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>晶心科 6533 / M31 6643</td><td>RISC-V / 介面 IP</td><td>晶心 Meta MTIA 估 2026 量產;M31 權利金 2027 里程碑(現遞延小虧)</td><td><span class="conf c-med">中</span></td></tr>
-      <tr><td>COT 風險(事件)</td><td>天花板觀察點</td><td>郭明錤:Google 詢問台積電直接下單(Humufish,H2'27)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>世芯-KY 3661</td><td>AWS 軸後段+turnkey</td><td>1Q26 谷底→2026/5 量產啟動、6 月量產交貨(milestone 口徑差一個月,兩報導皆真)→Q3'26 大量放量(80% 營收在 2H26);N2 案年底 tape-out</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>創意 3443</td><td>Google/Meta 軸(Tesla ⚪待查)</td><td>Axion+3nm AI 加速器兩案合計占 2026 turnkey 營收 50-55%(法說口徑);MTIA-3 2H26 亮相(reportedly);1-5 月營收 +90.64% 當期兌現中;Tesla AI5 夥伴說無官方佐證</td><td><span class="conf c-high">高(財務)/待查(Tesla)</span></td></tr>
+      <tr><td>聯發科 2454</td><td>Google TPU 推論軸</td><td>v7e 首案 1Q26 底 risk production、Q4'26 起認列、2026 全年 ~$2B(公司財測);第二案 2027 底;Zebrafish(2nm)late 2027 量產</td><td><span class="conf c-high">高(法說)</span></td></tr>
+      <tr><td>智原 3035</td><td>中階/AIoT(放量前夕)</td><td>5nm 新案 1Q26 拿下;9 個先進封裝案 2H26 起貢獻、2027 放量;5 月營收 -45.07% 仍在谷底</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>力旺 3529</td><td>eNVM IP 收租</td><td>現在收租(1Q26 royalty 佔 65.2%);NeoFuse N3P 驗證完成、2nm 開發中、權利金 2027 放大;Vera Rubin 連結 ⚪待查</td><td><span class="conf c-high">高(財務)</span></td></tr>
+      <tr><td>晶心科 6533 / M31 6643</td><td>RISC-V / 介面 IP</td><td>晶心 Meta MTIA 路線圖至第五代(細節不可揭露)、二代 2026 量產、Cuzco 2026 上市;M31 權利金 2027 里程碑(5 月 -18% 回溫未確立)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>愛普* 6531</td><td>客製記憶體/矽電容(邊緣)</td><td>S-SiCap 量產中(1-5 月 +104.71%);VHM 2027-28 選擇權</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>COT 風險(事件)</td><td>天花板觀察點</td><td>郭明錤:Google 詢問台積電直接下單(Humufish,2H27)——單一分析師 ⚪未證實,僅列觀察</td><td><span class="conf c-un">⚪待查</span></td></tr>
     </tbody>
   </table></div>
+
+  <h3>催化劑時間軸表(帶狀態+來源型別,2026/7 增補)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>日期</th><th>事件</th><th>狀態</th><th>來源型別</th><th>信心</th></tr></thead>
+    <tbody>
+      <tr><td>2025/7/28</td><td>Tesla×Samsung 簽 $16.5B 合約(AI6 @Taylor,8 年至 2033);Musk 其後證實 AI5/AI6 雙代工</td><td><span class="conf c-high">已發生</span></td><td>Bloomberg/CNN/Tom's Hardware</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2025/10/13</td><td>OpenAI×Broadcom 宣布 10GW 自研加速器+Ethernet 系統(機櫃 2H26-2029 底)</td><td><span class="conf c-med">進行中</span></td><td>OpenAI 官方新聞稿</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2025/12/11</td><td>Broadcom FY25Q4:AI backlog &gt;$73B/未來 18 個月、FY26Q1 AI 指引 $8.2B</td><td><span class="conf c-high">已發生</span></td><td>法說(CNBC 報導)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2025/12/25</td><td>SemiAnalysis《Trainium3 Deep Dive》:前段 Annapurna/後段+封裝世芯、Marvell 輸掉 bakeoff、Anita/Mariana 雙光罩</td><td><span class="conf c-high">已發生</span></td><td>研究部落格(多家獨立引述)</td><td><span class="conf c-med">中(細節單源)</span></td></tr>
+      <tr><td>2026/1/20</td><td>TrendForce:2026 AI 伺服器出貨 +28%、ASIC 系統占比 27.8%、ASIC +44.6% vs GPU +16.1%(4/15 更新下修至 ~27%)</td><td><span class="conf c-high">已發生</span></td><td>研調新聞稿</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/1/26</td><td>Microsoft 發表 Maia 200(TSMC 3nm、216GB HBM3e),已量產支撐 M365 Copilot</td><td><span class="conf c-high">已發生</span></td><td>Microsoft 官方部落格</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/1/30</td><td>TrendForce:Meta MTIA-3 2H26 亮相、3nm、GUC 後段+投片(reportedly、Meta 未證實)</td><td><span class="conf c-med">進行中</span></td><td>研調轉述媒體</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>2026/3/31</td><td>NVIDIA 投資 Marvell $2B、綁定 NVLink Fusion(Marvell 當日漲近 13%)</td><td><span class="conf c-high">已發生</span></td><td>NVIDIA 官方新聞稿</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/4/15</td><td>Tesla AI5 tape-out(Musk 宣布;~5x AI4 有效算力為公司自述)</td><td><span class="conf c-high">已發生</span></td><td>公司高層公開發言</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/4/20</td><td>CNBC(引 The Information):Google 洽 Marvell 兩顆晶片(MPU+推論 TPU)——尚未簽約</td><td><span class="conf c-low">傳聞</span></td><td>媒體引述</td><td><span class="conf c-med">中(洽談)/未簽約</span></td></tr>
+      <tr><td>2026/4/22</td><td>Google Cloud Next:Ironwood GA;TPU v8 拆訓練(Sunfish/Broadcom)/推論(Zebrafish/聯發科)雙軌,皆 2nm、late 2027</td><td><span class="conf c-high">已發生</span></td><td>Google 官方+多家研析</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/4/30</td><td>聯發科法說:2026 AI ASIC $1B→$2B(集中 Q4'26 認列)、TAM $70-80B 提前 2027(公司自述)</td><td><span class="conf c-high">已發生</span></td><td>法說(經濟日報/CMoney)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/5/8</td><td>世芯 1Q26 法說:GM 50.16% 創高、EPS 17.55;Trainium3 2Q26 出貨、3Q26 放量、80% 營收在 2H</td><td><span class="conf c-high">已發生</span></td><td>法說(fiisual/豐雲學堂)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/5/27</td><td>Marvell FY27Q1:營收 $2.418B(+28%)、DC $1.833B、Q2 指引 $2.7B;20+ custom design wins(FY28/29)</td><td><span class="conf c-high">已發生</span></td><td>官方新聞稿</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/5/29</td><td>聯發科股東會:重申 $2B;蔡明介回應 COT 疑慮「自然趨勢,但真正做出一顆晶片不容易」;點名 400G SerDes/die-to-die/3.5D/2nm-1.4nm</td><td><span class="conf c-high">已發生</span></td><td>股東會(鉅亨)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/6/3</td><td>Broadcom FY26Q2:AI 營收 $10.8B(+143%)、Q3 指引 $16.0B(+200%+)——賽道總量最強即期驗證</td><td><span class="conf c-high">已發生</span></td><td>官方新聞稿+SEC 8-K</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/6/16</td><td>世芯:北美客戶 3nm 產品(Trainium3)6 月開始量產交貨;法人估全年 EPS 126 元+(非公司財測)</td><td><span class="conf c-high">已發生</span></td><td>工商時報</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/6/24</td><td>OpenAI×Broadcom 發表 Jalapeño(9 個月 design→tape-out、2026 底部署);同日晶心科官方 PR:AndesCore SoC 出貨破 200 億顆</td><td><span class="conf c-high">已發生</span></td><td>OpenAI 官方/Andes 官方</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/6/26</td><td>高通宣布攜手 Meta 進軍 ASIC——聯發科×Meta 傳聞的反向訊號,聯發科股價一度跌停</td><td><span class="conf c-high">已發生</span></td><td>TechNews/鏡報</td><td><span class="conf c-med">中(歸屬未定)</span></td></tr>
+      <tr><td>2026/7/2</td><td>GS 將聯發科 TP 升至 6,800、2027 ASIC $20.3B(券商連續上修:4 月 2,454→5/1 5,000→7/2 6,800;理由之一為未證實 Meta 傳聞)</td><td><span class="conf c-high">已發生</span></td><td>券商報告(TechNews/時報轉述)</td><td><span class="conf c-med">中(非公司財測)</span></td></tr>
+      <tr><td>2026/7/10 前後</td><td>全 holds 6 月營收公告:世芯 N3 放量拉貨、創意能否續 +130% 級距、聯發科 6 月 460 億達 Q2 財測低標與否</td><td><span class="conf c-un">前瞻</span></td><td>MOPS 申報制度</td><td><span class="conf c-high">高(時點確定)</span></td></tr>
+      <tr><td>2026/7-8</td><td>2Q26 財報季+聯發科 7/30 前後法說(觀察 Meta 傳聞是否鬆口)</td><td><span class="conf c-un">前瞻</span></td><td>申報制度/法說排程</td><td><span class="conf c-high">高(時點)</span></td></tr>
+      <tr><td>2H26</td><td>Meta MTIA-3 亮相(GUC);OpenAI 首批 10GW 機櫃;智原封裝案開始貢獻</td><td><span class="conf c-un">前瞻</span></td><td>研調/官方(見上)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>4Q26</td><td>聯發科首顆 ASIC 兌現 ~$2B(公司財測);Maia 300 傳 Q4'26 發布(未證實);2026 底 Jalapeño 首批部署</td><td><span class="conf c-un">前瞻</span></td><td>法說/傳聞混合</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>2027</td><td>聯發科第二顆 ASIC 量產(底)、Zebrafish/Sunfish late 2027、智原封裝放量、M31 權利金里程碑、2H27 Humufish(COT 與否)</td><td><span class="conf c-un">前瞻</span></td><td>法說/研調/傳聞</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>2027-2028</td><td>Tesla AI6(Samsung Taylor);2028:Counterpoint 口徑 ASIC 顆數超越 DC GPU、TPU v9 Triggerfish(單源傳聞)</td><td><span class="conf c-un">前瞻</span></td><td>研調/傳聞</td><td><span class="conf c-med">中/低</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="disclaimer">狀態徽章:已發生=有日期可考的既成事件;進行中=已官宣、執行中;前瞻=時點確定但結果未出;傳聞=未簽約/未證實。Counterpoint 兩里程碑勿混:「出貨三倍」=2027 vs 2024 基期、「&gt;15M 顆交叉」=2028。</p>
 </div></section>
 
 <!-- 10 -->
@@ -458,6 +624,17 @@ p,li,td{overflow-wrap:anywhere}
       <tr><td><b>題材選擇權</b></td><td>本業 + 未來 ASIC 案折現</td><td>未放量案</td><td>聯發科 ASIC、晶心 MTIA、愛普 VHM</td></tr>
     </tbody>
   </table></div>
+  <h3>法人共識/目標價錨點(2026/7 增補;全部為法人預估/券商目標價,非公司財測)</h3>
+  <div class="table-wrap" style="margin-bottom:24px"><table>
+    <thead><tr><th>公司</th><th>2026 法人共識 EPS(元)</th><th>法人目標價(元)</th><th>來源+日期</th></tr></thead>
+    <tbody>
+      <tr><td>創意 3443</td><td>45.3(FactSet 共識);另市場預估 48.54 並存</td><td>3,500(FactSet 調查);BofA 7,000(2026/5/8)、里昂 6,000、亞系 6,542 並存(分歧大)</td><td>鉅亨網 FactSet 調查(2026/6)、TechNews(2026/5/8)、經濟日報(里昂)</td></tr>
+      <tr><td>世芯-KY 3661</td><td>126+(工商時報 6/16 法人估);另法人區間 120-140</td><td>外資 TP 最高喊至 4,500(里昂由 4,600「下調」至 4,500;另有美系 4,388——引用註明方向與家數)</td><td>工商時報(2026/6/16)、外資報告轉述(2025/12/2 起)、玉山證整理</td></tr>
+      <tr><td>智原 3035</td><td>3.56(FactSet 共識,下修後)</td><td>190(FactSet 調查);2027 EPS 法人估 +60%+</td><td>鉅亨網 FactSet 調查/LINE TODAY 轉載(2026/6)</td></tr>
+      <tr><td>聯發科 2454</td><td>—(GS 2028 EPS 預估 422.17)</td><td>GS 6,800(2026/7/2;4 月 2,454→5/1 5,000→7/2 6,800 連續上修,引用必帶報告日期)</td><td>TechNews+時報資訊(2026/7/2)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn">⚠️ 設計服務估值邏輯會隨營收結構由「NRE 設計費」(世芯 1Q26 GM 50.16%)切到「turnkey 量產抽成」(~20%)而變——PE 倍數不宜跨階段直接沿用;上表錨點皆非公司財測。</div>
   <h3>試算計算機(示意預設,請填真實數字)</h3>
   <div class="calc">
     <div class="inputs">
@@ -482,19 +659,84 @@ p,li,td{overflow-wrap:anywhere}
 <section class="block" id="refs"><div class="container">
   <span class="eyebrow">Sources · 參考資料</span>
   <h2 class="title">參考資料來源</h2>
-  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查說法已標註。</p>
+  <p class="subtitle">經 Workflow 研究與對抗式查證(findings 三檔+verdicts 全量裁決,2026/7/2-3 回填)。品質分層:<span class="q qp" style="font-size:11px;padding:2px 8px">primary</span> 官方新聞稿/財報/公開申報 <span class="q qs" style="font-size:11px;padding:2px 8px">secondary</span> 研調/主流媒體/法說轉述 <span class="q qb" style="font-size:11px;padding:2px 8px">blog</span> 研究部落格/彙整。每筆註明佐證了什麼;被反駁或需保留意見之來源另行標註;無法定位原文者標「未附網址」。</p>
+
+  <h3>Primary(官方/一手)</h3>
   <ul class="refs">
-    <li><b>SemiAnalysis《Trainium3 Deep Dive》(2025/12)</b> — 設計分工(前段 Annapurna/後段+封裝世芯)、Anita vs Mariana 雙光罩、世芯擊敗 Marvell<span class="q">secondary</span></li>
-    <li><b>世芯/創意/智原/聯發科/力旺/M31/晶心科/愛普 1Q26 法說與月營收</b> — 各家數字<span class="q">primary</span></li>
-    <li><b>TrendForce / Counterpoint(2026)</b> — ASIC 出貨占比 ~27.8%、+44.6% vs GPU、2028 超越 GPU、Broadcom 市占 ~60%<span class="q">secondary</span></li>
-    <li><b>Broadcom / Marvell 法說</b> — AI backlog $73B、$60-90B SAM;Marvell AI ASIC $11B<span class="q">primary</span></li>
-    <li><b>創意官方 PR(2026/2、5/4)、Google Cloud Next(4/22)、OpenAI×Broadcom</b> — tape-out、TPU v8 雙軌、10GW<span class="q">primary</span></li>
+    <li><b>TrendForce 官方新聞稿(2026/1/20)</b> — 佐證:2026 AI 伺服器出貨 +28%、ASIC 系統占比 27.8%、ASIC +44.6% vs GPU +16.1%(KPI 原始出處;2026/4/15 更新下修至 ~27%)<a href="https://www.trendforce.com/presscenter/news/20260120-12887.html">trendforce.com/presscenter/news/20260120-12887.html</a><span class="q qp">primary</span></li>
+    <li><b>Omdia 新聞稿(2025/8)</b> — 佐證:AI DC 晶片 $123B/$207B/$286B(2024/25E/30)、custom ASIC 2030 ~25%(≈$84.5B)、支出 2026 見頂<a href="https://omdia.tech.informa.com/pr/2025/aug/ai-data-center-chip-market-to-hit-286bn-growth-likely-peaking-as-custom-asics-gain-ground">omdia.tech.informa.com/pr/2025/aug/...</a><span class="q qp">primary</span></li>
+    <li><b>Bloomberg Intelligence 新聞稿</b> — 佐證:AI 加速器 2033 &gt;$600B、custom ASIC $118B(2033)、份額 8%→19%<a href="https://www.bloomberg.com/company/press/ai-accelerator-market-looks-set-to-exceed-600-billion-by-2033-driven-by-hyperscale-spending-and-asic-adoption-according-to-bloomberg-intelligence/">bloomberg.com/company/press/ai-accelerator-market...</a><span class="q qp">primary</span></li>
+    <li><b>Marvell Custom AI Investor Event 簡報(2025/6/17)</b> — 佐證:DC TAM CY28 $94B、custom compute $55.4B(公司自述口徑)<a href="https://www.marvell.com/content/dam/marvell/en/company/assets/marvell-custom-ai-investor-event-2025.pdf">marvell.com/.../marvell-custom-ai-investor-event-2025.pdf</a><span class="q qp">primary</span></li>
+    <li><b>Google Cloud Blog — Ironwood TPUs + Axion VMs(2026/4/22)</b> — 佐證:Ironwood GA、4.6 PFLOPS/9,216 顆 superpod=42.5 EFLOPS(Cloud Next 官方錨點)<a href="https://cloud.google.com/blog/products/compute/ironwood-tpus-and-new-axion-based-vms-for-your-ai-workloads">cloud.google.com/blog/products/compute/ironwood-tpus...</a><span class="q qp">primary</span></li>
+    <li><b>Microsoft 官方部落格 — Maia 200(2026/1/26)</b> — 佐證:TSMC 3nm、216GB HBM3e、7TB/s、272MB SRAM、已量產支撐 M365 Copilot<a href="https://blogs.microsoft.com/blog/2026/01/26/maia-200-the-ai-accelerator-built-for-inference/">blogs.microsoft.com/blog/2026/01/26/maia-200...</a><span class="q qp">primary</span></li>
+    <li><b>OpenAI 官方新聞稿 — OpenAI×Broadcom 10GW(2025/10/13)</b> — 佐證:10GW 自研加速器、機櫃 2H26-2029 底、Broadcom Ethernet<a href="https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/">openai.com/index/openai-and-broadcom-announce...</a><span class="q qp">primary</span></li>
+    <li><b>OpenAI 官方 — Jalapeño 推論晶片(2026/6/24)</b> — 佐證:9 個月 design→tape-out、reticle-sized、2026 底部署(perf/W 為公司自述)<a href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip/">openai.com/index/openai-broadcom-jalapeno-inference-chip/</a><span class="q qp">primary</span></li>
+    <li><b>Broadcom IR — FY26Q2 財報新聞稿(2026/6/3)</b> — 佐證:AI 營收 $10.8B(+143%)、Q3 指引 $16.0B、總營收 $22.2B(+48%);SEC 8-K 同步存檔<a href="https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial">investors.broadcom.com/news-releases/...</a><span class="q qp">primary</span></li>
+    <li><b>NVIDIA Technical Blog — Trainium4×NVLink Fusion(2025/12)</b> — 佐證:Trainium4 整合 NVLink 6/MGX、多世代合作<a href="https://developer.nvidia.com/blog/aws-integrates-ai-infrastructure-with-nvidia-nvlink-fusion-for-trainium4-deployment/">developer.nvidia.com/blog/aws-integrates-ai-infrastructure...</a><span class="q qp">primary</span></li>
+    <li><b>晶心科官方新聞稿(2026/6/24)</b> — 佐證:AndesCore SoC 累計出貨破 200 億顆、特化 IP 用於 Meta MTIA<a href="https://www.andestech.com/en/2026/06/24/risc-v-market-leadership-helped-andes-technology-drive-cumulative-shipments-of-andescore-powered-socs-beyond-the-20-billion-mark/">andestech.com/en/2026/06/24/...</a><span class="q qp">primary</span></li>
+    <li><b>創意 GUC 官方 PR</b> — 佐證:2026/4 月營收 NT$42.94 億(+156.9%)、全球首顆 HBM4 IP 於 TSMC N3P tape-out(2025/4/2)<a href="https://www.guc-asic.com/en/news/PressRelease/202604revenueE">guc-asic.com/en/news/PressRelease/202604revenueE</a>、<a href="https://www.guc-asic.com/en/news/all/PR_ENG_20250402">guc-asic.com/en/news/all/PR_ENG_20250402</a><span class="q qp">primary</span></li>
+    <li><b>力旺 2026 Q1 法說簡報(2026/5/8,官網 IR)</b> — 佐證:1Q26 營收 10.94 億(+20%)、淨利 5.96 億(+29.1%)、royalty 65.2%、N3P 驗證/2nm 開發<a href="https://www.ememory.com.tw/Content/Upload/files/Webcastconference/2026/Q1/2026%20Q1%20Investor%20Conference%20Presentation%20Material_20260508_zh.pdf">ememory.com.tw/.../2026 Q1 法說簡報</a><span class="q qp">primary</span></li>
+    <li><b>公開資訊觀測站 MOPS</b> — 佐證:全 holds 月營收正規出處(世芯 5 月 19.35 億/創意 46.74 億/智原 9.30 億/力旺 3.05 億/M31 1.28 億/晶心科 8,723.6 萬/愛普 7.49 億/聯發科 474.34 億;6 月營收 7/10 前後公告)<a href="https://mops.twse.com.tw/">mops.twse.com.tw</a><span class="q qp">primary</span></li>
+    <li><b>Marvell FY27Q1 官方新聞稿(2026/5/27)</b> — 佐證:營收 $2.418B(+28%)、DC $1.833B、custom FY26 ~$1.5B;<b>未附網址</b>(本輪僅定位到 IR 編號 detail/1023;勿誤連 detail/95=舊季稿);法說逐字稿見 Motley Fool 轉錄<a href="https://www.fool.com/earnings/call-transcripts/2026/05/27/marvell-mrvl-q1-2027-earnings-transcript/">fool.com/earnings/call-transcripts/2026/05/27/...</a><span class="q qp">primary</span></li>
   </ul>
-  <div class="callout warn" style="margin-top:18px">⚠️ <b>口徑修正 / 待查:</b>① 聯發科 $2B 是「Q4'26 單季」非全年;② 創意 Google 是「占總營收 50%+」非「占 turnkey」;③ 世芯 Trainium3 量中 Anita 光罩僅 ~30-37%(其餘 COT);④ TAM $70-80B 為聯發科自述、Broadcom $60-90B 背書,皆樂觀框架;⑤ 多數客戶 ASIC 對應為 SemiAnalysis/媒體彙整或公司自述,客戶身分未經兩造逐項證實。</div>
+
+  <h3>Secondary(研調/主流媒體/法說轉述)</h3>
+  <ul class="refs">
+    <li><b>Counterpoint Research insight(2026/1)</b> — 佐證:2028 ASIC &gt;1,500 萬顆超越 DC GPU、2024-28 累計 &gt;4,000 萬顆、Broadcom 2027 設計市占 ~60%、Google 出貨 64%→52%、聯發科 2028 佔出貨 ~1/4<a href="https://finance.yahoo.com/news/broadcom-set-dominate-custom-ai-163116560.html">Yahoo Finance 轉載</a>、<a href="https://www.benzinga.com/markets/tech/26/01/50165889/broadcom-set-to-dominate-custom-ai-chip-market-with-60-share-by-2027-counterpoint-says">Benzinga 交叉</a><span class="q qs">secondary</span></li>
+    <li><b>TrendForce News(2026/1/30)</b> — 佐證:Meta MTIA-3 2H26/3nm/GUC 後段+投片、CoWoS 每晶圓 8 顆(reportedly、Meta 未官方證實)<a href="https://www.trendforce.com/news/2026/01/30/news-metas-mtia-3-ai-chip-reportedly-tipped-for-2h26-debut-built-on-tsmc-3nm-with-guc-support/">trendforce.com/news/2026/01/30/...</a><span class="q qs">secondary</span></li>
+    <li><b>TrendForce News(2025/10/21)</b> — 佐證:Axion=TSMC 3nm、GUC 設計支援(reportedly)<a href="https://www.trendforce.com/news/2025/10/21/news-googles-axion-cpu-reportedly-built-on-tsmcs-3nm-set-to-drive-foundrys-data-center-revenue-growth/">trendforce.com/news/2025/10/21/...</a><span class="q qs">secondary</span></li>
+    <li><b>TrendForce News(2026/2/5)</b> — 佐證:聯發科首顆 TPU 案(v7e 系)1Q26 底 risk production、已取得 v8e 訂單;$1B 為上修前口徑(歷史軌跡)<a href="https://www.trendforce.com/news/2026/02/05/news-mediatek-forecasts-1b-in-asic-sales-for-2026-custom-ai-chips-set-for-20-revenue-share-in-2027/">trendforce.com/news/2026/02/05/...</a><span class="q qs">secondary</span></li>
+    <li><b>TrendForce News(2026/3/12、2026/3/20、2026/5/26)</b> — 佐證:Meta 至 2027 四顆新加速器;CSP 加速自研、聯發科/GUC/世芯三強受惠(官方稿具名);世芯關鍵客戶 AI 晶片 5 月量產(與 6 月交貨為 milestone 口徑差)<a href="https://www.trendforce.com/news/2026/03/12/news-metas-in-house-ai-chip-push-four-new-accelerators-gear-up-amid-memory-crunch-by-2027/">3/12</a>、<a href="https://www.trendforce.com/news/2026/03/20/news-csps-accelerate-asic-push-in-2h26-challenging-nvidia-as-mediatek-guc-alchip-benefit/">3/20</a>、<a href="https://www.trendforce.com/news/2026/05/26/news-alchip-says-key-customers-ai-chip-enters-mass-production-in-may-asics-seen-outpacing-gpu-cagr/">5/26</a><span class="q qs">secondary</span></li>
+    <li><b>TrendForce News(2025/10/23)</b> — 佐證:Tesla AI5 三星/台積電拆單、Musk 說法<a href="https://www.trendforce.com/news/2025/10/23/news-tesla-ai5-production-split-between-samsung-tsmc-musk-cites-samsungs-advanced-equipment/">trendforce.com/news/2025/10/23/...</a><span class="q qs">secondary</span></li>
+    <li><b>CNBC — Broadcom FY25Q4(2025/12/11)</b> — 佐證:AI backlog &gt;$73B/18 個月、FY26Q1 AI 指引 $8.2B($73B 必須標 FY25Q4 口徑)<a href="https://www.cnbc.com/2025/12/11/broadcom-avgo-q4-earnings-2025.html">cnbc.com/2025/12/11/broadcom-avgo-q4-earnings-2025</a><span class="q qs">secondary</span></li>
+    <li><b>CNBC — Google 洽 Marvell(2026/4/20,引 The Information)</b> — 佐證:兩顆晶片(MPU+推論 TPU)洽談、明言未簽約;文內提及 Broadcom×Google 長約至 2031(轉述)<a href="https://www.cnbc.com/2026/04/20/marvell-stock-google-custom-ai-chips.html">cnbc.com/2026/04/20/marvell-stock-google-custom-ai-chips</a><span class="q qs">secondary</span></li>
+    <li><b>The Next Platform(2026/4/24)+ NAND Research(2026/4)</b> — 佐證:TPU v8 訓練/推論拆分規格、TSMC 2nm、late 2027(<b>Zebrafish 量產時點裁決依據</b>)<a href="https://www.nextplatform.com/compute/2026/04/24/with-tpu-8-google-makes-genai-systems-much-better-not-just-bigger/5218834">nextplatform.com/compute/2026/04/24/...</a>、<a href="https://nand-research.com/google-cloud-8th-generation-tpu-family-splits-training-and-inference/">nand-research.com/google-cloud-8th-generation-tpu...</a><span class="q qs">secondary</span></li>
+    <li><b>Tom's Hardware(×3)</b> — 佐證:Maia 200 規格轉載;NVIDIA 投資 Marvell $2B/NVLink Fusion;Musk 證實 AI5/AI6 雙代工<a href="https://www.tomshardware.com/pc-components/cpus/microsoft-introduces-newest-in-house-ai-chip-maia-200-is-faster-than-other-bespoke-nvidia-competitors-built-on-tsmc-3nm-with-216gb-of-hbm3e">Maia 200</a>、<a href="https://www.tomshardware.com/tech-industry/nvidia-invests-2-billion-in-marvell-whose-biggest-clients-are-trying-to-replace-nvidia-chips">NVIDIA×Marvell</a>、<a href="https://www.tomshardware.com/tech-industry/semiconductors/musk-confirms-tesla-ai5-and-ai6-will-be-made-at-samsung-and-tsmc">Tesla 雙代工</a><span class="q qs">secondary</span></li>
+    <li><b>The Korea Times(2026/4/20)+ DCD</b> — 佐證:Samsung Taylor 投產、AI6 2nm GAA、$16.5B 合約;「Taylor 獨家」與分拆兩說未收斂<a href="https://www.koreatimes.co.kr/amp/business/tech-science/20260420/samsungs-taylor-plant-to-begin-operations-with-tesla-chips-ready-for-fabrication">koreatimes.co.kr/.../samsungs-taylor-plant...</a>、<a href="https://www.datacenterdynamics.com/en/news/samsung-electronics-signs-165bn-deal-with-tesla-to-manufacture-ai6-chips-at-taylor-texas-fab/">datacenterdynamics.com/...</a><span class="q qs">secondary</span></li>
+    <li><b>TechNews(2026/7/2)</b> — 佐證:GS 聯發科 TP 6,800、2027 ASIC $20.3B、2028 $52.5B/EPS 422.17(券商預估、非公司財測;上修理由之一為未證實 Meta 傳聞)<a href="https://finance.technews.tw/2026/07/02/goldman-sachs-raised-its-target-price-for-mediatek-to-nt6800/">finance.technews.tw/2026/07/02/...</a><span class="q qs">secondary</span></li>
+    <li><b>TechNews 引 BofA(2026/5/8)</b> — 佐證:創意 2026 營收 +63%、TP 7,000、Axion 3nm 2H26 放量、Tesla ADAS 貢獻 2H27 起(券商口徑)<a href="https://technews.tw/2026/05/08/bofa-see-guc-2026/">technews.tw/2026/05/08/bofa-see-guc-2026/</a><span class="q qs">secondary</span></li>
+    <li><b>經濟日報(2026/4/30、2026/5/6)</b> — 佐證:聯發科法說 2026 ASIC $1B→$2B(集中 Q4'26)、TAM $70-80B 提前 2027;蔡力行補充「今年上看 20 億美元、2027 數十億美元、2027 起擬單獨揭露 ASIC 營收」(公司自述)<a href="https://money.udn.com/money/story/5612/9474616">4/30 法說</a>、<a href="https://money.udn.com/money/story/5612/9486368">5/6 補充</a><span class="q qs">secondary</span></li>
+    <li><b>鉅亨網 — 聯發科股東會(2026/5/29)</b> — 佐證:重申 $2B、蔡明介回應 COT「自然趨勢,但真正做出一顆晶片不容易」、400G SerDes/3.5D/2nm-1.4nm 布局<a href="https://news.cnyes.com/news/id/6472950">news.cnyes.com/news/id/6472950</a><span class="q qs">secondary</span></li>
+    <li><b>時報資訊(2026/6/10)</b> — 佐證:聯發科 5 月營收 474.34 億(+5.0%)、1-5 月 -1.59%、6 月 460 億=Q2 財測門檻<a href="https://www.chinatimes.com/realtimenews/20260610003777-260410">chinatimes.com/realtimenews/20260610003777-260410</a><span class="q qs">secondary</span></li>
+    <li><b>TechNews(2026/6/10)+ 工商時報(2025/12/2 起)</b> — 佐證:世芯 5 月營收 19.35 億(-33.45%)、1-5 月 -50.05%;6/16 報導 N3 六月量產交貨、法人估 EPS 126 元+;外資估 Trainium3 2026 ~$2.3B/出貨 50 萬顆/2027 ~$3.3B、TP 上看 4,500(里昂由 4,600 下調;券商)<a href="https://finance.technews.tw/2026/06/10/alchip-3661-202605-financial-report/">TechNews</a>、<a href="https://www.ctee.com.tw/news/20251202700655-430201">工商時報</a><span class="q qs">secondary</span></li>
+    <li><b>fiisual — 世芯 1Q26 法說 memo(2026/5)+ 玉山證整理</b> — 佐證:GM 50.16% 創高、EPS 17.55、Q2 出貨/Q3 放量、80% 營收在 2H、N2 案年底 tape-out;法人估 2026 EPS 120-140(估值錨點、非公司財測)<a href="https://tw.fiisual.com/blog/post/2026/Alchip-2026-q1-earnings-call-memo">fiisual 法說 memo</a>、<a href="https://www.esunsec.com.tw/article/post/592">esunsec.com.tw/article/post/592</a><span class="q qs">secondary</span></li>
+    <li><b>財訊快報 — 智原法說(2026/4/29)+ Win投資/Yahoo(5 月營收)</b> — 佐證:2026 指引 +11~13%(公司對具體百分比回應「以公告為主」)、9 個先進封裝案;5 月 9.30 億(-45.07%)<a href="https://www.investor.com.tw/onlineNews/NewsContent.asp?articleNo=14202604290097">財訊快報</a>、<a href="https://winvest.tw/News/Detail/86310">Win投資</a><span class="q qs">secondary</span></li>
+    <li><b>鉅亨網 — FactSet 共識(2026/6)+ 里昂創意 TP</b> — 佐證:創意 2026 共識 EPS 45.3/TP 3,500(另市場預估 EPS 48.54);智原 3.56/TP 190;里昂創意 TP 6,000(法人預估、非公司財測)<a href="https://news.cnyes.com/news/id/6440921">FactSet 創意</a>、<a href="https://today.line.me/tw/v3/article/PGe0MqR">FactSet 智原(LINE TODAY 轉載)</a>、<a href="https://money.udn.com/money/story/5607/9481690">里昂(經濟日報)</a><span class="q qs">secondary</span></li>
+    <li><b>uanalyze(創意法說整理)</b> — 佐證:<b>turnkey 占比口徑修正原始出處</b>——Google 3nm CPU+3nm AI 加速器「兩案合計」占 2026 turnkey 營收 50-55%<a href="https://uanalyze.com.tw/articles/6307112056">uanalyze.com.tw/articles/6307112056</a><span class="q qs">secondary</span></li>
+    <li><b>TechNews — M31 5 月營收(2026/6/5)</b> — 佐證:1.28 億(-18.0%)、Q2 未回溫之負面查證(「回溫說」被反駁的依據)<a href="https://finance.technews.tw/2026/06/05/m31-6643-202605-financial-report">finance.technews.tw/2026/06/05/m31-6643...</a><span class="q qs">secondary</span></li>
+    <li><b>TechNews — 晶心科 5 月營收(2026/6/10)+ 旺得富(×2)+ 富果(法說 2026/3/18)</b> — 佐證:5 月 8,723.6 萬(+2.3%)、1-5 月 +17.3%;MTIA 至第五代/Cuzco 2026 上市;投顧砍 TP 三成(反方並陳)。<b>被反駁來源標註:旺得富 2026/4/20 之「每股虧損 3.63 元」係含非控制權益直算,本報告採歸母 -3.28</b><a href="https://finance.technews.tw/2026/06/10/es-6533-202605-financial-report/">TechNews</a>、<a href="https://wantrich.chinatimes.com/news/20260420900575-420101">旺得富 4/20</a>、<a href="https://wantrich.chinatimes.com/news/20260325900353-420101">旺得富 3/25</a>、<a href="https://blog.fugle.tw/post/earnings-call-6533-2026-03-18">富果</a><span class="q qs">secondary</span></li>
+    <li><b>鉅亨網 — 愛普 5 月營收 + 豐雲學堂愛普法說</b> — 佐證:5 月 7.49 億(+89.34%)、1Q26 EPS 4.15、S-SiCap 佈局(公司說法)<a href="https://news.cnyes.com/news/id/6486600">news.cnyes.com/news/id/6486600</a>、<a href="https://www.sinotrade.com.tw/richclub/hotstock/%E6%84%9B%E6%99%AE--6531-%E5%81%9A%E4%BB%80%E9%BA%BC-%E6%B3%95%E8%AA%AA%E6%9C%89%E4%BD%95%E9%87%8D%E9%BB%9E-2026%E5%B9%B4%E7%AC%AC%E4%B8%80%E5%AD%A3EPS%E9%81%944-15%E5%85%83-IoTRAM%E5%BC%B7%E5%8B%81%E9%9C%80%E6%B1%82%E6%8E%A8%E5%8D%87%E7%87%9F%E6%94%B6%E5%B9%B4%E5%A2%9E115--S-SiCap%E9%87%8F%E7%94%A2%E4%BD%88%E5%B1%80%E5%8A%A0%E9%80%9F%E5%95%9F%E5%8B%95-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-6a02f1e5028e5400c745ab0c">豐雲學堂</a><span class="q qs">secondary</span></li>
+    <li><b>DIGITIMES(×3)</b> — 佐證:Trainium4 兩軌/世芯領銜(2025/12/3);台廠設計服務月度分化 tracker(2026/5/12);反方專文:部分設計服務公司缺席 AI 熱潮(2026/4/11)<a href="https://www.digitimes.com/news/a20251203VL202/aws-nvidia-cloud-computing-amazon-chips.html">12/3</a>、<a href="https://www.digitimes.com/news/a20260512VL219/taiwan-monthly-tracker-alchip-faraday-guc-asic-design-revenue-2026.html">tracker</a>、<a href="https://www.digitimes.com/news/a20260411VL201/asic-design-service-taiwan-revenue-demand.html">反方專文</a><span class="q qs">secondary</span></li>
+    <li><b>Futurum Group(×2)</b> — 佐證:Maia 200 分工拼圖(微軟前段+GUC 後段+Marvell,非官方);Marvell FY27Q1 解讀。<b>被反駁口徑標註:「Marvell FY27 ~$11B」為此處轉述之全公司指引、非 ASIC 專屬</b><a href="https://futurumgroup.com/insights/microsofts-maia-200-signals-the-xpu-shift-toward-reinforcement-learning/">Maia 200</a>、<a href="https://futurumgroup.com/insights/marvell-q1-fy-2027-raises-full-year-outlook-on-ai-data-center-demand/">Marvell FY27Q1</a><span class="q qs">secondary</span></li>
+    <li><b>TECHi — Maia 300(2026)</b> — 佐證:Marvell 開發 Maia 300(2nm+HBM4)方向;量價數字為分析師估、未證實<a href="https://www.techi.com/marvell-stock-microsoft-maia300-ai-chip-boost/">techi.com/marvell-stock-microsoft-maia300...</a><span class="q qs">secondary</span></li>
+    <li><b>CommonWealth Magazine English(2025/8/29)</b> — 佐證:反方觀點錨點《How Alchip Puts Taiwan on the Frontline of the ASIC Wars》(世芯客戶集中度、ASIC 熱潮持續性保留意見)<a href="https://english.cw.com.tw/article/article.action?id=4307">english.cw.com.tw/article/article.action?id=4307</a><span class="q qs">secondary</span></li>
+    <li><b>watch 查核 7+1 檔來源</b> — 佐證:理財周刊(矽統,2026/6/25)、壹蘋(祥碩法說,2026/5/13)、MoneyDJ(譜瑞 ASIC-like)、富果(聯詠法說 2026/5/7)、Goodinfo(金麗科財報)、財報狗(群聯)、經濟日報(神盾)——逐檔佐證/反駁依據<a href="https://www.moneyweekly.com.tw/ArticleData/Info/Article/234403">矽統</a>、<a href="https://news.nextapple.com/life/20260513/B5DE07F5C8735814ACA2307EB38B184D">祥碩</a>、<a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=86ba67b4-fe3a-4508-8f53-44c3440e0156">譜瑞</a>、<a href="https://blog.fugle.tw/post/earnings-call-3034-2026-05-07">聯詠</a>、<a href="https://goodinfo.tw/tw2/StockDetail.asp?STOCK_ID=3228">金麗科</a>、<a href="https://statementdog.com/analysis/8299">群聯</a>、<a href="https://udn.com/news/story/7254/8831175">神盾</a><span class="q qs">secondary</span></li>
+    <li><b>TechTimes(2026/5/26)+ TNW</b> — 佐證:ASIC +44.6% vs GPU +16.1% 獨立轉載交叉;Google 供應鏈多夥伴化/雙軌設計省 ~30% 成本(BofA 估)脈絡<a href="https://www.techtimes.com/articles/317225/20260526/custom-ai-chips-outpace-nvidia-gpu-growth-2026-asic-shipments-set-triple-gpu-rate.htm">TechTimes</a>、<a href="https://thenextweb.com/news/google-inference-chips-nvidia-challenge-supply-chain">TNW</a><span class="q qs">secondary</span></li>
+    <li><b>Yahoo 股市 — CoWoS 狂潮報導(2026)</b> — 佐證:世芯投片「8 千→9 萬片」說法出處;<b>被反駁來源標註:此為晶圓投片口徑非 CoWoS,且「100 萬片」為需求推估非台積電產能(見被反駁區)</b><a href="https://tw.stock.yahoo.com/news/cowos%E7%8B%82%E6%BD%AE%E4%BE%86%E8%A5%B2-%E5%8F%B0%E7%A9%8D%E9%9B%BB%E6%90%B6%E5%96%AE%E8%BC%9D%E9%81%94-%E4%B8%96%E8%8A%AF-2026%E5%B9%B4%E5%90%83%E4%B8%8B%E8%BF%919%E6%88%90%E5%96%AE-233900186.html">tw.stock.yahoo.com/news/cowos...</a><span class="q qs">secondary</span></li>
+    <li><b>KuCoin News 轉述 JPMorgan(2026)</b> — 佐證:JPM 2026 $60-70B/2027 顆數交叉之唯一可得轉述;<b>原報告不可得、單一轉述,標 ⚪待查</b><a href="https://www.kucoin.com/news/flash/jpmorgan-ai-custom-chip-shipments-to-surpass-gpus-by-2027">kucoin.com/news/flash/jpmorgan-ai-custom-chip...</a><span class="q qs">secondary</span></li>
+    <li><b>India's News 等轉述 Morgan Stanley(2026/1)</b> — 佐證:MS「custom 佔加速器營收 7%(2023)→30%(2027)」之轉述出處;<b>原報告非公開,標「據轉述」</b><a href="https://www.indiasnews.net/news/279003986/morgan-stanley-agentic-ai-shifts-value-from-gpus-to-cpus-and-memory-creating-up-to-60bn-incremental-cpu-tam-by-2030">indiasnews.net/news/279003986/...</a><span class="q qs">secondary</span></li>
+    <li><b>豐雲學堂(聯發科 TPU 專欄)</b> — 佐證:外資「Pumafish 取消→Whalefish」與郭明錤「Humufish/Triggerfish」兩說並存之整理(代號/節點不可寫死)<a href="https://www.sinotrade.com.tw/richclub/hotstock/%E8%81%AF%E7%99%BC%E7%A7%91%E6%90%ADGoogle-TPU%E5%95%86%E6%A9%9F%E6%BC%B2%E5%81%9C-ASIC%E6%A5%AD%E5%8B%99%E9%80%B2%E5%85%A5%E6%94%B6%E5%89%B2%E6%9C%9F-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C--6926922f0c5a0a4256cb8121">sinotrade.com.tw/richclub/hotstock/聯發科...</a><span class="q qs">secondary</span></li>
+  </ul>
+
+  <h3>Blog / 彙整(標明保留意見)</h3>
+  <ul class="refs">
+    <li><b>SemiAnalysis《AWS Trainium3 Deep Dive》(2025/12/25)</b> — 佐證:前段 Annapurna(SerDes=Synopsys)/後段+封裝世芯、Marvell 輸掉 bakeoff(RDL interposer/時程)、Anita/Mariana 雙光罩;<b>Anita 佔比細節為單一來源、維持 ⚪待查</b><a href="https://newsletter.semianalysis.com/p/aws-trainium3-deep-dive-a-potential">newsletter.semianalysis.com/p/aws-trainium3-deep-dive...</a><span class="q qb">blog</span></li>
+    <li><b>SemiWiki 論壇轉述郭明錤 + AIPostHub 整理(2026/5)</b> — 佐證:Humufish COT 評估/EMIB-T 90% 良率之「據轉述」出處;<b>X 原帖不可得、單一分析師、⚪unverified</b><a href="https://semiwiki.com/forum/threads/ming-chi-kuo-on-intels-emib-t-packaging-for-google-tpu-v8e-humufish.25038/">semiwiki.com/forum/threads/...</a>、<a href="https://www.aiposthub.com/google-tpu-v8-mediatek-tsmc-intel-supply-chain/">aiposthub.com/...</a><span class="q qb">blog</span></li>
+    <li><b>郭明錤 X 原帖(2026/6/22)</b> — 佐證:TPU v9 Triggerfish「聯發科獨家/ASP+30%/Humufish 4-5 百萬顆 vs Triggerfish 增量 1-2 百萬顆」原始出處;<b>單一信源、⚪unverified、與同人 5 月 COT 說對沖</b><a href="https://x.com/mingchikuo/status/2068924606329598079">x.com/mingchikuo/status/2068924606329598079</a>(另見 <a href="https://cryptobriefing.com/google-mediatek-tpu-v9-triggerfish-chip/">cryptobriefing 轉述</a>、<a href="https://wccftech.com/google-mediatek-build-tpuv9-triggerfish-cpu-compute-die-one-package-agentic-ai/">Wccftech</a>)<span class="q qb">blog</span></li>
+    <li><b>Jukan X 轉述 Morgan Stanley(2025/7 報告)</b> — 佐證:MS「世芯或為 Trainium3 唯一 ASIC 設計服務供應商、大機率取得 Trainium4」;<b>法人報告經轉述、原文未公開</b><a href="https://x.com/Jukanlosreve/status/1940903893556514936">x.com/Jukanlosreve/status/1940903893556514936</a><span class="q qb">blog</span></li>
+    <li><b>BigGo Finance 轉述 Goldman Sachs(2026/4)</b> — 佐證:GS 2027 ASIC $12.3B/TAM $195B→$240B 之 4 月版轉述(與 7/2 $20.3B 為同券商連續上修軌跡、引用帶日期);<b>GS 原報告非公開、未附原文網址</b><a href="https://finance.biggo.com/news/xgQcm50ByH9TLH69xqvl">finance.biggo.com/news/xgQcm50ByH9TLH69xqvl</a><span class="q qb">blog</span></li>
+    <li><b>Growin 投資部落格(2026/4/22)</b> — 佐證:GS TP 5,000(5/1)彙整;「台股 7 檔 ASIC 受惠股」市場清單原文(6 檔經查核歸屬其他題、防雙計之查核對象)<a href="https://blog.growin.tv/asic-vs-gpu-stocks/">blog.growin.tv/asic-vs-gpu-stocks/</a><span class="q qb">blog</span></li>
+    <li><b>CMoney/vocus — 力旺×NVIDIA Vera Rubin 說法出處</b> — 佐證:「NeoFuse/PUF 整合 Vera Rubin、取得訂單」僅見於此類彙整/投顧轉述;<b>無官方佐證、列未證實傳聞區、不作事實引用</b><a href="https://cmnews.com.tw/article/cmoney-c8e04a54-4ad2-11f1-9f45-7eafde940d10">cmnews.com.tw/article/cmoney-c8e04a54...</a><span class="q qb">blog</span></li>
+    <li><b>豹投資專欄(HPC 概念股列名處)</b> — 佐證:創惟 6104 被列名之出處;<b>經 2026H1 新聞查核無 AI ASIC 案源、判定純清單錯掛(被反駁來源)</b><a href="https://www.gorich.com.tw/tw/article/21715">gorich.com.tw/tw/article/21715</a><span class="q qb">blog</span></li>
+    <li><b>ABMedia(2026)</b> — 佐證:「聯發科傳拿下 Meta」「傳入股創意」兩則傳聞之出處;<b>均無公司證實、列未證實傳聞區(被反駁/待查來源)</b><a href="https://abmedia.io/mediatek-reportedly-secures-meta-as-asic-customer-after-tpu">abmedia.io/mediatek-reportedly-secures-meta...</a><span class="q qb">blog</span></li>
+    <li><b>36kr/BigGo 供應鏈報導 — 世芯 CoWoS 60K 片說法出處</b> — 佐證:「60K(+200%)」單一供應鏈口徑;<b>與外資 4→5 萬片口徑衝突、標 low、兩口徑並陳(未附網址:本輪僅定位到轉載鏈)</b><span class="q qb">blog</span></li>
+  </ul>
+
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>口徑修正 / 待查(2026/7 依 verdicts 最終裁決更新):</b>① <b>聯發科 $2B=「2026 全年 AI ASIC 目標」(由 $1B 上修)、實質集中 Q4'26 認列</b>(法說 4/30+股東會 5/29);認列主體=v7e 首案(N3),Zebrafish(2nm)為 late 2027——勿把不同案/節點/年度混為一談;② <b>創意 Google 占比=兩大 3nm 案「合計」占 2026 turnkey 營收 50-55%(法說口徑)</b>,原「Axion 單案占總營收 50%+」寫法屬雙重高估、已全數改寫;③ <b>世芯 Trainium3 量產主力=Annapurna 自有 Mariana 光罩、世芯 Anita 佔少數</b>(市場流傳 30-37% 為單一來源 ⚪待查勿硬填);④ TAM $70-80B 為聯發科自述、Broadcom $60-90B 為公司框架、GS $240B 為券商口徑——三者口徑不同、勿直接對台廠營收線性外推;⑤ Broadcom $73B(FY25Q4 backlog)與 $30B+(FY26Q2 bookings)不同季不同口徑勿混;⑥ 多數客戶 ASIC 對應為 SemiAnalysis/媒體彙整或公司自述,客戶身分未經兩造逐項證實。</div>
   <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
 </div></section>
 
-<footer class="container"><p>雲端 AI ASIC 設計服務台鏈 製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+<footer class="container"><p>雲端 AI ASIC 設計服務台鏈 製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 增補:2026/07(findings 三檔全量回填+verdicts 最終裁決:refuted 8 條移入警示區、unverified 10 條標 ⚪、corrections 全數採用)· 資料僅供參考,不構成投資建議</p></footer>
 
 <script>
 (function(){

@@ -100,6 +100,8 @@ footer{padding:36px 0;border-top:1px solid var(--line);color:var(--ink-soft);fon
 @media print{header.nav{position:static}.card:hover{transform:none;box-shadow:var(--shadow)}section.block{padding:24px 0;break-inside:avoid}.hero{padding:24px 0}body{font-size:12px}a{color:var(--ink)}}
 @media(max-width:860px){.cols-2,.cols-3,.cols-4{grid-template-columns:1fr}.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}.hero h1{font-size:28px}.chain-row{grid-template-columns:1fr}}
 p,li,td{overflow-wrap:anywhere}
+table td{overflow-wrap:break-word}
+.callout.ok{background:var(--ok-soft);border-left:4px solid var(--ok)}
 @media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 @media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
 </style>
@@ -118,12 +120,14 @@ p,li,td{overflow-wrap:anywhere}
 
 <div class="hero"><div class="container">
   <h1>InP 光通訊上游 <em>× 供應鏈研究指南</em> 2026</h1>
-  <p class="lead">AI 光通訊(CPO/1.6T)的雷射光源只能做在 InP 上、無矽替代——這是材料端的物理瓶頸。「瓶頸中的瓶頸」是基板長晶(AXT+住友雙寡頭近 8 成、產能受中國管制、6 吋 +250%)。台廠吃磊晶+雷射晶粒(聯亞一條龍最硬、全新 MOCVD 龍頭、英特磊 MBE),基板長晶=零(成本端受制)。性感點:需求 9 倍 × 供給寡占 × 地緣管制三重共振。</p>
+  <p class="lead">AI 光通訊(CPO/1.6T)的雷射光源只能做在 InP 上、無矽替代——這是材料端的物理瓶頸。「瓶頸中的瓶頸」是基板長晶(AXT+住友雙寡頭近 8 成、產能受中國管制、6 吋 +250%)。台廠吃磊晶+雷射晶粒(聯亞一條龍最硬、全新 MOCVD 龍頭、英特磊 MBE),基板長晶=零(成本端受制)。性感點:需求 9 倍 × 供給寡占 × 地緣管制三重共振。2026/5 月營收已示範分化:有住友長約的聯亞 +118.8% vs 無鎖料的英特磊 +1.07%——「基板=瓶頸中的瓶頸」從敘事變成可觀測事實。</p>
   <div class="meta">
     <span class="badge b-accent">驅動力:AI 光通訊最上游瓶頸</span>
     <span class="badge">市場:台灣磊晶 + 國際基板對照</span>
-    <span class="badge b-warn">更新:2026/06</span>
-    <span class="badge b-ok">查證:Workflow 研究＋對抗式查證</span>
+    <span class="badge b-warn">更新:2026/06 · 增補:2026-07-03</span>
+    <span class="badge b-ok">查證:Workflow 研究＋兩輪對抗式查證</span>
+    <span class="badge b-ok">來源:75+ 筆逐筆帶 URL 分層</span>
+    <span class="badge b-ok">第二輪裁決:24 條主張反例測試＋13 檔股號複核＋9 組跨檔矛盾裁決</span>
   </div>
 </div></div>
 
@@ -135,8 +139,9 @@ p,li,td{overflow-wrap:anywhere}
   <div class="grid cols-3">
     <div class="card"><h4><span class="ico">💎</span>基板長晶(台股缺席)</h4><p>瓶頸中的瓶頸:AXT+住友雙寡頭近 8 成、產能受中國管制、6 吋 +250%。台灣基板長晶=零,須全數外購(成本端受制)。</p></div>
     <div class="card"><h4><span class="ico">🌈</span>磊晶(台廠卡位最硬)</h4><p>MOCVD/MBE 在基板上長 EML/CW/PD 元件層。全新(MOCVD 龍頭)、聯亞(一條龍)、英特磊(MBE+國防)是全球少數 InP 磊晶外包產能。</p></div>
-    <div class="card"><h4><span class="ico">🔦</span>雷射晶粒製造</h4><p>EML/CW DFB/PD 裸晶粒。聯亞有自有晶粒;穩懋 200G PD 量產、CW/EML 2027 選擇權;IDM(Lumentum/Coherent)自製為主。</p></div>
+    <div class="card"><h4><span class="ico">🔦</span>雷射晶粒製造</h4><p>EML/CW DFB/PD 裸晶粒。聯亞有自有晶粒;穩懋 200G PD 已進量產(法說口徑 2Q26 小量、2H26 放量)、CW/EML 2027 選擇權;IDM(Lumentum/Coherent)自製為主。</p></div>
   </div>
+  <div class="callout ok"><b>2026-07-03 增補重點(依第二輪對抗式裁決更新):</b>① 2026/5 月營收全補齊——同鏈兩極分化成形:有住友長約鎖料的聯亞 5 月 +118.84% vs 無長約的英特磊 +1.07%(公司/法人皆歸因 InP 基板短缺卡出貨),鉅亨/Yahoo 股市 2026/6;② 供給端三路大擴產上修——JX 2026/6/16 把 2 月 ¥200 億/3 倍計畫加碼到至 FY2030 最多 ¥1,200 億、產能 7-10 倍(JX 官網一手稿),Coherent Sherman $650M 動土(廠房空間 2 倍、InP 晶圓產出 12 個月內 4 倍,獲 CHIPS 最高 $50M LOI,2026/6/16-17),AXT 2026 倍增+2027 再倍增(公司自述),住友上修至 ¥180 億/伊丹製作所(日刊工業/日經,2026/6);③ NVIDIA 2026/3/2 各注資 Lumentum/Coherent $20 億+多年採購承諾+產能取得權(SEC 8-K);④ 環宇-KY 4991 經逐檔查證升入受惠名單(InP/GaAs 晶圓代工實體業務、200G PD 2Q26 量產);⑤ 新增「被反駁說法警示區」(見參考資料前),refuted 主張不入正文。</div>
 </div></section>
 
 <!-- 02 -->
@@ -145,12 +150,12 @@ p,li,td{overflow-wrap:anywhere}
   <h2 class="title">供應鏈地圖(四層結構)</h2>
   <p class="subtitle">原料 → 基板長晶 → 磊晶 → 雷射晶粒 →(下游 CPO 光引擎)。<span class="conf c-high">綠＝獨立佐證</span> <span class="conf c-med">橙＝公司自述</span> <span class="conf c-un">灰＝媒體彙整</span></p>
   <div class="chain">
-    <div class="chain-row"><div class="lvl">原料/基板<small>台股缺席=成本端</small></div><div class="items"><span class="badge b-accent">住友/AXT-Tongmei/JX(基板)</span><span class="badge b-accent">中國銦精煉</span><span class="badge b-accent">Coherent(自製 6 吋)</span></div></div>
-    <div class="chain-row"><div class="lvl">磊晶<small>台廠最硬</small></div><div class="items"><span class="badge b-tw">全新 2455(MOCVD)</span><span class="badge b-tw">聯亞 3081</span><span class="badge b-tw">英特磊 4971(MBE)</span><span class="badge b-accent">IQE / Aixtron(設備)</span></div></div>
-    <div class="chain-row"><div class="lvl">雷射晶粒<small>製造代工</small></div><div class="items"><span class="badge b-tw">聯亞 3081(自有)</span><span class="badge b-tw">穩懋 3105(200G PD)</span><span class="badge b-tw">宏捷科 8086</span><span class="badge b-accent">Lumentum/Coherent</span></div></div>
+    <div class="chain-row"><div class="lvl">原料/基板<small>台股缺席=成本端</small></div><div class="items"><span class="badge b-accent">住友/AXT-Tongmei/JX(基板)</span><span class="badge b-accent">中國銦精煉/雲南鍺業</span><span class="badge b-accent">Coherent(自製 6 吋)</span><span class="badge">Freiberger(第二梯隊)</span></div></div>
+    <div class="chain-row"><div class="lvl">磊晶<small>台廠最硬</small></div><div class="items"><span class="badge b-tw">全新 2455(MOCVD)</span><span class="badge b-tw">聯亞 3081</span><span class="badge b-tw">英特磊 4971(MBE)</span><span class="badge b-tw">環宇-KY 4991(代工)</span><span class="badge b-accent">IQE / Aixtron・Veeco(設備)</span></div></div>
+    <div class="chain-row"><div class="lvl">雷射晶粒<small>製造代工</small></div><div class="items"><span class="badge b-tw">聯亞 3081(自有)</span><span class="badge b-tw">穩懋 3105(200G PD)</span><span class="badge b-tw">環宇-KY 4991(PD/CW)</span><span class="badge b-tw">宏捷科 8086(⚪待查)</span><span class="badge b-tw">光環 3234(CW 代工,watch)</span><span class="badge b-accent">Lumentum/Coherent/Broadcom/三菱</span></div></div>
     <div class="chain-row"><div class="lvl">下游交界<small>COS/光引擎</small></div><div class="items"><span class="badge b-tw">聯鈞 3450(COS/AOC)</span><span class="badge b-ok">→ CPO 矽光子題</span></div></div>
   </div>
-  <div class="callout insight">💡 台廠位置:卡在「磊晶+雷射晶粒」兩段(全球少數產能、議價力正兌現);最上游基板長晶與原料完全缺席=成本端與地緣風險源。</div>
+  <div class="callout insight">💡 台廠位置:卡在「磊晶+雷射晶粒」兩段(全球少數產能、議價力正兌現);最上游基板長晶與原料完全缺席=成本端與地緣風險源。國際佐證:聯亞(LandMark)被 TrendForce 具名列入全球 CW-DFB 產能前四(2026/6/3);全新(VPEC)被 Reuters 具名為全球 InP 供應鏈成員(2026/6/10)。</div>
 </div></section>
 
 <!-- 03 -->
@@ -168,17 +173,62 @@ p,li,td{overflow-wrap:anywhere}
     <div class="card"><p>光網路 TAM 2026→2028</p><h4>$150 億→$1,540 億(9 倍)</h4></div>
     <div class="card"><p>6 吋 InP 晶圓累計漲幅</p><h4>+250%(至 $5,000)</h4></div>
     <div class="card"><p>AXT+住友基板市占</p><h4>~8 成</h4></div>
-    <div class="card"><p>InP 基板供需缺口</p><h4>近 7 成</h4></div>
+    <div class="card"><p>InP 基板供需缺口</p><h4>逾 7 成(DIGITIMES)</h4></div>
   </div>
-  <p class="disclaimer">TAM 為 GS 口徑;漲價兩套口徑並行(國際累計 6 吋 +250% vs 台廠合約 +3-5%,差一數量級);基板市占 Reuters 口徑(36kr 系給住友 60%/AXT 35%)。缺口為 36kr/DIGITIMES 量級參考。標來源、非成交數。</p>
-  <h3>地緣事件鏈(供給瓶頸的時間線)</h3>
+  <div class="grid cols-4" style="margin-top:16px">
+    <div class="card"><p>AI 光收發器市場 2025→2026</p><h4>$165 億→$260 億(+57%,TrendForce)</h4></div>
+    <div class="card"><p>EML+CW-DFB 2026 月產能</p><h4>5,070 萬顆(倍增,TrendForce)</h4></div>
+    <div class="card"><p>1.6T 模組 2026 需求區間</p><h4>860 萬–2,000 萬顆(商轉元年)</h4></div>
+    <div class="card"><p>聯亞 vs 英特磊 2026/5 營收 YoY</p><h4>+118.8% vs +1.07%(鎖料分水嶺)</h4></div>
+  </div>
+  <p class="disclaimer">TAM 為 GS 口徑(券商研究、非公司財測);漲價兩套口徑並行(國際累計 6 吋 +250% vs 台廠合約 +3-5%,差一數量級);基板市占以 Reuters(2026/6/10,AXT+住友近 80%、JX ~10%)為錨,36kr(住友 60/AXT 35)與 BigGo(42/36/13)口徑分歧、僅作附註(產能/產量/營收口徑不明)。缺口已獲 DIGITIMES 具名口徑確認:2026 需求 260-300 萬片 vs 有效產能 ~75 萬片(2 吋約當)、缺口逾 7 成。標來源、非成交數。</p>
+
+  <h3>市場規模多研調口徑對照表(2026-07 增補;同層可比、跨層勿混比)</h3>
   <div class="table-wrap"><table>
-    <thead><tr><th>時點</th><th>事件</th></tr></thead>
+    <thead><tr><th>機構(時點)</th><th>量測層</th><th>數值(基期→預測)</th><th>CAGR / 成長率</th><th>口徑備註 / 分歧主因</th><th>信心</th></tr></thead>
     <tbody>
-      <tr><td>2025/2/4</td><td>中國第 10 號公告對「銦」(含 InP)出口管制、逐案許可——瓶頸引爆點</td></tr>
-      <tr><td>2025 上半年→Q3</td><td>AXT 自中國出口 InP 從「零許可」到 Q3 起穩定獲批(約 4 個月空窗)</td></tr>
-      <tr><td>2025/11</td><td>中國暫停部分礦物管制,但「銦/InP 未獲暫停」</td></tr>
-      <tr><td>2026/3/2</td><td>NVIDIA 對 Lumentum+Coherent 各注資 ~$20 億(合計 $40 億)鎖 EML/InP 產能</td></tr>
+      <tr><td>Intel Market Research(2026/4)</td><td>基板(AI 子口徑)</td><td>$1.35 億(2024)→$2.6 億(2032)</td><td>9.0%</td><td>明顯低於同業:模型未反映 2025H2 後漲價與缺口——低值錨</td><td><span class="conf c-low">低</span></td></tr>
+      <tr><td>Mordor Intelligence(2026/7 核對原頁)</td><td>基板(wafer)</td><td>$1.98 億(2025)→$2.21 億(2026)→$3.86 億(2031)</td><td>11.73%</td><td>基期模型保守、未充分反映 2026 現貨暴漲</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Technavio(2026/6)</td><td>基板(wafer)</td><td>2026-2030 增量 +$2.439 億</td><td>19.8%</td><td>介於 Mordor 與 QY 之間</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>QY Research(2026/5)</td><td>基板(substrate)</td><td>$1.37 億(2024)→$6.89 億(2031)</td><td>25.7%</td><td>反映 2025-26 漲價循環+AI 需求外推,CAGR 為 Mordor 的 2.2 倍</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>DIGITIMES(2026/5)</td><td>基板(金額+片數)</td><td>2026 約 $2.02 億、銷量 128.19 萬片</td><td>—</td><td>需求 260-300 萬片 vs 有效產能 ~75 萬片(2 吋約當)、缺口逾 7 成</td><td><span class="conf c-high">高(具名媒體)</span></td></tr>
+      <tr><td>Yole Group(2026/4-5)</td><td>元件 / PIC</td><td>InP 基 PIC $30 億(2023)→約 $50 億(2027);InP 光子元件 $52 億(2029E)</td><td>~14%;InP PIC ~22%</td><td>元件層,價值量約為基板層 15-25 倍,勿與 Mordor/QY 混比</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Cignal AI(2026/4)</td><td>元件(光元件營收)</td><td>光元件 ~$250 億(2025);datacom 光元件 $190 億+(2025)</td><td>datacom +70%(2025)</td><td>光網路專業研調;hyperscaler 投資使 2026 預測較前版大幅上修</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>TrendForce(2026/4/20)</td><td>模組(AI 光收發器)</td><td>$165 億(2025)→$260 億(2026)</td><td>+57% YoY</td><td>官方新聞稿;EML/CW 晶片短缺被點名為擴產最大瓶頸</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>LightCounting(2026/3-4)</td><td>模組(乙太網光模組)</td><td>2024 +93%、2025 +82%、2026 約 +60-65%;2030 AI 叢集光學上看 $1,000 億(情境值、標題帶問號、非基準預測)</td><td>+60-65%(2026)</td><td>自家口徑=成長率;$16.5B→$26B 絕對值出處=TrendForce(掛名錯置已更正,見被反駁區)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>Yole《Optical Transceivers 2026》</td><td>模組(光收發)</td><td>$234 億(2025)→$1,123 億(2031)</td><td>datacom CAGR 30%</td><td>AI 訓練+推論在預測期末占營收 >90%;與 LightCounting 模組口徑互證</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>Goldman Sachs(2026/6)</td><td>光網路(最寬)</td><td>$150 億(2026)→$1,540 億(2028)</td><td>~9 倍 / 2 年</td><td>券商研究、非公司財測;scale-up 占 ~69%(~$1,060 億)、CPO ~$910 億(29% 滲透假設)</td><td><span class="conf c-med">中(券商)</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 <b>口徑分歧主因(本研究彙整交叉):</b>各家數字差距的主因是「量測層不同」而非互相矛盾——基板層($1.4-6.9 億)→ 元件/PIC 層($30-250 億)→ 模組層($165-260 億)→ 光網路層($150-1,540 億),每上一層價值量放大 10-20 倍;<b>同層內分歧</b>(基板 CAGR 9% vs 11.7% vs 19.8% vs 25.7%)則來自基期年與是否納入 2025-26 漲價/AI 外推。引用任何「InP 市場規模」前先問是哪一層。</div>
+
+  <h3>催化劑時間軸(地緣事件鏈 2026-07 擴充為全事件表:狀態+來源型別+信心)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>時點</th><th>事件</th><th>狀態</th><th>來源型別</th><th>信心</th></tr></thead>
+    <tbody>
+      <tr><td>2025/2/4</td><td>中國商務部+海關總署 2025 年第 10 號公告:鎢/碲/鉍/鉬/銦相關物項出口管制(含磷化銦、三甲基銦)、逐案許可,即日生效——整輪漲價與供應鏈重組的引爆點</td><td>已發生(在效)</td><td>一手(官方公告)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2025 上半年→Q3</td><td>AXT 自中國出口 InP 從「零許可」到 Q3 起穩定獲批(約 4 個月空窗);Q3 營收因遞延訂單放行大幅超標、Q4 又因許可遞延受限——「管制≠禁運,許可節奏=營收波動主因」</td><td>已發生</td><td>法說+二手</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2025/8</td><td>Coherent 啟動 6 吋 InP 量產平台;中國首度放行部分 InP 基板</td><td>已發生</td><td>二手</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>2025/11</td><td>中國暫停部分礦物管制,但「銦/InP 未獲暫停」</td><td>已發生(在效)</td><td>二手</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2025/12/8</td><td>TrendForce 定調「AI 資料中心點燃雷射缺貨潮」:NVIDIA 預先鎖定 EML/CW 產能、非 NVIDIA 客戶交期被推遲到 2027 之後;台股雷射概念股 12 月波段 +52%~+104%(今周刊統計)</td><td>已發生</td><td>研調一手</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/1/1</td><td>中國 2026 年版兩用物項許可目錄生效:海關實質審查趨嚴、北美大買家通關由當日延至數日、歐洲買家首次被要求揭露端用戶總部所在地</td><td>已發生(在效)</td><td>一手+二手彙整</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>2026/1/2</td><td>CFIUS 令中資背景 HieFo 於 180 天內出脫 EMCORE InP 資產(DPA 721 條、白宮行政命令);白宮 232 條關鍵礦物調查 50 種含銦</td><td>已發生</td><td>一手(白宮 EO/美財政部 sb0349)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/2/10</td><td>JX Advanced Metals 磯原廠 ¥200 億投資、InP 基板產能 2030 較 2025 擴 3 倍、FY2027 起分段投產</td><td>已發生→執行中</td><td>一手(公告)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/3/2</td><td>NVIDIA 對 Lumentum+Coherent 各注資 ~$20 億(合計 $40 億)+多年期數十億美元採購承諾+未來產能取得權(非獨家),鎖 EML/InP 產能</td><td>已發生</td><td>一手(SEC 8-K/NVIDIA Newsroom)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/4/2</td><td>穩懋 200G PD 完成最終驗證進量產(法說口徑:2Q26 小量量產前出貨、2H26 明顯成長;TechNews「4 月起量產出貨」為樂觀口徑並列);CW/EML 驗證中、市場看 2027</td><td>已發生</td><td>二手+法說</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/4/22 + 6/17</td><td>聯亞:與住友電工簽 2026-2030 五年 InP 基板長約+4/22 公告 13.15 億設備投資;6/17 董事會再通過 30 億擴產(與 2025/8 投資上限 3.62 億為三筆遞增獨立公告、勿合併)</td><td>已發生→執行中</td><td>公告+法說</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/4/27</td><td>MACOM 注資 IQE £45M+長期供貨協議(IQE 共募 £81M 擴 InP/GaN)——磊晶委外供給強化、台磊晶三雄中期競爭變數</td><td>已發生</td><td>一手(IQE 公告)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/4/30</td><td>AXT 1Q26 法說:營收 $26.9M(+17% QoQ / +39% YoY,兩口徑皆真)、InP backlog 破 $1 億、non-GAAP 毛利率 29.9%、2Q 指引 ~$34M 視出口許可;Tongmei $632.5M 募資、產能 2026 倍增+2027 再倍增(公司自述)</td><td>已發生</td><td>一手(法說逐字稿)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/5/5</td><td>Veeco 公告多家客戶合計 >$250M 訂單(Lumina MOCVD+Spector IBD+WaferEtch;大宗為 Spector IBD 售予 800G/1.6T 光收發器製造商),2026 起交付、2027 顯著加速</td><td>已發生</td><td>一手(Veeco IR)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/5 上旬-5 月底</td><td>Coherent CEO 隨美國商界代表團赴中交涉出口許可延遲;5 月底中國 2026 首批 InP 基板「有限放行」(優先內需、難紓全球缺口);Google 親自登門拜訪基板供應商催擴產、「供應鏈安全超過價格」</td><td>已發生</td><td>二手(Reuters/DIGITIMES)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>2026/5/19</td><td>Aixtron 獲 Lumentum 多台 G10-AsP MOCVD 訂單(800G+ InP 雷射/偵測器擴產,金額未揭露)——與 Veeco 訂單同構成設備軍備競賽證據鏈</td><td>已發生</td><td>一手(新聞稿)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/6/10-11</td><td>Reuters:6 吋 InP 均價 +250% 至 $5,000、AXT+住友合計近 80%、JX 約 10%;AXT 中國子公司 6 月才獲首批年度出口許可;Lumentum 稱產能翻 4 倍仍 sold out 到 2028;VPEC(全新)/LandMark(聯亞)被具名列為全球供應鏈成員</td><td>已發生</td><td>二手(國際線報,多渠道聯合供稿)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/6 中旬</td><td>住友電工上修 InP 基板擴產:投資 ¥180 億、伊丹製作所、至 FY2028 產能約 2.4~3 倍(vs FY2024;日刊工業頭條 2.4x/日經標題約 3x,精確倍率待一手)——取代舊「6 吋 +40%」口徑(該口徑僅研調轉述 ⚪)</td><td>已發生→執行中</td><td>二手(日刊工業/日經雙源)</td><td><span class="conf c-high">高(倍率口徑 <span class="conf c-med">中</span>)</span></td></tr>
+      <tr><td>2026/6/16-17</td><td>JX 加碼:至 FY2030 最多 ¥1,200 億、產能 7-10 倍(CPO 需求加速,JX 官網一手稿+Nikkei);Coherent Sherman $650M 擴建動土(空間 2 倍/InP 晶圓產出 12 個月內 4 倍)+CHIPS 最高 $50M LOI(LOI 非最終撥款協議)、與 NVIDIA 共同動土</td><td>已發生→執行中</td><td>一手(JX/NIST/Coherent PR)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026/7/10</td><td><b>前瞻:</b>台股 6 月營收公告(法定期限)——驗證聯亞高基期能否續逾 +100%、英特磊基板缺料衝擊是否延續第二個月</td><td>前瞻</td><td>制度(MOPS)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>2026 H2</td><td><b>前瞻:</b>穩懋 CW 70/100mW 小量出貨目標(市場估量產 2027)、全新新磊晶機台 Q3-Q4 進廠、環宇-KY V-Tac InP 產線投產+CW 100mW 放量目標(百萬顆級,公司自述)、宏捷科 Q2 法說(InP 認證是否親口證實)、中國出口許可審批節奏(60+ 工作天是否縮短,2026H1 無證據顯示系統性放鬆)</td><td>前瞻</td><td>公司自述+彙整</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>2027</td><td><b>前瞻:</b>Veeco/Aixtron 交機加速、穩懋 CW/EML 量產(市場估)、AXT 產能再倍增、CPO ELS 大規模部署起點、聯亞前段產能較 2026 底 +100%(公司自述)——2027=供給釋放與新品認證的雙重樞紐年</td><td>前瞻</td><td>彙整</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>FY2027-2030</td><td><b>前瞻:</b>JX 分段投產→7-10 倍、Coherent Sherman 產出 4 倍、住友 FY2028 約 2.4~3 倍——2028 後基板供給結構性翻轉,漲價紅利有時效</td><td>前瞻</td><td>一手+彙整</td><td><span class="conf c-med">中</span></td></tr>
     </tbody>
   </table></div>
 </div></section>
@@ -193,24 +243,24 @@ p,li,td{overflow-wrap:anywhere}
     <thead><tr><th>方法</th><th>原理</th><th>難點</th><th>門檻</th></tr></thead>
     <tbody>
       <tr><td>LEC 液封柴可拉斯基</td><td>B2O3 液封抑磷揮發、拉晶</td><td>拉晶快但差排高</td><td><span class="stars">★★★★★</span></td></tr>
-      <tr><td>VGF 垂直梯度凝固</td><td>低溫梯度長低差排大尺寸</td><td>磷揮發+InP 易孿晶、良率 20-25%</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>VGF 垂直梯度凝固</td><td>低溫梯度長低差排大尺寸</td><td>磷揮發(蒸氣壓 ~2.75MPa/1335K)+InP 疊差能最低極易孿晶,良率分層:產業 20-25%/龍頭 15-20%/中國 &lt;10%</td><td><span class="stars">★★★★★</span></td></tr>
     </tbody>
   </table></div>
   <div class="grid cols-2">
-    <div class="card"><h4>住友 / AXT-Tongmei / JX <span class="code">國際</span></h4><p>三強占 80-90%;AXT 產能多在中國受出口管制;台廠完全缺席、須全數外購(=成本端受制+地緣風險)。<span class="conf c-high">高</span></p></div>
-    <div class="card"><h4>Coherent <span class="code">COHR</span></h4><p>西方少數垂直整合者,建全球首座 6 吋 InP 量產廠(繞開中國)。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>住友 / AXT-Tongmei / JX <span class="code">國際</span></h4><p>三強占 80-90%(Reuters:AXT+住友近 80%、JX ~10%);AXT 產能多在中國受出口管制,InP backlog 破 $1 億(1Q26 法說);台廠完全缺席、須全數外購(=成本端受制+地緣風險)。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>Coherent <span class="code">COHR</span></h4><p>西方少數垂直整合者,建西方首座 6 吋 InP 量產平台(Sherman,繞開中國);2026/6/16 動土 $650M 擴建:廠房空間 2 倍、InP 晶圓產出 12 個月內 4 倍,獲 CHIPS 最高 $50M LOI+德州/地方約 $20M;自述 4→6 吋=4 倍產出、die cost −60%(公司自述、缺第三方)。<span class="conf c-high">高</span></p></div>
   </div>
   <h3>核心 B:磊晶 + 雷射晶粒(③④ 16/20,台廠主場)</h3>
   <div class="table-wrap"><table>
     <thead><tr><th>環節</th><th>作用</th><th>難點</th><th>門檻</th></tr></thead>
     <tbody>
-      <tr><td>MOCVD/MBE 磊晶</td><td>長 EML/CW/PD 元件層</td><td>1310/1550nm 長波長均勻性;Aixtron MOCVD 設備隘口(70-90%)</td><td><span class="stars">★★★★☆</span></td></tr>
-      <tr><td>EML 雷射晶粒</td><td>DFB+EAM 單片整合</td><td>200G/lane、106GBaud、e-beam 微影、Tier-1 認證</td><td><span class="stars">★★★★★</span></td></tr>
+      <tr><td>MOCVD/MBE 磊晶</td><td>長 EML/CW/PD 元件層</td><td>1310/1550nm 長波長均勻性;Aixtron MOCVD 設備隘口(70-90%);2026 設備軍備競賽:Lumentum 下單 Aixtron G10-AsP 多台(2026/5/19)、Veeco 獲 >$250M 訂單(2026/5/5)</td><td><span class="stars">★★★★☆</span></td></tr>
+      <tr><td>EML 雷射晶粒</td><td>DFB+EAM 單片整合</td><td>200G/lane、106GBaud、e-beam 微影(穩懋 4→10 台;聯亞已擴 2.5 倍,公司自述)、Tier-1 認證</td><td><span class="stars">★★★★★</span></td></tr>
     </tbody>
   </table></div>
   <div class="grid cols-2">
-    <div class="card"><h4>聯亞光電 <span class="code">3081</span></h4><p>InP 磊晶+雷射晶粒一條龍(鏈上最硬),矽光子 CW/外置光源主供;與住友五年長約鎖料;1Q26 +99%、EPS 3.44 創高、毛利率 54.8% 8 年高。<span class="conf c-high">高</span></p></div>
-    <div class="card"><h4>全新光電 <span class="code">2455</span></h4><p>InP/GaAs MOCVD 磊晶龍頭;200G PD Q2 出貨、Q2 成本轉嫁;1Q26 EPS 1.06、MOCVD 擴 5 部 2027 投產。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>聯亞光電 <span class="code">3081</span></h4><p>InP 磊晶+雷射晶粒一條龍(鏈上最硬),矽光子 CW/外置光源主供;與住友簽 2026-2030 五年長約鎖料;1Q26 +99%、EPS 3.44 創高、毛利率 54.8% 8 年高;2026/5 營收 4.05 億 +118.84%、1-5 月 +107.11%。<span class="conf c-high">高</span></p></div>
+    <div class="card"><h4>全新光電 <span class="code">2455</span></h4><p>InP/GaAs MOCVD 磊晶龍頭;200G PD Q2 小量出貨、Q2 成本轉嫁+6 月起磊晶雙位數調漲;1Q26 EPS 1.06、MOCVD 擴 5 部 2027 投產(新機台 3Q-4Q26 進廠,今周刊 2026/6/16);2026/5 營收 3.21 億 +46.51%。<span class="conf c-high">高</span></p></div>
   </div>
 </div></section>
 
@@ -224,13 +274,30 @@ p,li,td{overflow-wrap:anywhere}
     <div class="down">↓</div>
     <div class="layer"><b>② InP 基板長晶(LEC/VGF)★ 瓶頸中的瓶頸</b><div class="uses">AXT/住友/JX 80-90%;台股缺席</div></div>
     <div class="down">↓</div>
-    <div class="layer"><b>③ MOCVD/MBE 磊晶 ★ 台廠主場</b><div class="uses">全新/聯亞/英特磊;Aixtron 設備隘口</div></div>
+    <div class="layer"><b>③ MOCVD/MBE 磊晶 ★ 台廠主場</b><div class="uses">全新/聯亞/英特磊(+環宇-KY 代工);Aixtron/Veeco 設備隘口</div></div>
     <div class="down">↓</div>
-    <div class="layer"><b>④ 雷射晶粒製造(EML/CW DFB/PD)</b><div class="uses">聯亞自有/穩懋 200G PD;Lumentum/Coherent IDM</div></div>
+    <div class="layer"><b>④ 雷射晶粒製造(EML/CW DFB/PD)</b><div class="uses">聯亞自有/穩懋 200G PD;Lumentum/Coherent/Broadcom IDM</div></div>
     <div class="down">↓</div>
     <div class="layer"><b>⑤ COS 封測 → 光引擎/模組(CPO 題)</b><div class="uses">聯鈞 COS/AOC;與 CPO 矽光子題交界</div></div>
   </div>
   <div class="callout insight">💡 核心結論:需求金字塔(光網路 TAM 9 倍)的「塔尖發光」全靠 InP,但供給的「塔基」(基板長晶)被三家寡占+中國管制卡住——台廠的 alpha 在中段磊晶/晶粒的全球稀缺產能與漲價轉嫁,不是塔基(基板長晶台廠=零)。</div>
+
+  <h3>需求端量化傳導鏈(1.6T/CPO → EML/CW 顆數 → InP 磊晶/基板;2026-07 增補)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>傳導節點</th><th>量化錨</th><th>來源 / 信心</th></tr></thead>
+    <tbody>
+      <tr><td>1.6T 模組 → EML 顆數</td><td>1.6T-DR8(OSFP)=8 光學通道 × 200G/lane → <b>每模組 8 顆 200G EML</b>(規格定義)</td><td>Coherent 1.6T-DR8 新聞稿(一手)<span class="conf c-high">高</span></td></tr>
+      <tr><td>矽光路線對照:1.6T → CW 顆數</td><td>矽光 DR8 每模組低至 <b>2 顆高功率 CW</b> 分光 8 路(各家實作 1-4 顆不等)vs EML 路線 8 顆——矽光滲透率升=顆數降但單顆功率/磊晶面積升</td><td>DustPhotonics Oz8 產品頁(vendor 規格)<span class="conf c-med">中</span></td></tr>
+      <tr><td>2026 1.6T 出貨量</td><td>商轉元年需求 860 萬-2,000 萬顆(區間大=各家對 NVIDIA Rubin 拉貨節奏假設不同);分布 NVIDIA >500 萬、Google ~400 萬、Meta ~100 萬 ⚪顆數分配為 vendor blog 轉述、未經 LightCounting 原文核對</td><td>C-Light 彙整(blog 層)<span class="conf c-un">⚪待查</span></td></tr>
+      <tr><td>EML 供需缺口(推導)</td><td>若 1.6T 出貨 1,000-2,000 萬顆 → 僅 1.6T 就需 0.8-1.6 億顆 200G EML/年;業界推算 500 萬顆模組即需 4,000 萬顆 EML,而 Broadcom/Lumentum/三菱主力年產能僅約 2,000 萬顆 → 缺口 25-50%(推導,標明)</td><td>MapYourTech 引 McKinsey 推算+本研究推導<span class="conf c-med">中(推導)</span></td></tr>
+      <tr><td>短缺持續時間</td><td>McKinsey《Opportunities in networking optics》(2025/6):800G 短缺 40-60% 至 2027、<b>1.6T 短缺 30-40% 延續至 2029</b>(McKinsey 原報告確有此數)</td><td>McKinsey 2025/6(SDxCentral 具名轉述)<span class="conf c-high">高</span></td></tr>
+      <tr><td>800G 上修</td><td>GS 把 2026 800G 出貨由 2,500 萬顆上修 58% 至 3,350 萬顆;TrendForce:800G 及以上合計 2,400 萬(2025)→近 6,300 萬顆(2026,2.6 倍)——兩口徑範圍不同(GS=僅 800G;TrendForce=800G+ 含 1.6T),非矛盾</td><td>C-Light 彙整 GS+Semiconductor Today 轉述 TrendForce<span class="conf c-med">中-高</span></td></tr>
+      <tr><td>CPO → CW DFB 顆數</td><td>Broadcom Bailly 51.2T CPO=8 個 6.4T 光引擎+<b>16 個外置雷射模組(每引擎 2 個)</b>;CPO 把雷射由分散改 ELS 集中式,高功率 CW DFB(100-400mW)顆數+功率需求上移;高功率 CW 良率隨功率驟降(400mW 級 3 吋片僅 200+ die)進一步放大磊晶/基板需求</td><td>Chipstrat(blog,架構拆解)<span class="conf c-med">中</span></td></tr>
+      <tr><td>CPO ELS 市場與時點</td><td>CPO 元件市場 >$13 億(2025)→$27 億(2028);外置雷射被點名「立即性需求」品類;大規模 ELS 部署約 2027 起加速——CPO 放量遞延到 2027-28 反而拉長可插拔模組+EML 賞味期</td><td>viksnewsletter 彙整 LightCounting<span class="conf c-med">中</span></td></tr>
+      <tr><td>IDM 驗證</td><td>Coherent 於 OFC 2026 展示 6.4T(32×200G)socketed CPO+自家高功率 InP CW 驅動的 ELS——「CPO 商用=外置 CW DFB 放量」傳導鏈的一手驗證;分工:IDM 自供光源、台廠磊晶(聯亞)吃代工單</td><td>Coherent OFC 2026 新聞稿(一手)<span class="conf c-high">高</span></td></tr>
+      <tr><td>台廠供給端對應</td><td>聯亞 2027 前段產能 vs 2026 底 +100%(公司自述)、E-beam 已擴 2.5 倍;全新 capex ~7 億、新機 3Q-4Q26 進廠;英特磊德州二期 +12 台(公司自述)——供給增速仍遠低於模組需求增速(推導):量的分配靠長約與認證卡位,不是人人有獎</td><td>各家法說(公司自述)+本研究推導<span class="conf c-med">中</span></td></tr>
+    </tbody>
+  </table></div>
 </div></section>
 
 <!-- 06 -->
@@ -240,12 +307,42 @@ p,li,td{overflow-wrap:anywhere}
   <div class="table-wrap"><table>
     <thead><tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr></thead>
     <tbody>
-      <tr><td>磊晶三雄(聯亞/全新/英特磊)</td><td>InP 缺料漲價 + CPO/1.6T 放量</td><td>聯亞一條龍最硬+住友長約鎖料;全新 200G PD+成本轉嫁;英特磊 InP 占比翻倍</td></tr>
-      <tr><td>雷射晶粒代工(聯亞/穩懋/宏捷科)</td><td>EML/CW DFB 需求倍增</td><td>聯亞自有晶粒(現在);穩懋 200G PD 量產、CW/EML 2027(選擇權);宏捷科認證待證</td></tr>
-      <tr><td>下游封測交界(聯鈞)</td><td>AOC/COS 放量</td><td>偏 CPO 下游,與 CPO 題重疊(交界對照)</td></tr>
+      <tr><td>磊晶三雄+代工(聯亞/全新/英特磊/環宇-KY)</td><td>InP 缺料漲價 + CPO/1.6T 放量</td><td>聯亞一條龍最硬+住友長約鎖料(2026-2030);全新 200G PD Q2 小量+6 月磊晶雙位數調漲;英特磊 InP 占比 54.5%→60%(但無長約、5 月被缺料打到 +1.07%);環宇 200G PD 2Q26 量產+V-Tac InP 2H26</td></tr>
+      <tr><td>雷射晶粒代工(聯亞/穩懋/宏捷科)</td><td>EML/CW DFB 需求倍增(月產能 5,070 萬顆仍不足)</td><td>聯亞自有晶粒(現在、CW-DFB 產能全球前四);穩懋 200G PD 量產、CW/EML 2027(選擇權);宏捷科認證⚪待證(ETtoday 具名反證)</td></tr>
+      <tr><td>下游封測交界(聯鈞)</td><td>AOC/COS 放量(COS 產能擴 5 倍仍供不應求)</td><td>偏 CPO 下游,與 CPO 題重疊(交界對照、不雙計);單月強/累計負=復甦剛起步</td></tr>
     </tbody>
   </table></div>
-  <div class="callout risk">⚠️ 特有風險:① <b>台灣基板長晶=零</b>(成本端受制,基板 +250% 是壓力);② <b>穩懋/宏捷科本業手機 PA</b>、InP 光通訊貢獻小,勿誇大;③ <b>CPO 量產時程遞延</b>(CPO 2026 滲透率僅 0.5%);④ <b>漲價口徑分歧</b>(國際 +250% vs 台廠 +3-5%);⑤ <b>中國 InP 許可審批是雙向最大變數</b>(放鬆=供給釋出壓低漲價邏輯)。</div>
+  <div class="callout risk">⚠️ 特有風險:① <b>台灣基板長晶=零</b>(成本端受制,基板 +250% 是壓力);② <b>穩懋/宏捷科本業手機 PA</b>、InP 光通訊貢獻小,勿誇大;③ <b>CPO 量產時程遞延</b>(CPO 2026 滲透率僅約 0.5%);④ <b>漲價口徑分歧</b>(國際 +250% vs 台廠合約 +3-5%);⑤ <b>中國 InP 許可審批是雙向最大變數</b>(放鬆=供給釋出壓低漲價邏輯;2026/5 底已首批「有限放行」、優先內需);⑥ <b>NVIDIA 注資排擠效應</b>($40 億+產能取得權使上游雷射產能被鎖,非美系/台系模組客戶面臨排擠;但 TAM 抬升亦帶來二供外溢——兩面效應並存);⑦ <b>2027-28 供給結構性翻轉</b>(JX 7-10 倍/AXT 再倍增/Coherent 4 倍/設備交機潮——「短缺財」不可線性外推)。</div>
+
+  <h3>2026/5 月營收與 1Q26 財報速覽(2026-07 增補;6 月營收 2026/7/10 前公告後可再刷新)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司(股號)</th><th>2026/5 營收</th><th>YoY</th><th>1-5 月累計 / YoY</th><th>1Q26 EPS</th><th>1Q26 毛利率</th><th>動能一句話</th><th>信心</th></tr></thead>
+    <tbody>
+      <tr><td>聯亞 3081</td><td>4.05 億</td><td><b>+118.84%</b></td><td>17.05 億 / +107.11%</td><td>3.44(創高)</td><td>54.8%(8 年高)</td><td>住友長約鎖料、CW DFB/ELS 放量+磊晶漲價</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>全新 2455</td><td>3.21 億</td><td>+46.51%</td><td>15.99 億 / +28.52%</td><td>1.06</td><td>38.09%</td><td>200G PD Q2 小量出貨+6 月磊晶雙位數調漲</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>英特磊 4971</td><td>0.78 億</td><td><b>+1.07%</b>(月減 26.58%)</td><td>5.16 億 / +19.49%</td><td>1.97</td><td>47.84%</td><td>⚠ InP 基板短缺卡出貨(法人/公司雙口徑歸因)——無長約的分水嶺教訓</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>穩懋 3105</td><td>17.55 億</td><td>+40.3%(48 個月新高)</td><td>80.8 億 / +34.85%</td><td>1.26</td><td>26.3% 合併(個體 32.2%)</td><td>200G PD 2Q26 小量量產前出貨(法說口徑);本業 PA 為主</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>宏捷科 8086</td><td>4.43 億</td><td>+36.98%</td><td>21.13 億 / +51.49%</td><td>1.51</td><td>—</td><td>公司歸因無人機+PA(非 InP);InP 認證⚪待查</td><td><span class="conf c-high">高(財務)</span> <span class="conf c-un">InP待查</span></td></tr>
+      <tr><td>聯鈞 3450</td><td>9.60 億</td><td>+49.91%(14 個月新高)</td><td>39.25 億 / <b>−1.92%</b></td><td>0.69(季減 55%)</td><td>~24.8%</td><td>COS 供不應求;單月強/累計負=復甦剛起步</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>環宇-KY 4991</td><td>2.00 億</td><td>+54.4%(月減 17.9%)</td><td>11.59 億 / +55.05%</td><td>1.67(季增 178%)</td><td>54.5%(歷史新高)</td><td>AOC 74%+III-V 代工;200G PD 2Q26 量產</td><td><span class="conf c-high">高</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 <b>選股訊號(2026/5 月營收兩極分化):</b>同一條 InP 鏈,有基板長約者(聯亞 +118.8%)vs 無鎖料者(英特磊 +1.07%,基板短缺卡出貨)——「基板=瓶頸中的瓶頸」已從研究敘事變成月營收可觀測的分化事實;<b>住友長約是聯亞相對同業最硬的護城河</b>(鉅亨/Yahoo 股市/財報狗交叉,2026/6)。來源皆公開申報轉載;下一個驗證點=2026/7/10 六月營收。</div>
+
+  <h3>短期受惠 vs 長期題材(選股節奏表;2026-07 增補)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司</th><th>受惠節奏</th><th>2026 當期兌現</th><th>2027+ 選擇權</th><th>主要風險</th></tr></thead>
+    <tbody>
+      <tr><td>聯亞 3081</td><td><b>現在就有營收</b></td><td>1-5 月累計 +107%、磊晶漲價+CW DFB/ELS 放量、1.6T 高階產品進量產(公司自述)</td><td>2027 前段產能 +100%、CPO ELS 放量</td><td>外資以 2027 年 79x PE 評價=price-in 程度高</td></tr>
+      <tr><td>全新 2455</td><td><b>現在就有營收</b></td><td>200G PD Q2 小量出貨+6 月磊晶雙位數調漲(成本轉嫁落地)、光電子占比已近三成</td><td>新機台 2027 初投產、1.6T 世代放量</td><td>InP 基板取得(公司稱短缺仍在、全年審慎樂觀)</td></tr>
+      <tr><td>英特磊 4971</td><td>現在(但 5 月被缺料打斷)</td><td>InP 訂單 2026 翻倍、占比→60%(公司自述);1Q26 EPS 1.97 轉盈</td><td>德州二廠二期 2026 完工+12 台機台(公司自述)</td><td><b>無基板長約=5 月營收 +1.07% 的分水嶺教訓</b>;全年 +20-40% 目標達成待驗</td></tr>
+      <tr><td>環宇-KY 4991</td><td>現在+2H26 增量</td><td>200G PD 2Q26 提前量產、AOC 占 74%、1-5 月 +55%</td><td>V-Tac InP 2H26 投產、CW 100mW 放量至百萬顆級(公司自述)</td><td>客戶集中、美國廠產能上限、單月波動大(5 月 −17.9% MoM)</td></tr>
+      <tr><td>穩懋 3105</td><td>2027 選擇權為主</td><td>200G PD 2Q26 小量量產前出貨(現有貢獻占比小、Optical 占營收 5-10%)</td><td>CW/EML 2027 量產(市場估)、E-beam 4→10 台</td><td>時程下修風險;FactSet 高低估值差近 3 倍=分歧大</td></tr>
+      <tr><td>宏捷科 8086</td><td>待證(⚪)</td><td>營收動能=無人機+PA(公司歸因,非 InP)</td><td>InP 認證若 Q2 法說證實才升格</td><td>ETtoday 具名反證「與 InP 直接關係有限」</td></tr>
+      <tr><td>聯鈞 3450</td><td>交界對照</td><td>COS 供不應求、5 月 +49.9%;800G AOC 2H26 放量</td><td>CPO ELS 放量帶動 COS 需求(2027)</td><td>1-5 月累計仍 −1.92%、1Q26 EPS 偏弱;偏 CPO 題</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn">⚠️ <b>漲價紅利時效風險(短期營收組估值必讀):</b>供給端三路大擴產(JX 7-10 倍至 FY2030、AXT 2027 再倍增+Tongmei $632.5M、Coherent Sherman 產出 4 倍+CHIPS、住友 ¥180 億約 2.4~3 倍至 FY2028)+設備 2027 交機潮 → <b>2027-28 基板/磊晶供給結構性放大</b>;當前 6 吋 $5,000 的超額價差與台磊晶廠 50%+ 毛利率屬「短缺財」,2027 後不可線性外推——對短期營收組的估值需做 2027 供給釋放敏感度(本研究彙整擴產公告交叉)。</div>
 </div></section>
 
 <!-- 07 -->
@@ -259,16 +356,36 @@ p,li,td{overflow-wrap:anywhere}
     <button data-f="down">下游交界</button><button data-f="intl">國際/基板</button>
   </div>
   <div class="grid cols-3" id="cGrid">
-    <div class="card" data-cat="epi"><h4>聯亞光電 <span class="code">3081</span></h4><p>InP 磊晶+雷射晶粒一條龍(鏈上最硬);矽光子 CW/ELS 主供;住友五年長約鎖料;1Q26 +99%、EPS 3.44 創高、毛利率 54.8% 8 年高;2027 前段產能倍增。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="epi"><h4>全新光電 <span class="code">2455</span></h4><p>InP/GaAs MOCVD 磊晶龍頭;200G PD Q2 出貨、Q2 成本轉嫁;1Q26 EPS 1.06、毛利率 38.09%;MOCVD 擴 5 部 2027 投產。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="epi"><h4>英特磊 IET-KY <span class="code">4971</span></h4><p>少數 MBE 路線(美國生產),InP 光通訊+國防雙引擎;InP 占比 50%→60%、2026 訂單翻倍;1Q26 淨利 +231.8%。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="die"><h4>穩懋 <span class="code">3105</span></h4><p>全球最大 GaAs 代工跨光通訊;200G PD 2026/4 量產出貨美系客戶(現在);CW/EML 2H26 目標但量產落 2027(選擇權)。本業手機 PA、InP 貢獻小。</p><span class="conf c-med">中</span></div>
-    <div class="card" data-cat="die"><h4>宏捷科 <span class="code">8086</span></h4><p>全球第二大 GaAs 代工(中美晶集團);媒體稱通過 1.6T EML/CW 驗證、有 6 吋 InP 產線,但 InP 認證未獨立佐證、論壇有質疑;現有放量主體 GaAs。</p><span class="conf c-un">待查</span></div>
-    <div class="card" data-cat="down"><h4>聯鈞 <span class="code">3450</span></h4><p>雷射二極體封測 COS+AOC;2026/5 月營收 9.60 億 +49.9%;400G AOC 月產 4.5→8.5 萬條、800G AOC 2H26。偏 CPO 下游、與 CPO 題重疊。</p><span class="conf c-med">中</span></div>
-    <div class="card" data-cat="intl"><h4>住友 / AXT-Tongmei / JX <span class="code">基板</span></h4><p>InP 基板三強 80-90%;住友最大、AXT 產能多在中國受管制、JX 第三(擴產 +50%)。台廠基板長晶=零。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="intl"><h4>Coherent / Lumentum <span class="code">COHR/LITE</span></h4><p>垂直整合(基板+磊晶+晶粒);Coherent 建全球首座 6 吋 InP 廠;Lumentum 200G EML 50-60%;NVIDIA 各注資 ~$20 億。</p><span class="conf c-high">高</span></div>
-    <div class="card" data-cat="intl"><h4>IQE / Aixtron / Riber <span class="code">磊晶/設備</span></h4><p>IQE 獨立磊晶代工(MACOM 投資 £45M);Aixtron 光子 MOCVD 70-90%(擴產隘口);Riber MBE 龍頭(英特磊用)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="epi"><h4>聯亞光電 <span class="code">3081</span></h4><p>InP 磊晶+雷射晶粒一條龍(鏈上最硬);矽光子 CW/ELS 主供;住友 2026-2030 五年長約鎖料;1Q26 +99%、EPS 3.44 創高、毛利率 54.8% 8 年高;2026/5 營收 4.05 億 +118.84%、1-5 月 +107.11%;2027 前段產能倍增(公司自述);擴產三筆分列:2025/8 投資上限 3.62 億 → 2026/4/22 新增 13.15 億(前段磊晶+曝光蝕刻)→ 2026/6/17 董事會 30 億添購機器。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="epi"><h4>全新光電 <span class="code">2455</span></h4><p>InP/GaAs MOCVD 磊晶龍頭(Reuters 具名全球供應鏈成員);200G PD Q2 小量出貨(客戶=美系指標大廠,媒體點名對象⚪未經公司證實)、Q2 成本轉嫁+6 月起磊晶雙位數調漲;1Q26 EPS 1.06、毛利率 38.09%、歸母淨利 1.95 億 +24%;光電子占比近三成;MOCVD 擴 5 部 2027 投產(新機台 3Q-4Q26 進廠、capex ~7 億);2026/5 營收 3.21 億 +46.51%。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="epi"><h4>英特磊 IET-KY <span class="code">4971</span></h4><p>少數 MBE 路線(美國生產),InP 光通訊+國防雙引擎;InP 占比 54.5%(1Q26 實績)→上看 60%、2026 訂單翻倍(公司自述);1Q26 EPS 1.97、毛利率 47.84%、歸母淨利 +231.8% 轉盈;⚠ 2026/5 營收僅 0.78 億、年增縮至 +1.07%——法人歸因 InP 基板短缺卡出貨,公司啟動「自備基板+客戶提供基板」雙軌;德州二廠二期 2026 完工、可容 12 台新 MBE(公司自述)。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="die"><h4>穩懋 <span class="code">3105</span></h4><p>全球最大 GaAs 代工跨光通訊;1Q26 營收 45.90 億 +28%、EPS 1.26、合併毛利率 26.3%(個體 32.2%,口徑不同)、Optical 首度獨立揭露占營收 5-10%;200G PD 法說口徑=2Q26 小量量產前出貨、2H26 明顯成長(現在);CW 70/100mW 2H26 小量目標、CW/EML 量產市場估 2027(選擇權);2026/5 營收 17.55 億 +40.3% 創 48 個月新高。本業手機 PA、InP 貢獻小。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="die"><h4>宏捷科 <span class="code">8086</span></h4><p>全球第二大 GaAs 代工(中美晶集團);媒體稱通過 1.6T EML/CW 驗證、有 6 吋 InP 產線,但 InP 認證未獨立佐證、論壇有質疑,且 ETtoday(2026/4/26)具名反證「與磷化銦直接關係有限」;可驗證事實:2026/5 營收 4.43 億 +36.98%、1-5 月 +51.49%、1Q26 EPS 1.51,公司自己把 5 月動能歸因無人機+PA(非 InP);現有放量主體 GaAs,等 2026Q2 法說親口驗證。</p><span class="conf c-un">待查</span></div>
+    <div class="card" data-cat="die"><h4>環宇-KY <span class="code">4991</span></h4><p>III-V(GaAs/InP)晶圓代工+自有光電元件(AOC 占 1Q26 營收 74%);2026-07 經逐檔查證升入受惠名單:200G PD 提前至 2026Q2 量產(1.6T 用)、CW 70mW 已出貨/100mW 認證中、目標 Q3-Q4 放量至百萬顆級(公司自述);投資威立富(V-Tac)導入 InP 製程、2H26 貢獻產能;1Q26 EPS 1.67 季增 178%、毛利率 54.5% 創歷史新高、訂單能見度至 2027Q1(公司自述);2026/5 營收 2.00 億 +54.4%。</p><span class="conf c-med">中高</span></div>
+    <div class="card" data-cat="die"><h4>光環 <span class="code">3234</span></h4><p>台灣少數雷射二極體晶粒自製/代工廠(watch):CW 雷射代工切入 AI 供應鏈、代工比重 2026 續升、毛利率由 4%(2023-24 均值)升至 15%;TrendForce 把 LuxNet 具名列入全球 CW-DFB 產能前四——但規模小(2026/5 營收 0.57 億 +13.34%、1-5 月累計年減 3.18%)且仍在虧損縮減階段;升格條件=累計營收轉正+單季轉盈。</p><span class="conf c-med">中(watch)</span></div>
+    <div class="card" data-cat="down"><h4>聯鈞 <span class="code">3450</span></h4><p>雷射二極體封測 COS+AOC;2026/5 月營收 9.60 億 +49.9% 創 14 個月新高,但 1-5 月累計仍 −1.92%(單月強/累計負);1Q26 EPS 0.69 季減 55%、毛利率 ~24.8%;COS 產能擴 5 倍仍供不應求、400G AOC 月產 4.5→8.5 萬條、800G AOC 2H26。偏 CPO 下游、與 CPO 題重疊(交界對照、不雙計)。</p><span class="conf c-med">中</span></div>
+    <div class="card" data-cat="down"><h4>華星光 <span class="code">4979</span></h4><p>光收發模組/次系統+晶粒垂直整合(watch 跨題):Marvell 光模組重要夥伴,800G 放量/1.6T 送樣;MoneyDJ 載其 CW 雷射月產能 150 萬顆→2026 底 300-400 萬→2027 600 萬+(此組數字屬華星光,市場彙整常誤掛他檔,引用務必核對);1Q26 EPS 1.62、2026/5 營收 4.21 億 +21.08%;與「InP 上游材料/晶粒」軸相關性低、與 CPO 題高度重疊,勿雙計;InP 晶圓製程擴至 3-4 吋、200G EML 2026 量產之說⚪僅 blog/研報彙整。</p><span class="conf c-un">跨題待查</span></div>
+    <div class="card" data-cat="intl"><h4>住友 / AXT-Tongmei / JX <span class="code">基板</span></h4><p>InP 基板三強 80-90%(Reuters:AXT+住友近 80%、JX ~10%);住友最大(基板多數內供自家雷射、外售市場實質更緊;2026/6 上修:¥180 億、伊丹製作所、FY2028 約 2.4~3 倍)、AXT 產能多在中國受管制(backlog 破 $1 億、Tongmei $632.5M 募資、2026 倍增+2027 再倍增,公司自述)、JX 擴產軌跡:2026/2 ¥200 億/3 倍(2030)→ 2026/6/16 加碼至 FY2030 最多 ¥1,200 億/7-10 倍。台廠基板長晶=零。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>Coherent / Lumentum <span class="code">COHR/LITE</span></h4><p>垂直整合(基板+磊晶+晶粒);Coherent 建西方首座 6 吋 InP 量產平台(Sherman $650M 擴建:空間 2 倍/晶圓產出 12 個月內 4 倍;CHIPS 最高 $50M LOI);Lumentum FQ3 2026 營收 $808.4M(+90% YoY)、EML 出貨年增 100%(SEC 8-K),200G EML 近乎獨供(McKinsey 2025/6 口徑;2026H1 Coherent 已有 200G EML 出貨),市占口徑 50-80% 分歧、皆非公司揭露;產能翻 4 倍仍 sold out 到 2028(Reuters);NVIDIA 各注資 ~$20 億。</p><span class="conf c-high">高</span></div>
+    <div class="card" data-cat="intl"><h4>IQE / Aixtron / Veeco / Riber <span class="code">磊晶/設備</span></h4><p>IQE 獨立磊晶代工(MACOM 投資 £45M+長約、共募 £81M);Aixtron 光子 MOCVD 70-90%(擴產隘口;1Q26 訂單 €171M +30%、Opto 占 >65%;獲 Lumentum G10-AsP 多台);Veeco 2026/5/5 獲多家客戶 >$250M 訂單(Lumina+Spector IBD+WaferEtch,2026 起交付、2027 加速);Riber MBE 龍頭(英特磊用其機台;MBE 6000×2 台 2026 交付歐洲光子廠)。</p><span class="conf c-high">高</span></div>
   </div>
+
+  <h3>概念股清單逐檔查證結果(watch / 排除;不可採信也不可錯殺)</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>股票(股號)</th><th>處置</th><th>理由(含反駁 reason)</th><th>來源+日期</th></tr></thead>
+    <tbody>
+      <tr><td>環宇-KY 4991</td><td><span class="badge b-ok">升入受惠名單(2026-07)</span></td><td>InP/GaAs 光電晶圓代工實體業務(PD/CW 晶粒實際出貨,非題材);200G PD 2Q26 提前量產、V-Tac InP 2H26;1Q26 EPS 1.67/毛利率 54.5% 創高佐證;ETtoday 亦將其與聯亞/英特磊/穩懋並列 InP 磊晶受惠</td><td>富果法說備忘錄(2026/3/4)+豐雲學堂(2026/6)+ETtoday(2026/4/26)</td></tr>
+      <tr><td>宏捷科 8086</td><td><span class="badge b-warn">watch(維持)</span></td><td>InP 認證主張=媒體彙整無一手、ETtoday 具名反證;財務實績可信(1-5 月 +51.49%)但動能=無人機+PA;觀察點=2026Q2 法說是否親口證實</td><td>ETtoday(2026/4/26)+鉅亨(2026/6)+CMoney 論壇(質疑帖並存)</td></tr>
+      <tr><td>聯鈞 3450</td><td><span class="badge b-warn">watch(維持)</span></td><td>COS 擴 5 倍屬實(2025 底-2026 初)但主體=雷射封測 COS+AOC 中下游、與 CPO 矽光子題重疊;1Q26 EPS 0.69 季減 55% 偏弱不支持升格;續留交界對照、不雙計</td><td>財報狗+鉅亨研報(2026/5-6)</td></tr>
+      <tr><td>光環 3234</td><td><span class="badge b-warn">watch(2026-07 新增)</span></td><td>晶粒代工題材真:CW 代工切入 AI 供應鏈、比重續升、毛利率 4%→15%;TrendForce 把 LuxNet 具名列全球 CW-DFB 產能前四——但規模小(2026/5 營收 0.57 億)且 1-5 月累計 3.02 億年減 3.18%、仍虧損,未達受惠評分門檻</td><td>MoneyDJ《DJ在線》+聯合新聞網法說(2025/12/22)+TrendForce(2026/6/3)</td></tr>
+      <tr><td>華星光 4979</td><td><span class="badge b-warn">watch(跨題對照)</span></td><td>主體=光收發模組/次系統(下游、Marvell 夥伴),與「InP 上游材料/晶粒」軸相關性低、與 CPO 題高度重疊;市場流傳 2026 EPS 9-12 元僅 blog 層級⚪未驗證;2026/5 營收 4.21 億 +21.08% 屬實</td><td>財報狗(2026/6)+vocus(⚪)</td></tr>
+      <tr><td>波若威 3163</td><td><span class="badge b-danger">排除(本題)</span></td><td>光纖被動元件(OIN 33%/分路 28%/WDM 27%/放大器 12%),InP 上游業務=0;屬 CPO 共封裝題(2026H2 被動件放量)——不錯殺,於 CPO 題另評</td><td>DA Labs+MoneyDJ 法說(2026)</td></tr>
+      <tr><td>上詮 3363</td><td><span class="badge b-danger">排除(本題)</span></td><td>CPO 光連接/FAU,自稱 2026 為 CPO 量產元年;無 InP 材料/磊晶/晶粒業務——歸 CPO 題</td><td>MoneyDJ(2026)</td></tr>
+      <tr><td>前鼎 4908</td><td><span class="badge b-danger">排除(本題)</span></td><td>ELS 外置光源模組=CW DFB 晶粒的「下游用戶」而非上游供給(2026 送樣+初量產、2027 放量;1Q26 營收 2.65 億 +25%);InP 材料/晶粒無角色、TO-can 角色查無 2026 佐證——於 CPO/光模組題處理</td><td>鉅亨焦點股(2026/4)</td></tr>
+      <tr><td>光聖 6442</td><td><span class="badge b-danger">排除(⚪TO-can 未驗證)</span></td><td>主體=光纖連接器/線纜/機構件(美系 CSP 拉貨題);「TO-can 封裝」角色 2026H1 檢索查無任何一手/二手佐證——列未驗證、本題排除,若後續有 COS/TO-can 佐證再補</td><td>檢索結論(Goodinfo/鉅亨/Yahoo 2026H1)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout insight">💡 <b>股號/掛牌狀態總核對(2026-07-02 第二輪複核):</b>聯亞=3081(上櫃)、全新=2455(上市)、英特磊 IET-KY=4971(上櫃,開曼)、穩懋=3105(上櫃)、宏捷科=8086(上櫃)、聯鈞=3450(上市)、環宇-KY=4991(上櫃,開曼 GCS,2014/9/15 掛牌)、光環=3234(上櫃)、華星光=4979(上櫃)、波若威=3163(上櫃)、上詮=3363(上櫃)、光聖=6442(上市)、前鼎=4908(上櫃)——13 檔全數正常掛牌、無興櫃、無已下市死代號(Yahoo 股市 .TW/.TWO 後綴+Goodinfo 交叉核對)。</div>
 </div></section>
 
 <!-- 07b 設備/材料細顆粒地圖 -->
@@ -276,46 +393,51 @@ p,li,td{overflow-wrap:anywhere}
   <span class="eyebrow">07+ · Fine-grained Equipment Map</span>
   <h2 class="title">🔬 細顆粒設備/材料地圖 + 台灣吃得到定位</h2>
   <p class="subtitle">一句話:<b>基板長晶+磊晶設備=國際主場、台廠完全缺席;磊晶代工+雷射晶粒=台廠卡位(alpha 所在)。</b></p>
-  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>機型取自官網/法說/新聞稿(G10-AsP / Veeco Lumina+Spector / Riber MBE 等已查證);個股實際營收貢獻強弱不一,投資前自行查證。</div>
+  <div class="callout risk">⚠️ <b>研究線索、非投資背書:</b>機型取自官網/法說/新聞稿(G10-AsP / AIX 2800G4-TM / Veeco Lumina+Spector / Riber MBE 已查證);個股實際營收貢獻強弱不一,投資前自行查證。</div>
   <h3>台灣吃得到多少(逐環節定位)</h3>
   <div class="table-wrap"><table>
-    <thead><tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr></thead>
+    <thead><tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th><th>量級佐證(2026)</th></tr></thead>
     <tbody>
-      <tr><td>① 原料 / pBN 坩堝</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 純風險端</span></td><td>銦/鎵/鍺精煉中國主導、銦永久管制;pBN 國際材料商</td></tr>
-      <tr><td>② InP 基板長晶 ⭐</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 須全數外購</span></td><td>住友/AXT/JX/Coherent 三強 80-90%;台廠零產能</td></tr>
-      <tr><td>③ MOCVD/MBE 磊晶設備</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 國際壟斷</span></td><td>Aixtron G10-AsP/Veeco/Riber;機台交期=擴產隘口</td></tr>
-      <tr><td>④ 磊晶代工(epiwafer)⭐</td><td>聯亞 3081 / 全新 2455 / 英特磊 4971</td><td><span class="badge b-ok">領先 · 全球少數外包產能</span></td><td>三雄是 IDM 外稀缺產能、議價力兌現</td></tr>
-      <tr><td>⑤ 雷射晶粒 EML/CW/PD</td><td>聯亞自有 / 穩懋 3105 / 宏捷科 8086</td><td><span class="badge b-warn">追趕 · IDM 主導</span></td><td>PD 已量產;EML/CW 認證中、2027 選擇權</td></tr>
-      <tr><td>⑥ COS 封測 / 光引擎交界</td><td>聯鈞 3450</td><td><span class="badge b-ok">領先(偏下游 · 跨 CPO 題)</span></td><td>COS 自動化平台;跨 CPO 題、勿重複計</td></tr>
+      <tr><td>① 原料 / pBN 坩堝</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 純風險端</span></td><td>銦/鎵/鍺精煉中國主導、銦永久管制;pBN 國際材料商 <span class="conf c-high">高</span></td><td>中國產全球 ~70% 銦(Reuters 2026/6)</td></tr>
+      <tr><td>② InP 基板長晶 ⭐</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 須全數外購</span></td><td>住友/AXT/JX/Coherent 三強 80-90%;台廠零產能;2026H1 全新靠出口許可放行才拿到美系基板+低價庫存(今周刊 2026/6/16)<span class="conf c-high">高</span></td><td>基板市場 2026 約 $2.02 億/128.19 萬片(DIGITIMES)</td></tr>
+      <tr><td>③ MOCVD/MBE 磊晶設備</td><td>(缺席)</td><td><span class="badge b-danger">缺席 · 國際壟斷</span></td><td>Aixtron G10-AsP/Veeco Lumina/Riber MBE;機台交期=擴產隘口;台灣角色僅設備用戶(富采 2026/6/11 完成 Veeco Lumina+ 認證,Veeco IR)<span class="conf c-high">高</span></td><td>Aixtron 1Q26 訂單 €171M(Opto >65%)/Veeco >$250M</td></tr>
+      <tr><td>④ 磊晶代工(epiwafer)⭐</td><td>聯亞 3081 / 全新 2455 / 英特磊 4971 / 環宇-KY 4991(代工)</td><td><span class="badge b-ok">領先 · 全球少數外包產能</span></td><td>三雄是 IDM 外稀缺產能、議價力兌現;聯亞住友五年長約(2026-2030)+TrendForce CW-DFB 產能前四;全新被 Reuters 具名 <span class="conf c-high">高</span></td><td>三雄 1-5 月營收合計約 38.2 億台幣(公開申報加總,推導)</td></tr>
+      <tr><td>⑤ 雷射晶粒 EML/CW/PD</td><td>聯亞自有 / 穩懋 3105 / 宏捷科 8086(⚪)/ 環宇-KY 4991</td><td><span class="badge b-warn">追趕 · IDM 主導</span></td><td>PD 已進量產(穩懋 2Q26 小量、全新 Q2、環宇 2Q26);EML/CW 認證中、2027 選擇權;IDM(Lumentum/Broadcom)主導 200G EML <span class="conf c-med">中</span></td><td>穩懋 Optical 占營收 5-10%(1Q26 法說)</td></tr>
+      <tr><td>⑥ COS 封測 / 光引擎交界</td><td>聯鈞 3450</td><td><span class="badge b-ok">領先(偏下游 · 跨 CPO 題)</span></td><td>COS 自動化平台、產能擴 5 倍仍供不應求;跨 CPO 題、勿重複計 <span class="conf c-med">中</span></td><td>聯鈞 1-5 月營收 39.25 億(累計仍 −1.92%)</td></tr>
     </tbody>
   </table></div>
-  <h3>細顆粒設備/材料地圖(逐製程 × 具體商/機型)</h3>
+  <h3>細顆粒設備/材料地圖(逐製程 × 具體商/機型:基板長晶 → 磊晶 → 晶粒 → 封裝)</h3>
   <div class="table-wrap"><table>
     <thead><tr><th>設備 / 材料 + 具體機型</th><th>供應商(代號/別)</th><th>台廠地位</th></tr></thead>
     <tbody>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">① 原料 / pBN 坩堝</td></tr>
-      <tr><td>高純銦(6-7N)/紅磷/鎵/鍺 精煉</td><td>中國精煉(雲南鍺業等);銦永久管制</td><td><span class="badge b-danger">缺席</span></td></tr>
+      <tr><td>高純銦(6-7N)/紅磷/鎵/鍺 精煉</td><td>中國精煉(雲南鍺業等:2026/4 宣布投資 RMB 1.89 億擴 InP 晶圓產能至 45 萬片/年、2025 出貨 +74%,Reuters);銦受第 10 號公告永久管制</td><td><span class="badge b-danger">缺席</span></td></tr>
       <tr><td>pBN 坩堝(LEC/VGF 長晶容器)</td><td>Sintec(Kennametal)/ Heeger / Momentive(美)</td><td><span class="badge b-danger">缺席</span></td></tr>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">② InP/GaAs 基板長晶 ★瓶頸中的瓶頸</td></tr>
-      <tr><td>InP 單晶長晶+切磨拋(VGF/LEC,4→6 吋)</td><td>住友電工(6 吋 +40%)/ AXT-Tongmei(雙倍·$632.5M)/ JX(¥20bn·3 倍 2030)</td><td><span class="badge b-danger">缺席 · 須全數外購</span></td></tr>
-      <tr><td>6 吋 InP 自製(西方繞開中國)</td><td>Coherent(Sherman/Järfälla/Zürich,4x/die −60%)</td><td><span class="badge b-danger">缺席</span></td></tr>
+      <tr><td>InP 單晶長晶+切磨拋(VGF/LEC,4→6 吋)</td><td>住友電工(2026/6 上修 ¥180 億、伊丹、FY2028 約 2.4~3 倍;舊「6 吋 +40%」口徑⚪僅研調轉述)/ AXT-Tongmei($632.5M 增資;2026 倍增+2027 再倍增,公司自述;自製 VGF 長晶爐、子公司金美控原料)/ JX(¥200 億·3 倍 2030 → 2026/6/16 加碼 ¥1,200 億·7-10 倍 FY2030)</td><td><span class="badge b-danger">缺席 · 須全數外購</span></td></tr>
+      <tr><td>6 吋 InP 自製(西方繞開中國)</td><td>Coherent(Sherman/Järfälla/Zürich;$650M 擴建=空間 2 倍/晶圓產出 12 個月內 4 倍;die cost −60% 公司自述;CHIPS 最高 $50M LOI)</td><td><span class="badge b-danger">缺席</span></td></tr>
+      <tr><td>其他基板供應商(第二梯隊)</td><td>Freiberger(德,GaAs 為主兼 InP)/ 中國廠(單晶良率 &lt;10% 口徑、以內需為主;2026/5 底中國首批「有限放行」優先內需,DIGITIMES)</td><td><span class="badge b-danger">缺席</span></td></tr>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">③ MOCVD/MBE 磊晶設備 ★國際壟斷 · 機台=擴產隘口</td></tr>
-      <tr><td>光子 MOCVD(新世代):AIXTRON G10-AsP</td><td>AIXTRON(德;Nokia/Lumentum 多機台)</td><td><span class="badge b-danger">缺席</span></td></tr>
-      <tr><td>光子 MOCVD(前代):AIX 2800G4-TM</td><td>AIXTRON(TRUMPF/Furukawa/Modulight)</td><td><span class="badge b-danger">缺席</span></td></tr>
-      <tr><td>MOCVD:Veeco Lumina + Spector IBD 刻面鍍膜</td><td>Veeco(美;tool of record)</td><td><span class="badge b-danger">缺席</span></td></tr>
-      <tr><td>MBE:Riber MBE 8000 / MBE 49</td><td>Riber(法);英特磊 4971 用其機台</td><td><span class="badge b-warn">設備缺席 · 英特磊用其機台代工</span></td></tr>
+      <tr><td>光子 MOCVD(新世代):AIXTRON G10-AsP</td><td>AIXTRON(德;Nokia 2025/4、Lumentum 2026/5/19 多機台;1Q26 訂單 €171M +30%、Opto 占 >65%;交期月數官方未揭露)</td><td><span class="badge b-danger">缺席</span></td></tr>
+      <tr><td>光子 MOCVD(前代):AIX 2800G4-TM</td><td>AIXTRON(TRUMPF/Furukawa/Modulight 在用)</td><td><span class="badge b-danger">缺席</span></td></tr>
+      <tr><td>MOCVD:Veeco Lumina / Lumina+ + Spector IBD 刻面鍍膜 + WaferEtch</td><td>Veeco(美;2026/5/5 多家客戶 >$250M 訂單,2026 起交付、2027 加速;Spector IBD 大宗售予 800G/1.6T 收發器製造商;富采 2026/6/11 認證 Lumina+)</td><td><span class="badge b-danger">缺席(富采=設備用戶)</span></td></tr>
+      <tr><td>MBE:Riber MBE 8000 / MBE 49</td><td>Riber(法);英特磊 4971 用其機台。⚠ 時代錯置更正:「首台 MBE 8000 交付英特磊」=2021/4、且用途 VCSEL(GaAs 6 吋)非 InP,不得作 2026 InP 擴產證據;英特磊 2026 擴產證據=德州二廠二期(+12 台機台,公司自述);Riber 新單=MBE 6000×2 台(2025/12 接單、2026 交付,歐洲光子廠、AI 資料中心光連接)</td><td><span class="badge b-warn">設備缺席 · 英特磊用其機台代工</span></td></tr>
+      <tr><td>設備交期(擴產節奏推演)</td><td>MOCVD 機台交期無公開月數(Aixtron/Veeco 均未揭露);可引用替代指標:Veeco 官方「2026 起交付、2027 顯著加速」+TrendForce「非 NVIDIA 客戶雷射交期→2027 之後」+Lumentum 產能翻 4 倍仍 sold out 到 2028(Reuters)→ 供給實質釋放=2027</td><td><span class="badge b-warn">推演(來源已標)</span></td></tr>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">④ 磊晶代工(epiwafer 服務)★台廠卡位</td></tr>
-      <tr><td>InP/GaAs MOCVD 磊晶代工</td><td><b>全新 2455</b>(MOCVD 龍頭,擴 5 部 2027)/ <b>聯亞 3081</b>(一條龍)/ IQE(英)</td><td><span class="badge b-ok">領先</span></td></tr>
-      <tr><td>InP MBE 磊晶代工(+國防 GaSb)</td><td><b>英特磊 4971</b>(美國生產)</td><td><span class="badge b-ok">卡位(少數 MBE 路線)</span></td></tr>
+      <tr><td>InP/GaAs MOCVD 磊晶代工</td><td><b>全新 2455</b>(MOCVD 龍頭,擴 5 部 2027 投產、新機 3Q-4Q26 進廠)/ <b>聯亞 3081</b>(一條龍;住友長約 2026-2030)/ IQE(英,MACOM £45M 注資)/ <b>環宇-KY 4991</b>(III-V 代工+V-Tac InP 2H26)</td><td><span class="badge b-ok">領先</span></td></tr>
+      <tr><td>InP MBE 磊晶代工(+國防 GaSb)</td><td><b>英特磊 4971</b>(美國生產;InP 占 1Q26 營收 54.5%)</td><td><span class="badge b-ok">卡位(少數 MBE 路線)</span></td></tr>
       <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">⑤ 雷射晶粒 EML/CW/PD ★IDM 主導 · 台廠追趕</td></tr>
-      <tr><td>EML(DFB+EAM,200G/lane)</td><td>Lumentum(唯一量產 200G/lane)/Coherent/三菱;<b>聯亞自有</b>;穩懋 3105 驗證中</td><td><span class="badge b-warn">追趕</span></td></tr>
-      <tr><td>CW DFB 雷射(矽光子外置光源 ELS)</td><td><b>聯亞 3081</b>(主供)/穩懋/宏捷科 8086;Coherent</td><td><span class="badge b-ok">卡位(聯亞領先)</span></td></tr>
-      <tr><td>PD 光偵測器(200G/400G)</td><td><b>穩懋 3105</b>(200G PD 已量產)/ <b>全新 2455</b>(Q2 出貨);Coherent</td><td><span class="badge b-ok">卡位(已量產)</span></td></tr>
-      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">⑥ COS 封測 / 光引擎交界</td></tr>
-      <tr><td>COS 雷射晶粒封測+burn-in / 光引擎組裝</td><td><b>聯鈞 3450</b>(COS+AOC+ELS);Lumentum/Coherent/Fabrinet</td><td><span class="badge b-ok">領先(偏下游 · 跨 CPO 題)</span></td></tr>
+      <tr><td>EML(DFB+EAM,200G/lane)</td><td>Lumentum(200G EML 近乎獨供:McKinsey 2025/6「唯一大量出貨」口徑;2026H1 Coherent 已有 200G EML 出貨;市占 50-80% 口徑分歧、皆非公司揭露)/Broadcom(TrendForce 列 EML 產能前三:Broadcom/Lumentum/住友合計 55%)/Coherent/三菱;<b>聯亞自有</b>;穩懋 3105 驗證中(認證期至 2026 底)</td><td><span class="badge b-warn">追趕</span></td></tr>
+      <tr><td>CW DFB 雷射(矽光子外置光源 ELS)</td><td><b>聯亞 3081</b>(主供;TrendForce CW-DFB 產能前四,前四合計 74%)/穩懋(70/100mW 2H26 小量目標→市場估 2027)/宏捷科 8086(⚪未驗證)/<b>環宇-KY</b>(70mW 出貨/100mW 認證中);Coherent(OFC 2026 展示自家 InP CW 驅動 ELS)</td><td><span class="badge b-ok">卡位(聯亞領先)</span></td></tr>
+      <tr><td>PD 光偵測器(200G/400G)</td><td><b>穩懋 3105</b>(200G PD 2Q26 小量量產前出貨、2H26 放量,法說口徑)/ <b>全新 2455</b>(200G PD Q2 小量出貨)/ <b>環宇-KY 4991</b>(200G PD 2Q26 提前量產);Coherent</td><td><span class="badge b-ok">卡位(已量產)</span></td></tr>
+      <tr><td>DFB 光柵 e-beam 微影(晶粒前段)</td><td>穩懋 E-beam 微影機 4→10 台(2027);聯亞 E-beam 產能已擴 2.5 倍(公司自述)——EML/DFB 光柵製程的實際瓶頸站</td><td><span class="badge b-warn">追趕(擴充中)</span></td></tr>
+      <tr><td>晶粒製程:6 吋 InP 電漿蝕刻(全自動)</td><td>Oxford Instruments(2025/11/17 官方:交付 Coherent Sherman+Järfälla 兩廠,支援 800G→1.6T 轉換;自述 datacom InP 電漿蝕刻設備領導供應商)</td><td><span class="badge b-danger">缺席(設備)</span></td></tr>
+      <tr><td colspan="3" style="background:var(--accent-soft);color:var(--accent);font-weight:700">⑥ COS 封測 / TO-can / 光引擎交界</td></tr>
+      <tr><td>COS 雷射晶粒封測+burn-in / 光引擎組裝</td><td><b>聯鈞 3450</b>(COS+AOC+ELS;COS=晶粒焊上高導熱 submount+打線+電測,可直接作矽光子/CPO 外置光源單元;產能 2025 擴 5 倍仍供不應求);Lumentum/Coherent/Fabrinet</td><td><span class="badge b-ok">領先(偏下游 · 跨 CPO 題)</span></td></tr>
+      <tr><td>TO-can 氣密封裝(電信級 10G/25G、PON)</td><td>800G/1.6T datacom 發射端主流=COS/CoC submount(高速訊號完整性+散熱),非 TO-can;台股純 TO-can 上游曝險有限(光環 3234 之 TO 產品偏電信舊世代;光聖 6442「TO-can 角色」2026H1 查無佐證⚪)——綜合推導、低信心</td><td><span class="badge b-danger">低曝險(推導)</span></td></tr>
     </tbody>
   </table></div>
-  <p class="disclaimer">中期變數:住友 +40% / AXT 雙倍 / JX 3 倍 / Coherent 6 吋 四方擴產,2027-2030 或緩解缺口、壓漲價邏輯。資料整合自各家官網/法說/新聞稿(一手)+ TrendForce 等研調,為研究線索、非投資背書。</p>
+  <p class="disclaimer">中期變數:住友 ¥180 億(FY2028 約 2.4~3 倍)/ AXT 2026 倍增+2027 再倍增 / JX ¥1,200 億(7-10 倍)/ Coherent 6 吋產出 4 倍 四方擴產,2027-2030 或緩解缺口、壓漲價邏輯。資料整合自各家官網/法說/新聞稿(一手)+ TrendForce 等研調,為研究線索、非投資背書。</p>
 </div></section>
 
 <!-- 08 -->
@@ -324,44 +446,44 @@ p,li,td{overflow-wrap:anywhere}
   <h2 class="title">逐環節技術難度評分</h2>
   <p class="subtitle">維度:技術門檻 / 壟斷集中度 / 設備稀缺 / 良率挑戰,各 0~5 分(5＝最難)。評分為推估。</p>
   <div class="table-wrap"><table>
-    <thead><tr><th>製程環節</th><th>技術門檻</th><th>壟斷集中</th><th>設備稀缺</th><th>良率挑戰</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th></tr></thead>
+    <thead><tr><th>製程環節</th><th>技術門檻</th><th>壟斷集中</th><th>設備稀缺</th><th>良率挑戰</th><th>總分<small style="font-weight:600;color:var(--ink-soft)"> /20</small></th><th>最卡關原因</th></tr></thead>
     <tbody>
       <tr><td>② InP 基板長晶</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
-        <td><span class="tot">19</span></td></tr>
+        <td><span class="tot">19</span></td><td>磷易揮發(~2.75MPa/1335K)+InP 疊差能最低易孿晶,良率僅 20-25%(龍頭 15-20%/中國 &lt;10%);AXT/住友/JX 寡占、產能受中國管制</td></tr>
       <tr><td>③ 磊晶(MOCVD/MBE)</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-        <td><span class="tot">16</span></td></tr>
+        <td><span class="tot">16</span></td><td>1310/1550nm 長波長磊晶良率+Aixtron MOCVD 設備隘口(70-90%)、機台交期=擴產實際瓶頸</td></tr>
       <tr><td>④ 雷射晶粒(EML/CW)</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
-        <td><span class="tot">16</span></td></tr>
+        <td><span class="tot">16</span></td><td>200G EML 單片整合 DFB+EAM、106GBaud、e-beam 微影、Tier-1 認證週期長</td></tr>
       <tr><td>① 原料+pBN 坩堝</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:100%"></div></div><span class="num">5</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-        <td><span class="tot">13</span></td></tr>
+        <td><span class="tot">13</span></td><td>中國主導銦精煉+永久管制、每 100kg 高純銦僅 ~10kg 成可售基板(利用率極低)</td></tr>
       <tr><td>⑤ 晶粒封測 COS</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
-        <td><span class="tot">10</span></td></tr>
+        <td><span class="tot">10</span></td><td>AuSn 共晶接合/熱管理/burn-in know-how,但玩家分散、偏下游</td></tr>
     </tbody>
   </table></div>
   <p class="disclaimer">台廠卡在 ③④(磊晶/晶粒,16),議價力正兌現;② 基板長晶(19,瓶頸中的瓶頸)台廠完全缺席。評分為推估,僅供參考。</p>
 
   <h3>公司受惠強度評分(含總分排序)</h3>
-  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。</p>
+  <p class="subtitle">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,0~5 分。只列有查證信心者;總分由高到低。2026-07 增補:環宇-KY 4991 經逐檔查證納入;宏捷科(InP 認證未獨立佐證+具名反證)、聯鈞(偏 CPO 下游交界)維持排除於評分表、列 watch。</p>
   <div class="table-wrap"><table>
     <thead><tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分 /25</th><th>查證</th></tr></thead>
     <tbody>
@@ -386,6 +508,13 @@ p,li,td{overflow-wrap:anywhere}
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
         <td><span class="tot">18</span></td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>環宇-KY 4991(2026-07 新增)</td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:80%"></div></div><span class="num">4</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
+        <td><div class="score-bar"><div class="track"><div class="fill" style="width:40%"></div></div><span class="num">2</span></div></td>
+        <td><span class="tot">17</span></td><td><span class="conf c-med">中高</span></td></tr>
       <tr><td>穩懋 3105</td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:60%"></div></div><span class="num">3</span></div></td>
         <td><div class="score-bar"><div class="track"><div class="fill" style="width:70%"></div></div><span class="num">3.5</span></div></td>
@@ -395,23 +524,26 @@ p,li,td{overflow-wrap:anywhere}
         <td><span class="tot">16</span></td><td><span class="conf c-med">中</span></td></tr>
     </tbody>
   </table></div>
-  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。穩懋本業手機 PA、InP 光通訊現階段貢獻小(規模分高但 InP 純度低)。</p>
+  <p class="disclaimer">受惠評分為推估,僅供參考,不構成投資建議。穩懋本業手機 PA、InP 光通訊現階段貢獻小(規模分高但 InP 純度低);環宇-KY 財務佐證硬(1Q26 EPS 1.67/毛利率 54.5% 創高)但 V-Tac InP 產線 2H26 才落地、時程屬公司自述。</p>
 </div></section>
 
 <!-- 09 -->
 <section class="block" id="capacity"><div class="container">
   <span class="eyebrow">09 · Progress</span>
   <h2 class="title">量產進度速查表 / 時間軸</h2>
-  <p class="subtitle">各家定位、進度與查證信心。</p>
+  <p class="subtitle">各家定位、進度與查證信心(2026-07 依第二輪查證刷新)。</p>
   <div class="table-wrap"><table>
     <thead><tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr></thead>
     <tbody>
-      <tr><td>聯亞 3081</td><td>磊晶+晶粒一條龍</td><td>住友五年長約鎖料;1Q26 +99% EPS 3.44 創高;2027 前段產能倍增</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>全新 2455</td><td>MOCVD 磊晶龍頭</td><td>200G PD Q2 出貨;Q2 成本轉嫁;MOCVD 擴 5 部 2027 投產</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>英特磊 4971</td><td>MBE 磊晶+國防</td><td>InP 占比 50%→60%、2026 訂單翻倍</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>穩懋 3105 / 宏捷科 8086</td><td>GaAs 代工跨光通訊</td><td>穩懋 200G PD 2026/4 量產、CW/EML 2027(選擇權);宏捷科認證待證</td><td><span class="conf c-med">中</span></td></tr>
-      <tr><td>中國 InP 管制(事件)</td><td>供給最大變數</td><td>2025/2 銦管制、逐案許可;審批 60+ 工作天;雙向變數</td><td><span class="conf c-high">高</span></td></tr>
-      <tr><td>NVIDIA 注資(事件)</td><td>需求鎖產能</td><td>2026/3 對 Lumentum+Coherent 各 ~$20 億鎖 EML/InP</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>聯亞 3081</td><td>磊晶+晶粒一條龍</td><td>住友五年長約(2026-2030)鎖料;1Q26 +99% EPS 3.44 創高;2026/5 營收 +118.84%;2027 前段產能倍增(公司自述);擴產三筆遞增:3.62 億(2025/8 上限)→13.15 億(2026/4/22)→30 億(2026/6/17)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>全新 2455</td><td>MOCVD 磊晶龍頭</td><td>200G PD Q2 小量出貨;Q2 成本轉嫁+6 月磊晶雙位數調漲;MOCVD 擴 5 部 2027 投產(新機 3Q-4Q26 進廠、capex ~7 億);2026/5 營收 +46.51%</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>英特磊 4971</td><td>MBE 磊晶+國防</td><td>InP 占比 54.5%→60%、2026 訂單翻倍(公司自述);⚠ 2026/5 營收 +1.07%(基板缺料卡出貨);德州二廠二期 2026 完工+12 台(公司自述)</td><td><span class="conf c-high">高(5 月警訊)</span></td></tr>
+      <tr><td>環宇-KY 4991</td><td>III-V 代工+光電元件</td><td>200G PD 2Q26 提前量產;CW 70mW 出貨/100mW 認證中、Q3-Q4 放量目標百萬顆級(公司自述);V-Tac InP 2H26 投產;2026/5 營收 +54.4%</td><td><span class="conf c-med">中高</span></td></tr>
+      <tr><td>穩懋 3105 / 宏捷科 8086</td><td>GaAs 代工跨光通訊</td><td>穩懋 200G PD 2Q26 小量、2H26 放量(法說口徑);CW/EML 2027(選擇權);宏捷科 InP 認證⚪待證(ETtoday 具名反證、等 Q2 法說)</td><td><span class="conf c-med">中</span></td></tr>
+      <tr><td>中國 InP 管制(事件)</td><td>供給最大變數</td><td>2025/2 銦管制、逐案許可;審批 60+ 工作天(2026H1 無系統性放鬆證據);2026/5 底首批「有限放行」優先內需;雙向變數</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>NVIDIA 注資(事件)</td><td>需求鎖產能</td><td>2026/3/2 對 Lumentum+Coherent 各 ~$20 億+多年採購承諾+產能取得權,鎖 EML/InP;非 NVIDIA 客戶雷射交期→2027 後(TrendForce)</td><td><span class="conf c-high">高</span></td></tr>
+      <tr><td>國際基板擴產(事件)</td><td>2027-28 供給翻轉</td><td>JX ¥1,200 億·7-10 倍(FY2030);AXT 2026 倍增+2027 再倍增(公司自述);Coherent Sherman 產出 4 倍(12 個月內);住友 ¥180 億·FY2028 約 2.4~3 倍——漲價紅利有時效</td><td><span class="conf c-high">高(部分公司自述)</span></td></tr>
+      <tr><td>2026/7/10(前瞻)</td><td>下一個驗證點</td><td>台股 6 月營收法定公告:聯亞高基期能否續逾 +100%、英特磊缺料衝擊是否延續第二個月</td><td><span class="conf c-high">高(制度)</span></td></tr>
     </tbody>
   </table></div>
 </div></section>
@@ -424,12 +556,25 @@ p,li,td{overflow-wrap:anywhere}
   <div class="table-wrap" style="margin-bottom:24px"><table>
     <thead><tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr></thead>
     <tbody>
-      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>磊晶股 PE 高(稀缺+成長)</td></tr>
+      <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>磊晶股 PE 高(稀缺+成長);外資給聯亞 2027 年 79x、全新明年 53x——PE 本身即風險訊號</td></tr>
       <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
-      <tr><td><b>毛利率擴張</b></td><td>漲價轉嫁 → 毛利率上行 → EPS 槓桿</td><td>缺料漲價</td><td>聯亞毛利率 8 年高即此邏輯</td></tr>
-      <tr><td><b>題材選擇權</b></td><td>本業 + CW/EML 放量折現</td><td>未放量</td><td>穩懋 CW/EML(2027)屬此類</td></tr>
+      <tr><td><b>毛利率擴張</b></td><td>漲價轉嫁 → 毛利率上行 → EPS 槓桿</td><td>缺料漲價</td><td>聯亞毛利率 8 年高(54.8%)、環宇 54.5% 創高即此邏輯;注意 2027 供給釋放後不可線性外推</td></tr>
+      <tr><td><b>題材選擇權</b></td><td>本業 + CW/EML 放量折現</td><td>未放量</td><td>穩懋 CW/EML(2027)、宏捷科(⚪待證)屬此類</td></tr>
     </tbody>
   </table></div>
+
+  <h3>法人預估 / 目標價 / YTD(估值錨;2026-07 增補,全部非公司財測)</h3>
+  <div class="callout warn">⚠️ <b>使用須知:</b>下表全為券商/法人預估,<b>非公司財測</b>;聯亞/全新目標價僅單一媒體轉述外資報告、未取得第二源(⚪標註),穩懋 FactSet 有鉅亨頁面可及、相對可信。2026 年磊晶股漲幅巨大,估值錨定用於判斷 price-in 程度,不構成投資建議。</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>公司</th><th>法人 EPS 預估(非財測)</th><th>目標價</th><th>YTD / 價格軌跡</th><th>估值訊號</th><th>來源+日期</th></tr></thead>
+    <tbody>
+      <tr><td>聯亞 3081</td><td>2026/27/28:17.6 / 28.8 / 50.6 元(美系外資 2026/4/23 上修);另有法人上修 2027 EPS 預估 23→40.04 元、2026 營收增速看 ~129%(2026/4/28)</td><td>最高 4,738 元(外資 12 個月)⚪單一來源;另一法人口徑約 2,000 元——兩套差 1.4 倍、錨定極度發散</td><td>2026 年內約漲 4 倍(240 元區間→2,320 元波段新高;2026/3/31 收盤 1,575 元可作對照)</td><td>以 2027 年 79x PE 評價、部分法人以 100x PE 評價——本身即高估值風險訊號</td><td>CMoney 轉述外資(2026/4/23)+工商時報(2026/4/24)+旺得富(2026/4/23、4/28)</td></tr>
+      <tr><td>全新 2455</td><td>兩套口徑嚴重分歧:本土券商/投顧 2026 EPS 4.55~6.12 元 vs 外資 9.5 元(2027 13.3 元;2026-28 營收 CAGR 36%);另有法人估 7.51 元——高低差近 1 倍,引用必標機構+日期、不可混用</td><td>270 / 290 / 319 / 428 / 504 元(504=美系外資 2026/5/19)⚪多為單一來源</td><td>—(外資 2026/5/18 以明年 53x PE 重評)</td><td>Q2 漲價機制啟動、毛利率 37.4%→38.9% 預估(法人)</td><td>鉅亨(2026/5/4)+TechNews(2026/5/18)+旺得富(2026/5/18-19)</td></tr>
+      <tr><td>穩懋 3105</td><td>FactSet 15 位分析師(2026/5/4):2026 中位數 5.66 元(最高 7.38/最低 2.66);另有法人估 2026 EPS 6.5/2027 拚 11 元</td><td>324 元(FactSet,鉅亨頁面可及)</td><td>—</td><td>高低估值差近 3 倍=市場對 InP 兌現度分歧大</td><td>鉅亨 FactSet 台股預估(2026/5/4)</td></tr>
+      <tr><td>英特磊 4971 / 環宇-KY 4991</td><td>本輪未取得可靠法人共識(僅實績:英特磊 1Q26 EPS 1.97、環宇 1.67)</td><td>—</td><td>—</td><td>缺共識=估值錨薄弱,追高風險自負</td><td>TechNews(2026/5/7)/豐雲學堂(2026/6)</td></tr>
+    </tbody>
+  </table></div>
+
   <h3>試算計算機(示意預設,請填真實數字)</h3>
   <div class="calc">
     <div class="inputs">
@@ -454,20 +599,146 @@ p,li,td{overflow-wrap:anywhere}
 <section class="block" id="refs"><div class="container">
   <span class="eyebrow">Sources · 參考資料</span>
   <h2 class="title">參考資料來源</h2>
-  <p class="subtitle">經 Workflow 研究與對抗式查證。品質分層;口徑修正/待查已標註。</p>
+  <p class="subtitle">經 Workflow 研究與兩輪對抗式查證(第二輪 2026-07-02:24 條主張反例測試+13 檔股號複核+9 組跨檔矛盾裁決)。品質分層;口徑修正/待查已標註。</p>
+
+  <h3>被反駁說法警示區(2026-07 對抗式裁決)</h3>
+  <p class="subtitle">裁決規則:<b>refuted(被反駁)不得寫入正文</b>、僅在此區留檔含理由;<b>⚪未驗證</b>=不可採信也不可錯殺,待新事證;<b>correction(更正)</b>正文一律已採更正後口徑。</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>說法</th><th>裁決</th><th>理由 / 正確口徑</th></tr></thead>
+    <tbody>
+      <tr><td>「Veeco $250M 訂單公告=2026/3/2、來自光通訊雷射龍頭單一客戶、交機 3Q26 起/1Q27 加速」</td><td><span class="conf c-low">refuted</span></td><td>Veeco IR/GlobeNewswire 原始稿日期=2026/5/5,且明載訂單來自「multiple customers」(大宗 Spector IBD 售予 800G/1.6T 光收發器製造商),交付「2026 開始、2027 顯著加速」——日期/單一客戶/交機節奏三處失實。正文已全採更正口徑</td></tr>
+      <tr><td>「AI 光收發器 $16.5B→$26B(2026)出自 LightCounting」</td><td><span class="conf c-low">refuted(來源歸屬)</span></td><td>經查該組絕對值為 TrendForce 2026/4/20 官方新聞稿口徑(+57%);LightCounting 自家口徑是成長率(2026 乙太網光模組 +60~65%)而非此絕對值——正文已分開掛名、勿互掛</td></tr>
+      <tr><td>「Coherent Sherman 擴建後產能=現行 5 倍」</td><td><span class="conf c-low">refuted</span></td><td>Coherent 官方口徑=「製造空間倍增(2x)、InP 晶圓產出 12 個月內 4 倍(quadruple)」;「5 倍」無官方出處。正文已全部採 4 倍口徑</td></tr>
+      <tr><td>「Riber 首台 MBE 8000 交付英特磊」作為 2026 InP 擴產的機台證據</td><td><span class="conf c-low">refuted(時代錯置)</span></td><td>Riber 原始新聞稿日期=2021/4/6,且用途為 VCSEL(GaAs 6 吋)非 InP;英特磊 2026 擴產證據應改用德州二廠二期(+12 台機台,公司自述、缺第三方)——正文已更正</td></tr>
+      <tr><td>「宏捷科已通過 1.6T 用 200G EML+CW 認證、6 吋 InP 產線、切入 ELS 代工」</td><td><span class="conf c-un">⚪未驗證+具名反證</span></td><td>正面說法僅理財周刊/CMoney/論壇彙整(2026/3 起)、無公司法說/公告一手(論壇且有質疑帖);反面:ETtoday 2026/4/26 具名判斷「與磷化銦直接關係有限,漲勢動能=PA+衛星電池」;公司自己把 5 月營收動能歸因無人機+PA。維持 watch、不入受惠名單,等 2026Q2 法說</td></tr>
+      <tr><td>「住友電工 6 吋 InP 產能 +40%(2026 或 2027 達成)」</td><td><span class="conf c-un">⚪未驗證(已被新口徑取代)</span></td><td>僅研調頁轉述、無住友官方稿;且已被 2026/6 新計畫實質取代:¥180 億、伊丹製作所、至 FY2028 約 2.4~3 倍(日刊工業頭條 2.4x/日經標題約 3x,精確倍率待一手;單一轉述之 3.1x 不採為唯一值)——舊 +40% 不再作主引</td></tr>
+      <tr><td>「Lumentum=唯一大量出貨 200G EML 的供應商、市占 50-60%」</td><td><span class="conf c-med">correction(部分成立)</span></td><td>「唯一大量出貨」有 McKinsey(2025/6)獨立背書、非僅 blog 互抄,但時效=2025/6 口徑;2026H1 Coherent 已有 200G EML 出貨(自家 1.6T-DR8);市占口徑 50-80% 分歧、皆非公司揭露——正文改寫為「近乎獨供、市占口徑分歧」</td></tr>
+      <tr><td>「供需缺口:需求 200-300 萬片 vs 產能 60-75 萬片、缺口 >70%」</td><td><span class="conf c-med">correction(升級確認)</span></td><td>第二輪查證:DIGITIMES 原文標題與內文確認「缺口逾 7 成」(2026 需求 260-300 萬片 vs 有效產能 ~75 萬片,2 吋約當)——彙整層(BigGo)同系數字獲具名媒體升級;「片」的吋別約當口徑仍需標明</td></tr>
+      <tr><td>「聯亞住友長約鎖產能至 2027-28」/「擴產金額合併引用」</td><td><span class="conf c-med">correction</span></td><td>長約=2026-2030(5 年);且 3.62 億(2025/8 投資上限)、13.15 億(2026/4/22 公告)、30 億(2026/6/17 董事會)為三筆遞增的獨立公告,引用各標公告日、勿合併互換——正文已更正</td></tr>
+      <tr><td>「全新 1.6T 已量產」</td><td><span class="conf c-med">correction</span></td><td>公司口徑=200G PD(1.6T 模組用)2026Q2 起小量量產出貨;「1.6T 已量產」是把模組世代與元件量產混寫——正文已收斂</td></tr>
+      <tr><td>「JX 擴產 +50%」</td><td><span class="conf c-med">correction</span></td><td>正確軌跡:2026/2/10 ¥200 億/3 倍(2030)→ 2026/6/16 加碼至 FY2030 最多 ¥1,200 億/7-10 倍(JX 官網一手稿)——正文已更正</td></tr>
+      <tr><td>「穩懋 200G PD 2026/4 起(大量)量產出貨」</td><td><span class="conf c-med">correction(口徑收斂)</span></td><td>採公司法說口徑(一手且較保守):2Q26 小量量產前出貨、2H26 明顯成長;TechNews 4 月口徑作樂觀版並列,不得寫成 4 月已大量出貨</td></tr>
+      <tr><td>「穩懋 1Q26 毛利率 32.2%」單獨引用</td><td><span class="conf c-med">correction(口徑標註)</span></td><td>兩數字皆真:26.3%=合併毛利率(主口徑,季減 5.5pp)、32.2%=個體(母公司)口徑,豐雲學堂原文同載——與合併營收並列時應用 26.3%</td></tr>
+      <tr><td>「CW 雷射月產能 150 萬→300-400 萬(2026 底)→600 萬+(2027)顆」掛在聯亞名下</td><td><span class="conf c-med">correction(歸屬勘誤)</span></td><td>MoneyDJ《DJ在線》(2025/12/23)原文:這組數字屬於<b>華星光</b>,非聯亞——市場彙整文常誤掛,引用務必核對;同文對聯亞的記載僅「2025/8 公告投資上限 3.62 億元」</td></tr>
+      <tr><td>「1.6T 2026 需求分布:NVIDIA >500 萬/Google ~400 萬/Meta ~100 萬」</td><td><span class="conf c-un">⚪未驗證</span></td><td>僅 vendor blog(C-Light)引述「LightCounting 口徑之整理」,無法取得原文或第二獨立源核對分配數;區間敘述(860 萬-2,000 萬顆)合理但顆數分配維持未驗證</td></tr>
+      <tr><td>「基板市占:住友 ~60%/AXT ~35%」(36kr 口徑)</td><td><span class="conf c-un">⚪未驗證</span></td><td>與 Reuters(AXT+住友合計 ~80%、AXT=全球第二大)及他源(住友 2024 ~30%)皆不相容;36kr 未載明產能/產量/營收口徑——維持多口徑並列+disclaimer,以 Reuters 2026/6 為錨</td></tr>
+      <tr><td>「媒體點名全新 200G PD 客戶=博通」</td><td><span class="conf c-un">⚪未驗證</span></td><td>媒體點名、未經公司證實;正文僅寫「美系指標大廠」</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>一手來源(primary)</h3>
   <ul class="refs">
-    <li><b>全新/聯亞/英特磊/穩懋/宏捷科/聯鈞 2026Q1 法說與月營收</b> — 各家數字<span class="q">primary</span></li>
-    <li><b>Reuters(2026/6/10-11)</b> — 6 吋 InP +250% 至 $5,000、AXT+住友近 8 成;<b>AXT 1Q26 法說</b> — backlog 逾 1 億創高、出口許可為最大變數<span class="q">primary</span></li>
-    <li><b>中國商務部第 10 號公告(2025/2/4)</b> 銦出口管制;<b>白宮 232 條/CFIUS(2026/1)</b><span class="q">primary</span></li>
-    <li><b>Goldman Sachs《Optical Networking》</b> — 光網路 TAM 2026 $150 億→2028 $1,540 億(近 9 倍)<span class="q">secondary</span></li>
-    <li><b>TrendForce(2026/4-6)</b> — EML+CW 月產能倍增至 5,070 萬顆、800G+ 模組 6,300 萬;NVIDIA 注資 Lumentum+Coherent $40 億<span class="q">secondary</span></li>
-    <li><b>Mordor / QY Research</b> — InP 基板市場規模(口徑分歧,量級參考);<b>globalsemiresearch</b> — 良率/缺口/原料利用率<span class="q">blog</span></li>
+    <li><b>中國商務部+海關總署 2025 年第 10 號公告(2025/2/4)</b> — 銦/InP(含三甲基銦)出口管制的法規原點 — <a href="https://www.mofcom.gov.cn/zwgk/zcfb/art/2025/art_e623090907fc4e1092f0a4db72f57b95.html">mofcom.gov.cn(官網原文)</a><span class="q">primary</span></li>
+    <li><b>白宮行政命令(2026/1/2)+美國財政部 sb0349</b> — CFIUS 令 HieFo 180 天出脫 EMCORE InP 資產(理由含 InP 晶片供應移轉風險;交易額 $2.92M) — <a href="https://www.whitehouse.gov/presidential-actions/2026/01/regarding-the-acquisition-of-certain-assets-of-emcore-corporation-by-hiefo-corporation/">whitehouse.gov</a> / <a href="https://home.treasury.gov/news/press-releases/sb0349">home.treasury.gov</a><span class="q">primary</span></li>
+    <li><b>NIST / 商務部 CHIPS 計畫(2026/6)</b> — 與 Coherent 簽最高 $50M LOI 擴大 InP 生產(LOI 非最終撥款協議) — <a href="https://www.nist.gov/news-events/news/2026/06/department-commerces-chips-program-announces-letter-intent-coherent-50">nist.gov</a><span class="q">primary</span></li>
+    <li><b>NVIDIA Newsroom(2026/3/2)</b> — 注資 Lumentum $2B(Coherent 同步 $2B)+多年採購承諾+未來產能取得權(非獨家);Lumentum/Coherent 8-K、CNBC 同日交叉 — <a href="https://nvidianews.nvidia.com/news/nvidia-announces-strategic-partnership-with-lumentum-to-develop-state-of-the-art-optics-technology">nvidianews.nvidia.com</a><span class="q">primary</span></li>
+    <li><b>AXT 1Q26 法說逐字稿(2026/4/30,Motley Fool)</b> — 營收 $26.9M(+17% QoQ/+39% YoY)、InP backlog >$100M、non-GAAP 毛利率 29.9%、2Q 指引 ~$34M 視出口許可、Tongmei $632.5M 募資、產能 2026 倍增+2027 再倍增(公司自述);亞太占 78%/歐洲 21%/北美僅 1% — <a href="https://www.fool.com/earnings/call-transcripts/2026/04/30/axt-axti-q1-2026-earnings-call-transcript/">fool.com</a><span class="q">primary</span></li>
+    <li><b>Veeco IR(2026/5/5)</b> — 多家客戶合計 >$250M 訂單(Lumina MOCVD+Spector IBD+WaferEtch)、2026 起交付/2027 顯著加速(舊版 2026/3/2 日期與單一客戶說法已依此反駁更正) — <a href="https://ir.veeco.com/news-and-events/news-details/2026/Veeco-Announces-250-Million-in-Equipment-Orders-for-Manufacturing-Indium-Phosphide-Lasers/default.aspx">ir.veeco.com</a><span class="q">primary</span></li>
+    <li><b>Veeco IR(2026/6/11)</b> — 富采(Ennostar)完成 Lumina+ MOCVD 新機認證(台灣=設備用戶的證據) — <a href="https://ir.veeco.com/news-and-events/news-details/2026/Ennostar-Qualifies-Veecos-New-LUMINA-MOCVD-System-for-Advanced-Product-Applications/default.aspx">ir.veeco.com</a><span class="q">primary</span></li>
+    <li><b>JX Advanced Metals 公告(2026/2/10,Japan IR 轉載)</b> — 磯原廠 ¥200 億、InP 基板 2030 產能 3 倍、FY2027 起投產 — <a href="https://japanir.jp/en/company/company-5016/ir/5016-20260210-04_wp_business_update/">japanir.jp</a><span class="q">primary</span></li>
+    <li><b>JX 官網新聞稿(2026/6/16)</b> — 至 FY2030 最多 ¥1,200 億(4 か年最大)、InP 基板產能 7-10 倍(vs FY2025),CPO 需求加速;史上最大投資 — <a href="https://www.jx-nmm.com/newsrelease/2026/20260616_01.html">jx-nmm.com(一手)</a><span class="q">primary</span></li>
+    <li><b>TrendForce 新聞稿(2025/12/8)</b> — AI 雷射缺貨潮定調:NVIDIA 預鎖 EML/CW 產能、非 NVIDIA 客戶交期→2027 之後 — <a href="https://www.trendforce.com/presscenter/news/20251208-12823.html">trendforce.com</a><span class="q">primary</span></li>
+    <li><b>TrendForce 新聞稿(2026/4/20)</b> — AI 光收發器市場 $16.5B(2025)→$26B(2026,+57%);EML/CW 短缺=擴產最大瓶頸(「LightCounting $26B」掛名錯置已依此更正) — <a href="https://www.trendforce.com/presscenter/news/20260420-13017.html">trendforce.com</a><span class="q">primary</span></li>
+    <li><b>TrendForce 新聞稿(2026/6/3)</b> — EML+CW-DFB 月產能倍增至 5,070 萬顆;EML top3(Broadcom/Lumentum/住友)55%;CW-DFB top4 74% 含 LandMark(聯亞)/LuxNet(光環) — <a href="https://www.trendforce.cn/presscenter/news/20260603-13076.html">trendforce.cn</a><span class="q">primary</span></li>
+    <li><b>LightCounting April 2026 Market Forecast</b> — 乙太網光模組 2024 +93%/2025 +82%/2026 約 +60-65%;XPU/ASIC 短缺=2026 成長上限 — <a href="https://www.lightcounting.com/newsletter/en/april-2026-market-forecast-379">lightcounting.com</a><span class="q">primary</span></li>
+    <li><b>LightCounting March 2026</b> — 「2030 AI 叢集光學 $100B?」情境推演(標題帶問號、非基準預測,僅作多頭上限錨) — <a href="https://www.lightcounting.com/newsletter/en/march-2026-ethernet-optics-382">lightcounting.com</a><span class="q">primary</span></li>
+    <li><b>Coherent OFC 2026 新聞稿</b> — 6.4T(32×200G)socketed CPO+自家 InP CW 驅動 ELS(CPO→CW DFB 傳導鏈一手驗證) — <a href="https://www.coherent.com/news/press-releases/coherent-co-packaged-optics-cpo-technologies-ofc-2026">coherent.com</a><span class="q">primary</span></li>
+    <li><b>Coherent 1.6T-DR8 新聞稿</b> — 1.6T-DR8=8×200G EML/模組的規格定義(需求傳導量化錨) — <a href="https://www.coherent.com/news/press-releases/coherent-demonstrates-two-advanced-transceiver-modules">coherent.com</a><span class="q">primary</span></li>
+    <li><b>Coherent 官方部落格(2026/3)</b> — 4→6 吋 InP=4 倍產出、die cost −60%(公司自述、缺第三方) — <a href="https://www.coherent.com/news/blog/indium-phosphide-wafer-fab">coherent.com</a><span class="q">primary</span></li>
+    <li><b>Oxford Instruments 官方新聞(2025/11/17)</b> — 向 Coherent Sherman+Järfälla 交付全自動 6 吋 InP 電漿蝕刻設備(晶粒製程站具名設備商) — <a href="https://www.oxinst.com/news/oxford-instruments-delivers-automated-6%E2%80%9D-inp-wafer-processing-for-next-gen-ai">oxinst.com</a><span class="q">primary</span></li>
+    <li><b>IQE 公告(2026/4/27)</b> — 策略檢討結論:MACOM £45M(£30M 股權+£15M 可轉債)+長期供貨協議、合計募資 £81M 擴 InP/GaN — <a href="https://www.iqep.com/media/press-releases/2026/conclusion-of-strategic-review/">iqep.com</a><span class="q">primary</span></li>
+    <li><b>Riber 官方新聞頁</b> — 首台 MBE 8000 交付 IntelliEPI(⚠ 2021/4、VCSEL/GaAs 用;已標時代錯置、不作 2026 InP 擴產證據,見被反駁區) — <a href="https://www.riber.com/news/first-mbe-8000-machine-delivered-to-intelliepi/">riber.com</a><span class="q">primary(被反駁用法)</span></li>
+    <li><b>住友電工 IR 簡報(2025/11/13)</b> — 資料中心相關事業成長戰略(官方 PDF):住友 InP 基板/光元件擴產口徑最接近一手的官方材料 — <a href="https://sumitomoelectric.com/sites/default/files/2025-11/download_documents/Growth%20strategy%20for%20data%20center-related%20business_2025.pdf">sumitomoelectric.com(PDF)</a><span class="q">primary</span></li>
+    <li><b>英特磊 2026/5/7 法說簡報(公開資訊觀測站)</b> — 「2026 InP 營收占比五成→六成、高速傳輸 InP 訂單較 2025 翻倍」之公司自述出處 — <a href="https://mopsov.twse.com.tw/nas/STR/497120260507E001.pdf">mopsov.twse.com.tw(PDF)</a><span class="q">primary(公司自述)</span></li>
+    <li><b>Goldman Sachs Research《Optical Networking》(2026/6)</b> — 光網路 TAM $15B(2026)→$154B(2028)、scale-up ~69%、CPO ~$91B(券商研究、非公司財測) — <a href="https://www.goldmansachs.com/insights/goldman-sachs-research/optical-networking-the-next-mega-trend-in-ai-infrastructure">goldmansachs.com</a><span class="q">primary(券商)</span></li>
+    <li><b>台灣證交所 MOPS 月營收申報制度</b> — 每月 10 日前公告(下次數字刷新點=2026/7/10) — <a href="https://mops.twse.com.tw/mops/web/t21sc04_ifrs">mops.twse.com.tw</a><span class="q">primary</span></li>
   </ul>
-  <div class="callout warn" style="margin-top:18px">⚠️ <b>口徑修正:</b>① 「全新 6/12 漲價公告」查無佐證、已剔除(以 Q2 成本轉嫁為準);② 「pBN 坩堝被中國管制」查無官方佐證、已剔除(確證在效是銦管制);③ 漲價兩套口徑差一數量級(國際累計 +250% vs 台廠合約 +3-5%);④ 台灣基板長晶=零(成本端受制);⑤ 聯亞/全新/聯鈞跨「CPO 矽光子」題,勿重複計受惠;⑥ 穩懋/宏捷科本業手機 PA、InP 貢獻小,勿誇大。</div>
+
+  <h3>二手來源(secondary,具名媒體/研調)</h3>
+  <ul class="refs">
+    <li><b>Reuters(2026/6/10-11)</b> — 6 吋 InP +250% 至 $5,000、AXT+住友近 80%、JX ~10%、中國產全球 ~70% 銦、AXT 中國子公司 6 月獲首批年度許可、Lumentum 產能翻 4 倍仍 sold out 到 2028、VPEC/LandMark 具名(⚠ reuters.com 原文連結未取得=未附網址;MINING.com 全文聯載可點) — <a href="https://www.mining.com/web/chinas-control-over-indium-phosphide-exports-threatens-ai-data-centre-rollout/">mining.com(聯合供稿)</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Today(2026/6/17)</b> — Coherent Sherman $650M 動土:空間 2 倍、InP 晶圓產出 12 個月內 4 倍、CHIPS $50M+地方 ~$20M、與 NVIDIA 共同動土、6 吋良率高於自家 3 吋線(公司自述) — <a href="https://www.semiconductor-today.com/news_items/2026/jun/coherent-170626.shtml">semiconductor-today.com</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Today(2026/5/20)</b> — Aixtron 獲 Lumentum 多台 G10-AsP(交期未揭露);引 Yole:InP 基 PIC $3B(2023)/CAGR 14% 至 2027 — <a href="https://www.semiconductor-today.com/news_items/2026/may/aixtron-200526.shtml">semiconductor-today.com</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Today(2026/4/16)</b> — Aixtron 1Q26 初步:訂單 €171M(+30% YoY)、光電占設備訂單 >65%、FY2026 指引上調 €560M±30M(設備需求的財務級量化;機台交期月數仍未披露) — <a href="https://www.semiconductor-today.com/news_items/2026/apr/aixtron-160426.shtml">semiconductor-today.com</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Today(2026/6/4)</b> — 轉述 TrendForce:5,070 萬顆/月、800G+ 模組 2,400 萬→近 6,300 萬顆(2.6x)、台廠列入擴產名單 — <a href="https://www.semiconductor-today.com/news_items/2026/jun/trendforce-040626.shtml">semiconductor-today.com</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Today(2026/5/14)</b> — Lumentum FQ3 2026 營收 $808.4M(+90% YoY)、EML 出貨年增 100%、供不應求至少到 2026 曆年底 — <a href="https://www.semiconductor-today.com/news_items/2026/may/lumentum-140526.shtml">semiconductor-today.com</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Today(2025/11)</b> — AXT 2025Q3 營收超標=中國核發許可放行遞延訂單(管制≠禁運、許可節奏=營收波動主因) — <a href="https://www.semiconductor-today.com/news_items/2025/nov/axt-101125.shtml">semiconductor-today.com</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Today(2026/4/29)</b> — IQE £81M 募資與 MACOM 投資細節(對台磊晶三雄=中期競爭變數) — <a href="https://www.semiconductor-today.com/news_items/2026/apr/iqe-290426.shtml">semiconductor-today.com</a><span class="q">secondary</span></li>
+    <li><b>日刊工業新聞(2026/6)+日經同步報導</b> — 住友電工上修 InP 基板擴產:¥180 億、伊丹製作所、FY2028 產能約 2.4~3 倍(日刊工業頭條 2.4x/日經約 3x,倍率口徑差異待一手) — <a href="https://www.nikkan.co.jp/articles/view/00773387">nikkan.co.jp</a><span class="q">secondary</span></li>
+    <li><b>DIGITIMES(2026/5)</b> — InP 基板荒:2026 需求 260-300 萬片(2 吋約當)vs 有效產能 ~75 萬片、缺口逾 7 成;2026 市場 ~$2.02 億/128.19 萬片 — <a href="https://www.digitimes.com.tw/tech/dt/n/shwnws.asp?id=0000754544_8Q86L3ER3NBSLE5JVDAKZ">digitimes.com.tw</a><span class="q">secondary</span></li>
+    <li><b>DIGITIMES(2026/6/15)</b> — 中國 2026 首批 InP 基板 5 月底「有限放行」、優先內需、供應鏈搶料備戰 2027-28 — <a href="https://www.digitimes.com.tw/tech/dt/n/shwnws.asp?id=0000759233_79A1EQ734HGGFI2FM1O6W">digitimes.com.tw</a><span class="q">secondary</span></li>
+    <li><b>DIGITIMES(2026/6)</b> — Google 親自登門拜訪 InP 基板供應商催擴產、「供應鏈安全超過價格」(CSP 下沉到最上游的罕見訊號) — <a href="https://gb-www.digitimes.com.tw/tech/dt/n/shwnws.asp?id=0000758803_L0J91ZTKL2Y3KV4FB5E3R">digitimes.com.tw</a><span class="q">secondary</span></li>
+    <li><b>INSIDE(2026/6)</b> — 中國 2026 兩用物項目錄 1/1 生效後審查趨嚴、北美買家通關當日→數日、銦端用戶揭露要求提高 — <a href="https://www.inside.com.tw/article/41602-china-indium-export-control-ai-data-center">inside.com.tw</a><span class="q">secondary</span></li>
+    <li><b>McKinsey《Opportunities in networking optics》(2025/6,經 SDxCentral 具名轉述)</b> — 800G 短缺 40-60% 至 2027、1.6T 短缺 30-40% 延續至 2029;「Lumentum 唯一大量出貨 200G EML」口徑的獨立背書(時效=2025/6;McKinsey 原報告 URL 未附網址) — <a href="https://mapyourtech.com/co-packaged-optics-architecture-status-and-the-path-to-1-6t-switches/">mapyourtech.com(轉述載點)</a><span class="q">secondary</span></li>
+    <li><b>鉅亨網營收速報(2026/6)</b> — 聯亞 5 月營收 4.05 億(+118.84%)、1-5 月 17.05 億(+107.11%) — <a href="https://m.cnyes.com/news/id/6485743">m.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>永豐金豐雲學堂(2026/6)</b> — 聯亞 1Q26 法說:營收 9.04 億(QoQ+41%/YoY+99%)、毛利率 54.8%、EPS 3.44;住友 5 年長約(2026-2030)、E-beam +2.5x、2027 前段產能 +100%(公司自述) — <a href="https://www.sinotrade.com.tw/richclub/hotstock/%E8%81%AF%E4%BA%9E-3081-%E5%81%9A%E4%BB%80%E9%BA%BC-%E6%B3%95%E8%AA%AA%E9%87%8D%E9%BB%9E%E6%9C%89%E5%93%AA%E4%BA%9B-%E7%A3%B7%E5%8C%96%E9%8A%A6%E9%95%B7%E7%B4%84%E5%8A%A0%E7%A2%BC%E6%93%B4%E7%94%A2-Q1%E5%96%AE%E5%AD%A3%E7%87%9F%E6%94%B69-04%E5%84%84%E5%85%83-%E5%AD%A3%E5%A2%9E41--%E5%B9%B4%E5%A2%9E99-%E5%89%B5%E5%8F%B2%E9%AB%98-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-69e87c64828d0b0adef97326">sinotrade.com.tw</a><span class="q">secondary</span></li>
+    <li><b>TechNews(2026/4/22)</b> — 聯亞 1Q26 第二來源交叉:稅後淨利 3.18 億、EPS 3.44;新增 capex 13.15 億(前段磊晶+曝光蝕刻);1.6T 矽光已量產、3.2T 目標 2H26(公司自述);營收結構 DC 80-85% — <a href="https://technews.tw/2026/04/22/landmark-optoelectronics-corporation-2026-q1-financial-report/">technews.tw</a><span class="q">secondary</span></li>
+    <li><b>工商時報(2026/4/24)</b> — 聯亞外資 12 個月目標價上調至 4,738 元(另一法人口徑 ~2,000 元;2026/3/31 收盤 1,575 元對照;非公司財測) — <a href="https://www.ctee.com.tw/news/20260424700890-430201">ctee.com.tw</a><span class="q">secondary</span></li>
+    <li><b>CMoney 即時新聞(2026/4/23)</b> — 美系外資上修聯亞 2026-28 EPS 17.6/28.8/50.6、2027 79x PE(非公司財測) — <a href="https://cmnews.com.tw/article/newsyoudeservetoknow-1f9b9dac-3ef1-11f1-96c3-b0a261d0fb8d">cmnews.com.tw</a><span class="q">secondary</span></li>
+    <li><b>旺得富理財網(2026/4/23、4/28)</b> — 聯亞 YTD 約 4 倍(240→2,320 波段)、大摩三情境;法人上修 2027 EPS 23→40.04 元、部分以 100x PE 評價(皆法人預估、非財測;⚪目標價單一來源) — <a href="https://wantrich.chinatimes.com/news/20260423900345-420101">wantrich.chinatimes.com</a> / <a href="https://wantrich.chinatimes.com/news/20260428900337-420101">4/28 篇</a><span class="q">secondary</span></li>
+    <li><b>Yahoo 股市營收表</b> — 全新 5 月營收 3.21 億(+46.51%)、1-5 月 15.99 億(+28.52%)(公開申報) — <a href="https://tw.stock.yahoo.com/quote/2455.TW/revenue">tw.stock.yahoo.com</a><span class="q">secondary</span></li>
+    <li><b>CMoney 26Q1 財報筆記</b> — 全新 1Q26:營收 9.5931 億(+20.87%)、毛利率 38.09%、淨利 1.9509 億(+24.03%)、EPS 1.06、公司稱 InP 基板短缺仍在 — <a href="https://www.cmoney.tw/notes/note-detail.aspx?nid=1178103">cmoney.tw</a><span class="q">secondary</span></li>
+    <li><b>今周刊(2026/6/16)</b> — 全新:GaAs/InP 磊晶 6 月起雙位數調漲、微電子 4 月/6 月兩度調價、200G PD Q2 小量、capex ~7 億、新機 3Q-4Q26、出口許可放行後拿到美系基板+低價庫存(⚠ 舊引「旺得富磊晶漲逾一成」原文 not_found=未附網址;以本篇為替代佐證、主張升級為有佐證) — <a href="https://www.businesstoday.com.tw/article/category/183008/post/202606160018/">businesstoday.com.tw</a><span class="q">secondary</span></li>
+    <li><b>TechNews(2026/5/18)</b> — 外資以明年 53x PE 調升全新目標價、2026-28 營收 CAGR 36%、EPS 9.5/13.3(非財測) — <a href="https://technews.tw/2026/05/18/visual-photonics-epitaxy-0518-raised-price/">technews.tw</a><span class="q">secondary</span></li>
+    <li><b>旺得富理財網(2026/5/18)+鉅亨(2026/5/4)</b> — 全新目標價 504 元(美系)/290 元(外資)等多套並列;本土投顧 2026 EPS 4.55~6.12 vs 外資 9.5——法人預估嚴重分歧、引用必標機構+日期 — <a href="https://wantrich.chinatimes.com/news/20260518900265-420101">wantrich.chinatimes.com</a> / <a href="https://news.cnyes.com/news/id/6442041">news.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>TechNews(2026/3/23)</b> — 全新光電子(光通訊磊晶)占比近三成、2026 營運目標雙位數成長(公司自述口徑) — <a href="https://technews.tw/2026/03/23/visual-photonics-epitaxy-2026-03-report">technews.tw</a><span class="q">secondary</span></li>
+    <li><b>優分析 UAnalyze</b> — 全新 200G PD 小規模量產(客戶含美系/台系/日系)、1.6T PD 與高功率 CW 良率爬坡中、Q2 起調漲售價轉嫁(成本轉嫁進行中) — <a href="https://uanalyze.com.tw/articles/2293048243">uanalyze.com.tw</a><span class="q">secondary</span></li>
+    <li><b>TechNews(2026/5/7)</b> — 英特磊 1Q26:EPS 1.97(修復原懸空數字)、毛利率 47.84%、稅後純益 0.79 億轉盈、InP 占 54.5%、瓶頸=InP 基板供給 — <a href="https://technews.tw/2026/05/07/iet-ky-2026-q1-financial-report/">technews.tw</a><span class="q">secondary</span></li>
+    <li><b>Yahoo 股市新聞(2026/6)</b> — 「全球 InP 基板供應短缺,IET-KY 5 月營收 7,804 萬」:月減 26.58%/年增 1.07%、法人稱缺口今明兩年逐步改善 — <a href="https://tw.stock.yahoo.com/news/%E5%85%A8%E7%90%83inp%E5%9F%BA%E6%9D%BF%E4%BE%9B%E6%87%89%E7%9F%AD%E7%BC%BA-iet-ky-5%E6%9C%88%E7%87%9F%E6%94%B67-804%E8%90%AC%E5%85%83-003101621.html">tw.stock.yahoo.com</a> / <a href="https://statementdog.com/analysis/4971/monthly-revenue">statementdog.com(月營收追蹤)</a><span class="q">secondary</span></li>
+    <li><b>CMoney 法說報導(2026/5)</b> — 英特磊全年營收 +20-40% 目標不變、「自備基板+客戶提供基板」雙軌(公司自述、缺第三方) — <a href="https://www.cmoney.tw/notes/note-detail.aspx?nid=1184988">cmoney.tw</a><span class="q">secondary</span></li>
+    <li><b>鉅亨網(IET-KY 董座專訪)</b> — 德州二廠二期 2026 完工、可容 12 台新 MBE 機台;2026 InP 短缺為業界整體問題(公司自述、缺第三方) — <a href="https://news.cnyes.com/news/id/6314049">news.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>StockFeel 股感</b> — 穩懋 2026Q1 法說整理:合併營收 45.90 億(+28%)、合併毛利率 26.3%、EPS 1.26、稼動率 60%、Q2 指引 QoQ+14-16%;Optical 首度獨立揭露占 5-10%;PD 2Q26 小量、2H26 放量;LD(EML/CW)明後年才是成長項 — <a href="https://www.stockfeel.com.tw/%E7%A9%A9%E6%87%8B-2026-q1-%E6%B3%95%E8%AA%AA%E6%9C%83-%E9%87%8D%E9%BB%9E%E6%95%B4%E7%90%86/">stockfeel.com.tw</a><span class="q">secondary</span></li>
+    <li><b>永豐金豐雲學堂</b> — 穩懋 1Q26 個體毛利率 32.2%(與合併 26.3% 口徑並列,原文同時載明) — <a href="https://www.sinotrade.com.tw/richclub/hotstock/%E7%A9%A9%E6%87%8B%E5%8D%8A%E5%B0%8E%E9%AB%94-3105-%E5%81%9A%E4%BB%80%E9%BA%BC-%E6%B3%95%E8%AA%AA%E9%87%8D%E9%BB%9E%E6%9C%89%E5%93%AA%E4%BA%9B-%E7%AC%AC%E4%B8%80%E5%AD%A3-EPS-1-26%E5%85%83-%E6%AF%9B%E5%88%A9%E7%8E%8732-2--%E4%BC%B0%E7%AC%AC%E4%BA%8C%E5%AD%A3%E7%87%9F%E6%94%B6%E7%BA%8C%E6%8F%9A-%E5%85%89%E5%82%B3%E8%BC%B8%E8%BA%8D%E5%8D%87%E7%82%BA%E6%9C%AC%E5%AD%A3%E6%9C%80%E5%8F%97%E7%9F%9A%E7%9B%AE%E7%9A%84%E6%96%B0%E8%88%88%E6%88%90%E9%95%B7%E5%BC%95%E6%93%8E-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-69f32719d4f77d0110440053">sinotrade.com.tw</a><span class="q">secondary</span></li>
+    <li><b>鉅亨網營收速報(2026/6)</b> — 穩懋 5 月 17.55 億(+40.3%,48 個月新高)、1-5 月 80.8 億(+34.85%) — <a href="https://news.cnyes.com/news/id/6485805">news.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>鉅亨 FactSet 台股預估(2026/5/4)</b> — 穩懋 2026 EPS 中位數 5.66(高 7.38/低 2.66)、目標價 324(法人預估、非財測;此筆有頁面可及、相對可信) — <a href="https://news.cnyes.com/news/id/6441992">news.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>TechNews(2026/4/2)</b> — 穩懋 200G PD 完成最終驗證、量產出貨美系網通晶片大廠(⚠ 樂觀口徑:法說口徑=2Q26 小量、2H26 放量,已依矛盾裁決收斂);CW/EML 驗證中、市場看 2027 — <a href="https://technews.tw/2026/04/02/win-semiconductors-2026-1-6t-pd-products/">technews.tw</a><span class="q">secondary(口徑已收斂)</span></li>
+    <li><b>ETtoday 財經雲(2026/4/26)</b> — 宏捷科「與磷化銦直接關係有限」、漲勢動能=中國 PA 市占+衛星電池(watch 反證主源;同文將環宇與聯亞/英特磊/穩懋並列 InP 磊晶受惠) — <a href="https://finance.ettoday.net/news/3155481">finance.ettoday.net</a><span class="q">secondary(反證)</span></li>
+    <li><b>鉅亨網(2026/6)</b> — 宏捷科 5 月 4.43 億(+36.98%)、動能=無人機+PA、Q2 展望季增約 1 成(公司展望) — <a href="https://news.cnyes.com/news/id/6484415">news.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>鉅亨網營收速報(2026/6)</b> — 聯鈞 5 月 9.60 億(+49.91%,14 個月新高)、1-5 月 39.25 億(−1.92%) — <a href="https://m.cnyes.com/news/id/6489373">m.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>鉅亨網專家觀點(2026/6)</b> — 聯鈞 COS 產能 2025 擴 5 倍仍供不應求;COS(高導熱 submount+打線+電測)=矽光子/CPO 外置光源單元;400G AOC 4.5→8.5 萬條/月 — <a href="https://news.cnyes.com/news/id/6504346">news.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>財報狗</b> — 聯鈞 1Q26 EPS 0.69(季減 54.96%)、毛利率 ~24.8%(公開申報彙整) — <a href="https://statementdog.com/analysis/3450/eps">statementdog.com</a><span class="q">secondary</span></li>
+    <li><b>永豐金豐雲學堂(2026/6)</b> — 環宇-KY 1Q26:EPS 1.67(季增 178%)、毛利率 54.5% 創歷史新高、訂單能見度至 2027Q1(公司自述)、1-5 月 11.59 億(+55.05%) — <a href="https://www.sinotrade.com.tw/richclub/hotstock/%E7%92%B0%E5%AE%87-KY-4991-%E5%81%9A%E4%BB%80%E9%BA%BC-Q1%E6%B3%95%E8%AA%AA%E4%BA%AE%E9%BB%9E%E6%9C%89%E5%93%AA%E4%BA%9B-EPS-1-67%E5%85%83%E6%AF%9B%E5%88%A9%E7%8E%8754-5-%E5%89%B5%E6%AD%B7%E5%8F%B2%E6%96%B0%E9%AB%98-%E8%A8%82%E5%96%AE%E8%83%BD%E8%A6%8B%E5%BA%A6%E7%9C%8B%E8%87%B3%E6%98%8E%E5%B9%B4%E9%A6%96%E5%AD%A3-%E4%B8%8B%E5%8D%8A%E5%B9%B4%E7%87%9F%E9%81%8B%E5%84%AA%E6%96%BC%E4%B8%8A%E5%8D%8A%E5%B9%B4-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-69f9ba9374fe280086c46b65">sinotrade.com.tw</a><span class="q">secondary</span></li>
+    <li><b>富果 Fugle 法說會備忘錄(2026/3/4)</b> — 環宇-KY:2025 全年 21.95 億(+25.4%)/AOC 70%;V-Tac InP 2H26 投產、200G PD 提前 2Q26 量產、CW 70mW 出貨/100mW 認證中、Q3-Q4 放量目標百萬顆級(公司自述、缺第三方) — <a href="https://blog.fugle.tw/post/earnings-call-4991-2026-03-04">blog.fugle.tw</a><span class="q">secondary</span></li>
+    <li><b>Yahoo 股市 4991.TWO</b> — 環宇-KY 5 月 2.00 億(MoM −17.9%/YoY +54.37%,單月波動=風險註記)+13 檔股號/市場別總核對(.TW=上市/.TWO=上櫃) — <a href="https://tw.stock.yahoo.com/quote/4991.TWO">tw.stock.yahoo.com</a><span class="q">secondary</span></li>
+    <li><b>MoneyDJ《DJ在線》(2025/12/23)+聯合新聞網(2025/12/22 法說)</b> — 光環 CW 雷射代工切入 AI 供應鏈、代工比重 2026 續升、毛利率 4%→15%(仍虧損縮減階段);⚠ 同文 CW 月產能 150 萬→300-400 萬→600 萬+ 顆歸屬=華星光(歸屬勘誤主源) — <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=67534107-733a-4e9a-9559-cd6a84018ea6">moneydj.com</a> / <a href="https://udn.com/news/story/7254/9219542">udn.com</a><span class="q">secondary</span></li>
+    <li><b>財報狗</b> — 華星光 1Q26 EPS 1.62、5 月 4.21 億(+21.08%)、1-5 月 20.28 億(+12.77%)(跨題對照用) — <a href="https://statementdog.com/analysis/4979/monthly-revenue">statementdog.com</a><span class="q">secondary</span></li>
+    <li><b>DA Labs / MoneyDJ</b> — 波若威營收結構(OIN/分路/WDM/放大器)與上詮 CPO 定位=排除佐證 — <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=40d51b65-dd70-4cb5-a51a-3e6bcd641d27">moneydj.com</a><span class="q">secondary</span></li>
+    <li><b>鉅亨網焦點股(2026/4)</b> — 前鼎 1Q26 營收 2.65 億(+25%)、ELS 2026 送樣+初量產/2027 放量(=CW 晶粒下游用戶,排除佐證) — <a href="https://news.cnyes.com/news/id/6436410">news.cnyes.com</a><span class="q">secondary</span></li>
+    <li><b>Goodinfo</b> — 光聖 6442 基本資料(TO-can 角色 2026H1 檢索=0 筆佐證⚪、本題排除) — <a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6442">goodinfo.tw</a><span class="q">secondary</span></li>
+    <li><b>經濟日報(2026/5)</b> — 全新、穩懋同步寫下最強 Q1(兩檔 1Q26 財報第二交叉源) — <a href="https://money.udn.com/money/story/5612/9427738">money.udn.com</a><span class="q">secondary</span></li>
+    <li><b>Cignal AI(2026/4)</b> — datacom 光元件營收 2025 突破 $19B(+70% YoY)、光元件全年近 $25B;hyperscaler 投資重塑光元件市場 — <a href="https://cignal.ai/2026/04/datacom-optical-component-revenue-surpasses-19b-in-2025/">cignal.ai</a><span class="q">secondary</span></li>
+    <li><b>Compound Semiconductor(轉述 Yole《Optical Transceivers 2026》)</b> — 光收發模組 $23.4B(2025)→$112.3B(2031)、datacom CAGR 30%、AI 佔期末營收 >90%、InP PIC CAGR ~22% — <a href="https://compoundsemiconductor.net/article/124586/AI_is_redefining_the_optical_transceiver_market">compoundsemiconductor.net</a><span class="q">secondary</span></li>
+    <li><b>Yole Group</b> — Photonics GaAs & InP 季度監測:InP 光子元件 $5.2B(2029E)、AI 驅動 100G/200G EML+SiPh CW — <a href="https://www.yolegroup.com/product/quarterly-monitor/photonics-gaas-and-inp-compound-semiconductor-market-monitor/">yolegroup.com</a><span class="q">secondary</span></li>
+    <li><b>Mordor Intelligence</b> — InP wafer 市場 $198.17M(2025)→$221.42M(2026)→$385.65M(2031)、CAGR 11.73%(2026/7 重抓原頁核對) — <a href="https://www.mordorintelligence.com/industry-reports/indium-phosphide-wafer-market">mordorintelligence.com</a><span class="q">secondary</span></li>
+    <li><b>QY Research</b> — InP substrate $137M(2024)→$689M(2031)、CAGR 25.7%(與 Mordor 分歧=口徑/基期/AI 假設) — <a href="https://www.qyresearch.com/reports/4183648/inp-substrate">qyresearch.com</a><span class="q">secondary</span></li>
+    <li><b>Technavio</b> — InP wafers 2026-2030 增量 +$243.9M、CAGR 19.8% — <a href="https://www.technavio.com/report/indium-phosphide-inp-wafers-market-industry-analysis">technavio.com</a><span class="q">secondary</span></li>
+    <li><b>Intel Market Research</b> — AI InP 基板子口徑 $135M(2024)→$260M(2032)、CAGR 9.0%(低值錨、標低信心) — <a href="https://www.intelmarketresearch.com/ai-indium-phosphide-substrate-market-22295">intelmarketresearch.com</a><span class="q">secondary</span></li>
+    <li><b>Semiconductor Insight</b> — 住友 6 吋 +40% 擴產(⚠ 僅研調頁轉述、無住友官方稿=⚪未驗證;已被 ¥180 億新口徑取代、不作主引) — <a href="https://semiconductorinsight.com/report/inp-substrate-market/">semiconductorinsight.com</a><span class="q">secondary(⚪)</span></li>
+    <li><b>36kr(英文版)</b> — 基板市占另一口徑:住友 ~60%/AXT ~35%(⚪與 Reuters/BigGo 口徑分歧且未載明統計口徑;僅作附註、以 Reuters 為錨) — <a href="https://eu.36kr.com/en/p/3651344579993989">eu.36kr.com</a><span class="q">secondary(⚪)</span></li>
+    <li><b>C-Light(彙整 LightCounting/GS)</b> — 800G 2026 出貨 GS 上修 25M→33.5M(+58%);1.6T 2026 需求 8.6M-20M 顆(⚪顆數分配 NVDA>5M/Google~4M/Meta~1M 為 vendor 轉述、未經原文核對) — <a href="https://m.c-light.com/news/details/Optical_Transceiver_Market_Size_Data_Centers_2026.html">m.c-light.com</a><span class="q">secondary(⚪部分)</span></li>
+    <li><b>DustPhotonics Oz8 產品頁</b> — 矽光 1.6T DR8 低至 2 顆高功率 CW/模組(vendor 規格,對照 EML 路線 8 顆) — <a href="https://www.dustphotonics.com/products/oz8/">dustphotonics.com</a><span class="q">secondary(vendor)</span></li>
+  </ul>
+
+  <h3>blog / 彙整層(僅作背景、不作關鍵數據源)</h3>
+  <ul class="refs">
+    <li><b>BigGo Finance</b> — 供需缺口 60-75 萬 vs 260-300 萬片、2 吋 $800→$2,300-2,500(近 +200%)、市占 42/36/13 口徑(缺口數字已獲 DIGITIMES 具名口徑升級;市占口徑僅附註) — <a href="https://finance.biggo.com/news/xsiIxJ0Bh5an-7GhIww3">finance.biggo.com</a><span class="q">blog</span></li>
+    <li><b>Global Semi Research(Substack)</b> — AXT/InP 供給分析系列(良率/缺口/原料利用率背景;原引「globalsemiresearch」即此) — <a href="https://globalsemiresearch.substack.com/p/axt-the-indium-phosphide-play-for">globalsemiresearch.substack.com</a><span class="q">blog</span></li>
+    <li><b>MapYourTech / Deep Fundamental</b> — 1.6T=8×EML、5M 模組→40M EML vs 產能 ~20M 推算(引 McKinsey 2025/6) — <a href="https://mapyourtech.com/co-packaged-optics-architecture-status-and-the-path-to-1-6t-switches/">mapyourtech.com</a><span class="q">blog</span></li>
+    <li><b>Chipstrat</b> — Optics Primer Part 3:Broadcom Bailly 51.2T=8 光引擎+16 ELS、高功率 CW 良率隨功率驟降(400mW 3 吋 200+ die) — <a href="https://www.chipstrat.com/p/optics-primer-part-3-co-packaged">chipstrat.com</a><span class="q">blog</span></li>
+    <li><b>viksnewsletter</b> — CPO 為何用外置雷射:CPO 元件 >$1.3B(2025)→$2.7B(2028)、ELS 放量 ~2027(彙整 LightCounting) — <a href="https://www.viksnewsletter.com/p/why-cpo-uses-external-lasers">viksnewsletter.com</a><span class="q">blog</span></li>
+    <li><b>MLQ.ai / PhotonCap</b> — Lumentum 200G EML 市占 50-60%、產能 +40%/+40%、毛利率 16%→42.5%(分析彙整;市占非公司揭露、另一 blog 口徑 80/20,見被反駁區) — <a href="https://mlq.ai/research/lumentum/">mlq.ai</a> / <a href="https://photoncap.net/p/the-8-companies-behind-lumentums">photoncap.net</a><span class="q">blog(⚪部分)</span></li>
+    <li><b>理財周刊</b> — 宏捷科 InP 認證彙整(⚪未驗證、無一手;與 ETtoday 反證並列) — <a href="https://www.moneyweekly.com.tw/ArticleData/Info/Article/222728">moneyweekly.com.tw</a><span class="q">blog(⚪)</span></li>
+    <li><b>CMoney 股市爆料同學會</b> — 宏捷科 InP 認證正反貼文並存(論壇層級、真假自行判斷;作對立面留檔) — <a href="https://www.cmoney.tw/forum/article/178360068">cmoney.tw/forum</a><span class="q">blog(⚪)</span></li>
+    <li><b>vocus 分析</b> — 華星光 2026 營收 +40-50%/EPS 9-12 元傳聞(⚪未驗證,僅 blog 層級) — <a href="https://statementdog.com/analysis/4979/monthly-revenue">財報狗頁對照(vocus 原文未附網址)</a><span class="q">blog(⚪)</span></li>
+    <li><b>舊版聚合條目保留</b> — 「全新/聯亞/英特磊/穩懋/宏捷科/聯鈞 2026Q1 法說與月營收(公開申報)」— 未附網址(原版無 URL);本次已拆為上列逐筆帶 URL 條目<span class="q">primary(未附網址)</span></li>
+    <li><b>舊版條目保留</b> — 旺得富「磊晶漲逾一成」— 原文 URL 未尋獲=未附網址;漲價事實以今周刊(2026/6/16)「雙位數調漲」為替代佐證、主張升級為有佐證<span class="q">secondary(未附網址)</span></li>
+  </ul>
+
+  <div class="callout warn" style="margin-top:18px">⚠️ <b>口徑修正:</b>① 「全新 6/12 漲價公告」查無佐證、已剔除(漲價依據=Q2 成本轉嫁+今周刊 2026/6/16「6 月起雙位數調漲」);② 「pBN 坩堝被中國管制」查無官方佐證、已剔除(確證在效是銦管制);③ 漲價兩套口徑差一數量級(國際累計 +250% vs 台廠合約 +3-5%);④ 台灣基板長晶=零(成本端受制);⑤ 聯亞/全新/聯鈞跨「CPO 矽光子」題,勿重複計受惠;⑥ 穩懋/宏捷科本業手機 PA、InP 貢獻小,勿誇大;⑦ 穩懋 1Q26 毛利率 26.3%(合併)/32.2%(個體)兩口徑並列;⑧ AXT 1Q26 +17%(QoQ)/+39%(YoY)皆正確、口徑不同;⑨ InP 基板市占多口徑並列、以 Reuters 2026/6 為錨。</div>
   <p class="disclaimer">免責聲明:本指南僅供研究與教育參考,不構成投資建議。屬時間敏感領域,數據請以最新官方法說/公告為準;投資人應自行查證,盈虧自負。</p>
 </div></section>
 
-<footer class="container"><p>InP 光通訊上游(III-V 化合物半導體鏈)製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 資料僅供參考,不構成投資建議</p></footer>
+<footer class="container"><p>InP 光通訊上游(III-V 化合物半導體鏈)製程鏈 × 供應鏈研究指南 · 2026 · process-chain-research · 產出 2026/06 · 增補 2026-07-03(第二輪對抗式查證:24 條主張反例測試+13 檔股號複核+9 組跨檔矛盾裁決;refs 重整為 75+ 筆分層帶 URL;月營收與 1Q26 財報全面刷新;環宇-KY 升級納入;被反駁說法警示區新設)· 資料僅供參考,不構成投資建議</p></footer>
 
 <script>
 (function(){

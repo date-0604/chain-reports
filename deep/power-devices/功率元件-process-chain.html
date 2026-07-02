@@ -72,6 +72,26 @@
   p,li{overflow-wrap:anywhere}
   td{overflow-wrap:break-word}
   @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}}
+  /* ==== 2026-07 增補(只增不刪):公司圖譜篩選卡 + 估值計算機 ==== */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+  .filters button{border:1px solid var(--line);background:var(--card2);color:var(--sub);padding:6px 13px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit}
+  .filters button:hover{border-color:var(--accent);color:var(--txt)}
+  .filters button.active{background:var(--accent);color:#08111d;border-color:var(--accent)}
+  .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:860px){.cgrid{grid-template-columns:1fr}}
+  .cgrid .card{margin:0;padding:14px 16px}
+  .cgrid .card h4{margin:0 0 6px;font-size:15px;display:flex;align-items:center}
+  .cgrid .card p{font-size:12.5px;color:var(--sub);margin:6px 0}
+  .code{font-size:11.5px;font-weight:700;color:var(--accent);background:rgba(251,146,60,.12);padding:1px 7px;border-radius:6px;margin-left:6px}
+  .calc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .calc label{display:block;font-size:12px;font-weight:600;color:var(--sub);margin-bottom:4px}
+  .calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--card2);color:var(--txt);font-family:inherit}
+  .calc .out{margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .calc .out .res{background:rgba(251,146,60,.1);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+  .calc .out .res small{display:block;color:var(--accent);font-size:11.5px;font-weight:600}
+  .calc .out .res b{font-size:20px;color:#fff}
+  @media(max-width:640px){.calc .inputs,.calc .out{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -81,28 +101,33 @@
   <h1>功率元件(SiC / GaN / MOSFET)製程鏈 × 供應鏈 深度研究報告</h1>
   <div class="sub">完整製程逐環節拆解、逐環節技術難度、台灣與國際供應鏈對照、對抗式查證</div>
   <div class="meta-row">
-    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">產出日期：<b>2026-06</b>(2026-07 增強版)</span>
     <span class="pill">研究方法：<b>缺口分析 + 對抗式查證</b></span>
+    <span class="pill">查證統計：<b>三包 findings 154 條、最終裁決 31 項(confirmed 19 / refuted 4 / unverified 8)、股號核對 27 檔、口徑衝突裁決 10 項</b></span>
+    <span class="pill">增補 2026/07：<b>2026Q1 財報＋5 月營收逐檔更新、細顆粒地圖、轉單實證對照、被反駁說法警示</b></span>
     <span class="pill">驅動力：<b>AI 電源 800V × 電動車 × 再生能源</b></span>
     <span class="pill">配對淺色版：<b>功率元件-process-chain-light.html</b></span>
   </div>
   <div class="toc">
     <a href="#s1">1. 是什麼/應用/原理</a>
     <a href="#s2">2. 完整製程環節</a>
-    <a href="#s3">3. 逐環節難度</a>
-    <a href="#s4">4. 供應鏈對照</a>
-    <a href="#s5">5. 量產時程</a>
-    <a href="#s6">6. 投資警示</a>
-    <a href="#s7">7. 資料來源</a>
+    <a href="#s3">3. 逐環節難度+受惠評分</a>
+    <a href="#s4">4. 供應鏈對照+需求軸</a>
+    <a href="#sfine">5. 細顆粒地圖(IDM×代工)</a>
+    <a href="#s5">6. 量產時程+催化劑</a>
+    <a href="#scards">7. 公司圖譜</a>
+    <a href="#scalc">8. 估值試算</a>
+    <a href="#s6">9. 投資警示+被反駁說法</a>
+    <a href="#s7">10. 資料來源</a>
   </div>
 </header>
 
 <!-- 0 -->
 <div class="callout info"><b>一句話總結：</b>三代半導體進入<b>產業洗牌年</b>——台積電 2027/7 退出 GaN 代工、Navitas 全線轉單<b>力積電(6770)</b>；Wolfspeed 破產重整、意法收縮帶動 SiC 轉單。需求由電動車為主軸、AI 電源 800V HVDC(GaN 為 DC-DC 主力)為新增量。本段是「元件層」(SiC/GaN/MOSFET/二極體晶粒與代工)，與「AI 伺服器電源」系統/模組層切開。</div>
 <div class="kpi">
-  <div class="box"><div class="v">$3.55億→$30億</div><div class="l">GaN 功率市場(Yole 24→30)</div></div>
+  <div class="box"><div class="v">$3.55億→$30億</div><div class="l">GaN 功率市場(Yole 24→30,2025/10)</div></div>
   <div class="box"><div class="v">~42-44%</div><div class="l">GaN CAGR(Yole/TrendForce)</div></div>
-  <div class="box"><div class="v">$5.33-6.14B</div><div class="l">SiC 功率市場 2026</div></div>
+  <div class="box"><div class="v">$5.33-6.14B</div><div class="l">SiC 功率市場 2026(舊口徑:TrendForce 2024/03 / Yole ~2022;現行以 Yole 2025/12 修正版為準)</div></div>
   <div class="box"><div class="v">80%→近90%</div><div class="l">全球 8 吋稼動率(25→26)</div></div>
 </div>
 
@@ -112,12 +137,14 @@
   <h3>核心定義</h3>
   <p>功率元件控制電流的開關與整流,是電源、電動車、再生能源的核心。三大材料路線:矽(Si)成熟主流、碳化矽(SiC)高壓高效(EV/工業)、氮化鎵(GaN)高頻(快充/AI 電源 DC-DC)。</p>
   <div class="callout warn"><b>切分:</b>本主題是元件層(晶粒/代工);系統/模組(PSU/power shelf/BBU)屬「AI 伺服器電源」;類比/電源管理 IC 屬「成熟製程代工×類比 IC」。三者勿混搶。</div>
-  <table><tr><th>材料</th><th>場景</th><th>台廠卡位</th></tr>
-    <tr><td>矽 Si MOSFET/二極體</td><td>低中壓、量大;車用整流、消費/工業電源</td><td>強茂/大中/富鼎/朋程/台半</td></tr>
-    <tr><td>碳化矽 SiC</td><td>高壓(650-1700V+);800V EV、工業</td><td>漢磊/嘉晶/世界先進</td></tr>
-    <tr><td>氮化鎵 GaN</td><td>高頻;快充、AI 電源 800V DC-DC</td><td>力積電(代工)/世界先進(授權)</td></tr>
+  <table><tr><th>材料</th><th>場景</th><th>台廠卡位</th><th>2026 變數(增補)</th></tr>
+    <tr><td>矽 Si MOSFET/二極體</td><td>低中壓、量大;車用整流、消費/工業電源</td><td>強茂/大中/富鼎/朋程/台半</td><td>安世(Nexperia)斷鏈轉單+國際 IDM 漲價循環(Infineon 2026/04+07/01 兩波,TrendForce 2026/05/27);AI 伺服器 12V→48V 帶動 MOSFET 30V→100V 升規。⚠「歐盟反傾銷制裁中系」查無立案(2026-07 檢索),轉單實際驅動是安世事件</td></tr>
+    <tr><td>碳化矽 SiC</td><td>高壓(650-1700V+);800V EV、工業</td><td>漢磊/嘉晶/世界先進</td><td>過剩修正期至 2027-2028(Yole 2025/12:上游稼動率 ~50%);6→8 吋轉換(TrendForce 2026/03:8 吋成主流基準);台系 8 吋試產 2026H1(漢磊×世界先進)</td></tr>
+    <tr><td>氮化鎵 GaN</td><td>高頻;快充、AI 電源 800V DC-DC</td><td>力積電(代工)/世界先進(授權)</td><td>台積退出→力積電接 Navitas(100V 已 1H26 投產);GF(2025/11)/Rohm(2026/02 回濱松)/Samsung(2026/07 傳聞)接棒;英諾賽科 8 吋價格戰+對 Infineon 中國禁售令(2026/06)</td></tr>
   </table>
+  <p class="sub">「2026 變數」列自淺色版補齊並依 2026-07 裁決更正(歐盟反傾銷改標查無立案)。</p>
 </div>
+<div class="callout ok"><b>2026H1 板塊快照(增補)：</b>功率元件族群 2026/06 全面噴發——富鼎、台半連拉 3 根漲停,朋程、力智等 8 檔齊亮燈(Yahoo 股市 2026/06)。驅動三軸:① AI 伺服器電力架構升級(12V→48V→800VDC);② 安世(Nexperia)斷鏈轉單;③ 國際 IDM 漲價循環——Infineon 2026 年連兩波漲價(4 月首波、7/1 第二波生效,幅度未公開;TrendForce 2026/02/05、2026/05/27),TI 同步 7/1 調漲;台系強茂/德微/台半/穩得部分產品傳跟漲約兩成、四家訂單能見度看到 2027 年(工商時報 2026/05/28、旺得富 2026/06/23;漲幅為供應鏈/媒體轉述,逐檔幅度⚪待查)。個股 YTD 股價與法人共識 PE 隨行情變動,建議由行情端即時數據帶入、本報告不寫死。</div>
 
 <!-- 2 -->
 <h2 id="s2"><span class="n">2</span>完整製程流程拆解 <span class="conf c-high">高信心</span></h2>
@@ -126,40 +153,60 @@
   <div class="step"><div class="num">1</div><div class="body">
     <h4>長晶(基板)</h4>
     <p>長 SiC 單晶或矽晶圓基板。輸入:原料;輸出:6→8 吋基板。</p>
-    <div class="diff">難點:SiC 缺陷密度、轉 8 吋良率;國際寡占(Wolfspeed/Coherent)。</div>
+    <div class="diff">難點:SiC 缺陷密度、轉 8 吋良率;國際寡占(Wolfspeed/Coherent);中國 6 吋殺價(MOS 級 ~$350/片,低於 ~$400 損益兩平,TrendForce 2025/11/26)。</div>
     <div class="who">對應:<span class="tag t-intl">Wolfspeed/Coherent(SiC)</span> <span class="tag t-tw">環球晶 6488</span> <span class="tag t-tw">合晶 6182</span> <span class="conf c-med">中</span></div>
   </div></div>
   <div class="step"><div class="num">2</div><div class="body">
     <h4>磊晶</h4>
     <p>基板上長元件層(SiC 磊晶 / GaN-on-Si 磊晶)。</p>
-    <div class="diff">難點:厚度均勻、摻雜控制;GaN-on-Si 應力/翹曲。</div>
+    <div class="diff">難點:厚度均勻、摻雜控制;GaN-on-Si 應力/翹曲;客戶已要求 3,300V 以上高壓規格(工商時報 2025/09)。</div>
     <div class="who">對應:<span class="tag t-tw">嘉晶 3016</span> <span class="tag t-tw">漢磊 3707</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">3</div><div class="body">
     <h4>元件代工(2026 洗牌焦點)</h4>
     <p>晶圓製造成功率元件。GaN-on-Si 8 吋代工是台積電退出後的版圖重組。</p>
-    <div class="diff">難點:8 吋 GaN 良率;台積電 2027/7 退出。</div>
+    <div class="diff">難點:8 吋 GaN 良率;台積電 2027/7 退出(6 吋月產 3,000-4,000 片、Navitas 佔過半,TrendForce 2025/07)。</div>
     <div class="who">對應:<span class="tag t-tw">力積電 6770(接 Navitas)</span> <span class="tag t-tw">世界先進 5347(GaN 授權)</span> <span class="tag t-tw">漢磊 3707</span> <span class="tag t-intl">台積電(退出中)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">4</div><div class="body">
     <h4>元件(IDM/設計)</h4>
     <p>MOSFET / 二極體 / 整流器晶粒。</p>
-    <div class="diff">難點:成熟製程、競爭激烈;靠車規/客戶認證卡位。</div>
-    <div class="who">對應:<span class="tag t-tw">朋程 8255</span> <span class="tag t-tw">強茂 2481</span> <span class="tag t-tw">大中 6435</span> <span class="tag t-tw">富鼎 8261</span> <span class="tag t-tw">台半 5425</span> <span class="tag t-intl">Infineon/ON/STM</span> <span class="conf c-high">高</span></div>
+    <div class="diff">難點:成熟製程、競爭激烈;靠車規/客戶認證卡位(車規重認證需 1.5-2 年=轉單黏性,經濟日報 2026/06)。</div>
+    <div class="who">對應:<span class="tag t-tw">朋程 8255</span> <span class="tag t-tw">強茂 2481</span> <span class="tag t-tw">大中 6435</span> <span class="tag t-tw">富鼎 8261</span> <span class="tag t-tw">台半 5425</span> <span class="tag t-tw">德微 3675</span> <span class="tag t-intl">Infineon/ON/STM</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">5</div><div class="body">
     <h4>封裝/模組</h4>
     <p>功率模組、驅動(逆變器、OBC、DC-DC)。</p>
-    <div class="diff">難點:散熱、寄生電感;SiC/GaN 模組封裝門檻較矽高。</div>
-    <div class="who">對應:<span class="tag t-tw">朋程/強茂(自有封裝)</span> <span class="tag t-intl">Infineon/ON</span> <span class="conf c-med">中</span></div>
+    <div class="diff">難點:散熱、寄生電感;SiC/GaN 模組封裝門檻較矽高;AI 12V→800V 帶動銅夾鍵合/頂部冷卻(界霖法說 2026/05/21)。</div>
+    <div class="who">對應:<span class="tag t-tw">朋程/強茂(自有封裝)</span> <span class="tag t-tw">捷敏-KY 6525(功率封測)</span> <span class="tag t-tw">界霖 5285(導線架)</span> <span class="tag t-intl">Infineon/ON</span> <span class="conf c-med">中</span></div>
   </div></div>
   <div class="step"><div class="num">6</div><div class="body">
     <h4>系統(終端應用)</h4>
     <p>電動車 800V 平台、AI 電源 800V HVDC、再生能源逆變器。</p>
-    <div class="diff">EV:每車 SiC MOSFET 24→48 顆;AI 電源:GaN 做 DC-DC、SiC 做 PFC/前級。</div>
+    <div class="diff">EV:每車 SiC MOSFET 24→48 顆(⚪顆數口徑未找到獨立第三方佐證,標未驗證);AI 電源:GaN 做 DC-DC、SiC 做 PFC/前級(TrendForce Insights 2026/05)。</div>
     <div class="who">對應:<span class="tag t-intl">EV OEM / Hyperscaler</span> <span class="conf c-high">高</span></div>
   </div></div>
 </div>
+<h3>核心環節放大鏡:路線 × 難點 × 壁壘(增補)</h3>
+<div class="grid g2">
+  <div class="card">
+    <h3 style="margin-top:0">A:GaN-on-Si 8 吋代工(2026 洗牌焦點)</h3>
+    <table>
+      <tr><th>路線</th><th>原理</th><th>難點</th><th>壁壘</th></tr>
+      <tr><td>GaN-on-Si(180nm)</td><td>矽基板長 GaN 磊晶、做高頻功率元件</td><td>磊晶應力/翹曲、8 吋良率</td><td>★★★★★</td></tr>
+      <tr><td>GaN-on-SiC(RF)</td><td>SiC 基板長 GaN(射頻為主)</td><td>成本高;屬射頻非電源功率(宏捷科 8086 屬此類,勿混列)</td><td>★★★★☆</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">B:SiC 長晶 / 磊晶(高壓主戰場)</h3>
+    <table>
+      <tr><th>製程</th><th>作用</th><th>難點</th><th>重要性</th></tr>
+      <tr><td>SiC 長晶(6→8 吋)</td><td>長 SiC 單晶基板</td><td>缺陷密度、轉 8 吋良率;國際寡占</td><td>★★★★★</td></tr>
+      <tr><td>SiC 磊晶</td><td>基板上長元件層</td><td>厚度均勻、摻雜控制</td><td>★★★★☆</td></tr>
+    </table>
+  </div>
+</div>
+<div class="callout info"><b>供應鏈四層對照(增補)：</b>上游(基板/磊晶:環球晶 6488、嘉晶 3016、合晶 6182|國際 Wolfspeed/Coherent)→ 中游(元件代工:力積電 6770、漢磊 3707、世界先進 5347|台積電 2027/7 退 GaN)→ 元件(IDM/設計:強茂 2481、大中 6435、富鼎 8261、朋程 8255、台半 5425、德微 3675|Infineon/onsemi/ST)→ 後段(封測/導線架:捷敏-KY 6525、界霖 5285)→ 終端(EV OBC/逆變器、AI 電源 800V HVDC、再生能源/工業)。2026 最關鍵的結構變化在「中游代工」:台積電退出 GaN 把整條代工版圖洗牌,力積電成最大受惠(Navitas 全線轉單)、世界先進取得授權切入——元件層因產業洗牌而「地位上升」的台廠,過去名單常漏。</div>
 
 <!-- 3 -->
 <h2 id="s3"><span class="n">3</span>逐環節技術難度評分</h2>
@@ -173,18 +220,23 @@
   <tr><td>封裝/模組</td><td>3</td><td>3</td><td>2</td><td>2</td><td>10</td><td>散熱/寄生電感</td></tr>
 </table>
 <div class="callout"><b>最卡關：</b>SiC 長晶(19/20)——國際寡占、台廠多外購基板;GaN-on-Si 代工(16/20)是 2026 洗牌焦點與台廠新機會。</div>
-<h3>公司受惠強度評分(報酬,僅列有查證信心者)</h3>
-<p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議。</p>
+<h3>公司受惠強度評分(報酬,總分排序;2026-07 擴充至 11 檔)</h3>
+<p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議。查證欄=該檔受惠敘事的佐證強度,與淺色版對齊(漢磊/世界先進由「中」上修為「高」——官方公告/8-K 與 2026Q1 財報補齊佐證,留痕見第 9 節)。</p>
 <table>
   <tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
-  <tr><td>力積電 6770</td><td>4</td><td>4.5</td><td>4</td><td>4</td><td>3</td><td><b>19.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>嘉晶 3016</td><td>3.5</td><td>4</td><td>3.5</td><td>3.5</td><td>2.5</td><td><b>17</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>朋程 8255</td><td>2</td><td>3.5</td><td>4.5</td><td>3.5</td><td>3</td><td><b>16.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>漢磊 3707</td><td>3.5</td><td>4</td><td>3.5</td><td>3</td><td>2.5</td><td><b>16.5</b></td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>世界先進 5347</td><td>3.5</td><td>3.5</td><td>2.5</td><td>3</td><td>3.5</td><td><b>16</b></td><td><span class="conf c-med">中(GaN 屬 2028 選擇權)</span></td></tr>
+  <tr><td>力積電 6770</td><td>4</td><td>4.5</td><td>4</td><td>4</td><td>3</td><td><b>19.5</b></td><td><span class="conf c-high">高</span>(Navitas 官方新聞稿+8-K;GaN 營收未單獨揭露)</td></tr>
+  <tr><td>強茂 2481(增補)</td><td>4</td><td>3</td><td>4.5</td><td>3</td><td>3</td><td><b>17.5</b></td><td><span class="conf c-med">中</span>(Q1 毛利率 32.68% 創高、AI 占比 7%→11%,MoneyDJ 2026/05;B/B 1.4-1.5;CSP 具名⚪待查)</td></tr>
+  <tr><td>嘉晶 3016</td><td>3.5</td><td>4</td><td>3.5</td><td>3.5</td><td>2.5</td><td><b>17</b></td><td><span class="conf c-high">高</span>(2026Q1 轉盈 EPS 0.35 硬數據)</td></tr>
+  <tr><td>漢磊 3707</td><td>3.5</td><td>4</td><td>3.5</td><td>3</td><td>2.5</td><td><b>16.5</b></td><td><span class="conf c-high">高</span>(5 月營收 +28.0% 連 11 個月年增硬數據;8 吋量產時點=公司自述)</td></tr>
+  <tr><td>朋程 8255</td><td>2</td><td>3.5</td><td>4.5</td><td>3.5</td><td>3</td><td><b>16.5</b></td><td><span class="conf c-high">高</span>(⚠2026 前 5 月營收 -7.01%,動能疲弱警示)</td></tr>
+  <tr><td>世界先進 5347</td><td>3.5</td><td>3.5</td><td>2.5</td><td>3</td><td>3.5</td><td><b>16</b></td><td><span class="conf c-high">高</span>(官方授權文件+Q1 財報;GaN 屬 2028 選擇權、2026-27 無 GaN 營收)</td></tr>
+  <tr><td>德微 3675(增補)</td><td>3.5</td><td>2.5</td><td>4.5</td><td>2.5</td><td>2</td><td><b>15</b></td><td><span class="conf c-high">高</span>(法說毛利率 &gt;40%、能見度至 2027 底,vocus/工商 2026/05)</td></tr>
+  <tr><td>台半 5425(增補)</td><td>2.5</td><td>2.5</td><td>4</td><td>2.5</td><td>3</td><td><b>14.5</b></td><td><span class="conf c-med">中</span>(5 月 +11.8% 創 40 個月高;惟累計僅 +1.38%,詢單≠訂單)</td></tr>
+  <tr><td>環球晶 6488(增補)</td><td>2</td><td>3.5</td><td>2.5</td><td>2.5</td><td>4</td><td><b>14.5</b></td><td><span class="conf c-med">中</span>(8 吋 SiC 放量時點多為公司自述;本業矽晶圓 2026H2 漲價=法說)</td></tr>
+  <tr><td>大中 6435(增補)</td><td>3</td><td>2.5</td><td>4</td><td>2</td><td>2.5</td><td><b>14</b></td><td><span class="conf c-med">中</span>(連 18 個月營收成長、Q1 EPS +54.9% 硬數據;AI 題材屬散熱風扇周邊)</td></tr>
+  <tr><td>富鼎 8261(增補)</td><td>3</td><td>2.5</td><td>2</td><td>2</td><td>2.5</td><td><b>12</b></td><td><span class="conf c-med">中</span>(5 月營收僅 +1.15%——SPS 題材先行、數字未跟上)</td></tr>
 </table>
-<p class="sub">力積電為台積退 GaN 最直接受惠(AI 增量);朋程 AI 受惠低但車用整流寡占穩;世界先進 GaN 屬 2028 選擇權、近期無營收。受惠評分為推估,僅供參考。</p>
-
+<p class="sub">力積電為台積退 GaN 最直接受惠(AI 增量);朋程 AI 受惠低但車用整流寡占穩(惟 2026H1 營收年減,評分之「商轉時程」反映既有本業而非新題材);世界先進 GaN 屬 2028 選擇權、近期無 GaN 營收。2026/07 增列 6 檔評分依據:強茂(Q1 毛利率 32.68% 創高、AI 占比 11%、B/B 1.4-1.5)、德微(毛利率 &gt;40%、能見度 2027 底)、台半(5 月 +11.8% 40 個月高、惟累計 +1.38%)、環球晶(8 吋 SiC 起步、規模大但 SiC 撞價格戰)、大中(連 18 個月成長、伺服器風扇 36.4%)、富鼎(SPS 題材先行、5 月僅 +1.15%)。朋程 16.5 與漢磊 16.5 同分——朋程商轉分反映油車整流現金流,惟 2026H1 營收年減需留意。受惠評分為推估,僅供參考。</p>
 <!-- 4 -->
 <h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
 <div class="legend">
@@ -192,110 +244,447 @@
   <span><span class="conf c-med">中</span> 部分佐證</span>
   <span><span class="conf c-un">待查/釐清</span></span>
 </div>
-<h3>台廠 × 環節</h3>
+<h3>受惠族群邏輯(催化 × 受惠點,增補)</h3>
+<table>
+  <tr><th>族群</th><th>核心催化</th><th>營運受惠點</th></tr>
+  <tr><td>GaN 代工(力積電/世界先進)</td><td>台積電 2027 退出 GaN 代工</td><td>Navitas 全線轉單(力積)、台積 GaN 授權(世界先進)</td></tr>
+  <tr><td>第三代半導體上游(嘉晶/環球晶/合晶)</td><td>SiC/GaN 磊晶與基板需求</td><td>8 吋 SiC 磊晶/基板放量;中美晶集團整合</td></tr>
+  <tr><td>SiC 代工(漢磊)</td><td>EV 800V + 工業高壓</td><td>第四代 SiC MOSFET;AI 偏 PFC/前級(勿誇大)</td></tr>
+  <tr><td>矽基分立元件(強茂/大中/富鼎/朋程/台半/德微)</td><td>安世斷鏈轉單+Bosch 退出+IDM 兩波漲價(「歐盟反傾銷」查無立案,不作依據)</td><td>車用整流(朋程龍頭)、MOSFET/二極體轉單與跟漲;強茂 B/B 1.4-1.5(2026/06)、台半 5 月營收 +11.8%</td></tr>
+  <tr><td>功率後段(捷敏-KY/界霖)</td><td>功率封測與模組導線架需求隨元件放量</td><td>捷敏 5 月營收 +19.0%(連創高);界霖高毛利模組導線架占比突破一成(法說 2026/05/21)</td></tr>
+</table>
+<div class="callout warn"><b>特有風險：</b>① 中國英諾賽科(2577.HK)8 吋 GaN 低價傾銷,台廠 GaN 成本/良率須抗價格戰;② SiC「國際退出→台廠轉單」需逐項查實際訂單,勿一概當受惠;③ 宏捷科是射頻 GaN(非電源功率)、杰力是類比 IC,易被誤列;④ EV 需求若放緩,SiC 量產出海口受壓。</div>
+<h3>台廠 × 環節(holds:2026-07 增補財務時效與新收錄 3 檔)</h3>
 <table>
   <tr><th>公司(股號)</th><th>對應環節</th><th>角色 / 數字</th><th>查證</th></tr>
-  <tr><td>力積電 6770</td><td>GaN-on-Si 代工</td><td>Navitas 全線(100V-650V)200mm 轉單竹南 Fab 8B;100V 1H26 投產、650V 12-24 月內轉移——台積退 GaN 最大受惠</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>嘉晶 3016</td><td>磊晶代工</td><td>SiC/GaN 磊晶片;8 吋 SiC 準備、GaN-on-Si 布局(中美晶集團)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>漢磊 3707</td><td>SiC/GaN 代工</td><td>SiC/GaN 代工 + 第四代 SiC 平面 MOSFET;SiC 於 AI 機櫃定位 PFC/前級</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>世界先進 5347</td><td>GaN 授權新平台</td><td>2026/01 取得台積電 650V+80V GaN 授權、8 吋平台 2028H1 量產;台積已出脫 8.1% 持股(降至 19%)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>朋程 8255</td><td>元件(整流)</td><td>車用整流二極體(全球車用整流器龍頭)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>強茂 2481</td><td>元件(二極體/MOSFET)</td><td>歐盟制裁中系功率元件的潛在轉單受惠</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>大中 6435</td><td>元件(MOSFET)</td><td>車用/工業功率 MOSFET</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>富鼎 8261</td><td>元件(MOSFET)</td><td>消費/PC 電源為主</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>台半 5425</td><td>元件(二極體)</td><td>二極體/小信號;歐盟制裁中系的轉單機會</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>環球晶 6488</td><td>上游基板</td><td>全球矽晶圓第三;發展 SiC/GaN/SOI 基板</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>宏捷科 8086</td><td>(釐清)</td><td>砷化鎵 PA(射頻)為主;『GaN/PA』易誤導為功率 GaN——實為射頻 GaN</td><td><span class="conf c-un">釐清</span></td></tr>
-  <tr><td>杰力 5299</td><td>(釐清)</td><td>電源管理 IC 設計(類比);與『成熟製程×類比 IC』題重疊,非功率分立元件</td><td><span class="conf c-un">釐清</span></td></tr>
-  <tr><td>偉詮電 2436</td><td>(待查)</td><td>USB-PD + GaN SiP;GaN 著力為消費快充,AI 伺服器電源 GaN 為傳聞/送樣</td><td><span class="conf c-un">待查</span></td></tr>
+  <tr><td>力積電 6770</td><td>GaN-on-Si 代工</td><td>Navitas 全線(100V-650V)200mm 轉單竹南 Fab 8B(0.18μm);100V 已 1H26 投產、650V 12-24 月內轉移、認證最快 2026Q4——台積退 GaN 最大受惠。2026/06/29 法說:GaN 放量目標 2026Q2-Q3、營收未單獨揭露;「2026 年 GaN 產能擴 3-4 倍」為公司自述⚪。注意:Navitas 同步推進 GF 美國 8 吋線(2027),力積電非獨家</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>嘉晶 3016</td><td>磊晶代工</td><td>SiC/GaN 磊晶片(台灣唯一專業功率磊晶廠);8 吋 SiC 磊晶:試產 2026H1(已兌現)→認證+小量 2026H2→正式量產 2027H1(Yahoo 2026 裁決口徑);6 吋 SiC 磊晶新增日系 IDM 客戶 2026Q2 量產(車用/高階工業)。2026Q1 轉盈 EPS 0.35、毛利率 18%(vocus 法說 2026/04/29)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>漢磊 3707</td><td>SiC/GaN 代工</td><td>SiC/GaN 代工 + 第四代 SiC 平面 MOSFET;SiC 於 AI 機櫃定位 PFC/前級。與世界先進合作 8 吋 SiC 試產線(月產 1,500 片,2026H1 試產、最快 2026H2 商業化量產=股東會公司自述 2026/06/11);SiC trench MOSFET 原指引 2026Q2 量產、截至 2026/06 無獨立確認⚪。5 月營收 5.90 億 +27.97%(連 11 個月年增)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>世界先進 5347</td><td>GaN 授權新平台</td><td>2026/01/28 取得台積電 650V+80V GaN 授權、8 吋平台 1H2028 量產(官方新聞稿;法說筆記另有 2027H2 提前口徑⚪blog 級單源);低壓 GaN-on-Si(100V 以下)已量產、GaN-on-QST GaN 2 完成認證(法說公司自述);「全球唯一同時提供 GaN-on-Si 與 GaN-on-QST」=公司自述、無第三方認證;SiC 試產線 2026/04 建置完成試產;台積已出脫 8.1% 持股(降至 19%)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>朋程 8255</td><td>元件(整流)</td><td>車用整流二極體全球市佔 50-60%(多源媒體長期一致,源頭為公司自述被轉引、缺獨立第三方稽核);承接 Bosch 全面退出發電機二極體之轉單(實證級供給缺口)——惟 2026 前 5 月營收 -7.01%、轉單尚未轉化為年增,「轉單有實證、放量未兌現」;48V 第三條產線 2026/10 建成(480-500 萬套/年);評估自建/併購 8 吋晶圓廠(1-1.5 年決策)=2028+ 選擇權</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>強茂 2481</td><td>元件(二極體/MOSFET)</td><td>更正:轉單驅動=安世(Nexperia)事件而非歐盟制裁(反傾銷查無立案)。安世+揚杰事件後 B/B 升至 1.4-1.5(2026/06,經濟日報;2025/10-2026/05 常態 1.2-1.4)、接獲歐洲車廠試單、能見度至 2027 年中、部分產品漲價上看 2 成(媒體/公司自述);AI:30V 熱插拔訂單排至 2026/10、100V 2026H2 量產;MOSFET 營收 2025 約 $100M→2026 目標 $150M→2030 目標 $500M(公司自述三段式)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>大中 6435</td><td>元件(MOSFET)</td><td>車用/工業功率 MOSFET;5 月營收 3.18 億 +22.2%、連 18 個月成長;伺服器散熱馬達/風扇成第二大營收(36.4%)、Q1 EPS 3.67 元 +54.9%(富果法說 2026/04/27)</td><td><span class="conf c-high">高(增補硬數據後上調)</span></td></tr>
+  <tr><td>富鼎 8261</td><td>元件(MOSFET)</td><td>消費/PC 電源為主;2026 動能=AI 伺服器 SPS 高壓功率元件+散熱風扇(公司自述)、高壓 Super Junction+SiC/GaN 2026 規模化量產、高壓佔比 >10%(公司自述);5 月營收 +1.15%——題材先行、營收未反映;鴻海/國巨集團資源</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>台半 5425</td><td>元件(二極體)</td><td>更正:轉單機會=安世事件(非歐盟制裁)。車用+工控約 70% 營收(車用 ~50%)、產品(車用 MOSFET/二極體/TVS/Load Dump)與安世高度重疊、具車規認證替代能力;5 月營收 17.67 億 +11.8% 創 40 個月新高、惟 1-5 月累計僅 +1.38%(單月回溫、累計動能平);「十年轉單」敘事=blog 級不可採信</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>環球晶 6488</td><td>上游基板</td><td>全球矽晶圓第三;8 吋 SiC 基板小量量產起步、2026 逐步放量、8 吋營收目標超越 6 吋(公司自述);已展示 12 吋方形 SiC 晶圓;2026H2 全產品漲價計畫(法說);Q1 EPS 3.97、營收 139.85 億年減 10.3%(近 23 季低)但淨利 +30.2%</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>德微 3675(新收錄)</td><td>元件(二極體/MOSFET IDM)</td><td>達爾集團旗下(貢獻 65% 營收):受惠 AI 剛需+安世轉單,毛利率突破 40%、接單滿到年底、部分能見度至 2027 年底(法說 2026/05/28);聚焦 1000-1600W AI 電源 HVDC 800V 高壓元件;5 月營收 2.67 億 +24.4%。易混提醒:德微 3675 勿與母集團達爾(美股 DIOD)混同</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>捷敏-KY 6525(新收錄)</td><td>封測(功率 OSAT)</td><td>功率半導體專業封測(MOSFET/IGBT/二極體/功率模組);5 月營收 5.49 億 +18.95%、連兩月創高、公司指 Q2/Q3 逐季揚;2025 EPS 5.88 元、毛利率 27%。⚠產能集中上海/合肥——去中化敘事下屬雙面刃</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>界霖 5285(新收錄)</td><td>結構件(功率導線架)</td><td>功率導線架專業廠(車用+工控 75-80%);高毛利功率模組導線架 Q1 營收占比突破一成;AI 12V→800V HVDC 帶動銅夾鍵合/頂部冷卻技術門檻(法說 2026/05/21);5 月營收 5.22 億 +18.5%</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>宏捷科 8086</td><td>(釐清/watch)</td><td>砷化鎵 PA(射頻)為主(Q1 營收 +58.4% 主力仍是射頻);功率 GaN:GaN-on-Si 6 吋已量產、8 吋研發中(公司自述);「與 Navitas 合作 6 吋 GaN 代工」僅理財周刊單源、Navitas 官方公告夥伴為力積電(+GF)——該主張⚪未驗證不可採信亦不錯殺;觀察點:GaN 產品線 2026H2 歐美車廠認證</td><td><span class="conf c-un">釐清</span></td></tr>
+  <tr><td>杰力 5299</td><td>(釐清/watch)</td><td>電源管理 IC 設計(類比);與『成熟製程×類比 IC』題重疊,非功率分立元件。與朋程共同開發車用 48V MOSFET 模組、2026 才量產;5 月營收 +2.19%、累計 -2.52% 動能平淡——維持 watch 成立</td><td><span class="conf c-un">釐清</span></td></tr>
+  <tr><td>偉詮電 2436</td><td>(釐清/watch)</td><td>反駁成立:「GaN 切入 AI 伺服器電源」無訂單佐證——GaN 著力仍為消費快充+USB-PD 整合模組。另有非 GaN 的伺服器散熱題材(風扇/水冷幫浦驅動 IC 全球前三、漏液感測器 2026Q1 送樣三大廠;伺服器營收目標 2026 >30%=公司自述),屬散熱 IC 題、另計勿混入功率分立</td><td><span class="conf c-un">釐清</span></td></tr>
+  <tr><td>中美晶 5483(watch)</td><td>(間接持股)</td><td>環球晶(持 50.62%)/嘉晶母公司;Q1 EPS 1.83(+54% YoY)主升力=環球晶+再生能源(Q1 13.5 億 +75.5%)——本體功率元件屬間接持股題材,直接受惠標的應為嘉晶/環球晶/宏捷科</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>尼克森 3317(watch,增補)</td><td>(升格觀察)</td><td>切入 AI 伺服器電源 SiC MOSFET/功率模組、開始小量出貨+投入 GaN 開發(客戶/訂單⚪未驗證);Q1 EPS 0.84(QoQ+594%)但 5 月營收 -13.1%、PC 佔比 ~70%——小量出貨是升格訊號,待模組放量數字,維持 watch</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>合晶 6182(watch,增補)</td><td>(上游矽晶圓)</td><td>Q1 EPS 0 元(損平);5 月營收 +11.9%;擴產方向=矽光子+SiC 晶圓(2026/06 報導),GaN AI 資料中心布局無量產佐證——獲利極弱+無實證,維持 watch</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>茂矽 2342(watch,新增)</td><td>(SiC 候選)</td><td>功率晶圓代工/元件(車用近五成);SiC MOSFET/JFET 即將送樣、2026H2 小量量產;1200V FS-IGBT/FRED/TVS 已送樣(均公司自述);5 月營收 1.74 億、規模小——觀察 2026H2 SiC 落地</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>虹揚-KY 6573(watch,新增)</td><td>(轉單反駁)</td><td>橋式整流器/二極體;媒體點名「卡位安世車用轉單」但數字反向:1-5 月營收 -19.74%——轉單敘事與營收衰退矛盾,反駁成立;2026 規劃產出 SiC SBD(公司自述)</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>台亞 2340(watch,新增)</td><td>(SiC 代工轉投資)</td><td>子公司積亞=台灣少數 6 吋 SiC 專業代工(南科);「2026 滿載 5,000 片/月」為 2023 舊指引、2026H1 無獨立更新⚪未驗證;母公司本業為油品通路</td><td><span class="conf c-un">待查</span></td></tr>
+  <tr><td>力智 6719(watch,新增)</td><td>(電源 IC 邊界)</td><td>PMIC 46%/Power Stage 30%/MOSFET 24%;Q1 EPS 2.1、AI 占比 >5%;GaN driver 經 Tier-1 電源廠出貨雲端客戶;5 月營收 -9.58%——比照杰力(segment 歸電源 IC),列 watch 不入 holds。掛牌更正:上市(TWSE)</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>晶焱 6411(watch,新增)</td><td>(保護元件邊界)</td><td>ESD/TVS 全球第三;安森美退出部分 ESD/EOS 市場引轉單潮、非亞洲占比 5%→7%、效益 2026H2-2027 放大(法說 2026/05/21);但屬保護元件非功率分立主流、Q1 EPS 0.54 低於去年——watch(segment 邊界+獲利未跟上)</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>全宇昕 6651(watch,新增)</td><td>(題材待佐證)</td><td>功率元件混合通路+自有品牌 MOSFET/二極體;Q1 EPS 2.47(+23% YoY)族群排行第二;但 Q1 營收僅 3.96 億、2025 全年 15.02 億規模小,AI/車用高壓/三代半實質佐證不足⚪</td><td><span class="conf c-un">watch</span></td></tr>
 </table>
-<p class="sub">⚠「釐清/待查」= 角色易被誤列或無量產佐證，須切清 segment 歸屬，不應當功率分立元件主力下單。</p>
+<p class="sub">⚠「釐清/待查」= 角色易被誤列或無量產佐證，須切清 segment 歸屬，不應當功率分立元件主力下單。候選剔除:統懋 2434(2025 全年營收僅 4,555.1 萬、2026/05 單月 394.7 萬,量體極小非資料異常,statementdog)。掛牌狀態 26 檔全核對 0 異常(Yahoo 股市逐檔;力智 6719 更正為上市)。</p>
 <h3>國際 × 環節</h3>
 <table>
   <tr><th>公司</th><th>環節</th><th>角色</th><th>查證</th></tr>
-  <tr><td>Infineon / ON / STM</td><td>元件 IDM</td><td>SiC/GaN/矽功率元件國際龍頭;STM 收縮中</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>Wolfspeed</td><td>SiC 基板/元件</td><td>2025/09 走完破產重整、Renesas 入股、轉 200mm(非單純退出)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>英諾賽科 Innoscience(2577.HK)</td><td>GaN IDM</td><td>中國 8 吋 GaN、發動價格戰;台廠 GaN 最大威脅(風險對照,非投資標的)</td><td><span class="conf c-low">風險</span></td></tr>
+  <tr><td>Infineon / ON / STM</td><td>元件 IDM</td><td>SiC/GaN/矽功率元件國際龍頭;STM 收縮中。SiC 元件市佔(TrendForce 2023):ST 32.6% 居首、onsemi 23.6% 第二、前五大合計 91.9%</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Wolfspeed</td><td>SiC 基板/元件</td><td>2025/09/29 走完破產重整(減債 $4.6B、-70%)、轉 200mm(非單純退出);FY26Q2 GAAP 毛利率 -46%(non-GAAP -34%,含一次性項目)、Durham 150mm 已關;獲 CHIPS 48D 退稅 ~$700M——存續但殺價求量風險上升</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>GlobalFoundries</td><td>GaN 代工(美)</td><td>2025/11 取得台積電 650V+80V GaN 授權,Burlington 200mm;與 Navitas 綁定 2027 美產——與台系代工直接競爭</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Samsung / DB HiTek</td><td>GaN 代工(韓)</td><td>Samsung 自有 GaN discrete 未過客戶基準→轉純代工、最快 2026/07 營運(韓媒轉述,傳聞/前瞻、無官方公告);DB HiTek 落後 1-2 季、2026H2 跟進</td><td><span class="conf c-med">中(傳聞)</span></td></tr>
+  <tr><td>Rohm</td><td>GaN/SiC IDM(日)</td><td>2026/02 授權台積電 GaN 製程回自家濱松廠、2027 投產(端到端自產)——台積客戶分流中對台廠零轉單的反例</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>英諾賽科 Innoscience(2577.HK)</td><td>GaN IDM</td><td>中國 8 吋 GaN、發動價格戰;台廠 GaN 最大威脅(風險對照,非投資標的)。2024 GaN 市佔 ~30%(TrendForce 29.9%/Yole 30% 兩研調互證);NVIDIA 800VDC 唯一中系供應商+Google design-in(2026/02)</td><td><span class="conf c-low">風險</span></td></tr>
 </table>
 <h3>台灣吃得到多少(逐環節定位)</h3>
 <p class="sub">台廠最有實績的是「磊晶代工 + 矽基成熟分立元件」;SiC 單晶基板與高階 SiC/GaN 模組基本缺席。GaN 代工因台積退出「地位上升」但須抗中系價格戰。定位為質化判斷。</p>
 <table>
   <tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr>
-  <tr><td>基板長晶(SiC 單晶/GaN-on-Si 基材)</td><td>環球晶 6488(矽/SOI 為主)</td><td><span class="conf c-low">SiC 單晶缺席</span></td><td>SiC 單晶由 Wolfspeed/Coherent/中國寡占;台廠多外購、環球晶 SiC 多在研發</td></tr>
-  <tr><td>磊晶(SiC/GaN-on-Si)</td><td>嘉晶 3016 / 漢磊 3707</td><td><span class="conf c-high">領先/追趕 · 亞洲要角</span></td><td>嘉晶 8 吋 GaN 小量試產、8 吋 SiC 磊晶估 2026H1 量產;台廠最實質卡位環節</td></tr>
-  <tr><td>GaN-on-Si 8 吋元件代工</td><td>力積電 6770 / 世界先進 5347 / 漢磊 3707</td><td><span class="conf c-med">地位上升 · 須抗價格戰</span></td><td>力積電拿 Navitas 全線轉單(最硬佐證);GF/ROHM/Samsung 也接棒、中系英諾賽科價格戰在側</td></tr>
-  <tr><td>SiC 元件/MOSFET 代工</td><td>漢磊 3707</td><td><span class="conf c-med">追趕</span></td><td>第四代 SiC MOSFET、trench 2026Q2;國際 Infineon/onsemi/STM 以 IDM+200mm 領先;AI 偏 PFC/前級</td></tr>
-  <tr><td>矽基分立元件(MOSFET/二極體/整流)</td><td>朋程 8255 / 強茂 2481 / 台半 5425 / 大中 6435 / 富鼎 8261</td><td><span class="conf c-high">領先(成熟最有實績)</span></td><td>朋程承接 Bosch 退出車用整流市占(硬佐證);強茂車規認證到 2026 切 CSP;轉單/漲價須逐項查實單</td></tr>
-  <tr><td>功率模組/封裝/驅動</td><td>朋程 / 強茂(自封裝)/ 台半</td><td><span class="conf c-med">部分參與 · 高階缺席</span></td><td>高階 SiC/GaN 模組(散熱/寄生電感門檻高)由 Infineon/onsemi/台達/Vertiv 主導;台廠以分立自封裝為主</td></tr>
+  <tr><td>基板長晶(SiC 單晶/GaN-on-Si 基材)</td><td>環球晶 6488(矽/SOI 為主)</td><td><span class="conf c-med">SiC 單晶:缺席→追趕(升級中)</span></td><td>SiC 單晶由 Wolfspeed/Coherent/中國(TanKeBlue/SICC)寡占;環球晶 8 吋 SiC 已起步小量量產、2026 放量(公司自述),正撞上中國價格戰底部(6 吋 MOS 級 ~$350/片,TrendForce 2025/11)</td></tr>
+  <tr><td>磊晶(SiC/GaN-on-Si)</td><td>嘉晶 3016 / 漢磊 3707</td><td><span class="conf c-high">利基領先 · 亞洲要角</span></td><td>嘉晶 8 吋 GaN 小量試產、8 吋 SiC 磊晶試產 2026H1→量產 2027H1(裁決更正,「2026H1 量產」禁用);台灣內寡占、全球第二梯隊;AI 800V HVDC 帶動 2026 後磊晶剛性需求(Yahoo 2026/06)</td></tr>
+  <tr><td>GaN-on-Si 8 吋元件代工</td><td>力積電 6770 / 世界先進 5347 / 漢磊 3707</td><td><span class="conf c-med">地位上升 · 須抗價格戰</span></td><td>力積電拿 Navitas 全線轉單(最硬佐證,官方+8-K);GF/ROHM/Samsung 也接棒、中系英諾賽科價格戰在側——台灣獨占轉多極競爭</td></tr>
+  <tr><td>SiC 元件/MOSFET 代工</td><td>漢磊 3707(+世界先進 8 吋合作)</td><td><span class="conf c-med">追趕</span></td><td>第四代 SiC MOSFET;trench 原指引 2026Q2 量產、無獨立確認⚪;8 吋 SiC 試產 2026H1→最快 2026H2 商業化(公司自述);國際 Infineon/onsemi/STM 以 IDM+200mm 領先;AI 偏 PFC/前級</td></tr>
+  <tr><td>矽基分立元件(MOSFET/二極體/整流)</td><td>朋程 8255 / 強茂 2481 / 台半 5425 / 大中 6435 / 富鼎 8261 / 德微 3675</td><td><span class="conf c-high">領先(成熟最有實績)</span></td><td>朋程承接 Bosch 退出車用整流市占(硬佐證、放量未兌現);安世事件替代帶有硬數據(強茂 B/B 1.4-1.5、台半 5 月 +11.8%);強茂切 CSP=公司自述⚪;轉單/漲價須逐項查實單</td></tr>
+  <tr><td>功率模組/封裝/驅動</td><td>朋程 / 強茂(自封裝)/ 台半 / 捷敏-KY 6525 / 界霖 5285</td><td><span class="conf c-med">部分參與 · 高階缺席</span></td><td>高階 SiC/GaN 模組(散熱/寄生電感門檻高)由 Infineon/onsemi/台達/Vertiv 主導;台廠以分立自封裝+功率封測(捷敏)+導線架(界霖)切入</td></tr>
+</table>
+<h3>兩條需求軸 × 製程環節 × 台廠定位(2026-07 增補矩陣)</h3>
+<p class="sub">把「車用 800V」與「AI 800VDC」兩條需求軸拆開看:AI 軸對 SiC 的拉動量級遠小於對 GaN(Yole 2025/12:資料中心對 SiC 僅 ~$2 億/5 年累計 vs 車用佔 SiC ~70%)——SiC 台廠不應套用 GaN 的 AI 乘數。</p>
+<table>
+  <tr><th>需求軸</th><th>環節</th><th>國際主導者</th><th>台廠實證</th><th>證據等級</th></tr>
+  <tr><td rowspan="5">AI 800VDC(Kyber 2027 放量)</td><td>元件品牌(silicon)</td><td>NVIDIA 官方名單現行 14 家(AOS/ADI/EPC/Infineon/Innoscience/MPS/Navitas/onsemi/PI/Renesas/Richtek/ROHM/ST/TI,名單滾動更新)</td><td>無台灣上市功率元件個股直接列名;Richtek 立錡(台灣品牌)在列,惟為聯發科旗下、非獨立上市公司</td><td><span class="conf c-high">高(官方名單)</span></td></tr>
+  <tr><td>GaN DC-DC 代工</td><td>Innoscience(中,NVIDIA 指名)/GF(2027)</td><td>力積電 via Navitas(Navitas 2026/06/03 進 NVIDIA MGX 生態)——台廠承接的是美系 fabless 訂單,非 NVIDIA 直接指名</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>SiC PFC/前級</td><td>Infineon/onsemi/ST</td><td>漢磊(定位宣示);量級小(Yole:DC 對 SiC 5 年累計 ~$200M)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>48V 矽 MOSFET 升規</td><td>Infineon/TI(漲價中)</td><td>強茂 30V 訂單排至 2026/10、100V 2026H2 量產(公司自述);富鼎 SPS(公司自述、營收未反映)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>電源系統(另題)</td><td>Vertiv/Eaton/Schneider</td><td>台達 2308/光寶 2301 為 NVIDIA featured partners(+Bizlink/Lead Wealth)——屬「AI 伺服器電源」題,本題不重計</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td rowspan="5">車用 800V(SiC 主戰場)</td><td>SiC 基板</td><td>Wolfspeed/Coherent/中國(價格戰)</td><td>環球晶 8 吋起步(公司自述、獲利兌現遞延)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>SiC 磊晶</td><td>IDM 自製為主</td><td>嘉晶:6 吋 SiC 磊晶日系 IDM 客戶 2026Q2 量產(車用/高階工業);8 吋 2027H1 量產</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>SiC 元件代工</td><td>IDM 自製(ST/Infineon/onsemi/Rohm/Wolfspeed)</td><td>漢磊×世界先進 8 吋合作,打 IDM 收縮期第二供應源缺口</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>主驅/OBC 元件品牌</td><td>ST 32.6%/onsemi 23.6%(2023,前五大 91.9%);800V 先行者 Hyundai/Kia E-GMP、Tesla 僅 Cybertruck/Semi、BYD 漢 L 945V</td><td><b>台廠直接供應主驅/OBC 元件=無實證(缺席)</b>;僅代工/磊晶/基板間接切入——guide 開放缺口確認</td><td><span class="conf c-high">高(缺席之證)</span></td></tr>
+  <tr><td>車用整流/48V/中低壓</td><td>Bosch 退出發電機二極體(全線)</td><td>朋程(整流市佔 50-60%,公司自述被轉引)、台半(車用 ~50%)、強茂/德微(安世替代)</td><td><span class="conf c-med">中</span></td></tr>
+</table>
+<h3>去中化/國際退出「轉單主張 vs 實證訂單」對照(2026-07 增補)</h3>
+<p class="sub">黃金樣本式逐檔對照:每條轉單敘事給實證或反證,勿一概當受惠。</p>
+<table>
+  <tr><th>轉單主張</th><th>驅動事件</th><th>實證訂單/數字</th><th>裁決</th></tr>
+  <tr><td>Navitas GaN 全線→力積電</td><td>台積電 2027/7 退出 GaN</td><td><b>有</b>:官方新聞稿+SEC 8-K;100V 已 1H26 投產(Navitas Q1'26 電話會:樣品交付、AI 基建營收 QoQ +50%)</td><td><span class="conf c-high">實證成立</span></td></tr>
+  <tr><td>台積 GaN 技術→世界先進</td><td>同上(授權)</td><td><b>有</b>:官方新聞稿 2026/01/28;量產 1H2028(營收貢獻在後)</td><td><span class="conf c-high">實證成立(遠期)</span></td></tr>
+  <tr><td>Bosch 退出→朋程</td><td>Bosch 全面退出發電機二極體(一般/LLD/ULLD)</td><td>供給缺口有媒體佐證;<b>但</b> 2026 前 5 月營收 -7.01%——轉單有實證、放量未兌現</td><td><span class="conf c-med">兩段式:實證有/兌現無</span></td></tr>
+  <tr><td>安世斷鏈→強茂/台半/德微/朋程</td><td>荷蘭凍結聞泰控制權(2025/09/30)→中國出口反制</td><td>部分兌現:強茂 B/B 1.4-1.5、歐洲車廠試單;德微接單滿到年底;台半 5 月 +11.8% 惟累計 +1.38%;更正:安世=「車用低壓 MOSFET 全球第二、小訊號分立全球第一」(非「功率 MOSFET 整體第二」),受阻口徑=約 7-8 成成品封測在中國東莞受出口反制影響(非晶圓產能 80% 停擺);⚠安世中國 2026/03 已達 12 吋小批量、去荷蘭化=轉單收斂風險,2026H2 起追蹤黏著度</td><td><span class="conf c-med">部分兌現+收斂風險</span></td></tr>
+  <tr><td>歐盟反傾銷制裁中系→強茂/台半</td><td>(無)</td><td><b>無</b>:截至 2026-07 查無歐盟對中功率元件反傾銷立案(負面查證,本質不可完全證明);同賽道真實貿易措施反而是中國對美類比 IC 反傾銷調查(結案期限 2026/09/13)</td><td><span class="conf c-un">⚪無立案佐證,不入主表</span></td></tr>
+  <tr><td>Wolfspeed 收縮→SiC 轉單台廠</td><td>Ch11 重整、Durham 150mm 關閉</td><td><b>無實證訂單</b>;且重整後獲 CHIPS 退稅 ~$700M 產能存續,虧損中殺價求量風險反升——敘事需下修</td><td><span class="conf c-un">⚪待查</span></td></tr>
+  <tr><td>ST 收縮→台廠</td><td>台積退出 GaN 後 ST 尋代工</td><td><b>反例</b>:ST 與 Innoscience 簽 JDA(2025/03/31 官方)——性質為雙向產能互用(Innoscience 可用 ST 中國以外前段、ST 可用其中國產能),非單向轉單中國、更非轉台</td><td><span class="conf c-high">反例成立</span></td></tr>
+  <tr><td>Rohm→台系代工</td><td>台積退出 GaN</td><td><b>反例</b>:Rohm 授權台積製程回自家濱松廠 2027 投產,對台零轉單</td><td><span class="conf c-high">反例成立</span></td></tr>
+  <tr><td>CSP 直接下單強茂</td><td>AI 12V→48V 升規</td><td>公司自述(30V 訂單至 2026/10)、無具名 CSP 第三方佐證</td><td><span class="conf c-un">⚪公司自述</span></td></tr>
+  <tr><td>宏捷科×Navitas 6 吋 GaN</td><td>(理財周刊單源)</td><td>Navitas 官方公告代工夥伴=力積電(+GF),無宏捷科</td><td><span class="conf c-un">⚪未驗證</span></td></tr>
+  <tr><td>Power Integrations→EPC 代工</td><td>台積退出 GaN</td><td>僅部落格層級單源,無官方/權威媒體佐證</td><td><span class="conf c-un">⚪低信心待查</span></td></tr>
 </table>
 
-<!-- 5 -->
-<h2 id="s5"><span class="n">5</span>量產時程與各家進度 / 時程錨點</h2>
+<!-- 5 細顆粒地圖 -->
+<h2 id="sfine"><span class="n">5</span>細顆粒地圖:GaN/SiC 路線 × 製造模式 × 6→8 吋 × 價格戰(2026-07 增補)</h2>
+<p class="sub">台積電退出後的 GaN 代工版圖重組:客戶分流四路全數確認——Navitas→力積電(+GF)、Rohm→自家濱松、ST→Innoscience、製程授權→世界先進/GF。彙整 20 格佐證:高佐證 13、中 5、低/待查 2(本報告 findings 彙整 2026/07)。</p>
+<h3>地圖①:GaN 路線 × 製造模式(2026H1 快照)</h3>
+<table>
+  <tr><th>廠商</th><th>路線 · 吋別</th><th>現況與時點</th><th>對台廠意義</th><th>佐證</th></tr>
+  <tr><td colspan="5" style="background:var(--card2);color:var(--accent);font-weight:700">台系代工</td></tr>
+  <tr><td>力積電 6770</td><td>GaN-on-Si · 8 吋(0.18μm)</td><td>Navitas 全線轉單竹南 Fab 8B:認證 2025Q4、100V 1H26 投產、650V 12-24 個月移轉(最快 2026Q4 認證);GaN 營收公司尚未單獨揭露</td><td>台積退出最大轉單實證;但 Navitas 雙軌(GF 美產 2027)非獨家</td><td>Navitas 官方新聞稿+SEC 8-K(2025/07/01)<span class="conf c-high">高</span></td></tr>
+  <tr><td>世界先進 5347</td><td>GaN-on-Si+GaN-on-QST · 8 吋</td><td>2026/01/28 簽台積電 650V+80V 授權,2026 年初啟動開發、1H2028 量產;低壓 GaN 已量產、GaN 2(QST)完成認證(公司自述)</td><td>台積技術在台留根;量產前 2026-2027 無 GaN 營收</td><td>世界先進官網新聞稿(2026/01/28)<span class="conf c-high">高</span></td></tr>
+  <tr><td>漢磊 3707</td><td>GaN/SiC 代工 · 6→8 吋</td><td>6 吋既有產能+8 吋 SiC 與世界先進合作(試產 2026H1)</td><td>利基代工;GaN 量體小於力積電</td><td>鉅亨網股東會(2026/06/11)<span class="conf c-med">中</span></td></tr>
+  <tr><td colspan="5" style="background:var(--card2);color:var(--accent);font-weight:700">美韓代工(競爭軸)</td></tr>
+  <tr><td>GlobalFoundries</td><td>GaN-on-Si · 200mm(Burlington)</td><td>2025/11 取得台積電 650V+80V 授權;與 Navitas 綁定 2027 美國量產</td><td>分食 Navitas 訂單、美製化分流</td><td>TrendForce(2025/11/27)+EE Times<span class="conf c-high">高</span></td></tr>
+  <tr><td>Samsung</td><td>GaN · 8 吋(純代工)</td><td>自有 GaN discrete 未過客戶基準→轉純代工,最快 2026/07 營運、初期年營收 &lt;₩1,000 億(約 $66M);截至 2026/07 初仍為韓媒報導層級、無官方公告</td><td>再添 8 吋代工競爭者、報價壓力</td><td>TrendForce 轉述 The Elec(2026/05/22)<span class="conf c-un">傳聞/前瞻</span></td></tr>
+  <tr><td>DB HiTek</td><td>GaN · 8 吋</td><td>落後 Samsung 1-2 季、2026H2 跟進(媒體報導)</td><td>同上</td><td>TrendForce(2026/05/22)<span class="conf c-med">中</span></td></tr>
+  <tr><td colspan="5" style="background:var(--card2);color:var(--accent);font-weight:700">IDM 內製(對台委外態度)</td></tr>
+  <tr><td>Infineon</td><td>GaN-on-Si · 300mm(Villach)</td><td>全球首家在既有 300mm 矽產線做出功率 GaN,2025Q4 交樣;單片晶粒產出較 200mm 高 2.3 倍,目標 GaN 與矽 RDS(on) 成本平價</td><td>以尺寸級距反制價格戰;對台零委外;另受中國 GaN 禁售令衝擊(見第 9 節)</td><td>Infineon 官方新聞稿(2025/07)<span class="conf c-high">高</span></td></tr>
+  <tr><td>Rohm</td><td>GaN(授權台積製程)· 濱松自產</td><td>2026/02 宣布取得台積電 GaN 授權、移轉至日本濱松廠 2027 投產;自 2023 年即用台積電 650V 製程、150V 已在濱松自產;技轉完成後結束與台積電合作</td><td><b>對台廠零轉單</b>(走 IDM 內製化)</td><td>TrendForce(2026/03/10)+Semiconductor Today(2026/02/27)<span class="conf c-high">高</span></td></tr>
+  <tr><td>ST</td><td>GaN · 與 Innoscience JDA</td><td>2025/03/31 簽 GaN 技術開發與製造協議:雙向產能互用——Innoscience 可用 ST 中國以外前段產能、ST 可用 Innoscience 中國產能(非單向「ST 轉單中國」)</td><td>歐系 IDM 反用中國產能=「去中化」非全行業一致</td><td>ST 官方 newsroom+GlobeNewswire(2025/03/31)<span class="conf c-high">高</span></td></tr>
+  <tr><td>Power Integrations / EPC</td><td>GaN 代工去向</td><td>「PI 轉單 EPC 8 吋線」僅部落格層級單源,無官方佐證</td><td>⚪待查,不入結論</td><td>Conevo 部落格<span class="conf c-low">低/待查</span></td></tr>
+  <tr><td colspan="5" style="background:var(--card2);color:var(--accent);font-weight:700">中系 IDM(價格戰主體)</td></tr>
+  <tr><td>英諾賽科 2577.HK</td><td>GaN-on-Si · 8 吋專廠(蘇州+珠海)</td><td>2024 GaN 功率市佔 29.9%(TrendForce)/30%(Yole)全球第一;規劃月產能合計近 70K 片、累計出貨 &gt;20 億顆(公司自述、缺第三方);NVIDIA 800VDC 唯一中系供應商(2025/08)、Google design-in(2026/02)、all-GaN 15V-1200V 進 NVIDIA MGX(2026/05/29);GB300 已 2 次送樣、2026H1 小批量(公司/媒體口徑)</td><td>台系 GaN 代工最大低價競爭壓力;具體報價差距無公開數字⚪待查</td><td>TrendForce(2025/08/04、2026/05/29)<span class="conf c-med">中</span></td></tr>
+  <tr><td>英諾賽科(財務)</td><td>價格戰承受力</td><td>H1 2025 營收 RMB 5.53 億(+43.4%)、毛利率首度轉正 6.8%、虧損收窄至 4.29 億;管理層展望 FY2026 營收 RMB 20-25 億、毛利率 &gt;15%(公司自述);S&amp;P Global 估 2025 +59%/2025-28 CAGR 77%(⚪訂閱制單源)</td><td>仍虧損但成長極快;2026H1 中期數據 2026/08 才發布</td><td>2025 中期報告(Yahoo 財經香港)<span class="conf c-med">中</span></td></tr>
+</table>
+<h3>地圖②:SiC IDM 五雄 × 200mm 轉換(2026H1 快照)</h3>
+<table>
+  <tr><th>IDM</th><th>200mm(8 吋)進度</th><th>2026 現況</th><th>對台委外/轉單含義</th><th>佐證</th></tr>
+  <tr><td>Wolfspeed</td><td>Durham 150mm 元件廠 2026/01 前提前約 1 個月關閉,元件產能全數集中 Mohawk Valley 200mm;8 吋營收自 2024H2 起超過 6 吋(Yole 口徑)</td><td>2025/09/29 完成 91 天預重整出 Chapter 11:減債 $4.6B(-70%)、年付息 -60%;獲 CHIPS 48D 退稅約 $700M;FY26Q2(2026/02/04 發布)營收 $168M、GAAP 毛利率 -46%(non-GAAP -34%;含 $48M 低稼動成本+$23M fresh-start 存貨評價,勿單引 -46% 誇大)、Mohawk Valley 貢獻 $76M;2026 稼動率/報價無公開數字⚪</td><td>「出局→轉單台廠」需下修:產能存續獲資金支撐,虧損中殺價求量風險反升</td><td>SEC 8-K(2025/09、2026/01)+Manufacturing Dive<span class="conf c-high">高</span></td></tr>
+  <tr><td>ST</td><td>Catania SiC Campus=全球首座全流程 200mm 垂直整合基地(基板→磊晶→前段→封測);200mm 已於 2025Q4 開始生產(提前),2033 滿載 1.5 萬片/週</td><td>總投資約 €5B、義大利依歐盟晶片法補助 €2B;2023 SiC 元件市佔 32.6% 居首(TrendForce 2024/06)</td><td>IDM 自製為主、對台委外空間小;GaN 端反與 Innoscience 互供</td><td>ST 官方新聞稿<span class="conf c-high">高</span></td></tr>
+  <tr><td>onsemi</td><td>垂直整合 SiC 擴產;2025/11 獲歐盟核准捷克 $530M 國家補助</td><td>2023 SiC 元件市佔 23.6% 第二(TrendForce)</td><td>歐洲在地化獲政策資金;補助細節建議補 EC 官方文核實</td><td>DataM 轉述(2025/11)<span class="conf c-med">中</span></td></tr>
+  <tr><td>Rohm</td><td>宮崎第二廠規劃為最大 SiC 廠、直上 8 吋;築後廠 2025 前完成 6→8 吋轉換(2023/11 官方指引;2026 年實際量產進度未見獨立更新⚪)</td><td>2026/03 推出第 4 代 SiC 模製功率模組(EV 主驅,功率密度 ~1.5x)</td><td>IDM 內製;GaN 亦回濱松自產(對台零轉單)</td><td>ROHM 官方新聞稿(2023/11/07)<span class="conf c-med">中</span></td></tr>
+  <tr><td>Infineon</td><td>SiC+GaN 多線;GaN 走 300mm(Villach)</td><td>FY26Q1(2026/02/04):capex €2.2B→€2.7B 加速 AI 資料中心電源產能;AI DC 營收目標 FY26 約 €1.5B、FY27 約 €2.5B(公司自述前瞻);Q2 FY26(2026/05)再上修全年營收至 &gt;€16B(約 +10%,EE Times)——AI 需求軸屬實際拉貨的季度連續驗證;2026 年 4 月+7/1 兩波漲價(幅度未公開)</td><td>國際龍頭把 AI 電源當主成長軸;台廠矽基元件跟漲、跟車</td><td>Infineon 官方新聞稿+法說(2026/02、2026/05)<span class="conf c-high">高</span></td></tr>
+  <tr><td>市佔集中度</td><td colspan="2">TrendForce 2023 SiC 元件營收市佔:ST 32.6%、onsemi 23.6%,前五大(ST/onsemi/Infineon/Rohm/Wolfspeed)合計 91.9%——車用主驅級 SiC 品牌元件由 IDM 寡占,台灣無同級品牌玩家</td><td>台廠只能以代工/磊晶/基板切入</td><td>TrendForce 官方新聞稿(2024/06/20)<span class="conf c-high">高</span></td></tr>
+</table>
+<h3>地圖③:SiC 6→8 吋轉換進度 × 價格戰數字錨點</h3>
+<table>
+  <tr><th>主體</th><th>6→8 吋時點</th><th>備註(來源+日期)</th></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">轉換進度(各家時點)</td></tr>
+  <tr><td>Wolfspeed</td><td>150mm 已關(2026/01 前)、全數 200mm</td><td>SEC 8-K(2026/02/04)<span class="conf c-high">高</span></td></tr>
+  <tr><td>ST</td><td>200mm 2025Q4 投產(Catania)</td><td>ST 官方新聞稿(2025/12)<span class="conf c-high">高</span></td></tr>
+  <tr><td>Rohm</td><td>築後 6→8 吋 2025 前;宮崎二廠直上 8 吋</td><td>ROHM 官方(2023/11)⚪2026 進度待更新</td></tr>
+  <tr><td>環球晶 6488</td><td>8 吋 SiC 已起步小量、2026 逐步放量;公司稱 8 吋 SiC 營收 2026 估超越 6 吋、12 吋方形 SiC 已展示</td><td>豐雲學堂(2026/07)+TechNews(2026/06/05);量產片數缺第三方(公司自述)<span class="conf c-med">中</span></td></tr>
+  <tr><td>漢磊×世界先進</td><td>8 吋 SiC 試產 2026H1(1,500 片/月)→最快 2026H2 商業化量產</td><td>中央社(2024/09/11)+鉅亨網股東會(2026/06/11,公司自述;2024/09 宣布至今時程未跳票)<span class="conf c-med">中</span></td></tr>
+  <tr><td>嘉晶 3016</td><td>8 吋 SiC 磊晶:試產 2026H1→認證+小量 2026H2→量產 2027H1</td><td>Yahoo 股市/工商時報(2026/06);「2026H1 量產」已裁決不成立<span class="conf c-med">中</span></td></tr>
+  <tr><td>產業整體</td><td>TrendForce:2026 年 SiC 晶圓產能放量、8 吋成車用供應鏈基準;8 吋滲透率由 &lt;2% 升至 2026 約 15%</td><td>TrendForce(2026/03/04;滲透率為 2024/03 口徑)<span class="conf c-med">中</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">價格戰數字錨點</td></tr>
+  <tr><td>6 吋 SiC 基板(國際參考價)</td><td>$750-800/片(跌近 30%)</td><td>TrendForce(2024/09/24;2024 年時點,2026 現價待查)<span class="conf c-med">中</span></td></tr>
+  <tr><td>6 吋 SiC 基板(中國殺價)</td><td>MOS 級 ~$350/片(低於 ~$400 損益兩平)、Schottky 級 ~$250/片;同期上游原料(高純 SiC 粉料)漲價,業界共識價格戰接近落底</td><td>TrendForce(2025/11/26,channel check)<span class="conf c-high">高</span></td></tr>
+  <tr><td>6→8 吋成本效益</td><td>單位成本可再降約 35%(天科合達口徑)</td><td>TrendForce(2024/09/24)<span class="conf c-med">中</span></td></tr>
+  <tr><td>SiC 晶圓成本趨勢</td><td>2024→2028 預估 -30~40%</td><td>Vik's Newsletter(2026/01,blog 級)<span class="conf c-low">低</span></td></tr>
+</table>
+<div class="callout"><b>細顆粒結論：</b>GaN 代工「台灣獨占」已轉為<b>多極競爭</b>(台:力積電/世界先進;美:GF;韓:Samsung/DB HiTek;日:Rohm 內製;中:英諾賽科 IDM)——力積電的 Navitas 轉單是最硬的實證,但 2027 起接棒者增多、報價競爭加劇;SiC 則是 IDM 寡占+中國基板殺價近底,台廠(漢磊×世界先進 8 吋、嘉晶磊晶、環球晶基板)吃的是 IDM 收縮期的第二供應源缺口,節奏落在 2026H2-2027。</div>
+
+<!-- 6(原 5)量產時程 -->
+<h2 id="s5"><span class="n">6</span>量產時程與各家進度 / 時程錨點</h2>
 <div class="card">
-  <h3>市場規模(多研調口徑,SiC 分歧尤大)</h3>
+  <h3>市場規模(多研調口徑,SiC 分歧尤大;2026-07 擴充至 8 口徑)</h3>
   <table>
     <tr><th>子市場</th><th>多研調口徑</th><th>分歧主因</th></tr>
-    <tr><td>GaN 功率元件(全市場)</td><td>Yole:2024 $355M→2030 $3.0B(CAGR 42%,資料中心/電信 segment 53%、車用 73%);TrendForce:2024 $390M→2030 $3.51B(44%)</td><td>兩家量級接近;分歧主因基期口徑(是否含快充/消費歸類)</td></tr>
-    <tr><td>SiC 功率元件(全市場)</td><td>Yole:2030 近 $10.3B(惟 2026-2028 過剩下行、2025 上游稼動率 ~50%);Research and Markets:2030 $4.9-7.1B;TrendForce:2026 約 $5.33B</td><td>分歧近一倍:中國 6 吋 SiC 基板殺到約 $500(國際 1/3)壓 ASP、EV 放緩、元件 vs 含基板/模組口徑</td></tr>
-    <tr><td>AI 資料中心電源用 GaN(窄口徑)</td><td>Yole:資料中心/電信 GaN 2030 &gt;$380M(segment CAGR 53%);NVIDIA/Navitas(系統側):800V HVDC、機櫃 GB300 120-140kW→Rubin Ultra 250-500kW(2027)→1MW(2029)</td><td>窄口徑僅 Yole 一家具名;系統規格(廠商自述)非市場規模,不可相加;小基期易誇大</td></tr>
+    <tr><td>GaN 功率元件(全市場)</td><td>Yole《Power GaN 2025》(2025/10):2024 $355M→2030 $3.0B(CAGR 42%,資料中心/電信 segment 53%、車用 73%);TrendForce:2024 $390M→2030 $3.51B(44%)。分段絕對值(Yole 2025/10):消費 2024 $250M→2030 $1.53B(CAGR 35%,2030 仍佔 &gt;50%)vs 資料中心+電信 2030 合計 &gt;$380M——AI 題材是「成長率故事」,量體至 2030 仍由消費撐盤</td><td>兩家量級接近;分歧主因基期口徑(是否含快充/消費歸類);均第三方非廠商自估 <span class="conf c-high">高</span></td></tr>
+    <tr><td>SiC 功率元件(全市場)</td><td>Yole 2025/12 修正版(現行基準):2030 近 $10.3B(CAGR 2024-30 約 20%;2026-2028 過剩下行、2025 上游稼動率僅 ~50%、元件產線 ~70%);Research and Markets 現行版(2025/12):2024 $3.94B→2025 $4.36B→2030 $7.26B(CAGR 10.72%;原引「$4.9-7.1B」為不同版本混用,已更正);TrendForce:2026 約 $5.33B(2024/03 舊口徑,EV 用 $3.98B、再生能源 $410M)</td><td>分歧近一倍:中國 6 吋 SiC 基板殺價壓 ASP、EV 放緩假設、元件 vs 含基板/模組口徑;舊口徑引用一律標時點 <span class="conf c-high">高</span></td></tr>
+    <tr><td>AI 資料中心電源用 GaN(窄口徑)</td><td>Yole:資料中心/電信 GaN 2030 &gt;$380M(segment CAGR 53%);TrendForce Insights(2026/05)HVDC 專文:SiC=PFC/前級、GaN=DC-DC 後級分工(第 2 具名研調);NVIDIA/Navitas(系統側):800V HVDC、機櫃 GB300 120-140kW→Rubin Ultra 250-500kW(2027)→1MW(2029)</td><td>絕對值僅 Yole 一家具名;NVIDIA/Navitas 為系統規格(廠商自述)非市場規模,不可相加;小基期易誇大 <span class="conf c-med">中</span></td></tr>
+    <tr><td>AI 資料中心用 SiC(窄口徑,增補)</td><td>Yole 2025/12:車用未來 5 年仍占 SiC 需求約 70%;資料中心基礎設施對 SiC 僅約 $2 億(5 年累計)增量——AI/800VDC 對 SiC 的拉動量級遠小於對 GaN,SiC 台廠不應套用 GaN 的 AI 乘數(Semiconductor Today 2025/12/18)</td><td>單一研調口徑;但方向(SiC 基本盤綁 EV)與 TrendForce 應用結構一致 <span class="conf c-high">高</span></td></tr>
+    <tr><td>功率半導體總盤(含 Si,增補)</td><td>富士経済(2025/04,EE Times Japan 轉述):2035 年 ¥7 兆 7,710 億(2024 年的 2.3 倍);SiC 2035=2024 的 7.4 倍;EV 的 SiC 採用率 2024 約 10%→2035 &gt;50%;庫存 2025 下半年正常化、2026 年起成長擴大。2026 年更新版 ¥7 兆 3,495 億(較 2025 +95.7%)⚪待查(原始網頁憑證錯誤未讀全文、無第二源,主引 2025/04 版)</td><td>版本逐年微幅下修;日圓計價與美元口徑不可直接換算比較 <span class="conf c-med">中</span></td></tr>
+    <tr><td>SiC 廣口徑(材料+元件,增補)</td><td>MarketsandMarkets(2025/10):2025 $3.83B→2030 $12.03B(CAGR 25.7%)——含基板/磊晶材料與非功率應用,與 Yole/TrendForce 器件窄口徑不可直接比較</td><td>分歧主因=口徑含蓋範圍(材料/應用)不同 <span class="conf c-med">中</span></td></tr>
+    <tr><td>中國 GaN 玩家成長(對照,增補)</td><td>S&amp;P Global Market Intelligence(2026/01):英諾賽科 2025 營收年增約 59%、2025-2028 CAGR 約 77%,動能=AI 基礎設施+EV 的 GaN 採用</td><td>訂閱制報告、公開檢索無第二源覆核具體數字 ⚪單源 <span class="conf c-med">中</span></td></tr>
+    <tr><td>第 4 研調源可得性(增補)</td><td>Omdia 已有完整口徑:《SiC &amp; GaN Power Semiconductors Report 2025》(3 元件×17 應用、2023-2034)與《Power Semiconductor Market Share Database 1H26》(CY24/CY25 供應商市佔);數值訂閱制、公開不可得——公開市佔口徑以 Yole/TrendForce 互證補位(英諾賽科 2024 GaN 市佔:TrendForce 29.9% / Yole 30%,兩研調獨立一致;2023:Innoscience 31%、Power Integrations 17%、Navitas 16%,Yole)</td><td>訂閱制限制;GaN 市佔兩源互證信度高 <span class="conf c-high">高</span></td></tr>
   </table>
-  <h3>催化劑時間軸(2025-2028)</h3>
+  <p class="sub">市場規模均第三方研調、量級參考。SiC 因中系殺價+EV 放緩,Yole 看「量增價跌、中期 V 轉」;AI-GaN 窄口徑高成長但小基期。標來源、非成交數。KPI 卡之「SiC 2026 $5.33-6.14B」兩數字皆 EV 放緩前舊口徑($5.33B=TrendForce 2024/03、$6.14B=Yole 約 2022 年自 $4.89B 上修,Power Electronics News),現行以 Yole 2025/12 修正版為基準——原 refs 標「TrendForce 2026/5」日期有誤,已更正(見第 9-10 節)。TrendForce 2026/04 已出版《2026 Global SiC Power Device Market Analysis Report》(RP260401AC),細部數值訂閱制未公開。</p>
+  <h3>量產進度速查表(公司 / 事件 × 環節 × 時程,增補)</h3>
   <table>
-    <tr><th>時點</th><th>狀態</th><th>事件</th><th>影響</th></tr>
-    <tr><td>2025/07</td><td><span class="conf c-high">已發生</span></td><td>台積電公告 2027/7/31 全面退出 GaN 代工</td><td>觸發 GaN 代工版圖洗牌;力積/世界先進/GF/ROHM 接手</td></tr>
-    <tr><td>2025/09</td><td><span class="conf c-high">已發生</span></td><td>Wolfspeed 走完 Chapter 11、Renesas 債轉股、CFIUS 2026/01 放行</td><td>SiC 龍頭未消失而是重整轉 200mm;「退出→轉單」須精確化</td></tr>
-    <tr><td>2025/10-11</td><td><span class="conf c-high">已發生</span></td><td>NVIDIA 公布 800V HVDC 生態夥伴(Infineon/onsemi/Navitas/STM/Innoscience…)</td><td>確立 AI 電源 800V 新增量;GaN 做 DC-DC、SiC 做 PFC</td></tr>
-    <tr><td>1H2026</td><td><span class="conf c-med">進行中</span></td><td>力積電接 Navitas 全線 200mm GaN-on-Si:100V 1H26 投產、650V 12-24 月轉移、最快 2026Q4 認證</td><td>台積退 GaN 最大直接受惠、綁 NVIDIA 800V 供應鏈</td></tr>
-    <tr><td>2026/01-03</td><td><span class="conf c-med">進行中</span></td><td>世界先進簽台積 650V+80V GaN 授權(2028H1 量產);GF/ROHM 也取得授權</td><td>GaN 代工接棒者增多;台廠非唯一受惠、競爭加劇</td></tr>
-    <tr><td>2026/05</td><td><span class="conf c-med">進行中</span></td><td>傳 Samsung 將 GaN 轉做代工(最快 2026/07);台積出脫世界先進 8.1% 持股</td><td>再添 8 吋 GaN 代工大廠,台廠價格壓力升溫</td></tr>
-    <tr><td>2026/06</td><td><span class="conf c-high">已發生</span></td><td>中國最高法院終審維持禁售令,Infineon 不得在中國銷售相關 GaN</td><td>中系 GaN 氣勢增強=價格戰風險;Infineon 在中受限或外溢轉單(待觀察)</td></tr>
-    <tr><td>2026 全年</td><td><span class="conf c-med">進行中</span></td><td>Infineon 指引 AI 資料中心營收 FY26 €1.5B→FY27 €2.5B、capex €2.7B</td><td>國際龍頭把 AI 電源當主成長軸;台廠矽基元件以 CSP 轉單跟車</td></tr>
-    <tr><td>2026/11</td><td><span class="conf c-un">前瞻</span></td><td>中美鎵出口管制暫停期到期,可能恢復鎵出口限制</td><td>鎵為 GaN 關鍵原料;若恢復管制,GaN 上游成本/供給風險升</td></tr>
-    <tr><td>1H2028</td><td><span class="conf c-un">前瞻</span></td><td>世界先進 8 吋 GaN 平台量產</td><td>GaN 代工接棒者放量;台廠 GaN 產能再增</td></tr>
+    <tr><th>公司 / 事件</th><th>環節定位</th><th>進度 / 時程</th><th>查證</th></tr>
+    <tr><td>力積電 6770</td><td>GaN-on-Si 代工</td><td>Navitas 100V 1H26 投產、650V 12-24 月內轉移(認證最快 2026Q4);GaN 放量看 2026Q2-Q3(公司自述)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>台積電(事件)</td><td>GaN 代工退出</td><td>2027/7/31 全面結束(2025/07 通知客戶;媒體/研調轉述)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>世界先進 5347</td><td>GaN 授權新平台</td><td>2026/01 取得台積 GaN 授權、8 吋 2028H1 量產(官方;法說筆記 2027H2⚪blog 級單源)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>嘉晶 3016</td><td>SiC/GaN 磊晶</td><td>8 吋 SiC 磊晶準備、GaN-on-Si 布局;試產 2026H1(已兌現)→認證+小量 2026H2→正式量產 2027H1;6 吋線日系 IDM 客戶 2026Q2 量產</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Wolfspeed(事件)</td><td>SiC 國際龍頭</td><td>2025/09 走完破產重整、Renesas 入股、轉 200mm(非單純退出)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>漢磊 3707</td><td>SiC 代工</td><td>第四代 SiC 平面 MOSFET;AI 偏 PFC/前級;trench MOSFET 2026Q2 量產⚪待查(2026/06 股東會僅提 8 吋 2026H2)</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>漢磊×世界先進 8 吋 SiC</td><td>SiC 代工(8 吋)</td><td>試產線 1,500 片/月、2026H1 試產、最快 2026H2 商業化量產(公司自述;合作 2024/09 宣布、時程未跳票)</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>環球晶 6488</td><td>SiC 基板</td><td>8 吋已起步小量、2026 放量、公司稱 8 吋 SiC 營收 2026 超越 6 吋(公司自述);12 吋方形 SiC 已展示;德州 12 吋矽晶圓廠 2026H2 滿載目標</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>GlobalFoundries(事件)</td><td>GaN 代工(美)</td><td>2025/11 取得台積電 GaN 授權;Burlington 200mm、Navitas 美產 2027</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>Samsung(事件)</td><td>GaN 代工(韓)</td><td>8 吋 GaN 純代工最快 2026/07 營運(韓媒報導層級、無官方公告)</td><td><span class="conf c-un">傳聞</span></td></tr>
+    <tr><td>Rohm(事件)</td><td>GaN IDM 內製</td><td>台積電 GaN 授權移回濱松廠、2027 投產——對台零轉單</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>ST(事件)</td><td>SiC IDM / GaN JDA</td><td>Catania 200mm 全流程 2025Q4 投產(€5B);GaN 與 Innoscience 雙向互供</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>Infineon(事件)</td><td>GaN 300mm IDM</td><td>Villach 300mm 功率 GaN 2025Q4 交樣、晶粒產出 2.3 倍 vs 200mm</td><td><span class="conf c-high">高</span></td></tr>
   </table>
-  <div class="callout"><b>選股節奏：</b>現在就有營收=朋程/強茂/大中(EV+轉單)、嘉晶/漢磊(磊晶);轉折受惠=力積電(GaN 接單放量);未來選擇權=世界先進 GaN(2028)。</div>
+  <h3>催化劑時間軸(2025-2028;2026-07 擴充+補「來源型別」欄)</h3>
+  <table>
+    <tr><th>時點</th><th>狀態</th><th>事件</th><th>影響</th><th>來源型別</th></tr>
+    <tr><td>2025/07</td><td><span class="conf c-high">已發生</span></td><td>台積電通知客戶 2027/7/31 全面退出 GaN 代工(6 吋月產 3,000-4,000 片、Navitas 佔過半;竹科 Fab 5 轉先進封裝)</td><td>觸發 GaN 代工版圖洗牌;力積/世界先進/GF/ROHM 先後接手</td><td>媒體/研調轉述(TrendForce 2025/07/03;台積電無獨立官網新聞稿——原標「公告」已更正)</td></tr>
+    <tr><td>2025/07/01</td><td><span class="conf c-high">已發生</span></td><td>Navitas 宣布與力積電 200mm GaN 合作:竹南 Fab 8B、0.18μm;認證 2025Q4、100V 1H26 投產、650V 12-24 個月移轉</td><td>台積退 GaN 最大轉單實證落地台灣</td><td>官方新聞稿+SEC 8-K</td></tr>
+    <tr><td>2025/09/29</td><td><span class="conf c-high">已發生</span></td><td>Wolfspeed 走完 91 天預重整 Chapter 11:減債 $4.6B(-70%)、Renesas 債轉股、CFIUS 2026/01 放行;Durham 150mm 2025 年底關閉、全轉 200mm;後獲 CHIPS 48D 退稅 ~$700M</td><td>SiC 國際龍頭未消失而是重整轉 200mm;「退出→轉單」須精確化</td><td>官方(SEC 8-K)+Manufacturing Dive</td></tr>
+    <tr><td>2025/10-11</td><td><span class="conf c-high">已發生</span></td><td>NVIDIA 公布 800V HVDC 生態夥伴(Infineon/onsemi/Navitas/STM/Innoscience…);silicon 名單現行 14 家(AOS/ADI/EPC/Infineon/Innoscience/MPS/Navitas/onsemi/PI/Renesas/Richtek/ROHM/ST/TI,滾動更新;初版 10 家為舊快照)</td><td>確立 AI 電源 800V 新增量;GaN 做 DC-DC、SiC 做 PFC</td><td>官方技術部落格</td></tr>
+    <tr><td>2025/11/09</td><td><span class="conf c-high">已發生</span></td><td>中國宣布暫停對美鎵/鍺/銻出口禁令至 2026/11/27(改許可證管理、軍事終端禁令仍在;原禁令 2024/12)</td><td>GaN 原料鏈壓力暫解;到期日=尾部風險時點</td><td>官方政策+媒體(Fastmarkets/CNBC)</td></tr>
+    <tr><td>2025/11/26</td><td><span class="conf c-high">已發生</span></td><td>SiC 上游原料(高純粉料)漲價、中國 6 吋基板殺價:MOS 級 ~$350/片(低於 ~$400 兩平)、Schottky 級 ~$250;業界共識價格戰近底</td><td>台廠基板/磊晶毛利承壓與 SiC 元件降價滲透為同一枚硬幣</td><td>研調快訊(TrendForce,channel check)</td></tr>
+    <tr><td>2025/11/27</td><td><span class="conf c-high">已發生</span></td><td>GlobalFoundries 取得台積電 650V+80V GaN 授權,與 Navitas 綁定 2027 美產(Burlington 200mm)</td><td>GaN 代工技術分流美國;力積電非獨家</td><td>研調/產業媒體(TrendForce/EE Times)</td></tr>
+    <tr><td>2026/01/28</td><td><span class="conf c-high">已發生</span></td><td>世界先進與台積電簽 650V+80V GaN 授權:2026 年初啟動開發、1H2028 量產</td><td>台積 GaN 技術在台留根;GaN 代工接棒者增多、競爭加劇</td><td>官方新聞稿(世界先進官網)</td></tr>
+    <tr><td>2026/02/04</td><td><span class="conf c-high">已發生</span></td><td>Infineon FY26Q1 法說:capex €2.2B→€2.7B 加速 AI 資料中心電源;AI DC 營收目標 FY26 €1.5B、FY27 €2.5B;Q2 FY26(2026/05)再上修全年至 &gt;€16B</td><td>國際龍頭把 AI 電源當主成長軸、季度連續驗證;台廠矽基元件跟車</td><td>官方法說(目標值屬公司自述)</td></tr>
+    <tr><td>2026/02</td><td><span class="conf c-high">已發生</span></td><td>英諾賽科 GaN 完成 Google AI 硬體平台關鍵 design-in、簽正式供貨協議;2026/05/29 再發 all-GaN 全鏈路方案進 NVIDIA MGX 生態</td><td>中系 GaN 取得終端指名地位;對台系 GaN 代工鏈最直接低價競爭壓力</td><td>公司新聞稿(產能/出貨為公司自述)</td></tr>
+    <tr><td>2026/02→04</td><td><span class="conf c-high">已發生</span></td><td>Infineon 第一波漲價(2026/02/05 報導、4 月生效,AI 電源 IC 吃緊)</td><td>IDM 漲價循環啟動</td><td>產業媒體轉述供應鏈通知(channel check,非官方新聞稿)</td></tr>
+    <tr><td>2026/02-03</td><td><span class="conf c-high">已發生</span></td><td>Rohm 取得台積電 GaN 授權、移轉日本濱松廠 2027 投產;技轉完成後結束與台積電合作</td><td>台積 GaN 客戶分流之一走 IDM 內製——對台廠零轉單</td><td>研調/產業媒體(TrendForce 2026/03/10、Semiconductor Today 2026/02/27)</td></tr>
+    <tr><td>2026/03</td><td><span class="conf c-high">已發生</span></td><td>安世中國達成 12 吋晶圓小批量生產、推進去荷蘭化(距斷供約 5 個月)</td><td>台廠安世轉單非永久結構;2026H2 起追蹤黏著度(風險型事件)</td><td>媒體(UNWIRE.PRO 2026/03/12)</td></tr>
+    <tr><td>1H2026</td><td><span class="conf c-med">進行中</span></td><td>力積電接 Navitas 全線 200mm GaN-on-Si:100V 1H26 投產、650V 12-24 月轉移、認證最快 2026Q4;GaN 放量目標 2026Q2-Q3、營收尚未單獨揭露</td><td>台積退 GaN 最大直接受惠、綁 NVIDIA 800V 供應鏈(經由 Navitas 間接)</td><td>官方新聞稿+公司法說(放量時點為公司自述)</td></tr>
+    <tr><td>2026/05</td><td><span class="conf c-un">傳聞/前瞻</span></td><td>傳 Samsung 將 GaN 轉做純代工(最快 2026/07 啟動、初期年營收 &lt;₩1,000 億);DB HiTek 2026H2 跟進;同月台積電出脫世界先進 8.1% 持股(降至 19%)——Samsung 截至 2026/07 初仍為韓媒報導層級、無官方公告(原標「進行中」已更正)</td><td>再添 8 吋 GaN 代工大廠,台廠價格壓力升溫</td><td>韓媒轉述(TrendForce 引 The Elec)</td></tr>
+    <tr><td>2026/05-06</td><td><span class="conf c-med">進行中</span></td><td>台系功率元件跟漲:強茂/德微/台半/穩得部分產品傳喊漲約兩成、訂單能見度看到 2027</td><td>漲價+轉單雙催化;逐檔幅度屬供應鏈/媒體轉述⚪待查</td><td>channel check/財經媒體(工商 2026/05/28、旺得富 2026/06/23)</td></tr>
+    <tr><td>2026/06/03</td><td><span class="conf c-high">已發生</span></td><td>Navitas 於 Computex 2026 正式加入 NVIDIA MGX 生態(800VDC AI 基礎設施)</td><td>「Navitas→力積電代工→NVIDIA」台鏈 2026H1 最新續強事件</td><td>公司新聞稿+產業媒體(Semiconductor Today)</td></tr>
+    <tr><td>2026/06/13</td><td><span class="conf c-high">已發生</span></td><td>中國最高人民法院維持對 Infineon GaN 產品在華「臨時銷售禁令」(蘇州中院 2026/05/27 一審認定侵害英諾賽科 2 項專利、賠 RMB 1,000 萬)。「終審勝利」為英諾賽科新聞稿框架——維持的是臨時禁令(interim relief)非侵權終局判決(原「終審維持禁售令」已更正);2026/07/01 electronica China 上 Infineon 仍展出受禁產品、經投訴後撤展,執行仍有攻防</td><td>中系 GaN 氣勢增強=價格戰風險;Infineon 在中受限或外溢轉單(待觀察)</td><td>當事方新聞稿(PR Newswire)+第三方(Semiconductor Today/MLex/ip fray/Tom's Hardware)</td></tr>
+    <tr><td>2026/07/01</td><td><span class="conf c-high">已公告生效</span></td><td>Infineon 第二波漲價生效(2026/05/26 通知客戶;<b>幅度未公開</b>);TI 同步 7/1 調漲;中系跟漲:MacMic IGBT +10%、捷捷微電 MOSFET/IGBT +10~20%(幅度歸屬更正:+10~20% 非 Infineon 公告值)</td><td>漲價循環第二波;台廠報價談判籌碼增</td><td>研調(TrendForce 2026/05/27)</td></tr>
+    <tr><td>2026H2</td><td><span class="conf c-un">前瞻</span></td><td>漢磊×世界先進 8 吋 SiC 最快商業化量產(2026Q4 完成驗證);嘉晶 8 吋 SiC 磊晶認證+小量出貨;強茂 100V MOSFET 量產</td><td>台系 SiC 8 吋是否兌現的檢驗窗</td><td>公司法說/股東會(公司自述)</td></tr>
+    <tr><td>2026/11/27</td><td><span class="conf c-un">前瞻</span></td><td>中國對美鎵出口管制暫停期到期,可能恢復鎵出口限制(中國佔全球鎵產量 ~94%)</td><td>鎵為 GaN 關鍵原料;若恢復管制,GaN 上游成本/供給風險升</td><td>官方政策時程(Pillsbury/Fastmarkets)</td></tr>
+    <tr><td>2027</td><td><span class="conf c-un">前瞻</span></td><td>NVIDIA Kyber 機櫃(Rubin Ultra NVL576、~600kW/rack)與 800VDC 全面量產;Yole 估 GaN 首波大規模商用 rollout 約 2027;GF/Rohm 新產線同年投產;台積電 2027/7/31 GaN 停產大限</td><td>GaN 資料中心主升段檢驗年;多極競爭全面開打</td><td>官方藍圖(NVIDIA)+研調(Yole)</td></tr>
+    <tr><td>1H2028</td><td><span class="conf c-un">前瞻</span></td><td>世界先進 8 吋 GaN 平台量產(官方口徑;法說筆記「2027H2 提前」⚪blog 級單源,以官方為準)</td><td>GaN 代工接棒者放量;台廠 GaN 產能再增</td><td>官方新聞稿(2026/01/28)</td></tr>
+  </table>
+  <p class="sub">狀態:已發生=公告/財報;進行中=轉單/授權執行中;傳聞/前瞻=無官方公告或屬未來變數。來源型別:官方(新聞稿/SEC/法說)&gt; 研調 &gt; 媒體/channel check &gt; 公司自述(前瞻目標)。</p>
+  <div class="callout"><b>選股節奏：</b>現在就有營收=朋程/強茂/大中(EV+轉單)、嘉晶/漢磊(磊晶);轉折受惠=力積電(GaN 接單放量);未來選擇權=世界先進 GaN(2028)。※2026-07 依最新月營收修正:朋程移入「動能背離警示」(前 5 月 -7.01%),詳下表。</div>
+  <h3>選股節奏:短期受惠 vs 長期題材(2026H2→2028,增補表格化)</h3>
+  <p class="sub">同一批標的按「營收兌現時點」分層——現在有營收、下半年轉折、明後年選擇權;避免把 2028 題材當 2026 動能追。</p>
+  <table>
+    <tr><th>節奏</th><th>標的</th><th>依據(數字+來源+日期)</th><th>下一個檢驗點</th></tr>
+    <tr><td rowspan="4"><span class="conf c-high">現在有營收</span>(2026H1 已兌現)</td><td>強茂 2481</td><td>Q1 毛利率 32.68% 創高、EPS 0.75;1-5 月 +11.27%;AI 占比 11%(MoneyDJ 2026/05)</td><td>100V MOSFET 2026H2 量產、Q3 接單</td></tr>
+    <tr><td>台半 5425 / 大中 6435 / 德微 3675 / 捷敏 6525 / 界霖 5285</td><td>5 月營收 YoY:台半 +11.8%、大中 +22.2%、德微 +24.4%、捷敏 +19.0%、界霖 +18.5%(財報狗/MoneyDJ 2026/06)</td><td>台半累計動能(1-5 月僅 +1.38%)能否跟上單月</td></tr>
+    <tr><td>嘉晶 3016</td><td>Q1 EPS 0.35 轉盈、Q2 指引 QoQ +20%(法說 2026/04/29);5 月 +37.28%</td><td>8 吋 SiC 認證+小量出貨(2026H2)</td></tr>
+    <tr><td>漢磊 3707</td><td>5 月 +27.97%、連 11 個月年增(TechNews 2026/06/09);法人看全年轉盈(非財測)</td><td>2026Q3 營收 +30% YoY(公司自述)兌現與否</td></tr>
+    <tr><td><span class="conf c-low">動能背離警示</span></td><td>朋程 8255 / 富鼎 8261 / 虹揚 6573</td><td>朋程 1-5 月 -7.01%(轉單實證但未放量);富鼎 5 月僅 +1.15%(SPS 題材先行);虹揚 1-5 月 -19.74%(轉單敘事反駁成立)</td><td>朋程 48V 三線 2026/10;富鼎高壓佔比是否轉化為營收</td></tr>
+    <tr><td rowspan="2"><span class="conf c-med">轉折股</span>(2026H2 檢驗)</td><td>力積電 6770</td><td>Q1 本業轉盈+5 月 +58.9%(44 個月高);GaN 放量看 2026Q2-Q3、650V 認證最快 2026Q4(法說/鉅亨,公司自述)</td><td>650V 認證與 GaN 營收首度揭露</td></tr>
+    <tr><td>漢磊×世界先進 8 吋 SiC</td><td>試產 2026H1(1,500 片/月)、最快 2026H2 商業化量產(股東會 2026/06/11)</td><td>2026Q4 驗證完成與首批客戶</td></tr>
+    <tr><td rowspan="4"><span class="conf c-un">長期選擇權</span>(2027-2028+)</td><td>世界先進 5347(GaN)</td><td>650V GaN 量產 1H2028(官方公告 2026/01/28);2026-2027 無 GaN 營收、現值靠本業</td><td>2027 試產進度、是否官方上修時程</td></tr>
+    <tr><td>NVIDIA Kyber 800VDC 放量</td><td>Kyber(Rubin Ultra NVL576、~600kW/rack)2027 全面量產(NVIDIA 官方);GaN 資料中心主升段在 2027</td><td>2027 上半年 Kyber 出貨與 GaN 元件放量</td></tr>
+    <tr><td>環球晶 6488(SiC)</td><td>8 吋 SiC 2026 起步、實質放量 2027;2026H2 全產品漲價(法說)</td><td>8 吋 SiC 營收是否如公司所述超越 6 吋</td></tr>
+    <tr><td>朋程 8255(8 吋廠)/ 嘉晶 8 吋 SiC 磊晶</td><td>朋程自建/併購 8 吋晶圓廠 1-1.5 年內決策(2028+ 選擇權);嘉晶 8 吋 SiC 磊晶正式量產 2027H1</td><td>朋程 2027 決策公告;嘉晶 2027H1 量產兌現</td></tr>
+  </table>
 </div>
 
-<!-- 6 -->
-<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<!-- 7 公司圖譜 -->
+<h2 id="scards"><span class="n">7</span>公司圖譜:2026Q1 財報 ＋ 2026 年 5 月營收逐檔快照(2026-07 增補)</h2>
+<p class="sub">全部 26 檔(holds 13/watch 12/風險對照 1)逐檔補財務時效;角色/查證詳見第 4 節對照表。法人預估均非公司財測;公司自述/目標一律標註。</p>
+<table>
+  <tr><th>公司(股號)</th><th>分類</th><th>2026Q1(EPS/獲利/毛利率)</th><th>5 月營收 YoY</th><th>1-5 月累計 YoY</th><th>備註(題材與警示)</th></tr>
+  <tr><td colspan="6" style="background:var(--card2);color:var(--accent);font-weight:700">holds:代工 / 上游</td></tr>
+  <tr><td>力積電 6770</td><td>GaN 代工</td><td>EPS 3.36、稅後純益 142.31 億(含出售 P5 廠予美光一次性利益;本業轉盈約逾 5 億=經濟日報/豐雲主口徑,富果「約損平」為少數口徑);稼動率 80%→88%、毛利率回升至 10%;終結連 10 季虧損</td><td>+58.86%(57.70 億,44 個月新高)</td><td>+31.42%(243.89 億)</td><td>全年營收 +50% 目標與 GaN 產能擴 3-4 倍=公司自述⚪;GaN 放量看 2026Q2-Q3;3D AI Foundry 佔比 3.2%→目標 20%;估值試算請剔除一次性 EPS</td></tr>
+  <tr><td>世界先進 5347</td><td>GaN 授權/代工</td><td>EPS 1.18(QoQ +27%)、營收 125.32 億、毛利率 29.3%</td><td>+19.48%(42.42 億)</td><td>+8.48%(208.00 億)</td><td>Q2 指引出貨 +11-13%、毛利率上看 33%、Q2 漲價、新加坡 12 吋廠售罄(法說 2026/05/05);GaN 2026-2027 無營收</td></tr>
+  <tr><td>嘉晶 3016</td><td>SiC/GaN 磊晶</td><td>EPS 0.35 轉盈、營收 10.58 億 +18%、毛利率 18%(去年同期低個位數);8 吋佔矽磊晶營收 70%、8 吋稼動率近九成</td><td>+37.28%(4.34 億;4 月 4.27 億 +32.85%)</td><td>+21.96%(1-4 月口徑 14.86 億)</td><td>Q2 指引 QoQ +20%、capex 追加至原預算 3 倍(法說 2026/04/29,公司自述);矽基 2026 挑戰雙位數成長</td></tr>
+  <tr><td>漢磊 3707</td><td>SiC/GaN 代工</td><td>Q1 營收 15.34 億(2025 全年淨損 7.49 億、虧損年增 80.99%)</td><td>+27.97%(5.90 億,連 3 個月年月雙增、連 11 個月年增)</td><td>+24.02%(27.10 億)</td><td>法人看 2026 全年轉虧為盈(非財測);董座:2026Q3 營收看 +30% YoY、2026 全年雙位數成長(公司自述)</td></tr>
+  <tr><td>環球晶 6488</td><td>基板(矽/SiC)</td><td>EPS 3.97(QoQ -13.91%)、營收 139.85 億(YoY -10.3%,近 23 季低)、歸母淨利 18.96 億(+30.2%)、毛利率 20.8%、近四季 EPS 16.21</td><td>-3.3%(48.42 億)</td><td>約 -8.9%(235.75 億)</td><td>董座:Q1 為全年價格底、12 吋先進矽晶圓近滿載;2026H2 全產品漲價(反映擴產折舊逾 120 億);4+5 月獲利創單季新高、股價創新天價(時報 2026/07/02);德州 12 吋廠 2026H2 滿載目標</td></tr>
+  <tr><td colspan="6" style="background:var(--card2);color:var(--accent);font-weight:700">holds:矽基元件 / 後段</td></tr>
+  <tr><td>朋程 8255</td><td>車用整流</td><td>EPS 1.7(QoQ +1%/YoY -27%)、營收 20.37 億(QoQ +10.8%/YoY -3.7%)、營業利益 1.30 億(QoQ +119%)</td><td>-11.62%(6.19 億,月減 8.8%)</td><td>-7.01%(33.34 億)</td><td>動能背離:公司目標 2026 雙位數成長與實際相左,並列呈現;48V 第三條產線 2026/10 建成(總產能 480-500 萬套/年);8 吋廠 1-1.5 年決策=2028+ 選擇權</td></tr>
+  <tr><td>強茂 2481</td><td>MOSFET/二極體</td><td>EPS 0.75(四年單季高)、毛利率 32.68% 再創高;AI 相關營收占比 4Q25 7%→1Q26 11%</td><td>+13.66%(12.69 億,月減 2.16%)</td><td>+11.27%(59.88 億)</td><td>B/B 1.4-1.5(2026/06,安世+揚杰後;2025/10-2026/05 常態 1.2-1.4)、能見度至 2027 年中(公司自述);2026 營收目標 &gt;300 億、市值拚千億(公司自述);法人估 2026 營收 +15~20%、EPS 4.76-5 元(非財測)</td></tr>
+  <tr><td>大中 6435</td><td>MOSFET</td><td>EPS 3.67(+54.85%)、毛利率 26.78%(法說 2026/04/27)</td><td>+22.2%(3.18 億,連 18 個月成長)</td><td>+9.04%(15.76 億)</td><td>伺服器散熱馬達/風扇應用成第二大營收來源(36.4%)、PC 41.3%;5 月年增率為矽基元件同儕最高</td></tr>
+  <tr><td>富鼎 8261</td><td>MOSFET</td><td>EPS 1.57(+8.28%)、歸母淨利 1.86 億、毛利率 38.07%</td><td>+1.15%(2.97 億)</td><td>—</td><td>AI SPS 高壓元件、高壓 Super Junction+SiC/GaN 2026 規模化量產、高壓佔比 &gt;10% 均公司自述——營收未反映=題材先行;2026/06 連 3 漲停(板塊行情);鴻海/國巨集團資源</td></tr>
+  <tr><td>台半 5425</td><td>二極體/MOSFET</td><td>EPS 0.7(QoQ -17%/YoY +49%)</td><td>+11.8%(17.67 億,40 個月新高、連 3 個月成長)</td><td>+1.38%(78.00 億)</td><td>單月回溫、累計動能平;車用+工控約 70% 營收(車用約 50%);安世後車用詢單明顯增加(詢單≠訂單);「十年轉單」敘事=blog 級不可採信;易混提醒:台半≠台積電</td></tr>
+  <tr><td>德微 3675</td><td>元件 IDM(新收錄)</td><td>毛利率突破 40%(法說 2026/05/28)</td><td>+24.42%(2.67 億;4 月 2.54 億創高)</td><td>—</td><td>接單滿到年底、部分訂單能見度至 2027 年底;聚焦 1000-1600W AI 電源 HVDC 800V 高壓元件;達爾集團貢獻 65% 營收;勿與美股達爾(DIOD)混同</td></tr>
+  <tr><td>捷敏-KY 6525</td><td>功率封測 OSAT(新收錄)</td><td>2025 全年:營收 53.26 億 +14%、EPS 5.88、毛利率 27%</td><td>+18.95%(5.49 億,連兩月創高)</td><td>+14.72%(24.46 億)</td><td>公司指 Q2/Q3 逐季揚;⚠產能集中上海/合肥(中國),去中化敘事下屬雙面刃</td></tr>
+  <tr><td>界霖 5285</td><td>功率導線架(新收錄)</td><td>高毛利功率模組導線架 Q1 營收占比突破一成</td><td>+18.5%(5.22 億,月減 10.29%)</td><td>+10.41%(24.62 億)</td><td>車用+工控占 75-80%(車用約 50%);AI 12V→800V HVDC 帶動銅夾鍵合/頂部冷卻需求(法說 2026/05/21)</td></tr>
+  <tr><td colspan="6" style="background:var(--card2);color:var(--accent);font-weight:700">watch(釐清/待查,不入受惠主表)</td></tr>
+  <tr><td>宏捷科 8086</td><td>watch(射頻 GaN)</td><td>Q1 營收 12.22 億 +58.38%(3 月 4.32 億創 22 個月高;成長主力仍為射頻 PA)</td><td>—</td><td>—</td><td>GaN-on-Si 6 吋已量產、8 吋研發中(公司自述);「×Navitas 6 吋 GaN 代工」⚪理財周刊單源未驗證;觀察:2026H2 歐美車廠認證;法人估 2026 EPS 4.5-5.1(非財測);中美晶持股 27.6%、徐秀蘭任董座</td></tr>
+  <tr><td>杰力 5299</td><td>watch(電源 IC)</td><td>EPS 1.65(QoQ +29%/YoY +19%)</td><td>+2.19%(1.34 億,月減 6.46%)</td><td>-2.52%(6.64 億)</td><td>NB/PC 電源 IC 為主、動能平淡;與朋程共同開發車用 48V MOSFET 模組、2026 才量產貢獻</td></tr>
+  <tr><td>中美晶 5483</td><td>watch(間接持股)</td><td>EPS 1.83(QoQ -31%/YoY +54%)、營收 193.82 億、毛利率 23.24%、歸母淨利 11.26 億</td><td>—</td><td>+1.08%(327.95 億)</td><td>獲利主升力=持股 50.62% 的環球晶+再生能源(Q1 13.5 億 +75.5%)——直接受惠標的應為嘉晶/環球晶</td></tr>
+  <tr><td>偉詮電 2436</td><td>watch(GaN 反駁成立)</td><td>營收 10.48 億 +31.74%(單季新高)、EPS 0.7(QoQ -55%/YoY +400%)</td><td>—</td><td>—</td><td>「GaN 切入 AI 伺服器電源」無訂單佐證、反駁成立(GaN=消費快充);非 GaN 散熱題材另計:風扇/水冷幫浦驅動 IC(全球前三)+漏液感測器(2026Q1 送樣三大廠)、伺服器營收 2026 目標 &gt;30%(公司自述)</td></tr>
+  <tr><td>尼克森 3317</td><td>watch(升格觀察)</td><td>EPS 0.84(QoQ +594%/YoY +14%)、營業利益 9,233 萬 +33.09%</td><td>-13.08%(2.14 億;4 月 2.65 億 +10.81%)</td><td>+6.48%(11.87 億)</td><td>PC 佔比 ~70%;AI 伺服器 SiC MOSFET/功率模組小量出貨+GaN 開發(客戶/訂單⚪未驗證);波動大、待放量數字</td></tr>
+  <tr><td>合晶 6182</td><td>watch(上游矽晶圓)</td><td>EPS 0(損平,季減/年減 100%)</td><td>+11.94%(8.89 億)</td><td>+7.96%(42.36 億)</td><td>擴產方向=矽光子+SiC 晶圓(2026/06 報導);GaN AI 資料中心布局無量產佐證⚪;獲利極弱</td></tr>
+  <tr><td>茂矽 2342</td><td>watch(SiC 候選)</td><td>—(2025 全年營收 20.37 億 +7.6%)</td><td>1.74 億</td><td>8.32 億</td><td>SiC MOSFET/JFET 即將送樣、2026H2 小量量產;1200V FS-IGBT/FRED/TVS 已送樣、預期 2026 挹注營收(均公司自述⚪,法說 2026/04/23);車用營收近五成、規模小</td></tr>
+  <tr><td>虹揚-KY 6573</td><td>watch(轉單反駁)</td><td>—</td><td>-9.78%(0.72 億)</td><td>-19.74%(3.13 億)</td><td>媒體點名「卡位安世車用轉單」(鉅亨 2026)但數字反向——反駁成立;2026 規劃產出 SiC SBD(公司自述);勿錯殺也勿採信</td></tr>
+  <tr><td>台亞 2340</td><td>watch(SiC 轉投資)</td><td>—</td><td>—</td><td>—</td><td>子公司積亞=台灣少數 6 吋 SiC 專業代工(南科),初期 JBS/DMOS 鎖定家電/伺服器 PSU/太陽能逆變器;「2026 滿載 5,000 片/月」為 2023 舊指引⚪2026H1 無獨立更新;母公司本業油品通路</td></tr>
+  <tr><td>力智 6719</td><td>watch(電源 IC 邊界)</td><td>EPS 2.1、毛利率 41.7%;AI 伺服器占比 Q1 突破 5%、全年目標雙位數(公司自述)</td><td>-9.58%(3.67 億)</td><td>—</td><td>PMIC 46%/Power Stage 含 DrMOS 30%/Power MOSFET 24%;GaN driver 已經電源供應器 Tier-1 出貨雲端客戶;比照杰力列觀察;掛牌更正:上市(TWSE,MIS API 核對,原誤標上櫃)</td></tr>
+  <tr><td>晶焱 6411</td><td>watch(保護元件邊界)</td><td>營收 6.6 億 +12.8%、EPS 0.54(低於去年同期 0.61,成本侵蝕毛利)</td><td>+17.61%(2.34 億,月增 4%)</td><td>—</td><td>ESD/TVS 全球第三(次於 onsemi/ST、產品線 400 顆 IC);onsemi 退出部分 ESD/EOS 引轉單、非亞洲占比 5%→7%、效益 2026H2-2027(法說 2026/05/21);屬保護元件非功率分立主流;上櫃(部分媒體誤標 .TW)</td></tr>
+  <tr><td>全宇昕 6651</td><td>watch(題材待佐證)</td><td>EPS 2.47(QoQ +25%/YoY +23%)、營收 3.96 億 +2.43%</td><td>—</td><td>—</td><td>功率元件混合通路+自有品牌 MOSFET/二極體;族群 Q1 EPS 排行第二;2025 全年 15.02 億規模小、AI/車用高壓/三代半實質佐證不足⚪</td></tr>
+  <tr><td colspan="6" style="background:var(--card2);color:var(--accent);font-weight:700">風險對照(非台股、非投資標的)</td></tr>
+  <tr><td>英諾賽科 2577.HK</td><td>中國 GaN IDM</td><td>H1 2025:營收 RMB 5.53 億 +43.4%、毛利率 6.8% 首度轉正(去年同期 -21.6%)、虧損收窄至 4.29 億;海外營收 6,370 萬 +57.8%(佔 11.5%)</td><td>—</td><td>—</td><td>FY2026 指引營收 RMB 20-25 億(+65~106%)、毛利率 &gt;15%(公司自述);2024 GaN 市佔 ~30%(TrendForce 29.9%/Yole 30% 互證);2026H1 中期數據 2026/08 發布</td></tr>
+</table>
+<p class="sub">收錄口徑:統懋 2434 不收錄——2026/05 營收僅 394.7 萬、1-5 月累計 1,927.6 萬、2025 全年 4,555.1 萬(財報狗),營收量體極小且為真實萎縮(年度口徑同樣極小、非資料異常),不具收錄條件。股號+掛牌狀態 26 檔(holds 10 原有+3 新收錄、watch 12、港股對照 1)全數核對 0 異常(Yahoo 股市逐檔+MIS API;力智 6719 更正為上市)。個股 YTD 股價/法人共識 PE 隨行情變動,由行情端即時數據帶入、不寫死。</p>
+
+<!-- 8 估值試算 -->
+<h2 id="scalc"><span class="n">8</span>受惠股估值試算(工具,增補)</h2>
+<p class="sub">通用估值方法 + 互動計算機。下方為<b>示意預設</b>(非財測),請以第 7 節逐檔快照或下表真實基期替換。功率元件多為週期股,留意景氣位置。</p>
+<table>
+  <tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr>
+  <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>歷史區間+成長溢價</td></tr>
+  <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+  <tr><td><b>EV/EBITDA</b></td><td>(EBITDA×倍數−淨負債)÷股數</td><td>代工/重資產</td><td>力積電等代工適用</td></tr>
+  <tr><td><b>題材選擇權</b></td><td>本業估值 + GaN/SiC 轉單貢獻折現</td><td>未放量題材</td><td>世界先進 GaN(2028)屬此類</td></tr>
+</table>
+<h3>試算計算機(示意預設,請填真實數字)</h3>
+<div class="calc">
+  <div class="inputs">
+    <div><label>基期營收(億元)</label><input id="rev" type="number" value="500"></div>
+    <div><label>營收成長率(%)</label><input id="g" type="number" value="12"></div>
+    <div><label>淨利率(%)</label><input id="npm" type="number" value="10"></div>
+    <div><label>流通股數(億股)</label><input id="sh" type="number" value="40"></div>
+    <div><label>目標 PE(x)</label><input id="pe" type="number" value="20"></div>
+    <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="18"></div>
+  </div>
+  <div class="out">
+    <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+    <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+    <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+    <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+  </div>
+</div>
+<p class="sub">通用試算工具,預設值為示意非個股財測。功率元件為週期股,代工(力積電)與設計(強茂等)財務結構差異大,務必填入標的真實數字。僅供研究參考,不構成投資建議。</p>
+<h3>真實基期參考(2026Q1 財報+2026 年 5 月營收,填計算機用)</h3>
+<table>
+  <tr><th>公司</th><th>2026Q1(EPS/獲利)</th><th>5 月營收 YoY</th><th>1-5 月累計 YoY</th><th>成長口徑備註(來源)</th></tr>
+  <tr><td>力積電 6770</td><td>EPS 3.36(含售 P5 廠一次性利益;本業轉盈約逾 5 億)</td><td>+58.86%(57.70 億)</td><td>+31.42%(243.89 億)</td><td>全年 +50% 為公司目標非財測(法說/鉅亨 2026/06)——試算請剔除一次性 EPS</td></tr>
+  <tr><td>世界先進 5347</td><td>EPS 1.18(QoQ +27%)、毛利率 29.3%</td><td>+19.48%(42.42 億)</td><td>+8.48%(208.00 億)</td><td>Q2 指引出貨 +11-13%(法說 2026/05/05)</td></tr>
+  <tr><td>強茂 2481</td><td>EPS 0.75、毛利率 32.68% 創高</td><td>+13.66%(12.69 億)</td><td>+11.27%(59.88 億)</td><td>法人估 2026 EPS 4.76-5 元(非公司財測;鉅亨)</td></tr>
+  <tr><td>台半 5425</td><td>EPS 0.7(YoY +49%)</td><td>+11.8%(17.67 億,40 個月高)</td><td>+1.38%(78.00 億)</td><td>單月回溫、累計平(Win 投資 2026/06)</td></tr>
+  <tr><td>大中 6435</td><td>EPS 3.67(+54.85%)、毛利率 26.78%</td><td>+22.2%(3.18 億)</td><td>+9.04%(15.76 億)</td><td>連 18 個月成長(財報狗/富果 2026)</td></tr>
+  <tr><td>富鼎 8261</td><td>EPS 1.57(+8.28%)、毛利率 38.07%</td><td>+1.15%(2.97 億)</td><td>—</td><td>SPS 題材先行、營收未反映(財報狗/鉅亨)</td></tr>
+  <tr><td>朋程 8255</td><td>EPS 1.7(YoY -27%)</td><td>-11.62%(6.19 億)</td><td>-7.01%(33.34 億)</td><td>公司目標雙位數成長與實際相左,並列呈現(財報狗/CMoney)</td></tr>
+  <tr><td>嘉晶 3016</td><td>EPS 0.35(轉盈)、毛利率 18%</td><td>+37.28%(4.34 億)</td><td>+21.96%(1-4 月口徑 14.86 億)</td><td>Q2 指引 QoQ +20%(法說 2026/04/29)</td></tr>
+  <tr><td>漢磊 3707</td><td>Q1 營收 15.34 億(2025 全年淨損 7.49 億)</td><td>+27.97%(5.90 億)</td><td>+24.02%(27.10 億)</td><td>法人看 2026 轉盈(非財測;TechNews 2026/06/09)</td></tr>
+  <tr><td>環球晶 6488</td><td>EPS 3.97(近四季 16.21)、毛利率 20.8%</td><td>-3.3%(48.42 億)</td><td>約 -8.9%(235.75 億)</td><td>Q1 為全年價格底(董座)、2026H2 漲價(法說/時報 2026/07/02)</td></tr>
+</table>
+<p class="sub">上表為公開財報/月營收硬數據(2026/06-07 彙整),供替換計算機預設值;EPS 成長率與目標 PE 仍需自行假設。法人預估均非公司財測。</p>
+
+<!-- 9(原 6)投資警示 -->
+<h2 id="s6"><span class="n">9</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被反駁說法警示區(refuted,2026/07 二輪裁決;不得再寫入正文,理由附)：</b>
+  <ul>
+    <li>🚫「NVIDIA 800VDC silicon 夥伴 10 家」——<b>反駁理由:</b>NVIDIA 官方技術部落格現行名單為 <b>14 家</b>(AOS、ADI、EPC、Infineon、Innoscience、MPS、Navitas、onsemi、Power Integrations、Renesas、Richtek、ROHM、ST、TI),第三方(Power Electronics News GTC 2026 等)亦引 14 家口徑;「10 家」為 2025/10 初版快照,名單持續更新——正文一律改用 14 家並標「滾動更新」</li>
+    <li>🚫「800VDC silicon 層台灣品牌 0 家」——<b>反駁理由:</b>現行名單含 Richtek 立錡科技(台灣品牌、聯發科旗下);正確寫法=「無台灣上市功率元件<b>個股</b>直接列名(立錡非獨立上市公司)」;系統層台系 4 家(台達/光寶/Bizlink/Lead Wealth)不變,系統元件層另有 Flex、Megmeet</li>
+    <li>🚫「安世(Nexperia)=全球第 2 大功率 MOSFET 商」——<b>反駁理由:</b>公開檢索僅支持「<b>車用低壓</b> MOSFET 全球第二(次於 Infineon)、小訊號分立元件全球第一」;功率 MOSFET 整體排名通常為 Infineon/onsemi/ST 居前。「約 80% 產能受阻」實際口徑=約 7-8 成<b>成品封測</b>在中國(東莞)受出口反制影響,非晶圓產能 80% 停擺</li>
+    <li>🚫「嘉晶 8 吋 SiC 磊晶 2026H1 量產」——<b>反駁理由:</b>Yahoo 2026 法說報導明示「明年(2027)上半年量產」;正確時間軸=試產 2026H1(已兌現)→認證+小量 2026H2→正式量產 <b>2027H1</b>;三份 findings 口徑(2026H1 小量/2026Q4 商業化/2027H1 量產)經裁決為階段混寫,「2026H1 量產」禁用;6 吋線日系 IDM 客戶 2026Q2 量產為既有產品線、與 8 吋分開寫</li>
+    <li>🚫「Infineon 第二波漲價 +10~20%」——<b>反駁理由(幅度歸屬錯誤):</b>Infineon 未公開具體百分比;+10% 是 MacMic(IGBT)、+10~20% 是捷捷微電(MOSFET/IGBT)的中系跟漲幅度——Infineon 幅度標「未公開」</li>
+    <li>🚫「英諾賽科對 Infineon 中國『終審勝利』」(框架修正)——<b>理由:</b>ip fray 第三方核實:最高人民法院維持的是「臨時銷售禁令(interim relief)」而非侵權終局判決,「終審勝利」是英諾賽科新聞稿框架;且 2026/07/01 electronica China 上 Infineon 仍展出受禁產品、經投訴後撤展——執行仍有攻防</li>
+  </ul>
+</div>
+<div class="callout warn"><b>⚪未驗證/待查清單(unverified;不可採信、也不錯殺)：</b>
+  <ul>
+    <li>歐盟對中功率元件反傾銷(查無立案=反證;負面查證本質不可完全證明,該敘事不得寫入受惠主表——實際轉單驅動是安世事件+中國車廠在地化;同賽道真實貿易措施反而是中國 2025/09/13 對美類比 IC 反傾銷調查,2026/09/13 前結案)</li>
+    <li>台亞 2340/積亞 6 吋 SiC「2026 滿載 5,000 片/月」(2023 舊指引、2026H1 無獨立更新)</li>
+    <li>漢磊 SiC trench MOSFET「2026Q2 量產」兌現(截至 2026/07 無獨立確認;2026/06/11 股東會僅提 8 吋 SiC 最快 2026H2——不可寫成已達成)</li>
+    <li>Power Integrations GaN 代工轉 EPC(部落格單源,無 PI/EPC 官方或權威產業媒體佐證)</li>
+    <li>富士経済 2026 更新版 ¥7 兆 3,495 億(原始網頁憑證錯誤未讀全文、無第二源;主引 2025/04 版 ¥7.771 兆)</li>
+    <li>S&amp;P Global 英諾賽科 2025 +59%/2025-2028 CAGR 77%(訂閱制單源、無第二源覆核;具名可引但標單源)</li>
+    <li>力積電「2026 年 GaN 產能擴 3-4 倍」(公司自述單源,鉅亨轉述法說;2026/06/29 法說未單獨揭露 GaN 營收/產能)</li>
+    <li>宏捷科×Navitas「6 吋 GaN 代工合作」(僅理財周刊單源;Navitas 官方公告代工夥伴為力積電+GF)</li>
+    <li>EV「每車 SiC MOSFET 24→48 顆」顆數口徑(無獨立第三方佐證)</li>
+    <li>台廠跟漲「約兩成」逐檔幅度(供應鏈/媒體轉述,非公司正式公告)</li>
+  </ul>
+</div>
 <div class="callout warn"><b>需釐清 / 已更正(請勿當事實)：</b>
   <ul>
     <li>宏捷科 8086=射頻 GaN(非電源功率 GaN)、杰力 5299=類比/電源管理 IC——兩者移 watch、勿列功率分立元件主力</li>
     <li>世界先進角色已更新:台積電出脫 8.1% 持股 + 取得 GaN 授權(從純 SiC 受惠擴張)</li>
-    <li>Wolfspeed 是破產重整(Renesas 入股、轉 200mm)非單純退出——「國際退出→台廠轉單」敘事須精確化</li>
-    <li>「國際 SiC 退出→台廠轉單」需逐項查實際訂單,勿一概當受惠</li>
-    <li>SiC 在 AI 電源(800V)角色偏 PFC/前級,主力是 GaN——勿把 SiC 受惠誇大為「AI 電源主力」</li>
+    <li>Wolfspeed 是破產重整(Renesas 入股、轉 200mm)非單純退出——「國際退出→台廠轉單」敘事須精確化;FY26Q2 GAAP 毛利率 -46% 引用時必須併註 non-GAAP -34%(含 $48M 低稼動成本+$23M fresh-start 存貨評價),勿單引 -46% 誇大</li>
+    <li>「國際 SiC 退出→台廠轉單」需逐項查實際訂單,勿一概當受惠(見第 4 節「轉單主張 vs 實證訂單」對照表:ST→Innoscience 雙向互供、Rohm→濱松內製均為反例)</li>
+    <li>SiC 在 AI 電源(800V)角色偏 PFC/前級,主力是 GaN——勿把 SiC 受惠誇大為「AI 電源主力」(Yole 2025/12:資料中心對 SiC 僅 ~$2 億/5 年累計)</li>
+    <li>強茂 MOSFET 營收路徑更正:$100M(2025 實際)→$150M(2026 目標)→$500M(2030 目標)——macro 包誤把 2026 目標當基期,已依 MoneyDJ 原文更正,全部標「公司自述」</li>
+    <li>強茂 B/B 兩口徑並存屬時間演進非矛盾:2025/10-2026/05 常態 1.2-1.4 → 2026/06 安世+揚杰事件後升至 1.4-1.5(分時點寫)</li>
+    <li>力積電 2026Q1 本業口徑裁決:「本業轉盈、獲利約逾 5 億」(經濟日報+豐雲兩源一致)為主口徑;富果「約損益兩平」為少數口徑——引用時仍區分含售 P5 廠一次性利益之 142.3 億總數</li>
+    <li>統懋 2434 不收錄:2025 全年營收僅 4,555 萬、真實量體萎縮(非資料異常)</li>
+    <li>掛牌/易混更正:力智 6719=上市(原誤標上櫃,MIS API 核對);晶焱 6411=上櫃(部分媒體誤標 .TW);台半 5425≠台積電;德微 3675 勿與美股達爾(DIOD)混同</li>
+    <li>受惠評分表查證欄與淺色版對齊:漢磊/世界先進由「中」上修為「高」(官方公告/8-K+2026Q1 財報補齊佐證;世界先進 GaN 仍屬 2028 選擇權)</li>
+    <li>refs 日期/歸屬更正:「台積電公告(2025/07)」實為媒體/研調轉述(台積電無獨立官網新聞稿);「TrendForce(2026/5)SiC $5.33B」實為 2024/03 口徑;Research and Markets「$4.9-7.1B」為不同版本混用、現行版 2030 $7.26B</li>
   </ul>
 </div>
 <div class="card"><h3>數據強度分層 / 開放問題</h3>
   <ul>
-    <li><b>硬來源：</b>Navitas SEC 8-K(轉單力積電)、台積電/世界先進公告、Yole《Power GaN 2025》</li>
-    <li><b>券商/研調估：</b>SiC/GaN 市場規模(各家口徑/基期不同)、8 吋稼動率</li>
-    <li><b>開放問題：</b>其他 GaN fabless(Power Integrations/EPC)代工去向、SiC 國際重整的台廠實際轉單、台廠 GaN 抗中系價格戰能力、AI 電源用矽功率元件台廠缺席度、車用 OBC 800V SiC/GaN 增量</li>
+    <li><b>硬來源：</b>Navitas SEC 8-K(轉單力積電)+Navitas×NVIDIA 8-K(2025/05/21)、世界先進官網公告(2026/01/28)、Wolfspeed SEC 8-K(2025/09、2026/01)、ST/Infineon/ROHM 官方新聞稿、NVIDIA 技術部落格、Yole《Power GaN 2025》;台積電退出 GaN 為媒體/研調轉述(原標「公告」已更正)</li>
+    <li><b>券商/研調估：</b>SiC/GaN 市場規模(各家口徑/基期不同)、8 吋稼動率、SiC 基板價格錨點(2024-2025 時點)</li>
+    <li><b>公司自述/法人估(標註後可引)：</b>各檔放量時程與營收目標(力積電 GaN 放量 Q2-Q3、漢磊 8 吋 2026H2、強茂 55 計畫、環球晶 8 吋超越 6 吋等)、法人 EPS 預估</li>
+    <li><b>開放問題：</b>其他 GaN fabless(Power Integrations/EPC)代工去向、SiC 國際重整的台廠實際轉單、台廠 GaN 抗中系價格戰能力(英諾賽科具體報價差距無公開數字)、AI 電源用矽功率元件台廠缺席度、車用 OBC 800V SiC/GaN 增量與台廠主驅/OBC 元件層缺席的追蹤、安世轉單黏著度(2026H2 起)、Samsung GaN 代工是否如期 2026/07 開業、力積電 GaN 營收何時單獨揭露</li>
   </ul>
 </div>
 
-<!-- 7 -->
-<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
-<p class="sub">品質：<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<!-- 10(原 7)資料來源 -->
+<h2 id="s7"><span class="n">10</span>資料來源(含網址;2026-07 依二輪查證重寫、分層)</h2>
+<p class="sub">品質分層:<span class="src-q q-primary">primary</span>=官方新聞稿/SEC/法說一手 <span class="src-q q-secondary">secondary</span>=研調/產業媒體 <span class="src-q q-blog">blog</span>=法說筆記/部落格(佐證力有限)。每筆附一句話「佐證了什麼」;被反駁/降級來源明確標註。查證統計:三包 findings 154 條、31 項最終裁決(19 confirmed / 4 refuted / 8 unverified)、股號核對 27 檔、口徑衝突裁決 10 項。</p>
 <div class="card">
-  <div class="src-item">Navitas 新聞稿 / SEC 8-K — 全線 GaN(100V-650V)200mm 轉單力積電竹南 Fab 8B<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">台積電公告(2025/07) — 2027/7/31 退出 GaN 代工<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">世界先進公告(2026/01) — 取得台積電 650V+80V GaN 授權、8 吋 2028H1 量產<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">Yole《Power GaN 2025》 — GaN 2024 USD 3.55 億→2030 約 30 億(CAGR 42%)<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">TrendForce(2026/5) — SiC 2026 約 USD 5.33B;8 吋稼動率 2025 ~80%→2026 近 90%<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">功率元件-guide(舊版投資指南) — 上中游(環球晶/中美晶/嘉晶/合晶)、SiC/GaN 三品類拆解、估值模型<span class="src-q q-blog">blog</span></div>
-  <div class="src-item">Yole(2025/10 GaN、2025/12 SiC) — GaN 2030 $3.0B/CAGR 42%;SiC 2026-2028 過剩、2030 近 $10.3B;TrendForce GaN 2030 $3.51B<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">TrendForce(2026/02) 台積 GaN 授權 VIS/GF、Samsung 轉代工;PR Newswire(2026/06) Innoscience 中國終審勝 Infineon GaN 禁售<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">NVIDIA 技術部落格 / DCD — 800V HVDC 生態夥伴(Navitas/Infineon/onsemi/STM/Innoscience…);Infineon 法說 AI 電源 FY26 €1.5B<span class="src-q q-secondary">secondary</span></div>
+  <h3 style="margin-top:0">Primary(一手文件)</h3>
+  <div class="src-item"><b>Navitas 官方新聞稿+SEC 8-K(2025/07/01)</b> — 佐證:全線 GaN(100V-650V)200mm 轉單力積電竹南 Fab 8B、0.18μm,認證 2025Q4、100V 1H26 投產、650V 12-24 個月移轉。<a href="https://navitassemi.com/navitas-announces-plans-for-200mm-gan-production-with-psmc/">navitassemi.com</a> / <a href="https://www.sec.gov/Archives/edgar/data/0001821769/000182176925000155/exhibit991-pressreleasedda.htm">SEC 8-K exhibit</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Navitas×NVIDIA 800VDC 合作 8-K(2025/05/21)</b> — 佐證:「Navitas→力積電代工→NVIDIA 生態」台鏈的一手法律文件級起點。<a href="https://www.sec.gov/Archives/edgar/data/0001821769/000162828025027705/ex9912025-05x21prrenvidiac.htm">SEC EDGAR</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Navitas Q1 2026 earnings call 逐字稿(2026/05/06)</b> — 佐證:100V/650V 最終樣品已交付(功率密度 +50%、系統效率 &gt;98%)、AI 基建營收 QoQ +50%;同步推進 GF 美國 8 吋(2027)=力積電非獨家。<a href="https://www.fool.com/earnings/call-transcripts/2026/05/06/navitas-nvts-q1-2026-earnings-transcript/">Motley Fool 逐字稿</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>世界先進官網新聞稿(2026/01/28)</b> — 佐證:與台積電簽 650V+80V GaN 授權、2026 年初啟動開發、1H2028 量產;「全球唯一雙平台(GaN-on-Si+QST)」為公司自述、引用需標註。<a href="https://www.vis.com.tw/en/press_detail?itemid=21379">vis.com.tw</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Wolfspeed SEC 8-K(2025/09/29 出重整)</b> — 佐證:91 天預重整、減債 $4.6B(-70%)、年付息 -60%、轉 200mm。<a href="https://www.sec.gov/Archives/edgar/data/0000895419/000119312525224251/d22768dex991.htm">SEC EDGAR</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Wolfspeed SEC 8-K FY2026Q2(2026/02/04 發布)</b> — 佐證:營收 $168M、GAAP 毛利率 -46%(non-GAAP -34%,含 $48M 低稼動+$23M fresh-start 存貨評價)、Durham 150mm 提前關閉、Mohawk Valley 貢獻 $76M。<a href="https://www.sec.gov/Archives/edgar/data/0000895419/000089541926000012/ex991q2-26.htm">SEC EDGAR</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Infineon 官方新聞稿 FY26Q1(2026/02/04)</b> — 佐證:capex €2.2B→€2.7B、AI 資料中心營收目標 FY26 €1.5B/FY27 €2.5B(目標值=公司自述)。<a href="https://www.infineon.com/press-release/2026/infxx202602-042">infineon.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Infineon 官方新聞稿(2025/07)</b> — 佐證:全球首家 300mm 功率 GaN(Villach)、2025Q4 交樣、晶粒產出 2.3x vs 200mm。<a href="https://www.infineon.com/press-release/2025/INFXX202507-122">infineon.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>STMicroelectronics 官方 newsroom</b> — 佐證:Catania 全球首座全流程 200mm SiC 垂直整合基地、€5B/補助 €2B、200mm 2025Q4 投產;另 2025/03/31 官方宣布與 Innoscience GaN JDA(雙向產能互用)。<a href="https://newsroom.st.com/media-center/press-item.html/c3262.html">newsroom.st.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>NVIDIA 技術部落格(800VDC 架構主文+生態系文,2025/10 起滾動更新)</b> — 佐證:Kyber 2027、~600kW/rack、TCO -30%/效率 +5%(NVIDIA 自述)、silicon 夥伴現行 14 家(含 Richtek 立錡);台系系統層 4 家(台達/光寶/Bizlink/Lead Wealth)。※「10 家」為 2025/10 初版快照,已被現行名單反駁。<a href="https://developer.nvidia.com/blog/nvidia-800-v-hvdc-architecture-will-power-the-next-generation-of-ai-factories/">架構主文</a> / <a href="https://developer.nvidia.com/blog/building-the-800-vdc-ecosystem-for-efficient-scalable-ai-factories/">生態系文</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>PR Newswire:Innoscience 新聞稿(2026/06/13)</b> — 佐證:最高人民法院維持對 Infineon GaN 在華銷售禁令、蘇州一審賠 RMB 1,000 萬。※當事方來源;「終審勝利」框架已更正為「維持臨時禁令」(ip fray 第三方核實)。<a href="https://www.prnewswire.com/news-releases/innoscience-secures-final-victory-in-patent-lawsuit-as-chinas-supreme-court-upholds-injunction-against-infineon-gan-products-302799583.html">prnewswire.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Yole Group《Power GaN 2025》(2025/10)</b> — 佐證:GaN 2024 $355M→2030 $3B(CAGR 42%);消費 $250M→$1.53B(35%)、DC+電信 53%、車用 73%。<a href="https://www.yolegroup.com/press-release/from-chargers-to-data-centers-power-gan-market-set-for-rapid-sixfold-expansion-by-2030/">新聞稿</a> / <a href="https://www.yolegroup.com/product/report/power-gan-2025/">報告頁</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>ROHM 官方新聞稿(2023/11/07)</b> — 佐證:宮崎第二廠規劃最大 SiC 廠直上 8 吋、築後 6→8 吋(2026 實際進度⚪待更新)。<a href="https://www.rohm.com/news-detail?news-title=2023-11-07_news&amp;defaultGroupId=false">rohm.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>TrendForce《2026 Global SiC Power Device Market Analysis Report》(RP260401AC,2026/04)</b> — 佐證:本題最新付費口徑存在;細部數值訂閱制未公開。<a href="https://www.trendforce.com/research/download/RP260401AC">報告頁</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Omdia《SiC &amp; GaN Power Semiconductors Report 2025》</b> — 佐證:第 4 研調源存在(2023-2034、17 應用);數值訂閱制不可得。<a href="https://omdia.tech.informa.com/om138748/sic--gan-power-semiconductors-report--2025">目錄頁</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>富士経済 2026 年市場調查網頁</b> — 佐證:2035 總盤 ¥7 兆 3,495 億更新版(⚪原頁憑證錯誤未讀全文、無第二源,主引 2025/04 版)。<a href="https://www.fkg-report.jp/market-trends/2026/2908.html">fkg-report.jp</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>英諾賽科 2025 中期業績(2025/08)</b> — 佐證:H1 2025 營收 RMB 5.53 億 +43.4%、毛利率首度轉正 6.8%、FY26 指引 RMB 20-25 億(公司自述)。<a href="https://hk.finance.yahoo.com/news/%E6%A5%AD%E7%B8%BE-%E8%8B%B1%E8%AB%BE%E8%B3%BD%E7%A7%91-02577-hk-%E4%B8%AD%E6%9C%9F%E8%99%A7%E6%90%8D%E6%94%B6%E7%AA%84%E8%87%B34-145630263.html">Yahoo 財經香港(轉述中報)</a><span class="src-q q-primary">primary</span></div>
+  <h3>Secondary(研調/產業媒體)</h3>
+  <div class="src-item"><b>TrendForce News(2025/07/03)</b> — 佐證:台積電 2027/7/31 前退出 GaN 代工、6 吋 3-4K wpm、Navitas 佔過半。※原 refs 標「台積電公告」已更正為媒體/研調轉述(台積電無獨立官網新聞稿)。<a href="https://www.trendforce.com/news/2025/07/03/news-tsmc-to-exit-gan-production-by-july-2027-reportedly-repurposes-fab-for-advanced-packaging/">trendforce.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce News(2026/02/02、2025/11/27、2026/03/10)</b> — 佐證:台積 GaN 授權 VIS/GF 進入新階段;GF Burlington 200mm+Navitas 美產 2027;Rohm 授權回濱松 2027(對台零轉單)。<a href="https://www.trendforce.com/news/2026/02/02/news-gan-industry-enters-a-new-phase-as-tsmc-licenses-gan-technologies-to-vis-and-gf/">2026/02/02</a> / <a href="https://www.trendforce.com/news/2025/11/27/news-globalfoundries-moves-on-gan-tsmc-and-navitas-ties-position-u-s-as-new-gan-production-hub/">2025/11/27</a> / <a href="https://www.trendforce.com/news/2026/03/10/news-rohm-secures-gan-technology-license-from-tsmc-to-build-production-line-by-2027/">2026/03/10</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce News(2026/05/22)</b> — 佐證:Samsung GaN 轉純代工、最快 2026/07 營運(轉述 The Elec;傳聞層級);DB HiTek 2026H2 跟進。※原 refs 把本事件併入 2026/02 條目,已拆分。<a href="https://www.trendforce.com/news/2026/05/22/news-samsung-reportedly-shifts-gan-strategy-to-foundry-on-customer-growth-operations-may-start-in-july/">trendforce.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce News(2025/08/04、2026/05/29)</b> — 佐證:NVIDIA 選英諾賽科為 800VDC 唯一中系 GaN 供應商;all-GaN 15V-1200V 進 NVIDIA MGX、8 吋產能規劃 ~70K wpm(公司自述)。<a href="https://www.trendforce.com/news/2025/08/04/news-nvidia-picks-innoscience-as-sole-chinese-supplier-for-800-vdc-power-unpacking-the-gan-giant/">2025/08/04</a> / <a href="https://www.trendforce.com/news/2026/05/29/news-from-800-vdc-to-gpu-core-innoscience-all-gan-technology-provides-key-solutions-to-high-density-ai-power-delivery-for-the-nvidia-mgx-ecosystem/">2026/05/29</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce News(2026/02/05、2026/05/27)</b> — 佐證:Infineon 2026 兩波漲價(4 月、7/1;幅度未公開)、中系 MacMic +10%/捷捷微電 +10~20% 跟漲。※「+10~20%=Infineon 公告幅度」已反駁、歸屬更正。<a href="https://www.trendforce.com/news/2026/02/05/news-infineon-to-lift-prices-starting-april-2026-amid-ai-driven-power-ic-tightness/">第一波</a> / <a href="https://www.trendforce.com/news/2026/05/27/news-infineon-announces-second-2026-price-hike-effective-july-1-amid-rising-supply-chain-costs-strong-demand/">第二波</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce News(2025/11/26、2024/09/24、2026/03/04)</b> — 佐證:SiC 原料漲價+6 吋基板殺價(MOS 級 ~$350)、8 吋之戰(6→8 吋成本 -35%、國際價 $750-800)、2026 SiC 產能放量新階段(8 吋滲透 2026 ~15%)。<a href="https://www.trendforce.com/news/2025/11/26/news-sic-raw-materials-see-a-price-increase-while-6-inch-substrate-kicks-off-a-price-war/">2025/11/26</a> / <a href="https://www.trendforce.com/news/2024/09/24/news-the-battle-for-8-inch-silicon-carbide-is-heating-up/">2024/09/24</a> / <a href="https://www.trendforce.com/news/2026/03/04/news-wafer-capacity-set-to-surge-a-new-phase-for-the-sic-industry-in-2026/">2026/03/04</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce 官方新聞稿(2024/06/20)</b> — 佐證:2023 SiC 元件市佔 ST 32.6%、onsemi 23.6%、前五大 91.9%。<a href="https://www.trendforce.com/presscenter/news/20240620-12196.html">trendforce.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce Insights(2026/05)</b> — 佐證:HVDC 時代 SiC=PFC/前級、GaN=DC-DC 後級的分工(AI-GaN 窄口徑第 2 具名研調)。<a href="https://insights.trendforce.com/p/sic-and-gan-ai-power-wall">insights.trendforce.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Semiconductor Today(2025/10/29、2025/12/18、2024/03/21)</b> — 佐證:Yole GaN 分段(DC+電信 53% CAGR→$380M+、商用部署 ~2027);Yole SiC 修正版(下行至 2027-28、上游稼動率 ~50%、2030 $10.3B、車用 ~70%、DC 5 年 ~$200M);TrendForce SiC 2026 $5.33B。※原 refs 日期標「2026/5」有誤,實為 2024/03 口徑,已更正。<a href="https://www.semiconductor-today.com/news_items/2025/oct/yole-291025.shtml">2025/10</a> / <a href="https://www.semiconductor-today.com/news_items/2025/dec/yole-181225.shtml">2025/12</a> / <a href="https://www.semiconductor-today.com/news_items/2024/mar/trendforce-210324.shtml">2024/03</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Semiconductor Today(2026/06/03)</b> — 佐證:Navitas 於 Computex 2026 加入 NVIDIA MGX 生態。<a href="https://www.semiconductor-today.com/news_items/2026/jun/navitas-030626.shtml">semiconductor-today.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Yole strategy insight(The power GaN race)</b> — 佐證:GaN 市佔 Innoscience 30%(2024)、PI 17%/Navitas 16%(2023)——與 TrendForce 29.9% 互為第二源。<a href="https://www.yolegroup.com/strategy-insights/the-power-gan-race-market-growth-consolidation-and-new-entrants/">yolegroup.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>經濟日報(功率半導體大復活,2026/06)+鉅亨網(安世斷鏈,2025/11)</b> — 佐證:安世事件轉單軸——強茂/台半訂單激增、部分產品漲價上看 2 成、B/B 1.4-1.5、車規重認證 1.5-2 年;※安世定位更正:車用低壓 MOSFET 全球第二(非「功率 MOSFET 整體第二」)。<a href="https://money.udn.com/money/story/5612/9381875">udn.com</a> / <a href="https://news.cnyes.com/news/id/6202701">cnyes.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>UNWIRE.PRO(2026/03/12)</b> — 佐證:安世中國 12 吋小批量、去荷蘭化=轉單收斂風險。<a href="https://unwire.pro/2026/03/12/nexperia-china-12-inch-wafer-production-semiconductor/news/">unwire.pro</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>工商時報(2026/03/24、2026/05/28、2025/09/18)</b> — 佐證:強茂/德微 AI 訂單滿手;台廠功率元件漲價潮(跟漲約兩成⚪);嘉晶/漢磊擴產(漢磊 8 吋初期 ~1.5K 片/月、3,300V+ 需求)。<a href="https://www.ctee.com.tw/news/20260324700881-430503">2026/03/24</a> / <a href="https://www.ctee.com.tw/news/20260528700244-439901">2026/05/28</a> / <a href="https://www.ctee.com.tw/news/20250918700298-439901">2025/09/18</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Yahoo 股市(8 吋 SiC 量產倒數)+中央社(2024/09/11)</b> — 佐證:嘉晶 8 吋 SiC 磊晶「2027 上半年量產」時程更正來源(反駁「2026H1 量產」);漢磊×世界先進 8 吋 SiC 合作(2026H2 量產目標、前後口徑未跳票)。<a href="https://tw.stock.yahoo.com/news/8%E5%90%8B-sic%E9%87%8F%E7%94%A2%E9%80%B2%E5%85%A5%E5%80%92%E6%95%B8-%E6%BC%A2%E7%A3%8A-%E5%98%89%E6%99%B6%E8%B5%B0%E5%87%BA%E4%BD%8E%E6%BD%AE-2026%E5%B9%B4%E8%BF%8E%E9%9B%99%E4%BD%8D%E6%95%B8%E6%88%90%E9%95%B7-043610933.html">Yahoo</a> / <a href="https://www.cna.com.tw/news/afe/202409110307.aspx">CNA</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>鉅亨網(漢磊股東會 2026/06/11;力積電奪納微大單 2025/07;力積電 5 月營收 2026/06/05;強茂 CSP 2026;力積電法說 2025/07/22)</b> — 佐證:漢磊 8 吋最快 2026H2 量產、2025 淨損 7.49 億;力積電 650V 認證最快 2026Q4、GaN 產能擴 3-4 倍(公司自述⚪);5 月營收 57.7 億 +58.9%;強茂 30V 訂單至 2026/10;力積電 100V 平台 2025Q4 試產(總座朱憲國)。<a href="https://news.cnyes.com/news/id/6496287">股東會</a> / <a href="https://news.cnyes.com/news/id/6047250">納微大單</a> / <a href="https://news.cnyes.com/news/id/6486398">月營收</a> / <a href="https://news.cnyes.com/news/id/6394231">強茂</a> / <a href="https://news.cnyes.com/news/id/6073110">力積電法說</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>MoneyDJ(強茂 55 計畫;捷敏)+聯合新聞網(強茂 5 月/世界先進 5 月)</b> — 佐證:MOSFET 營收 2025 ~$100M→2026 目標 $150M→2030 $500M(公司自述;更正 macro 誤把 2026 目標當基期);強茂 Q1 毛利率 32.68%/AI 占比 11%;捷敏月營收;各檔 5 月營收。<a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=b0c500c7-ddfd-4b43-ac5b-2364b7e39161">MoneyDJ 強茂</a> / <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=ca557060-bb5e-43f2-b33d-2a8971e89ed4">MoneyDJ 強茂 Q1</a> / <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=c7e2cca3-bd8a-4824-b88f-e413f19a5e4e">MoneyDJ 捷敏</a> / <a href="https://udn.com/news/story/7253/9515468">udn 強茂</a> / <a href="https://udn.com/news/story/7240/9555210">udn 世界先進</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>永豐金豐雲學堂+經濟日報(力積電/世界先進法說;環球晶)</b> — 佐證:力積電 Q1 稅後 142.31 億、EPS 3.36(含售 P5 廠一次性)、本業轉盈逾 5 億(主口徑)、稼動率 88%;世界先進 Q1 EPS 1.18、Q2 指引;環球晶 8 吋 SiC 起步與徐秀蘭 8 吋目標(2023/11 良率 &gt;50%、100 萬片/年目標,公司自述)。<a href="https://www.sinotrade.com.tw/richclub/hotstock/%E5%8A%9B%E7%A9%8D%E9%9B%BB%E6%B3%95%E8%AA%AA-%E9%A6%96%E5%AD%A3%E5%A4%A7%E8%BD%89%E7%9B%88-%E5%94%AE%E5%BB%A0%E5%88%A9%E7%9B%8A%E6%8E%A8%E5%8D%87%E5%96%AE%E5%AD%A3%E8%B3%BA142%E5%84%84-%E6%9C%AC%E6%A5%AD%E4%BA%A6%E5%9B%9E%E6%AD%A3-3D-AI%E4%BB%A3%E5%B7%A5%E8%88%87HBM%E4%BD%88%E5%B1%80%E9%9B%99%E5%BC%95%E6%93%8E%E5%95%9F%E5%8B%95-%E8%82%A1%E5%B8%82%E8%A9%B1%E9%A1%8C-69e73c449323d90b12d75477">豐雲(力積電)</a> / <a href="https://money.udn.com/money/story/5612/7531432">經濟日報(徐秀蘭 2023/11)</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TechNews 財經(漢磊 2026/06/09;環球晶 2026/06/05)+TechNews(世界先進×台積電授權 2026/01/28)+財報狗(各檔月營收/EPS)</b> — 佐證:漢磊 5 月 +27.97% 連 11 個月年增;環球晶 5 月 -3.3%、德州廠 2026H2 滿載、8 吋 SiC 2026 導入;VIS 授權報導;台半/大中/富鼎/朋程/嘉晶/界霖/中美晶/統懋月營收硬數據。<a href="https://finance.technews.tw/2026/06/09/episil-3707-202605-financial-report">TechNews 漢磊</a> / <a href="https://finance.technews.tw/2026/06/05/gwc-6488-202605-financial-report">TechNews 環球晶</a> / <a href="https://technews.tw/2026/01/28/vis-signs-gan-technology-licensing-agreement-with-tsmc/">TechNews VIS</a> / <a href="https://statementdog.com/analysis/5425/monthly-revenue">財報狗</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>EE Times(GF-TSMC GaN reshuffle 2025/11;Infineon Q2 FY26 2026/05)+DIGITIMES(2025/11/28、2025/11/13)</b> — 佐證:台積授權後功率代工版圖重洗牌;Infineon 上修全年 &gt;€16B(AI 軸實際拉貨);台美 GaN 競合格局;Infineon AI DC €1.5B 目標首報。<a href="https://www.eetimes.com/a-power-reshuffle-follows-gf-tsmc-gan-tie-up/">EE Times</a> / <a href="https://www.eetimes.com/automotive-and-ai-lift-infineon-q2-point-to-fy2026-revenue-above-18b/">Infineon Q2</a> / <a href="https://www.digitimes.com/news/a20251128PD205/tsmc-gan-market-technology-manufacturing.html">DIGITIMES</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Omdia 官方部落格(2025/09)+TechInsights</b> — 佐證:台積電退出 GaN 動機(規模小/中國價格戰/資源轉 AI);Navitas 捨 VIS 就 PSMC 主因=GaN-on-Si vs GaN-on-QST 技術相容性。<a href="https://omdia.tech.informa.com/blogs/2025/sep/why-tsmc-abandoned-the-gan-market-and-what-it-means-for-the-industry">Omdia blog</a> / <a href="https://library.techinsights.com/public/sectioned-blog-viewer/16680dab-2b0e-4f8d-8ab9-521d12516b19">TechInsights</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Tom's Hardware(2026/06)+Power Semiconductors Weekly(2026/02/04、2026/02/26)+Power Electronics News</b> — 佐證:Infineon 中國 GaN 禁售令第三方版本;Infineon FY26Q1 細節;Rohm 端到端 GaN 產線;ST GaN 去向與 SiC 舊口徑 $6.14B 出處(Yole 約 2022 年自 $4.89B 上修)。<a href="https://www.tomshardware.com/tech-industry/chinas-top-court-bars-infineon-from-selling-gan-power-chips-in-china">Tom's Hardware</a> / <a href="https://www.powersemiconductorsweekly.com/2026/02/04/infineon-reports-q1-fy2026-results-raises-investment-to-accelerate-ai-data-center-power-capacity/">PSW</a> / <a href="https://www.powerelectronicsnews.com/tsmc-to-exit-the-gan-business-what-does-this-mean-for-the-semiconductor-industry/">PEN(ST 去向)</a> / <a href="https://www.powerelectronicsnews.com/the-number-of-silicon-carbide-sic-players-is-on-steep-rise/">PEN($6.14B 出處)</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>EE Times Japan(2025/04/07)</b> — 佐證:富士経済 2035 總盤 ¥7.771 兆(2.3x)、SiC 7.4x、EV SiC 採用率 2035 &gt;50%(主引版本)。<a href="https://eetimes.itmedia.co.jp/ee/articles/2504/07/news056.html">eetimes.itmedia.co.jp</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>MarketsandMarkets(2025/10)+Research and Markets(2025/12)</b> — 佐證:SiC 廣口徑 2030 $12.03B(CAGR 25.7%);R&amp;M 現行版 2030 $7.26B(CAGR 10.72%)。※原引「$4.9-7.1B」為不同版本混用、未標年月,已更正。<a href="https://www.prnewswire.com/news-releases/silicon-carbide-sic-market-worth-12-03-billion-by-2030---exclusive-report-by-marketsandmarkets-302576722.html">MnM</a> / <a href="https://www.researchandmarkets.com/report/silicon-carbide">R&amp;M</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>S&amp;P Global Market Intelligence(2026/01)</b> — 佐證:英諾賽科 2025 營收 +59%、2025-28 CAGR 77%(⚪訂閱制單源、無第二源覆核)。<a href="https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/01/innoscience-revenue-seen-surging-59percent-yoy-in-2025-with-77percent-cagr-through-2028">spglobal.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>IDTechEx(2025/12)</b> — 佐證:SiC MOSFET 需求 2023→2035 十倍、800V 效率增益 5-10%、Tesla/BYD/Hyundai/Kia 導入、BYD 漢 L 945V。<a href="https://www.idtechex.com/en/research-article/800v-evs-charge-into-the-mainstream-using-sic-power-electronics/28780">idtechex.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Fastmarkets+Pillsbury Law(2026/06)</b> — 佐證:中國對美鎵禁令暫停至 2026/11/27、許可證管理、中國佔全球鎵產量 ~94%。<a href="https://www.fastmarkets.com/insights/china-suspends-export-prohibition-on-superhard-materials-us/">Fastmarkets</a> / <a href="https://www.pillsburylaw.com/en/news-and-insights/china-suspends-export-controls-certain-critical-minerals-related-items.html">Pillsbury</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>新華社(2025/09/14)+歐盟 trade defence 目錄交叉檢索</b> — 佐證(反證用):歐盟對中功率元件反傾銷=查無立案;真實貿易措施是中國對美類比 IC 反傾銷調查(2026/09/13 前結案)。<a href="https://english.news.cn/20250914/0d9b6f3974ac42f0bddb5f7051f4abf2/c.html">news.cn</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Yahoo 股市新聞(2026/06)+經理人 managertoday(2026)+BigGo 財經(嘉晶 2026/04/29、晶焱 2026/05/21)+CMoney/Win 投資/優分析等法說彙整</b> — 佐證:功率元件族群噴發(富鼎/台半連 3 漲停、8 檔亮燈);「去紅鏈」敘事定性;嘉晶 Q1 轉盈 EPS 0.35;晶焱 onsemi 轉單;朋程/杰力/尼克森/合晶/全宇昕等月營收與 EPS。<a href="https://tw.stock.yahoo.com/news/%E5%8A%9F%E7%8E%87%E5%85%83%E4%BB%B6%E5%85%A8%E9%9D%A2%E5%99%B4%E7%99%BC-%E5%AF%8C%E9%BC%8E-%E5%8F%B0%E5%8D%8A%E9%80%A3%E6%8B%893%E6%A0%B9%E6%BC%B2%E5%81%9C-%E6%9C%8B%E7%A8%8B-%E5%8A%9B%E6%99%BA%E7%AD%898%E6%AA%94%E9%BD%8A%E4%BA%AE%E7%87%88-031100129.html">族群噴發</a> / <a href="https://www.managertoday.com.tw/articles/view/72361">經理人</a> / <a href="https://finance.biggo.com.tw/news/TW_3016.TW_2026-04-29">BigGo 嘉晶</a> / <a href="https://finance.biggo.com.tw/news/TW_6411.TW_2026-05-21">BigGo 晶焱</a> / <a href="https://winvest.tw/Stock/Symbol/Comment/5299">Win 杰力</a> / <a href="https://winvest.tw/Stock/Symbol/Comment/6182">Win 合晶</a> / <a href="https://winvest.tw/Stock/Symbol/Comment/6651">Win 全宇昕</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>鏡報+理財周刊+EET-China/Futu+經濟日報(尼克森)+鉅亨(虹揚)+DataM(onsemi 捷克補助)</b> — 佐證:漢磊 8 吋試產線 1,500 片/月;宏捷科×Navitas 說法出處(⚪單源、未驗證,被 Navitas 官方名單反駁);英諾賽科 GB300 送樣進度(公司/媒體口徑);尼克森 SiC/GaN 投入;虹揚安世轉單點名(被營收數字反駁);onsemi $530M 補助(轉述、建議補 EC 官方文)。<a href="https://www.mirrordaily.news/story/20796">鏡報</a> / <a href="https://www.moneyweekly.com.tw/ArticleData/Info/Article/218661">理財周刊</a> / <a href="https://www.eet-china.com/mp/a483296.html">EET-China</a> / <a href="https://money.udn.com/money/story/11074/9094768">經濟日報 尼克森</a> / <a href="https://news.cnyes.com/news/id/6298548">鉅亨 虹揚</a> / <a href="https://www.datamintelligence.com/research-report/sic-power-semiconductor-market">DataM</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>鉅亨網(台亞/積亞 2023 舊聞)</b> — 佐證:積亞 6 吋 SiC 舊指引出處(2026 目標 5,000 片/月;⚪2026H1 無更新、未驗證)。<a href="https://news.cnyes.com/news/id/5290900">cnyes.com</a><span class="src-q q-secondary">secondary</span></div>
+  <h3>Blog / 內部(佐證力有限,僅作口徑補充)</h3>
+  <div class="src-item"><b>富果 Fugle 法說備忘錄(力積電 2026/06/29、大中 2026/04/27、茂矽 2026/04/23、虹揚 2026/05/28、環球晶 SiC)</b> — 佐證:力積電 GaN 放量 2026Q2-Q3(公司自述)、3D AI Foundry 3.2%→20% 目標;各檔法說口徑。<a href="https://blog.fugle.tw/post/earnings-call-6770-2026-06-29">力積電</a> / <a href="https://blog.fugle.tw/post/earnings-call-6435-2026-04-27">大中</a> / <a href="https://blog.fugle.tw/post/earnings-call-2342-2026-04-23">茂矽</a> / <a href="https://blog.fugle.tw/globalwafers-sic/">環球晶 SiC</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>vocus 法說筆記(世界先進 2026/05/05、嘉晶 2026/04/29、偉詮電 2026/05/22、德微 2026/05/28、力智)</b> — 佐證:VIS GaN/SiC 進度(※「650V 提前 2027H2」僅此單源⚪,以官方 2028H1 為準);嘉晶 Q1 細節與 SiC 兩條線時程;偉詮電 GaN=消費快充(反駁 AI 電源 GaN 敘事);德微/力智法說。<a href="https://vocus.cc/article/6a035241fd897800012ade62">VIS</a> / <a href="https://vocus.cc/article/69faa49bfd897800015ab3f2">嘉晶</a> / <a href="https://vocus.cc/article/6a1027a5fd897800017f72b8">偉詮電</a> / <a href="https://vocus.cc/article/6a18e3f2fd897800016bdf07">德微</a> / <a href="https://vocus.cc/article/69f9aabbfd897800010ff2d6">力智</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>Conevo Electronics 部落格</b> — 「Power Integrations GaN 代工轉 EPC」唯一出處——⚪低信心待查,不入主表。<a href="https://www.conevoelec.com/extension/d_blog_module/post?post_id=403">conevoelec.com</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>Vik's Newsletter(2026/01)+Bondoro(Wolfspeed 案件摘要)</b> — 佐證:800V EV/SiC 技術背景與成本趨勢(每車顆數無法由此驗證⚪)、Wolfspeed 重整脈絡整理。<a href="https://www.viksnewsletter.com/p/800v-electric-vehicles-and-sic">Vik's</a> / <a href="https://bondoro.com/wolfspeed/">Bondoro</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>財報狗洞見(朋程:市佔第一的車用二極體供應商)</b> — 佐證:朋程四大供應商格局(Actron/Hitachi/Sanken/Bosch)與 Bosch 退出脈絡(市佔數字源頭仍為公司自述被轉引)。<a href="https://statementdog.com/insight/posts/156-8255%E6%9C%8B%E7%A8%8B%E7%A7%91%E6%8A%80-%E5%B8%82%E4%BD%94%E7%AC%AC%E4%B8%80%E7%9A%84%E8%BB%8A%E7%94%A8%E4%BA%8C%E6%A5%B5%E9%AB%94%E4%BE%9B%E6%87%89%E5%95%86">statementdog.com</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>功率元件-guide(舊版投資指南,專案內部文件)</b> — 佐證:上中游(環球晶/中美晶/嘉晶/合晶)、SiC/GaN 三品類拆解、估值模型的前版基礎。未附網址(內部文件,無對外可驗證 URL)。<span class="src-q q-blog">blog</span></div>
 </div>
 
 <footer>
   <p><b>研究方法：</b>缺口分析 + 對抗式查證;嚴格區分有佐證/券商估/概念股列舉。</p>
+  <p><b>2026-07 增補：</b>第二輪 reinforce 查證——audit 缺口分析 → findings-macro/companies/finegrain 三包共 154 條 → verdicts 31 項最終裁決(19 confirmed / 4 refuted / 8 unverified)、股號核對 27 檔、口徑衝突裁決 10 項;refuted 主張已移出正文、集中於第 9 節「被反駁說法警示區」。</p>
   <p>本報告以「已通過查證」內容為主幹，並標示待查與已更正項目。屬時間敏感領域，數據請以最新官方法說/公告為準。<b>本報告為研究整理，非投資建議。</b></p>
-  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+  <p style="color:var(--muted)">產出：2026-06 · 增補：2026-07 · Claude Code · process-chain-research</p>
 </footer>
 
 </div>
+<script>
+(function(){
+  var ids=['rev','g','npm','sh','pe','epsg'];
+  function $(id){return document.getElementById(id);}
+  function calc(){
+    var rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    var ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);
+  }
+  for(var i=0;i<ids.length;i++){var el=$(ids[i]);if(el){el.addEventListener('input',calc);}}
+  if($('rev'))calc();
+})();
+</script>
 </body>
 </html>
