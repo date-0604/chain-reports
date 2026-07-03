@@ -31,7 +31,7 @@ body{font-family:var(--font);background:#0d1418;color:var(--ink);-webkit-font-sm
 .preview-head p{font-size:13.5px;color:#8ea1a8;margin-top:6px;line-height:1.6}
 .preview-head code{background:#1b262b;padding:2px 7px;border-radius:5px;font-size:12.5px;color:#7fd4e0}
 .deck{display:flex;flex-direction:column;align-items:center;gap:30px;padding:26px 12px 70px}
-body:not(.render) .slide{zoom:.5}  /* 乾淨縮放,不跑版;render 模式為原尺寸 */
+body:not(.render) .slide{zoom:.42}  /* 靜態 fallback;下方 JS 依螢幕寬度精算(桌機上限 .5、手機貼合) */
 
 /* ============ 卡片 (IG 4:5 = 1080×1350) ============ */
 .slide{
@@ -377,5 +377,18 @@ body:not(.render) .slide{zoom:.5}  /* 乾淨縮放,不跑版;render 模式為原
   </article>
 
 </div>
+<script>
+// 網頁預覽:依螢幕寬度把 1080px 卡片縮到剛好塞滿(桌機上限 .5);render 模式不縮。
+(function(){
+  if(document.body.classList.contains('render')) return;
+  function fit(){
+    var z = Math.min(0.5, (window.innerWidth - 28) / 1080);
+    var s = document.querySelectorAll('.slide');
+    for(var i=0;i<s.length;i++){ s[i].style.zoom = z; }
+  }
+  fit();
+  window.addEventListener('resize', fit);
+})();
+</script>
 </body>
 </html>
