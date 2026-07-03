@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!-- 玻璃載板 科普卡片版 (第三高度:入門/科普) — pilot v2
+     資料來源:deep/glass-substrate/glass-substrate-process-chain-light.html
+     v2:預覽改 zoom(修跑版) · emoji→SVG icon · 版面垂直平衡 · 卡3 flow 3+3 · 卡4/5 加剖面示意圖 -->
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玻璃載板 · 科普卡片 8 張</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#0e7490; --brand-soft:#cffafe;
+  --ink:#1c2833; --muted:#5b6b74;
+  --amber:#c2740c; --amber-soft:#fdecd0;
+  --blue:#2563eb;  --blue-soft:#dbeafe;
+  --red:#d1332e;   --red-soft:#fde5e4;
+  --green:#12855a; --green-soft:#d5f2e3;
+  --copper:#c0722b;
+  --card:#edefec; --paper:#ffffff; --line:#d7dbd6; --seal:#0e7490;
+  --font:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:#0d1418;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* 預覽(不進截圖) */
+.preview-head{max-width:1120px;margin:0 auto;padding:26px 20px 6px;color:#c7d2d6}
+.preview-head h1{font-size:20px;font-weight:900;color:#eaf2f4}
+.preview-head p{font-size:13.5px;color:#8ea1a8;margin-top:6px;line-height:1.6}
+.preview-head code{background:#1b262b;padding:2px 7px;border-radius:5px;font-size:12.5px;color:#7fd4e0}
+.deck{display:flex;flex-direction:column;align-items:center;gap:30px;padding:26px 12px 70px}
+body:not(.render) .slide{zoom:.42}  /* 靜態 fallback;下方 JS 依螢幕寬度精算(桌機上限 .5、手機貼合) */
+
+/* ============ 卡片 (IG 4:5 = 1080×1350) ============ */
+.slide{
+  position:relative;width:1080px;height:1350px;flex:none;
+  background:var(--card);border:14px solid var(--brand);border-radius:40px;
+  padding:56px 58px 104px;display:flex;flex-direction:column;overflow:hidden;
+}
+.slide::after{content:"";position:absolute;inset:10px;border:1px solid rgba(14,116,144,.18);border-radius:28px;pointer-events:none}
+
+.head{flex:none}
+.body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px;margin:14px 0}
+.punch{flex:none}
+.foot{flex:none;margin-top:14px;font-size:20px;color:#8a968f;text-align:center;font-weight:500}
+
+.page{position:absolute;top:28px;right:32px;background:#c9d2cd;color:#42504a;font-size:24px;font-weight:700;padding:6px 20px;border-radius:999px;z-index:3}
+
+.eyebrow{font-size:23px;font-weight:900;color:var(--brand);letter-spacing:3px}
+.h1{font-size:74px;font-weight:900;line-height:1.08;letter-spacing:-1px;margin-top:6px;color:var(--ink)}
+.h1.sm{font-size:58px}
+.h1 .hl{color:var(--amber)} .h1 .br{color:var(--brand)}
+.sub{font-size:33px;font-weight:700;color:var(--muted);margin-top:16px;line-height:1.45}
+.sub .hl{color:var(--amber)}
+
+/* 金句 */
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
+.punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
+
+/* 品牌章 — 替換成你的 logo */
+.seal{position:absolute;bottom:32px;right:40px;z-index:3;display:flex;align-items:center;gap:9px;background:var(--seal);color:#eafcff;padding:10px 18px;border-radius:14px;font-weight:900;font-size:22px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.seal svg{width:24px;height:24px}
+
+/* SVG icon */
+.ic{width:38px;height:38px;flex:none;vertical-align:-9px}
+
+/* 通用盒 */
+.box{border-radius:18px;padding:20px 24px;font-weight:700}
+.box.blue{background:var(--blue-soft);border:2px solid #9fbdf5;color:#1e3a8a}
+.box.amber{background:var(--amber-soft);border:2px solid #e9b464;color:#8a4b06}
+.box.green{background:var(--green-soft);border:2px solid #8fd6b5;color:#0b5e40}
+.box .t{font-size:30px;font-weight:900;display:flex;align-items:center;gap:12px}
+.box .d{font-size:25px;font-weight:600;margin-top:6px;line-height:1.4;opacity:.92}
+
+.arrow-lbl{font-size:23px;font-weight:800;color:var(--muted);text-align:center}
+.arrow-d{font-size:40px;line-height:1;color:var(--brand);text-align:center}
+
+/* 封裝堆疊(1) */
+.stack{display:flex;flex-direction:column;gap:9px}
+.layer{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 26px;font-size:31px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.layer small{font-size:22px;font-weight:600;color:var(--muted)}
+.layer.hl{border:3px solid var(--brand);background:linear-gradient(90deg,var(--brand-soft),var(--paper));color:var(--brand)}
+.layer.dim{opacity:.72}
+.stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
+
+/* 流程 3+3(3) */
+.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.frow{display:flex;align-items:stretch;justify-content:center;gap:0}
+.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
+.step small{font-size:20px;color:var(--muted);font-weight:600}
+.step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
+.step.hot b{color:#8a4b06}
+.fa{display:flex;align-items:center;font-size:34px;font-weight:900;color:var(--brand);padding:0 8px}
+
+/* 編號難點(2/7) */
+.nrow{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start}
+.nrow .num{flex:none;width:54px;height:54px;border-radius:50%;color:#fff;font-size:31px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.nrow .num.n1{background:var(--blue)} .nrow .num.n2{background:var(--amber)} .nrow .num.n3{background:var(--red)}
+.nrow .tt{font-size:31px;font-weight:900;color:var(--ink)}
+.nrow .dd{font-size:24px;font-weight:600;color:var(--muted);margin-top:3px;line-height:1.35}
+
+/* 成孔星等(4) */
+.rows{display:flex;flex-direction:column;gap:10px}
+.rrow{display:flex;align-items:center;gap:16px;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:15px 22px}
+.rrow.win{border:3px solid var(--green);background:var(--green-soft)}
+.rrow .nm{font-size:28px;font-weight:900;color:var(--ink);flex:1}
+.rrow .nm small{display:block;font-size:21px;font-weight:600;color:var(--muted)}
+.rrow .st{font-size:30px;letter-spacing:2px;color:#e0a63a;white-space:nowrap}
+.rrow.win .nm{color:#0b5e40}
+
+/* 剖面示意圖框(4/5) */
+.fig{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:18px 22px 14px}
+.fig .cap{font-size:24px;font-weight:900;color:var(--ink);text-align:center;margin-bottom:6px}
+.fig .cap .hl{color:var(--amber)}
+.fig svg{display:block;width:100%;height:auto}
+.slabel{font-size:22px;font-weight:800;fill:var(--muted)}
+.slabel.b{fill:var(--brand)} .slabel.c{fill:var(--copper)} .slabel.g{fill:#0b5e40}
+
+.statline{font-size:26px;font-weight:800;color:var(--brand);text-align:center}
+.statline b{color:var(--amber)}
+
+/* 對照(6) */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{border-radius:20px;padding:8px 8px 14px}
+.panel.old{background:var(--red-soft);border:3px solid #e6a9a5}
+.panel.new{background:var(--green-soft);border:3px solid #8fd6b5}
+.panel .ph{text-align:center;font-size:34px;font-weight:900;padding:14px 0 10px}
+.panel .ph small{display:block;font-size:22px;font-weight:700}
+.panel.old .ph{color:#9c211d} .panel.new .ph{color:#0b5e40}
+.crow{background:rgba(255,255,255,.72);border-radius:12px;margin:10px 12px;padding:14px 18px}
+.crow .ck{font-size:21px;font-weight:700;color:var(--muted)}
+.crow .cv{font-size:30px;font-weight:900;color:var(--ink);margin-top:2px;line-height:1.2}
+
+/* callout */
+.callout{border-radius:16px;padding:20px 24px;font-size:27px;font-weight:700;line-height:1.42;display:flex;gap:14px;align-items:flex-start}
+.callout .ic{width:36px;height:36px;margin-top:2px}
+.callout.warn{background:var(--amber-soft);border-left:10px solid var(--amber);color:#8a4b06}
+.callout.insight{background:var(--brand-soft);border-left:10px solid var(--brand);color:#0b5566}
+.callout.risk{background:var(--red-soft);border-left:10px solid var(--red);color:#9c211d}
+.callout .hl{color:var(--amber)}
+
+/* 卡位圖(8) */
+.pos{display:flex;flex-direction:column;gap:7px}
+.pseg{display:grid;grid-template-columns:290px 1fr;gap:16px;align-items:center;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:11px 18px;border-left-width:10px}
+.pseg.miss{border-left-color:var(--red)} .pseg.tw{border-left-color:var(--amber)} .pseg.core{border-left-color:var(--green)}
+.pseg .seg{font-size:27px;font-weight:900;color:var(--ink)}
+.pseg .seg small{display:block;font-size:19px;font-weight:600;color:var(--muted)}
+.pseg .co{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.stock{background:var(--amber-soft);color:#8a4b06;font-size:25px;font-weight:900;padding:5px 14px;border-radius:9px;white-space:nowrap}
+.stock.intl{background:#e3e6e2;color:#5b6b64}
+.note-line{font-size:22px;font-weight:700;color:var(--muted)} .note-line .hl{color:var(--red)}
+</style>
+</head>
+<body>
+<script>if(location.search.includes('render'))document.body.classList.add('render');</script>
+
+<div class="preview-head">
+  <h1>AI ASIC 設計服務 · 一次看懂</h1>
+  <p>CSP 自研晶片擺脫 NVIDIA GPU,替它們把晶片做出來的「設計服務商」成 AI 第二主軸;8 張圖卡拆解台廠卡在哪一段。技術科普,非投資建議。</p>
+</div>
+
+<div class="deck">
+
+<!-- 1 · 封面 -->
+  <article class="slide">
+    <div class="page">1 / 8</div>
+    <div class="head">
+      <div class="eyebrow">產業鏈科普 · AI 晶片設計</div>
+      <div class="h1">AI ASIC <span class="hl">設計服務</span></div>
+      <div class="sub">CSP 想擺脫 NVIDIA GPU,<span class="hl">自己設計晶片</span> —<br>替它們把晶片做出來的人,是誰?</div>
+    </div>
+    <div class="body">
+      <div class="stack">
+        <div class="layer dim">CSP 客戶 Google / AWS / Meta / 微軟 / OpenAI <small>出規格、出錢,要自研 ASIC</small></div>
+        <div class="arrow-d">↓</div>
+        <div class="layer hl">設計服務 / IP 商 GUC<small>本題主角:把架構「做成一顆可量產的晶片」</small></div>
+        <div class="arrow-d">↓</div>
+        <div class="layer dim">台積電 N3 / N2 + CoWoS 製造 <small>再往下接到 AI 資料中心</small></div>
+      </div>
+      <div class="stk-note">ASIC 出貨成長近 GPU 三倍 · 2028 顆數超越 GPU · AI 第二主軸</div>
+    </div>
+    <div class="punch">CSP 有錢有架構,但把晶片<span class="br">「做出來」</span><br>得交給<span class="hl">設計服務商</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 2 · 需求 × 痛點 -->
+  <article class="slide">
+    <div class="page">2 / 8</div>
+    <div class="head">
+      <div class="h1 sm">CSP 想自研晶片,<br>卻卡在<span class="hl">做不出來</span></div>
+      <div class="sub">需求把規格拉到最尖端 → 三件事 CSP 自己搞不定</div>
+    </div>
+    <div class="body">
+      <div class="box blue"><div class="t"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-5 4 4 8-8"/><path d="M15 7h5v5"/></svg>需求:自研 ASIC 省 GPU 成本</div>
+        <div class="d">為自家工作負載最佳化 · 2026 ASIC 出貨 +44.6%、遠高於 GPU +16.1%(TrendForce)</div></div>
+      <div class="arrow-lbl">所以 ↓ CSP 卡在三個做不來的地方</div>
+      <div class="rows">
+        <div class="nrow"><div class="num n1">1</div><div><div class="tt">後段做不動</div><div class="dd">N3/N2 的時序收斂、繞線每代指數變難,缺量產 know-how</div></div></div>
+        <div class="nrow"><div class="num n2">2</div><div><div class="tt">封裝整不起</div><div class="dd">多顆晶粒要 2.5D/3D 疊起來,還得綁台積電 CoWoS 產能</div></div></div>
+        <div class="nrow"><div class="num n3">3</div><div><div class="tt">尖端 IP 要外購</div><div class="dd">SerDes、HBM PHY 這些「現成積木」自己做不划算</div></div></div>
+      </div>
+    </div>
+    <div class="punch">問題不在想不想自研,<br>在<span class="hl">「做不做得出來」</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 3 · 全流程地圖 -->
+  <article class="slide">
+    <div class="page">3 / 8</div>
+    <div class="head">
+      <div class="h1 sm">一個規格,<br>怎麼變成<span class="br">一顆晶片</span>?</div>
+      <div class="sub">設計服務價值鏈七道關 — 難的集中在中後段</div>
+    </div>
+    <div class="body">
+      <div class="flow2">
+        <div class="frow">
+          <div class="step"><b>規格 / 架構</b><small>CSP 自研主導</small></div>
+          <div class="fa">›</div>
+          <div class="step"><b>前端 RTL</b><small>驗證佔 8 成工時</small></div>
+          <div class="fa">›</div>
+          <div class="step"><b>矽智財 IP</b><small>現成積木收租</small></div>
+        </div>
+        <div class="arrow-d">↓</div>
+        <div class="frow">
+          <div class="step hot"><b>後段實體</b><small>擺放繞線收時序</small></div>
+          <div class="fa">›</div>
+          <div class="step hot"><b>chiplet 封裝</b><small>多晶粒疊成一顆</small></div>
+          <div class="fa">›</div>
+          <div class="step"><b>光罩 / 量產</b><small>turnkey 統包</small></div>
+        </div>
+      </div>
+      <div class="callout insight"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.2 1 2.5h6c0-1.3.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg><div><b>橘色兩關是台廠護城河:</b>後段實體設計 + chiplet 封裝(難度 17–19/20);前段架構是 CSP 自研天花板。</div></div>
+    </div>
+    <div class="punch">一顆晶片七道關,台廠卡最深的是<br><span class="hl">「後段」</span>與<span class="hl">「封裝」</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 4 · 後段實體設計(含 網表→佈局 示意) -->
+  <article class="slide">
+    <div class="page">4 / 8</div>
+    <div class="head">
+      <div class="h1 sm">台廠核心戰場:<br><span class="hl">後段實體設計</span></div>
+      <div class="sub">把抽象的邏輯藍圖,變成可製造的實體佈局</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">邏輯網表 → 擺放繞線 → <span class="hl">收斂時序</span>(紅=關鍵路徑)</div>
+        <svg viewBox="0 0 940 210" preserveAspectRatio="xMidYMid meet">
+          <rect x="20" y="34" width="360" height="150" rx="10" fill="#dbeafe" stroke="#7ea8e8" stroke-width="2"/>
+          <text x="38" y="26" class="slabel b">① 邏輯網表(閘級 · 抽象)</text>
+          <g stroke="#0e7490" stroke-width="2.5" fill="none">
+            <path d="M90 90 L160 70 M90 90 L160 130 M160 70 L240 100 M160 130 L240 100 M240 100 L320 80 M240 100 L320 140"/>
+          </g>
+          <g fill="#0e7490">
+            <circle cx="90" cy="90" r="12"/><circle cx="160" cy="70" r="12"/><circle cx="160" cy="130" r="12"/>
+            <circle cx="240" cy="100" r="12"/><circle cx="320" cy="80" r="12"/><circle cx="320" cy="140" r="12"/>
+          </g>
+          <text x="406" y="102" font-size="48" font-weight="900" fill="#c2740c">›</text>
+          <text x="393" y="142" class="slabel c">P&amp;R</text>
+          <rect x="490" y="34" width="430" height="150" rx="10" fill="#eef2ff" stroke="#7ea8e8" stroke-width="2"/>
+          <text x="508" y="26" class="slabel b">② 實體佈局(GDSII · 可製造)</text>
+          <g fill="#c9d6f0" stroke="#5b7fd0" stroke-width="2">
+            <rect x="512" y="58" width="112" height="48" rx="4"/>
+            <rect x="648" y="58" width="96" height="44" rx="4"/>
+            <rect x="792" y="60" width="104" height="58" rx="4"/>
+            <rect x="512" y="126" width="140" height="46" rx="4"/>
+            <rect x="676" y="124" width="130" height="50" rx="4"/>
+          </g>
+          <path d="M624 82 L648 82 M744 82 L792 88 M652 149 L676 149" stroke="#9aa7b4" stroke-width="2" fill="none"/>
+          <path d="M568 106 L582 126 M806 118 L820 124" stroke="#d1332e" stroke-width="3.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="box green"><div class="t">世芯 3661 的關鍵一役</div><div class="d">在 design bakeoff 擊敗前代設計商 Marvell、獨拿 AWS Trainium3 後段;官網稱可降 die size 至多 15%、提良率至多 20%</div></div>
+      <div class="statline">台廠核心戰場 · <b>世芯 3661 / 創意 3443 / 智原 3035</b></div>
+    </div>
+    <div class="punch">一條時序沒收斂,<br>就得<span class="hl">重跑一次 tape-out</span>(數百萬美元)</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 5 · chiplet 封裝(含 2.5D 剖面) -->
+  <article class="slide">
+    <div class="page">5 / 8</div>
+    <div class="head">
+      <div class="h1 sm">最難一關:<br>把多顆晶粒<span class="hl">拼成一顆</span></div>
+      <div class="sub">2.5D 封裝 — 運算晶粒 + HBM 塞進同一片中介層</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">運算晶粒與 HBM,<span class="hl">疊在同一片矽中介層上</span></div>
+        <svg viewBox="0 0 940 290" preserveAspectRatio="xMidYMid meet">
+          <!-- BGA solder balls -->
+          <g fill="#c0722b"><circle cx="130" cy="274" r="8"/><circle cx="198" cy="274" r="8"/><circle cx="266" cy="274" r="8"/><circle cx="334" cy="274" r="8"/><circle cx="402" cy="274" r="8"/><circle cx="470" cy="274" r="8"/><circle cx="538" cy="274" r="8"/><circle cx="606" cy="274" r="8"/><circle cx="674" cy="274" r="8"/></g>
+          <!-- substrate -->
+          <rect x="90" y="232" width="620" height="32" rx="4" fill="#ece9e3" stroke="#c0722b" stroke-width="2"/>
+          <!-- interposer -->
+          <rect x="140" y="196" width="520" height="32" rx="3" fill="#dbeafe" stroke="#5b7fd0" stroke-width="2"/>
+          <g stroke="#c0722b" stroke-width="3"><path d="M190 196V228"/><path d="M250 196V228"/><path d="M310 196V228"/><path d="M370 196V228"/><path d="M430 196V228"/><path d="M490 196V228"/><path d="M550 196V228"/><path d="M610 196V228"/></g>
+          <!-- micro-bumps -->
+          <g fill="#9c5a1e"><circle cx="180" cy="183" r="3.5"/><circle cx="210" cy="183" r="3.5"/><circle cx="240" cy="183" r="3.5"/><circle cx="330" cy="183" r="3.5"/><circle cx="380" cy="183" r="3.5"/><circle cx="430" cy="183" r="3.5"/><circle cx="470" cy="183" r="3.5"/><circle cx="540" cy="183" r="3.5"/><circle cx="570" cy="183" r="3.5"/><circle cx="600" cy="183" r="3.5"/></g>
+          <!-- left HBM stack -->
+          <rect x="160" y="100" width="120" height="70" rx="4" fill="#dbeafe" stroke="#5b7fd0" stroke-width="2"/>
+          <g stroke="#5b7fd0" stroke-width="1.5"><path d="M160 117H280"/><path d="M160 134H280"/><path d="M160 151H280"/></g>
+          <!-- compute die -->
+          <rect x="300" y="112" width="200" height="56" rx="5" fill="#fdecd0" stroke="#c2740c" stroke-width="3"/>
+          <!-- right HBM stack -->
+          <rect x="520" y="100" width="120" height="70" rx="4" fill="#dbeafe" stroke="#5b7fd0" stroke-width="2"/>
+          <g stroke="#5b7fd0" stroke-width="1.5"><path d="M520 117H640"/><path d="M520 134H640"/><path d="M520 151H640"/></g>
+          <!-- UCIe links -->
+          <g stroke="#12855a" stroke-width="3"><path d="M283 140H298"/><path d="M502 140H517"/></g>
+          <!-- right-side labels + leaders -->
+          <g stroke="#c9d2cd" stroke-width="1.5"><path d="M640 118 L708 96"/><path d="M500 140 L708 150"/><path d="M508 140 L708 184"/><path d="M660 210 L708 212"/><path d="M700 248 L708 248"/></g>
+          <text x="714" y="100" class="slabel b" font-size="22">HBM 記憶體(疊層)</text>
+          <text x="714" y="154" class="slabel c" font-size="22">運算晶粒 Chiplet</text>
+          <text x="714" y="188" class="slabel g" font-size="21">UCIe die-to-die 互連</text>
+          <text x="714" y="216" class="slabel b" font-size="22">矽中介層 + TSV</text>
+          <text x="714" y="252" class="slabel c" font-size="22">封裝基板 Substrate</text>
+        </svg>
+      </div>
+      <div class="box amber"><div class="t">難點:三種東西一起算</div><div class="d">die 級 + 封裝級的 訊號 / 熱 / 應力 要同時收斂;還綁死台積電 CoWoS 產能與 UCIe 生態</div></div>
+      <div class="statline"><b>世芯 · 創意</b>=台積電 3DFabric 少數能代客「設計整顆 SiP」的夥伴</div>
+    </div>
+    <div class="punch">會設計晶片的多,<br>能把晶片<span class="hl">疊起來封成一顆</span>的沒幾家</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 6 · 矽智財 IP(含 SoC 積木圖) -->
+  <article class="slide">
+    <div class="page">6 / 8</div>
+    <div class="head">
+      <div class="h1 sm">晶片裡的<br><span class="br">「現成積木」</span>:矽智財 IP</div>
+      <div class="sub">可重用、能收權利金 — 但最尖端那幾塊被國際掐著</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">一顆 SoC = 一堆 <span class="hl">IP 積木</span>拼起來</div>
+        <svg viewBox="0 0 940 320" preserveAspectRatio="xMidYMid meet">
+          <rect x="40" y="20" width="860" height="232" rx="12" fill="#f3f4f6" stroke="#5b6b74" stroke-width="3"/>
+          <!-- Row A -->
+          <rect x="58" y="64" width="188" height="80" rx="8" fill="#dbeafe" stroke="#5b7fd0" stroke-width="2"/>
+          <text x="152" y="100" text-anchor="middle" class="slabel b" font-size="24">SerDes / PCIe</text>
+          <text x="152" y="128" text-anchor="middle" class="slabel" font-size="19">國際 EDA 主導</text>
+          <rect x="266" y="64" width="396" height="80" rx="8" fill="#e5e7eb" stroke="#9aa7b4" stroke-width="2"/>
+          <text x="464" y="100" text-anchor="middle" class="slabel" font-size="25">運算邏輯</text>
+          <text x="464" y="128" text-anchor="middle" class="slabel" font-size="19">客戶自研架構(天花板)</text>
+          <rect x="682" y="64" width="188" height="80" rx="8" fill="#d5f2e3" stroke="#6cc79a" stroke-width="2"/>
+          <text x="776" y="100" text-anchor="middle" class="slabel g" font-size="24">HBM4 PHY</text>
+          <text x="776" y="128" text-anchor="middle" class="slabel" font-size="19">創意 3443</text>
+          <!-- Row B -->
+          <rect x="58" y="160" width="188" height="80" rx="8" fill="#d5f2e3" stroke="#6cc79a" stroke-width="2"/>
+          <text x="152" y="196" text-anchor="middle" class="slabel g" font-size="24">eNVM / OTP</text>
+          <text x="152" y="224" text-anchor="middle" class="slabel" font-size="19">力旺 3529</text>
+          <rect x="266" y="160" width="188" height="80" rx="8" fill="#d5f2e3" stroke="#6cc79a" stroke-width="2"/>
+          <text x="360" y="196" text-anchor="middle" class="slabel g" font-size="24">RISC-V 核</text>
+          <text x="360" y="224" text-anchor="middle" class="slabel" font-size="19">晶心科 6533</text>
+          <rect x="474" y="160" width="188" height="80" rx="8" fill="#d5f2e3" stroke="#6cc79a" stroke-width="2"/>
+          <text x="568" y="196" text-anchor="middle" class="slabel g" font-size="24">UCIe 互連</text>
+          <text x="568" y="224" text-anchor="middle" class="slabel" font-size="19">創意 3443</text>
+          <rect x="682" y="160" width="188" height="80" rx="8" fill="#d5f2e3" stroke="#6cc79a" stroke-width="2"/>
+          <text x="776" y="196" text-anchor="middle" class="slabel g" font-size="24">介面 IP</text>
+          <text x="776" y="224" text-anchor="middle" class="slabel" font-size="19">M31 6643</text>
+          <!-- legend -->
+          <g><rect x="70" y="278" width="26" height="18" rx="3" fill="#d5f2e3" stroke="#6cc79a" stroke-width="2"/><text x="104" y="293" class="slabel" font-size="20">綠=台廠卡到的利基</text>
+          <rect x="392" y="278" width="26" height="18" rx="3" fill="#dbeafe" stroke="#5b7fd0" stroke-width="2"/><text x="426" y="293" class="slabel" font-size="20">藍=國際主導</text>
+          <rect x="646" y="278" width="26" height="18" rx="3" fill="#e5e7eb" stroke="#9aa7b4" stroke-width="2"/><text x="680" y="293" class="slabel" font-size="20">灰=客戶自研</text></g>
+        </svg>
+      </div>
+      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v5M12 16h.01"/></svg><div><b>尖端仍受制於人:</b>最頂級 SerDes/PCIe 仍 Synopsys/Cadence 主導,連 AWS Annapurna 都得向其授權。</div></div>
+    </div>
+    <div class="punch">台廠拿到幾塊利基積木,<br>最尖端那幾塊<span class="hl">還在國際手上</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 7 · 為什麼難 / 現實校正 -->
+  <article class="slide">
+    <div class="page">7 / 8</div>
+    <div class="head">
+      <div class="h1 sm">護城河真的深,<br>但<span class="hl">天花板也在</span></div>
+      <div class="sub">台廠卡到最深的一段,卻不是最賺的一段</div>
+    </div>
+    <div class="body">
+      <div class="rows">
+        <div class="nrow"><div class="num n3">1</div><div><div class="tt">COT 化天花板</div><div class="dd">客戶若自掌 tooling,設計商抽成最少;傳 Google 詢台積電直接下單(未證實,列風險)</div></div></div>
+        <div class="nrow"><div class="num n2">2</div><div><div class="tt">兩強壟斷架構</div><div class="dd">prime co-design 被 Broadcom(~60%)+Marvell 壟斷 ≈95%,台廠多承接後段/封裝</div></div></div>
+        <div class="nrow"><div class="num n1">3</div><div><div class="tt">毛利與客戶都會晃</div><div class="dd">NRE 設計費 50% → turnkey 量產 ~20%;世芯單客戶斷一世代就大空窗</div></div></div>
+      </div>
+      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>看懂時間差:</b>「tape-out / 出樣 ≠ 已量產認列」;很多 CSP–台廠對應是媒體/研調彙整、未經兩造證實。</div></div>
+    </div>
+    <div class="punch">台廠吃得到<span class="br">「實作」</span>,<br>架構與抽成天花板<span class="hl">在客戶手上</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 8 · 台廠卡位圖 + 金句 -->
+  <article class="slide">
+    <div class="page">8 / 8</div>
+    <div class="head">
+      <div class="h1 sm">台廠卡在<span class="hl">哪一段</span>?</div>
+      <div class="sub">一條 ASIC 設計服務鏈,逐環節看台廠位置</div>
+    </div>
+    <div class="body">
+      <div class="pos">
+        <div class="pseg miss"><div class="seg">規格 / 架構<small>CSP 自研天花板</small></div><div class="co"><span class="note-line hl">台廠缺席</span><span class="stock intl">Broadcom</span><span class="stock intl">Marvell</span><span class="stock">聯發科 2454</span></div></div>
+        <div class="pseg tw"><div class="seg">矽智財 IP<small>利基收租</small></div><div class="co"><span class="stock">力旺 3529</span><span class="stock">晶心科 6533</span><span class="stock">M31 6643</span></div></div>
+        <div class="pseg core"><div class="seg">後段實體設計 ⭐<small>台廠戰場</small></div><div class="co"><span class="stock">世芯 3661</span><span class="stock">創意 3443</span><span class="stock">智原 3035</span></div></div>
+        <div class="pseg core"><div class="seg">chiplet 封裝 ⭐<small>護城河最深</small></div><div class="co"><span class="stock">世芯 3661</span><span class="stock">創意 3443</span></div></div>
+        <div class="pseg tw"><div class="seg">光罩 / turnkey<small>統包量產</small></div><div class="co"><span class="stock">聯發科 2454</span><span class="stock">智原 3035</span></div></div>
+        <div class="pseg tw"><div class="seg">客製記憶體<small>邊緣 · 矽電容</small></div><div class="co"><span class="stock">愛普 6531</span></div></div>
+      </div>
+      <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v4c0 2 1 3 3 3h10"/><path d="M4 19v-4c0-2 1-3 3-3h10"/><path d="M15 9l3 3-3 3"/></svg><div><b>別混一堆概念股:</b>金麗科/矽統/群聯等常被列名,查核後屬錯掛或非本題,不列入。</div></div>
+    </div>
+    <div class="punch">架構誰都想自研,<br>能把它<span class="hl">做出來、封起來</span>才是護城河</div>
+    <div class="foot">本文為技術科普 · 台廠曝險=「架構在美、實作在台」· 非投資建議</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+</div>
+<script>
+// 網頁預覽:依螢幕寬度把 1080px 卡片縮到剛好塞滿(桌機上限 .5);render 模式不縮。
+(function(){
+  if(document.body.classList.contains('render')) return;
+  function fit(){
+    var z = Math.min(0.5, (window.innerWidth - 28) / 1080);
+    var s = document.querySelectorAll('.slide');
+    for(var i=0;i<s.length;i++){ s[i].style.zoom = z; }
+  }
+  fit();
+  window.addEventListener('resize', fit);
+})();
+</script>
+</body>
+</html>

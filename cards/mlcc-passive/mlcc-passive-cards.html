@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<!-- 玻璃載板 科普卡片版 (第三高度:入門/科普) — pilot v2
+     資料來源:deep/glass-substrate/glass-substrate-process-chain-light.html
+     v2:預覽改 zoom(修跑版) · emoji→SVG icon · 版面垂直平衡 · 卡3 flow 3+3 · 卡4/5 加剖面示意圖 -->
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玻璃載板 · 科普卡片 8 張</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#0e7490; --brand-soft:#cffafe;
+  --ink:#1c2833; --muted:#5b6b74;
+  --amber:#c2740c; --amber-soft:#fdecd0;
+  --blue:#2563eb;  --blue-soft:#dbeafe;
+  --red:#d1332e;   --red-soft:#fde5e4;
+  --green:#12855a; --green-soft:#d5f2e3;
+  --copper:#c0722b;
+  --card:#edefec; --paper:#ffffff; --line:#d7dbd6; --seal:#0e7490;
+  --font:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:#0d1418;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* 預覽(不進截圖) */
+.preview-head{max-width:1120px;margin:0 auto;padding:26px 20px 6px;color:#c7d2d6}
+.preview-head h1{font-size:20px;font-weight:900;color:#eaf2f4}
+.preview-head p{font-size:13.5px;color:#8ea1a8;margin-top:6px;line-height:1.6}
+.preview-head code{background:#1b262b;padding:2px 7px;border-radius:5px;font-size:12.5px;color:#7fd4e0}
+.deck{display:flex;flex-direction:column;align-items:center;gap:30px;padding:26px 12px 70px}
+body:not(.render) .slide{zoom:.42}  /* 靜態 fallback;下方 JS 依螢幕寬度精算(桌機上限 .5、手機貼合) */
+
+/* ============ 卡片 (IG 4:5 = 1080×1350) ============ */
+.slide{
+  position:relative;width:1080px;height:1350px;flex:none;
+  background:var(--card);border:14px solid var(--brand);border-radius:40px;
+  padding:56px 58px 104px;display:flex;flex-direction:column;overflow:hidden;
+}
+.slide::after{content:"";position:absolute;inset:10px;border:1px solid rgba(14,116,144,.18);border-radius:28px;pointer-events:none}
+
+.head{flex:none}
+.body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px;margin:14px 0}
+.punch{flex:none}
+.foot{flex:none;margin-top:14px;font-size:20px;color:#8a968f;text-align:center;font-weight:500}
+
+.page{position:absolute;top:28px;right:32px;background:#c9d2cd;color:#42504a;font-size:24px;font-weight:700;padding:6px 20px;border-radius:999px;z-index:3}
+
+.eyebrow{font-size:23px;font-weight:900;color:var(--brand);letter-spacing:3px}
+.h1{font-size:74px;font-weight:900;line-height:1.08;letter-spacing:-1px;margin-top:6px;color:var(--ink)}
+.h1.sm{font-size:58px}
+.h1 .hl{color:var(--amber)} .h1 .br{color:var(--brand)}
+.sub{font-size:33px;font-weight:700;color:var(--muted);margin-top:16px;line-height:1.45}
+.sub .hl{color:var(--amber)}
+
+/* 金句 */
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
+.punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
+
+/* 品牌章 — 替換成你的 logo */
+.seal{position:absolute;bottom:32px;right:40px;z-index:3;display:flex;align-items:center;gap:9px;background:var(--seal);color:#eafcff;padding:10px 18px;border-radius:14px;font-weight:900;font-size:22px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.seal svg{width:24px;height:24px}
+
+/* SVG icon */
+.ic{width:38px;height:38px;flex:none;vertical-align:-9px}
+
+/* 通用盒 */
+.box{border-radius:18px;padding:20px 24px;font-weight:700}
+.box.blue{background:var(--blue-soft);border:2px solid #9fbdf5;color:#1e3a8a}
+.box.amber{background:var(--amber-soft);border:2px solid #e9b464;color:#8a4b06}
+.box.green{background:var(--green-soft);border:2px solid #8fd6b5;color:#0b5e40}
+.box .t{font-size:30px;font-weight:900;display:flex;align-items:center;gap:12px}
+.box .d{font-size:25px;font-weight:600;margin-top:6px;line-height:1.4;opacity:.92}
+
+.arrow-lbl{font-size:23px;font-weight:800;color:var(--muted);text-align:center}
+.arrow-d{font-size:40px;line-height:1;color:var(--brand);text-align:center}
+
+/* 封裝堆疊(1) */
+.stack{display:flex;flex-direction:column;gap:9px}
+.layer{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 26px;font-size:31px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.layer small{font-size:22px;font-weight:600;color:var(--muted)}
+.layer.hl{border:3px solid var(--brand);background:linear-gradient(90deg,var(--brand-soft),var(--paper));color:var(--brand)}
+.layer.dim{opacity:.72}
+.stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
+
+/* 流程 3+3(3) */
+.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.frow{display:flex;align-items:stretch;justify-content:center;gap:0}
+.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
+.step small{font-size:20px;color:var(--muted);font-weight:600}
+.step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
+.step.hot b{color:#8a4b06}
+.fa{display:flex;align-items:center;font-size:34px;font-weight:900;color:var(--brand);padding:0 8px}
+
+/* 編號難點(2/7) */
+.nrow{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start}
+.nrow .num{flex:none;width:54px;height:54px;border-radius:50%;color:#fff;font-size:31px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.nrow .num.n1{background:var(--blue)} .nrow .num.n2{background:var(--amber)} .nrow .num.n3{background:var(--red)}
+.nrow .tt{font-size:31px;font-weight:900;color:var(--ink)}
+.nrow .dd{font-size:24px;font-weight:600;color:var(--muted);margin-top:3px;line-height:1.35}
+
+/* 成孔星等(4) */
+.rows{display:flex;flex-direction:column;gap:10px}
+.rrow{display:flex;align-items:center;gap:16px;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:15px 22px}
+.rrow.win{border:3px solid var(--green);background:var(--green-soft)}
+.rrow .nm{font-size:28px;font-weight:900;color:var(--ink);flex:1}
+.rrow .nm small{display:block;font-size:21px;font-weight:600;color:var(--muted)}
+.rrow .st{font-size:30px;letter-spacing:2px;color:#e0a63a;white-space:nowrap}
+.rrow.win .nm{color:#0b5e40}
+
+/* 剖面示意圖框(4/5) */
+.fig{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:18px 22px 14px}
+.fig .cap{font-size:24px;font-weight:900;color:var(--ink);text-align:center;margin-bottom:6px}
+.fig .cap .hl{color:var(--amber)}
+.fig svg{display:block;width:100%;height:auto}
+.slabel{font-size:22px;font-weight:800;fill:var(--muted)}
+.slabel.b{fill:var(--brand)} .slabel.c{fill:var(--copper)} .slabel.g{fill:#0b5e40}
+
+.statline{font-size:26px;font-weight:800;color:var(--brand);text-align:center}
+.statline b{color:var(--amber)}
+
+/* 對照(6) */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{border-radius:20px;padding:8px 8px 14px}
+.panel.old{background:var(--red-soft);border:3px solid #e6a9a5}
+.panel.new{background:var(--green-soft);border:3px solid #8fd6b5}
+.panel .ph{text-align:center;font-size:34px;font-weight:900;padding:14px 0 10px}
+.panel .ph small{display:block;font-size:22px;font-weight:700}
+.panel.old .ph{color:#9c211d} .panel.new .ph{color:#0b5e40}
+.crow{background:rgba(255,255,255,.72);border-radius:12px;margin:10px 12px;padding:14px 18px}
+.crow .ck{font-size:21px;font-weight:700;color:var(--muted)}
+.crow .cv{font-size:30px;font-weight:900;color:var(--ink);margin-top:2px;line-height:1.2}
+
+/* callout */
+.callout{border-radius:16px;padding:20px 24px;font-size:27px;font-weight:700;line-height:1.42;display:flex;gap:14px;align-items:flex-start}
+.callout .ic{width:36px;height:36px;margin-top:2px}
+.callout.warn{background:var(--amber-soft);border-left:10px solid var(--amber);color:#8a4b06}
+.callout.insight{background:var(--brand-soft);border-left:10px solid var(--brand);color:#0b5566}
+.callout.risk{background:var(--red-soft);border-left:10px solid var(--red);color:#9c211d}
+.callout .hl{color:var(--amber)}
+
+/* 卡位圖(8) */
+.pos{display:flex;flex-direction:column;gap:7px}
+.pseg{display:grid;grid-template-columns:290px 1fr;gap:16px;align-items:center;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:11px 18px;border-left-width:10px}
+.pseg.miss{border-left-color:var(--red)} .pseg.tw{border-left-color:var(--amber)} .pseg.core{border-left-color:var(--green)}
+.pseg .seg{font-size:27px;font-weight:900;color:var(--ink)}
+.pseg .seg small{display:block;font-size:19px;font-weight:600;color:var(--muted)}
+.pseg .co{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.stock{background:var(--amber-soft);color:#8a4b06;font-size:25px;font-weight:900;padding:5px 14px;border-radius:9px;white-space:nowrap}
+.stock.intl{background:#e3e6e2;color:#5b6b64}
+.note-line{font-size:22px;font-weight:700;color:var(--muted)} .note-line .hl{color:var(--red)}
+</style>
+</head>
+<body>
+<script>if(location.search.includes('render'))document.body.classList.add('render');</script>
+
+<div class="preview-head">
+  <h1>MLCC 被動元件 · 一次看懂</h1>
+  <p>把「AI 缺 MLCC」這條被動元件題拆成 8 張圖卡:為何缺、高容難在哪、台廠卡哪一段。技術科普,非投資建議。</p>
+</div>
+
+<div class="deck">
+
+<!-- 1 · 封面 -->
+  <article class="slide">
+    <div class="page">1 / 8</div>
+    <div class="head">
+      <div class="eyebrow">產業鏈科普 · 被動元件</div>
+      <div class="h1"><span class="hl">MLCC</span> 被動元件</div>
+      <div class="sub">AI 伺服器裡最不起眼、卻最<span class="hl">缺</span>的<br>那一顆「電容」</div>
+    </div>
+    <div class="body">
+      <div class="stack">
+        <div class="layer dim">AI 晶片 GPU / HBM <small>吃電暴增、電流瞬變又急又猛</small></div>
+        <div class="arrow-d">↓</div>
+        <div class="layer hl">MLCC 高容電容陣列<small>穩住供電、濾掉雜訊的關鍵</small></div>
+        <div class="arrow-d">↓</div>
+        <div class="layer dim">電源模組 / 主機板 <small>把乾淨的電送進晶片</small></div>
+      </div>
+      <div class="stk-note">一台 AI 伺服器要上萬顆 · 高端由日韓三雄壟斷 &gt;80%</div>
+    </div>
+    <div class="punch">AI 只吃 MLCC <span class="hl">2-3% 顆數</span>,<br>卻鎖死約 <span class="hl">10% 產能</span><small>一小撮量,就把高端結構性鎖死</small></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 2 · 需求 × 痛點 -->
+  <article class="slide">
+    <div class="page">2 / 8</div>
+    <div class="head">
+      <div class="h1 sm">AI 供電又急又猛<br><span class="hl">高容電容</span>不夠用</div>
+      <div class="sub">用量升級 → 但「做得出高容」的產能,就是不夠</div>
+    </div>
+    <div class="body">
+      <div class="box blue"><div class="t"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-5 4 4 8-8"/><path d="M15 7h5v5"/></svg>需求:單板用量翻倍跳</div>
+        <div class="d">單板 MLCC 用量:GB200 約 6,500 顆 → Rubin 約 12,000 顆;整櫃 GB200 NVL72 上看 ~44 萬顆</div></div>
+      <div class="arrow-lbl">所以 ↓ 高容 MLCC 露出三個破綻</div>
+      <div class="rows">
+        <div class="nrow"><div class="num n1">1</div><div><div class="tt">良率懸崖</div><div class="dd">高容品良率僅約 40%,消費級卻 &gt;99% —— 越高容越難做</div></div></div>
+        <div class="nrow"><div class="num n2">2</div><div><div class="tt">產能鎖死</div><div class="dd">AI 只吃 2-3% 顆數,卻吃掉約 10% 產能,明年上看 15-20%</div></div></div>
+        <div class="nrow"><div class="num n3">3</div><div><div class="tt">日韓轉產</div><div class="dd">三雄把產能轉去做 AI 高容,標準品缺口外溢轉單台廠</div></div></div>
+      </div>
+    </div>
+    <div class="punch">缺的不是「電容」,<br>是<span class="hl">做得出高容的產能</span><small>村田 4/1、太陽誘電 5/1 接力漲價已落地</small></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 3 · 全流程地圖 -->
+  <article class="slide">
+    <div class="page">3 / 8</div>
+    <div class="head">
+      <div class="h1 sm">一坨陶瓷粉,<br>怎麼變成<span class="br">一顆電容</span>?</div>
+      <div class="sub">完整八道製程,精簡成六大關 — 難的集中在中間</div>
+    </div>
+    <div class="body">
+      <div class="flow2">
+        <div class="frow">
+          <div class="step"><b>介電粉配方</b><small>BaTiO₃ 摻雜</small></div>
+          <div class="fa">›</div>
+          <div class="step hot"><b>薄層流延</b><small>刮出 sub-1μm 膜</small></div>
+          <div class="fa">›</div>
+          <div class="step"><b>Ni 電極疊層</b><small>疊上千層</small></div>
+        </div>
+        <div class="arrow-d">↓</div>
+        <div class="frow">
+          <div class="step"><b>壓合切割</b><small>壓實切成顆</small></div>
+          <div class="fa">›</div>
+          <div class="step hot"><b>還原共燒</b><small>高溫一次燒結</small></div>
+          <div class="fa">›</div>
+          <div class="step"><b>端電極測試</b><small>鍍銅/篩選</small></div>
+        </div>
+      </div>
+      <div class="callout insight"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.2 1 2.5h6c0-1.3.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg><div><b>橘色兩關是門檻:</b>把介電膜刮到 sub-1μm 不能有一顆團聚,再用「窄到極限」的氧氣窗把它燒熟。</div></div>
+    </div>
+    <div class="punch">八道製程,勝負集中在<br><span class="hl">「薄層流延」</span>與<span class="hl">「還原共燒」</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 4 · 為何高容難:千層結構(含剖面圖) -->
+  <article class="slide">
+    <div class="page">4 / 8</div>
+    <div class="head">
+      <div class="h1 sm">高容的祕密:<br>把它疊成<span class="hl">千層派</span></div>
+      <div class="sub">容量 ∝ 層數 ÷ 厚度 —— 想更高容,層要更薄、疊更多</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">MLCC 剖面:<span class="hl">介電層</span>與<span class="hl">內電極</span>一層層交疊</div>
+        <svg viewBox="0 0 940 300" preserveAspectRatio="xMidYMid meet">
+          <!-- 陶瓷本體 -->
+          <rect x="112" y="55" width="716" height="200" fill="#eef1f4" stroke="#c3ccd4" stroke-width="2"/>
+          <!-- 端電極 Cu -->
+          <rect x="70" y="55" width="48" height="200" rx="6" fill="#c0722b"/>
+          <rect x="822" y="55" width="48" height="200" rx="6" fill="#c0722b"/>
+          <!-- 內電極 Ni:交叉指狀 -->
+          <g fill="#7a8794">
+            <rect x="70"  y="78"  width="700" height="9"/>
+            <rect x="170" y="108" width="700" height="9"/>
+            <rect x="70"  y="138" width="700" height="9"/>
+            <rect x="170" y="168" width="700" height="9"/>
+            <rect x="70"  y="198" width="700" height="9"/>
+            <rect x="170" y="222" width="700" height="9"/>
+          </g>
+          <text x="60" y="42" class="slabel c">端電極 Cu</text>
+          <text x="470" y="42" class="slabel">內電極 Ni ×1000+ 層</text>
+          <text x="360" y="290" class="slabel b">介電層 sub-1μm(越薄容量越大)</text>
+        </svg>
+      </div>
+      <div class="box blue"><div class="t">為什麼要疊千層?</div>
+        <div class="d">高容品層數可達 <b>1000+ 層</b>(早年貴金屬時代僅約 50 層);單層薄到 sub-1μm,才塞得下這麼多容量</div></div>
+      <div class="box amber"><div class="t">難點:薄到極限,良率就崩</div>
+        <div class="d">層薄到 sub-1μm,<b>一顆團聚的粉粒就穿層短路</b> → 高容良率僅約 40%(消費級 &gt;99%)</div></div>
+    </div>
+    <div class="punch">高容祕密就一句:<br>層更<span class="br">薄</span>、疊更<span class="br">多</span> —— 但薄到極限,良率崩</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 5 · 介電粉末配方(含核殼剖面圖) -->
+  <article class="slide">
+    <div class="page">5 / 8</div>
+    <div class="head">
+      <div class="h1 sm">最深護城河:<br>一顆<span class="hl">粉的配方</span></div>
+      <div class="sub">粉決定介電常數、溫度特性與抗還原能力 —— 各家最深機密</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">高容粉的<span class="hl">「核殼結構」</span>core-shell</div>
+        <svg viewBox="0 0 940 240" preserveAspectRatio="xMidYMid meet">
+          <!-- 核殼粒 -->
+          <circle cx="230" cy="120" r="98" fill="#fdecd0" stroke="#c2740c" stroke-width="3"/>
+          <circle cx="230" cy="120" r="54" fill="#cffafe" stroke="#0e7490" stroke-width="3"/>
+          <!-- 摻雜點 -->
+          <g fill="#c2740c"><circle cx="230" cy="38" r="6"/><circle cx="302" cy="88" r="6"/><circle cx="302" cy="158" r="6"/><circle cx="230" cy="204" r="6"/><circle cx="158" cy="158" r="6"/><circle cx="158" cy="88" r="6"/></g>
+          <text x="230" y="130" text-anchor="middle" class="slabel b">核</text>
+          <text x="470" y="72" class="slabel">核殼結構 core-shell</text>
+          <text x="470" y="120" class="slabel b">核 = 高介電 BaTiO₃</text>
+          <text x="470" y="164" class="slabel c">殼 = 抗還原摻雜(Dy/Ho/Mg)</text>
+          <text x="470" y="208" class="slabel">粒徑僅 ~100–200nm</text>
+        </svg>
+      </div>
+      <div class="box amber"><div class="t">為什麼是護城河?</div>
+        <div class="d">粒徑越小,介電常數越低,要靠<b>精準摻雜補回</b>又不能犧牲壽命 —— 配方是各家壓箱底的營業秘密</div></div>
+      <div class="statline">全球龍頭 <b>堺化學 ~25%</b> · 台廠 <b>信昌電 6173</b> 全台唯一自製瓷粉(利基卡位)</div>
+    </div>
+    <div class="punch">一顆粉的配方,<br>決定整顆電容的<span class="hl">上限</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 6 · 還原氣氛共燒(含窄窗示意圖) -->
+  <article class="slide">
+    <div class="page">6 / 8</div>
+    <div class="head">
+      <div class="h1 sm">決勝一爐:<br><span class="hl">氧氣</span>差一點就全毀</div>
+      <div class="sub">高溫 ~1000–1300°C 共燒 —— 氧分壓的安全窗窄到極限</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">還原共燒:只有<span class="hl">中間這條窄縫</span>能過</div>
+        <svg viewBox="0 0 940 220" preserveAspectRatio="xMidYMid meet">
+          <!-- 窄窗標記 -->
+          <text x="466" y="30" text-anchor="middle" class="slabel g">窄窗</text>
+          <path d="M466 38 l16 26 h-32 z" fill="#12855a"/>
+          <!-- 三段 -->
+          <rect x="60"  y="78" width="360" height="66" fill="#fde5e4" stroke="#d1332e" stroke-width="2"/>
+          <rect x="420" y="70" width="92"  height="82" fill="#d5f2e3" stroke="#12855a" stroke-width="3"/>
+          <rect x="512" y="78" width="368" height="66" fill="#fde5e4" stroke="#d1332e" stroke-width="2"/>
+          <text x="240" y="118" text-anchor="middle" class="slabel">太低→陶瓷漏電</text>
+          <text x="466" y="117" text-anchor="middle" class="slabel g">安全</text>
+          <text x="696" y="118" text-anchor="middle" class="slabel">太高→Ni 氧化</text>
+          <text x="470" y="192" text-anchor="middle" class="slabel">氧分壓 低 ←——————————→ 高</text>
+        </svg>
+      </div>
+      <div class="box amber"><div class="t">為什麼難?</div>
+        <div class="d">氧氣多一點,鎳內電極就<b>氧化</b>;氧氣少一點,陶瓷變半導體<b>漏電</b>。窗口窄到 10⁻¹¹–10⁻¹⁰ atm</div></div>
+      <div class="box blue"><div class="t">難點集大成</div>
+        <div class="d">把「配方 + 薄層 + 千層」的所有挑戰,在這一爐高溫<b>一次引爆</b> → 台廠與日韓最大的代差</div></div>
+    </div>
+    <div class="punch">全在一線之間:<br>氣氛差一點,<span class="hl">整爐報廢</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 7 · 為什麼難 / 現實校正 -->
+  <article class="slide">
+    <div class="page">7 / 8</div>
+    <div class="head">
+      <div class="h1 sm">缺是真的,<br>但台廠<span class="hl">吃得到多少</span>?</div>
+      <div class="sub">熱度很高,先看清三件容易被放大的事</div>
+    </div>
+    <div class="body">
+      <div class="rows">
+        <div class="nrow"><div class="num n3">1</div><div><div class="tt">台廠非主菜</div><div class="dd">最高端(高容 X6S/X7R 高層數)日韓 &gt;80%,台廠全球僅約 1-2 成</div></div></div>
+        <div class="nrow"><div class="num n2">2</div><div><div class="tt">真受惠 ≠ 沾光</div><div class="dd">高功率電阻/電感是真受惠,但那是「非 MLCC」;鋁電容多屬族群沾光</div></div></div>
+        <div class="nrow"><div class="num n1">3</div><div><div class="tt">通路庫存反噬</div><div class="dd">交期拉長易重複下單,原廠一正常化就可能訂單修正</div></div></div>
+      </div>
+      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>行情已大漲一段:</b>5/20-22 曾 16 檔漲停、華新科 3 週翻倍。TrendForce 警告 OEM 全年未上修、通路囤 X5R,H2 有訂單修正風險。</div></div>
+    </div>
+    <div class="punch">缺是真的 —— 但台廠吃<span class="hl">外溢轉單</span>與<br><span class="hl">利基高壓</span>,不是最高端主菜</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 8 · 台廠卡位圖 + 金句 -->
+  <article class="slide">
+    <div class="page">8 / 8</div>
+    <div class="head">
+      <div class="h1 sm">台廠卡在<span class="hl">哪一段</span>?</div>
+      <div class="sub">一條 MLCC 鏈,逐環節看台廠位置</div>
+    </div>
+    <div class="body">
+      <div class="pos">
+        <div class="pseg miss"><div class="seg">上游材料·設備<small>配方粉/Ni膏/共燒爐</small></div><div class="co"><span class="note-line hl">台廠缺席</span><span class="stock intl">堺化學</span><span class="stock intl">昭榮</span><span class="stock intl">則武</span></div></div>
+        <div class="pseg tw"><div class="seg">上游瓷粉<small>介電粉末</small></div><div class="co"><span class="stock">信昌電 6173</span><span class="note-line">全台唯一自製</span></div></div>
+        <div class="pseg core"><div class="seg">MLCC 本體<small>標準品外溢/高容追趕</small></div><div class="co"><span class="stock">華新科 2492</span><span class="stock">國巨 2327</span><span class="note-line hl">最高端日韓 &gt;80%</span></div></div>
+        <div class="pseg tw"><div class="seg">利基高壓 NP0<small>800V AI 電源</small></div><div class="co"><span class="stock">禾伸堂 3026</span><span class="stock">信昌電 6173</span></div></div>
+        <div class="pseg tw"><div class="seg">通路代理<small>缺貨經濟</small></div><div class="co"><span class="stock">蜜望實 8043</span><span class="stock">日電貿 3090</span></div></div>
+        <div class="pseg tw"><div class="seg">其他品類真受惠<small>非 MLCC</small></div><div class="co"><span class="stock">光頡 3624</span><span class="stock">臺慶科 3357</span><span class="note-line">電阻/電感</span></div></div>
+      </div>
+      <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v4c0 2 1 3 3 3h10"/><path d="M4 19v-4c0-2 1-3 3-3h10"/><path d="M15 9l3 3-3 3"/></svg><div><b>別混一條鏈:</b>鋁電容、鉭電容(KEMET)是<span class="hl">另一條鏈</span>;凱美/鈞寶/興勤等多屬族群沾光、AI 真受惠待查。</div></div>
+    </div>
+    <div class="punch">日韓壟斷最高端,台廠甜蜜點在<br><span class="hl">上游瓷粉</span>與 <span class="hl">800V 高壓</span></div>
+    <div class="foot">本文為技術科普 · 台廠吃外溢/利基、非最高端主菜 · 非投資建議</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+</div>
+<script>
+// 網頁預覽:依螢幕寬度把 1080px 卡片縮到剛好塞滿(桌機上限 .5);render 模式不縮。
+(function(){
+  if(document.body.classList.contains('render')) return;
+  function fit(){
+    var z = Math.min(0.5, (window.innerWidth - 28) / 1080);
+    var s = document.querySelectorAll('.slide');
+    for(var i=0;i<s.length;i++){ s[i].style.zoom = z; }
+  }
+  fit();
+  window.addEventListener('resize', fit);
+})();
+</script>
+</body>
+</html>
