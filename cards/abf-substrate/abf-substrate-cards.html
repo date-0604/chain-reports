@@ -60,7 +60,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .sub .hl{color:var(--amber)}
 
 /* 金句 */
-.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:18px 30px;font-size:40px;font-weight:900;line-height:1.32;color:var(--ink);text-align:center}
 .punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
 .punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
 
@@ -91,9 +91,11 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
 
 /* 流程 3+3(3) */
-.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.flow2{display:flex;flex-direction:column;gap:16px;align-items:center;counter-reset:st}
+.flow2 > .arrow-d{display:none}  /* 用步驟編號表達順序、不用中間向下箭頭(避免誤讀 2→5) */
 .frow{display:flex;align-items:stretch;justify-content:center;gap:0}
-.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step{position:relative;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 10px 20px;width:250px;text-align:center}
+.flow2 .step::before{counter-increment:st;content:counter(st);position:absolute;top:-13px;left:-11px;width:36px;height:36px;border-radius:50%;background:var(--brand);color:#fff;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,.16)}
 .step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
 .step small{font-size:20px;color:var(--muted);font-weight:600}
 .step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
@@ -357,7 +359,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
       <div class="nrow"><div class="num n2">2</div><div><div class="tt">設備是瓶頸</div><div class="dd">雷射鑽孔機 backlog 18 個月、14 層 ABF 交期 28 週,誰先買到誰先吃單</div></div></div>
       <div class="nrow"><div class="num n1">3</div><div><div class="tt">頂規在日本手上</div><div class="dd">最高階 GPU FC-BGA 由 Ibiden / Shinko 掌 70-80%,台廠是技術老二</div></div></div>
     </div>
-    <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>數字別當定論:</b>2028 缺口外資估 35-42% 但三套口徑分歧;味之素漲幅仍在協商、非官方定案。</div></div>
+    <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>數字別當定論:</b>2028 缺口外資估 35-42%,各家估算仍有分歧;味之素漲幅仍在協商、非官方定案。</div></div>
   </div>
   <div class="punch">台廠吃的是<span class="hl">製造良率×順價</span>,<br>不是造膜、也不是頂規</div>
   <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
@@ -379,9 +381,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
       <div class="pseg tw"><div class="seg">BT 載板<small>記憶體/HBM 周邊</small></div><div class="co"><span class="stock">南電 8046</span><span class="stock">景碩 3189</span><span class="stock">臻鼎 4958</span></div></div>
       <div class="pseg tw"><div class="seg">玻璃載板 GCS<small>2028+ 接替</small></div><div class="co"><span class="stock">欣興 3037</span><span class="note-line">卡位較弱 · 見玻璃專篇</span></div></div>
     </div>
-    <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v4c0 2 1 3 3 3h10"/><path d="M4 19v-4c0-2 1-3 3-3h10"/><path d="M15 9l3 3-3 3"/></svg><div><b>別誤掛:</b>健鼎3044、華通2313、定穎3715 是 PCB/HDI 廠,不生產 ABF 載板。</div></div>
   </div>
-  <div class="punch">這一段(製造良率)台灣是主場,<br>上下游多握在<span class="hl">日本手上</span></div>
   <div class="foot">本文為技術科普 · ABF 漲價數據以官方法說為準 · 非投資建議</div>
   <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
 </article>

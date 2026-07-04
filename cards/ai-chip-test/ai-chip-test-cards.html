@@ -60,7 +60,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .sub .hl{color:var(--amber)}
 
 /* 金句 */
-.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:18px 30px;font-size:40px;font-weight:900;line-height:1.32;color:var(--ink);text-align:center}
 .punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
 .punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
 
@@ -91,9 +91,11 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
 
 /* 流程 3+3(3) */
-.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.flow2{display:flex;flex-direction:column;gap:16px;align-items:center;counter-reset:st}
+.flow2 > .arrow-d{display:none}  /* 用步驟編號表達順序、不用中間向下箭頭(避免誤讀 2→5) */
 .frow{display:flex;align-items:stretch;justify-content:center;gap:0}
-.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step{position:relative;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 10px 20px;width:250px;text-align:center}
+.flow2 .step::before{counter-increment:st;content:counter(st);position:absolute;top:-13px;left:-11px;width:36px;height:36px;border-radius:50%;background:var(--brand);color:#fff;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,.16)}
 .step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
 .step small{font-size:20px;color:var(--muted);font-weight:600}
 .step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
@@ -376,7 +378,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
         <div class="nrow"><div class="num n2">2</div><div><div class="tt">多是公司自述</div><div class="dd">「測試時間 +100~200%」為京元電自述、無第三方 benchmark;capex 500 億折舊先行</div></div></div>
         <div class="nrow"><div class="num n1">3</div><div><div class="tt">兌現要等</div><div class="dd">欣銓 / 致茂 / 雍智不少是 2026H2 前瞻;2nm 探針卡已被國際三強先卡位</div></div></div>
       </div>
-      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>別重複計:</b>「HBM 記憶體測試」是相鄰的另一題,京元電 / 穎崴 / 旺矽等橫跨兩題,是同一批公司、不是兩批受惠。</div></div>
+      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>相鄰的另一題:</b>「HBM 記憶體測試」是另一條相鄰的測試題,京元電 / 穎崴 / 旺矽等同時橫跨兩題。</div></div>
     </div>
     <div class="punch">台股吃得到<span class="br">介面 + 代工 + SLT</span>,<br>吃不到<span class="hl">測試機本體</span></div>
     <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
@@ -398,9 +400,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
         <div class="pseg core"><div class="seg">SLT 系統級 ★<small>AI 增幅最大</small></div><div class="co"><span class="stock">致茂 2360</span><span class="stock">穎崴 6515</span><span class="stock">鴻勁 7769</span></div></div>
         <div class="pseg tw"><div class="seg">出貨檢測 QA<small>AOI / X-ray</small></div><div class="co"><span class="stock">德律 3030</span><span class="stock">由田 3455</span></div></div>
       </div>
-      <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v4c0 2 1 3 3 3h10"/><path d="M4 19v-4c0-2 1-3 3-3h10"/><path d="M15 9l3 3-3 3"/></svg><div><b>查證護欄:</b>此為概念股列舉、非逐檔佐證;上表是「AI 加速器測試」,勿與「HBM 記憶體測試」重複計。</div></div>
     </div>
-    <div class="punch">算力人人追,把每顆 AI 晶片<br><span class="hl">篩到不出錯</span>才難</div>
     <div class="foot">本文為技術科普 · 測試鏈屬結構性放量但數字多含公司自述 · 非投資建議</div>
     <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
   </article>

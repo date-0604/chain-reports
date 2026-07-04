@@ -60,7 +60,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .sub .hl{color:var(--amber)}
 
 /* 金句 */
-.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:18px 30px;font-size:40px;font-weight:900;line-height:1.32;color:var(--ink);text-align:center}
 .punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
 .punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
 
@@ -91,9 +91,11 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
 
 /* 流程 3+3(3) */
-.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.flow2{display:flex;flex-direction:column;gap:16px;align-items:center;counter-reset:st}
+.flow2 > .arrow-d{display:none}  /* 用步驟編號表達順序、不用中間向下箭頭(避免誤讀 2→5) */
 .frow{display:flex;align-items:stretch;justify-content:center;gap:0}
-.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step{position:relative;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 10px 20px;width:250px;text-align:center}
+.flow2 .step::before{counter-increment:st;content:counter(st);position:absolute;top:-13px;left:-11px;width:36px;height:36px;border-radius:50%;background:var(--brand);color:#fff;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,.16)}
 .step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
 .step small{font-size:20px;color:var(--muted);font-weight:600}
 .step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
@@ -396,11 +398,9 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
       <div class="pseg tw"><div class="seg">機構件<small>滑軌 / 機殼 / 均熱片</small></div><div class="co"><span class="stock">川湖 2059</span><span class="stock">勤誠 8210</span><span class="stock">健策 3653</span></div></div>
       <div class="pseg tw"><div class="seg">PCB midplane 板材<small>交界 · 歸 CCL 鏈</small></div><div class="co"><span class="stock">欣興 3037</span><span class="stock">台光電 2383</span></div></div>
       <div class="pseg miss"><div class="seg">NVLink 銅背板<small>陪跑 · 歸 224G 題</small></div><div class="co"><span class="note-line hl">台廠陪跑</span><span class="stock intl">Amphenol</span></div></div>
-      <div class="pseg miss"><div class="seg">被排除 / 概念<small>敘事風險 · 待查</small></div><div class="co"><span class="stock">技嘉 2376</span><span class="stock">英業達 2356</span><span class="stock">可成 2474</span><span class="stock">臻鼎 4958</span></div></div>
+      <div class="pseg miss"><div class="seg">被排除 / 概念<small>敘事風險</small></div><div class="co"><span class="stock">技嘉 2376</span><span class="stock">英業達 2356</span><span class="stock">可成 2474</span><span class="stock">臻鼎 4958</span></div></div>
     </div>
-    <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v4c0 2 1 3 3 3h10"/><path d="M4 19v-4c0-2 1-3 3-3h10"/><path d="M15 9l3 3-3 3"/></svg><div><b>別混一條鏈:</b>可成/臻鼎是 MGX 名單概念股(列名 ≠ 出貨),銅背板與板材另歸他題、別重複計。</div></div>
   </div>
-  <div class="punch">機櫃全球只有台廠組得動,<br>但最肥的 <span class="hl">L10</span> 正被 NVIDIA 盯上</div>
   <div class="foot">本文為技術科普 · 量確定但毛利歸屬待 2026–27 見真章 · 非投資建議</div>
   <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
 </article>

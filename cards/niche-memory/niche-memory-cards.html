@@ -60,7 +60,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .sub .hl{color:var(--amber)}
 
 /* 金句 */
-.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:18px 30px;font-size:40px;font-weight:900;line-height:1.32;color:var(--ink);text-align:center}
 .punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
 .punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
 
@@ -91,9 +91,11 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
 
 /* 流程 3+3(3) */
-.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.flow2{display:flex;flex-direction:column;gap:16px;align-items:center;counter-reset:st}
+.flow2 > .arrow-d{display:none}  /* 用步驟編號表達順序、不用中間向下箭頭(避免誤讀 2→5) */
 .frow{display:flex;align-items:stretch;justify-content:center;gap:0}
-.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step{position:relative;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 10px 20px;width:250px;text-align:center}
+.flow2 .step::before{counter-increment:st;content:counter(st);position:absolute;top:-13px;left:-11px;width:36px;height:36px;border-radius:50%;background:var(--brand);color:#fff;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,.16)}
 .step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
 .step small{font-size:20px;color:var(--muted);font-weight:600}
 .step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
@@ -375,9 +377,9 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
       <div class="rows">
         <div class="nrow"><div class="num n1">1</div><div><div class="tt">型態別搞混</div><div class="dd">自有產能的「結構定價者」≠ 吃庫存的「週期利益者」;混為一談=循環股低本益比陷阱</div></div></div>
         <div class="nrow"><div class="num n2">2</div><div><div class="tt">供給會回來</div><div class="dd">2027 中系 CXMT DDR4 倍增、力積電放量,是「2H27 轉弱」劇本的破口</div></div></div>
-        <div class="nrow"><div class="num n3">3</div><div><div class="tt">口徑別亂加</div><div class="dd">合約 +58~63%／現貨 +300%／累計 18 倍 是不同口徑,勿混用、勿加總</div></div></div>
+        <div class="nrow"><div class="num n3">3</div><div><div class="tt">口徑別亂加</div><div class="dd">合約 +58~63%／現貨 +300%／累計 18 倍,是三種不同口徑的漲幅</div></div></div>
       </div>
-      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>看懂 nuance:</b>「缺到 2030」是轉述原廠內部報告(待查);連空方大摩都已翻多 —— 漲價「能撐多久」才是最大爭點。</div></div>
+      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>看懂 nuance:</b>「缺到 2030」是轉述原廠內部報告;連空方大摩都已翻多 —— 漲價「能撐多久」才是最大爭點。</div></div>
     </div>
     <div class="punch">缺貨是真的,<br>但<span class="hl">能撐多久</span>是活的問題</div>
     <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
@@ -399,9 +401,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
         <div class="pseg tw"><div class="seg">代工／設計<small>投片價差</small></div><div class="co"><span class="stock">力積電 6770</span><span class="stock">晶豪科 3006</span></div></div>
         <div class="pseg miss"><div class="seg">HBM 本體<small>另題 · 台廠缺席</small></div><div class="co"><span class="note-line hl">台廠缺席</span><span class="stock intl">SK海力士</span><span class="stock intl">三星</span><span class="stock intl">美光</span></div></div>
       </div>
-      <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v4c0 2 1 3 3 3h10"/><path d="M4 19v-4c0-2 1-3 3-3h10"/><path d="M15 9l3 3-3 3"/></svg><div><b>查證護欄:</b>模組通路屬「庫存利益型」、反轉最險;群聯一檔跨兩題、HBM 本體另題,別混為同一條鏈。</div></div>
     </div>
-    <div class="punch">跟漲二十年,<br>台廠第一次<span class="hl">自己喊價</span></div>
     <div class="foot">本文為技術科普 · 漲價「持續性」仍有爭點、須分清公司自述與查證 · 非投資建議</div>
     <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
   </article>

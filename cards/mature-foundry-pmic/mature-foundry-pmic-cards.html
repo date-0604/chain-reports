@@ -60,7 +60,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .sub .hl{color:var(--amber)}
 
 /* 金句 */
-.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:18px 30px;font-size:40px;font-weight:900;line-height:1.32;color:var(--ink);text-align:center}
 .punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
 .punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
 
@@ -91,9 +91,11 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
 .stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
 
 /* 流程 3+3(3) */
-.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.flow2{display:flex;flex-direction:column;gap:16px;align-items:center;counter-reset:st}
+.flow2 > .arrow-d{display:none}  /* 用步驟編號表達順序、不用中間向下箭頭(避免誤讀 2→5) */
 .frow{display:flex;align-items:stretch;justify-content:center;gap:0}
-.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step{position:relative;background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 10px 20px;width:250px;text-align:center}
+.flow2 .step::before{counter-increment:st;content:counter(st);position:absolute;top:-13px;left:-11px;width:36px;height:36px;border-radius:50%;background:var(--brand);color:#fff;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,.16)}
 .step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
 .step small{font-size:20px;color:var(--muted);font-weight:600}
 .step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
@@ -348,7 +350,7 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
         <div class="nrow"><div class="num n2">2</div><div><div class="tt">設計層轉嫁分化</div><div class="dd">致新尚未啟動、茂達協商 0–15%;Q2–Q3 上游已漲、下游未轉嫁最被夾</div></div></div>
         <div class="nrow"><div class="num n1">3</div><div><div class="tt">去中化可期≠已發生</div><div class="dd">無台廠以公司公告確認轉單訂單數字;且行情已大漲一段</div></div></div>
       </div>
-      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>「代工已漲」≠「設計已轉嫁成功」:</b>漲幅有公告 / 法說 / 媒體 / 傳聞四級,別擇一寫死。</div></div>
+      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>「代工已漲」≠「設計已轉嫁成功」:</b>漲幅有公告 / 法說 / 媒體 / 傳聞四級。</div></div>
     </div>
     <div class="punch">8 吋確定性 &gt; 12 吋、代工層 &gt; 設計層<br><small>真受惠 vs 概念股,要分清楚</small></div>
     <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
@@ -367,12 +369,10 @@ body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;
         <div class="pseg core"><div class="seg">8 吋代工 · BCD 平台<small>先吃漲價 · 台灣寡占級</small></div><div class="co"><span class="stock">聯電 2303</span><span class="stock">世界先進 5347</span><span class="stock">力積電 6770</span></div></div>
         <div class="pseg tw"><div class="seg">風扇 / 散熱驅動 IC<small>AI 電源利基 · 有實質市占</small></div><div class="co"><span class="stock">偉詮電 2436</span><span class="stock">茂達 6138</span></div></div>
         <div class="pseg tw"><div class="seg">DDR5 PMIC / 類比設計<small>利基 · 待轉嫁發動</small></div><div class="co"><span class="stock">致新 8081</span></div></div>
-        <div class="pseg tw"><div class="seg">伺服器 / NB 電源 IC<small>已導入但規模小</small></div><div class="co"><span class="stock">力智 6719</span><span class="stock">通嘉 3588</span><span class="note-line hl">· 通嘉概念股待查</span></div></div>
+        <div class="pseg tw"><div class="seg">伺服器 / NB 電源 IC<small>已導入但規模小</small></div><div class="co"><span class="stock">力智 6719</span><span class="stock">通嘉 3588</span></div></div>
         <div class="pseg tw"><div class="seg">中國鏈掛台股<small>非台灣製造口徑</small></div><div class="co"><span class="stock">矽力*-KY 6415</span></div></div>
       </div>
-      <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg><div><b>查證護欄:</b>通嘉屬概念股列舉、矽力是中國鏈(非台灣製造);去中化轉單「可期≠已發生」。</div></div>
     </div>
-    <div class="punch">漲價的本體是<span class="hl">代工層</span>,<br>設計層是<span class="br">利基與選擇權</span></div>
     <div class="foot">本文為技術科普 · 漲幅有公告 / 法說 / 媒體 / 傳聞多版本口徑 · 非投資建議</div>
     <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
   </article>
