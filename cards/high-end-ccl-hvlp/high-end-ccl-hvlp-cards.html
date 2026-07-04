@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!-- 玻璃載板 科普卡片版 (第三高度:入門/科普) — pilot v2
+     資料來源:deep/glass-substrate/glass-substrate-process-chain-light.html
+     v2:預覽改 zoom(修跑版) · emoji→SVG icon · 版面垂直平衡 · 卡3 flow 3+3 · 卡4/5 加剖面示意圖 -->
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玻璃載板 · 科普卡片 8 張</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#0e7490; --brand-soft:#cffafe;
+  --ink:#1c2833; --muted:#5b6b74;
+  --amber:#c2740c; --amber-soft:#fdecd0;
+  --blue:#2563eb;  --blue-soft:#dbeafe;
+  --red:#d1332e;   --red-soft:#fde5e4;
+  --green:#12855a; --green-soft:#d5f2e3;
+  --copper:#c0722b;
+  --card:#edefec; --paper:#ffffff; --line:#d7dbd6; --seal:#0e7490;
+  --font:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:#0d1418;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* 預覽(不進截圖) */
+.preview-head{max-width:1120px;margin:0 auto;padding:26px 20px 6px;color:#c7d2d6}
+.preview-head h1{font-size:20px;font-weight:900;color:#eaf2f4}
+.preview-head p{font-size:13.5px;color:#8ea1a8;margin-top:6px;line-height:1.6}
+.preview-head code{background:#1b262b;padding:2px 7px;border-radius:5px;font-size:12.5px;color:#7fd4e0}
+.preview-head .deep-link{color:#7fd4e0;font-weight:700;white-space:nowrap;text-decoration:underline;margin-left:4px}
+.preview-head .swipe-hint{font-size:12px;color:#5f7480;margin-top:9px;letter-spacing:3px;font-weight:700}
+.deck{display:flex;flex-direction:column;align-items:center;gap:30px;padding:26px 12px 70px}
+/* 網頁預覽:左右滑動輪播(IG 式);render 模式不套用,仍逐卡截圖 */
+body:not(.render) .deck{flex-direction:row;align-items:flex-start;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:16px 12px 30px}
+body:not(.render) .slide{zoom:.42;scroll-snap-align:center}  /* 靜態 fallback;下方 JS 依螢幕寬度精算 */
+
+/* ============ 卡片 (IG 4:5 = 1080×1350) ============ */
+.slide{
+  position:relative;width:1080px;height:1350px;flex:none;
+  background:var(--card);border:14px solid var(--brand);border-radius:40px;
+  padding:56px 58px 104px;display:flex;flex-direction:column;overflow:hidden;
+}
+.slide::after{content:"";position:absolute;inset:10px;border:1px solid rgba(14,116,144,.18);border-radius:28px;pointer-events:none}
+
+.head{flex:none}
+.body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px;margin:14px 0}
+.punch{flex:none}
+.foot{flex:none;margin-top:14px;font-size:20px;color:#8a968f;text-align:center;font-weight:500}
+
+.page{position:absolute;top:28px;right:32px;background:#c9d2cd;color:#42504a;font-size:24px;font-weight:700;padding:6px 20px;border-radius:999px;z-index:3}
+
+.eyebrow{font-size:23px;font-weight:900;color:var(--brand);letter-spacing:3px}
+.h1{font-size:74px;font-weight:900;line-height:1.08;letter-spacing:-1px;margin-top:6px;color:var(--ink)}
+.h1.sm{font-size:58px}
+.h1 .hl{color:var(--amber)} .h1 .br{color:var(--brand)}
+.sub{font-size:33px;font-weight:700;color:var(--muted);margin-top:16px;line-height:1.45}
+.sub .hl{color:var(--amber)}
+
+/* 金句 */
+.punch{background:var(--paper);border:3px solid var(--ink);border-radius:22px;padding:26px 34px;font-size:40px;font-weight:900;line-height:1.35;color:var(--ink);text-align:center}
+.punch .hl{color:var(--amber)} .punch .br{color:var(--brand)}
+.punch small{display:block;font-size:26px;font-weight:700;color:var(--muted);margin-top:8px}
+
+/* 品牌章 — 替換成你的 logo */
+.seal{position:absolute;bottom:32px;right:40px;z-index:3;display:flex;align-items:center;gap:9px;background:var(--seal);color:#eafcff;padding:10px 18px;border-radius:14px;font-weight:900;font-size:22px;letter-spacing:.5px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.seal svg{width:24px;height:24px}
+
+/* SVG icon */
+.ic{width:38px;height:38px;flex:none;vertical-align:-9px}
+
+/* 通用盒 */
+.box{border-radius:18px;padding:20px 24px;font-weight:700}
+.box.blue{background:var(--blue-soft);border:2px solid #9fbdf5;color:#1e3a8a}
+.box.amber{background:var(--amber-soft);border:2px solid #e9b464;color:#8a4b06}
+.box.green{background:var(--green-soft);border:2px solid #8fd6b5;color:#0b5e40}
+.box .t{font-size:30px;font-weight:900;display:flex;align-items:center;gap:12px}
+.box .d{font-size:25px;font-weight:600;margin-top:6px;line-height:1.4;opacity:.92}
+
+.arrow-lbl{font-size:23px;font-weight:800;color:var(--muted);text-align:center}
+.arrow-d{font-size:40px;line-height:1;color:var(--brand);text-align:center}
+
+/* 封裝堆疊(1) */
+.stack{display:flex;flex-direction:column;gap:9px}
+.layer{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 26px;font-size:31px;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.layer small{font-size:22px;font-weight:600;color:var(--muted)}
+.layer.hl{border:3px solid var(--brand);background:linear-gradient(90deg,var(--brand-soft),var(--paper));color:var(--brand)}
+.layer.dim{opacity:.72}
+.stk-note{text-align:center;font-size:23px;color:var(--muted);font-weight:600}
+
+/* 流程 3+3(3) */
+.flow2{display:flex;flex-direction:column;gap:14px;align-items:center}
+.frow{display:flex;align-items:stretch;justify-content:center;gap:0}
+.step{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:20px 10px;width:250px;text-align:center}
+.step b{display:block;font-size:29px;font-weight:900;color:var(--ink)}
+.step small{font-size:20px;color:var(--muted);font-weight:600}
+.step.hot{border:3px solid var(--amber);background:var(--amber-soft)}
+.step.hot b{color:#8a4b06}
+.fa{display:flex;align-items:center;font-size:34px;font-weight:900;color:var(--brand);padding:0 8px}
+
+/* 編號難點(2/7) */
+.nrow{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;gap:18px;align-items:flex-start}
+.nrow .num{flex:none;width:54px;height:54px;border-radius:50%;color:#fff;font-size:31px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.nrow .num.n1{background:var(--blue)} .nrow .num.n2{background:var(--amber)} .nrow .num.n3{background:var(--red)}
+.nrow .tt{font-size:31px;font-weight:900;color:var(--ink)}
+.nrow .dd{font-size:24px;font-weight:600;color:var(--muted);margin-top:3px;line-height:1.35}
+
+/* 成孔星等(4) */
+.rows{display:flex;flex-direction:column;gap:10px}
+.rrow{display:flex;align-items:center;gap:16px;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:15px 22px}
+.rrow.win{border:3px solid var(--green);background:var(--green-soft)}
+.rrow .nm{font-size:28px;font-weight:900;color:var(--ink);flex:1}
+.rrow .nm small{display:block;font-size:21px;font-weight:600;color:var(--muted)}
+.rrow .st{font-size:30px;letter-spacing:2px;color:#e0a63a;white-space:nowrap}
+.rrow.win .nm{color:#0b5e40}
+
+/* 剖面示意圖框(4/5) */
+.fig{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:18px 22px 14px}
+.fig .cap{font-size:24px;font-weight:900;color:var(--ink);text-align:center;margin-bottom:6px}
+.fig .cap .hl{color:var(--amber)}
+.fig svg{display:block;width:100%;height:auto}
+.slabel{font-size:22px;font-weight:800;fill:var(--muted)}
+.slabel.b{fill:var(--brand)} .slabel.c{fill:var(--copper)} .slabel.g{fill:#0b5e40}
+
+.statline{font-size:26px;font-weight:800;color:var(--brand);text-align:center}
+.statline b{color:var(--amber)}
+
+/* 對照(6) */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.panel{border-radius:20px;padding:8px 8px 14px}
+.panel.old{background:var(--red-soft);border:3px solid #e6a9a5}
+.panel.new{background:var(--green-soft);border:3px solid #8fd6b5}
+.panel .ph{text-align:center;font-size:34px;font-weight:900;padding:14px 0 10px}
+.panel .ph small{display:block;font-size:22px;font-weight:700}
+.panel.old .ph{color:#9c211d} .panel.new .ph{color:#0b5e40}
+.crow{background:rgba(255,255,255,.72);border-radius:12px;margin:10px 12px;padding:14px 18px}
+.crow .ck{font-size:21px;font-weight:700;color:var(--muted)}
+.crow .cv{font-size:30px;font-weight:900;color:var(--ink);margin-top:2px;line-height:1.2}
+
+/* callout */
+.callout{border-radius:16px;padding:20px 24px;font-size:27px;font-weight:700;line-height:1.42;display:flex;gap:14px;align-items:flex-start}
+.callout .ic{width:36px;height:36px;margin-top:2px}
+.callout.warn{background:var(--amber-soft);border-left:10px solid var(--amber);color:#8a4b06}
+.callout.insight{background:var(--brand-soft);border-left:10px solid var(--brand);color:#0b5566}
+.callout.risk{background:var(--red-soft);border-left:10px solid var(--red);color:#9c211d}
+.callout .hl{color:var(--amber)}
+
+/* 卡位圖(8) */
+.pos{display:flex;flex-direction:column;gap:7px}
+.pseg{display:grid;grid-template-columns:290px 1fr;gap:16px;align-items:center;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:11px 18px;border-left-width:10px}
+.pseg.miss{border-left-color:var(--red)} .pseg.tw{border-left-color:var(--amber)} .pseg.core{border-left-color:var(--green)}
+.pseg .seg{font-size:27px;font-weight:900;color:var(--ink)}
+.pseg .seg small{display:block;font-size:19px;font-weight:600;color:var(--muted)}
+.pseg .co{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.stock{background:var(--amber-soft);color:#8a4b06;font-size:25px;font-weight:900;padding:5px 14px;border-radius:9px;white-space:nowrap}
+.stock.intl{background:#e3e6e2;color:#5b6b64}
+.note-line{font-size:22px;font-weight:700;color:var(--muted)} .note-line .hl{color:var(--red)}
+</style>
+</head>
+<body>
+<script>if(location.search.includes('render'))document.body.classList.add('render');</script>
+
+<div class="preview-head">
+  <h1>高階 CCL / HVLP 銅箔 · 一次看懂</h1>
+  <p>把 AI 板材「漲價+規格升級」雙循環拆成 8 張圖卡:CCL 怎麼升級、HVLP 銅箔難在哪、台廠卡哪一段。技術科普,非投資建議。 <a class="deep-link" href="../../deep/high-end-ccl-hvlp/高階CCL-HVLP銅箔-process-chain-light.html">看完整深度研究 →</a></p>
+  <p class="swipe-hint">← 左右滑動看 8 張圖卡 →</p>
+</div>
+
+<div class="deck">
+
+<!-- 1 · 封面 -->
+  <article class="slide">
+    <div class="page">1 / 8</div>
+    <div class="head">
+      <div class="eyebrow">產業鏈科普 · AI 板材</div>
+      <div class="h1 sm">高階 <span class="hl">CCL</span> /<br><span class="br">HVLP 銅箔</span></div>
+      <div class="sub">AI 板材「漲價 + 規格升級」雙循環 —<br>台灣<span class="hl">定價權最強</span>的一段</div>
+    </div>
+    <div class="body">
+      <div class="stack">
+        <div class="layer dim">玻纖布 / 石英布(補強材)<small>見 T-Glass 專篇</small></div>
+        <div class="arrow-d">↓</div>
+        <div class="layer hl">HVLP 銅箔 ＋ CCL 配方壓合<small>本篇增量:布之後、載板之前</small></div>
+        <div class="arrow-d">↓</div>
+        <div class="layer dim">高層數 PCB / ABF 載板<small>見 ABF/BT 專篇</small></div>
+      </div>
+      <div class="stk-note">速率衝 1.6T,板材一路升級 M7 → M8 → M9</div>
+    </div>
+    <div class="punch">算力人人追,<br><span class="hl">承載訊號的板材</span>只有少數人做得出</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 2 · 需求 × 痛點 -->
+  <article class="slide">
+    <div class="page">2 / 8</div>
+    <div class="head">
+      <div class="h1 sm">速率衝上 1.6T,<br><span class="hl">舊板材</span>跟不上</div>
+      <div class="sub">訊號越跑越快 → 對「銅箔」和「樹脂」的要求拉到極限</div>
+    </div>
+    <div class="body">
+      <div class="box blue"><div class="t"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-5 4 4 8-8"/><path d="M15 7h5v5"/></svg>需求:訊號速率翻倍 800G → 1.6T</div>
+        <div class="d">交換器 / 加速卡的訊號在板材裡跑得又快又遠 —— 一點損耗都不能有</div></div>
+      <div class="arrow-lbl">所以 ↓ 舊板材露出三個破綻</div>
+      <div class="rows">
+        <div class="nrow"><div class="num n1">1</div><div><div class="tt">訊號會糊</div><div class="dd">樹脂損耗 Df 太高,高速訊號跑遠就衰減、失真(M7≈0.003 要壓到 M9≈0.001)</div></div></div>
+        <div class="nrow"><div class="num n2">2</div><div><div class="tt">銅箔太粗</div><div class="dd">高頻訊號集中在導體表面(趨膚深度僅約 2µm),銅箔一粗就撞「銅瘤」損耗</div></div></div>
+        <div class="nrow"><div class="num n3">3</div><div><div class="tt">大板會爆</div><div class="dd">層數越疊越高,高溫壓合時容易分層、翹曲(爆板)</div></div></div>
+      </div>
+    </div>
+    <div class="punch">問題不在算力,在<span class="hl">板材夠不夠低損、銅箔夠不夠平</span><br><small>要更低 Df 的樹脂 ＋ 更平滑的銅箔</small></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 3 · 全流程地圖 -->
+  <article class="slide">
+    <div class="page">3 / 8</div>
+    <div class="head">
+      <div class="h1 sm">一片高階板材,<br>怎麼<span class="br">做出來</span>?</div>
+      <div class="sub">從樹脂到交貨七道關,精簡成六格 — 難的集中在前中段</div>
+    </div>
+    <div class="body">
+      <div class="flow2">
+        <div class="frow">
+          <div class="step hot"><b>樹脂配方</b><small>低 Df 膠水</small></div>
+          <div class="fa">›</div>
+          <div class="step"><b>布投料</b><small>玻纖 / 石英布</small></div>
+          <div class="fa">›</div>
+          <div class="step hot"><b>HVLP 銅箔</b><small>磨到超平滑</small></div>
+        </div>
+        <div class="arrow-d">↓</div>
+        <div class="frow">
+          <div class="step"><b>含浸</b><small>做成 prepreg</small></div>
+          <div class="fa">›</div>
+          <div class="step"><b>壓合 CCL</b><small>高溫高壓</small></div>
+          <div class="fa">›</div>
+          <div class="step hot"><b>客戶認證</b><small>&gt;9 個月</small></div>
+        </div>
+      </div>
+      <div class="callout insight"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.2 1 2.5h6c0-1.3.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg><div><b>橘色三關最卡:</b>銅箔「低粗糙度」、樹脂「低 Df 配方」、認證「切換難」—— 也是台廠護城河所在。</div></div>
+    </div>
+    <div class="punch">七道製程,勝負集中在<br><span class="hl">銅箔</span>、<span class="hl">配方</span>、<span class="hl">認證</span>三關</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 4 · 黑盒1:HVLP 銅箔(含剖面示意) -->
+  <article class="slide">
+    <div class="page">4 / 8</div>
+    <div class="head">
+      <div class="h1 sm">最卡一關:<br>把銅箔<span class="hl">磨到超平滑</span></div>
+      <div class="sub">高頻訊號集中在表面 —— 銅箔越粗,損耗越大</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">銅箔表面越<span class="hl">粗</span>,高頻訊號越容易撞到「銅瘤」而損耗</div>
+        <svg viewBox="0 0 940 240" preserveAspectRatio="xMidYMid meet">
+          <line x1="470" y1="24" x2="470" y2="212" stroke="#d7dbd6" stroke-width="2"/>
+          <text x="45" y="34" class="slabel c">粗糙:RTF Rz≈2.5µm</text>
+          <text x="505" y="34" class="slabel g">超平:HVLP4 Rz≈0.5µm</text>
+          <!-- 左:粗銅箔(大銅瘤) -->
+          <path d="M45,205 L45,150 L65,110 L85,150 L105,110 L125,150 L145,110 L165,150 L185,110 L205,150 L225,110 L245,150 L265,110 L285,150 L305,110 L325,150 L345,110 L365,150 L385,110 L405,150 L425,110 L445,150 L445,205 Z" fill="#c0722b" stroke="#9c5a1e" stroke-width="2"/>
+          <line x1="45" y1="118" x2="445" y2="118" stroke="#5b6b74" stroke-width="2" stroke-dasharray="7 6"/>
+          <text x="45" y="70" class="slabel" font-size="18">趨膚深度~2µm(訊號集中帶)</text>
+          <path d="M45,96 L75,86 L105,104 L135,88 L165,102 L195,86 L225,104 L255,88 L285,102 L315,86 L345,104 L375,88 L405,102 L435,92" fill="none" stroke="#d1332e" stroke-width="3"/>
+          <text x="45" y="230" class="slabel c" font-size="20">訊號撞到銅瘤 → 損耗↑</text>
+          <!-- 右:超平銅箔(微銅瘤) -->
+          <path d="M505,205 L505,150 L525,142 L545,150 L565,142 L585,150 L605,142 L625,150 L645,142 L665,150 L685,142 L705,150 L725,142 L745,150 L765,142 L785,150 L805,142 L825,150 L845,142 L865,150 L865,205 Z" fill="#c0722b" stroke="#9c5a1e" stroke-width="2"/>
+          <line x1="505" y1="118" x2="865" y2="118" stroke="#5b6b74" stroke-width="2" stroke-dasharray="7 6"/>
+          <path d="M505,100 Q545,86 585,100 Q625,114 665,100 Q705,86 745,100 Q785,114 825,100 Q855,90 865,96" fill="none" stroke="#12855a" stroke-width="3"/>
+          <text x="505" y="230" class="slabel g" font-size="20">訊號跑得順 → 損耗↓</text>
+        </svg>
+      </div>
+      <div class="box amber"><div class="t">物理矛盾:越平滑 ↔ 越黏不牢</div><div class="d">銅箔靠「銅瘤 + 矽烷」咬住樹脂;瘤磨小 → 訊號順了,但附著力也掉了。窗口極窄,正是三井壟斷主因</div></div>
+      <div class="statline">台灣二供 <b>金居 8358</b>(ARTF)· 三井最高階近壟斷、良率僅 7–8 成</div>
+    </div>
+    <div class="punch">磨平不難,<br><span class="hl">磨平又黏得牢</span>才難</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 5 · 黑盒2:M8 → M9 樹脂/石英布 -->
+  <article class="slide">
+    <div class="page">5 / 8</div>
+    <div class="head">
+      <div class="h1 sm">樹脂也要<span class="br">換骨架</span>:<br>M8 → M9</div>
+      <div class="sub">每升一級,樹脂更低損、補強布從玻璃換成石英</div>
+    </div>
+    <div class="body">
+      <div class="compare">
+        <div class="panel old">
+          <div class="ph">M8<small>2026 主流 · 現金牛</small></div>
+          <div class="crow"><div class="ck">樹脂骨架</div><div class="cv">PPO/PPE ＋ BMI</div></div>
+          <div class="crow"><div class="ck">損耗 Df</div><div class="cv">≈ 0.002</div></div>
+          <div class="crow"><div class="ck">補強布</div><div class="cv">Low-Dk 玻纖布</div></div>
+          <div class="crow"><div class="ck">認證</div><div class="cv">成熟 · 多家供</div></div>
+        </div>
+        <div class="panel new">
+          <div class="ph">M9<small>2026H2 小量 · 溢價</small></div>
+          <div class="crow"><div class="ck">樹脂骨架</div><div class="cv">碳氫為主(碳氫:PPO≈2:1)</div></div>
+          <div class="crow"><div class="ck">損耗 Df</div><div class="cv">≈ 0.0008–0.001</div></div>
+          <div class="crow"><div class="ck">補強布</div><div class="cv">石英布 Q-glass</div></div>
+          <div class="crow"><div class="ck">認證</div><div class="cv">壁壘高 · 首發寡</div></div>
+        </div>
+      </div>
+      <div class="statline">再摻球形矽微粉 &gt;40% 控翹曲 · 越低損的樹脂越難黏住超平銅箔</div>
+    </div>
+    <div class="punch">M9 換樹脂、換補強布,<br>ASP 跳到 M7 的 <span class="hl">約 4 倍</span></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 6 · 壓合 + 認證 = CCL 主場(含剖面示意) -->
+  <article class="slide">
+    <div class="page">6 / 8</div>
+    <div class="head">
+      <div class="h1 sm">壓成一片板,<br>還要<span class="hl">過認證</span>才算數</div>
+      <div class="sub">上下銅箔 ＋ 中間樹脂布,高溫高壓壓合成 CCL</div>
+    </div>
+    <div class="body">
+      <div class="fig">
+        <div class="cap">上下<span class="hl">銅箔</span> ＋ 中間樹脂布 → 高溫高壓壓成 CCL</div>
+        <svg viewBox="0 0 940 250" preserveAspectRatio="xMidYMid meet">
+          <!-- 左:疊層(壓合前) -->
+          <text x="215" y="30" class="slabel b" text-anchor="middle" font-size="34" font-weight="900">↓</text>
+          <text x="70" y="30" class="slabel">高溫高壓</text>
+          <rect x="70" y="45" width="290" height="24" fill="#c0722b" stroke="#9c5a1e" stroke-width="2"/>
+          <text x="368" y="62" class="slabel c">HVLP 銅箔</text>
+          <rect x="70" y="88" width="290" height="56" fill="#eef0e2" stroke="#b9c0a8" stroke-width="2"/>
+          <line x1="82" y1="104" x2="348" y2="104" stroke="#c9d0bb" stroke-width="2"/>
+          <line x1="82" y1="116" x2="348" y2="116" stroke="#c9d0bb" stroke-width="2"/>
+          <line x1="82" y1="128" x2="348" y2="128" stroke="#c9d0bb" stroke-width="2"/>
+          <text x="368" y="122" class="slabel">樹脂＋石英布</text>
+          <rect x="70" y="163" width="290" height="24" fill="#c0722b" stroke="#9c5a1e" stroke-width="2"/>
+          <text x="215" y="216" class="slabel b" text-anchor="middle" font-size="34" font-weight="900">↑</text>
+          <!-- 中:箭頭 -->
+          <text x="460" y="150" class="slabel b" font-size="46" font-weight="900">›</text>
+          <!-- 右:壓合後 CCL -->
+          <rect x="505" y="72" width="300" height="120" fill="none" stroke="#0e7490" stroke-width="3" rx="4"/>
+          <rect x="508" y="75" width="294" height="26" fill="#c0722b" stroke="#9c5a1e" stroke-width="1.5"/>
+          <rect x="508" y="101" width="294" height="62" fill="#eef0e2"/>
+          <rect x="508" y="163" width="294" height="26" fill="#c0722b" stroke="#9c5a1e" stroke-width="1.5"/>
+          <text x="655" y="216" class="slabel b" text-anchor="middle">CCL(銅箔基板)</text>
+          <text x="70" y="240" class="slabel c" font-size="20">難點:壓合易分層 · 爆板 · 翹曲</text>
+        </svg>
+      </div>
+      <div class="callout insight"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>認證 &gt;9 個月、切換成本高:</b>台光電首家量產認證 M9 供輝達,先卡先贏、拿定價權(聯茂亦過認證)。</div></div>
+    </div>
+    <div class="punch">設備買得到,<br><span class="hl">良率與認證</span>買不到</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 7 · 為什麼難 / 現實校正 -->
+  <article class="slide">
+    <div class="page">7 / 8</div>
+    <div class="head">
+      <div class="h1 sm">都能出樣了,<br>為什麼<span class="hl">還沒賺爆</span>?</div>
+      <div class="sub">真受惠,但有三個現實要先看懂</div>
+    </div>
+    <div class="body">
+      <div class="rows">
+        <div class="nrow"><div class="num n3">1</div><div><div class="tt">良率是生死線</div><div class="dd">HVLP4 業界平均良率僅約 50%,拉不上去、損耗大就是實質風險</div></div></div>
+        <div class="nrow"><div class="num n2">2</div><div><div class="tt">M9 還在小量</div><div class="dd">2026 多是小量、2027 才放量;當期營收其實仍靠 M8 撐</div></div></div>
+        <div class="nrow"><div class="num n1">3</div><div><div class="tt">上游被日系卡</div><div class="dd">單體樹脂、球形矽微粉仍是日系天下,台廠多靠採購(隱性卡脖子)</div></div></div>
+      </div>
+      <div class="callout warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><div><b>「已認證 ≠ 已放量」:</b>金居 EPS 14.58、市佔 53%、缺口千噸等數字多屬市場小作文、未獨立佐證。</div></div>
+    </div>
+    <div class="punch">方向對,但這是<span class="br">2026–27 的放量題</span><br><small>別把「傳言數字」當成既成事實</small></div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+  <!-- 8 · 台廠卡位圖 + 金句 -->
+  <article class="slide">
+    <div class="page">8 / 8</div>
+    <div class="head">
+      <div class="h1 sm">台廠卡在<span class="hl">哪一段</span>?</div>
+      <div class="sub">一條高階板材鏈,逐環節看台廠位置</div>
+    </div>
+    <div class="body">
+      <div class="pos">
+        <div class="pseg miss"><div class="seg">上游材料<small>單體樹脂 · 球形矽微粉</small></div><div class="co"><span class="note-line hl">台廠缺席</span><span class="stock intl">SABIC</span><span class="stock intl">Admatechs</span><span class="stock intl">Denka</span></div></div>
+        <div class="pseg tw"><div class="seg">HVLP 銅箔<small>低粗糙度處理層</small></div><div class="co"><span class="stock">金居 8358</span><span class="stock">南亞 1303</span><span class="stock intl">三井</span><span class="note-line">· 二供</span></div></div>
+        <div class="pseg tw"><div class="seg">補強布<small>玻纖布 / 石英布</small></div><div class="co"><span class="stock">台玻 1802</span><span class="stock">富喬 1815</span><span class="note-line">· 見 T-Glass</span></div></div>
+        <div class="pseg core"><div class="seg">CCL 配方壓合認證<small>本題主場 · 全球約 37%</small></div><div class="co"><span class="stock">台光電 2383</span><span class="stock">台燿 6274</span><span class="stock">聯茂 6213</span></div></div>
+        <div class="pseg tw"><div class="seg">利基 CCL<small>高頻 + 航太</small></div><div class="co"><span class="stock">騰輝 6672</span></div></div>
+        <div class="pseg tw"><div class="seg">製程設備<small>含浸 / 壓合</small></div><div class="co"><span class="stock">志聖 3567</span><span class="stock">群翊 6664</span><span class="note-line">· 含浸亞泰 alpha</span></div></div>
+      </div>
+      <div class="callout risk"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5v4c0 2 1 3 3 3h10"/><path d="M4 19v-4c0-2 1-3 3-3h10"/><path d="M15 9l3 3-3 3"/></svg><div><b>查證護欄:</b>金居市佔 53%/EPS 14.58/缺口千噸多屬<span class="hl">市場小作文</span>、未獨立佐證;台燿·南亞另跨 T-Glass、下游見 ABF/BT,勿重複計。</div></div>
+    </div>
+    <div class="punch">算力誰都追得上,<br>把訊號<span class="hl">又快又乾淨</span>送過去才難</div>
+    <div class="foot">本文為技術科普 · 市場傳言密度高、務必自行查證 · 非投資建議</div>
+    <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>產業鏈研究</div>
+  </article>
+
+</div>
+<script>
+// 網頁預覽:依螢幕寬度把 1080px 卡片縮到剛好塞滿(桌機上限 .5);render 模式不縮。
+(function(){
+  if(document.body.classList.contains('render')) return;
+  function fit(){
+    var z = Math.min(0.5, (window.innerWidth - 28) / 1080);
+    var s = document.querySelectorAll('.slide');
+    for(var i=0;i<s.length;i++){ s[i].style.zoom = z; }
+  }
+  fit();
+  window.addEventListener('resize', fit);
+})();
+</script>
+</body>
+</html>
