@@ -65,10 +65,19 @@
   .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
   .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
   footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  .calc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;margin:14px 0}
+  .calc .inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .calc label{display:block;font-size:12.5px;font-weight:600;color:var(--sub);margin-bottom:4px}
+  .calc input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--card2);color:var(--txt);font-family:inherit}
+  .calc .out{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .calc .out .res{background:rgba(56,189,248,.1);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .calc .out .res small{display:block;color:var(--accent);font-size:12px;font-weight:600}
+  .calc .out .res b{font-size:22px;color:#fff}
+  @media(max-width:820px){.calc .inputs{grid-template-columns:1fr 1fr}.calc .out{grid-template-columns:1fr 1fr}}
   @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
   p,li{overflow-wrap:anywhere}
   td{overflow-wrap:break-word}
-  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}}
+  @media(max-width:640px){.wrap{padding:16px 11px 56px}h1{font-size:21px}table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}.step{grid-template-columns:36px 1fr;gap:9px}.step .num{width:34px;height:34px}.step:not(:last-child)::before{left:17px}.card{padding:14px 13px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -76,31 +85,35 @@
 
 <header class="hero">
   <h1>AI 散熱鏈 製程鏈 × 供應鏈 深度研究報告</h1>
-  <div class="sub">晶片級 IHS → 封裝級 MCL → TIM → VC/熱導管 → 冷板 → CDU/UQD → 浸沒 → 系統;逐環節難度、台廠/國際對照、對抗式查證</div>
+  <div class="sub">晶片級 IHS → 封裝級 MCL → TIM → VC/熱導管 → 冷板 → CDU/UQD → 浸沒 → 系統;逐環節難度、台廠/國際對照、機型世代細顆粒地圖、對抗式查證</div>
   <div class="meta-row">
-    <span class="pill">產出日期：<b>2026-06</b></span>
-    <span class="pill">研究方法：<b>Workflow 研究＋對抗式查證</b></span>
+    <span class="pill">產出日期：<b>2026-07(補強第 2 輪)</b></span>
+    <span class="pill">研究方法：<b>Workflow 研究＋對抗式查證＋審計補強</b></span>
     <span class="pill">驅動力：<b>機櫃 1MW+/單晶片 2000W+ 撞破氣冷極限</b></span>
+    <span class="pill">月營收時效：<b>最新=2026 年 5 月(6 月營收 7/10 前後公告)</b></span>
     <span class="pill">配對淺色版：<b>AI散熱鏈-process-chain-light.html</b></span>
   </div>
   <div class="toc">
     <a href="#s1">1. 是什麼/瓶頸邏輯</a>
     <a href="#s2">2. 完整熱階層</a>
-    <a href="#s3">3. 逐環節難度</a>
+    <a href="#s3">3. 難度與受惠評分</a>
     <a href="#s4">4. 供應鏈對照</a>
-    <a href="#s5">5. 市場與時程</a>
-    <a href="#s6">6. 投資警示</a>
-    <a href="#s7">7. 資料來源</a>
+    <a href="#s5">5. 元件×供應商×機型世代</a>
+    <a href="#s6">6. 市場口徑與催化劑</a>
+    <a href="#s7">7. 短期 vs 長期節奏</a>
+    <a href="#s8">8. 估值試算</a>
+    <a href="#s9">9. 投資警示/被反駁區</a>
+    <a href="#s10">10. 資料來源</a>
   </div>
 </header>
 
 <!-- 0 -->
-<div class="callout info"><b>一句話總結：</b>AI 把散熱從「可選能效升級」變成「<b>部署前提</b>」——機櫃功率(15kW→GB300 130-140kW→Rubin Ultra 600kW→1MW+)與單晶片 TDP(H100 700W→Rubin 1.8kW→2029 4000W)兩條曲線同時撞破氣冷物理極限,液冷滲透率 14%(2024)→33%(25)→47%(26)。台廠在散熱<b>全球最強</b>:奇鋐/雙鴻(冷板/CDU/VC)、健策(晶片封裝級 IHS→MCL)、高力(BPHE 台灣唯一)、富世達(UQD 首家 NVIDIA 認證出貨)、建準(風扇→液冷泵)。最性感是<b>封裝級 MCL(19/20)</b>與 <b>CDU/UQD(18/20)</b>;最大風險是<b>規格變更砍價</b>(健策均熱片單價 $150→$50 -66% 即實例)與估值已預支。</div>
+<div class="callout info"><b>一句話總結：</b>AI 把散熱從「可選能效升級」變成「<b>部署前提</b>」——機櫃功率(15kW→GB300 ~140kW→VR200 190-230kW→Rubin Ultra Kyber 600kW→1MW+)與單晶片 TDP(H100 700W→Rubin 1.8kW→2029 &gt;4,000W,Dell'Oro 2026/1)兩條曲線同時撞破氣冷物理極限,AI 晶片液冷滲透率 14%(2024)→30%+(2025)→47%(2026,TrendForce 2025/11)。台廠在散熱<b>全球最強</b>:奇鋐/雙鴻(冷板/CDU/VC)、健策(晶片封裝級 IHS→MCL)、高力(BPHE 台灣唯一)、富世達(UQD 首家 NVIDIA 認證出貨)、建準(風扇→液冷泵)——惟「台灣佔 AI 伺服器 9 成」屬<b>伺服器組裝口徑外溢</b>,非每一散熱環節皆 9 成(blog 層口徑)。最性感是<b>封裝級 MCL(19/20)</b>與 <b>CDU/UQD(18/20)</b>;最大風險是<b>規格變更砍價</b>(健策均熱片單價 $150→$50 -66%,TechNews 2026/5/6 即實例)與估值已預支。</div>
 <div class="kpi">
   <div class="box"><div class="v">15kW→1MW+</div><div class="l">機櫃功率(撞破氣冷極限)</div></div>
-  <div class="box"><div class="v">14%→47%</div><div class="l">液冷滲透率(2024→2026,TrendForce)</div></div>
-  <div class="box"><div class="v">$30億→$70億</div><div class="l">資料中心液冷市場 2025→2029(Dell'Oro)</div></div>
-  <div class="box"><div class="v">700W→4000W</div><div class="l">單 GPU TDP(H100→2029)</div></div>
+  <div class="box"><div class="v">14%→47%</div><div class="l">AI 晶片液冷滲透率(2024→2026,TrendForce)</div></div>
+  <div class="box"><div class="v">$30億→$70億</div><div class="l">資料中心液冷 2025→2029(Dell'Oro 2026/1)</div></div>
+  <div class="box"><div class="v">700W→4000W+</div><div class="l">單 GPU TDP(H100→2029,Dell'Oro)</div></div>
 </div>
 
 <!-- 1 -->
@@ -108,66 +121,87 @@
 <div class="card">
   <h3>為何 AI 讓散熱從可選變必要(雙曲線撞極限)</h3>
   <ul>
-    <li><b>機櫃級:</b>傳統 ~15kW、氣冷上限約 35kW/rack(~50 W/cm²);GB200/GB300 NVL72 已 130-140kW,Rubin Ultra Kyber 2027 達 600kW、朝 1MW+ —— 10 倍跳升使液冷成唯一解。</li>
-    <li><b>晶片級:</b>單 GPU TDP H100 700W(氣冷 4U 實務上限 ~400W/GPU)→ B200 ~1,000W → GB300 1.4kW → Rubin ~1,800W → Rubin Ultra 上看 2,300W → 2029 超過 4,000W。</li>
-    <li><b>封裝級:</b>熱通量破 1 kW/cm²,連 TIM2 那層都成瓶頸 → 微通道直接做進封裝蓋(MCL)、把 coolant 拉到離電晶體數十微米。</li>
+    <li><b>機櫃級:</b>傳統 ~15kW、氣冷上限約 35kW/rack(~50 W/cm²);GB200/GB300 NVL72 已 ~120-140kW,VR200 世代 Max Q ~190kW/Max P ~230kW(CES 2026 後多源,郭明錤/hashrateindex 2026/1),Rubin Ultra Kyber 2027H2 達 600kW(DCD 2025/3)、朝 1MW+ —— 10 倍以上跳升使液冷成唯一解。</li>
+    <li><b>晶片級:</b>單 GPU TDP H100 700W(氣冷 4U 實務上限 ~400W/GPU)→ B200 ~1,000W → GB300 1.4kW → Rubin ~1,800W → Rubin Ultra 上看 2,300W → 2029 超過 4,000W(Dell'Oro 2026/1)。</li>
+    <li><b>封裝級:</b>熱通量破 1 kW/cm²,連 TIM2 那層都成瓶頸 → 微通道直接做進封裝蓋(MCL)、把 coolant 拉到離電晶體數十微米;VR200 已上微通道冷板+45°C 入水(NVIDIA 官方 blog 2025/10)。</li>
+    <li><b>需求面實證:</b>NVIDIA Q4 FY26(2026/2/25 公布)單季營收 $681 億(+73% YoY)、資料中心 $623 億、全年 $2,159 億(SEC 8-K);Dell'Oro 實績 DLC 市場 1Q25 +144%、2Q25 +156% YoY——散熱鏈的需求母體與市場實績都在歷史高速區。</li>
   </ul>
 </div>
-
+<div class="card">
+  <h3>新舊技術對比(氣冷 vs 液冷)</h3>
+  <table>
+    <tr><th>項目</th><th>氣冷(舊)</th><th>液冷(新,AI 必要)</th></tr>
+    <tr><td>機櫃散熱上限</td><td>~35kW/rack</td><td>冷板 130kW+(VR200 190-230kW 全冷板)、浸沒更高</td></tr>
+    <tr><td>單晶片可承受</td><td>~400W/GPU</td><td>冷板 1.4kW+、MCL/微流道目標 2000W+(未量產)</td></tr>
+    <tr><td>PUE / 能效</td><td>較差(風扇耗能)</td><td>顯著改善、可回收餘熱;VR200 45°C 入水使多數氣候可用乾冷卻器(NVIDIA 2025/10)</td></tr>
+    <tr><td>台廠卡位</td><td>風扇(成熟、低毛利)</td><td>冷板/CDU/UQD/IHS(高毛利、稀缺認證)</td></tr>
+    <tr><td>風扇的下場</td><td>機櫃內主角</td><td>VR200 compute/NVSwitch tray 無風扇化、風冷 CFM 需求 -80%(郭明錤 2026/1,供應鏈查核)——風扇內容量下移至 sidecar 風扇盤管/設施端</td></tr>
+  </table>
+</div>
 <!-- 2 -->
 <h2 id="s2"><span class="n">2</span>完整熱階層拆解(晶片 → 環境)<span class="conf c-high">高信心</span></h2>
 <p class="sub">8 層:由內(貼著矽)往外。台廠在 ①晶片級、⑤冷板、⑥CDU/UQD 卡位最強;②封裝級 MCL 是最難、最前瞻的增量。</p>
+<div class="card">
+  <h3>供應鏈地圖(四層結構速覽)</h3>
+  <table>
+    <tr><th>層</th><th>內容</th><th>台廠</th><th>國際</th></tr>
+    <tr><td><b>晶片/封裝級</b></td><td>IHS/TIM/MCL</td><td><span class="tag t-tw">健策 3653(IHS/MCL)</span></td><td><span class="tag t-intl">Honeywell(TIM)</span> <span class="tag t-intl">TSMC IMC-Si</span> <span class="tag t-intl">Microsoft microfluidics</span></td></tr>
+    <tr><td><b>模組級</b></td><td>VC/熱導管/冷板</td><td><span class="tag t-tw">奇鋐 3017</span> <span class="tag t-tw">雙鴻 3324</span> <span class="tag t-tw">泰碩 3338</span> <span class="tag t-tw">超眾 6230</span> <span class="tag t-tw">力致 3483</span></td><td><span class="tag t-intl">Boyd(Eaton)</span> <span class="tag t-intl">CoolIT(Ecolab)</span></td></tr>
+    <tr><td><b>機櫃水路</b></td><td>CDU/UQD/manifold/泵</td><td><span class="tag t-tw">高力 8996(BPHE)</span> <span class="tag t-tw">富世達 6805(UQD)</span> <span class="tag t-tw">建準 2421(泵/水冷板)</span> <span class="tag t-tw">台達 2308</span> <span class="tag t-tw">雙鴻 3324</span></td><td><span class="tag t-intl">Vertiv</span> <span class="tag t-intl">CPC/Stäubli/Parker/Danfoss/CEJN</span> <span class="tag t-intl">Nidec</span></td></tr>
+    <tr><td><b>系統設施</b></td><td>RDHx/浸沒/sidecar</td><td><span class="tag t-tw">晟銘電 3013(sidecar)</span> <span class="tag t-tw">緯穎 6669/技嘉 2376(浸沒)</span> <span class="tag t-tw">力致 3483(浸沒)</span></td><td><span class="tag t-intl">Vertiv/Motivair/nVent</span> <span class="tag t-intl">介電液:Solvay/AGC/Chemours(3M 已退場)</span></td></tr>
+  </table>
+  <p class="sub">台廠從晶片封裝級(健策)到機櫃水路(奇鋐/雙鴻/高力/富世達/建準)全段卡位;最上游 TIM 料源(液態金屬/銦鎵/石墨)與最下游介電液仍是國際的天下。</p>
+</div>
 <div class="flow">
   <div class="step"><div class="num">1</div><div class="body">
     <h4>晶片級 — IHS/散熱蓋(lid)+ TIM1</h4>
-    <p>矽與外界間的整合散熱蓋當第一層擴熱。GB200 用全尺寸 IHS(ASP 大跳)、GB300 改沙漏結構+石墨提升 TIM1 良率。</p>
-    <div class="diff">難點:蓋件平整/翹曲/接合;認證 NVIDIA 單一窗口、綁定極深。</div>
+    <p>矽與外界間的整合散熱蓋當第一層擴熱。GB200 用全尺寸 IHS(ASP 大跳)、GB300 改沙漏結構+石墨提升 TIM1 良率;Rubin 自 2026/5 出貨起由雙蓋板改<b>單片式</b>、單價 ~$150→~$50(-66%)(TechNews 2026/5/6)。</p>
+    <div class="diff">難點:蓋件平整/翹曲/接合;認證 NVIDIA 單一窗口、綁定極深——但議價權在客戶,單價可被一次設計變更砍 66%。</div>
     <div class="who">對應:<span class="tag t-tw">健策 3653(全尺寸 IHS)</span> <span class="tag t-intl">Honeywell(TIM)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">2</div><div class="body">
     <h4>封裝級直接晶片散熱 — MCL 微通道水冷蓋 / direct-to-silicon ⭐ 最難</h4>
-    <p>微通道直接做進封裝蓋(MCL)或矽背面,消掉 TIM2 這層最大瓶頸。Rubin R100 首顆破 2000W,NVIDIA 推 MCL/MCCP。</p>
-    <div class="diff">難點:封裝內微通道蝕刻 30-150µm+氣密;CoWoS 整合冷卻可靠度;與 TSMC/原廠共開發極窄門。</div>
-    <div class="who">對應:<span class="tag t-tw">健策 3653(MCL 共開發,傳 2026H2 導入)</span> <span class="tag t-intl">TSMC IMC-Si / Microsoft microfluidics</span> <span class="conf c-med">中(未量產)</span></div>
+    <p>微通道直接做進封裝蓋(MCL)或矽背面,消掉 TIM2 這層最大瓶頸。健策 Computex 2026(6月)首展 MCL、並與<b>佳世達旗下其曜科技</b>合作開發雙相 2P MCL(聯合/CMoney 多源,2026/6);市場預期 MCL 明顯營收貢獻落在 <b>2027H2-2028</b>,2026H2 的 Rubin 世代僅是均熱片→液冷整合的過渡(工商時報 2026/5/29)。</p>
+    <div class="diff">難點:封裝內微通道蝕刻 30-150µm+氣密;CoWoS 整合冷卻可靠度;與 TSMC/原廠共開發極窄門。「獲 NVIDIA 認證」僅見 blog 層、公司未在法說親口證實 <span class="conf c-un">⚪ 未驗證</span></div>
+    <div class="who">對應:<span class="tag t-tw">健策 3653(MCL;2P MCL 與其曜合作)</span> <span class="tag t-intl">TSMC IMC-Si / Microsoft microfluidics</span> <span class="conf c-med">中(未量產)</span></div>
   </div></div>
   <div class="step"><div class="num">3</div><div class="body">
     <h4>TIM 熱介面材料 — 液態金屬 / PCM / 石墨</h4>
     <p>填補 die↔蓋(TIM1)、蓋↔冷板(TIM2)空隙。Rubin 原採銦鎵液態金屬 TIM2、ASP 看三倍。</p>
-    <div class="diff">難點+重大反證:液態金屬腐蝕/外溢——<b>Rubin 因系統組裝液態金屬外溢、改回石墨(回 Blackwell 方案)</b>,路線未定、易被設計變更打亂。</div>
-    <div class="who">對應:<span class="tag t-tw">健策(規格升級題材,但液金退場使 2026 營收估減)</span> <span class="tag t-intl">Honeywell;銦鎵/石墨料源</span> <span class="conf c-med">中</span></div>
+    <div class="diff">難點+重大反證:液態金屬腐蝕/外溢——<b>Rubin 因系統組裝液態金屬外溢、TIM2 退回石墨(回 Blackwell 方案)、冷板鍍金需求同步取消</b>(TechNews 2026/5/6),路線未定、易被設計變更打亂。</div>
+    <div class="who">對應:<span class="tag t-tw">健策(規格升級題材,但液金退場使 2026 營收估減)</span> <span class="tag t-intl">Honeywell;銦鎵/石墨料源(台廠缺席)</span> <span class="conf c-med">中</span></div>
   </div></div>
   <div class="step"><div class="num">4</div><div class="body">
     <h4>模組級 2-phase — VC 均熱板 / 熱導管</h4>
     <p>兩相蒸發-凝結把熱攤平擴散。3D VC 為氣冷天花板,也是轉水冷前的過渡與周邊散熱。</p>
     <div class="diff">難點中高:VC 燒結/真空/抗翹;部分被冷板取代,但仍是記憶體/周邊散熱主力。</div>
-    <div class="who">對應:<span class="tag t-tw">奇鋐 3017(VC 起家)</span> <span class="tag t-tw">雙鴻 3324</span> <span class="tag t-tw">泰碩 3338</span> <span class="conf c-high">高</span></div>
+    <div class="who">對應:<span class="tag t-tw">奇鋐 3017(VC 起家)</span> <span class="tag t-tw">雙鴻 3324</span> <span class="tag t-tw">泰碩 3338</span> <span class="tag t-tw">超眾 6230(熱管/VC)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">5</div><div class="body">
     <h4>冷板 cold plate(單相/兩相、微通道)</h4>
-    <p>直接貼晶片帶走 &gt;80% 機櫃熱。GB300 改「一晶片一冷板」、Rth ≤0.030°C/W、入水 40°C。</p>
-    <div class="diff">難點:微通道 &lt;0.3mm 紊流/壓降/熱阻、銅基微結構;NVIDIA GB300 液冷認證嚴。AI 增幅極大(每晶片一塊、滲透率 76%)。</div>
-    <div class="who">對應:<span class="tag t-tw">奇鋐 3017(40-50% 市占)</span> <span class="tag t-tw">雙鴻 3324</span> <span class="tag t-tw">健策 3653</span> <span class="tag t-intl">Boyd/CoolIT</span> <span class="conf c-high">高</span></div>
+    <p>直接貼晶片帶走 &gt;80% 機櫃熱。GB300 改「一晶片一冷板」(一進一出)、單 tray 快接 6→14 對、系統 252 對約為 GB200 兩倍(ToneCooling 技術 blog,廠商方待交叉)、Rth ≤0.030°C/W、入水 40°C;VR200 升級微通道冷板、TCS 冷卻液流量 +100%(郭明錤 2026/1)。</p>
+    <div class="diff">難點:微通道 &lt;0.3mm 紊流/壓降/熱阻、銅基微結構;NVIDIA 液冷認證嚴。AI 增幅極大——每晶片一塊;伺服器分母口徑滲透率 2026 年底看 76%(GS 口徑,經 Lombard Odier 2026/1 轉述,法人層)。</div>
+    <div class="who">對應:<span class="tag t-tw">奇鋐 3017(市占 40-50% 為法人/媒體推估口徑 ⚪ 無第三方研調拆分)</span> <span class="tag t-tw">雙鴻 3324</span> <span class="tag t-tw">健策 3653</span> <span class="tag t-tw">建準 2421(新進)</span> <span class="tag t-intl">Boyd(Eaton)/CoolIT(Ecolab)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">6</div><div class="body">
     <h4>CDU / manifold / UQD 快接(水路分配)⭐ 高門檻</h4>
-    <p>CDU(泵+板式熱交換器 BPHE+漏液偵測)做熱交換分流;UQD 無溢流快接做熱插拔。VR200 單櫃 UQD 達 500+ 顆。</p>
-    <div class="diff">難點:CDU 內 BPHE/泵/控制、UQD 零洩漏/低壓降/可互換(OCP);漏液=機櫃級災難;NVIDIA+OCP 雙標準認證。</div>
-    <div class="who">對應:<span class="tag t-tw">高力 8996(BPHE 台灣唯一)</span> <span class="tag t-tw">富世達 6805(UQD 首家 NVIDIA 認證出貨)</span> <span class="tag t-tw">雙鴻/台達 2308</span> <span class="tag t-intl">Vertiv/Boyd/CEJN</span> <span class="conf c-high">高</span></div>
+    <p>CDU(泵+板式熱交換器 BPHE+漏液偵測)做熱交換分流;UQD 無溢流快接做熱插拔。VR200 單櫃 UQD 由 120 顆增至 500+ 顆(工商時報 2026/5/6+優分析+經濟日報多源;<b>皆屬供應鏈/法人口徑,非 NVIDIA 官方規格</b>)。</p>
+    <div class="diff">難點:CDU 內 BPHE/泵/控制、UQD 零洩漏/低壓降/可互換(OCP UQD v2);漏液=機櫃級災難;NVIDIA+OCP 雙標準認證。CDU 整機約 40 家競逐、Dell'Oro 預期十年末整併至 &lt;10 家(2025/9/30)。</div>
+    <div class="who">對應:<span class="tag t-tw">高力 8996(BPHE 台灣唯一,國內市佔 ~9 成/全球 ~5%)</span> <span class="tag t-tw">富世達 6805(UQD 首家 NVIDIA 認證出貨)</span> <span class="tag t-tw">嘉澤 3533(UQD 有出貨、量小)</span> <span class="tag t-tw">雙鴻/台達 2308</span> <span class="tag t-intl">Vertiv/CPC/Stäubli/Parker/Danfoss/CEJN</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">7</div><div class="body">
     <h4>浸沒式 immersion(單相/兩相)</h4>
-    <p>整機泡介電液;兩相靠沸騰、傳熱量為單相 10-100 倍。超高密度/PUE 壓力下的替代解。</p>
-    <div class="diff">難點:介電液相容/維運;滲透仍低、與冷板競爭、規格碎片化、商轉慢。</div>
-    <div class="who">對應:<span class="tag t-tw">緯穎/技嘉/台達(系統整合)</span> <span class="tag t-intl">LiquidStack/GRC/3M(介電液)</span> <span class="conf c-med">中</span></div>
+    <p>整機泡介電液;兩相靠沸騰、傳熱量為單相 10-100 倍。超高密度/PUE 壓力下的替代解——但 NVIDIA 主線世代(GB300/VR200/Kyber)均未採用,維持利基定位。</p>
+    <div class="diff">難點:介電液相容/維運;3M 已於 2025 年底全面退出 PFAS/Novec 生產(DCD 2026/1),兩相浸沒直接斷料、替代品(Solvay Galden/AGC/Chemours)仍屬 PFAS 監管標的;滲透仍低、規格碎片化、商轉慢。</div>
+    <div class="who">對應:<span class="tag t-tw">力致 3483(自述年出貨 ~30 套 Total Solution)</span> <span class="tag t-tw">緯穎 6669/技嘉 2376(系統)</span> <span class="tag t-intl">GRC/Submer/LiquidStack(列舉未逐項佐證)</span> <span class="conf c-med">中</span></div>
   </div></div>
   <div class="step"><div class="num">8</div><div class="body">
     <h4>系統/環境 — chiller、後門熱交換 RDHx、sidecar</h4>
-    <p>把機櫃/列的熱排到設施水路再到大氣。RDHx 單櫃達 80kW。</p>
-    <div class="diff">難點中:成熟暖通+高密度化;每座資料中心必備、容量規格上修。</div>
-    <div class="who">對應:<span class="tag t-tw">晟銘電 3013(sidecar,Meta 訂單)</span> <span class="tag t-tw">台達 2308</span> <span class="tag t-intl">Vertiv/Motivair/nVent</span> <span class="conf c-med">中</span></div>
+    <p>把機櫃/列的熱排到設施水路再到大氣。RDHx 單櫃達 80kW;L2A sidecar(如台達 260kW 單台可支援整櫃 Vera Rubin,自由財經/MoneyDJ 2026/6)。</p>
+    <div class="diff">難點中:成熟暖通+高密度化;每座資料中心必備、容量規格上修;設施端機電工程(chiller/管路承包)非本報告追蹤範圍,僅追蹤設備供應商。</div>
+    <div class="who">對應:<span class="tag t-tw">晟銘電 3013(sidecar/機櫃,Meta Minerva 訂單獲 IEK 轉載佐證)</span> <span class="tag t-tw">台達 2308</span> <span class="tag t-tw">元山 6275(SideCar 開發中)</span> <span class="tag t-intl">Vertiv/Motivair/nVent/Legrand/Rittal/Stulz</span> <span class="conf c-med">中</span></div>
   </div></div>
 </div>
-
 <!-- 3 -->
 <h2 id="s3"><span class="n">3</span>逐環節技術難度評分</h2>
 <p class="sub">維度:技術門檻 / 良率挑戰 / AI 需求增幅 / 客戶認證,各 0~5 分(5＝最難)。評分為推估。</p>
@@ -176,26 +210,45 @@
   <tr><td><b>② 封裝級 MCL/direct-to-silicon</b></td><td>5</td><td>5</td><td>4</td><td>5</td><td><b>19</b></td><td>封裝內微通道+氣密、CoWoS 整合冷卻、與 TSMC 共開發</td></tr>
   <tr><td>⑥ CDU/manifold/UQD</td><td>4</td><td>5</td><td>5</td><td>4</td><td>18</td><td>BPHE/泵/零洩漏 UQD;漏液=機櫃級災難</td></tr>
   <tr><td>① 晶片級 IHS/lid/TIM1</td><td>4</td><td>4</td><td>4</td><td>5</td><td>17</td><td>蓋件平整/翹曲;NVIDIA 單一窗口綁定極深</td></tr>
-  <tr><td>⑤ 冷板 cold plate</td><td>4</td><td>4</td><td>5</td><td>4</td><td>17</td><td>微通道 &lt;0.3mm/Rth≤0.030;每晶片一塊、滲透 76%</td></tr>
+  <tr><td>⑤ 冷板 cold plate</td><td>4</td><td>4</td><td>5</td><td>4</td><td>17</td><td>微通道 &lt;0.3mm/Rth≤0.030;每晶片一塊、VR200 流量 +100%</td></tr>
   <tr><td>③ TIM 液態金屬/PCM</td><td>4</td><td>5</td><td>3</td><td>4</td><td>16</td><td>液態金屬外溢致 Rubin 退回石墨即實證;路線未定</td></tr>
-  <tr><td>⑦ 浸沒式</td><td>4</td><td>3</td><td>3</td><td>3</td><td>13</td><td>介電液相容、規格碎片化、商轉慢</td></tr>
+  <tr><td>⑦ 浸沒式</td><td>4</td><td>3</td><td>3</td><td>3</td><td>13</td><td>介電液相容+3M PFAS 退場斷料、規格碎片化、商轉慢</td></tr>
   <tr><td>④ 模組級 VC/heat pipe</td><td>3</td><td>3</td><td>3</td><td>3</td><td>12</td><td>成熟;部分被冷板取代、屬過渡與周邊</td></tr>
   <tr><td>⑧ 系統/環境 RDHx</td><td>3</td><td>2</td><td>4</td><td>3</td><td>12</td><td>成熟暖通+高密度化;設施端非 GPU 原廠窗口</td></tr>
 </table>
-<div class="callout"><b>台股甜蜜點:</b>封裝級 MCL(19,健策)、CDU/UQD(18,高力/富世達)、冷板(17,奇鋐/雙鴻)——台廠在散熱全球最強(台灣佔 AI 伺服器散熱約 9 成)。但 MCL 仍未量產(選擇權)、TIM 路線因液金外溢未定。</div>
-<h3>公司受惠強度評分(報酬,僅列有查證信心者)</h3>
-<p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議。</p>
-<table>
-  <tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
-  <tr><td>奇鋐 3017</td><td>5</td><td>4.5</td><td>5</td><td>4</td><td>4.5</td><td><b>23</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>雙鴻 3324</td><td>5</td><td>4.5</td><td>5</td><td>4</td><td>4</td><td><b>22.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>富世達 6805</td><td>4.5</td><td>5</td><td>4.5</td><td>5</td><td>2.5</td><td><b>21.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>高力 8996</td><td>4.5</td><td>5</td><td>4</td><td>5</td><td>2</td><td><b>20.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>健策 3653</td><td>4.5</td><td>5</td><td>2.5</td><td>4.5</td><td>3</td><td><b>19.5</b></td><td><span class="conf c-med">中(風險高)</span></td></tr>
-  <tr><td>建準 2421</td><td>4</td><td>3.5</td><td>4</td><td>3</td><td>3.5</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
-</table>
-<p class="sub">健策技術卡位最深(封裝級),但商轉時程因液態金屬退場、規格砍價而下修、估值已預支,故總分高而信心標中。受惠評分為推估,僅供參考。</p>
+<div class="callout"><b>台股甜蜜點:</b>封裝級 MCL(19,健策)、CDU/UQD(18,高力/富世達)、冷板(17,奇鋐/雙鴻)——台廠在散熱全球最強(AI 伺服器台系組裝約 9 成,散熱環節寡占但非每環節皆 9 成)。但 MCL 仍未量產(選擇權)、TIM 路線因液金外溢未定。</div>
 
+<div class="card">
+  <h3>受惠族群邏輯(族群 × 核心催化 × 節奏)</h3>
+  <table>
+    <tr><th>族群</th><th>核心催化</th><th>節奏 / 受惠點</th></tr>
+    <tr><td>散熱整機龍頭(奇鋐/雙鴻)</td><td>冷板/CDU/VC 整套放量</td><td>奇鋐 1Q26 EPS 20.17 創高、1-5 月營收 +90.3%(鉅亨 2026/6);雙鴻 2026 目標 +70%/400 億(公司自述,工商 2026/5/22)、整套交付 Meta/AWS ASIC+Google CDU(媒體多源)——現在就有營收</td></tr>
+    <tr><td>水路關鍵件(高力/富世達)</td><td>CDU 內 BPHE + UQD 快接</td><td>高力 BPHE 台灣唯一、1Q26 EPS 6.54 +348%(Yahoo 2026/5);富世達 UQD 首家 NVIDIA 認證出貨、1Q26 EPS 13.38(MoneyDJ 2026/5/8)——現在,且稀缺</td></tr>
+    <tr><td>晶片封裝級(健策)</td><td>IHS→MCL 規格升級</td><td>IHS 現有營收(1-5 月 99.3 億 +20.3%);MCL 貢獻 2027H2-2028(工商 2026/5/29)——近期被 IHS 砍價壓制、遠期選擇權</td></tr>
+    <tr><td>風扇轉型(建準/超眾)</td><td>風扇→液冷泵/水冷板</td><td>建準水冷板 Q1 首批→Q3 小批量→Q4 放量(法說,公司自述);超眾水冷占比 2025 約 2-5%→2026 目標 ~10%(公司自述)</td></tr>
+    <tr><td>系統/機櫃(台達/晟銘電)</td><td>CDU/sidecar/機櫃</td><td>台達水冷占比 2024 &lt;1%→2025 全年 8%、CDU 4Q25 起出貨(法說);晟銘電 Meta Minerva 機櫃年底前量產(IEK 轉載)</td></tr>
+  </table>
+</div>
+
+<h3>公司受惠強度評分(總分排序)</h3>
+<p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議。本輪由 6 檔擴至 13 檔(holds 8+watch 5);元山 6275/艾姆勒 2241 液冷營收未體現、僅樣品或開發階段,列 watch 不評分;動力-KY 6591 查無液冷實質佐證不收錄。</p>
+<table>
+  <tr><th>公司(股號)</th><th>環節</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
+  <tr><td>奇鋐 3017</td><td>冷板/VC/CDU/manifold</td><td>5</td><td>4.5</td><td>5</td><td>4</td><td>4.5</td><td><b>23</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>雙鴻 3324</td><td>冷板/CDU/整套</td><td>5</td><td>4.5</td><td>5</td><td>4</td><td>4</td><td><b>22.5</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>富世達 6805</td><td>UQD 快接</td><td>4.5</td><td>5</td><td>4.5</td><td>5</td><td>2.5</td><td><b>21.5</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>高力 8996</td><td>BPHE(CDU 核心件)</td><td>4.5</td><td>5</td><td>4</td><td>5</td><td>2</td><td><b>20.5</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>健策 3653</td><td>IHS/均熱片→MCL</td><td>4.5</td><td>5</td><td>2.5</td><td>4.5</td><td>3</td><td><b>19.5</b></td><td><span class="conf c-med">中(風險高)</span></td></tr>
+  <tr><td>台達電 2308</td><td>CDU/sidecar/RDHx(散熱段)</td><td>4.5</td><td>4</td><td>4.5</td><td>2.5</td><td>3.5</td><td><b>19</b></td><td><span class="conf c-high">高(散熱段;不與電源鏈雙計)</span></td></tr>
+  <tr><td>建準 2421</td><td>風扇→液冷泵/水冷板</td><td>4</td><td>3.5</td><td>4</td><td>3</td><td>3.5</td><td><b>18</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>晟銘電 3013</td><td>機櫃/sidecar</td><td>4</td><td>2.5</td><td>4</td><td>2</td><td>2.5</td><td><b>15</b></td><td><span class="conf c-med">中(6 月營收 7/10 驗證)</span></td></tr>
+  <tr><td>超眾 6230</td><td>熱管/VC/水冷板</td><td>3.5</td><td>2.5</td><td>2.5</td><td>2</td><td>2</td><td><b>12.5</b></td><td><span class="conf c-med">中(watch;1Q26 EPS -0.91)</span></td></tr>
+  <tr><td>力致 3483</td><td>水冷板/CDU/浸沒</td><td>3</td><td>2.5</td><td>2</td><td>2</td><td>2.5</td><td><b>12</b></td><td><span class="conf c-med">中(watch;浸沒屬選擇權)</span></td></tr>
+  <tr><td>泰碩 3338</td><td>熱導管/VC→CDM/CDU</td><td>2.5</td><td>2</td><td>2</td><td>2</td><td>2</td><td><b>10.5</b></td><td><span class="conf c-un">watch(轉換期承壓)</span></td></tr>
+  <tr><td>廣運 6125</td><td>CDU 系統(子公司金運)</td><td>3</td><td>2</td><td>1.5</td><td>1.5</td><td>2</td><td><b>10</b></td><td><span class="conf c-un">watch(具名客戶未揭露)</span></td></tr>
+  <tr><td>鴻準 2354</td><td>機殼→散熱模組/液冷</td><td>2.5</td><td>2</td><td>1.5</td><td>1.5</td><td>2.5</td><td><b>10</b></td><td><span class="conf c-un">watch(液冷無新佐證)</span></td></tr>
+</table>
+<p class="sub">健策技術卡位最深(封裝級),但商轉時程因液態金屬退場、IHS 規格砍價而下修、估值已預支,故總分高而信心標中。台達電散熱段有具體占比(1Q26 冷卻系統約佔營收 ~9%,豐雲學堂 2026/6)故入 holds,notes 標不與電源鏈雙計。受惠評分為推估,僅供參考。</p>
 <!-- 4 -->
 <h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
 <div class="legend">
@@ -203,116 +256,333 @@
   <span><span class="conf c-med">中</span> 部分佐證/公司自述</span>
   <span><span class="conf c-un">待查</span> 概念/早期</span>
 </div>
-<h3>台廠 × 環節</h3>
+<h3>台廠 × 環節(含 1Q26 財報與 2026/05 月營收快照;6 月營收 7/10 前後公告)</h3>
 <table>
-  <tr><th>公司(股號)</th><th>環節定位</th><th>角色 / 最新數字 / AI 受惠</th><th>查證</th></tr>
-  <tr><td>奇鋐 3017</td><td>散熱龍頭(VC/冷板/CDU)</td><td>全球散熱出貨龍頭;水冷板 GB200/GB300 市占 40-50%、月產能 20 萬→100 萬組(年增 4 倍)、分歧管 1000→7000 套;2026Q1 營收 490 億 +110% YoY、EPS 20.17 創高、毛利率 29.77%、高毛利 Thermal 占比 63.6%</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>雙鴻 3324</td><td>VC/冷板/CDU/快接(整套)</td><td>冷板+CDU+快接整套,客戶 Meta/AWS/Microsoft、NVIDIA GB300 認證;液冷占比 2024 12%→25Q4 ~40%→2026 預期 &gt;55%;2026Q1 EPS 12.61(季增 +25%)、2025 EPS 28.26</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>健策 3653</td><td>晶片封裝級(IHS/均熱片→MCL)</td><td>熱階層最上游(貼 GPU die 的 IHS、未來 MCL);均熱片 ASP 因金屬 TIM2 升、傳率先取得 NVIDIA Rubin MCL 認證(2026H2 導入);2026 前 5 月營收 99.3 億 +20%。<b>風險:液態金屬退回石墨使 2026 營收估減、IHS 單價 $150→$50,股價回檔逾 20%</b></td><td><span class="conf c-high">高(均熱片)/中(MCL)</span></td></tr>
-  <tr><td>高力 8996</td><td>BPHE / CDU(系統熱交換)</td><td>台灣唯一、全球少數量產高品質真空硬銲板式熱交換器(BPHE,CDU 最核心件)、市佔逾 9 成;向 CDU/分歧管升級、橋頭新廠擴產、3-5 年倍增期。</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>富世達 6805</td><td>UQD 快接</td><td>UQD 通過 NVIDIA(GB200/300/VR200)認證、<b>首家正式出貨快接的台廠</b>;2026Q1 營收 41.84 億、EPS 13.38 創高、伺服器占比 36%→50%+</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>建準 2421</td><td>風扇龍頭→液冷泵/水冷板</td><td>伺服器風扇/大型 EC 風扇/液冷泵 + 水冷板新進;2026Q1 營收 50.2 億創高、EPS 2.36、伺服器占比 47%;水冷板 Q4 放量</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>泰碩 3338</td><td>熱導管/VC→CDM/CDU</td><td>熱導管/均溫板向液冷模組延伸;但 2026Q1 EPS 僅 0.27(年減 -56%)、平台轉換期承壓</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>力致 3483</td><td>全品類(風扇/熱導管→水冷板/CDU/浸沒)</td><td>由 NB 風扇轉型 AI 液冷全品類;浸沒式送驗;2026 前 5 月營收 35.6 億(+3% YoY)、動能待放量</td><td><span class="conf c-med">中(未來選擇權)</span></td></tr>
-  <tr><td>鴻準 2354</td><td>金屬機殼→散熱模組/液冷機櫃</td><td>鴻海集團垂直整合;液冷板/CDU/液冷機櫃仍送樣、早期;2026Q1 EPS 0.47(年減 -30%)</td><td><span class="conf c-un">概念/早期</span></td></tr>
-  <tr><td>廣運 6125</td><td>系統/CDU 整合</td><td>子公司金運科技推台灣首批自研 2.5MW 超大型液冷 CDU;液冷實體在未上市子公司、本體佐證較弱</td><td><span class="conf c-un">概念/早期</span></td></tr>
+  <tr><th>公司(股號)</th><th>環節定位</th><th>角色 / 最新數字 / AI 受惠</th><th>2026/05 月營收(最新)</th><th>查證</th></tr>
+  <tr><td>奇鋐 3017</td><td>散熱龍頭(VC/冷板/CDU/manifold)</td><td>全球散熱出貨龍頭;水冷板 GB200/GB300 市占 40-50%(法人/媒體推估口徑 ⚪ 無第三方研調拆分);冷板月產能 20 萬→100 萬組、分歧管 1,000→7,000 套/月、機箱 40 萬→60 萬台(法說,公司自述,經濟日報 2026/6);1Q26 營收 490.38 億 +110.2%、EPS 20.17 創高、毛利率 29.77%、capex 36.57 億 +169%(台視/FTNN 2026/5/14);Thermal 占營收 63.6%;訂單能見度 2029(公司自述);capex 2026 150 億/2027 171 億</td><td>158.71 億 +60.6%;1-5 月 805.41 億 +90.3%(鉅亨 2026/6)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>雙鴻 3324</td><td>VC/冷板/CDU/快接(整套)</td><td>Cold Plate→Manifold→CDU Total Solution;Meta、AWS ASIC 散熱主要供應商+Google CDU 訂單(媒體多源、客戶未具名證實);CDU 2026 開始放量(全年數百台)、2027 挑戰 2,000 台(旺得富 2026/6/2);2026 目標:伺服器占比 72%、水冷 &gt;55%(2025/11 法說,公司自述)、年底單月水冷佔比衝 7 成(2026/5 股東會後媒體引述,時點口徑不同);2026 營收目標 +70%/400 億(股東會上修,公司自述,工商 2026/5/22);1Q26 營收 85.51 億 +93.6%、EPS 12.61 創高、毛利率 29.66%、伺服器占比 76%(經濟日報 2026/5);商機看到 2028(董座自述)</td><td>31.39 億 +93.8%;1-5 月 145.31 億 +80.5%(TechNews 2026/6/8)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>健策 3653</td><td>晶片封裝級(IHS/均熱片→MCL)</td><td>熱階層最上游(貼 GPU die 的 IHS、未來 MCL);<b>Rubin IHS 2026/5 改單片式、單價 ~$150→~$50(-66%),法人估影響 2026 營收 ~60 億/2027 ~130 億(推估非公司財測)</b>;5/6-5/7 連兩根跌停(TechNews/鉅亨 2026/5);MCL 與佳世達旗下其曜合作 2P MCL(Computex 2026/6)、「獲 NVIDIA 認證」⚪ 未驗證(blog 層,公司未親口);MCL 貢獻 2027H2-2028(工商 2026/5/29);1Q26 EPS 9.53(YoY -0.6%,高基期持平)</td><td>23.13 億 +37.8%;1-5 月 99.30 億 +20.3%(鉅亨 2026/6)</td><td><span class="conf c-high">高(IHS)/⚪(MCL 認證)</span></td></tr>
+  <tr><td>高力 8996</td><td>BPHE / CDU(系統熱交換)</td><td>台灣唯一大規模量產真空硬銲板式熱交換器(BPHE,CDU 最核心件)、<b>台灣國內市佔 ~9 成、全球僅 ~5%(全球前五)</b>(多源媒體/估測站口徑,缺研調背書);1Q26 營收 34.23 億 +237.6%、毛利率 30.03%、EPS 6.54 創高 +348%(經濟日報/Yahoo 2026/5);媒體稱液冷已達營收 5 成;泰國廠 2026 投產、橋頭新廠投資 32.5 億、完工 2028 底-2029(公司規劃)(鉅亨 2026/6);向 CDU/分歧管升級、媒體稱進入 3-5 年倍增期(媒體口徑)</td><td>6.32 億 +40.0%;1-5 月 50.03 億 +153.3%(專案型出貨、單月波動大,看累計)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>富世達 6805</td><td>UQD 快接</td><td>UQD 通過 NVIDIA(GB200/300/VR200 送樣中)認證、<b>首家正式出貨快接的台廠</b>(經濟日報 2024/12);2026 快接頭出貨量目標 ~300 萬件(公司自述,年口徑;董事長黃祖模,2025 約 150-200 萬件翻倍);1Q26 營收 41.84 億 +85.8%、毛利率 32.31% 首破三成、EPS 13.38 創高、連三季賺逾一股本(MoneyDJ 2026/5/8);配息 12.5 元;法人估 2026 營收 180-196 億/EPS 60.45-65.17(法人估非公司財測)</td><td>11.80 億 +37.2%;1-5 月 67.17 億 +69.5%(Win投資 2026/6)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>建準 2421</td><td>風扇龍頭→液冷泵/水冷板/CDU</td><td>伺服器風扇/大型 EC 風扇+液冷泵(台廠 pump 環節少數卡位)+水冷板新進;水冷板 1Q26 首批出貨→Q3 整合完成小批量→Q4 放量、3Q26 有新液冷專案量產貢獻(法說,公司自述,vocus 2026/5);惠州液冷產線 2026Q1 量產、CDU 五股 lab 級日產 6-8 台;1Q26 營收 50.19 億 +20.6% 創高、毛利率 31.7%/營益率 15.7% 雙升、EPS 2.36;AI 伺服器占比 22.6%(其中 ASIC 63%)</td><td>16.92 億 +14.9%;1-5 月 85.83 億 +18.2%(CMoney 2026/6)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>台達電 2308</td><td>系統層唯一全棧台廠(CDU/sidecar/RDHx+電源綁售)</td><td>L2A sidecar 2025 營收 &gt;$16 億美元(公司揭露);「Sidecar CDU 全球市占第一」為媒體口徑無研調數字;水冷占比 2024 &lt;1%→2025 全年 8%、CDU 4Q25 小量出貨、2026 散熱看年增 &gt;50%(法說+媒體整理,豐雲學堂 2026/6);產品:3,000kW in-row CDU/2,400kW CDU(800VDC、N+1 電子水泵)/260kW sidecar 單台支援整櫃 Vera Rubin(自由財經/MoneyDJ 2026/6;早期產品線 L2A CDU 80kW、in-rack L2L CDU 200kW/rack、RDHx);1Q26 AI 相關占比 ~40%(冷卻系統 ~9%/電源 ~30%);800VDC 2026H2 小量→2027 放量</td><td>589.62 億 +43.7%;1-5 月 2,770.06 億 +38.0%(鉅亨 2026/6)</td><td><span class="conf c-high">高(散熱段;不與電源鏈雙計)</span></td></tr>
+  <tr><td>晟銘電 3013</td><td>機殼→液冷機櫃/sidecar</td><td>經廣達供 Meta GB200 水冷機櫃+Sidecar 及 Meta MTIA ASIC 專案、2025/11 突破 sidecar 出貨瓶頸(MoneyDJ 2025/12/29);<b>奪 Meta Minerva 專案機櫃/機殼訂單、年底前量產(IEK 產業情報網轉載=第三方研究機構轉述)</b>;「Meta 超過 4 萬櫃」「2026 營收 163 億」僅法人推算 ⚪ 待查;AI 伺服器占營收 47%、泰國廠 2026Q1 量產+二期水冷產線(法說 2025/11);1Q26 EPS 1.37 +63%</td><td>10.06 億 +1.7%;1-5 月 52.5 億 +21.2%(財報狗 2026/5;5 月動能放緩、待 6 月營收驗證)</td><td><span class="conf c-med">中(holds 候選)</span></td></tr>
+  <tr><td>超眾 6230(尼得科超眾)</td><td>熱管/VC 模組+水冷板(新收錄 watch)</td><td>Nidec 集團分工:超眾做氣冷模組+水冷板(崑山)、快接頭/CDU 在泰國、母公司做高瓦數 CDU(Deschutes);水冷占比 2025 約 2-5%→2026 目標 ~10%、水冷業務 2026 逾倍翻升(公司自述,Yahoo 2025/12);1Q26 EPS -0.91(虧損、獲利未跟上)</td><td>1-5 月 39.21 億 +11.7%(HiStock 2026/5)</td><td><span class="conf c-med">中(watch)</span></td></tr>
+  <tr><td>泰碩 3338</td><td>熱導管/VC→CDM/CDU</td><td>熱導管/均溫板向液冷模組延伸;1Q26 EPS 0.27(YoY -56%)、平台轉換期營收獲利仍疲;CDM/CDU 出貨無放量實績(玩股網 2026/6)</td><td>3.25 億 +2.9%;1-5 月 15.10 億 -5.7%</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>力致 3483</td><td>全品類(風扇/熱導管→水冷板/CDU/浸沒)</td><td>NB 風扇轉型 AI 液冷全品類;自述為唯一浸沒式 Total Solution 整套出貨者、年出貨 ~30 套(自製 CDU/管路/Tank)、客戶含國際電信與台 IC 設計(公司自述,MoneyDJ 2025/8);2026H2 目標設美國分公司+取得 NVIDIA 認證;1Q26 EPS 0.17(低基期)</td><td>7.91 億 -16.4%;1-5 月 35.60 億 +3.0%(Win投資 2026/6)</td><td><span class="conf c-med">中(watch;浸沒屬選擇權)</span></td></tr>
+  <tr><td>鴻準 2354</td><td>金屬機殼→散熱模組/液冷機櫃</td><td>鴻海集團垂直整合;6/30 法說:遊戲機占營收 78%、散熱模組占比升至 14%、液冷為成長最快動能(富果法說備忘 2026/6/30)——散熱成長被遊戲機衰退稀釋,液冷客戶未揭露;2026/7 檢索無液冷送樣→訂單新佐證;1Q26 EPS 0.47(YoY -30%)</td><td>87.58 億 -40.6%;1-5 月 405.68 億 -29.6%</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>廣運 6125</td><td>系統/CDU 整合(子公司金運)</td><td>子公司金運科技自研 2.5MW 液冷 CDU、1Q26 轉盈、在手訂單 6 億元(媒體佐證,鉅亨 2026/6-7);盛新+金運籌資 11.8 億、獲大同 1.2 億策略投資;具名終端客戶仍未揭露,升格需具名客戶或連續月營收兌現;1Q26 EPS 0.16</td><td>3.52 億 +79.2%(2023/11 以來新高);1-5 月 14.96 億 +45.5%</td><td><span class="conf c-un">watch(證據增強)</span></td></tr>
+  <tr><td>艾姆勒 2241</td><td>車用散熱→浸沒式樣品(新收錄 watch)</td><td>已取得國際與國內大廠浸沒式散熱樣品訂單、2026 預計貢獻少量營收;目標 2026 營收 +20%、毛利率回 10%+(公司自述,富果 2025/12);1Q26 EPS -0.15(虧幅收斂)——車用為主體、AI 僅樣品階段</td><td>0.62 億 +40.2%;1-5 月 3.75 億 +35.0%</td><td><span class="conf c-un">watch</span></td></tr>
+  <tr><td>元山 6275</td><td>風扇/水冷模組→SideCar/CDU(新收錄 watch)</td><td>已完成 120/150/300kW SideCar 開發、120kW 液冷系統量產機驗證測試中、產品線含 1.4MW In-Row CDU;公司稱 2026 為驗證期、2027 起開花結果(公司自述,鉅亨 2026/6);前 5 月營收比重:車用 48%、高階運算 28%;2026/4 營收 3.49 億 -21.3%——液冷營收未體現</td><td>(4 月 3.49 億 -21.3%;5 月未取得)</td><td><span class="conf c-un">watch</span></td></tr>
 </table>
-<p class="sub">⚠ 二線/概念股(泰碩/鴻準/廣運)題材在、但營收與一手佐證未到位,不錯殺亦不採信。</p>
-<h3>國際 × 環節</h3>
+<p class="sub">⚠ 不收錄與排除:動力-KY 6591(市場點名「機殼液冷」,但 2026/3 營收 1.07 億 -44.3% 連續衰退、查無 AI 液冷實質佐證);「兆勁」查無可辨識掛牌代號與公開資訊(疑口耳傳播名稱);其曜科技為佳世達(2352)集團未上市公司,不得作獨立標的;雙鴻子公司分拆掛牌題材查無公告 ⚪ 不收錄。掛牌核對(2026/7):上市=3017/6805/8996/2421/3653/3338/2354/6125/2308/6230/3013/2241;上櫃=3324/3483/6275;無興櫃/死代號混入。</p>
+
+<h3>國際 × 環節(2026 整併潮後版圖)</h3>
 <table>
-  <tr><th>公司</th><th>環節</th><th>角色</th><th>查證</th></tr>
-  <tr><td>Vertiv(VRT)</td><td>CDU/整機系統龍頭</td><td>CoolChip CDU 121kW(專為 GB300 NVL72);CoolLoop RDHx 80kW</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>Boyd(被 Eaton 收購)</td><td>冷板量產龍頭</td><td>2025/9 累計交付 500 萬片液冷冷板給雲端大廠</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>台達電(2308)</td><td>電源+液冷雙線</td><td>L2A CDU 80kW、in-rack L2L CDU 200kW/rack;RDHx</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>CoolIT / Asetek / Motivair(Schneider)/ nVent</td><td>冷板/CDU/RDHx</td><td>direct-to-chip 純玩家、被併整合中;Motivair 由 Schneider $8.5 億收 75%</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>TSMC IMC-Si / Microsoft microfluidics</td><td>封裝級散熱(前瞻)</td><td>TSMC 矽整合微冷卻 Rth 0.055°C/W;MS in-chip microfluidics 較冷板強 3x(原型)</td><td><span class="conf c-med">中</span></td></tr>
-</table>
-<h3>台灣吃得到多少(逐環節定位)</h3>
-<p class="sub">台灣約佔 AI 伺服器散熱 9 成;在「冷板/CDU 關鍵件 BPHE/UQD/VC」全球最強。封裝級 MCL、TIM 料源、介電液則待補或缺席。定位為質化判斷。</p>
-<table>
-  <tr><th>熱階層</th><th>台廠</th><th>定位</th><th>證據</th></tr>
-  <tr><td>① 晶片級 IHS/lid/TIM1</td><td>健策 3653</td><td><span class="conf c-med">領先 · 單價被砍</span></td><td>供 Rubin 均熱片(一手媒體確認);NVIDIA 改單片式 $150→$50,議價權在客戶</td></tr>
-  <tr><td>② 封裝級 MCL/direct-to-silicon</td><td>健策 3653(共開發傳聞)</td><td><span class="conf c-un">前瞻 · 未量產</span></td><td>MCL 認證/2026H2 為媒體法人估、非法說親口;主導者 TSMC IMC-Si/Microsoft</td></tr>
-  <tr><td>③ TIM 液態金屬/PCM/石墨</td><td>健策 3653</td><td><span class="conf c-med">追趕 · 路線未定</span></td><td>液金外溢退回石墨;銦鎵/石墨料源多在 Honeywell 等國際</td></tr>
-  <tr><td>④ 模組級 VC/熱導管</td><td>奇鋐 3017 / 雙鴻 3324 / 泰碩 3338</td><td><span class="conf c-high">寡占 · 全球主力</span></td><td>台廠 VC/熱導管全球領先;AI 伺服器 VC 子段 CAGR ~24%</td></tr>
-  <tr><td>⑤ 冷板 cold plate</td><td>奇鋐 3017 / 雙鴻 3324 / 健策 3653</td><td><span class="conf c-high">領先/寡占</span></td><td>奇鋐 GB200/300 水冷板市占 40-50%;雙鴻整套交付 Meta/AWS/MS、過 GB300 認證</td></tr>
-  <tr><td>⑥ CDU(BPHE)</td><td>高力 8996 / 雙鴻 3324 / 台達 2308</td><td><span class="conf c-high">高力 BPHE 寡占</span></td><td>高力 BPHE 台灣唯一量產、市佔 &gt;9 成;CDU 整機約 40 家趨飽和</td></tr>
-  <tr><td>⑥ UQD 快接</td><td>富世達 6805</td><td><span class="conf c-high">領先 · 首家認證出貨</span></td><td>UQD 過 NVIDIA(GB200/300/VR200)認證、首家出貨;UQD 子段 CAGR 27-28% 全鏈最快</td></tr>
-  <tr><td>⑥ 液冷泵/水冷板(新進)</td><td>建準 2421</td><td><span class="conf c-med">追趕 · 風扇跨入</span></td><td>1Q26 三率三升、伺服器占比 47%;水冷板/液冷泵 Q4 放量(公司指引)</td></tr>
-  <tr><td>⑦ 浸沒式</td><td>力致 3483 / 緯穎 · 技嘉(系統)</td><td><span class="conf c-med">追趕 · 早期</span></td><td>力致浸沒送驗;介電液主導者為國際 3M/LiquidStack/GRC,料源缺席</td></tr>
-  <tr><td>⑧ 系統/環境 RDHx/sidecar</td><td>台達 2308 / 晟銘電 3013</td><td><span class="conf c-med">追趕 · 穩定非爆發</span></td><td>晟銘電 sidecar 傳 Meta 訂單;RDHx CAGR 僅 6-8%</td></tr>
+  <tr><th>公司</th><th>環節</th><th>角色 / 2026 動態</th><th>查證</th></tr>
+  <tr><td>Vertiv(VRT)</td><td>CDU/整機系統龍頭</td><td>CoolChip CDU 121kW(專為 GB300 NVL72)、CoolLoop RDHx 80kW;GMI 估 2025 液冷市佔 &gt;11.3% 居首;2026/4/27 收購 Strategic Thermal Labs(冷板設計/高密度熱驗證,金額未揭露)向伺服器側延伸(Vertiv 官方新聞稿)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Boyd Thermal(→Eaton)</td><td>冷板量產龍頭</td><td>2025/9 累計交付 500 萬片液冷冷板;<b>Eaton 以 $95 億完成收購(2026/3/12 交割,SEC 8-K)</b>;Boyd Thermal 2026E 營收 $17 億、其中液冷 $15 億;Eaton 打「grid-to-chip」電力+散熱整合,與台達直接對標</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>CoolIT(→Ecolab)</td><td>冷板/CDU 純液冷龍頭</td><td>Dell'Oro 2023 液冷營收前三;<b>Ecolab 以 $47.5 億收購、2026/7/2 提前完成交割(Ecolab 官方新聞稿)</b>;CoolIT YTD 銷售 +100%、NTM 營收 ~$5.5 億(≈8.6x P/S);Ecolab 目標 Global High Tech 2030 達 $40 億</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Motivair(Schneider)/ nVent / Johnson Controls</td><td>CDU/RDHx</td><td>Motivair 由 Schneider $8.5 億收 75%;CDU 賽道約 40 家競逐、Dell'Oro 預期整併至 &lt;10 家(2025/9/30)——11 天內三筆併購合計約 $190 億,國際商整併加速</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Nidec / Cooler Master / Envicool</td><td>CDU(Deschutes 陣營)</td><td>Google 開源 Project Deschutes CDU 規格給 OCP(史上首份 CDU 規格:2MW/3°C 趨近溫差/80 psi);Boyd/Cooler Master/台達/Envicool/Nidec/nVent/Vertiv 於 OCP Summit 2025+SC25 展相容機;Nidec Deschutes 5 原型(官方新聞稿 2025/12/3)——台達在首波名單,奇鋐/雙鴻 CDU 走客戶專案路線未見於名單</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>CPC / Stäubli / Parker / Danfoss / CEJN</td><td>UQD 快接(國際五強)</td><td>OCP UQD 規格 2020 年由 CPC/Parker/Stäubli 工作組制定;UQD v2 標準化盲插/互換幾何與測試協定(OCP 規格文件);Danfoss Hansen 自稱流量高 OCP 標準 25%(公司自述)——台廠僅富世達具規模出貨佐證</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>AWS(自研 IRHX)</td><td>CDU/L2A(自研擠壓)</td><td>與 NVIDIA 11 個月共同開發 IRHX(泵浦單元+配水櫃+風扇盤管)用於 GB200 NVL72;目標 2026 &gt;20% ML 容量液冷化;Dell'Oro 評非顛覆(L2A 屬改裝市場、冷板/manifold 仍外購)——對台廠冷板單影響中性偏正;台廠 ODM 承接與否待查(DCD 2025/7+Dell'Oro 2025/7/14)</td><td><span class="conf c-high">高(事件)/⚪(台廠承接)</span></td></tr>
+  <tr><td>TSMC IMC-Si / Microsoft microfluidics</td><td>封裝級散熱(前瞻)</td><td>TSMC 在 CoWoS 示範 Silicon-Integrated Micro Cooler(DI 水、&gt;7 W/mm²、Rth 0.055°C/W、去 TIM 化)=工程驗證(SemiWiki 2026/1);Microsoft 矽背蝕刻微流道(與 Corintis 合作)實驗室驗證峰溫 -65%、較冷板強 3x=原型(Tom's Hardware 2025/9);「Rubin R100 2000W 功能必需」屬媒體推論不採信</td><td><span class="conf c-med">中(原型/工程驗證)</span></td></tr>
 </table>
 
+<h3>台灣吃得到多少(逐環節定位)</h3>
+<p class="sub">「台灣供應全球 9 成 AI 伺服器」為<b>伺服器組裝口徑</b>外溢(blog 層,無第三方研調逐環節拆分)——實際結構:冷板/VC/manifold/機殼組裝環節台廠寡占,CDU 品牌層與 TIM 材料層由國際商把持。定位為質化判斷。</p>
+<table>
+  <tr><th>熱階層</th><th>台廠</th><th>定位</th><th>證據</th></tr>
+  <tr><td>① 晶片級 IHS/lid/TIM1</td><td>健策 3653</td><td><span class="conf c-med">領先 · 單價被砍</span></td><td>供 Rubin 均熱片(多源媒體確認);NVIDIA 改單片式 $150→$50(TechNews 2026/5/6),議價權在客戶</td></tr>
+  <tr><td>② 封裝級 MCL/direct-to-silicon</td><td>健策 3653(+其曜/佳世達 2P MCL)</td><td><span class="conf c-un">前瞻 · 未量產</span></td><td>MCL 貢獻 2027H2-2028(工商 2026/5/29);「獲 NVIDIA 認證」⚪ blog 層未驗證;國際主導者 TSMC IMC-Si/Microsoft;台系另有奇鋐總座公開看壞 MCL 的「冷板派」對立(經濟日報 2026/2)</td></tr>
+  <tr><td>③ TIM 液態金屬/PCM/石墨</td><td>(台廠料源缺席)</td><td><span class="conf c-un">缺席 · 路線未定</span></td><td>液金外溢退回石墨(TechNews 2026/5/6);銦鎵/石墨料源在 Honeywell/Indium/信越等國際日系(列舉未逐項佐證)</td></tr>
+  <tr><td>④ 模組級 VC/熱導管</td><td>奇鋐 3017 / 雙鴻 3324 / 泰碩 3338 / 超眾 6230</td><td><span class="conf c-high">寡占 · 全球主力</span></td><td>台廠 VC/熱導管全球領先;主晶片 VC 被冷板取代、增量在記憶體/周邊</td></tr>
+  <tr><td>⑤ 冷板 cold plate</td><td>奇鋐 3017 / 雙鴻 3324 / 健策 3653 / 建準 2421(新進)</td><td><span class="conf c-high">領先/寡占</span></td><td>奇鋐冷板月產能規模(→100 萬組/月)遠超國際商(CoolIT 全年營收僅 ~$5.5 億);市占 40-50% 為法人口徑 ⚪;雙鴻整套交付 Meta/AWS、GB300 認證</td></tr>
+  <tr><td>⑥ CDU(BPHE)</td><td>高力 8996 / 台達 2308 / 雙鴻 3324 / 建準 2421</td><td><span class="conf c-high">高力 BPHE 寡占(台灣口徑)</span></td><td>高力 BPHE 台灣唯一量產、國內市佔 ~9 成/全球 ~5%(媒體/估測站口徑);CDU 品牌層由 Vertiv/CoolIT/Boyd 領跑(Dell'Oro),台廠切入點=台達(Deschutes 首波)+雙鴻(Google 訂單)</td></tr>
+  <tr><td>⑥ UQD 快接</td><td>富世達 6805 / 嘉澤 3533</td><td><span class="conf c-high">領先 · 首家認證出貨</span></td><td>富世達 UQD 過 NVIDIA 認證首家出貨;嘉澤 2025 快接頭出貨已逾 1 萬套、量小(媒體/法人 2026);國際五強 CPC/Stäubli/Parker/Danfoss/CEJN 並存</td></tr>
+  <tr><td>⑥ 液冷泵/manifold</td><td>建準 2421(泵)/ 奇鋐 3017(分歧管)/ 晟銘電 3013(岐管)</td><td><span class="conf c-med">泵追趕 · manifold 寡占</span></td><td>建準惠州泵產線 2026Q1 量產(法說);奇鋐分歧管 1,000→7,000 套/月(公司自述);國際泵 Grundfos/Wilo/Nidec(列舉未逐項佐證)</td></tr>
+  <tr><td>⑦ 浸沒式</td><td>力致 3483 / 緯穎 6669 · 技嘉 2376(系統)/ 艾姆勒 2241(樣品)</td><td><span class="conf c-med">追趕 · 利基</span></td><td>力致自述年出貨 ~30 套;介電液(3M PFAS 退場後 Solvay/AGC/Chemours)台廠缺席;NVIDIA 主線世代均未採浸沒</td></tr>
+  <tr><td>⑧ 系統/環境 RDHx/sidecar</td><td>台達 2308 / 晟銘電 3013 / 元山 6275(開發中)</td><td><span class="conf c-med">追趕 · 穩定非爆發</span></td><td>台達 L2A 2025 &gt;$1.6B;晟銘電 Minerva 訂單(IEK 轉載);RDHx 環節台廠基本缺席(僅台達入列國際供應商名單,The Insight Partners);設施端機電工程非本報告範圍</td></tr>
+</table>
 <!-- 5 -->
-<h2 id="s5"><span class="n">5</span>市場規模與量產時程</h2>
+<h2 id="s5"><span class="n">5</span>細顆粒地圖:元件 × 供應商 × 機型世代</h2>
+<p class="sub">列=散熱元件;欄=NVIDIA 機型世代的形態/用量變化+供應商席次。世代軸:<b>GB200 NVL72</b>(2024-25,~120-132kW)→ <b>GB300 NVL72</b>(2025-26,~135-140kW,散熱 BOM ~$50K)→ <b>VR200 NVL72(即 NVL144,以 die 計)</b>(2026H2,45°C 入水,190-230kW,~$56K)→ <b>Rubin Ultra Kyber NVL576</b>(2027H2,600kW)。佐證:高=多源/官方;中=單一可靠源/公司自述;低=媒體/法人;⚪=列舉未逐項佐證。</p>
+<table>
+  <tr><th>元件</th><th>台廠席次</th><th>國際席次</th><th>世代演進(GB200 → GB300 → VR200 → Kyber)</th><th>佐證</th></tr>
+  <tr><td><b>TIM1/TIM2</b></td><td>缺席(料源國際/日系)</td><td>Honeywell/Indium/信越 <span class="conf c-un">⚪ 列舉</span></td><td>GB200/GB300:石墨 TIM2 → Rubin:試銦鎵液金(ASP 看 3 倍)→ 2026/5 退回石墨、鍍金取消 → Kyber:未定</td><td><span class="conf c-med">中(TechNews 2026/5/6)</span></td></tr>
+  <tr><td><b>IHS/均熱蓋(→MCL)</b></td><td>健策 3653(主供,市場共識);MCL 合作:其曜(佳世達)</td><td>無明確競爭者浮出 <span class="conf c-un">⚪</span></td><td>GB300:雙蓋板高規(單顆最高 ~$150)→ Rubin:單片式 ~$50(-66%)→ MCL 蓋板貢獻 2027H2-2028 → Kyber:未定</td><td><span class="conf c-med">中(TechNews+工商 2026/5)</span></td></tr>
+  <tr><td><b>冷板 cold plate</b></td><td>奇鋐(→100 萬組/月,2026H2)、雙鴻、建準(Q4 放量)、超眾(崑山)、力致、健策(液冷模組)</td><td>CoolIT(→Ecolab)、Boyd(→Eaton)、Motivair、STL(→Vertiv)、AWS 自研(與 NVIDIA 共同設計)</td><td>GB200:大冷板多晶片共用 → GB300:每晶片獨立一進一出(Rth ≤0.030°C/W、40°C 入水)→ VR200:微通道冷板、TCS 流量 +100%、45°C 入水 → Kyber:流量 ~2× GB300、待定</td><td><span class="conf c-high">高(產能=公司自述;設計變更=中)</span></td></tr>
+  <tr><td><b>UQD 快接頭</b></td><td>富世達 6805(主要台廠);嘉澤 3533(有出貨、量小,2025 &gt;1 萬套)</td><td>CPC、Stäubli、Parker、Danfoss(Hansen)、CEJN(OCP UQD 標準體系)</td><td>GB200:tray 6 對/系統 ~126 對 → GB300:tray 14 對/系統 252 對(~2×)→ VR200:單櫃 500+ 顆(多源法人口徑,非官方)→ Kyber:更高(無口徑)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td><b>manifold 分歧管</b></td><td>奇鋐(1,000→7,000 套/月)、雙鴻(整套內)、晟銘電(岐管新品)</td><td>Boyd、CoolIT(隨冷板方案)</td><td>隨機櫃功率逐代加大管徑/流量;VR200 TCS 流量 +100% 直接拉高 manifold 規格;市場口徑 MarketsandMarkets 2033 $63.3 億(低信心)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td><b>CDU(in-rack/in-row/sidecar)</b></td><td>台達(3,000kW in-row/2,400kW/260kW sidecar)、雙鴻(2026 數百台→2027 挑戰 2,000 台)、奇鋐、建準(lab 級日產 6-8 台)、力致(浸沒配套)、廣運(2.5MW ⚪)</td><td>Vertiv、CoolIT(Ecolab)、Boyd(Eaton)、Motivair、Nidec(Deschutes 5, 2MW)、nVent、Envicool、Johnson Controls 等 ~40 家</td><td>GB200/GB300:L2A sidecar 與 in-row 並行 → VR200:L2L 加速+45°C 入水、260kW sidecar 可撐單櫃 → Kyber 600kW:朝 Deschutes 級 2MW in-row/設施級</td><td><span class="conf c-high">高(Dell'Oro+官方);整併風險:&lt;10 家存活</span></td></tr>
+  <tr><td><b>BPHE 板式熱交換器</b></td><td>高力 8996(CDU 內核心;1Q26 EPS 6.54)</td><td>Alfa Laval、SWEP、Danfoss <span class="conf c-un">⚪ 列舉</span></td><td>隨 CDU 功率逐代放大;L2A→L2L 轉換提升 BPHE 用量(TrendForce 2025/11)</td><td><span class="conf c-med">中(高力)/⚪(國際)</span></td></tr>
+  <tr><td><b>泵浦 pump</b></td><td>建準(惠州 2026Q1 量產)、台達(2,400kW CDU 內 N+1 電子水泵)</td><td>Grundfos、Wilo、Nidec <span class="conf c-un">⚪ 列舉</span></td><td>VR200 TCS 流量 +100% → 泵浦規格/冗餘升級(N+1)</td><td><span class="conf c-med">中(台廠)</span></td></tr>
+  <tr><td><b>RDHx 後門熱交換</b></td><td>台達;其餘台廠缺席</td><td>nVent、Legrand(USystems)、Motivair、Airedale(Modine)、Rittal、Stulz、Vertiv、Boyd</td><td>氣冷輔助/舊世代改造為主;AI 主線世代非核心;市場 2030 ~$14.55 億(The Insight Partners,低信心)</td><td><span class="conf c-low">低-中</span></td></tr>
+  <tr><td><b>風扇/風牆</b></td><td>建準、台達、奇鋐</td><td>Nidec、ebm-papst <span class="conf c-un">⚪</span></td><td>GB300:仍需風冷輔助 → VR200:compute/NVSwitch tray 無風扇化、風冷 CFM -80%(郭明錤)→ 風扇內容量下移至 sidecar 風扇盤管/設施端</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td><b>浸沒槽/介電液</b></td><td>力致(~30 套/年 Total Solution,自述)、緯穎 6669/技嘉 2376(存量參與)、艾姆勒(樣品)</td><td>GRC/Submer/LiquidStack <span class="conf c-un">⚪</span>;介電液:3M 退場→Solvay/AGC/Chemours(仍 PFAS)/合成酯碳氫</td><td>NVIDIA 主線各世代均未採用;利基(電信/邊緣/ASIC);部分 blog「Kyber 完全浸沒」與官方架構不符、不採信</td><td><span class="conf c-med">中(力致/3M)/⚪(其餘)</span></td></tr>
+  <tr><td><b>單櫃散熱 BOM 價值</b></td><td>—</td><td>—</td><td>GB200 ~$35K(舊口徑,另一估算源)→ GB300 NVL72 ~$50K(Morgan Stanley 估 $49,860,法人估)→ VR NVL144 ~$56K(+12%,Tom's Hardware 2025/12)→ Kyber 600kW:無可靠口徑(待補)。兩套估算源不可混用</td><td><span class="conf c-med">中</span></td></tr>
+</table>
+<div class="callout info"><b>世代軸解讀:</b>散熱含量逐代跳增的三個硬指標——①UQD 用量 126 對→252 對→500+ 顆;②冷卻液流量 GB300→VR200 +100%、Kyber 再 ~2×;③單櫃散熱 BOM $50K→$56K(→Kyber 待補)。台廠受惠最大的環節=每代「用量 × 單價」同時上修的 UQD/manifold/冷板;風扇是唯一逐代下修的元件(內容量移往設施端)。</div>
+<!-- 6 -->
+<h2 id="s6"><span class="n">6</span>市場規模(多研調口徑)與催化劑時間軸</h2>
 <div class="card">
   <h3>市場規模(逐子段 × 多研調口徑;Dell'Oro 為大盤主口徑)</h3>
   <table>
-    <tr><th>子市場</th><th>多研調口徑</th><th>分歧 / 備註</th></tr>
-    <tr><td>資料中心液冷大盤</td><td>Dell'Oro(主口徑):2025 $30 億→2029 $70 億(DLC 2Q25 +156%);MarketsandMarkets:2033 $27.65 億;Grand View/GMI:2026 $4-6 億(設備本體)</td><td>是否含服務/設施/浸沒、製造商營收 vs 系統總值;Dell'Oro 最常被台廠法說引用</td></tr>
-    <tr><td>CDU</td><td>Fortune BI:2026 $25.4 億→2034 $73.8 億(14.3%);Persistence:2026 $19 億→2033 $61 億;Dell'Oro:2029 約 $60 億(約 40 家趨飽和)</td><td>是否含 in-row/in-rack/sidecar 全形態;飽和對上游件(高力 BPHE)有利、對純組裝是價格壓力</td></tr>
-    <tr><td>冷板 Direct-to-Chip</td><td>FMI:2026 $3.2 億→2036 $13.9 億(15.8%);Fact.MR:2026 $3.4 億→2036 $6.7 億(7.0%);IndexBox:CAGR 24-28%</td><td>CAGR 7% vs 28% 差極大(成熟組件 vs 系統價值綁 GPU 滲透);真 alpha 看每晶片一塊+滲透率</td></tr>
-    <tr><td>UQD 通用快接</td><td>Valuates/QYResearch:2024 $4.58 億→2030 $19.31 億(CAGR 27-28%)</td><td>整鏈成長最快子段(每櫃用量暴增、VR200 單櫃 500+ 顆)→直接對應富世達</td></tr>
-    <tr><td>VC 均熱板(AI 伺服器用)</td><td>QYResearch:AI 伺服器 VC 2025 $4.5 億→2032 $27.6 億(24%);VC 大盤(含消費)CAGR 僅 ~10%</td><td>大盤被消費稀釋;AI 子段才是奇鋐/雙鴻/泰碩受惠點;主晶片 VC 正被冷板取代</td></tr>
-    <tr><td>浸沒式 immersion</td><td>Mordor:資料中心浸沒 2026 $5.72 億→2031 $13.33 億(18.4%);Strategic MR:兩相 2024 $1.3 億→2030 $5.8 億(28.5%)</td><td>兩相 CAGR 高但受 PFAS 法規+介電液成本拖累、商轉慢;滲透低、規格碎片化</td></tr>
-    <tr><td>TIM 熱介面 / DCPI</td><td>Persistence:TIM 2026 $51 億→2033 $110 億(含 EV/封裝/消費);DCPI(含液冷+配電)2029 達 $610 億(CAGR 14%)</td><td>TIM 大盤是綜合體、資料中心僅一塊;健策受惠在 IHS+TIM2 規格升級而非 TIM 大盤(液金已退回石墨)</td></tr>
+    <tr><th>子市場</th><th>多研調口徑(來源+日期)</th><th>分歧主因 / 備註</th></tr>
+    <tr><td><b>資料中心液冷大盤</b></td><td>Dell'Oro(主口徑,2026/1):2025 ~$30 億→2029 逼近 $70 億(年度、製造商營收);其後上修:DLC 2030 突破 $80 億(2026/6 新聞稿);Grand View(2026/6 報告頁):2025 $66.5 億→2026 $81.7 億→2033 $294.6 億(CAGR 20.1%);GMI(2026/6):2025 $48 億→2026 $60 億→2035 $271 億;Persistence(2026/6):2026 $57 億→2033 $292 億;MarketsandMarkets(2026/5):2026 $40.7 億→<b>2033 $276.5 億(USD 27.65 billion)</b></td><td>①<b>累計 vs 年度</b>:Dell'Oro 2024/7 舊版「五年累計 &gt;$150 億(2024-2028)」是累計口徑,常被誤引為年度規模;②<b>單位</b>:MnM 2033 口徑為 $27.65B(billion),先前「$27.65 億」為單位誤植已更正;③是否含服務/設施/浸沒。Dell'Oro 最常被台廠法說引用</td></tr>
+    <tr><td><b>大盤實績(成長率)</b></td><td>Dell'Oro:DLC 1Q25 +144%、2Q25 +156% YoY(2025/10 分析)</td><td>實績非預測;高速成長期的一手研調錨點</td></tr>
+    <tr><td><b>上位口徑 DCPI</b></td><td>Dell'Oro(2026/3):資料中心實體基礎設施(含散熱+配電)4Q25 單季 $109 億 +20% YoY;2030 全年突破 $800 億</td><td>DCPI ≠ 液冷,引用須標明避免口徑混用</td></tr>
+    <tr><td><b>液冷滲透率</b></td><td>TrendForce(分母=AI 晶片):2024 ~14%→2025 &gt;30%(2025/8/21)→2026 47%(2025/11/27;AI 伺服器出貨 2026 +20%+);Goldman Sachs(分母=AI 伺服器台數,經 Lombard Odier 2026/1 轉述):2024 15%→2025 54%→2026 年底 76%</td><td><b>47% vs 76% 分歧=分母不同、不矛盾</b>:高階機櫃(NVL72 級)幾乎 100% 液冷,拉高以伺服器計的比率;GS/76% 為法人層(tier 不高於 secondary),引用必標分母</td></tr>
+    <tr><td><b>CDU</b></td><td>Valuates(2024/9):2023 $11.31 億→2030 $41.62 億(19.0%);LP Information(僅 L2A CDU):2024 $3.36 億→2030 $9.88 億(19.7%);Persistence 轉述口徑:2022 $15 億→2030 $32 億(10.3%,原文待核);Dell'Oro:DLC 2029 ~$60 億、CDU 為競爭最激烈環節(~40 家→&lt;10 家)</td><td>是否只算 L2A 子集、基年抓在爆發前後;飽和對上游件(高力 BPHE)有利、對純組裝是價格壓力</td></tr>
+    <tr><td><b>UQD 通用快接(三家口徑補齊)</b></td><td>①Valuates/QYResearch(2025/3):2023 $3.72 億→2030 $19.31 億(27.1%);②MarketsandMarkets(2026/6):2025 $3.9 億→2030 $7.5 億(14.3%);③Intel Market Research(2026/6):2024 $0.95 億→2031 $26.30 億(46.05%)</td><td>2030-31 落點差 3.5 倍;分歧主因:基年規模認定(UQD 標準品 vs 含專有快接頭)與 AI 機櫃單櫃用量假設;整鏈成長最快子段→直接對應富世達</td></tr>
+    <tr><td><b>冷板 cold plate(三家口徑)</b></td><td>①DataM Intelligence(泛工業):2025 $6.93 億→2035 $12 億(5.6%);②Persistence(資料中心液冷內冷板段):2026 &gt;$31 億、佔 DLC &gt;55%;③IndexBox:hyperscale 驅動看增至 2035</td><td>泛工業 vs 資料中心專用口徑差近 5 倍,引用必標;真 alpha 看「每晶片一塊+滲透率」而非泛工業盤</td></tr>
+    <tr><td><b>manifold 分歧管</b></td><td>MarketsandMarkets(2025/6):2033 $63.3 億</td><td>單一研調口徑(低信心);台廠實物錨點=奇鋐 7,000 套/月擴產</td></tr>
+    <tr><td><b>浸沒式 immersion(三家口徑)</b></td><td>①Grand View(泛浸沒):2024 $2.87 億→2030 $10.07 億(23.6%);②Mordor(DC 浸沒):2025 $10.0 億→2030 $31.8 億(26.15%);③Grand View(DC 液體浸沒另一報告):2030 $72.2 億(22.3%)</td><td>三口徑差 7 倍;相對冷板路線 2030 前仍小眾(vs 液冷大盤 2033 $270 億+);單相佔 70.6%(2024, GVR);3M PFAS 退場為兩相硬約束</td></tr>
+    <tr><td><b>VC 均熱板(AI 伺服器用)</b></td><td>QYResearch:AI 伺服器 VC 2025 $4.5 億→2032 $27.6 億(CAGR ~24%);VC 大盤(含消費)CAGR 僅 ~10%</td><td>大盤被消費稀釋;AI 子段才是奇鋐/雙鴻/泰碩受惠點;主晶片 VC 正被冷板取代、增量在記憶體/周邊</td></tr>
+    <tr><td><b>RDHx 後門熱交換</b></td><td>The Insight Partners:2030 ~$14.55 億;另家 CAGR 5.8%(2026-2035)</td><td>低信心;台廠僅台達入列供應商名單</td></tr>
+    <tr><td><b>單櫃散熱 BOM</b></td><td>Morgan Stanley:GB300 NVL72 液冷零組件 $49,860/櫃(法人估);Tom's Hardware(2025/12 引供應鏈):GB300 ~$50K→VR NVL144 ~$56K</td><td>與舊口徑「GB200 $3.5 萬→GB300 $6.3-6.5 萬」分屬不同估算源、不可混用;以 Tom's Hardware 為主口徑</td></tr>
   </table>
-  <p class="sub">建議以 Dell'Oro 為大盤主口徑(設備製造商營收、最常被台廠法說引用),其餘研調終值差距大,屬量級參考非硬數字。液冷滲透率 14%→33%→47%(TrendForce);50-76% 口徑分歧大。</p>
-  <h3>催化劑時間軸(2025-2027)</h3>
+  <p class="sub">主口徑原則:大盤與 CDU 以 Dell'Oro(設備製造商營收、最常被台廠法說引用)為準;其餘研調終值差距大,屬量級參考非硬數字。TIM 大盤(Persistence 2026 $51 億→2033 $110 億,含 EV/封裝/消費)是綜合體、資料中心僅一塊,健策受惠在 IHS/Stiffener 規格升級而非 TIM 大盤。</p>
+
+  <h3>催化劑時間軸(2025/03 → 2028;含來源型別)</h3>
   <table>
-    <tr><th>時點</th><th>狀態</th><th>事件</th><th>影響</th></tr>
-    <tr><td>2025/Q3</td><td><span class="conf c-high">已發生</span></td><td>GB300 NVL72 進入量產、全液冷成標配(Quanta 9 月出貨)</td><td>冷板/CDU/UQD 由選配變標配,啟動奇鋐/雙鴻/富世達主升段</td></tr>
-    <tr><td>2025/09</td><td><span class="conf c-med">原型</span></td><td>Microsoft 公布 in-chip microfluidics(降峰溫 65%、較冷板強 3x)</td><td>封裝級 MCL 路線獲背書(長線利多健策/TSMC IMC-Si);仍實驗、屬選擇權</td></tr>
-    <tr><td>2025/10</td><td><span class="conf c-high">已發生</span></td><td>Google 開源 Project Deschutes 2MW CDU(OCP),多廠相容</td><td>CDU 標準化抬高量產門檻、利多高力 BPHE 上游件;組裝廠議價權部分移轉</td></tr>
-    <tr><td>2026/01</td><td><span class="conf c-high">已發生</span></td><td>CES:Rubin R100 首破 2000W;Dell'Oro 上修液冷 2025 $30 億→2029 $70 億</td><td>確立液冷由能效升級變部署前提;市場規模一手機構數字</td></tr>
-    <tr><td>2026/Q1</td><td><span class="conf c-high">已發生</span></td><td>Vera Rubin NVL144 量產(~120-130kW/rack);奇鋐/雙鴻/建準/富世達 1Q26 EPS 創高</td><td>水路核心族群基本面背書;VR200 每櫃液冷價值 $3.5 萬→$6.3-6.5 萬(+50%,法人估)</td></tr>
-    <tr><td>2026/03</td><td><span class="conf c-high">已發生</span></td><td>整併潮:Ecolab $47.5 億收 CoolIT;Eaton 完成收購 Boyd Thermal</td><td>液冷關鍵件被巨頭垂直整併,壓縮純玩家、抬高國際門檻(台廠被併或被擠雙面)</td></tr>
-    <tr><td>2026/05</td><td><span class="conf c-low">負面</span></td><td>NVIDIA 要求 Rubin 均熱片改單片、TIM2 由液態金屬退回石墨;健策單價 $150→$50(-66%)</td><td>規格變更可單向砍價的實證;TIM 升級題材時程重評</td></tr>
-    <tr><td>2026/06</td><td><span class="conf c-med">進行中</span></td><td>Computex 散熱液冷專題;TrendForce 估 2026 NVL72 機櫃需求 5-6 萬台</td><td>需求能見度延伸至全年;惟滲透率 47-76% 口徑分歧大</td></tr>
-    <tr><td>2026/H2</td><td><span class="conf c-un">前瞻</span></td><td>Vera Rubin 放量;健策 MCL 傳導入;建準水冷板 Q4 放量;力致浸沒送驗</td><td>多數承重成長集中 2026H2;MCL/浸沒屬未兌現選擇權</td></tr>
-    <tr><td>2027/H2</td><td><span class="conf c-un">前瞻</span></td><td>Rubin Ultra NVL576「Kyber」600kW 機櫃、單晶片 2300W 量產</td><td>封裝級散熱(MCL)真正兌現點;每櫃 UQD/BPHE/冷板 TAM 續擴</td></tr>
+    <tr><th>時點</th><th>來源型別</th><th>狀態</th><th>事件</th><th>影響</th></tr>
+    <tr><td>2025/03</td><td>公告(GTC)</td><td><span class="conf c-high">已發生</span></td><td>NVIDIA 公告 Rubin Ultra NVL576「Kyber」~600kW、2027H2;576 GPU die/櫃、800VDC、冷卻液流量 ~2× GB300、機櫃風量需求 -80%(DCD 2025/3)</td><td>2027H2 為散熱含量再跳增的錨點;連 HGX 8-GPU 伺服器都需液冷</td></tr>
+    <tr><td>2025/07/09</td><td>公告+研調評估</td><td><span class="conf c-high">已發生</span></td><td>AWS 發表自研 IRHX 液冷(CDU+L2A);Vertiv/Munters 股價應聲跌;Dell'Oro(7/14)判非顛覆</td><td>自研壓縮第三方 CDU TAM、冷板/manifold 仍外購;台廠 ODM 承接待查</td></tr>
+    <tr><td>2025/Q3</td><td>媒體</td><td><span class="conf c-high">已發生</span></td><td>GB300 NVL72 進入量產、全液冷成標配(Quanta 9 月出貨)</td><td>冷板/CDU/UQD 由選配變標配,啟動奇鋐/雙鴻/富世達主升段</td></tr>
+    <tr><td>2025/09</td><td>媒體(原型)</td><td><span class="conf c-med">原型</span></td><td>Microsoft 公布 in-chip microfluidics(峰溫 -65%、較冷板強 3x;與 Corintis 合作)(Tom's Hardware)</td><td>封裝級路線獲方向性背書;仍實驗室多輪迭代、屬選擇權</td></tr>
+    <tr><td>2025/10</td><td>公告(OCP)</td><td><span class="conf c-high">已發生</span></td><td>Google 完成 Project Deschutes CDU 規格貢獻給 OCP(史上首份 CDU 規格:2MW/3°C/80psi);Boyd/Cooler Master/台達/Envicool/Nidec/nVent/Vertiv 展相容機(OCP+DCD)</td><td>CDU 標準化=台廠切入門票(台達在首波名單);組裝議價權部分移轉、利多上游件(高力 BPHE)</td></tr>
+    <tr><td>2025/11/27</td><td>研調</td><td><span class="conf c-high">已發生</span></td><td>TrendForce:2026 AI 晶片液冷滲透率 47%、CDU 由 L2A 轉 L2L(官方新聞稿)</td><td>滲透率主口徑確立(分母=AI 晶片)</td></tr>
+    <tr><td>2026/01/06</td><td>供應鏈查核</td><td><span class="conf c-high">已發生</span></td><td>CES 2026 後郭明錤查核:VR200 NVL144 改名 NVL72(package 計);tray 全無風扇化、TCS 流量 +100%、整櫃 190-230kW(Max Q/Max P)(郭明錤 X 2026/1)</td><td>散熱含量硬升級;先前 120-130kW 舊推測作廢(見被反駁區)</td></tr>
+    <tr><td>2026/01</td><td>研調</td><td><span class="conf c-high">已發生</span></td><td>Dell'Oro 發布液冷五年預測 2029 逼近 $70 億;GPU TDP 2029 &gt;4,000W(官方新聞稿)</td><td>大盤主口徑一手機構數字</td></tr>
+    <tr><td>2026/02/25</td><td>財報(SEC 8-K)</td><td><span class="conf c-high">已發生</span></td><td>NVIDIA Q4 FY26 營收 $681 億(+73%)、資料中心 $623 億;CFO Kress 親口:VR200 首批機櫃樣品 2 月下旬已出、量產出貨 2026H2(8-K+Tom's Hardware)</td><td>VR200 時程由官方確認——散熱鏈 2026H2 主升段的需求錨</td></tr>
+    <tr><td>2026/03/12</td><td>公告(SEC 8-K)</td><td><span class="conf c-high">已發生</span></td><td>Eaton $95 億完成收購 Boyd Thermal(2026E 營收 $17 億、液冷 $15 億)(Eaton 官方)</td><td>國際商「grid-to-chip」電力+散熱整合,與台達對標;整併潮首響</td></tr>
+    <tr><td>2026/04/27</td><td>公告</td><td><span class="conf c-high">已發生</span></td><td>Vertiv 收購 Strategic Thermal Labs(冷板設計/熱驗證)(Vertiv 官方)</td><td>CDU 龍頭向上游伺服器側冷板延伸</td></tr>
+    <tr><td>2026/04-05</td><td>法人</td><td><span class="conf c-high">已發生</span></td><td>Morgan Stanley 4/16 調升奇鋐/富世達;5/15 再升奇鋐目標價 3,333 元;高盛點名奇鋐/雙鴻/富世達(TechNews)——皆法人估非公司財測</td><td>法人背書節點;亦推升估值預支風險</td></tr>
+    <tr><td>2026/05/05-07</td><td>媒體</td><td><span class="conf c-low">負面</span></td><td>NVIDIA 要求 Rubin IHS 自 5 月出貨改單片式、TIM2 液金退回石墨;健策單價 ~$150→~$50(-66%);5/5 先跌 9.8%、5/6-5/7 連兩根跌停(TechNews/鉅亨/財報狗)</td><td>「規格變更可單向砍價」實證;法人估影響健策 2026 ~60 億/2027 ~130 億(推估)</td></tr>
+    <tr><td>2026/05/08-22</td><td>法說/股東會</td><td><span class="conf c-high">已發生</span></td><td>Q1 法說潮:建準(5/8)EPS 2.36、水冷板 Q3 小批量→Q4 放量;奇鋐(5/14)EPS 20.17 創高、capex 上修 150 億;雙鴻(5/21 股東會)2026 目標 +50%→+70%、挑戰 400 億(公司自述)(經濟日報/工商)</td><td>核心 6 檔基本面背書;雙鴻上修=ASIC 散熱大單</td></tr>
+    <tr><td>2026/06</td><td>展會+媒體</td><td><span class="conf c-med">進行中</span></td><td>Computex 2026:健策首展 MCL、宣布與佳世達旗下其曜合作 2P MCL;「獲 NVIDIA 認證」僅 blog 層 ⚪ 未驗證(豐雲學堂/聯合);TrendForce 估 2026 NVL72 機櫃需求 5-6 萬台(前輪引用,無更新口徑)</td><td>MCL 題材升溫但貢獻在 2027H2-2028(工商 2026/5/29 口徑為準)</td></tr>
+    <tr><td>2026/07/02</td><td>公告</td><td><span class="conf c-high">已發生</span></td><td>Ecolab $47.5 億完成收購 CoolIT(提前交割;CoolIT YTD 銷售 +100%)(Ecolab 官方)</td><td>三筆併購(Eaton/Ecolab/Vertiv 等)合計約 $190 億;冷板-CDU-水處理垂直整併成「系統標」</td></tr>
+    <tr><td>2026/07/10</td><td>公告(月營收)</td><td><span class="conf c-med">近端錨點</span></td><td>台股 6 月營收公告:奇鋐月增動能、雙鴻 400 億目標達成率、富世達 UQD 放量前哨、晟銘電 5 月放緩後驗證、建準 Q3 小批量前檢核(公開資訊觀測站)</td><td>本報告所有月營收數字時效=2026 年 5 月,此日全面刷新</td></tr>
+    <tr><td>2026/08</td><td>財報/法說</td><td><span class="conf c-med">近端錨點</span></td><td>2Q26 財報+法說:毛利率、液冷占比口徑(雙鴻 55%→年底 7 成?)、健策是否親口 MCL 時點</td><td>檢驗公司自述 vs 法人推估的分水嶺</td></tr>
+    <tr><td>2026/H2</td><td>媒體+法人</td><td><span class="conf c-un">前瞻</span></td><td>VR200 量產放量(「今秋出貨、8 家雲端夥伴」TechTimes 2026/6/27);出貨區間:保守數百櫃~富邦 ~2,000 櫃~郭明錤 5,000-7,000 櫃(最樂觀口徑,勿單引)</td><td>單櫃散熱 BOM +12%、UQD 500+ 顆、流量 +100%→散熱鏈 2026H2 營收主升段核心引擎</td></tr>
+    <tr><td>2026/Q4</td><td>法說追蹤</td><td><span class="conf c-un">前瞻</span></td><td>建準水冷板放量驗證(Q3 小批量→Q4);雙鴻 CDU 全年數百台兌現;台達 800VDC 小量導入</td><td>新進者「第二成長曲線」的第一個實績檢核點</td></tr>
+    <tr><td>2027/H2</td><td>公告(roadmap)</td><td><span class="conf c-un">前瞻</span></td><td>Rubin Ultra Kyber NVL576 600kW 出貨;健策 MCL 明顯貢獻起點(市場預期 2027H2-2028);雙鴻 CDU 挑戰 2,000 台</td><td>封裝級散熱真正兌現點;每櫃 UQD/BPHE/冷板 TAM 續擴</td></tr>
+    <tr><td>2028</td><td>公司自述/研調</td><td><span class="conf c-un">前瞻</span></td><td>雙鴻稱商機看到 2028、奇鋐訂單能見度 2029(皆公司自述);MCL/in-chip microfluidics(2028+)/浸沒商轉驗證;高力橋頭新廠完工(2028 底-2029)</td><td>長期選擇權的總驗收段;屆時並觀察系統商(Eaton/Ecolab)自帶供應鏈比例對台廠零件層議價力的擠壓</td></tr>
   </table>
-  <div class="callout"><b>選股節奏:</b>現在就有營收=奇鋐/雙鴻/高力/富世達/建準/健策(均熱片);未來選擇權=健策 MCL(2026H2-2027)/力致浸沒/鴻準/廣運(送樣)。</div>
+</div>
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>選股節奏:短期受惠 vs 長期題材(2026H2 → 2028)</h2>
+<p class="sub">先看「現在的錢」(2026/05 月營收快照,最新月營收;6 月營收 7/10 前後公告後需刷新),再排「未來的選擇權」。</p>
+<div class="card">
+  <h3>2026/05 月營收快照(全體收錄檔;來源:鉅亨/TechNews/CMoney/Win投資/財報狗 等公開申報彙整,2026/6)</h3>
+  <table>
+    <tr><th>公司(股號)</th><th>2026/05 營收</th><th>YoY</th><th>1-5 月累計</th><th>累計 YoY</th><th>1Q26 EPS</th><th>解讀</th></tr>
+    <tr><td>奇鋐 3017</td><td>158.71 億</td><td>+60.6%</td><td>805.41 億</td><td>+90.3%</td><td>20.17(創高)</td><td>短期梯隊火車頭;2026H2 公司稱大爆發(自述)</td></tr>
+    <tr><td>雙鴻 3324</td><td>31.39 億</td><td>+93.8%</td><td>145.31 億</td><td>+80.5%</td><td>12.61(創高)</td><td>400 億年目標(+70%)進度符合;ASIC 大單湧入</td></tr>
+    <tr><td>健策 3653</td><td>23.13 億</td><td>+37.8%</td><td>99.30 億</td><td>+20.3%</td><td>9.53(持平)</td><td>營收增但 IHS 砍價自 5 月出貨起發酵,毛利待 2Q26 檢驗</td></tr>
+    <tr><td>建準 2421</td><td>16.92 億</td><td>+14.9%</td><td>85.83 億</td><td>+18.2%</td><td>2.36</td><td>水冷板貢獻未顯著;Q4 放量才是驗證點</td></tr>
+    <tr><td>富世達 6805</td><td>11.80 億</td><td>+37.2%</td><td>67.17 億</td><td>+69.5%</td><td>13.38(創高)</td><td>5 月 MoM -12.8% 屬月度波動;VR200 UQD 放量看 2026H2</td></tr>
+    <tr><td>高力 8996</td><td>6.32 億</td><td>+40.0%</td><td>50.03 億</td><td>+153.3%</td><td>6.54(創高)</td><td>專案型出貨單月波動大(5 月 MoM -33%),看累計</td></tr>
+    <tr><td>台達電 2308</td><td>589.62 億</td><td>+43.7%</td><td>2,770.06 億</td><td>+38.0%</td><td>—(散熱段追蹤)</td><td>冷卻系統約佔 1Q26 營收 ~9%;法人看年底 AI 占比 50%</td></tr>
+    <tr><td>晟銘電 3013</td><td>10.06 億</td><td>+1.7%</td><td>52.5 億</td><td>+21.2%</td><td>1.37(+63%)</td><td>5 月 MoM -23.9% 動能放緩;6 月營收=Minerva 量產前哨</td></tr>
+    <tr><td>超眾 6230</td><td>—</td><td>—</td><td>39.21 億</td><td>+11.7%</td><td>-0.91(虧損)</td><td>營收成長獲利未跟上;watch</td></tr>
+    <tr><td>力致 3483</td><td>7.91 億</td><td>-16.4%</td><td>35.60 億</td><td>+3.0%</td><td>0.17</td><td>液冷未放量;watch</td></tr>
+    <tr><td>泰碩 3338</td><td>3.25 億</td><td>+2.9%</td><td>15.10 億</td><td>-5.7%</td><td>0.27(-56%)</td><td>單月轉正但累計仍負;watch</td></tr>
+    <tr><td>鴻準 2354</td><td>87.58 億</td><td>-40.6%</td><td>405.68 億</td><td>-29.6%</td><td>0.47(-30%)</td><td>散熱模組占比 14% 被遊戲機衰退稀釋;watch</td></tr>
+    <tr><td>廣運 6125</td><td>3.52 億</td><td>+79.2%</td><td>14.96 億</td><td>+45.5%</td><td>0.16</td><td>動能轉強、基數低;具名客戶未揭露;watch</td></tr>
+    <tr><td>艾姆勒 2241</td><td>0.62 億</td><td>+40.2%</td><td>3.75 億</td><td>+35.0%</td><td>-0.15(虧損收斂)</td><td>AI 僅樣品階段;watch</td></tr>
+  </table>
+</div>
+<div class="card">
+  <h3>三段式節奏表(逐檔:兌現時點 × 催化事件 × 驗證方式)</h3>
+  <table>
+    <tr><th>公司</th><th>梯隊</th><th>2026H2(現在的錢)</th><th>2027</th><th>2028+</th><th>驗證方式</th></tr>
+    <tr><td>奇鋐 3017</td><td><span class="conf c-high">短期+長期</span></td><td>公司稱「下半年大爆發、獲利增速大於營收」(自述);冷板 100 萬組/月、分歧管 7,000 套/月達成度;越南 V7/V8 2Q26 先到 75 萬組</td><td>capex 171 億續擴;法人估液冷占比挑戰 50%(法人估)</td><td>訂單能見度 2029(公司自述,缺第三方)</td><td>月營收(7/10)+ Q2 法說產能達成率</td></tr>
+    <tr><td>雙鴻 3324</td><td><span class="conf c-high">短期+長期</span></td><td>400 億(+70%)年目標達成率;CDU 2026 全年數百台;年底單月水冷佔比衝 7 成(媒體引述)</td><td>CDU 挑戰 2,000 台(旺得富 2026/6/2);In-row CDU 量產</td><td>董座稱商機看到 2028(自述)</td><td>月營收/400 億進度 + Q2 法說水冷占比口徑</td></tr>
+    <tr><td>富世達 6805</td><td><span class="conf c-high">短期</span></td><td>快接頭年出貨目標 ~300 萬件(公司自述);VR200 UQD 單櫃 500+ 顆(法人口徑)放量;GB300 tray UQD 認證進行中</td><td>Kyber 世代用量更高(無口徑);競爭者認證進度(CPC/Stäubli/Parker/Danfoss/CEJN+嘉澤)</td><td>—</td><td>月營收 + 各 CSP 認證消息;法人估 2026 EPS 60-65(非財測)</td></tr>
+    <tr><td>高力 8996</td><td><span class="conf c-high">短期+擴產</span></td><td>1Q26 已兌現(+237.6%);泰國廠 2026 投產;L2A→L2L 轉換拉 BPHE 用量</td><td>中壢增線滿載後看新產能</td><td>橋頭新廠(32.5 億投資)2028 底-2029 完工(公司規劃)</td><td>累計營收(單月波動大)+ CDU 客戶端(Vertiv/台達等)出貨</td></tr>
+    <tr><td>健策 3653</td><td><span class="conf c-med">短期承壓+長期選擇權</span></td><td>IHS 砍價消化年:法人估影響 2026 ~60 億(推估);Vera Rubin 放量下半年發功(工商 2026/5/29);Stiffener 規格升級過渡</td><td>MCL 明顯貢獻 2027H2 起(市場預期);2P MCL(與其曜)開發進度</td><td>MCL 放量+in-chip 路線背書驗證</td><td>Q2 法說是否親口 MCL 時點/量化;月營收 YoY 是否轉負</td></tr>
+    <tr><td>建準 2421</td><td><span class="conf c-med">短期次梯隊</span></td><td>水冷板 Q3 整合完成小批量→Q4 逐步放量;3Q26 新液冷專案量產貢獻(法說,自述)</td><td>惠州液冷產線(冷板/CDU/泵)放大;CDU 由 lab 級日產 6-8 台移惠州量產</td><td>—</td><td>10 月營收 + Q3 法說出貨規模揭露</td></tr>
+    <tr><td>台達電 2308</td><td><span class="conf c-high">短期(散熱段)</span></td><td>2026 散熱看年增 &gt;50%(法說);CDU 放量、260kW sidecar 支援 VR200;800VDC 2026H2 小量</td><td>800VDC 放量;電源+散熱綁售 vs Eaton「grid-to-chip」對打</td><td>Deschutes 標準化 CDU 市場卡位</td><td>月營收 + AI 占比口徑(冷卻系統 ~9%→?)</td></tr>
+    <tr><td>晟銘電 3013</td><td><span class="conf c-med">短期(待驗證)</span></td><td>Meta Minerva 機櫃年底前量產(IEK 轉載);泰國廠二期水冷產線</td><td>Meta sidecar 需求(法人推算 45,150 櫃/400 億 ⚪ 待查)</td><td>—</td><td>6 月營收(7/10)是否重拾動能 + 2Q26 財報</td></tr>
+    <tr><td>watch 五檔(泰碩/力致/鴻準/廣運/超眾)+ 艾姆勒/元山</td><td><span class="conf c-un">長期題材</span></td><td>2026 均無放量一手佐證:力致浸沒 ~30 套/年(自述)、廣運金運在手訂單 6 億(無具名客戶)、鴻準液冷無新佐證、超眾水冷目標 10%(自述)、元山 SideCar 驗證中</td><td>力致 NVIDIA 認證目標;廣運 2.5MW 規模化(估 2027 後);元山稱 2027 開花結果(自述)</td><td>浸沒式若 PFAS 替代液成熟才有第二波</td><td>逐月營收+是否出現具名客戶/一手訂單公告;升格 holds 需連續兌現</td></tr>
+  </table>
+  <div class="callout"><b>節奏總結:</b>現在就有營收=奇鋐/雙鴻/高力/富世達/台達(散熱段)/健策(IHS,但被砍價壓制);2026H2-Q4 新增驗證=建準水冷板、晟銘電 Minerva、雙鴻 CDU;2027+ 選擇權=健策 MCL(2027H2-2028)、雙鴻 CDU 2,000 台、力致浸沒/廣運/超眾。<b>MCL 路線正反並存:</b>正面=微軟微流道/TSMC IMC-Si 方向背書;反面=奇鋐總座公開看壞 MCL 取代水冷板(經濟日報)、Digitimes(2025/9/26)引業界對微軟微流道潑冷水、Rubin lid 已發生設計回退——非單邊敘事。</div>
 </div>
 
-<!-- 6 -->
-<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
-<div class="callout warn"><b>口徑修正(對抗式查證後):</b>
+<!-- 8 -->
+<h2 id="s8"><span class="n">8</span>受惠股估值試算(工具)</h2>
+<p class="sub">通用估值方法+互動計算機。預設為<b>示意數字</b>(非財測),請用下方「真實基期參考」填入個股實際數字。</p>
+<div class="card">
+  <h3>估值方法</h3>
+  <table>
+    <tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr>
+    <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>散熱龍頭 PE 已偏高(預支 2-3 年);健策事件前約 33 倍</td></tr>
+    <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴</td></tr>
+    <tr><td><b>市占×市場規模</b></td><td>液冷 TAM × 市占 × 淨利率</td><td>放量股</td><td>TAM 以 Dell'Oro 主口徑(2029 ~$70 億)代入;冷板/CDU 滲透率驅動</td></tr>
+    <tr><td><b>題材選擇權</b></td><td>本業 + MCL/浸沒折現</td><td>未放量</td><td>健策 MCL(2027H2-2028)/力致浸沒屬此類</td></tr>
+  </table>
+</div>
+<div class="calc">
+  <div class="inputs">
+    <div><label>基期營收(億元)</label><input id="rev" type="number" value="1500"></div>
+    <div><label>營收成長率(%)</label><input id="g" type="number" value="60"></div>
+    <div><label>淨利率(%)</label><input id="npm" type="number" value="14"></div>
+    <div><label>流通股數(億股)</label><input id="sh" type="number" value="2.4"></div>
+    <div><label>目標 PE(x)</label><input id="pe" type="number" value="25"></div>
+    <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="70"></div>
+  </div>
+  <div class="out">
+    <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+    <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+    <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+    <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+  </div>
+</div>
+<div class="card">
+  <h3>真實基期參考(供計算機填數;皆為已查證公開數字,時效 2026/05)</h3>
+  <table>
+    <tr><th>公司</th><th>基期錨(已實現)</th><th>成長率錨</th><th>獲利率錨</th><th>法人/公司前瞻(標註口徑)</th></tr>
+    <tr><td>奇鋐 3017</td><td>1-5 月營收 805.41 億;1Q26 營收 490.38 億</td><td>1-5 月累計 +90.3%</td><td>1Q26 毛利率 29.77%;EPS 20.17</td><td>大摩目標價 3,333 元(2026/5/15,法人估非財測)</td></tr>
+    <tr><td>雙鴻 3324</td><td>1-5 月營收 145.31 億;2025 EPS 28.26</td><td>公司目標 2026 +70%/400 億(自述非財測)</td><td>1Q26 毛利率 29.66%;EPS 12.61</td><td>毛利率「有信心站穩三成」(公司自述)</td></tr>
+    <tr><td>富世達 6805</td><td>1-5 月營收 67.17 億;1Q26 營收 41.84 億</td><td>1-5 月累計 +69.5%</td><td>1Q26 毛利率 32.31%;EPS 13.38</td><td>法人估 2026 營收 180-196 億/EPS 60.45-65.17(法人估非財測)</td></tr>
+    <tr><td>高力 8996</td><td>1-5 月營收 50.03 億;1Q26 營收 34.23 億</td><td>1-5 月累計 +153.3%</td><td>1Q26 毛利率 30.03%;EPS 6.54</td><td>媒體稱液冷已達營收 5 成(媒體口徑)</td></tr>
+    <tr><td>健策 3653</td><td>1-5 月營收 99.30 億</td><td>1-5 月累計 +20.3%</td><td>1Q26 EPS 9.53(YoY 持平)</td><td>FactSet 9 位分析師 2026 EPS 中位數 63.38、目標價中位數 4,575(法人估非財測;IHS 砍價後續修正風險)</td></tr>
+    <tr><td>建準 2421</td><td>1-5 月營收 85.83 億;1Q26 營收 50.19 億</td><td>1-5 月累計 +18.2%</td><td>1Q26 毛利率 31.7%;EPS 2.36</td><td>水冷板 Q4 放量(公司自述)</td></tr>
+  </table>
+  <p class="sub">通用試算工具,預設值為示意非個股財測。散熱股營收量級與毛利率差異大(奇鋐 ~30% 規模大;富世達/高力關鍵件高毛利但規模小),務必填入標的真實數字。僅供研究參考,不構成投資建議。</p>
+</div>
+<!-- 9 -->
+<h2 id="s9"><span class="n">9</span>投資警示、被反駁說法與主張對照 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>口徑修正(對抗式查證後,持續有效):</b>
   <ul>
-    <li>健策 MCL ASP 3-4 倍/AMD MI450 10 倍、Rubin MCL 認證、TAM 數字——<b>多為研調/媒體估、非健策法說親口</b>,不錯殺亦不採信</li>
-    <li>奇鋐/雙鴻「液冷占比 50%+」部分為法人推估非公司揭露;液冷滲透率 50-76% 口徑分歧大,不宜當硬數字</li>
+    <li>健策 MCL ASP 3-4 倍/「效率 +40%」/AMD MI450 10 倍、Rubin MCL「認證」、TAM 數字——<b>多為研調/媒體/blog 估、非健策法說親口</b>,不錯殺亦不採信 ⚪</li>
+    <li>奇鋐/雙鴻「液冷占比 50%+/70%+」部分為法人推估或年底 exit 口徑非全年;液冷滲透率 47% vs 76% 為分母不同(AI 晶片 vs AI 伺服器),引用必標分母</li>
+    <li>「台灣佔 AI 伺服器散熱 9 成」為伺服器組裝口徑外溢(blog 層),非每一散熱環節皆 9 成</li>
   </ul>
+</div>
+<div class="card"><h3>被反駁說法警示區(不得再引用)</h3>
+  <table>
+    <tr><th>說法</th><th>裁決</th><th>理由 / 更正後口徑</th></tr>
+    <tr><td>奇鋐「液冷模組月產能 200 萬→1,000 萬組」</td><td><span class="conf c-low">refuted</span></td><td>多輪檢索查無任何來源,疑 10 倍單位誤植或與風冷模組總量混淆;正確口徑=<b>水冷模組 20 萬→100 萬組/月</b>(法說,公司自述)</td></tr>
+    <tr><td>富世達「快接頭月產能 300 萬顆(3KK)」</td><td><span class="conf c-low">refuted</span></td><td>僅富果法說備忘單一自媒體來源,與多源媒體(董事長口徑)「2026 <b>年出貨</b>目標 ~300 萬件」差 12 倍;正確為年出貨口徑(公司自述)</td></tr>
+    <tr><td>VR200 整櫃功耗「~120-130kW、與 GB200/GB300 相容」</td><td><span class="conf c-low">refuted</span></td><td>CES 前舊推測(Introl blog);CES 2026 後多源確認 <b>Max Q ~190kW/Max P ~230kW</b>(GB300 ~140kW)、power whip 60A→100A</td></tr>
+    <tr><td>健策 2P MCL 合作對象「宏碁旗下公司」</td><td><span class="conf c-low">refuted</span></td><td>聯合新聞網+CMoney 多源確認其曜科技為<b>佳世達(2352)集團</b>;其曜未上市、不得作獨立標的</td></tr>
+    <tr><td>「NVIDIA 2026H2 提前導入健策 MCL」</td><td><span class="conf c-low">不採信(blog 層)</span></td><td>與工商時報(2026/5/29)「MCL 明顯貢獻 2027H2-2028、2026H2 為過渡」矛盾,以工商時報為準;「獲 NVIDIA 認證」公司未親口 ⚪</td></tr>
+    <tr><td>「Ecolab 收 CoolIT 預計 3Q26 交割」</td><td><span class="conf c-med">已過時</span></td><td>Ecolab 官方新聞稿+SEC 8-K:<b>2026/7/2 已提前完成交割</b></td></tr>
+    <tr><td>「Kyber NVL576 採完全浸沒式」</td><td><span class="conf c-low">不採信</span></td><td>與 NVIDIA 官方架構不符:Kyber 實際路線=100% 冷板 DLC + 800VDC</td></tr>
+    <tr><td>高力「BPHE 市佔九成」(未限定範圍)</td><td><span class="conf c-med">correction</span></td><td>九成=<b>台灣國內口徑</b>;全球市佔僅 ~5.1%(全球前五);且源頭偏公司自述+媒體轉載、缺研調背書</td></tr>
+    <tr><td>雙鴻「水冷占比已 &gt;70%」</td><td><span class="conf c-med">correction</span></td><td>&gt;55%=2026 全年目標(2025/11 法說);7 成=2026/5 股東會後媒體引述之「年底 exit」口徑——時點演進非現況,不得寫成「已 &gt;70%」</td></tr>
+    <tr><td>「Rubin R100 2000W 直接入矽=TSMC IMC-Si 功能必需」</td><td><span class="conf c-low">不採信</span></td><td>FinancialContent 內容農場級推論;TSMC IMC-Si 為 CoWoS 平台工程示範(SemiWiki),與 Rubin 量產綁定無佐證</td></tr>
+    <tr><td>奇鋐擴產「4 倍/6 倍」或「5 倍/7 倍」倍數標籤</td><td><span class="conf c-med">correction</span></td><td>跨來源倍數標籤不一;一律只寫端點值:冷板 20 萬→100 萬組/月、分歧管 1,000→7,000 套/月</td></tr>
+    <tr><td>健策「單日跌停」(2026/5/6)</td><td><span class="conf c-med">correction</span></td><td>細節更正:5/5 先跌 9.8%,<b>5/6 與 5/7 連續兩日跌停</b>,非單日事件</td></tr>
+  </table>
+</div>
+<div class="card"><h3>主張 vs 實證訂單(逐項分層:有佐證/公司自述/法人推算/待查)</h3>
+  <table>
+    <tr><th>主張</th><th>證據層級</th><th>現況</th></tr>
+    <tr><td>晟銘電獲 Meta Minerva 機櫃/機殼訂單</td><td><span class="conf c-high">第三方轉載</span></td><td>IEK 產業情報網轉載+台視/MoneyDJ;年底前量產;較「傳獲」升一級但仍非一手公告</td></tr>
+    <tr><td>晟銘電「Meta 超過 4 萬櫃/2026 營收 163 億」</td><td><span class="conf c-un">法人推算 ⚪</span></td><td>與 45,150 櫃/400 億產值同源推算;無一手公告,引用標「法人推算、非公司財測」</td></tr>
+    <tr><td>雙鴻獲 Google CDU 訂單</td><td><span class="conf c-med">媒體多源</span></td><td>客戶未具名證實;量級=2026 全年數百台、2027 挑戰 2,000 台(旺得富 2026/6/2)——「2026 起大量出貨」措辭過強已修正</td></tr>
+    <tr><td>廣運(金運)2.5MW CDU</td><td><span class="conf c-med">媒體佐證(訂單金額)</span></td><td>在手訂單 6 億元有媒體佐證;具名終端客戶未揭露;規模化估 2027 後</td></tr>
+    <tr><td>鴻準液冷板/CDU 送樣→訂單</td><td><span class="conf c-un">查無新佐證 ⚪</span></td><td>2026/7 檢索無 GB300/VR200 世代入列的新第三方報導;維持「送樣、未證實」</td></tr>
+    <tr><td>力致浸沒式 Total Solution 年出貨 ~30 套</td><td><span class="conf c-med">公司自述</span></td><td>缺第三方驗證;2026H2 目標 NVIDIA 認證(自述)</td></tr>
+    <tr><td>健策 MCL 獲 NVIDIA 認證</td><td><span class="conf c-un">⚪ 未驗證(blog 層)</span></td><td>公司未在法說親口;工商時報僅稱 Vera Rubin 放量+MCL 貢獻落 2027 後</td></tr>
+    <tr><td>AWS IRHX 製造委由台廠 ODM(奇鋐/雙鴻?)</td><td><span class="conf c-un">待查 ⚪</span></td><td>Dell'Oro 稱「可能委由既有散熱供應商」但未具名;無一手佐證</td></tr>
+    <tr><td>嘉澤 UQD 參與</td><td><span class="conf c-med">媒體/法人</span></td><td>2025 快接頭出貨已逾 1 萬套、2026 伺服器部門看 +30%;量級小、非主要營收——由「未驗證」升為「有出貨、量小」</td></tr>
+  </table>
 </div>
 <div class="card"><h3>結構性風險</h3>
   <ul>
-    <li><b>規格變更可單向砍價(最大近期風險):</b>健策 Rubin 均熱片因 NVIDIA 改回單蓋,單價 $150→$50(-66%)、連兩跌停、股價回檔逾 20% —— 機構件「單價只漲不跌」是錯覺</li>
-    <li><b>估值已大幅預支:</b>健策 33 倍 PE 反映 2-3 年後 EPS;散熱龍頭普遍評價偏高</li>
-    <li><b>液態金屬路線未定:</b>Rubin 因外溢退回石墨,TIM 升級題材的時程/受惠標的須重評</li>
-    <li><b>敘事擁擠+與既有液冷題重疊:</b>奇鋐/雙鴻/高力/建準同列液冷概念,可佐證數字集中在同幾家法說</li>
-    <li><b>二線概念股佐證落差:</b>泰碩 2026Q1 EPS 僅 0.27、鴻準/廣運液冷仍送樣或在未上市子公司——題材在、營收未到位</li>
+    <li><b>規格變更可單向砍價(最大近期風險):</b>健策 Rubin IHS 因 NVIDIA 改單片式,單價 ~$150→~$50(-66%)、5/6-5/7 連兩跌停——機構件「單價只漲不跌」是錯覺;散熱 BOM 到量產前仍會被 NVIDIA 改設計</li>
+    <li><b>估值已大幅預支:</b>健策事件前約 33 倍 PE 反映 2-3 年後 EPS;大摩奇鋐 TP 3,333(法人估)亦墊高預期;散熱龍頭普遍評價偏高</li>
+    <li><b>液態金屬路線未定:</b>Rubin 因外溢退回石墨、鍍金取消,TIM 升級題材的時程/受惠標的須重評</li>
+    <li><b>VR200 出貨量口徑落差極大:</b>2026H2 出貨=保守數百櫃 vs 富邦 ~2,000 櫃 vs 郭明錤 5,000-7,000 櫃(最樂觀)——引用單一數字會高估 2026H2 放量</li>
+    <li><b>國際商整併=長期議價力風險:</b>Eaton(Boyd)/Ecolab(CoolIT)/Vertiv(STL)11 天內約 $190 億,把冷板-CDU-水處理整併成「系統標」;2026 當下台廠產能寡占佔優(奇鋐 1-5 月營收 ~$2.5B+ vs CoolIT NTM ~$5.5 億),長期需觀察系統商自帶供應鏈比例</li>
+    <li><b>CDU 賽道飽和:</b>~40 家競逐、Dell'Oro 預期整併至 &lt;10 家——對純組裝是價格壓力,對上游關鍵件(BPHE/UQD)相對有利</li>
+    <li><b>敘事擁擠+與既有液冷題重疊:</b>奇鋐/雙鴻/高力/建準同列液冷概念,可佐證數字集中在同幾家法說;與先進封裝/電源鏈標的重疊(台達)以股號為 key 不雙計</li>
+    <li><b>二線概念股佐證落差:</b>泰碩 1Q26 EPS 0.27、鴻準液冷無新佐證、廣運具名客戶未揭露、超眾虧損中——題材在、營收未到位</li>
+    <li><b>時效:</b>本報告月營收最新=2026 年 5 月;6 月營收 7/10 前後公告、2Q26 財報 8 月,屆時全部數字需刷新</li>
   </ul>
 </div>
-
-<!-- 7 -->
-<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
-<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<!-- 10 -->
+<h2 id="s10"><span class="n">10</span>資料來源(分層 · 含網址)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span> 官方新聞稿/SEC/OCP/研調一手 <span class="src-q q-secondary">secondary</span> 主流財經媒體/法說報導 <span class="src-q q-blog">blog</span> 自媒體/法說備忘/廠商 blog。每條=來源名(日期)+一句佐證+URL;未尋獲原文者標「未附網址」。</p>
 <div class="card">
-  <div class="src-item">奇鋐/雙鴻/健策/高力/富世達/建準 2026Q1 法說與月營收(公開申報)<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">Dell'Oro Group(2026/1) — 液冷市場 2025 $30 億→2029 $70 億、CDU 2029 $60 億、DCPI $610 億<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">TrendForce — 液冷滲透率 14%→33%→47%;TechNews(2026/5/6) — 健策液態金屬退回石墨、IHS 單價 $150→$50<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">Digitimes(2025/10) NVIDIA MCL/MCCP;FinancialContent(2026/1) Rubin 2000W+、TSMC IMC-Si;工商時報(2025/11) VR200 UQD 500+顆<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">Precedence/IDTechEx/MRFR — VC/TIM/RDHx 市場規模(口徑分歧,量級參考)<span class="src-q q-blog">blog</span></div>
-  <div class="src-item">Dell'Oro(2026/1,主口徑) 液冷 2025 $30 億→2029 $70 億、DLC 2Q25 +156%、CDU 約 40 家趨飽和;Microsoft in-chip microfluidics 原型 · <a href="https://www.delloro.com/news/data-center-liquid-cooling-market-to-approach-7-billion-by-2029-as-ai-deployments-accelerate/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
-  <div class="src-item">NIDEC/Boyd(OCP Deschutes 2MW CDU)、Vertiv(收 Strategic Thermal Labs)、Ecolab $47.5 億收 CoolIT、Eaton 收 Boyd<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">Valuates/QYResearch、FMI、Mordor、Fortune BI — UQD 2030 $19.31 億(CAGR 27%)、冷板/浸沒/CDU/VC 各子段(口徑分歧,量級參考)<span class="src-q q-blog">blog</span></div>
-  <div class="src-item">DCD / Tom's Hardware(CES/GTC 2026) — Vera Rubin NVL144 H2 2026 ~120-130kW;Rubin Ultra Kyber 600kW H2 2027<span class="src-q q-secondary">secondary</span></div>
+  <h3>Primary</h3>
+  <div class="src-item">Dell'Oro Group(2026/1)— 液冷大盤主口徑:2025 ~$30 億→2029 逼近 $70 億、GPU TDP 2029 &gt;4,000W、單相 D2C 佔上線容量絕大多數 · <a href="https://www.delloro.com/news/data-center-liquid-cooling-market-to-approach-7-billion-by-2029-as-ai-deployments-accelerate/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Dell'Oro Group(2026/6,上修版)— DLC 2030 突破 $80 億(與 rack power distribution 一併上修)· <a href="https://www.delloro.com/news/delloro-group-raises-market-forecast-for-data-center-liquid-cooling-and-rack-power-distribution/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Dell'Oro Group(2024/7/23)— 「五年累計 &gt;$150 億(2024-2028)」為累計口徑,澄清常見誤引 · <a href="https://www.delloro.com/news/ata-center-liquid-cooling-market-set-to-go-mainstream-and-top-15-b-over-the-next-five-years/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Dell'Oro Group(2025/9/30)— CDU 賽道 ~40 家、DLC 2Q25 +156%、預期整併至 &lt;10 家 · <a href="https://www.delloro.com/market-at-the-boiling-point-is-the-cdu-space-becoming-saturated/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Dell'Oro Group(2026/3)— DCPI 上位口徑:4Q25 單季 $109 億 +20%、2030 &gt;$800 億(DCPI≠液冷)· <a href="https://www.delloro.com/news/data-center-physical-infrastructure-market-reaches-10-9-billion-in-4q-2025-up-20-percent-y-y/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Dell'Oro Group(2025/7/14)— AWS IRHX 評估:L2A 屬改裝市場、自研非顛覆 · <a href="https://www.delloro.com/awss-new-liquid-cooling-solution-rattled-the-market-but-is-it-truly-disruptive/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">TrendForce 新聞稿(2025/11/27)— 2026 AI 晶片液冷滲透率 47%、AI 伺服器出貨 +20%+、L2A→L2L · <a href="https://www.trendforce.com/presscenter/news/20251127-12805.html" target="_blank">連結</a>;(2025/8/21)2025 滲透率 &gt;30% · <a href="https://www.trendforce.com/presscenter/news/20250821-12682.html" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">NVIDIA 官方 blog(2025/10)— Vera Rubin MGX 45°C 液冷、無纜線模組化、機架級儲能 · <a href="https://blogs.nvidia.com/blog/gigawatt-ai-factories-ocp-vera-rubin/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">NVIDIA Q4 FY26 電話會議/SEC 8-K(2026/2/25)— 單季 $681 億、CFO 親口 VR200 首樣 2 月下旬已出、量產 2026H2(經 Tom's Hardware 報導)· <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/nvidia-delivers-first-vera-rubin-ai-gpu-samples-to-customers-88-core-vera-cpu-paired-with-rubin-gpus-with-288-gb-of-hbm4-memory-apiece" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">OCP UQD Specification Rev 1.0 — UQD 開放標準與互換規格(CPC/Parker/Stäubli 起草)· <a href="https://www.opencompute.org/documents/ocp-universal-quick-disconnect-uqd-specification-rev-1-0-2-pdf" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Nidec 官方新聞稿(2025/12/3)— Deschutes 5 CDU 2MW 原型(SC25);Google OCP 規格陣營 · <a href="https://www.nidec.com/en/product/news/2025/news1203-01/" target="_blank">連結</a>;各廠 demo 見 DCD · <a href="https://www.datacenterdynamics.com/en/news/companies-show-off-google-inspired-project-deschutes-cdus/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Ecolab 官方新聞稿(2026/7/2)— $47.5 億完成收購 CoolIT(提前交割、YTD +100%、2030 $40 億目標)· <a href="https://www.ecolab.com/media-center/news/ecolab-closes-coolit-acquisition-and-expands-ai-cooling-platform" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Eaton 官方新聞稿/SEC 8-K(2026/3/12)— $95 億完成收購 Boyd Thermal(2026E $17 億、液冷 $15 億、grid-to-chip)· <a href="https://www.eaton.com/us/en-us/company/news-insights/news-releases/2026/eaton-completes-acquisition-of-leading-liquid-cooling-solutions-provider-boyd-thermal.html" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">Vertiv 官方新聞稿(2026/4/27)— 收購 Strategic Thermal Labs,向伺服器側冷板延伸 · <a href="https://www.vertiv.com/en-us/about/news-and-events/corporate-news/2026/vertiv-strengthens-liquid-cooling-system-capability-with-acquisition-of-strategic-thermal-labs/" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item">公開資訊觀測站 — 台股月營收/財報申報時程(6 月營收 7/10 前後、2Q26 財報 8 月)· <a href="https://mops.twse.com.tw/" target="_blank">連結</a>;Yahoo 股市個股頁 — 掛牌市場別逐檔核對(2026/7)· <a href="https://tw.stock.yahoo.com/quote/6230" target="_blank">連結</a><span class="src-q q-primary">primary</span></div>
+</div>
+<div class="card">
+  <h3>Secondary</h3>
+  <div class="src-item">TechNews 科技新報(2026/5/6)— Rubin IHS 雙蓋改單片 $150→$50、TIM2 液金退回石墨、健策跌停;法人估影響 2026 ~60 億/2027 ~130 億 · <a href="https://finance.technews.tw/2026/05/06/ai-server-jentech/" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">工商時報(2026/5/29)— 健策 MCL 明顯貢獻 2027H2-2028、2026H2 Rubin=過渡世代(MCL 時點主口徑)· <a href="https://www.ctee.com.tw/news/20260529701470-430201" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">工商時報(2026/5/6)— VR200 單櫃 UQD 120→500+ 顆(多源法人口徑,非官方);富世達受惠 · <a href="https://www.ctee.com.tw/news/20260506700157-439901" target="_blank">連結</a>;2025/11 原文未尋獲(未附網址),以本條為替代源<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">工商時報(2026/1/7)— 郭明錤 VR200 解析:2026H2 出貨 5,000-7,000 櫃(最樂觀口徑)、微通道冷板、TCS 流量 +100%、無風扇 tray · <a href="https://www.ctee.com.tw/news/20260107701081-430704" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">經濟日報(2026/6)— 奇鋐法說:冷板 20 萬→100 萬組/月、分歧管 1,000→7,000 套/月、capex 150/171 億、能見度 2029(公司自述)· <a href="https://money.udn.com/money/story/5710/9541539" target="_blank">連結</a>;台視(2026/5/14)1Q26 EPS 20.17/毛利率 29.77% · <a href="https://www.ttv.com.tw/finance/view/052026141654E6487ECEA8BD4846817F9AE0F7786AD01C1D/588" target="_blank">連結</a>;FTNN 引大摩 — capex 36.57 億 +169% · <a href="https://www.ftnn.com.tw/news/546138" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">工商時報(2026/5/22)— 雙鴻股東會上修 2026 目標 +70%/400 億(公司自述)· <a href="https://www.ctee.com.tw/news/20260522700264-439901" target="_blank">連結</a>;TechNews(2026/6/8)5 月營收 31.39 億 +93.8% · <a href="https://finance.technews.tw/2026/06/08/auras-3324-202605-financial-report/" target="_blank">連結</a>;經濟日報(2026/5)1Q26 EPS 12.61 · <a href="https://money.udn.com/money/story/5612/9486687" target="_blank">連結</a>;CDU 量級(2026 數百台→2027 挑戰 2,000 台)旺得富 2026/6/2/聯合 · <a href="https://udn.com/news/story/7254/9517814" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">豐雲學堂(雙鴻法說紀要,2025/11)— 2026 目標伺服器占比 72%、水冷 &gt;55%(公司自述有法說來源)· <a href="https://www.sinotrade.com.tw/richclub/news/691735e78ff59b56a6e7d51f" target="_blank">連結</a>;Yahoo(2026/6)「水冷衝破 7 成」法人口徑對照 · <a href="https://tw.stock.yahoo.com/news/%E6%B6%B2%E5%86%B7%E7%88%86%E5%96%AE%E7%87%92%E5%88%B02028-%E9%9B%99%E9%B4%BB%E6%B0%B4%E5%86%B7%E7%87%9F%E6%94%B6%E8%A1%9D%E7%A0%B47%E6%88%90-%E6%B3%95%E4%BA%BA%E7%8B%82%E4%BF%AE%E8%B2%A1%E6%B8%AC-%E5%85%A8%E5%B9%B4%E7%87%9F%E6%94%B6%E7%9B%B4%E6%94%BB400%E5%84%84-021000766.html" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">MoneyDJ(2026/5/8)— 富世達 1Q26 營收 41.84 億/毛利率 32.31%/EPS 13.38 · <a href="https://www.moneydj.com/KMDJ/News/NewsViewer.aspx?a=1ddbf6f8-1dd4-4ff6-8ce2-2d70223f61d4" target="_blank">連結</a>;經濟日報(2024/12)富世達+嘉澤 UQD 過 NVIDIA 認證(競局背景,時效較舊)· <a href="https://money.udn.com/money/story/11162/8408701" target="_blank">連結</a>;時報資訊(2026/5/26)配息 12.5 元 · <a href="https://www.chinatimes.com/realtimenews/20260526001790-260410" target="_blank">連結</a>;理財周刊 — 法人估 2026 營收 180-196 億/EPS 60.45-65.17(法人估)· <a href="https://www.moneyweekly.com.tw/ArticleData/Info/article/224863" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Yahoo 股市(2026/5)— 高力 1Q26 EPS 6.54 創高(+348%)、營收 34.23 億 +237.6%、毛利率 30.03% · <a href="https://tw.stock.yahoo.com/news/eps%E8%A1%9D6-54%E5%85%83%E5%89%B5%E9%AB%98-%E6%95%A3%E7%86%B1%E5%A4%A7%E5%BB%A0-%E9%A6%96%E5%AD%A3%E7%8D%B2%E5%88%A9%E5%A4%A7%E5%A2%9E361-5-062000906.html" target="_blank">連結</a>;鉅亨(2026/6)橋頭 32.5 億/2028 底-2029、泰國廠 2026 投產 · <a href="https://news.cnyes.com/news/id/6483461" target="_blank">連結</a>;財報狗 — 高力 EPS 成長率 · <a href="https://statementdog.com/analysis/8996/eps-growth-rate" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">鉅亨網(2026/6)— 月營收速報:奇鋐 5 月 158.71 億 · <a href="https://news.cnyes.com/news/id/6488741" target="_blank">連結</a>;健策 5 月 23.13 億/1-5 月 99.30 億 · <a href="https://news.cnyes.com/news/id/6485745" target="_blank">連結</a>;台達電 5 月 589.62 億 · <a href="https://news.cnyes.com/news/id/6490998" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">BigGo 財經(2026/5/8)— 建準 1Q26 法說:水冷板 Q1 首批→Q3 小批量→Q4 放量、惠州 2026Q1 量產、CDU 日產 6-8 台(公司自述)· <a href="https://finance.biggo.com.tw/news/TW_2421.TW_2026-05-08" target="_blank">連結</a>;BigGo(2026/5/14)奇鋐法說彙整 · <a href="https://finance.biggo.com.tw/news/TW_3017.TW_2026-05-14" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">TechNews(2026/4/30)+自由財經/MoneyDJ(2026/6)— 台達 L2A 2025 &gt;$1.6B、CDU 4Q25 出貨、3,000kW/2,400kW CDU、260kW sidecar、800VDC 時程 · <a href="https://technews.tw/2026/04/30/hvdc-400-800-hvdc/" target="_blank">連結</a> · <a href="https://ec.ltn.com.tw/article/breakingnews/5421240" target="_blank">連結</a>;豐雲學堂(2026/6)台達 1Q26 AI 占比 ~40%(冷卻系統 ~9%)· <a href="https://www.sinotrade.com.tw/richclub/hotstock/%E6%B6%B2%E5%86%B7%E6%89%93%E7%A0%B4%E7%99%BD%E5%8D%80%E8%88%87%E7%81%B0%E5%8D%80%E7%95%8C%E7%B7%9A-%E5%8F%B0%E9%81%94%E9%9B%BB-2308--%E9%9B%99%E9%B4%BB-3324--%E5%A5%87%E9%8B%90-3017--%E4%B8%89%E5%A4%A7%E5%9F%BA%E5%BB%BA%E9%9C%B8%E4%B8%BB%E5%85%A8%E9%9D%A2%E6%BB%B2%E9%80%8F-AI-%E8%B3%87%E6%96%99%E4%B8%AD%E5%BF%83-%E7%94%A2%E6%A5%AD%E7%86%B1%E8%A9%B1-6964b77480fc0a261b354593" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">IEK 產業情報網(轉載,2025/12)— 晟銘電奪 Meta Minerva 機櫃/機殼訂單、年底前量產 · <a href="https://ieknet.iek.org.tw/ieknews/news_open.aspx?actiontype=ieknews&indu_idno=0&nsl_id=4c8e1dcc720b4d7aa70f8a2c1d35c3ee" target="_blank">連結</a>;MoneyDJ(2025/12/29)sidecar 出貨瓶頸突破、能見度 2026Q1 · <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=5b41288a-730c-4f48-9d5a-d3e59b074fe1" target="_blank">連結</a>;Meta 45,150 櫃/400 億=法人推算原文出處未尋獲(未附網址)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">DCD(2025/3)— Rubin Ultra NVL576 Kyber 600kW、2027H2 · <a href="https://www.datacenterdynamics.com/en/news/nvidias-rubin-ultra-nvl576-rack-expected-to-be-600kw-coming-second-half-of-2027/" target="_blank">連結</a>;DCD(2026/1)3M PFAS 退場衝擊兩相浸沒 · <a href="https://www.datacenterdynamics.com/en/news/two-phase-cooling-will-be-hit-by-epa-rules-and-3ms-exit-from-pfas-forever-chemicals/" target="_blank">連結</a>;DCD(2026/6)Ecolab-CoolIT $4.75B(~8.6x P/S)· <a href="https://www.datacenterdynamics.com/en/news/ecolab-to-pay-475bn-for-liquid-cooling-specialist-coolit/" target="_blank">連結</a>;DCD(2025/7)AWS IRHX · <a href="https://www.datacenterdynamics.com/en/news/amazon-web-services-develops-cooling-technology-for-next-generation-nvidia-gpus/" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Tom's Hardware(2025/12)— 單櫃散熱 BOM:GB300 ~$50K→VR NVL144 ~$56K · <a href="https://www.tomshardware.com/pc-components/cooling/cooling-system-for-a-single-nvidia-blackwell-ultra-nvl72-rack-costs-a-staggering-usd50-000-set-to-increase-to-usd56-000-with-next-generation-nvl144-racks" target="_blank">連結</a>;(2025/9)Microsoft 微流道 峰溫 -65%/3× · <a href="https://www.tomshardware.com/pc-components/liquid-cooling/microsoft-develops-breakthrough-chip-cooling-method-microfluidic-channels-can-cut-peak-temps-by-up-to-65-percent-outperform-conventional-cold-plates-by-up-to-3x" target="_blank">連結</a>;TechTimes(2026/6/27)VR200「今秋出貨、8 家雲端夥伴」· <a href="https://www.techtimes.com/articles/319203/20260627/nvidia-vera-rubin-ships-this-fall-8-cloud-partners-10x-lower-token-cost-hbm4-triples-bandwidth.htm" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">SemiWiki(2026/1)— TSMC IMC-Si 直接矽液冷 CoWoS 示範(&gt;7 W/mm²、DI 水)· <a href="https://semiwiki.com/semiconductor-manufacturers/362017-breaking-the-thermal-wall-tsmc-demonstrates-direct-to-silicon-liquid-cooling-on-cowos/" target="_blank">連結</a>;Digitimes(2025/9/26)微軟微流道業界潑冷水 · <a href="https://www.digitimes.com/news/a20250926PD213/microsoft-cooling-nvidia-design-liquid-cooling.html" target="_blank">連結</a>;經濟日報 — 奇鋐總座看壞 MCL(冷板派 vs 蓋板派)· <a href="https://money.udn.com/money/story/5612/9376909" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Lombard Odier(2026/1,轉述 Goldman Sachs)— 伺服器分母滲透率 15%→54%→76%(法人層,tier 不高於 secondary)· <a href="https://www.lombardodier.com/insights/2026/january/ai-supercharges-the-race.html" target="_blank">連結</a>;鉅亨(法人 76%/單櫃產值敘事對照)· <a href="https://news.cnyes.com/news/id/6423986" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">研調子段口徑:Grand View(液冷大盤 2033 $294.6 億)· <a href="https://www.grandviewresearch.com/industry-analysis/data-center-liquid-cooling-market-report" target="_blank">連結</a>;GMI(2035 $271 億;Vertiv 市佔 &gt;11.3%)· <a href="https://www.gminsights.com/industry-analysis/data-center-liquid-cooling-market" target="_blank">連結</a>;Persistence(2033 $292 億;冷板段 &gt;$31 億)· <a href="https://www.persistencemarketresearch.com/market-research/data-center-liquid-cooling-market.asp" target="_blank">連結</a>;MarketsandMarkets(2033 $27.65B,單位澄清)· <a href="https://www.marketsandmarkets.com/PressReleases/data-center-liquid-cooling.asp" target="_blank">連結</a>;MnM manifolds(2033 $6.33B)· <a href="https://www.prnewswire.com/news-releases/data-center-liquid-cooling-manifolds-market-worth-6-33-billion-by-2033---exclusive-report-by-marketsandmarkets-302814216.html" target="_blank">連結</a>;Mordor(DC 浸沒 2030 $31.8 億)· <a href="https://www.mordorintelligence.com/industry-reports/immersion-cooling-market-in-data-centers" target="_blank">連結</a>;DataM(冷板泛工業)· <a href="https://www.datamintelligence.com/research-report/cold-plate-market" target="_blank">連結</a>;Grand View CDU(玩家名單含台達)· <a href="https://www.grandviewresearch.com/industry-analysis/coolant-distribution-unit-market-report" target="_blank">連結</a>;Valuates CDU(2030 $41.62 億)· <a href="https://www.prnewswire.com/news-releases/coolant-distribution-units-cdu-market-size-to-grow-usd-4162-million-by-2030-at-a-cagr-of-19-0--valuates-reports-302240597.html" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">TechNews(2026/4/16、2026/5/15)— 大摩調升奇鋐/富世達;奇鋐 TP 3,333(法人估非財測)· <a href="https://finance.technews.tw/2026/05/15/3333-avc/" target="_blank">連結</a>;鉅亨 FactSet — 健策 2026 EPS 中位數 63.38/目標價 4,575(法人估)· <a href="https://news.cnyes.com/news/id/6422451" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">月營收/財務彙整:Win投資(富世達/高力/力致/廣運/健策 1Q26 等)· <a href="https://winvest.tw/Stock/Symbol/Comment/6805" target="_blank">連結</a>;財報狗(晟銘電 EPS)· <a href="https://statementdog.com/analysis/3013/eps" target="_blank">連結</a>;玩股網(泰碩月營收)· <a href="https://www.wantgoo.com/stock/3338/financial-statements/monthly-revenue" target="_blank">連結</a>;HiStock(超眾 EPS)· <a href="https://histock.tw/stock/6230/%E6%AF%8F%E8%82%A1%E7%9B%88%E9%A4%98" target="_blank">連結</a>;鉅亨(廣運/金運訂單 6 億、大同投資)· <a href="https://news.cnyes.com/news/id/6514734" target="_blank">連結</a>;鉅亨(元山 SideCar)· <a href="https://news.cnyes.com/news/id/6489388" target="_blank">連結</a>;Yahoo(超眾水冷布局)· <a href="https://tw.stock.yahoo.com/news/%E7%84%A6%E9%BB%9E%E8%82%A1-ai%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%A5%AD%E5%8B%99%E6%80%A5%E8%B5%B7%E7%9B%B4%E8%BF%BD-%E5%B0%BC%E5%BE%97%E7%A7%91%E8%B6%85%E7%9C%BE%E6%B0%B4%E5%86%B7%E6%A5%AD%E5%8B%99%E6%98%8E%E5%B9%B4%E9%80%BE%E5%80%8D%E7%BF%BB%E5%8D%87-042704323.html" target="_blank">連結</a>;nStock(動力-KY 排除依據)· <a href="https://shop.nstock.tw/stock_info?stock_id=6591&status=2" target="_blank">連結</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">未逐一回溯之舊 refs(量級參考、僅正文歷史引用):Precedence/IDTechEx/MRFR(VC/TIM/RDHx)未附網址,RDHx 子段改用 The Insight Partners;FMI/Fact.MR/IndexBox(冷板)未附網址,冷板子段以 Dell'Oro DLC 為主;Fortune BI/Persistence(CDU/TIM 舊條)未附網址,CDU 子段以 Dell'Oro 為主;Strategic MR(兩相浸沒)未附網址;LP Information(L2A CDU)未附網址<span class="src-q q-secondary">secondary</span></div>
+</div>
+<div class="card">
+  <h3>Blog / 自媒體(僅作線索、不作依據)</h3>
+  <div class="src-item">郭明錤 X(2026/1)— VR200 190-230kW、TCS +100%、無風扇 tray(供應鏈查核,分析師估非官方)· <a href="https://x.com/mingchikuo/status/2008439734536986852" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">豐雲學堂(2026/6)— 健策 MCL「獲 NVIDIA 認證」說法之出處(⚪ 未驗證,公司未親口;僅收錄供對照)· <a href="https://www.sinotrade.com.tw/richclub/industry/MCL%E6%95%A3%E7%86%B1%E8%A7%A3%E5%AF%86-%E7%8D%B2NVIDIA%E8%AA%8D%E8%AD%89-%E4%B8%8B%E4%B8%80%E4%BB%A3AI%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%95%A3%E7%86%B1%E9%9D%A9%E5%91%BD%E8%88%87%E5%8F%B0%E5%BB%A0%E5%8F%97%E6%83%A0%E6%A9%9F%E6%9C%83-%E7%94%A2%E6%A5%AD%E7%86%B1%E8%A9%B1-68e5dccea93d7199294202da" target="_blank">連結</a>;CMoney readmo(2026/6)2P MCL/ASP 3 倍說(⚪)· <a href="https://readmo.cmoney.tw/article/c53487f4-d6ba-4244-a6b1-a92b6597922b" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">vocus 法說筆記 — 建準(2026/5/8)1Q26 EPS 2.36/AI 占比 22.6%(數字對應公開財報)· <a href="https://vocus.cc/article/6a0015f8fd897800014508c8" target="_blank">連結</a>;(2026/5/21)水冷板 1Q26 首批出貨、3Q26 新專案 · <a href="https://vocus.cc/article/6a0f01d6fd8978000132f598" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">富果法說備忘 — 富世達(2026/3/5;「月產能 3KK」已被反駁降級,見第 9 節)· <a href="https://blog.fugle.tw/post/earnings-call-6805-2026-03-05" target="_blank">連結</a>;鴻準(2026/6/30)散熱模組占比 14% · <a href="https://blog.fugle.tw/post/earnings-call-2354-2026-06-30" target="_blank">連結</a>;艾姆勒(2025/12/4)浸沒樣品訂單 · <a href="https://blog.fugle.tw/post/earnings-call-2241-2025-12-04" target="_blank">連結</a>;Threads @alphamemo.ai — 富世達 VR200/CPX QT 用量 22g vs 16g(⚪ 待查)· <a href="https://www.threads.com/@alphamemo.ai/post/DRiyLiciSWY" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">ToneCooling(廠商技術 blog)— GB300 每晶片獨立冷板、tray 快接 6→14 對、Rth 規格(待第三方交叉)· <a href="https://tonecooling.com/nvidia-gb300-nvl72-liquid-cold-plate/" target="_blank">連結</a>;Alliance Chemical — 後 Novec 介電液版圖(Galden/Asahiklin/Opteon 仍 PFAS)· <a href="https://alliancechemical.com/blogs/articles/post-novec-immersion-fluid-alternatives-2026" target="_blank">連結</a>;Introl blog — NVL144 命名釐清(功耗口徑已被反駁,僅命名部分留用)· <a href="https://introl.com/blog/nvidia-vera-rubin-gpu-600kw-racks-2027" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">The Insight Partners — RDHx 2030 ~$14.55 億與供應商名單(台廠僅台達入列)· <a href="https://www.theinsightpartners.com/reports/rear-door-heat-exchanger-market" target="_blank">連結</a>;Valuates/QYResearch(2025/3)— UQD 2030 $19.31 億 · <a href="https://www.prnewswire.com/news-releases/universal-quick-disconnect-uqd-coupling-for-liquid-cooling-market-projected-to-grow-at-27-1-cagr-reaching-usd-1931-million-by-2030--valuates-reports-302401341.html" target="_blank">連結</a>;豐雲學堂/ESG遠見 — 「台灣 9 成」組裝口徑外溢說明 · <a href="https://esg.gvm.com.tw/article/112974" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item">FinancialContent(2026/1/15)— 「Rubin 2000W 直接入矽」推論(<b>不採信</b>,僅留檔供對照;以 SemiWiki 為主)· <a href="https://www.financialcontent.com/article/tokenring-2026-1-15-the-end-of-air-cooling-tsmc-and-nvidia-pivot-to-direct-to-silicon-microfluidics-for-2000w-ai-superchips" target="_blank">連結</a>;Digitimes(付費牆,刊出日待確認)— NVIDIA MCL 台系兩大陣營 · <a href="https://www.digitimes.com.tw/tech/dt/n/shwnws.asp?id=0000735611_1TZ5HMB12TEZF008HZ79U" target="_blank">連結</a>;MoneyDJ(2025/8)— 力致浸沒 ~30 套/年(公司自述)· <a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=d6ed1896-964a-40b5-8403-5a43fe5f0501" target="_blank">連結</a><span class="src-q q-blog">blog</span></div>
 </div>
 
 <footer>
-  <p><b>研究方法：</b>Workflow 多 agent 研究(熱階層/台廠/國際市場)+ 對抗式查證(股號修正、口徑、風險)。</p>
-  <p>本報告以「已通過查證」內容為主幹,口徑修正與待查項目已標明。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
-  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(熱階層/台廠/國際市場)+ 對抗式查證(股號修正、口徑、風險)+ 2026-07 審計補強第 2 輪(市場多口徑補齊、催化劑延伸至 2028、元件×供應商×機型世代細顆粒地圖、2026/05 月營收快照、被反駁警示區、refs 分層帶 URL)。</p>
+  <p>本報告以「已通過查證」內容為主幹,口徑修正與待查項目已標明;被反駁說法收錄於第 9 節警示區,不得再引用。屬時間敏感領域,月營收最新=2026 年 5 月(6 月營收 7/10 前後公告),數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-07 · Claude Code · process-chain-research(reinforce r2)</p>
 </footer>
+<script>
+(function(){
+  var ids=['rev','g','npm','sh','pe','epsg'];function $(id){return document.getElementById(id)}
+  function calc(){var rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    var ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(function(id){var el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
+
+
+
+
+
+
 
 </div>
 </body>
