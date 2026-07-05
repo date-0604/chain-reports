@@ -67,6 +67,19 @@
   .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
   .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
   .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  .chain{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+  .chain-row{display:grid;grid-template-columns:190px 1fr;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .chain-row .lvl{font-weight:700;color:#cdd9e5}.chain-row .lvl small{display:block;font-weight:400;color:var(--sub);font-size:11.5px}
+  @media(max-width:640px){.chain-row{grid-template-columns:1fr}}
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+  @media(max-width:820px){.calc{grid-template-columns:1fr}}
+  .calc .inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .calc label{font-size:12px;color:var(--sub);display:block;margin-bottom:3px}
+  .calc input{width:100%;background:#0d1117;border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:8px 10px;font-size:14px}
+  .calc .out{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .calc .res{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+  .calc .res small{display:block;color:var(--sub);font-size:11.5px}
+  .calc .res b{font-size:20px;color:var(--accent)}
   footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
   @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
   p,li{overflow-wrap:anywhere}
@@ -79,31 +92,37 @@
 
 <header class="hero">
   <h1>AI 晶片測試鏈 製程鏈 × 供應鏈 深度研究報告</h1>
-  <div class="sub">CP 晶圓測試 → Burn-in 老化 → FT 成品測試 → SLT 系統級測試;探針卡/測試座/分選機/治具逐環節難度、台廠/國際對照、對抗式查證</div>
+  <div class="sub">DFT → CP 晶圓測試 → KGD/chiplet 分測 → Burn-in 老化(WLBI/封裝級)→ FT 成品測試 → SLT 系統級測試 → 出貨檢測;探針卡/測試座/分選機/治具逐環節難度、台廠/國際對照、對抗式查證與被反駁說法留痕</div>
   <div class="meta-row">
-    <span class="pill">產出日期：<b>2026-06</b></span>
-    <span class="pill">研究方法：<b>Workflow 研究＋對抗式查證</b></span>
+    <span class="pill">產出日期：<b>2026-06(2026-07-06 補強)</b></span>
+    <span class="pill">研究方法：<b>Workflow 研究＋對抗式查證＋逐檔月營收刷新</b></span>
     <span class="pill">驅動力：<b>AI 晶片測試強度結構性大增</b></span>
+    <span class="pill">最新月營收：<b>2026 年 5 月(6 月於 7/10 前後公告)</b></span>
     <span class="pill">配對淺色版：<b>AI晶片測試鏈-process-chain-light.html</b></span>
   </div>
   <div class="toc">
-    <a href="#s1">1. 是什麼/應用/原理</a>
+    <a href="#s1">1. 是什麼/原理</a>
     <a href="#s2">2. 完整測試流程</a>
-    <a href="#s3">3. 逐環節難度</a>
+    <a href="#s3">3. 難度/受惠評分</a>
     <a href="#s4">4. 供應鏈對照</a>
-    <a href="#s5">5. 市場與時程</a>
-    <a href="#s6">6. 投資警示</a>
-    <a href="#s7">7. 資料來源</a>
+    <a href="#s4b">5. 細顆粒機台地圖</a>
+    <a href="#s4c">6. 公司快照(1Q26+5月)</a>
+    <a href="#s5">7. 市場口徑/時程</a>
+    <a href="#s5b">8. 短期vs長期節奏</a>
+    <a href="#s5c">9. 估值試算</a>
+    <a href="#s6">10. 投資警示</a>
+    <a href="#s6b">11. 被反駁/未驗證區</a>
+    <a href="#s7">12. 資料來源</a>
   </div>
 </header>
 
 <!-- 0 -->
-<div class="callout info"><b>一句話總結：</b>AI 晶片把測試從「抽樣的成本中心」結構性轉成「100% 全測 + burn-in + SLT 的良率保險」——這是<b>結構性放量、非一次性漲價事件</b>。最性感的環節是 <b>SLT 系統級測試</b>(從可選變強制)。台股卡位完整:測試代工京元電(AI 測試時間 +100-200%/單價 +50-100%)、分選機鴻勁(NVIDIA AI FT 約 90%)、測試座穎崴(全球第一、北美 AI 80%+)、SLT 系統致茂(NVIDIA 15 年獨家夥伴)、探針卡旺矽/中華精測。天花板:大型 ATE 測試機被 Advantest/Teradyne 壟斷,台廠吃不到。</div>
+<div class="callout info"><b>一句話總結：</b>AI 晶片把測試從「抽樣的成本中心」結構性轉成「100% 全測 + burn-in + SLT 的良率保險」——這是<b>結構性放量、非一次性漲價事件</b>。最性感的環節是 <b>SLT 系統級測試</b>(從可選變強制,Teradyne Titan HP 2kW→4kW、Cohu roadmap 到 10kW)。台股卡位完整:測試代工京元電(Rubin burn-in 3h→5-6h,Morgan Stanley 口徑 2026/6/23;capex 500 億創天量)、分選機鴻勁(1-5 月營收 +87.9%,AI/HPC/ASIC 佔比 78%;「NVIDIA AI FT ~90%」為媒體/法人口徑、無第三方研調 ⚪)、測試座穎崴(全球高階邏輯測試座第一梯隊/前五大,今周刊口徑;5 月營收 +119.8%)、SLT 系統致茂(媒體多源稱 NVIDIA GPU SLT 15 年獨供;5 月營收 +133.1%)、探針卡旺矽/中華精測(MEMS 通過 NVIDIA Rubin/AWS Trainium 3 認證,媒體/法人口徑)。天花板:大型 ATE 測試機被 Advantest/Teradyne 雙寡占、WLBI 為 Aehr 獨門、量產 prober 為 TEL/Accretech 日商雙強——台廠吃不到。</div>
 <div class="kpi">
-  <div class="box"><div class="v">10-15% vs 5%</div><div class="l">先進 AI 封裝測試成本占比 vs 傳統消費 SoC</div></div>
-  <div class="box"><div class="v">+30%</div><div class="l">SLT 測試市場 2026 估成長(Digitimes)</div></div>
-  <div class="box"><div class="v">+100~200%</div><div class="l">AI 晶片測試時間增幅(京元電自述)</div></div>
-  <div class="box"><div class="v">$11.2B</div><div class="l">半導體後段測試設備 2025(+48% YoY,SEMI)</div></div>
+  <div class="box"><div class="v">+48.1%</div><div class="l">測試設備 2025 $11.2B、成長最快設備子類(SEMI 2025/12);2026 再 +12%</div></div>
+  <div class="box"><div class="v">3h→5-6h</div><div class="l">Rubin/R 系列 XPU burn-in 時間(Morgan Stanley 經 TechNews 2026/6/23,法人估)</div></div>
+  <div class="box"><div class="v">$8.7-9.5B</div><div class="l">CY26 SoC tester 市場(Advantest 2026/4/27;另有 $8.5B 起轉述版本)</div></div>
+  <div class="box"><div class="v">+33%~+133%</div><div class="l">台測試鏈 2026 年 5 月營收 YoY 全數為正(公開申報)</div></div>
 </div>
 
 <!-- 1 -->
@@ -112,18 +131,18 @@
   <h3>核心定義:為何 AI 讓測試「強度倍增」</h3>
   <p>AI 加速器(NVIDIA GB/Rubin、Google TPU 等 ASIC)是「多 die 模組」——數千核心的 chiplet + HBM + SRAM 以 CoWoS/3D IC 整合。這把測試從「抽樣」變成「結構性必跑」,五條互相加乘:</p>
   <ul>
-    <li><b>chiplet 多 die → 強制 KGD(Known-Good-Die):</b>任一壞 die 毀掉整個數千美元封裝,封裝前必須全測;測試插入點(test insertions)從 CP 一路串到 burn-in、FT、SLT。</li>
-    <li><b>SLT 從選配變必要:</b>AI 晶片的矽資料錯誤(SDE/silent data corruption)只能在近真實系統的 SLT 抓出。</li>
-    <li><b>高功率(每封裝 300W~2000W):</b>測試期間散熱/供電變難,液冷估佔 AI 老化/SLT 平台約 41%。</li>
-    <li><b>大 die、高核心數 → 測試時間倍增</b>(京元電稱 +100~200%、單價 +50~100%,公司自述)。</li>
+    <li><b>chiplet 多 die → 強制 KGD(Known-Good-Die):</b>任一壞 die 毀掉整個數千美元封裝,封裝前必須全測;測試插入點(test insertions)從 CP 一路串到 KGD 分測、burn-in、FT、SLT。SemiEngineering 2026/4/7 確認四段插入點(final test/singulated die test/SLT/in-system test)由 DFT 協同支撐,HBM 可占封裝成本約 50%<span class="conf c-high">high</span>。</li>
+    <li><b>SLT 從選配變必要:</b>AI 晶片的矽資料錯誤(SDE/silent data corruption)只能在近真實系統的 SLT 抓出;Wing VC 2026/6 稱 SLT 為 ATE 核心 TAM 之上的數十億美元增量市場(VC 視角,blog 級)。</li>
+    <li><b>高功率(每封裝 300W~2000W+):</b>測試期間散熱/供電變難;SLT 平台功率天花板 2kW(Teradyne Titan HP 現行)→4kW(roadmap)→10kW(Cohu Eclipse roadmap);FMI 估液冷佔 AI 老化/SLT 平台約 41%(報告農場級)。</li>
+    <li><b>大 die、高核心數 → 測試時間拉長:</b>可佐證的分項錨=Rubin burn-in 3h→5-6h(Morgan Stanley 口徑,TechNews 2026/6/23)、SLT 覆蓋率/負荷 +20-30%(流通口徑)、Rubin vs Blackwell 測試時間 +50~100%(法人/媒體流通,無官方數 ⚪)。舊說法「AI 測試時間 +100-200%」查無來源、已裁決反駁,見第 11 節。</li>
     <li><b>測試成本占比上升:</b>先進 AI 封裝測試成本佔總晶片成本 10-15%,vs 傳統消費 SoC 約 5%。</li>
   </ul>
-  <div class="callout warn"><b>同名不同物/切分:</b>本主題是邏輯/SoC/AI 加速器測試(CP/burn-in/FT/SLT 與探針卡/測試座/分選/代工);與「HBM 測試與後段周邊」(記憶體測試)為相鄰但不同 segment——京元電/欣銓/矽格/穎崴/旺矽橫跨兩者,重疊處註明、不重複當兩批受惠灌。</div>
+  <div class="callout warn"><b>同名不同物/切分:</b>本主題是邏輯/SoC/AI 加速器測試(CP/KGD/burn-in/FT/SLT 與探針卡/測試座/分選/代工);與「HBM 測試與後段周邊」(記憶體測試)為相鄰但不同 segment——京元電/欣銓/矽格/穎崴/旺矽橫跨兩者,重疊處註明、不重複當兩批受惠灌。HBM4 base die 移往先進邏輯代工(SK hynix base die 採 TSMC 12nm、HBM4E 客製 logic die 走 N3P,TrendForce/Tom's Hardware 2026 口徑)使 CP/FT 交界複雜化:base die 的 CP 發生在 foundry 端,與本題交界為 CoWoS 堆疊後 KGD/FT;HBM 堆疊測試本體屬 HBM 題、不雙計。</div>
 </div>
 
 <!-- 2 -->
-<h2 id="s2"><span class="n">2</span>完整測試流程拆解(6 環節)<span class="conf c-high">高信心</span></h2>
-<p class="sub">設計 DFT → CP 晶圓針測 → Burn-in 老化 → FT 成品終測 → <b>SLT 系統級測試(AI 新增強度最大)</b> → 出貨檢測。台廠主戰場在 ②CP 探針卡、③burn-in、④FT、⑤SLT;① DFT 是國際 EDA 主場、台廠缺席。</p>
+<h2 id="s2"><span class="n">2</span>完整測試流程拆解(7 插入點)<span class="conf c-high">高信心</span></h2>
+<p class="sub">設計 DFT → CP 晶圓針測 → <b>KGD/chiplet 分測(2026 新增獨立插入點)</b> → Burn-in 老化 → FT 成品終測 → <b>SLT 系統級測試(AI 新增強度最大)</b> → 出貨檢測。台廠主戰場在 ②CP 探針卡、④burn-in、⑤FT、⑥SLT;①DFT 是國際 EDA 主場、③KGD 分測 cell 與 WLBI 台廠缺席。</p>
 <div class="flow">
   <div class="step"><div class="num">1</div><div class="body">
     <h4>設計階段 DFT / DFT-DV(可測試性設計)</h4>
@@ -134,32 +153,38 @@
   <div class="step"><div class="num">2</div><div class="body">
     <h4>CP 晶圓針測(封裝前,探針卡)</h4>
     <p>探針卡接觸晶圓每顆 die 做電性初測,挑壞 die、做 KGD 清單,壞 die 不進昂貴封裝。</p>
-    <div class="diff">難點:超高針數/微 pitch MEMS 探針卡;國際三強(FormFactor+Technoprobe+MJC)約 6 成、MEMS 佔 73%;Technoprobe 拿台積電 2nm 約 30% 認證(壁壘極高)。</div>
+    <div class="diff">難點:超高針數/微 pitch MEMS 探針卡;國際三強(FormFactor+Technoprobe+MJC)合計約 6 成 2025 探針卡營收(Mordor 口徑,低信心);TSMC 2025/8 認證 MJC 為 2nm 主力、Technoprobe 拿約 30% 2nm 認證案(同 Mordor 口徑待具名覆核)——壁壘極高。2nm 首波認證名單未見台廠具名。</div>
     <div class="who">對應:<span class="tag t-tw">旺矽 6223</span> <span class="tag t-tw">中華精測 6510</span> <span class="tag t-tw">欣銓 3264(CP 代工)</span> <span class="tag t-intl">FormFactor/Technoprobe/MJC</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">3</div><div class="body">
-    <h4>Burn-in 老化測試(含 WLBI 晶圓級 + 高功率燒錄)</h4>
-    <p>高溫+高壓+加電應力逼出早夭缺陷。AI 晶片價值高、故障損失大,從可選變關鍵把關。</p>
-    <div class="diff">難點:高功率(300W~2000W)供電與液冷散熱、自製老化爐成本優勢、老化座高溫接觸壽命;WLBI 全晶圓 contactor 是 Aehr 獨門(台廠缺席)。</div>
-    <div class="who">對應:<span class="tag t-tw">京元電 2449(自製爐)</span> <span class="tag t-tw">穎崴 6515(burn-in socket)</span> <span class="tag t-tw">雍智 6683</span> <span class="tag t-intl">Aehr(WLBI)</span> <span class="conf c-high">高</span></div>
+    <h4>KGD / chiplet 分測(singulated die test)⭐ 2026 新增獨立插入點</h4>
+    <p>切割後、封裝前對單顆裸晶(singulated die)做電性測試——2.5D/3D 封裝把「切割後才會顯現的缺陷」擋在 CoWoS 堆疊之前。Teradyne × TEL 於 SWTest 2026(2026/6/8)發表整合 KGD 測試 cell:UltraFLEXplus ATE + TEL Prexa SDP 裸晶探測機(2026/4/16 產品發表),SDP 同時管理高功耗 AI 晶片溫度;目標客戶=fabless/foundry/OSAT。</p>
+    <div class="diff">難點:裸晶接觸/溫控/搬送皆為新規格;量產導入 2026 起步。台廠無對應設備商,<b>京元電/欣銓為潛在導入方(OSAT 採購方)</b>。</div>
+    <div class="who">對應:<span class="tag t-intl">Teradyne + TEL(整合 cell)</span> <span class="tag t-tw">京元電 2449(潛在導入)</span> <span class="tag t-tw">欣銓 3264(潛在導入)</span> <span class="conf c-high">高(方案發布)/導入待驗證</span></div>
   </div></div>
   <div class="step"><div class="num">4</div><div class="body">
-    <h4>FT 成品終測(封裝後,分選機+測試座+ATE)</h4>
-    <p>分選機送 DUT 進測試座,ATE 雙/三溫下全功能+效能+分 bin 測試。chiplet 封裝後最後整體驗證。</p>
-    <div class="diff">難點:分選機主動溫控(ATC)在高功率下精準維持接面溫度;測試座承受高頻/大電流/大封裝(&gt;100×100mm、2 萬 pin)。京元電在 NVIDIA AI FT 近乎主導。</div>
-    <div class="who">對應:<span class="tag t-tw">京元電 2449</span> <span class="tag t-tw">鴻勁 7769(分選/ATC)</span> <span class="tag t-tw">穎崴 6515(socket)</span> <span class="tag t-tw">矽格 6257</span> <span class="tag t-intl">Advantest/Teradyne(ATE)、Cohu/TechWing</span> <span class="conf c-high">高</span></div>
+    <h4>Burn-in 老化測試(WLBI 晶圓級 + 高功率封裝級)</h4>
+    <p>高溫+高壓+加電應力逼出早夭缺陷。AI 晶片價值高、故障損失大,從可選變關鍵把關;AWS 等 CSP 已將 burn-in 納入 ASIC 標準流程(流通口徑)。</p>
+    <div class="diff">難點:高功率(300W~2000W)供電與液冷散熱、自製老化爐成本優勢、老化座高溫接觸壽命;Rubin 世代散熱挑戰使 burn-in 3h→5-6h(MS 口徑);WLBI 全晶圓 contactor 是 Aehr 獨門(FOX-XP 9×300mm 平行,2026/2 獲 lead AI processor 客戶 $14M 追單)——台廠缺席。burn-in 爐主機國際商=Incal/Micro Control(Threads 流通口徑 ⚪),京元電為採購方+自製爐服務方。</div>
+    <div class="who">對應:<span class="tag t-tw">京元電 2449(自製爐)</span> <span class="tag t-tw">穎崴 6515(burn-in socket)</span> <span class="tag t-tw">雍智 6683(burn-in board)</span> <span class="tag t-tw">宜特 3289(BIB 設計製作,watch)</span> <span class="tag t-tw">中探針 6217(高功率老化測試座,watch)</span> <span class="tag t-intl">Aehr(WLBI)/Incal/MCC</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">5</div><div class="body">
-    <h4>SLT 系統級測試 ⭐ AI 新增強度最大環節</h4>
-    <p>載入真實 OS/firmware/workload,長時間驗證整顆晶片在真實情境的功能/效能/穩定性,抓 ATE 抓不到的 system-level 缺陷。</p>
-    <div class="diff">難點:重現真實系統+高功率供電+液冷+長工時;<b>已從可選變 AI 晶片強制步驟</b>;Teradyne Titan HP 已支援 2kW、路線圖到 4kW。護城河極高。</div>
-    <div class="who">對應:<span class="tag t-tw">致茂 2360(NVIDIA 15 年獨家)</span> <span class="tag t-tw">鴻勁 7769</span> <span class="tag t-tw">穎崴 6515(SLT socket &gt;5 成)</span> <span class="tag t-tw">京元電 2449</span> <span class="tag t-intl">Advantest/Teradyne</span> <span class="conf c-high">高</span></div>
+    <h4>FT 成品終測(封裝後,分選機+測試座+ATE)</h4>
+    <p>分選機送 DUT 進測試座,ATE 雙/三溫下全功能+效能+分 bin 測試。chiplet 封裝後最後整體驗證。</p>
+    <div class="diff">難點:分選機主動溫控(ATC)在高功率下精準維持接面溫度(鴻勁 ATC 自述可處理 1500W+、roadmap 6kW);測試座承受高頻/大電流/大封裝(&gt;100×100mm、2 萬 pin)。京元電為 NVIDIA GPU FT/burn-in 主力供應商(媒體口徑;MS 窄口徑:V 系列 CPU FT+burn-in 近 100%,2026/6/23)。</div>
+    <div class="who">對應:<span class="tag t-tw">京元電 2449</span> <span class="tag t-tw">鴻勁 7769(分選/ATC)</span> <span class="tag t-tw">穎崴 6515(socket)</span> <span class="tag t-tw">矽格 6257</span> <span class="tag t-intl">Advantest/Teradyne(ATE)、Cohu(Eclipse 切入中)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">6</div><div class="body">
+    <h4>SLT 系統級測試 ⭐ AI 新增強度最大環節</h4>
+    <p>載入真實 OS/firmware/workload,長時間驗證整顆晶片在真實情境的功能/效能/穩定性,抓 ATE 抓不到的 system-level 缺陷。</p>
+    <div class="diff">難點:重現真實系統+高功率供電+液冷+長工時;<b>已從可選變 AI 晶片強制步驟</b>;Teradyne Titan HP 支援 2kW、路線圖 4kW、已在多家大客戶量產部署(2025/10/15 發布)。護城河極高;Rubin 導入 chiplet+HBM4 後 SLT 覆蓋率/負荷再增 20-30%(流通口徑)。</div>
+    <div class="who">對應:<span class="tag t-tw">致茂 2360(媒體多源稱 NVIDIA 15 年獨供)</span> <span class="tag t-tw">鴻勁 7769</span> <span class="tag t-tw">穎崴 6515(SLT 整合座 HyperSocket)</span> <span class="tag t-tw">京元電 2449</span> <span class="tag t-intl">Teradyne(Titan HP)/Advantest/Cohu</span> <span class="conf c-high">高</span></div>
+  </div></div>
+  <div class="step"><div class="num">7</div><div class="body">
     <h4>最終出貨檢測 / Outgoing QA(增幅最小)</h4>
     <p>AOI 外觀檢測(共面性/翹曲)、最終抽檢、雷射打標、編帶包裝與追溯。</p>
-    <div class="diff">難點相對低:成熟自動化檢測+OSAT 標準流程;大封裝翹曲/共面檢測規格升高,但非測試強度核心(周邊、不作投資主軸)。</div>
-    <div class="who">對應:<span class="tag t-tw">測試代工內含</span> <span class="tag t-tw">德律 3030(AOI,周邊)</span> <span class="conf c-med">中(周邊)</span></div>
+    <div class="diff">難點相對低:成熟自動化檢測+OSAT 標準流程;大封裝翹曲/共面檢測規格升高,銅柱/C4 凸塊 3D X-ray(德律 TR7600 SIII Plus)已通過客戶驗證並認列營收(2026),但非測試強度核心(周邊、不作投資主軸)。</div>
+    <div class="who">對應:<span class="tag t-tw">測試代工內含</span> <span class="tag t-tw">德律 3030(AOI/X-ray,watch)</span> <span class="tag t-intl">Camtek/Onto(高階計量)</span> <span class="conf c-med">中(周邊)</span></div>
   </div></div>
 </div>
 
@@ -168,25 +193,33 @@
 <p class="sub">維度:技術門檻 / 設備稀缺 / AI 強度增幅 / 客戶認證綁定,各 0~5 分(5＝最難)。評分為推估。</p>
 <table>
   <tr><th>製程環節</th><th>技術門檻</th><th>設備稀缺</th><th>AI強度增幅</th><th>客戶綁定</th><th>總分/20</th><th>最卡關原因</th></tr>
-  <tr><td><b>⑤ SLT 系統級測試</b></td><td>5</td><td>4</td><td>5</td><td>5</td><td><b>19</b></td><td>從可選變強制、高功率+真實 workload,增幅最大</td></tr>
-  <tr><td>② CP 晶圓針測(探針卡)</td><td>5</td><td>4</td><td>4</td><td>5</td><td>18</td><td>MEMS 微機電製程、2nm 認證壁壘極高</td></tr>
+  <tr><td><b>⑥ SLT 系統級測試</b></td><td>5</td><td>4</td><td>5</td><td>5</td><td><b>19</b></td><td>從可選變強制、高功率+真實 workload,增幅最大;功率天花板 2kW→4kW→10kW 競速</td></tr>
+  <tr><td>② CP 晶圓針測(探針卡)</td><td>5</td><td>4</td><td>4</td><td>5</td><td>18</td><td>MEMS 微機電製程、2nm 認證壁壘極高(MJC/Technoprobe/FormFactor 先卡位)</td></tr>
+  <tr><td>③ KGD/chiplet 分測(新插入點)</td><td>4</td><td>5</td><td>4</td><td>4</td><td>17</td><td>裸晶接觸+高功耗溫控新規格;設備端 Teradyne+TEL 整合 cell 剛落地(2026/6)</td></tr>
   <tr><td>① 設計 DFT/DFT-DV</td><td>5</td><td>4</td><td>4</td><td>4</td><td>17</td><td>多 die DFT 自動化,EDA 三家寡占(台廠缺席)</td></tr>
-  <tr><td>③ Burn-in 老化</td><td>4</td><td>4</td><td>5</td><td>4</td><td>17</td><td>高功率供電+液冷、自製爐;WLBI 是 Aehr 獨門</td></tr>
-  <tr><td>④ FT 成品終測</td><td>4</td><td>4</td><td>4</td><td>5</td><td>17</td><td>分選機 ATC 高功率溫控、大封裝測試座</td></tr>
-  <tr><td>⑥ 出貨檢測 QA</td><td>2</td><td>2</td><td>2</td><td>2</td><td>8</td><td>成熟檢測收尾,非強度核心</td></tr>
+  <tr><td>④ Burn-in 老化</td><td>4</td><td>4</td><td>5</td><td>4</td><td>17</td><td>高功率供電+液冷、自製爐;burn-in 3h→5-6h;WLBI 是 Aehr 獨門</td></tr>
+  <tr><td>⑤ FT 成品終測</td><td>4</td><td>4</td><td>4</td><td>5</td><td>17</td><td>分選機 ATC 高功率溫控、大封裝測試座</td></tr>
+  <tr><td>⑦ 出貨檢測 QA</td><td>2</td><td>2</td><td>2</td><td>2</td><td>8</td><td>成熟檢測收尾,非強度核心</td></tr>
 </table>
-<div class="callout"><b>台股甜蜜點:</b>SLT(19)+ 探針卡(18)+ burn-in/FT(17)——這幾環台廠都有龍頭級卡位(致茂/鴻勁/穎崴/旺矽/京元電/中華精測);唯 ① DFT 與 ATE 測試機本體是國際主場、台廠吃不到。</div>
-<h3>公司受惠強度評分(報酬,僅列有查證信心者)</h3>
-<p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議。</p>
+<div class="callout"><b>台股甜蜜點:</b>SLT(19)+ 探針卡(18)+ burn-in/FT(17)——這幾環台廠都有龍頭級卡位(致茂/鴻勁/穎崴/旺矽/京元電/中華精測);唯 ①DFT、③KGD 分測設備、ATE 測試機本體、WLBI、量產 prober 是國際主場、台廠吃不到。</div>
+
+<h3>公司受惠強度評分(總分排序,holds 9 檔 + watch 參考 2 檔)</h3>
+<p class="sub">維度:AI受惠 / 技術卡位 / 商轉時程 / 供給稀缺 / 規模財務,各 0~5 分;總分由高到低。評分為推估,非投資建議;數字時點=1Q26 財報+2026 年 5 月營收(6 月營收 7/10 前後公告後需刷新)。</p>
 <table>
-  <tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
-  <tr><td>京元電 2449</td><td>5</td><td>4</td><td>5</td><td>4.5</td><td>4</td><td><b>22.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>鴻勁精密 7769</td><td>5</td><td>4.5</td><td>4.5</td><td>4.5</td><td>3.5</td><td><b>22.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>致茂 2360</td><td>4.5</td><td>4.5</td><td>4</td><td>4.5</td><td>4</td><td><b>21.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>穎崴 6515</td><td>4.5</td><td>4.5</td><td>4.5</td><td>4</td><td>3</td><td><b>20.5</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>旺矽 6223</td><td>4</td><td>4.5</td><td>4</td><td>3.5</td><td>3</td><td><b>19</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><th>公司(股號)</th><th>AI受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分/25</th><th>為什麼(關鍵事證)</th><th>查證</th></tr>
+  <tr><td><b>鴻勁精密 7769</b></td><td>5</td><td>5</td><td>5</td><td>4.5</td><td>3.5</td><td><b>23</b></td><td>1-5 月營收 192.17 億(+87.9%);AI/HPC/ASIC 佔比 78%(1Q26 法說);1Q26 EPS 25.70、毛利率 56.24%;產能 2026 至少 +40%、2026-2028 CAGR 50%(公司自述);月營收體量已超過 Cohu 全年 HPC 目標的數倍</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>京元電子 2449</b></td><td>5</td><td>4</td><td>5</td><td>4.5</td><td>4</td><td><b>22.5</b></td><td>capex 500 億創天量(2026/4/10 上修);1Q26 營收 101.91 億創高、毛利率 39.74%;MS 估 2026 營收 +40%、burn-in 3h→5-6h 增測試工時(2026/6/23,法人估);自製 burn-in 爐成本優勢</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>致茂 2360</b></td><td>4.5</td><td>4.5</td><td>5</td><td>4.5</td><td>3.5</td><td><b>22</b></td><td>5 月營收 45.50 億(+133.1%)、1Q26 營收 118.6 億(+73%)、EPS 9.12、毛利率 63%;媒體多源(今周刊/天下)稱 NVIDIA GPU SLT 15 年獨供;新一代 AI GPU/ASIC SLT 案 2H26 量產(公司展望)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>穎崴 6515</b></td><td>4.5</td><td>4.5</td><td>4.5</td><td>4</td><td>3.5</td><td><b>21</b></td><td>5 月營收 10.73 億(+119.8%);1Q26 EPS 19.54 創高、AI/HPC 佔比 68%;探針產能倍增計畫(600→900 萬支/月,2026/5/26 法說);HyperSocket SLT 整合座+液冷座差異化</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>旺矽 6223</b></td><td>4</td><td>4.5</td><td>4.5</td><td>3.5</td><td>3.5</td><td><b>20</b></td><td>5 月營收 19.07 億(+57.8%);1Q26 毛利率 59.4% 創高、EPS 12.53;MEMS 通過 NVIDIA Rubin/AWS Trainium 3 認證(媒體/法人口徑);MEMS 產能 2026 倍增</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>中華精測 6510</td><td>4</td><td>4</td><td>4</td><td>3.5</td><td>2.5</td><td><b>18</b></td><td>1Q26 EPS 10.43 連 3 季成長創 40 季新高、HPC 營收 6.11 億(+63% QoQ);5 月營收 5.43 億(+34.1%);2026/8 產能 1.5-2 倍(公司自述);三廠總投資 40.87 億、2028H2 投產</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>矽格 6257</td><td>3.5</td><td>3</td><td>3.5</td><td>3</td><td>3.5</td><td><b>16.5</b></td><td>5 月營收 19.76 億創歷史新高;前 5 月 AI/ASIC/矽光子/HPC 佔比 23%、年增 40%(法說);capex 追加至 88 億(+48%);中興三廠提前 2026Q4 完工、法說稱新產能已被客戶預訂</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>雍智科技 6683</td><td>3.5</td><td>3.5</td><td>3.5</td><td>3</td><td>2.5</td><td><b>16</b></td><td>1Q26 營收 6.64 億(+46.3%)、EPS 6.23 雙創高;連 28 個月營收年增;測試板占營收 98%;全年指引 +20~30%(公司自述);Google TPU 測試板為市場消息未經公司證實 ⚪</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>欣銓 3264</td><td>3.5</td><td>3</td><td>3</td><td>3</td><td>3</td><td><b>15.5</b></td><td>5 月營收 15.18 億(+33.0%)創高;1Q26 EPS 1.95 創 14 季新高;龍潭 ASIC CP 2026/6 交機、Q3 起貢獻(法說)——未來選擇權進入兌現首驗期(7/10 六月營收+8 月 2Q26 財報)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>德律 3030(watch)</td><td>3</td><td>2.5</td><td>3</td><td>2</td><td>2.5</td><td><b>13</b></td><td>1Q26 EPS 3.5(+43%);5 月營收 10.71 億(+14.8%)、1-5 月 +30.0%;銅柱/C4 凸塊 3D X-ray 通過驗證並認列營收=「2026 推」已兌現;半導體檢測占比未揭露→留 watch、2Q26 財報決定升格</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>惠特 6706(watch)</td><td>2</td><td>2</td><td>1.5</td><td>1.5</td><td>1</td><td><b>8</b></td><td>1Q26 EPS -0.96(虧損擴大)、4 月營收 -41.8%;矽光子/CPO 設備仍在客戶驗證期;AI 測試營收目前近零、屬 CPO 題選擇權;「2Q26 轉盈」為公司自述</td><td><span class="conf c-med">中</span></td></tr>
 </table>
-<p class="sub">規模財務欄:鴻勁/穎崴/旺矽屬高彈性中型股、京元電/致茂規模較大;NVIDIA 占比/SLT 占比多為公司自述。受惠評分為推估,僅供參考。</p>
+<p class="sub">規模財務欄:鴻勁/穎崴/旺矽屬高彈性中型股、京元電/致茂規模較大;NVIDIA 佔比/SLT 佔比多為公司自述或媒體口徑。受惠評分為推估,僅供參考。</p>
 
 <!-- 4 -->
 <h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
@@ -195,143 +228,365 @@
   <span><span class="conf c-med">中</span> 部分佐證/公司自述</span>
   <span><span class="conf c-un">待查</span> 概念股列舉</span>
 </div>
-<h3>台廠 × 環節</h3>
+<h3>供應鏈地圖(四層結構)</h3>
+<div class="chain">
+  <div class="chain-row"><div class="lvl">上游<small>設計 DFT/EDA(台廠缺席)</small></div><div class="items"><span class="tag t-intl">Synopsys / Siemens Tessent / Cadence(DFT)</span></div></div>
+  <div class="chain-row"><div class="lvl">測試介面<small>探針卡/測試座/測試板/BIB</small></div><div class="items"><span class="tag t-tw">旺矽 6223</span><span class="tag t-tw">中華精測 6510</span><span class="tag t-tw">穎崴 6515</span><span class="tag t-tw">雍智 6683</span><span class="tag t-tw">中探針 6217(watch)</span><span class="tag t-intl">FormFactor / Technoprobe / MJC / ISC / Leeno</span></div></div>
+  <div class="chain-row"><div class="lvl">測試設備<small>ATE/prober/分選/SLT/burn-in</small></div><div class="items"><span class="tag t-tw">鴻勁 7769</span><span class="tag t-tw">致茂 2360</span><span class="tag t-tw">惠特 6706(watch)</span><span class="tag t-tw">德律 3030(watch)</span><span class="tag t-intl">Advantest / Teradyne(ATE 天花板)/ TEL / Accretech / Cohu / Aehr(WLBI)</span></div></div>
+  <div class="chain-row"><div class="lvl">測試代工<small>執行(OSAT)</small></div><div class="items"><span class="tag t-tw">京元電 2449</span><span class="tag t-tw">欣銓 3264</span><span class="tag t-tw">矽格 6257</span><span class="tag t-intl">→ NVIDIA / CSP ASIC 客戶</span></div></div>
+</div>
+<div class="callout ok">💡 台廠位置:測試介面(探針卡/測試座/測試板)、測試設備(分選/SLT)、測試代工三層都有龍頭級卡位;唯上游 DFT/EDA、大型 ATE 測試機本體、WLBI、量產 prober 是國際主場、台廠吃不到。</div>
+
+<h3>台廠 × 環節(數字時點:1Q26 財報 + 2026 年 5 月營收)</h3>
 <table>
   <tr><th>公司(股號)</th><th>環節定位</th><th>角色 / 最新數字 / AI 受惠</th><th>查證</th></tr>
-  <tr><td>京元電子 2449</td><td>FT+burn-in 測試代工龍頭</td><td>AI GPU/ASIC 成品測試+高功率燒錄;AI 測試時間 +100-200%、單價 +50-100%(公司自述);2026Q1 營收 101.92 億創高(+近 40%),capex 二度上修至 500 億創天量。註:AI 占比為公司自述、留意折舊與獲利</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>鴻勁精密 7769</td><td>SoC 測試分選機/ATC</td><td>FT/SLT handler+主動溫控;NVIDIA 倚賴的 AI FT 約 90%;2026Q1 營收 107 億(+81% YoY);高盛 2026/1 TP 上調 NT$5,000、估營收 2026 +54%/2027 +40%。2025/11/27 已轉上市(非興櫃)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>穎崴 6515</td><td>測試座/測試介面龍頭</td><td>全球第一大測試座;北美 AI 客戶占營收 80%+;HyperSocket 大封裝/大功耗 ASP 高 30%+、SLT 相關營收占比逾 5 成;2026Q1 EPS 19.54 雙創高</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>致茂 2360</td><td>SLT 系統+電源測試/量測</td><td>全球第四大半導體測試廠、NVIDIA 15 年 SLT 獨家夥伴(每顆 GPU 須過其設備);新世代 AI GPU/ASIC SLT 案 2026H2 量產;2026Q1 營收 +73% YoY、EPS 9.12 創高、毛利率 63%</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>旺矽 6223</td><td>探針卡龍頭+測試設備</td><td>探針卡占營收約 76%(CPC/VPC/MEMS、自製探針)+設備約 23%;2026Q1 營收 39.33 億(+39%)、EPS 12.53 創高、毛利率 59.45% 創高</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>中華精測 6510</td><td>MEMS 探針卡+測試載板</td><td>台積電轉投資,主攻 CP/HPC;2026Q1 EPS 10.43(+54% YoY);增發 20 億 CB 蓋第三廠(2028 初完工)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>矽格 6257</td><td>FT/SiP/RF 測試代工</td><td>布局 AI/HPC SLT、矽光子、高速網通;2026Q1 EPS 2.1(+34% YoY)、5 月營收創高;capex 88 億(+49%)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>雍智科技 6683</td><td>IC 測試板(load board)/介面</td><td>切入 Google TPU CP/FT 測試板;2026Q1 營收 6.64 億(+46% YoY)、EPS 6.23 雙創高</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>欣銓 3264</td><td>CP 晶圓測試代工</td><td>ASIC 佔比約 20%;龍潭新廠 ASIC CP 新專案最快 2026H2 貢獻(全年估雙位數百分比)——未來選擇權;2026Q1 EPS 1.95 創同期高</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>惠特 6706</td><td>光電/雷射測試設備</td><td>原 LED 點測分選龍頭轉 AI 光電/矽光子高階設備;新品在客戶驗證未放量、去年虧損(券商估今年有望轉盈)——未來選擇權</td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>德律 3030</td><td>ICT 電性測試+3D AOI</td><td>AI 受惠主要在網通/伺服器板測;2026Q1 EPS 3.5(+43% YoY)。屬周邊、非測試強度核心</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>京元電子 2449</td><td>FT+burn-in 測試代工龍頭</td><td>AI GPU/ASIC 成品測試+高功率燒錄;1Q26 營收 101.91 億創高(+39.3%)、毛利率 39.74%(+6.25pp)、EPS 1.87(低於法人預期,4 外資仍升目標價,工商時報 2026/5/11);5 月營收 37.77 億(+36.6%);capex 二度上修至 500 億(2026/4/10);AI 佔比公司口徑 2025 25-30%→2026E 35-40%(法人「AI 相關 7 成」為廣義分母 ⚪);MS:Rubin burn-in 3h→5-6h、2026 營收 +40%、TP 388(2026/6/23,法人估)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>鴻勁精密 7769</td><td>SoC 測試分選機/ATC/水冷板</td><td>FT/SLT handler+主動溫控;1Q26 營收 107 億(+81.4%)、毛利率 56.24%、EPS 25.70;5 月營收 41.30 億(+83.6%)、1-5 月 +87.9%;AI/HPC/ASIC 佔比 78%、訂單能見度至 2026 年底;高階 ATC 2H26 大量出貨(CSP TPU);Insertion 4 CPO 同測機 2026 底規格定案/2027 初量產(皆 2026/5/12 法說,公司自述);「NVIDIA AI FT ~90%」為媒體/法人口徑、無第三方研調 ⚪;高盛 TP 序列 5,000(2026/1)→5,700→12,000(2026/5,法人估非財測);2025/11/27 掛牌上市</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>穎崴 6515</td><td>測試座/測試介面(SLT 整合座)</td><td>全球高階邏輯測試座第一梯隊/前五大(今周刊口徑;與韓 ISC/Leeno 並列,「全球第一」無限定口徑已裁決反駁);1Q26 營收 29.8 億、EPS 19.54 雙創高、AI/HPC 佔比 68%;5 月營收 10.73 億(+119.8%);探針產能 600→900 萬支/月(2026/5/26 法說啟動倍增計畫);HyperSocket 針對 &gt;100×100mm、&gt;2 萬 pin,公司估 2027 高階營收貢獻 &gt;5%(公司自述);仁武廠爬坡中、仁武二廠 2Q27 投產(豐雲口徑)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>致茂 2360</td><td>SLT 系統+電源測試/量測</td><td>媒體多源(今周刊 2026/1/7、天下)稱 NVIDIA GPU SLT 15 年獨供;「每顆 NVIDIA GPU 須過其設備」為公司自述/媒體轉述;1Q26 營收 118.6 億(+73%)、淨利 38.6 億(+82%)、毛利率 63%、EPS 9.12;半導體/Photonics 測試方案 34.1 億(+31%);4 月 48.66 億(+128.9%)、5 月 45.50 億(+133.1%)連月翻倍;新一代 AI GPU/ASIC SLT 案 2H26 量產(公司展望)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>旺矽 6223</td><td>探針卡龍頭+測試設備</td><td>探針卡占營收 75.4%(CPC/VPC/MEMS 全系列、自製探針)+設備 22.7%(溫控 Thermal 市占 &gt;50% 為公司自述);1Q26 毛利率 59.4% 創高、淨利 12.27 億(+69.8%)、EPS 12.53;5 月營收 19.07 億(+57.8%、月增 28.4%);MEMS 通過 NVIDIA Rubin/AWS Trainium 3 認證、應用 3nm 以下(媒體/法人整理,法說背書待 2Q26 確認);MEMS 產能 2026 倍增;TSMC 2nm 探針卡認證無事證、標待查</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>中華精測 6510</td><td>MEMS 探針卡+測試載板</td><td>台積電轉投資,主攻 CP/HPC;1Q26 EPS 10.43(+20.1% QoQ,創 40 季新高)、HPC 營收 6.11 億(+63% QoQ)、晶圓測試卡占 80.31%;5 月營收 5.43 億(+34.1%);2026/8 總產能 1.5-2 倍(公司自述,經濟日報 2026/5);三廠投資上修至 40.87 億、2028H2 投產;高值化=MEMS 混針、112/224G PAM4、導板散熱複雜載板</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>矽格 6257</td><td>FT/SiP/RF 測試代工</td><td>1Q26 營收 52.94 億、毛利率 31.66%、EPS 2.08;5 月營收 19.76 億創歷史新高(+23.7%);前 5 月 AI/ASIC/矽光子/HPC 佔比 23%、年增 40%(2026/6/23 法說);capex 追加 28.22 億→全年 88 億(+48%);中興三廠提前 2026Q4 完工、2027Q1 量產,法說稱新產能已被客戶預訂(3A 策略)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>雍智科技 6683</td><td>IC 測試板(load board)/socket/BIB</td><td>測試板占營收 98%;1Q26 營收 6.64 億(+46.3%)、EPS 6.23 雙創高;5 月營收 2.03 億(+12.3%)、連 28 個月年增後動能趨緩;全年指引 +20~30%(公司自述);「經聯發科切入 Google TPU 測試板」為市場消息、未經公司證實 ⚪;「台系 burn-in board 獨家供應商」為法人口徑 ⚪;法人估 2026 EPS 28 元(+81.6%,非公司財測)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>欣銓 3264</td><td>CP 晶圓測試代工</td><td>ASIC 占比約 20% 集中龍潭 CP;1Q26 營收 39.8 億(+24.0%)、EPS 1.95 創 14 季新高;5 月營收 15.18 億(+33.0%)創高;龍潭新廠 2026/6 交機、Q3 起貢獻、稼動率約七成多、Q3 營收挑戰季增雙位數(2026/5/4 法說,公司自述)——未來選擇權兌現首驗=7/10 六月營收+8 月 2Q26 財報</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>德律 3030(watch)</td><td>ICT/AOI/3D X-ray 檢測</td><td>1Q26 營收 19.41 億(+28.5%)、EPS 3.5(+43%);5 月營收 10.71 億(+14.8%)、1-5 月 +30.0%;TR7600 SIII Plus 3D Semi X-Ray(銅柱/C4 凸塊)通過客戶驗證並認列營收;加入 NVIDIA Metropolis 生態系;主業仍為 PCBA/ICT/AOI、半導體檢測占比未揭露→watch,2Q26 財報決定升格</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>惠特 6706(watch)</td><td>光電/雷射測試設備</td><td>原 LED 點測分選龍頭轉矽光子/CPO 設備(貼合機/光纖陣列測試/主動對位);連兩年虧損(2024 EPS -4.29、2025 -3.92)、1Q26 EPS -0.96、4 月營收 5,399 萬(-41.8%);新品在客戶驗證期無量產;「2Q26 轉盈」為公司自述——AI 測試營收目前近零、屬 CPO 題選擇權</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>閎康 3587(watch)</td><td>MA/FA 材料/失效分析</td><td>1Q26 營收 14.24 億(+15.0%)、淨利 +197.5%、EPS 2.24;5 月營收 5.44 億(+26.9%)連 3 個月創高;動能=AI 晶片研發與 A16 先進製程迭代帶動檢測委外——屬研發/良率分析外圍、非 CP/FT/SLT 量產測試主鏈;與玻璃基板/先進封裝題不雙計</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>中探針 6217(watch)</td><td>測試探針/高功率老化測試座</td><td>5 月營收 4.06 億(+51.2%、近 4 月新高)、1-5 月 +36.3%;高頻高速探針+高功率 burn-in 測試座通過客戶驗證出貨、打入 AI 晶片封測大廠供應鏈(媒體具名報導);與京元電 burn-in 擴產同節奏;缺口:AI 佔比/毛利結構未揭露、探針以連接器/治具型為主與 MEMS 探針卡不同層級</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>汎銓 6830(watch)</td><td>MA 材料分析(檢測外圍)</td><td>1Q26 EPS -0.61(3 月單月轉正 0.35);5 月營收 2.17 億(+19.4%);MA 占營收 80-90%,2026 四引擎=埃米世代 MA/AI 客戶專區/全球據點/矽光子設備(法說前瞻);「下半年獲利黃金交叉」為公司自述——規模小+虧損,watch 劣後於閎康</td><td><span class="conf c-med">中</span></td></tr>
 </table>
-<p class="sub">⚠「未逐項佐證」= 未取得該公司在本主題的<b>獨立</b>佐證,不代表沒有角色,但也不應直接當事實下單。京元電/欣銓/矽格/穎崴/旺矽橫跨記憶體與邏輯測試,與「HBM 測試」題重疊,勿重複計兩次受惠。</p>
+<p class="sub">⚠「未逐項佐證」= 未取得該公司在本主題的<b>獨立</b>佐證,不代表沒有角色,但也不應直接當事實下單。京元電/欣銓/矽格/穎崴/旺矽橫跨記憶體與邏輯測試,與「HBM 測試」題重疊,勿重複計兩次受惠。watch 檔均附反駁理由;excluded 留痕(宜特營收負成長/蔚華科代理波動/久元 AI 未具體化/頎邦屬矽光子題/由田 H1 崩跌)見第 11 節。</p>
+
 <h3>國際 × 環節(台廠的天花板)</h3>
 <table>
-  <tr><th>公司</th><th>環節</th><th>角色 / 市占</th><th>查證</th></tr>
-  <tr><td>Advantest(6857.T)</td><td>ATE 測試機</td><td>SoC tester 全球龍頭,CY26 市場 $8.7-9.5B、市占 66%;FY26 財測創高(¥1.42 兆 +25.8%)</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>Teradyne(TER)</td><td>ATE+SLT</td><td>測試機全球第二;Titan HP SLT 平台 2kW→4kW,對應 AI 高功率</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>FormFactor / Technoprobe / MJC</td><td>探針卡</td><td>三強約 6-7 成(FORM ~30%、MJC ~14%);卡位台積電 2nm 認證</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>Cohu / ISC / Leeno / TechWing</td><td>測試座/分選機</td><td>測試座市場分散(前五約 41%);ISC 2025 AI 測試座 +115%、SLT 佔該類 &gt;50%</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><th>公司</th><th>環節</th><th>角色 / 市占 / 最新實績</th><th>查證</th></tr>
+  <tr><td>Advantest(6857.T)</td><td>ATE 測試機</td><td>SoC tester 全球龍頭;FY25 營收 ¥1,128.6B(+44.7%)、FY26 財測 ¥1,420B(+25.8%);FY26 SoC 測試系統指引 ¥999.5B、約 95% 來自 computing/communications(AI 為主);CY26 SoC tester TAM $8.7-9.5B(2026/4/27,另有 $8.5B 起轉述版);SoC 市占 56%→66%(CY25)為第三方分析整理、非官方具名;產能 2026 年底較 2024 擴 70%+、SoC tester 年產能 3,000 台→至少 5,000 台(2027/3 前,Bloomberg 2026/1/28);FY26Q1 決算 2026/7/29</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Teradyne(TER)</td><td>ATE+SLT+KGD cell</td><td>測試機全球第二;1Q26 營收 ~$1.3B 創紀錄、約 70% 營收 AI 相關(2026/4/29 法說);Titan HP SLT 2kW→4kW、已在多家大客戶量產部署;2026/6/8 與 TEL 發表 KGD 整合 cell(UltraFLEXplus+Prexa SDP);2026/3 發表 Photon 100 光電 ATE(CPO)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Technoprobe(義)</td><td>探針卡</td><td>1Q26 營收 €187M(+19%)創紀錄、EBITDA €69.2M(+44.2%,margin 37%);AI 相關約占營收 38%;全年 guidance 上修至 €950M-1.05B(EBITDA margin 目標 44-46%)、「2027 目標提前至 2026」;發布日股價 +32~36%;TSMC 2nm 認證案約 30%(Mordor 口徑,低信心)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>FormFactor(FORM)</td><td>探針卡</td><td>1Q26 營收 $226.1M(+32% YoY)連兩季新高;DRAM 探針卡 $82.9M(+70% YoY,HBM 帶動)、HBM 卡年增 &gt;50%;客戶集中 SK hynix 29.5%/NVIDIA 10.2%;2Q26 指引 ~$240M;GAAP 淨利 $20.4M/non-GAAP $44.5M(EPS $0.56),引用標口徑;2030 營收目標 $1.6B(CEO,2026/6/2);2026 CPO 營收僅 $10-20M 區間高端</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>MJC(Micronics Japan)</td><td>探針卡</td><td>TSMC 2025/8 認證為 2nm 主力探針卡供應商(18 個月共同開發;Mordor 口徑,低信心);三強(FormFactor+Technoprobe+MJC)合計約 6 成 2025 探針卡營收(同源)</td><td><span class="conf c-low">低(待具名覆核)</span></td></tr>
+  <tr><td>Cohu(COHU)</td><td>分選機/測試座</td><td>1Q26 營收 $125.1M(vs 前年 $96.8M);2026 HPC 營收指引 $80-100M(4/30 法說上修,前值 $60-85M);第二筆多台 Eclipse AI 資料中心處理器訂單(2026/3/17);Eclipse ATC 3kW→10kW roadmap;xPU test SAM $650M、pipeline $750M——鴻勁近獨占的具體國際挑戰者,但 2026 量級 &lt; 鴻勁單季</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>ISC / Leeno(韓)</td><td>測試座</td><td>ISC 2025 營收 ₩220.2B(+26%)、營益 ₩60.1B(+34%)雙創高(AI/HBM 座帶動)、2026 目標 +20%、AI 占比 13%→&gt;20%(2026 目標);矽膠 socket 市占 &gt;50% 為公司自述;Leeno TTM 營收 ~$263M——韓台對決,穎崴 2026 成長率(前 5 月 +46.5%)顯著高於 ISC guidance;「ISC +115%」舊口徑未見 2026 延續證據</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>Aehr(AEHR)</td><td>WLBI 晶圓級老化</td><td>市場唯一高功率全自動 WLBI 方案(FOX-XP 9×300mm 平行+WaferPak);2026/2/26 獲 lead AI processor 客戶 $14M 追單;2026/3 矽光子/光 I/O 客戶連續追加;大型 AI ASIC 客戶 FQ1'27(2026/6-8)起交機 forecast——台廠缺席環節</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>TEL / Accretech(日)</td><td>prober(晶圓/裸晶)</td><td>量產 prober 日商雙強:TEL Precio 系列+新 Prexa SDP 裸晶分測(2026/4/16 發表);Accretech/東京精密為先進邏輯/記憶體 probing 頂級供應商;wafer prober 市場 2026 $2.03B→2031 $2.81B(Mordor 口徑)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>TechWing(KOSDAQ)</td><td>記憶體 handler</td><td>記憶體 test handler 全球市占第一+HBM 檢測新機 Cube Prober(1Q26 訂單 ₩8.1B+handler ₩22.8B)——主戰場在記憶體/HBM,非鴻勁 SoC AI FT handler 直接對手(歸 HBM 測試題)</td><td><span class="conf c-med">中</span></td></tr>
 </table>
+
 <h3>台灣吃得到多少(逐環節定位)</h3>
-<p class="sub">台股在「介面 + 代工 + SLT 系統」吃最深;ATE 測試機本體、DFT/EDA、晶圓級老化(WLBI)缺席。定位為質化判斷、非精確市佔。</p>
+<p class="sub">台股在「介面 + 代工 + SLT 系統」吃最深;ATE 測試機本體、DFT/EDA、WLBI、量產 prober、KGD 分測設備缺席。定位為質化判斷、非精確市佔。</p>
 <table>
   <tr><th>製程環節</th><th>台廠</th><th>定位</th><th>證據</th></tr>
   <tr><td>設計 DFT / 多 die 互連測試</td><td>(缺席)</td><td><span class="conf c-low">缺席</span></td><td>Synopsys/Siemens Tessent/Cadence EDA 三家寡占</td></tr>
-  <tr><td>CP 晶圓針測(探針卡)</td><td>旺矽 6223 / 中華精測 6510 / 雍智 6683 / 欣銓 3264</td><td><span class="conf c-med">領先量產 · 追趕尖端</span></td><td>旺矽龍頭級;2nm 探針卡認證由 FormFactor/Technoprobe/MJC 卡位</td></tr>
-  <tr><td>Burn-in 老化(含 WLBI)</td><td>京元電 2449 / 穎崴 6515</td><td><span class="conf c-med">封裝級領先 · 晶圓級缺席</span></td><td>京元電自製爐成本優勢;WLBI 全晶圓 contactor 是 Aehr 獨門</td></tr>
-  <tr><td>FT 成品終測(分選+座+ATE)</td><td>鴻勁 7769 / 京元電 2449 / 穎崴 6515 / 矽格 6257</td><td><span class="conf c-med">分選/介面領先 · ATE 本體缺席</span></td><td>鴻勁 NVIDIA AI FT 近九成(媒體/法人);ATE 本體 Advantest/Teradyne 雙寡占</td></tr>
-  <tr><td>SLT 系統級測試(AI 增幅最大)</td><td>致茂 2360 / 穎崴 6515 / 京元電 2449 / 鴻勁 7769</td><td><span class="conf c-high">甜蜜點 · 系統+介面+代工全卡位</span></td><td>致茂 NVIDIA SLT 獨家、穎崴 SLT 座占逾 5 成(公司自述)</td></tr>
-  <tr><td>出貨檢測 / Outgoing QA</td><td>德律 3030</td><td><span class="conf c-un">周邊 · 非主軸</span></td><td>大封裝翹曲/共面檢測規格升,屬周邊</td></tr>
+  <tr><td>CP 晶圓針測(探針卡)</td><td>旺矽 6223 / 中華精測 6510 / 雍智 6683 / 欣銓 3264</td><td><span class="conf c-med">領先量產 · 追趕尖端</span></td><td>旺矽 MEMS 過 Rubin/Trainium 3 認證(媒體口徑)、精測 2026/8 產能 1.5-2 倍;2nm 首波認證由 MJC/Technoprobe/FormFactor 卡位(Mordor 口徑)、台廠未具名</td></tr>
+  <tr><td>KGD/chiplet 分測(新插入點)</td><td>京元電 2449 / 欣銓 3264(導入方)</td><td><span class="conf c-un">設備缺席 · 服務端潛在受惠</span></td><td>Teradyne×TEL 整合 cell(2026/6/8);台廠為 OSAT 採購/服務方、無設備商</td></tr>
+  <tr><td>Burn-in 老化(含 WLBI)</td><td>京元電 2449 / 穎崴 6515 / 雍智 6683 / 宜特 3289 / 中探針 6217</td><td><span class="conf c-med">封裝級領先 · 晶圓級缺席</span></td><td>京元電自製爐+capex 500 億主投高功率 burn-in;WLBI 為 Aehr 獨門;burn-in 爐主機(Incal/MCC,流通口徑)台廠亦缺席</td></tr>
+  <tr><td>FT 成品終測(分選+座+ATE)</td><td>鴻勁 7769 / 京元電 2449 / 穎崴 6515 / 矽格 6257</td><td><span class="conf c-med">分選/介面領先 · ATE 本體缺席</span></td><td>鴻勁 AI FT handler 近獨占(媒體/法人口徑 ⚪、Cohu 切入中);ATE 本體 Advantest/Teradyne 雙寡占</td></tr>
+  <tr><td>SLT 系統級測試(AI 增幅最大)</td><td>致茂 2360 / 穎崴 6515 / 京元電 2449 / 鴻勁 7769</td><td><span class="conf c-high">甜蜜點 · 系統+介面+代工全卡位</span></td><td>致茂 15 年獨供 NVIDIA GPU SLT(媒體多源)、穎崴 HyperSocket SLT 整合座;高功率戰場與 Teradyne Titan HP 交火</td></tr>
+  <tr><td>出貨檢測 / Outgoing QA</td><td>德律 3030 / 閎康 3587(分析外圍)</td><td><span class="conf c-un">周邊 · 非主軸</span></td><td>德律銅柱 X-ray 已認列營收;閎康 MA/FA 屬研發外圍</td></tr>
 </table>
 
-<h3>🔬 細顆粒設備/機台型號地圖(各環節 × 設備類別 + 具體機台)</h3>
-<div class="callout warn">把測試拆到各環節,列關鍵設備類別 + <b>具體機台型號</b> + 供應商。一眼看出:<b>越靠核心訊號產生(ATE 本體/prober/EDA)越是國際寡頭、台廠缺席;越靠介面/溫控/檢測(探針卡/測試座/分選機/AOI/老化爐)台廠越強。</b>機台型號取自官網/法說/媒體;台廠多只揭產品系列名(具體料號未公開、標待查),為研究線索非投資背書,投資前自行查證。</div>
+<!-- 4b -->
+<h2 id="s4b"><span class="n">5</span>細顆粒設備/機台型號地圖(逐插入點 × 機台 × 供應商 × 台廠卡位)</h2>
+<div class="callout warn">把測試拆到各插入點,列關鍵設備類別 + <b>具體機台型號</b> + 供應商。一眼看出:<b>越靠核心訊號產生(ATE 本體/prober/EDA)越是國際寡頭、台廠缺席;越靠介面/溫控/檢測(探針卡/測試座/分選機/AOI/老化爐)台廠越強。</b>機台型號取自官網/法說/媒體;台廠多只揭產品系列名(具體料號未公開、標待查),為研究線索非投資背書,投資前自行查證。本輪已解 2 處「型號待查」:致茂 SLT(3680 SoC ATE+Tri-Temp SLT Handler 3260,官網)、TEL 裸晶分測(Prexa SDP);Technoprobe 垂直/MEMS 型號、精測高階 MEMS 料號、由田 AOI 型號仍未公開、維持待查。</div>
 <table>
   <tr><th>設備 · 機台型號</th><th>供應商(代號)</th><th>台廠地位</th></tr>
   <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⓪ 設計 / DFT(EDA 軟體,非機台)</td></tr>
   <tr><td>多 die/3DIC DFT:Tessent Multi-die(IEEE 1838、SSN+IJTAG)</td><td>Siemens EDA(德/美)</td><td><span class="conf c-low">台廠缺席</span></td></tr>
   <tr><td>ATPG/DFT:TestMAX·DFT Compiler / Modus DFT</td><td>Synopsys SNPS / Cadence CDNS</td><td><span class="conf c-low">台廠缺席</span></td></tr>
-  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">① CP 晶圓針測 — prober 缺席、探針卡台廠強勢</td></tr>
-  <tr><td>晶圓針測機 prober:Precio / Precio XL、Prexa SDP(KGD 單顆 die)</td><td>Tokyo Electron 8035(日)</td><td><span class="conf c-low">國際主場 · 台廠缺席</span></td></tr>
-  <tr><td>HBM/DRAM 探針卡:SmartMatrix 3000XP / 1500XP(全晶圓單次 touchdown)</td><td>FormFactor FORM(美)</td><td><span class="conf c-med">國際龍頭</span></td></tr>
-  <tr><td>垂直/MEMS 探針卡(型號待查)</td><td>Technoprobe(義)</td><td><span class="conf c-med">國際第二 · 台灣擴產</span></td></tr>
-  <tr><td>探針卡全系列 CPC / VPC / MEMS</td><td><b>旺矽 6223</b></td><td><span class="conf c-high">台·三式全系列、MEMS 攻 2nm</span></td></tr>
-  <tr><td>高階 MEMS 探針卡(料號待查)/ load board 介面</td><td><b>中華精測 6510 / 雍智 6683</b></td><td><span class="conf c-high">台·全程自製/介面</span></td></tr>
-  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">② Burn-in 老化 — WLBI Aehr 獨門、高功率爐京元電自製</td></tr>
-  <tr><td>晶圓級老化 WLBI:Aehr FOX-XP(9 片並行)/ FOX-NP + WaferPak contactor</td><td>Aehr AEHR(美)</td><td><span class="conf c-low">獨門 · 台廠缺席</span></td></tr>
-  <tr><td>高功率封裝後老化爐:自製 1,500W 預燒爐(規劃液冷)</td><td><b>京元電 2449</b></td><td><span class="conf c-high">台·自製護城河</span></td></tr>
-  <tr><td>動態功能 burn-in(socket+製程)/ burn-in board</td><td><b>穎崴 6515 / 雍智 6683</b></td><td><span class="conf c-high">台·首創動態功能 burn-in</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">① CP 晶圓針測 — prober 日商雙強、探針卡台廠強勢</td></tr>
+  <tr><td>晶圓針測機 prober:Precio / Precio XL 系列</td><td>Tokyo Electron 8035(日)</td><td><span class="conf c-low">國際主場 · 台廠缺席</span></td></tr>
+  <tr><td>晶圓針測機 prober:先進邏輯/記憶體量產 prober</td><td>Accretech 東京精密 7729(日)</td><td><span class="conf c-low">國際主場 · 台廠缺席</span></td></tr>
+  <tr><td>工程 prober / 溫控系統(Thermal,市占 &gt;50% 為公司自述)</td><td><b>旺矽 6223</b> / MPI(工程 prober 競品)</td><td><span class="conf c-med">台·工程段有卡位、量產段缺席</span></td></tr>
+  <tr><td>HBM/DRAM 探針卡:SmartMatrix 3000XP / 1500XP(全晶圓單次 touchdown;HBM4 第二客戶導入)</td><td>FormFactor FORM(美)</td><td><span class="conf c-med">國際龍頭</span></td></tr>
+  <tr><td>垂直/MEMS 探針卡(全自製 MEMS tip;型號未公開、待查)</td><td>Technoprobe(義)</td><td><span class="conf c-med">國際第二 · 2nm 認證 ~30%(Mordor 口徑)</span></td></tr>
+  <tr><td>2nm 主力探針卡(2025/8 TSMC 認證;型號未公開)</td><td>MJC Micronics Japan(日)</td><td><span class="conf c-low">國際 · 2nm primary(Mordor 口徑)</span></td></tr>
+  <tr><td>探針卡全系列 CPC / VPC / MEMS(Rubin/Trainium 3 認證,媒體口徑;MEMS 產能 2026 倍增)</td><td><b>旺矽 6223</b></td><td><span class="conf c-high">台·三式全系列、MEMS 攻 3nm 以下</span></td></tr>
+  <tr><td>高階 MEMS 混針探針卡(料號待查)/ 112·224G PAM4 / 導板散熱複雜載板</td><td><b>中華精測 6510</b></td><td><span class="conf c-high">台·全程自製(PCB 載板/薄膜/探針)</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">①b KGD/chiplet 分測(2026 新插入點)— 國際整合方案剛落地</td></tr>
+  <tr><td>裸晶分測 prober:Prexa SDP(Singulated Device Prober,2026/4/16 發表;高功耗溫控)</td><td>Tokyo Electron 8035(日)</td><td><span class="conf c-low">台廠缺席</span></td></tr>
+  <tr><td>KGD 整合測試 cell:UltraFLEXplus × Prexa SDP(SWTest 2026/6/8 發表)</td><td>Teradyne TER + TEL(美+日)</td><td><span class="conf c-low">台廠缺席 · 京元電/欣銓為潛在導入方</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">② Burn-in 老化 — WLBI Aehr 獨門、高功率爐京元電自製、board 台廠卡位</td></tr>
+  <tr><td>晶圓級老化 WLBI:FOX-XP(9×300mm 並行)/ FOX-NP + WaferPak contactor + Auto Aligner</td><td>Aehr AEHR(美)</td><td><span class="conf c-low">獨門 · 台廠缺席</span></td></tr>
+  <tr><td>burn-in 系統(國際):Incal Sonoma(800W)/ MCC HPB6(1500W)——Threads 流通口徑 ⚪</td><td>Incal / Micro Control Company(美)</td><td><span class="conf c-low">爐主機台廠缺席(京元電為採購方)</span></td></tr>
+  <tr><td>高功率封裝後老化爐:自製 1,500W 級預燒爐(規劃液冷);capex 500 億主投高功率 burn-in</td><td><b>京元電 2449</b></td><td><span class="conf c-high">台·自製護城河</span></td></tr>
+  <tr><td>動態功能 burn-in(socket+製程)/ 高功率老化測試座</td><td><b>穎崴 6515 / 中探針 6217(watch)</b></td><td><span class="conf c-high">台·首創動態功能 burn-in</span></td></tr>
+  <tr><td>burn-in board(BIB):雍智測試板(含 BIB)/ 宜特 BIB 設計製作一站式;韓系 BIB 專業廠 2026 AI 事證待查</td><td><b>雍智 6683 / 宜特 3289(watch)</b></td><td><span class="conf c-high">台·board+服務卡位</span></td></tr>
   <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">③ FT 成品終測 — ATE 本體雙寡頭、handler/socket 台廠主場</td></tr>
   <tr><td>SoC ATE:Advantest V93000 EXA Scale(Pin Scale 5000B、Xtreme Link 超高電流)</td><td>Advantest 6857(日)</td><td><span class="conf c-low">雙寡頭 · 台廠缺席</span></td></tr>
   <tr><td>SoC/HBM ATE:Teradyne UltraFLEXplus / Magnum EPIC</td><td>Teradyne TER(美)</td><td><span class="conf c-low">雙寡頭 · 台廠缺席</span></td></tr>
-  <tr><td>分選機 handler + ATC 主動溫控 + Cold Plate 水冷板</td><td><b>鴻勁 7769</b></td><td><span class="conf c-high">台·全球龍頭(handler 42%/ATC 33%/水冷 23%)</span></td></tr>
-  <tr><td>分選機 handler:Eclipse(AI 高熱)/ Diamondx</td><td>Cohu COHU(美)</td><td><span class="conf c-med">國際</span></td></tr>
-  <tr><td>測試座 socket:HyperSocket(448Gbps)/ Coaxial Socket</td><td><b>穎崴 6515</b></td><td><span class="conf c-high">台·全球市佔第一</span></td></tr>
-  <tr><td>測試座 socket / 彈簧針 contactor</td><td>Cohu / ISC · Leeno(韓)/ Smiths-Plastronics</td><td><span class="conf c-med">國際</span></td></tr>
-  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">④ SLT 系統級測試 — Teradyne 領先、致茂切入</td></tr>
-  <tr><td>SLT 平台:Titan HP(2kW→4kW、ATC 主動溫控)</td><td>Teradyne TER(美)</td><td><span class="conf c-med">國際領先</span></td></tr>
-  <tr><td>SLT 系統(機型待查)</td><td><b>致茂 2360</b></td><td><span class="conf c-high">台·切入中、2026 量產</span></td></tr>
+  <tr><td>SoC ATE(中高階利基):Chroma 3680 Advanced SoC Test System(2048 I/O pins、1Gbps、16G SCAN)</td><td><b>致茂 2360</b></td><td><span class="conf c-med">台·利基段,最高階 AI ATE 缺席</span></td></tr>
+  <tr><td>分選機 handler + ATC 主動溫控(1500W+,roadmap 6kW)+ Cold Plate 水冷板;產品拆分 handler 42%/ATC 33%/水冷 23% 為 2025Q3 時點口徑</td><td><b>鴻勁 7769</b></td><td><span class="conf c-high">台·AI FT handler 實質龍頭(市占口徑 ⚪)</span></td></tr>
+  <tr><td>分選機 handler:Eclipse(ATC 3kW→10kW roadmap)/ Diamondx;2026 HPC 營收 $80-100M</td><td>Cohu COHU(美)</td><td><span class="conf c-med">國際 · 正切入 AI xPU</span></td></tr>
+  <tr><td>記憶體 handler + HBM Cube Prober(歸 HBM 測試題,非本題直接對手)</td><td>TechWing(韓)</td><td><span class="conf c-un">相鄰題</span></td></tr>
+  <tr><td>測試座 socket:HyperSocket(448Gbps、&gt;2 萬 pin SLT 整合座)/ Liquid Socket 液冷座 / Coaxial Socket</td><td><b>穎崴 6515</b></td><td><span class="conf c-high">台·第一梯隊(高功率液冷差異化)</span></td></tr>
+  <tr><td>測試座 socket / 彈簧針 contactor:ISC 矽膠座、Leeno pogo pin;Yamaichi/Enplas 2026 AI 事證待查</td><td>ISC · Leeno(韓)/ Smiths / Yamaichi · Enplas(日)</td><td><span class="conf c-med">國際(韓系為主要對手)</span></td></tr>
+  <tr><td>load board / 測試板(占營收 98%)</td><td><b>雍智 6683</b></td><td><span class="conf c-high">台·介面主場</span></td></tr>
+  <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">④ SLT 系統級測試 — Teradyne 領先、致茂媒體稱獨供 NVIDIA</td></tr>
+  <tr><td>SLT 平台:Titan HP(2kW→4kW、ATC 主動溫控、多分支冷板;已多家大客戶量產)</td><td>Teradyne TER(美)</td><td><span class="conf c-med">國際領先</span></td></tr>
+  <tr><td>SLT 產線 + Tri-Temp SLT Handler Model 3260(三溫域,AI/Data Center/GPU/HPC)——「機型待查」已解</td><td><b>致茂 2360</b></td><td><span class="conf c-high">台·媒體多源稱 NVIDIA GPU SLT 15 年獨供;2H26 新案量產</span></td></tr>
   <tr><td>SLT handler/溫控 + SLT socket + 測試服務</td><td><b>鴻勁 7769 / 穎崴 6515 / 京元電 2449</b></td><td><span class="conf c-high">台·周邊主場</span></td></tr>
+  <tr><td>CPO 光電同測:鴻勁 Insertion 4(2026 底規格定案/2027 初量產,法說);Teradyne Photon 100(2026/3);FormFactor TRITON</td><td><b>鴻勁 7769</b> / Teradyne / FormFactor+Advantest+TEL</td><td><span class="conf c-med">台·2027 選擇權</span></td></tr>
   <tr><td colspan="3" style="background:var(--card2);color:var(--accent);font-weight:700">⑤ 量測 / 檢測(AOI / X-ray)— 台廠有實質參與</td></tr>
-  <tr><td>SPI+AOI+AXI 一條龍 + 銅柱 X-ray(2026 推)</td><td><b>德律 3030</b></td><td><span class="conf c-high">台·進台積 OSAT</span></td></tr>
-  <tr><td>半導體/封裝 AOI(型號待查)</td><td><b>由田 3455</b></td><td><span class="conf c-med">台</span></td></tr>
+  <tr><td>SPI+AOI+AXI 一條龍 + TR7600 SIII Plus 3D Semi X-Ray(銅柱/C4 凸塊;已認列營收)</td><td><b>德律 3030</b></td><td><span class="conf c-high">台·「2026 推」已兌現</span></td></tr>
+  <tr><td>半導體/封裝 AOI(型號待查;1Q26 營收 -59.5%、虧損)</td><td>由田 3455(僅列供應商、不入 watch)</td><td><span class="conf c-un">台·H1 無實質出貨事證</span></td></tr>
   <tr><td>先進封裝計量/檢測(Firefly 等)</td><td>Camtek CAMT / Onto ONTO</td><td><span class="conf c-med">國際高階</span></td></tr>
-  <tr><td>光電/矽光子/CPO 測試·貼合:晶圓點測機/雷射系統/貼合機</td><td><b>惠特 6706</b></td><td><span class="conf c-med">台·LED 轉矽光子</span></td></tr>
+  <tr><td>光電/矽光子/CPO 測試·貼合:晶圓點測機/雷射系統/貼合機(客戶驗證期)</td><td><b>惠特 6706(watch)</b></td><td><span class="conf c-med">台·LED 轉矽光子(尚無量產)</span></td></tr>
 </table>
-<p class="sub">⚠ 國際大廠機型有官網/新聞稿背書(FormFactor SmartMatrix、Advantest V93000 EXA、Teradyne Titan HP/UltraFLEXplus、Aehr FOX-XP、TEL Precio/Prexa、Cohu Eclipse);台廠多以產品系列名對外、具體機台料號未揭露(標待查),致茂 SLT 機型未公開。為研究線索非投資背書。</p>
+<p class="sub">⚠ 國際大廠機型有官網/新聞稿背書(FormFactor SmartMatrix、Advantest V93000 EXA、Teradyne Titan HP/UltraFLEXplus/Photon 100、Aehr FOX-XP、TEL Precio/Prexa SDP、Cohu Eclipse、Chroma 3680/3260);台廠多以產品系列名對外、具體料號未揭露(標待查)。為研究線索非投資背書。</p>
+
+<!-- 4c -->
+<h2 id="s4c"><span class="n">6</span>公司快照:1Q26 財報 + 2026 年 5 月營收(真實基期參考)</h2>
+<p class="sub">全鏈逐檔最新可驗證數字(公開申報/法說;媒體彙整為輔)。<b>6 月營收 7/10 前後公告、2Q26 財報 7-8 月出爐——本表屆時需刷新。</b>此表亦作為第 9 節估值計算機的「真實基期」填數來源。</p>
+<table>
+  <tr><th>公司</th><th>1Q26 營收</th><th>1Q26 毛利率</th><th>1Q26 EPS</th><th>2026/5 營收(YoY)</th><th>1-5 月累計 YoY</th><th>備註</th></tr>
+  <tr><td>京元電 2449</td><td>101.91 億(+39.3%)創高</td><td>39.74%(+6.25pp)</td><td>1.87(低於法人預期)</td><td>37.77 億(+36.6%)</td><td>177.12 億(+37.7%)</td><td>法人估全年 ~500 億(+40%,非財測);Q2 起 Rubin 小量出貨(法人)</td></tr>
+  <tr><td>鴻勁 7769</td><td>107 億(+81.4%)</td><td>56.24%</td><td>25.70</td><td>41.30 億(+83.6%)</td><td>192.17 億(+87.9%)</td><td>AI/HPC/ASIC 78%;能見度至年底(法說)</td></tr>
+  <tr><td>致茂 2360</td><td>118.6 億(+73%)</td><td>63%</td><td>9.12</td><td>45.50 億(+133.1%)</td><td>—(4 月 48.66 億 +128.9%)</td><td>半導體/Photonics 測試 34.1 億(+31%);量測自動化 +145%(AI 電源)</td></tr>
+  <tr><td>穎崴 6515</td><td>29.8 億(+30%)創高</td><td>—</td><td>19.54 創高</td><td>10.73 億(+119.8%)</td><td>50.43 億(+46.5%)</td><td>AI/HPC 68%;探針 600→900 萬支/月</td></tr>
+  <tr><td>旺矽 6223</td><td>—(淨利 12.27 億 +69.8%)</td><td>59.4% 創高</td><td>12.53</td><td>19.07 億(+57.8%)</td><td>73.26 億(+46.2%)</td><td>探針卡占 75.4%、設備 22.7%</td></tr>
+  <tr><td>精測 6510</td><td>—(HPC 6.11 億 +63% QoQ)</td><td>—</td><td>10.43 創 40 季高</td><td>5.43 億(+34.1%)</td><td>—</td><td>晶圓測試卡占 80.31%;4 月 5.23 億(+30.2%)連創高</td></tr>
+  <tr><td>矽格 6257</td><td>52.94 億(+0.5% QoQ)</td><td>31.66%</td><td>2.08</td><td>19.76 億(+23.7%)創高</td><td>92.16 億(+17.5%)</td><td>AI 類佔 23%、年增 40%(法說)</td></tr>
+  <tr><td>雍智 6683</td><td>6.64 億(+46.3%)創高</td><td>—</td><td>6.23(+66%)</td><td>2.03 億(+12.3%)</td><td>10.85 億(+33.2%)</td><td>全年指引 +20~30%(公司自述)</td></tr>
+  <tr><td>欣銓 3264</td><td>39.8 億(+24.0%)</td><td>—</td><td>1.95 創 14 季高</td><td>15.18 億(+33.0%)創高</td><td>69.65 億(+26.6%)</td><td>龍潭 Q3 貢獻(法說);Q3 挑戰季增雙位數</td></tr>
+  <tr><td>德律 3030(watch)</td><td>19.41 億(+28.5%)</td><td>—</td><td>3.5(+43%)</td><td>10.71 億(+14.8%)</td><td>46.24 億(+30.0%)</td><td>銅柱 X-ray 已認列營收</td></tr>
+  <tr><td>惠特 6706(watch)</td><td>—</td><td>—</td><td>-0.96(虧損擴大)</td><td>—(4 月 0.54 億 -41.8%)</td><td>—</td><td>連兩年虧損;2Q26 轉盈為公司自述</td></tr>
+  <tr><td>閎康 3587(watch)</td><td>14.24 億(+15.0%)</td><td>—</td><td>2.24(淨利 +197.5%)</td><td>5.44 億(+26.9%)連 3 月創高</td><td>25.10 億(+19.0%)</td><td>MA/FA 外圍;A16/2nm 試產帶動</td></tr>
+  <tr><td>中探針 6217(watch)</td><td>—(1 月自結 +750%)</td><td>—</td><td>—</td><td>4.06 億(+51.2%)</td><td>18.43 億(+36.3%)</td><td>高功率老化測試座出貨;AI 佔比未揭露</td></tr>
+  <tr><td>汎銓 6830(watch)</td><td>—</td><td>—</td><td>-0.61(3 月轉正 0.35)</td><td>2.17 億(+19.4%)</td><td>10.08 億(+22.5%)</td><td>MA 占 80-90%;H2 黃金交叉為公司自述</td></tr>
+</table>
+<p class="sub">來源:各公司公開申報月營收(鉅亨網/財報狗/Win 投資彙整)、1Q26 法說(富果備忘錄等)、工商時報/經濟日報 2026/5;「—」=該欄位本輪未查得,7/10 後刷新。</p>
 
 <!-- 5 -->
-<h2 id="s5"><span class="n">5</span>市場規模與量產時程</h2>
+<h2 id="s5"><span class="n">7</span>市場規模(多口徑)與量產時程</h2>
 <div class="card">
-  <h3>市場規模(四子市場 × 多研調口徑,務必分開看)</h3>
-  <p class="sub">測試鏈不是單一市場——四個子市場絕對值差一個數量級,各家研調範圍界定不同,引用務必標口徑。</p>
+  <h3>市場規模(五子市場 × 多研調口徑,務必分開看)</h3>
+  <p class="sub">測試鏈不是單一市場——子市場絕對值差一個數量級,各家研調範圍界定不同,<b>引用任何數字必標分母</b>。同一年份 ATE 口徑差距 $6.9B~$16B(2.3 倍)。</p>
   <table>
-    <tr><th>子市場</th><th>多研調口徑(機構 / 規模 / 年)</th><th>分歧主因</th></tr>
-    <tr><td>後段測試設備大盤(含 ATE)</td><td>SEMI:測試設備 2026 +18.6%(總設備 $139B 創高);Advantest 自估 2026 $12.5-13B、市占近 7 成(公司口徑);第三方 $8.2B~$16.04B</td><td>是否含 ATE 本體/介面耗材/晶圓針測機各家不同;SEMI 只報成長率最可靠</td></tr>
-    <tr><td>探針卡 Probe Card</td><td>Mordor:2026 $2.71B→2031 $4.23B(9.3%);VMR:2024 $3.5B→2032 $7.95B(10.8%);MRFR:CAGR 6.8%、2035 $6.53B</td><td>基準年 + 是否計入 HBM/MEMS 高 ASP;三家皆認 FormFactor+Technoprobe 雙雄、MJC 第三</td></tr>
-    <tr><td>測試座 / Burn-in Socket</td><td>360iResearch:2026 ~$2.06B(6.6%);Market Reports World:2026 $1.55B→2035 $2.99B;HDIN:2026 &gt;$1.9B(AI 2 萬針驅動)</td><td>burn-in 與 FT socket 是否合計、AI 大封裝高針數 ASP 是否反映</td></tr>
-    <tr><td>AI 加速器 burn-in+SLT(窄口徑·強度核心)</td><td>FMI:2025 $0.8B→2026 $0.9B→2036 $2.2B(9.3%);液冷占 41%、burn-in rack 占 38%;Digitimes:SLT 2026 +30%</td><td>絕對值最小但「強度倍增」最集中;與大盤差一個數量級,勿混用</td></tr>
+    <tr><th>子市場</th><th>多研調口徑(機構 / 規模 / 年)</th><th>分歧主因 / 口徑警示</th></tr>
+    <tr><td>後段測試設備大盤(含 ATE)</td><td><b>SEMI(primary)</b>:測試設備 2025 $11.2B(+48.1%,成長最快設備子類)→2026 +12.0%(≈$12.5B)→2027 +7.1%;總設備 2025 實績 $135.1B(+15%)、2026F $138.1B、2027F $156B 創高;1Q26 billings $36.55B(+14%)。<b>Advantest(primary)</b>:CY26 SoC tester 單機 $8.7-9.5B(vs CY25 $6.9B;另有 $8.5B 起轉述版);CY25 tester 市場 ~$9B(+50%,公司口徑)。Mordor:廣義測試設備 2026 $16.04B→2031 $21.59B(CAGR 6.12%);Grand View:廣義 ATE 2025 ~$8.4B(摻非半導體)</td><td>分母不同:(1)SoC tester 單機 (2)SEMI 測試設備 billings (3)廣義含 memory tester/handler/介面 (4)摻非半導體 ATE。舊口徑「SEMI 2026 +18.6%/$139B」已拆開修正:測試設備 2026 +12%、$138.1B 為總設備 2026F</td></tr>
+    <tr><td>探針卡 Probe Card</td><td>Mordor:2026 $2.71B→2031 $4.23B(CAGR 9.31%);Research and Markets(advanced-only):2025 $1.28B→2026 $1.36B(+6.4%);MRFR:2025 $3.383B→2035 $6.533B(6.8%);VMR 僅 $0.64B(2025)——最窄最寬差 5 倍。<b>primary 實績印證</b>:Technoprobe 1Q26 €187M(+19%)、FY26 guide €950M-1.05B(AI 占 38%);FormFactor 1Q26 $226.1M(+32%)、DRAM 卡 +70%</td><td>advanced-only vs 全品類(含懸臂式)與是否含服務;龍頭實績成長(+19~32%)遠快於研調 6-9% CAGR 口徑——AI 先進品類是主成長體</td></tr>
+    <tr><td>測試座 / Burn-in Socket</td><td>Precision Reports:2026 $2.10B→2035 $5.09B(CAGR 10.31%);Market Reports World:2026 $1.55B→2035 $2.98B(7.6%);Global Growth Insights:2026 $1.70B→2035 $3.13B(7%)——三家皆報告農場級,無 TechInsights 級具名 primary</td><td>是否含 burn-in socket 與量產 IC socket;<b>寧用公司實績推斷</b>:ISC 2025 ₩220.2B(+26%)、2026 目標 +20%;Leeno TTM ~$263M;穎崴前 5 月 +46.5%、單 5 月 +119.8%</td></tr>
+    <tr><td>AI 加速器 burn-in+SLT(窄口徑·強度核心)</td><td>FMI:2025 $0.8B→2026 $0.9B(+9.3%)→2036 $2.2B;burn-in racks 占 38%、production 用途占 46%、液冷占 41%(2026);VMR:SLT 系統 2025 $1.79B→2032 $2.82B(6.74%);Verified Market Reports:SLT 2027 $1.2B→2033 $2.5B(8.9%)——皆二線;Digitimes 2025/7「SLT 2026 +30%」單源已一年舊、降級引用</td><td>系統 vs 平台 vs 服務分母不同不可互換;TechInsights/VLSI 級 SLT 具名口徑 2026 搜尋未獲——絕對值最小但「強度倍增」最集中,與大盤差一個數量級勿混用</td></tr>
+    <tr><td>OSAT / 測試代工 + 需求總錨</td><td>OSAT 全市場 2026 口徑帶 $49.6B~$77.1B(Grand View/Mordor/GGI 各異);<b>結構訊號:Mordor 拆分測試 segment 2026-2031 CAGR 10.35%,快於封裝</b>;需求總錨:Bloomberg Intelligence 估 AI 加速器市場 2033 &gt;$600B</td><td>是否含 IDM 內製與中國廠;「測試佔比提升」為本題核心邏輯的第三方背書</td></tr>
   </table>
-  <p class="sub">市場規模多為研調報告(部分屬方法不透明的報告農場),分歧大、量級參考;FMI「液冷占 41%/burn-in rack 占 38%」是高功率→液冷結構轉變的質化硬證據。結構指標:先進 AI 封裝測試成本佔晶片成本 10-15%(vs 消費 SoC ~5%)。</p>
-  <h3>催化劑時間軸(2025-2026)</h3>
+  <p class="sub">市場規模多為研調報告(部分屬方法不透明的報告農場),分歧大、量級參考;FMI「液冷占 41%/burn-in rack 占 38%」是高功率→液冷結構轉變的質化證據(台廠卡位者=穎崴液冷 Liquid Socket+鴻勁水冷板)。結構指標:先進 AI 封裝測試成本佔晶片成本 10-15%(vs 消費 SoC ~5%)。四子市場中僅 ATE/探針卡有 primary 級口徑,測試座/SLT 皆缺。</p>
+
+  <h3>量產進度速查表</h3>
   <table>
-    <tr><th>時點</th><th>狀態</th><th>事件</th><th>供應鏈影響</th></tr>
-    <tr><td>2025/08</td><td><span class="conf c-high">已發生</span></td><td>TSMC 認證 MJC 為 2nm 主要探針卡供應商(18 個月共同開發)</td><td>2nm 探針卡被國際三強卡位,台廠屬追趕第二梯隊</td></tr>
-    <tr><td>2025/10</td><td><span class="conf c-high">已發生</span></td><td>FormFactor 約 $120M 併購 MEMS 公司;Technoprobe 開 Dresden 新廠;Teradyne Titan HP SLT 2kW→4kW</td><td>探針卡龍頭加碼 MEMS/擴產;SLT 高功率天花板上移</td></tr>
-    <tr><td>2025/12-2026Q1</td><td><span class="conf c-high">已發生</span></td><td>京元電 capex 由 393.7 億二度上修至 500 億創天量</td><td>押注 AI FT/burn-in/SLT 放量,折舊先行</td></tr>
-    <tr><td>2026/01</td><td><span class="conf c-high">已發生</span></td><td>Teradyne 2026Q1 半導體測試 +87% YoY、約 7 成營收與 AI 相關;FormFactor Q1 創高(HBM 探針卡 +50%+);高盛調鴻勁 TP NT$5,000</td><td>印證 AI 測試大盤放量</td></tr>
-    <tr><td>2026/02-03</td><td><span class="conf c-med">進行中</span></td><td>Aehr 取得 AI 處理器 $14M + 光 I/O WLBI 追加訂單、重啟財測</td><td>WLBI 在 AI 處理器/矽光子能見度升(台廠此環缺席)</td></tr>
-    <tr><td>2026Q1</td><td><span class="conf c-high">已發生</span></td><td>台廠介面同創高:旺矽 EPS 12.53、穎崴 19.54、精測 10.43;矽格 capex 升 88 億</td><td>全鏈量價齊升落地;擴產集中 2026H2-2027 開出</td></tr>
-    <tr><td>2026H2</td><td><span class="conf c-un">前瞻</span></td><td>NVIDIA Vera Rubin 量產爬坡(Q3 出貨/Q4 放量,每 GPU 288GB HBM4)</td><td>下半最大需求催化:測試工時/SLT 強度/液冷再加一檔</td></tr>
-    <tr><td>2026H2→2027</td><td><span class="conf c-un">前瞻</span></td><td>欣銓龍潭 ASIC 廠 6 月交機、Q3 貢獻(2027 全面放量);致茂新世代 AI SLT 案量產</td><td>「未來選擇權」兌現節點;CPO/矽光子放大估 2027</td></tr>
+    <tr><th>公司 / 事件</th><th>定位</th><th>進度 / 時程</th><th>查證</th></tr>
+    <tr><td>京元電 2449</td><td>FT+burn-in 代工</td><td>capex 500 億(2026/4/10 二度上修)擴頭份/楊梅/新加坡、2027 轉銅鑼/竹南;產能 +30-50%(法人估);Q3-Q4 開出、7/10 六月營收為兌現前哨</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>鴻勁 7769</td><td>分選機/ATC</td><td>2026 產能至少 +40%(4/30 上修版)、2026-2028 CAGR 50%(5/12 法說);台中大雅新廠 4Q26-1Q27 投產;高階 ATC 2H26 大量出貨;Insertion 4 CPO 2027 初量產</td><td><span class="conf c-med">中(公司自述)</span></td></tr>
+    <tr><td>致茂 2360</td><td>SLT 系統</td><td>新一代 AI GPU/ASIC SLT 案 2H26 量產(公司展望);法人估 2026 全年 +34.75%(非財測)</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>穎崴 6515 / 旺矽 6223 / 精測 6510</td><td>測試座/探針卡</td><td>穎崴探針 600→900 萬支/月(2H26)、仁武二廠 2Q27;旺矽 MEMS 產能 2026 倍增;精測 2026/8 產能 1.5-2 倍(公司自述)、三廠 2028H2 投產</td><td><span class="conf c-med">中(公司自述)</span></td></tr>
+    <tr><td>欣銓 3264 / 矽格 6257</td><td>CP 代工 / FT 代工</td><td>欣銓龍潭 2026/6 交機、Q3 貢獻;矽格中興三廠提前 2026Q4 完工、2027Q1 量產(新產能已被客戶預訂,法說)</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Advantest(國際大盤)</td><td>ATE</td><td>產能 2026 年底較 2024 擴 70%+;SoC tester 年產能 3,000→至少 5,000 台(2027/3 前,Bloomberg 2026/1/28);FY26Q1 決算 7/29</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>SLT 結構放量(事件)</td><td>產業趨勢</td><td>Teradyne Titan HP 2kW→4kW 已量產部署;Cohu Eclipse 3kW→10kW roadmap;Wing VC:SLT=ATE TAM 之上的增量市場</td><td><span class="conf c-high">高</span></td></tr>
   </table>
-  <div class="callout"><b>選股節奏:</b>現在就有營收=京元電/鴻勁/穎崴/致茂/旺矽/中華精測/矽格/雍智;未來選擇權=欣銓(ASIC CP 2026H2)/惠特(光測轉盈)。</div>
+
+  <h3>催化劑時間軸(2025-2028,帶來源型別)</h3>
+  <table>
+    <tr><th>時點</th><th>狀態</th><th>來源型別</th><th>事件</th><th>供應鏈影響</th></tr>
+    <tr><td>2025/08</td><td><span class="conf c-high">已發生</span></td><td>研調口徑(低信心)</td><td>TSMC 認證 MJC 為 2nm 主力探針卡供應商(18 個月共同開發,Mordor 轉述)</td><td>2nm 探針卡被國際三強卡位,台廠屬追趕第二梯隊</td></tr>
+    <tr><td>2025/10/15</td><td><span class="conf c-high">已發生</span></td><td>產品發表</td><td>Teradyne Titan HP SLT 發布(2kW 現行→4kW roadmap);FormFactor 約 $120M 併購 MEMS 公司;Technoprobe 開 Dresden 新廠</td><td>SLT 高功率天花板上移;探針卡龍頭加碼 MEMS/擴產</td></tr>
+    <tr><td>2025/4Q</td><td><span class="conf c-high">已發生</span></td><td>公告(多源)</td><td>TSMC N2(2nm GAA)進入量產——首發高雄 Fab 22、竹科 Fab 20 較晚投產;N2P/A16 2H26 末</td><td>2nm 晶圓量=CP/探針卡強度直接分母;GAA 良率學習期測試強度更高</td></tr>
+    <tr><td>2025/12/16</td><td><span class="conf c-high">已發生</span></td><td>研調(primary)</td><td>SEMI 年終預測:測試設備 2025 $11.2B(+48.1%)、2026 +12%、2027 +7.1%;總設備 2027F $156B</td><td>測試設備=成長最快設備子類的官方背書</td></tr>
+    <tr><td>2026/01/05</td><td><span class="conf c-high">已發生</span></td><td>公告(CES)</td><td>NVIDIA 宣布 Vera Rubin NVL72 full production、volume 2H26;GTC 2026 揭 Rubin 336B 電晶體</td><td>Rubin 世代=2H26 測試強度主引擎;「測試時間 +40%」僅 blog 級 ⚪</td></tr>
+    <tr><td>2026/01/28</td><td><span class="conf c-high">已發生</span></td><td>媒體(Bloomberg)</td><td>Advantest:2026 年底前產能較 2024 擴 70%+;SoC tester 年產能 3,000→至少 5,000 台(2027/3 前)</td><td>ATE 雙寡頭押注 AI 測試長週期</td></tr>
+    <tr><td>2026/02/26</td><td><span class="conf c-high">已發生</span></td><td>公告</td><td>Aehr 獲 lead AI processor 客戶 $14M 多台全自動 FOX-XP WLBI 追單;2026/3 矽光子/光 I/O 客戶連續追加</td><td>WLBI 由工程驗證轉量產採購(台廠此環缺席)</td></tr>
+    <tr><td>2026/03/17</td><td><span class="conf c-high">已發生</span></td><td>公告</td><td>Cohu 獲第二筆多台 Eclipse AI 資料中心處理器訂單(當時口徑 $65-80M 上端);Teradyne 發表 Photon 100 光電 ATE</td><td>鴻勁 handler 近獨占出現具體挑戰者;CPO 測試工具鏈落地</td></tr>
+    <tr><td>2026/04/10</td><td><span class="conf c-high">已發生</span></td><td>公告</td><td>京元電 capex 由 393.72 億上修至 500 億(+27%)創歷史新高,無塵室+高功率 burn-in 為主投向</td><td>押注 AI FT/burn-in/SLT 放量,折舊先行</td></tr>
+    <tr><td>2026/04/16</td><td><span class="conf c-high">已發生</span></td><td>產品發表</td><td>TEL 發布 Prexa SDP 裸晶分測探測機(KGD 篩選、高功耗溫控)</td><td>KGD/chiplet 分測插入點設備端補齊</td></tr>
+    <tr><td>2026/04/27</td><td><span class="conf c-high">已發生</span></td><td>財報</td><td>Advantest FY25 決算+FY26 財測 ¥1,420B(+25.8%);CY26 SoC tester TAM $8.7-9.5B;SoC 系統 95% computing/AI</td><td>tester 大盤最權威半年度錨點</td></tr>
+    <tr><td>2026/04/29-30</td><td><span class="conf c-high">已發生</span></td><td>財報</td><td>Teradyne 1Q26 ~$1.3B 創紀錄(AI ~70%);FormFactor 1Q26 $226.1M(+32%)、Q2 指引 $240M;Cohu 上修 2026 HPC 至 $80-100M</td><td>國際介面/ATE 大盤全面印證 AI 測試放量</td></tr>
+    <tr><td>2026/05/12</td><td><span class="conf c-high">已發生</span></td><td>法說(公司自述)</td><td>鴻勁:AI/HPC/ASIC 78%、產能 2026-2028 CAGR 50%、ATC roadmap 6kW、Insertion 4 CPO 2027 初量產;高盛同月升 TP 至 12,000(法人估)</td><td>handler/ATC 供給稀缺性與 CPO 選擇權定價</td></tr>
+    <tr><td>2026/05/26</td><td><span class="conf c-high">已發生</span></td><td>法說(公司自述)</td><td>穎崴啟動探針產能倍增計畫(600→900 萬支/月);Technoprobe 1Q26 €187M、guidance 上修、股價 +32~36%(2026/5)</td><td>測試介面供給競賽;探針卡龍頭「2027 目標提前至 2026」</td></tr>
+    <tr><td>2026/06/08</td><td><span class="conf c-high">已發生</span></td><td>公告(SWTest)</td><td>Teradyne×TEL 發表 KGD 整合測試 cell(UltraFLEXplus+Prexa SDP)</td><td>KGD/chiplet 分測成為量產就緒的獨立插入點</td></tr>
+    <tr><td>2026/06/23-25</td><td><span class="conf c-high">已發生</span></td><td>法人估+媒體</td><td>MS:Rubin burn-in 3h→5-6h、京元電 2026 營收 +40%、TP 388;Digitimes:供應鏈稱 VR200 自 3Q26 ramp;矽格法說追加 capex 至 88 億</td><td>測試強度量化錨+Rubin 入帳時點收斂到 3Q26</td></tr>
+    <tr><td><b>2026/07/10</b></td><td><span class="conf c-med">驗證錨</span></td><td>公告(月營收)</td><td>京元電/鴻勁/穎崴/致茂/旺矽/精測/雍智/欣銓/矽格 6 月營收公告</td><td>Rubin ramp、京元電 capex、穎崴仁武爬坡、旺矽 MEMS 擴產的第一個共同驗證錨</td></tr>
+    <tr><td><b>2026/07/29</b></td><td><span class="conf c-med">驗證錨</span></td><td>財報(15:30 JST)</td><td>Advantest FY26Q1 決算</td><td>看點:CY26 TAM 是否再上修、HBM4 memory tester、產能 +70% 進度、市占口徑刷新</td></tr>
+    <tr><td><b>2026/08</b></td><td><span class="conf c-med">驗證錨</span></td><td>財報(2Q26)</td><td>台廠 2Q26 財報:欣銓龍潭 ASIC CP 首驗、毛利率是否隨測試強度提升、旺矽認證的法說背書</td><td>「未來選擇權」第一次對帳</td></tr>
+    <tr><td>2026H2</td><td><span class="conf c-un">前瞻</span></td><td>公司展望</td><td>VR200 volume ramp(3Q26 起);致茂新世代 SLT 量產;鴻勁高階 ATC(CSP TPU)大量出貨;矽格中興三廠 Q4 完工;N2P/A16 2H26 末投產;精材(TSMC 集團)擴晶圓測試產能</td><td>下半年最大需求催化;測試工時/SLT 強度/液冷再加一檔</td></tr>
+    <tr><td>2026 底-2027 初</td><td><span class="conf c-un">前瞻</span></td><td>公司展望</td><td>鴻勁 Insertion 4 CPO 同測分選機規格定案→量產;矽格 2027Q1 中興三廠量產;穎崴仁武二廠 2Q27 投產</td><td>CPO 測試選擇權開始定價</td></tr>
+    <tr><td>2027</td><td><span class="conf c-un">前瞻</span></td><td>研調/技術媒體</td><td>HBM4 測試強度跳升:功耗 &gt;2x HBM3、300mm DUT 密度朝 3,000 顆;HBM4 base die 走先進邏輯代工(SK hynix×TSMC N12/N3P)→CP/FT 交界重劃、shift-left 測試;2nm ASIC 放量;Aehr 大型 AI ASIC 客戶 FQ1'27 起交機</td><td>探針卡(旺矽/精測)&gt;測試代工 CP(欣銓/京元電)&gt;ATE 介面(雍智)受益順序</td></tr>
+    <tr><td>2028</td><td><span class="conf c-un">前瞻</span></td><td>公司公告</td><td>精測三廠 2028H2 完工投產(總投資 40.87 億);精測「2028 產能再翻倍」為公司自述</td><td>探針卡台廠產能長線押注</td></tr>
+  </table>
 </div>
+
+<!-- 5b -->
+<h2 id="s5b"><span class="n">8</span>短期 vs 長期節奏(選股節奏表)</h2>
+<table>
+  <tr><th>時間帶</th><th>誰在賺 / 什麼兌現</th><th>驗證錨</th><th>信心</th></tr>
+  <tr><td><b>現在就有營收(2026H1 已兌現)</b></td><td>台鏈 5 月營收 YoY 全數為正:致茂 +133.1%、穎崴 +119.8%、鴻勁 +83.6%、旺矽 +57.8%、京元電 +36.6%、精測 +34.1%、欣銓 +33.0%、矽格 +23.7%(創高)、雍智 +12.3%;國際端 Advantest FY26 財測 +25.8%、Teradyne AI ~70%、Technoprobe/FormFactor 記錄季——短期組全鏈齊漲,分歧僅在斜率</td><td>每月 10 日前後月營收(公開申報)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>年內兌現(2026Q3-Q4)</b></td><td>京元電 500 億 capex 產能開出(Q3-Q4)+Rubin 3Q26 ramp 測試強度入帳;欣銓龍潭 ASIC CP Q3 起貢獻;鴻勁高階 ATC(CSP TPU)2H26 大量出貨;致茂新世代 SLT 量產;矽格中興三廠 Q4 完工;穎崴探針 900 萬支/月</td><td>2026/7/10 六月營收(第一哨)→ 7/29 Advantest FY26Q1 → 8 月 2Q26 財報(毛利率+龍潭首驗)→ 10 月起 Q3 月營收逐月對帳</td><td><span class="conf c-med">中(公司展望+法人估)</span></td></tr>
+  <tr><td><b>2027-2028 選擇權</b></td><td>(1)CPO/矽光子測試:鴻勁 Insertion 4(2027 初量產)、矽格 AI+CPO 佔比 &gt;5% 目標、穎崴矽光子座、惠特設備——SiPh 測試設備 2026 僅 $730M(GM Insights)、FormFactor CPO $10-20M,2027+ 才放量;(2)HBM4 base die/2nm ASIC:CP 插入點時間拉長、探針卡散熱規格跳升;(3)WLBI:Aehr 獨走、台廠缺席,京元電 package-level 自製爐路線與其 2027 對決 KGD 良率經濟學;(4)精測三廠 2028H2、穎崴仁武二廠 2Q27</td><td>鴻勁 CPO 規格定案(2026 底);Aehr FY27 出貨;HBM4 量產進度;TSMC N2P/A16 ramp</td><td><span class="conf c-un">前瞻</span></td></tr>
+  <tr><td><b>長期風險帶</b></td><td>ATE 主機/WLBI/量產 prober/KGD 分測設備台廠永久缺席;Cohu 切入 handler(2026 $80-100M,量級尚小);TSMC 集團(精材)自建測試產能=OSAT 代工寡占的邊際侵蝕;capex 週期反轉時折舊反噬(京元電 500 億/矽格 88 億)</td><td>Advantest/Teradyne 每季法說;精材擴產進度;各檔毛利率 vs 折舊</td><td><span class="conf c-med">中</span></td></tr>
+</table>
+
+<!-- 5c -->
+<h2 id="s5c"><span class="n">9</span>受惠股估值試算(工具)</h2>
+<p class="sub">通用估值方法 + 互動計算機。預設值為<b>示意數字</b>(非財測),請用第 6 節「公司快照」的真實基期調整。測試代工為資本/折舊密集,留意 capex 週期。</p>
+<table>
+  <tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr>
+  <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>最普遍</td><td>探針卡/測試座股 PE 高(高毛利:旺矽 59.4%/鴻勁 56.2%/致茂 63%)</td></tr>
+  <tr><td><b>PEG</b></td><td>公允 PE = EPS 成長率 × PEG 目標</td><td>上行週期</td><td>&lt;1 低估 / &gt;2 偏貴;參考:法人估鴻勁 2026 EPS 137(高盛 2026/5)、雍智 28(+81.6%)——皆法人估非財測</td></tr>
+  <tr><td><b>EV/EBITDA</b></td><td>(EBITDA×倍數−淨負債)÷股數</td><td>重資產測試代工</td><td>京元電(capex 500 億)/矽格(88 億)折舊大,適用</td></tr>
+  <tr><td><b>題材選擇權</b></td><td>本業 + 未來 AI 案折現</td><td>未放量案</td><td>欣銓龍潭 ASIC CP、鴻勁 CPO Insertion 4、矽格 CPO、惠特光測、雍智 TPU(未證實 ⚪)</td></tr>
+</table>
+<h3>試算計算機(示意預設,請填第 6 節真實數字)</h3>
+<div class="calc">
+  <div class="inputs">
+    <div><label>基期營收(億元)</label><input id="rev" type="number" value="400"></div>
+    <div><label>營收成長率(%)</label><input id="g" type="number" value="30"></div>
+    <div><label>淨利率(%)</label><input id="npm" type="number" value="22"></div>
+    <div><label>流通股數(億股)</label><input id="sh" type="number" value="12.2"></div>
+    <div><label>目標 PE(x)</label><input id="pe" type="number" value="20"></div>
+    <div><label>EPS 成長率(%)</label><input id="epsg" type="number" value="35"></div>
+  </div>
+  <div class="out">
+    <div class="res"><small>預估 EPS</small><b id="oEps">—</b></div>
+    <div class="res"><small>PE 目標價</small><b id="oPe">—</b></div>
+    <div class="res"><small>隱含 PEG</small><b id="oPeg">—</b></div>
+    <div class="res"><small>稅後淨利(億)</small><b id="oNi">—</b></div>
+  </div>
+</div>
+<p class="sub">通用試算工具,預設值為示意非個股財測。測試代工(京元電毛利率 39.7%)vs 介面/設備(穎崴/鴻勁/旺矽/致茂 56-63%)財務結構差異大,務必填入標的真實數字。本頁僅供研究參考,不構成投資建議。</p>
 
 <!-- 6 -->
-<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
-<div class="callout warn"><b>口徑/股號修正(對抗式查證後):</b>
-  <ul>
-    <li><b>鴻勁精密 7769 已於 2025/11/27 由興櫃轉上市</b>(交易板別已更新)</li>
-    <li><b>京元電 AI 占比、測試時間 +100-200%/單價 +50-100% 為公司自述</b>(無第三方 benchmark);2026Q1 營收創高但需留意折舊與獲利結構</li>
-    <li>SLT 量化(+30% 市場、強度倍增)多為 Digitimes/法人口徑;探針卡市場研調絕對值與 CAGR 分歧大(Mordor vs MRFR vs VMR),為量級參考</li>
-  </ul>
-</div>
+<h2 id="s6"><span class="n">10</span>投資警示 <span class="conf c-low">務必閱讀</span></h2>
 <div class="card"><h3>結構性風險</h3>
   <ul>
-    <li><b>ATE 測試機本體天花板:</b>大型 ATE 由 Advantest(SoC tester 66%)+Teradyne 雙寡占,台廠在「測試機本體」基本吃不到——台廠強在代工、探針卡、測試座、分選機、SLT 系統</li>
-    <li><b>資本支出與折舊壓力:</b>京元電 capex 500 億創天量、矽格 88 億(+49%);先進測試機交期 6-8 個月、產能 Q3-Q4 才開出,折舊先行</li>
-    <li><b>認證週期長、放量遞延:</b>欣銓 ASIC 新專案 2026H2 才貢獻、致茂新 SLT 案 2026H2 量產、雍智 Google TPU——皆前瞻指引,尚未認列</li>
-    <li><b>與 HBM/記憶體測試題重疊:</b>京元電/欣銓/矽格/穎崴/旺矽橫跨兩題,評估受惠時勿重複計</li>
-    <li><b>探針卡 2nm 認證被國際三強卡位:</b>Technoprobe/MJC 已拿台積電 2nm 認證,台廠在最尖端節點屬追趕第二梯隊</li>
+    <li><b>ATE 測試機本體天花板:</b>大型 ATE 由 Advantest(SoC tester 市占 56%→66% CY25,第三方分析整理、非官方具名)+Teradyne 雙寡占,CY26 SoC tester TAM $8.7-9.5B 全歸日美兩強——台廠在「測試機本體」基本吃不到;台廠強在代工、探針卡、測試座、分選機、SLT 系統。</li>
+    <li><b>handler 近獨占出現具體挑戰者:</b>Cohu Eclipse 已獲兩筆多台 AI 資料中心處理器訂單(2026/3/17 第二筆)、2026 HPC 營收指引上修至 $80-100M、ATC roadmap 3kW→10kW——2026 量級仍遠小於鴻勁(1-5 月營收 ~US$600M),但趨勢需逐季追蹤。</li>
+    <li><b>資本支出與折舊壓力:</b>京元電 capex 500 億創天量(1Q26 EPS 1.87 已低於法人預期)、矽格 88 億(+48%);先進測試機交期長、產能 Q3-Q4 才開出,折舊先行。</li>
+    <li><b>認證週期長、放量遞延:</b>欣銓龍潭 ASIC Q3 才貢獻、致茂新 SLT 案 2H26 量產、鴻勁高階 ATC 2H26、雍智 Google TPU 未經公司證實——多為前瞻指引,尚未全數認列。</li>
+    <li><b>與 HBM/記憶體測試題重疊:</b>京元電/欣銓/矽格/穎崴/旺矽橫跨兩題,TechWing/HBM 探針卡屬 HBM 題,評估受惠時勿重複計。</li>
+    <li><b>探針卡 2nm 認證被國際三強卡位:</b>MJC(2025/8 主力認證)/Technoprobe(~30%)/FormFactor(Mordor 口徑,低信心)——台廠在最尖端節點屬追趕第二梯隊,旺矽 2nm 認證無事證。</li>
+    <li><b>foundry 集團自建測試的長期邊際風險:</b>Digitimes 2026/5/29:TSMC 集團測試臂膀精材為 2H26 擴晶圓測試產能——OSAT 測試代工寡占的長期侵蝕變數。</li>
+    <li><b>市占類主張全為公司自述或媒體口徑:</b>鴻勁 ~90%、京元電 NVIDIA >90%、Advantest 66%、穎崴「全球第一」、旺矽 Thermal >50%——無一有第三方研調,引用一律帶標註(逐條裁決見第 11 節)。</li>
+    <li><b>報告農場口徑氾濫:</b>測試座/SLT 子市場無 TechInsights/VLSI 級具名 primary,引用必標分母;Digitimes「SLT 2026 +30%」為 2025/7 單源、已一年舊,本版已降級。</li>
   </ul>
 </div>
 
+<!-- 6b -->
+<h2 id="s6b"><span class="n">11</span>被反駁/未驗證說法警示區(對抗式裁決留痕)</h2>
+<p class="sub">本輪逐條裁決:<b>refuted(反駁)不入正文、僅在此留痕;unverified 標 ⚪ 可引但不可當事實;correction 已就地改寫、此處留原始口徑。</b></p>
+<table>
+  <tr><th>說法</th><th>裁決</th><th>理由 / 正確口徑</th></tr>
+  <tr><td>京元電「AI 測試時間 +100-200%、單價 +50-100%」</td><td><span class="conf c-low">refuted</span></td><td>查無「+100-200%」口徑來源;可佐證分項錨全部低於或不同於此區間:burn-in 3h→5-6h(=+67~100%,MS 2026/6/23)、SLT 負荷 +20-30%(流通)、Rubin vs Blackwell +50~100%(法人流通 ⚪)。本版已以分項錨取代,不得合併寫成 +100-200%</td></tr>
+  <tr><td>穎崴「測試座全球第一」</td><td><span class="conf c-low">refuted</span></td><td>無限定口徑的「全球第一」查無佐證且有反例:今周刊口徑=「全球前五大高階邏輯 IC 測試座廠」;ISC 自述矽膠座市占 &gt;50%、Leeno TTM $263M 同量級。本版改寫「第一梯隊/前五大,高功率液冷座+SLT 整合座為差異化強項」</td></tr>
+  <tr><td>鴻勁「NVIDIA AI FT handler 市占 ~90%」</td><td><span class="conf c-un">⚪ unverified</span></td><td>媒體/法人口徑分歧(85%~接近 100%)且分母不一:另有外資估全 test handler 市占 2025 ~43%→2027 ~59%;無第三方研調;反向事證=Cohu 兩筆 Eclipse 訂單+HPC 上修 $80-100M。引用一律寫「媒體/法人口徑、分母不一、無第三方研調」</td></tr>
+  <tr><td>致茂「保有 NVIDIA Rubin SLT 100% 份額+過 AMD MI450 認證」</td><td><span class="conf c-un">⚪ unverified</span></td><td>唯一出處為 Threads 轉述外資報告,無具名原文、無第二來源;Teradyne Titan HP 已在多家大客戶量產=SLT 高功率戰場有交火。可靠替代錨=2H26 SLT 新案量產(公司展望)。註:「15 年獨供」另有今周刊/天下多源、confirmed,勿與此混引</td></tr>
+  <tr><td>京元電「NVIDIA AI 測試訂單 &gt;90%」</td><td><span class="conf c-un">⚪ unverified</span></td><td>無第三方研調;最接近事證=MS 窄口徑「V 系列 CPU FT+burn-in 近 100%」(2026/6/23)+「NVIDIA GPU FT/burn-in 主力供應商」(媒體口徑)</td></tr>
+  <tr><td>「Blackwell 測試時間=Hopper 3 倍」</td><td><span class="conf c-un">⚪ unverified</span></td><td>僅查得「訓練效能」3 倍類數據,無「測試時間」3 倍具名來源;測試強度引用改用 MS burn-in 3h→5-6h 與 SEMI +48.1% 等有源錨點</td></tr>
+  <tr><td>「Rubin 測試時間 +40%」</td><td><span class="conf c-un">⚪ unverified</span></td><td>僅 blog 級來源(tech-insider.org),無第三方研調背書</td></tr>
+  <tr><td>雍智「經聯發科切入 Google TPU 測試板」</td><td><span class="conf c-un">⚪ unverified</span></td><td>僅 CMoney 系即時新聞層級(市場消息),公司未公開證實;可靠替代錨=1Q26 營收 6.64 億(+46.3%)、連 28 個月年增(公告數據)</td></tr>
+  <tr><td>京元電「2026 AI 相關營收占比上看 7 成」</td><td><span class="conf c-un">⚪ 分母警示</span></td><td>法人廣義「AI 相關」分母(含 ASIC/CIS 等),與公司狹義口徑(2025 25-30%→2026E 35-40%)不可互換</td></tr>
+  <tr><td>Digitimes「SLT 市場 2026 +30%」</td><td><span class="conf c-un">降級</span></td><td>2025/7/3 單源、已一年舊、2026 年內未見更新——退役為輔助引用;SLT 具名 primary 研調仍缺</td></tr>
+  <tr><td>「高盛鴻勁 TP 5,000(2026/1)」</td><td><span class="conf c-med">correction</span></td><td>已過時三輪:外資 5,000(2026/1)→高盛 5,700→高盛 12,000(2026/5,大雅新廠+產能 CAGR 50% 上修後;EPS 估 137/250/426)。皆法人估非公司財測、引用必帶日期</td></tr>
+  <tr><td>「Advantest 2026 產能 5,000 台」</td><td><span class="conf c-med">correction</span></td><td>Bloomberg 口徑:+70%(2026 年底,對 2024 基期)與 5,000 台(2027/3 前、FY26 年度末,CEO 稱 bare minimum)是兩個不同時點目標,分開引用</td></tr>
+  <tr><td>「精測 2026/8 產能翻倍」</td><td><span class="conf c-med">correction</span></td><td>經濟日報 2026/5:提升至現有「1.5 倍至 2 倍」(公司自述)——翻倍為區間上緣,勿逕寫 x2;「2028 再翻倍」亦公司自述</td></tr>
+  <tr><td>「Cohu 第二筆 Eclipse 訂單 2026/5/27」</td><td><span class="conf c-med">correction</span></td><td>Cohu IR 新聞稿日期為 2026/3/17;$80-100M 上修發生在 4/30 Q1 法說(前值 $60-85M)——兩事件日期分開記</td></tr>
+  <tr><td>「鴻勁 handler 42%/ATC 33%/水冷 23%」</td><td><span class="conf c-med">correction</span></td><td>出處=2025Q3 產品結構(StockFeel 轉述法說/媒體口徑),引用需標時點、非 2026 現況;ATC 1500W+ 為公司自述</td></tr>
+  <tr><td>「SEMI 2026 測試設備 +18.6%、總設備 $139B」</td><td><span class="conf c-med">correction</span></td><td>口徑拆開:測試設備 2026 +12.0%(SEMI 2025/12);$138.1B 為總設備 2026F、$135.1B 為 2025 實績、$156B 為 2027F——已全數改寫</td></tr>
+  <tr><td>「Advantest SoC tester 市占 66%」</td><td><span class="conf c-med">correction(口徑)</span></td><td>可溯源至第三方分析整理(Seeking Alpha/Chips and Wafers Substack:CY25 56%→66%),非 Advantest 官方文件具名數字——引用標「外部整理」;7/29 FY26Q1 後刷新</td></tr>
+  <tr><td>「TSMC N2 於竹科 Fab 20/高雄 Fab 22 量產」</td><td><span class="conf c-med">correction(細節)</span></td><td>多源:量產首發高雄 Fab 22,竹科 Fab 20 較晚投產(與早先預期相反)</td></tr>
+</table>
+<h3>excluded 留痕(查證後不收錄,含理由)</h3>
+<table>
+  <tr><th>公司</th><th>理由(反駁測試)</th></tr>
+  <tr><td>宜特 3289</td><td>1Q26 EPS 2.05(+21%)但營收 10.83 億年減 4.2%、5 月僅 +0.2%、1-5 月 -3.3%——營收無成長;「AI 高單價專案比重提升」屬公司自述缺量化;驗證分析屬可靠度外圍(BIB 服務仍列細顆粒地圖)。watch 候選劣後、本版列 BIB 卡位不給評分</td></tr>
+  <tr><td>蔚華科 3055</td><td>1Q26 EPS -0.15 仍虧;5 月營收 2,265 萬(-75.0% YoY、-82% MoM)代理業務極端波動;TGV/玻璃基板檢測題材無量產訂單佐證且偏離本題——屬設備通路/檢測題材股</td></tr>
+  <tr><td>久元 6261</td><td>1Q26 EPS 0.85(-9% YoY、-44% QoQ);主業 LED/CIS 測試,CPO 測試為「未來動能」佈局(2026/4/29 法說)——AI 相關營收未具體化、歸 CPO 題觀察</td></tr>
+  <tr><td>頎邦 6147</td><td>AI 連結=矽光子金凸塊封裝(TIA/PD 量產)與驅動 IC,非 AI 晶片測試鏈環節——歸矽光子/LPO 題,避免與 InP/矽光子報告雙計;1Q26 EPS 0.59(-34%)</td></tr>
+  <tr><td>由田 3455</td><td>1Q26 營收 1.47 億(-59.5%)、EPS -0.81 轉虧;「2026 半導體占比五成」為公司展望非實績——維持僅列細顆粒地圖供應商、不入 watch</td></tr>
+</table>
+
 <!-- 7 -->
-<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
-<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<h2 id="s7"><span class="n">12</span>資料來源(分層 + 網址 + 一句佐證)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary</span>=官方新聞稿/財報/SEC/SEMI/公開申報;<span class="src-q q-secondary">secondary</span>=具名媒體/法說備忘錄/研調轉述;<span class="src-q q-blog">blog</span>=報告農場/社群/未具名整理。標註「未附網址」者=本輪未檢得原文連結。</p>
 <div class="card">
-  <div class="src-item">京元電/鴻勁/穎崴/致茂/旺矽/中華精測/矽格/雍智/欣銓 2026Q1 法說與月營收(公開申報)<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">SEMI 後段測試設備市場 2025 $11.2B(+48.1%);Advantest FY25 法說(SoC tester CY26 $8.7-9.5B、市占 66%)<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">SemiEngineering《AI Accelerators Usher In New Era of Test》/ FormFactor(Silicon Saxony 2026) — KGD、SLT 強制化、測試插入點倍增<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">Digitimes(2025/7) SLT 2026 +30%;高盛(2026/1) 鴻勁 TP $5,000;Teradyne Titan HP 2kW→4kW<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">Mordor/QYR/FMI/Verified Market Research — 探針卡/測試座/burn-in/SLT 市場規模(口徑分歧,量級參考)<span class="src-q q-blog">blog</span></div>
-  <div class="src-item">Aehr Test Systems 新聞稿 — WLBI 晶圓級老化、2026/2 AI 大客戶 $14M 訂單<span class="src-q q-primary">primary</span></div>
+  <h3>Primary(官方/一手)</h3>
+  <div class="src-item"><a href="https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-projected-to-reach-a-record-of-156-billion-dollars-in-2027-semi-reports">SEMI 年終總設備預測(2025/12/16)</a> — 佐證測試設備 2025 $11.2B(+48.1%)、2026 +12%、2027 +7.1%;總設備 2027F $156B<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.semi.org/en/SEMI-Reports-Global-Semiconductor-Equipment-Billings-Reached-135-Billion-in-2025">SEMI 2025 billings 實績報告(2026/4)</a> — 佐證 2025 總設備 $135.1B(+15%)、1Q26 $36.55B(+14%)創單季新高<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.advantest.com/en/news/2026/a81o6o0000000hgw-att/E_FR_FY2025_FN.pdf">Advantest FY2025 Consolidated Financial Results(2026/4/27)</a> — 佐證 FY25 ¥1,128.6B(+44.7%)、FY26 財測 ¥1,420B(+25.8%)、SoC 系統 ¥999.5B 約 95% computing<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.advantest.com/document/en/investors/ir-library/result/JE_BIZ_260427_QA.pdf">Advantest 法說 Q&amp;A/Tester Market Outlook(2026/4/27)</a> — 佐證 CY26 tester 市場創史上最大(官方定性);$8.7-9.5B 與 66% 未在文件內具名、標法說口頭/外部整理<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.advantest.com/en/investors/">Advantest IR 行事曆</a> — 佐證 FY26Q1 決算 2026/7/29 15:30 JST=大盤最權威更新錨<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.sec.gov/Archives/edgar/data/0001039399/000103939926000020/ex9901-earningsreleasexq126.htm">FormFactor Q1 2026 earnings release(SEC 8-K)</a> — 佐證 $226.1M(+32%)、DRAM 卡 $82.9M(+70%)、HBM 卡 +50%、SK hynix 29.5%/NVIDIA 10.2%、Q2 指引 $240M、GAAP/non-GAAP 並列<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.teradyne.com/products/titan-hp/">Teradyne Titan HP 產品頁</a> + <a href="https://www.stocktitan.net/news/TER/teradyne-unveils-titan-6kwsabktt74h.html">發布稿(2025/10/15)</a> — 佐證 SLT 2kW 現行→4kW roadmap、多分支冷板+PID 溫控、已多家大客戶量產<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.businesswire.com/news/home/20260608994172/en/Teradyne-Introduces-Integrated-Test-Solution-for-AI-and-Data-Center-Devices-in-Collaboration-with-Tokyo-Electron">Teradyne×TEL KGD 整合方案新聞稿(2026/6/8,SWTest 2026)</a> — 佐證 KGD/chiplet 分測成為量產就緒獨立插入點(UltraFLEXplus+Prexa SDP)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.tel.com/news/product/2026/20260416_001.html">TEL Prexa SDP 產品發表(2026/4/16)</a> — 佐證裸晶分測 prober 新機型與高功耗溫控<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.fool.com/earnings/call-transcripts/2026/04/29/teradyne-ter-q1-2026-earnings-transcript/">Teradyne Q1 2026 earnings 逐字稿(2026/4/29)</a> — 佐證 ~$1.3B 創紀錄、AI 相關 ~70%、memory test 強於預期、IST 切入 SLT compute<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://ir.cohu.com/news-releases/news-release-details/cohu-receives-second-multi-unit-order-testing-next-generation-ai">Cohu 第二筆多台 Eclipse AI 訂單新聞稿(2026/3/17)</a> — 佐證鴻勁近獨占的具體挑戰者;Eclipse ATC 3kW→10kW、xPU SAM $650M;$80-100M 上修在 4/30 法說<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.aehr.com/2026/02/aehr-receives-14-million-order-from-lead-ai-processor-customer-for-multiple-new-fully-automated-fox-xp-wafer-level-burn-in-systems/">Aehr $14M AI processor WLBI 訂單(2026/2/26)</a> + <a href="https://www.aehr.com/2026/03/aehr-receives-follow-on-order-for-fully-automated-wafer-level-burn-in-systems-powering-ai-optical-i-o-and-data-center-interconnects/">2026/3 光 I/O 追單</a> — 佐證 WLBI 放量且台廠缺席<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.chromaate.com/en/product/advanced_soc_analog_test_system_3680_36">Chroma 致茂 3680 產品頁(+SLT/3260 專頁)</a> — 解「致茂 SLT 機型待查」:3680 SoC ATE(2048 pins/1Gbps)+Tri-Temp SLT Handler 3260<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://www.istgroup.com/en/production/burn-in-board/">iST 宜特 burn-in board 服務頁</a> — 佐證 BIB 設計+製作一站式(台廠 BIB 卡位)<span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><a href="https://mops.twse.com.tw/">公開資訊觀測站(月營收申報制度)</a> — 佐證 6 月營收 7/10 前後公告=全鏈共同驗證錨;本版最新月營收=2026 年 5 月<span class="src-q q-primary">primary</span></div>
+  <h3>Secondary(具名媒體/法說備忘錄/研調轉述)</h3>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-7769-2026-05-12">鴻勁 2026/5/12 法說(富果備忘錄)</a> — 佐證 1Q26 107 億/EPS 25.70/AI 佔比 78%/產能 CAGR 50%/ATC 6kW roadmap/Insertion 4 CPO 2027 初<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-6515-2026-05-26">穎崴 2026/5/26 法說(富果備忘錄)</a> — 佐證 EPS 19.54/探針產能倍增計畫/HyperSocket 2027 貢獻 &gt;5%(公司自述)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-6257-2026-06-23">矽格 2026/6/23 法說(富果備忘錄)</a> + <a href="https://news.cnyes.com/news/id/6508689">鉅亨《新產能被客戶包走》</a> — 佐證 AI 類佔 23%+40% YoY、capex 88 億、中興三廠提前 Q4<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://finance.biggo.com.tw/news/TW_3264.TW_2026-05-04">欣銓 2026/5/4 法說(BigGo 財經)</a> + <a href="https://news.cnyes.com/news/id/6484191">鉅亨 5 月營收</a> — 佐證龍潭 2026/6 交機、Q3 貢獻、ASIC ~20%、5 月 15.18 億(+33.0%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://finance.technews.tw/2026/06/23/morgan-stanley-expects-king-yuan-electronics-revenue-to-grow-by-40-in-2026/">TechNews 轉述 Morgan Stanley 京元電報告(2026/6/23)</a> — 佐證 Rubin burn-in 3h→5-6h、2026 營收 +40%、TP 388(法人估非財測)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20260511700931-430201">工商時報《京元電 Q1 獲利低預期 4 外資仍升價》(2026/5/11)</a> — 佐證 1Q26 101.91 億/GM 39.74%/EPS 1.87<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.cna.com.tw/news/afe/202604100185.aspx">中央社:京元電 capex 上修 500 億(2026/4/10)</a> + <a href="https://money.udn.com/money/story/5710/9478033">經濟日報/理財周刊</a> — 佐證 393.72→500 億(+27%)、高功率 burn-in 主投向、產能 +30-50%(法人估)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://finance.technews.tw/2026/06/08/kyec-2449-202605-financial-report/">TechNews 京元電 5 月營收(2026/6/8)</a> + <a href="https://news.cnyes.com/news/id/6488811">鉅亨</a> — 佐證 5 月 37.77 億(+36.6%)、1-5 月 +37.7%<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://news.cnyes.com/news/id/6489318">鉅亨:鴻勁 5 月營收</a> — 佐證 41.30 億(+83.6%)、1-5 月 192.17 億(+87.9%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://news.cnyes.com/news/id/6488909">鉅亨:穎崴 5 月營收</a> — 佐證 10.73 億(+119.8%)、1-5 月 50.43 億(+46.5%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://money.udn.com/money/story/5612/9474383">經濟日報:致茂 1Q26 淨利 38.6 億 EPS 9.12(2026/5)</a> + <a href="https://news.cnyes.com/news/id/6444871">鉅亨 4-5 月營收</a> + <a href="https://www.nstock.tw/stock_info?stock_id=2360&amp;status=2">nStock</a> — 佐證營收 118.6 億(+73%)/毛利率 63%/5 月 45.50 億(+133.1%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.sinotrade.com.tw/richclub/hotstock/%E6%97%BA%E7%9F%BD-6223--1Q26%E6%AF%9B%E5%88%A9%E7%8E%87%E8%A1%9D59-4-%E5%86%8D%E5%89%B5%E6%96%B0%E7%8C%B7-AI-ASIC%E6%8E%A2%E9%87%9D%E5%8D%A1%E6%94%BE%E9%87%8F%E6%8E%A8%E5%8D%87%E8%A9%95%E5%83%B9%E9%87%8D%E4%BC%B0-%E8%B1%90%E5%AD%B8PRIME%E7%9B%A4%E5%BE%8C%E7%B2%BE%E9%81%B8--6a053064f4afcb00279ea62a">永豐豐雲學堂:旺矽 1Q26 整理(2026/5)</a> — 佐證 GM 59.4%/EPS 12.53/Rubin+Trainium 3 認證(媒體/法人口徑)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://tw.stock.yahoo.com/quote/6223.TWO/revenue">Yahoo 股市:旺矽月營收(6223.TWO)</a> — 佐證 5 月 19.07 億(+57.8%、月增 28.4%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://statementdog.com/analysis/6510/eps">財報狗:精測 EPS</a> + <a href="https://readmo.cmoney.tw/article/f1c2b3d0-e996-47e2-bfb5-2a4a6710eb47">CMoney 精測擴產</a> + <a href="https://news.cnyes.com/news/id/6297385">鉅亨 CB 公告報導</a> — 佐證 EPS 10.43 創 40 季高、三廠 40.87 億/2028H2、CB 20 億<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.businesstoday.com.tw/article/category/183008/post/202604020006/">今周刊:探針卡五雄專文(2026/4/2)</a> — 佐證精測 2026/8 產能 1.5-2 倍(公司自述)、垂直整合定位<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20260225700210-439901">工商時報:雍智(2026/2/25)</a> + <a href="https://www.moneyweekly.com.tw/ArticleData/Info/Article/227913">理財周刊</a> — 佐證 1Q26 6.64 億/EPS 6.23/連 28 個月年增/法人估 2026 EPS 28(非財測)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://money.udn.com/money/story/5607/9500978">經濟日報《鴻勁目標價喊到 12,000》</a> + <a href="https://udn.com/news/story/7240/9607806">聯合新聞網 EPS 128.8 法人估</a> + <a href="https://statementdog.com/news/15922">財報狗(2026/1 TP 5,000 轉述)</a> — 佐證 TP 序列 5,000→5,700→12,000(2026/5,法人估非財測)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://uk.investing.com/news/company-news/advantest-fy25-slides-record-margins-as-ai-testing-demand-surges-93CH-4631849">Investing.com:Advantest FY25 slides(2026/4/27)</a> — 佐證 CY26 SoC tester $8.7-9.5B(另有 $8.5B 轉述版)、FY26 毛利率目標 63%<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item">Bloomberg:Advantest 產能擴充報導(2026/1/28)— 佐證 2026 年底前產能較 2024 擴 70%+、SoC tester 3,000→至少 5,000 台(2027/3 前)(未附網址)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.investing.com/news/stock-market-news/technoprobe-shares-surge-36-as-q1-profit-jumps-targets-accelerated-4691350">Investing.com:Technoprobe 1Q26(2026/5)</a> — 佐證 €187M(+19%)、EBITDA +44.2%、guidance €950M-1.05B、股價 +32~36%<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.thelec.net/news/articleView.html?idxno=5574">THE ELEC:ISC 2025 記錄年報</a> — 佐證 ₩220.2B(+26%)、2026 目標 +20%、客戶 8→12 家<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://semiengineering.com/ai-accelerators-usher-in-new-era-of-semiconductor-test/">SemiEngineering《AI Accelerators Usher In New Era Of Semiconductor Test》(2026/4/7)</a> + <a href="https://semiengineering.com/hbm-shifts-testing-left-to-preserve-ai-chip-yield/">HBM shift-left 專文</a> — 佐證四段插入點框架、HBM ~50% 封裝成本、HBM4 測試左移<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://silicon-saxony.de/en/formfactor-how-ai-and-hbm-are-redefining-semiconductor-testing">Silicon Saxony:FormFactor CEO 專訪(2026/6/2)</a> — 佐證「測試從品管變價值來源」、2030 營收目標 $1.6B<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.digitimes.com/news/a20260625PD224/nvidia-rubin-gpu-revenue-2026.html">Digitimes:VR200 自 3Q26 ramp(2026/6/25)</a> — 佐證 Rubin 測試強度入帳時點;取代未檢得的 2026/5 舊引<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.digitimes.com/news/a20250703PD236/testing-slt-growth-chips-2026.html">Digitimes:SLT 2026 +30%(2025/7/3)</a> — 單源且一年舊,已降級為輔助引用<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.digitimes.com/news/a20260529PD214/testing-packaging-tsmc-csp-capacity.html">Digitimes:精材 2H26 擴晶圓測試(2026/5/29)</a> — 佐證 foundry 集團自建測試的長期邊際風險<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/news/2026/02/25/news-sk-hynix-reportedly-develops-hbm4-system-level-testing-equipment-deepens-tsmc-collaboration/">TrendForce:SK hynix 自研 HBM4 系統級測試設備(2026/2/25)</a> — 佐證 HBM4 base die 走 logic 製程後測試邊界移動<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/news/2025/10/16/news-tsmc-confirms-n2p-for-2h26-joins-a16-to-cement-2nm-class-as-major-long-lived-node/">TrendForce:N2P/A16 2H26(2025/10/16)</a> + <a href="https://www.techspot.com/news/110755-tsmc-2nm-n2-process-officially-enters-volume-production.html">TechSpot:N2 4Q25 量產</a> — 佐證 2nm 世代 CP 分母時程<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.theregister.com/2026/01/05/ces_rubin_nvidia/">The Register:CES 2026 Rubin full production(2026/1/5)</a> — 佐證 Rubin 平台 full production、volume 2H26<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://insights.trendforce.com/p/cpo-testing-market-opportunities">TrendForce Insights:CPO 測試瓶頸</a> + <a href="https://www.gminsights.com/industry-analysis/silicon-photonics-test-equipment-market">GM Insights:SiPh 測試設備</a> — 佐證 CPO/矽光子測試 2026 量級小、2027+ 放量(2026 $730M、CAGR 12%)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.bloomberg.com/company/press/ai-accelerator-market-looks-set-to-exceed-600-billion-by-2033-driven-by-hyperscale-spending-and-asic-adoption-according-to-bloomberg-intelligence/">Bloomberg Intelligence:AI 加速器 2033 &gt;$600B</a> — 測試鏈最上游需求分母<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://www.pocket.tw/school/report/SCHOOL/6856/">口袋學堂:德律法說整理</a> + <a href="https://www.cmoney.tw/forum/article/179532787">CMoney(銅柱 X-ray 認列營收)</a> — 佐證德律 watch 升格證據(TR7600 SIII Plus 已兌現)<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://statementdog.com/analysis/6706/monthly-revenue-growth-rate">財報狗:惠特月營收</a> — 佐證 4 月 -41.8%、連兩年虧損=watch 反駁測試不過<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://news.cnyes.com/news/id/6488862">鉅亨:閎康 5 月連 3 月創高(2026/6)</a>、<a href="https://news.cnyes.com/news/id/6486510">中探針 5 月營收</a>、<a href="https://vocus.cc/article/6a1718f8fd89780001e0b9bf">汎銓 5/27 法說(vocus)</a>、<a href="https://winvest.tw/Stock/Symbol/Comment/3289">Win 投資:宜特</a>、<a href="https://www.fugle.tw/ai/3055/EPS">富果:蔚華科</a>、<a href="https://vocus.cc/article/69f575aafd897800012de658">久元 4/29 法說(vocus)</a>、<a href="https://blog.fugle.tw/post/earnings-call-6147-2026-06-24">頎邦 6/24 法說(富果)</a>、<a href="https://www.chinatimes.com/realtimenews/20260415001620-260410">時報資訊:由田 Q1 轉虧</a> — watch/excluded 逐檔查證依據<span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><a href="https://money.udn.com/money/story/5607/9349113">經濟日報系:鴻勁 AI/HPC 分選機市占口徑</a> — 「~90%/接近 100%」媒體口徑的出處之一(裁決 ⚪ unverified)<span class="src-q q-secondary">secondary</span></div>
+  <h3>Blog / 報告農場 / 社群(低信心,僅量級或線索)</h3>
+  <div class="src-item"><a href="https://chipsandwafers.substack.com/p/semiconductor-test-a-compelling-investment">Chips and Wafers(Substack)</a> — 「Advantest SoC 市占 56%→66%(CY25)」外部整理出處;ISC/Leeno 量級對照<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.mordorintelligence.com/industry-reports/probe-card-market">Mordor:探針卡市場</a> / <a href="https://www.mordorintelligence.com/industry-reports/semiconductor-test-equipment-market">測試設備</a> / <a href="https://www.mordorintelligence.com/industry-reports/osat-market">OSAT(測試 segment CAGR 10.35%)</a> / <a href="https://www.mordorintelligence.com/industry-reports/wafer-prober-market">wafer prober</a> — 量級參考;2nm 認證格局(MJC primary/Technoprobe 30%)出處、待具名覆核<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.grandviewresearch.com/industry-analysis/automated-test-equipment-market">Grand View:廣義 ATE ~$8.4B(2025)</a> — ATE 口徑分歧比對用(摻非半導體)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.futuremarketinsights.com/reports/burn-in-and-system-level-test-slt-platforms-for-ai-accelerators-market">FMI:AI 加速器 burn-in+SLT 平台</a> — 2026 $0.9B、液冷 41%/burn-in racks 38%(報告農場級)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.precisionreports.co/market-reports/test-and-burn-in-sockets-market-605438">Precision Reports / Market Reports World / Global Growth Insights:測試座三口徑</a> — 2026 $1.55-2.10B、CAGR 7-10.3%(皆報告農場,交叉列示)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.intelmarketresearch.com/semiconductor-and-electronics-313">Intel Market Research:socket 需求 +60%</a> — 單源未驗證分母;僅方向參考<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.stockfeel.com.tw/%E9%B4%BB%E5%8B%81-%E5%81%9A%E4%BB%80%E9%BA%BC-%E6%99%B6%E7%89%87-ai-%E6%B8%AC%E8%A9%A6%E8%A8%AD%E5%82%99/">StockFeel:鴻勁產品解析</a> — handler 42%/ATC 33%/水冷 23%(2025Q3 時點口徑)出處<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://vocus.cc/article/698c8c58fd8978000105d6b0">vocus:Aletheia 外資報告解讀</a> — 鴻勁 handler 市占 43%(2025)→59%(2027)外資分母對照(裁決材料)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.threads.com/@wjsfinance/post/DOQqZauklyi/">Threads @wjsfinance:京元電 burn-in 平台整理</a> — Incal Sonoma 800W/MCC HPB6 1500W/GB300 千秒級(⚪ unverified,僅線索)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://krstockmarket.com/techwing-stock-forecast-2026/">krstockmarket:TechWing 2026 分析</a> — 記憶體 handler 定位、Cube Prober 訂單(相鄰題劃界依據)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><a href="https://www.wing.vc/content/the-chip-testing-bottleneck">Wing VC《The Chip Testing Bottleneck》(2026/6)</a> — SLT=ATE TAM 之上增量市場(VC 視角)<span class="src-q q-blog">blog</span></div>
+  <div class="src-item">tech-insider.org:「Rubin 測試時間 +40%」— blog 級、⚪ unverified(未附網址)<span class="src-q q-blog">blog</span></div>
 </div>
 
 <footer>
-  <p><b>研究方法：</b>Workflow 多 agent 研究(測試流程/台廠/國際市場)+ 對抗式查證(股號修正、口徑、風險)。</p>
-  <p>本報告以「已通過查證」內容為主幹,口徑修正與待查項目已標明。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
-  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(測試流程/台廠/國際市場/細顆粒機台)+ 對抗式查證(逐條裁決:refuted 不入正文僅留痕、unverified 標 ⚪、correction 就地改寫)+ 逐檔月營收/掛牌狀態刷新(19 檔核對)。</p>
+  <p>本報告以「已通過查證」內容為主幹;市占類主張無一有第三方研調、全數標註口徑。屬時間敏感領域:<b>最新月營收=2026 年 5 月,6 月營收 7/10 前後公告、2Q26 財報 7-8 月出爐,屆時需刷新。</b>數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06 · 補強:2026-07-06 · Claude Code · process-chain-research</p>
 </footer>
 
 </div>
+<script>
+(function(){
+  var ids=['rev','g','npm','sh','pe','epsg'];function $(id){return document.getElementById(id)}
+  function calc(){var rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    var ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(function(id){var el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
 </body>
 </html>
