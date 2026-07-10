@@ -79,9 +79,9 @@
 
 <header class="hero">
   <h1>224G 世代高速互連(連接器/AEC/MCIO/銅背板)深度研究報告</h1>
-  <div class="sub">SerDes→retimer/AEC 晶片→連接器→線纜組裝→銅背板/PCB midplane;訊號鏈逐環節難度、Rubin cableless 衝擊、價值量歸屬之爭、台廠卡位、對抗式查證</div>
+  <div class="sub">SerDes→retimer/AEC 晶片→連接器→線纜組裝→銅背板/PCB midplane;訊號鏈逐環節難度、Rubin cableless 衝擊、價值量歸屬之爭、台廠卡位、對抗式查證;2026/07 補強輪:2026/06 月營收全鏈刷新、Credo FY26 財報、VR200 spine 出處更正、watch 擴充至 9 檔帶反駁</div>
   <div class="meta-row">
-    <span class="pill">產出日期：<b>2026-06</b></span>
+    <span class="pill">產出日期：<b>2026-06(初版)/2026-07-11(補強)</b></span>
     <span class="pill">研究方法：<b>Workflow 多 agent 研究＋對抗式查證</b></span>
     <span class="pill">本質：<b>電氣銅互連(台廠吃連接器+線纜組裝、晶片端缺席)</b></span>
     <span class="pill">配對淺色版：<b>224G高速互連-process-chain-light.html</b></span>
@@ -90,20 +90,27 @@
     <a href="#s1">1. 是什麼/兩大判斷</a>
     <a href="#s2">2. 訊號鏈(7 環節)</a>
     <a href="#s3">3. 難度+受惠評分</a>
-    <a href="#s4">4. 供應鏈對照</a>
-    <a href="#s5">5. cableless模型/市場/時程</a>
-    <a href="#s6">6. 投資警示</a>
-    <a href="#s7">7. 資料來源</a>
+    <a href="#s4">4. 供應鏈對照+watch 反駁</a>
+    <a href="#s5">5. cableless模型/細顆粒地圖/市場/時程</a>
+    <a href="#s6">6. 估值方法+試算</a>
+    <a href="#s7">7. 投資警示/兩劇本/開放問題</a>
+    <a href="#s8">8. 資料來源</a>
   </div>
 </header>
 
 <!-- 0 -->
-<div class="callout info"><b>一句話總結：</b>這是 224G 世代 AI 伺服器「<b>電氣銅互連</b>」題(訊號出晶片之後的銅互連,排除光模組/CPO)。<b>用量結構性暴增:</b>GB200/GB300 NVL72 單櫃 NVLink 銅背板用掉 <b>5,184 條 224G 同軸銅纜</b>(NVIDIA 官方),scale-out 端 AEC 每伺服器從 <b>1 條→9 條</b>(650 Group/CNBC)。<b>但台廠價值捕捉分層明確:</b>① <b>晶片端(224G SerDes/retimer/AEC DSP)台廠幾乎缺席</b>——Credo(市佔約 88%→70%)+Marvell+Astera 美系壟斷;② <b>NVLink 銅背板 cable cartridge=Amphenol 獨大、Luxshare 二供,台股上市陪跑</b>(鴻騰 FIT 在港股);③ <b>台廠 alpha 在「連接器+線纜組裝」實體互連端</b>=貿聯 3665(Credo AEC 代工霸主+自有 224G AEC)、嘉澤 3533(全球前三大 CPU socket/PCIe 插槽/UQD)、宏致 3605(MCIO pure-play 挑戰者)。⚠ <b>最大結構變數=Rubin cableless</b>(見區塊 1/5):canister 內 flyover 線纜改 PCB midplane,但 5,184 條 spine 沿用——是「層級重分配」非全砍。切分:BOM 中 PCB midplane 板材歸 CCL 鏈、與 #26 整機組裝題交界(NVLink 銅背板深做)。</div>
+<div class="callout info"><b>一句話總結：</b>這是 224G 世代 AI 伺服器「<b>電氣銅互連</b>」題(訊號出晶片之後的銅互連,排除光模組/CPO)。<b>用量結構性暴增:</b>GB200/GB300 NVL72 單櫃 NVLink 銅背板用掉 <b>5,184 條 224G 同軸銅纜</b>(SemiAnalysis 拆解 1,296 埠×4 對;NVIDIA 官方 blog 口徑約 5,000+ 條/2 英里/每櫃省約 20kW),scale-out 端 AEC 機會密度每伺服器從 <b>1 條→9 條</b>(650 Group 分析師 Weckel 具名原話、CNBC 2025/10/17;<b>機會口徑非實際配置</b>)。<b>但台廠價值捕捉分層明確:</b>① <b>晶片端(224G SerDes/retimer/AEC DSP)台廠幾乎缺席</b>——Credo(650 Group 口徑 73–88% 區間,2025;FY2026 營收 $13.35 億、年增 205.7%)+Marvell+Astera 美系壟斷(例外:譜瑞-KY 集團 2025/4 以 $900 萬購 Spectra7 ACC 類比資產,小額);② <b>NVLink 銅背板 cable cartridge=Amphenol 獨大、Luxshare 爭取中,台股上市陪跑</b>(鴻騰 FIT 在港股);③ <b>台廠 alpha 在「連接器+線纜組裝」實體互連端</b>=貿聯 3665(Credo AEC 主要製造夥伴〔10-K,正崴 Foxlink 第二源〕+自有 224G AEC)、嘉澤 3533(全球前三大 CPU socket/PCIe 插槽)、宏致 3605(MCIO pure-play 挑戰者)。<b>2026/06 月營收已兌現分化:貿聯 +63.79% 歷史新高、宏致 +29.81% 首加速、嘉澤 +17.26%、宣德 +2.95%、嘉基 −9.2% 連三月年減。</b>⚠ <b>最大結構變數=Rubin cableless</b>(見區塊 1/5):tray 內 flyover 線纜改 44 層 PCB midplane,但 rack 級 spine 銅纜匣沿用——是「層級重分配」非全砍。切分:PCB midplane 板材歸 CCL 鏈、與 #26 整機組裝題交界(NVLink 銅背板深做)。</div>
 <div class="kpi">
-  <div class="box"><div class="v">5,184 條</div><div class="l">NVL72 單櫃 224G 同軸銅纜(NVIDIA 官方)</div></div>
-  <div class="box"><div class="v">1 → 9 條</div><div class="l">scale-out AEC 每伺服器用量(650/CNBC)</div></div>
-  <div class="box"><div class="v">~88% / 缺席</div><div class="l">Credo AEC 晶片市佔 / 台廠晶片端</div></div>
-  <div class="box"><div class="v">$7.38 億→35.7 億</div><div class="l">AEC 狹義市場 2025→2034(CAGR 23.8%)</div></div>
+  <div class="box"><div class="v">5,184 條</div><div class="l">NVL72 單櫃 224G 銅纜(第三方拆解;官方 blog 5,000+)</div></div>
+  <div class="box"><div class="v">1 → 9 條</div><div class="l">scale-out AEC 機會密度/伺服器(650 Group,機會口徑)</div></div>
+  <div class="box"><div class="v">73–88% / 缺席</div><div class="l">Credo AEC 份額區間(2025)/ 台廠晶片端</div></div>
+  <div class="box"><div class="v">$6.44 億→14 億</div><div class="l">AEC 狹義市場 2025→2029(650 Group,CAGR 約 21%)</div></div>
+</div>
+<div class="kpi">
+  <div class="box"><div class="v">+63.79%</div><div class="l">貿聯 2026/06 營收 YoY(85.18 億,歷史新高)</div></div>
+  <div class="box"><div class="v">+205.7%</div><div class="l">Credo FY2026 營收 $13.35 億(迄 2026/5/2)</div></div>
+  <div class="box"><div class="v">+99%</div><div class="l">Amphenol 1Q26 IT datacom YoY(佔營收 41%)</div></div>
+  <div class="box"><div class="v">3Q26 底</div><div class="l">VR200 NVL72 rack 量產(2H26 出貨 5,000-7,000 櫃,供應鏈估)</div></div>
 </div>
 
 <!-- 1 -->
@@ -112,61 +119,67 @@
   <h3>訊號鏈與本題範圍</h3>
   <ul>
     <li><b>訊號鏈:</b>SerDes 晶片 → retimer/AEC 晶片 → 連接器 → 線纜組裝 → 背板/midplane。三段拓樸:rack 內 scale-up 銅背板、rack 間 scale-out AEC/DAC、板內 MCIO/board-to-board。</li>
-    <li><b>用量暴增:</b>scale-up NVL72 單櫃 5,184 條 224G 銅纜;scale-out AEC 1→9 條/伺服器;PCIe Gen6/MCIO Gen6 2026 放量;1.6T AEC 2026-27 接棒。銅互連是訊號出晶片後不可繞過的環節,隨 GPU 密度線性放大。</li>
+    <li><b>用量暴增:</b>scale-up NVL72 單櫃 5,184 條 224G 銅纜;scale-out AEC 機會密度 1→9 條/伺服器;PCIe Gen6/MCIO Gen6 隨 VR200(3Q26)放量;1.6T AEC 2026-27 接棒。銅互連是訊號出晶片後不可繞過的環節,隨 GPU 密度線性放大。國際錨已由財報兌現:Credo FY26 營收 +205.7%、Amphenol 1Q26 IT datacom +99%(organic +81%)。</li>
     <li><b>台廠定位:</b>「連接器+線纜組裝」實體互連端=重要供應商/快速挑戰者(對手美系三雄 Amphenol/Molex/TE + 中國 Luxshare);「224G 晶片(SerDes/retimer)與 NVLink 背板」幾乎缺席。日韓存在感低,主戰場台 vs 美 vs 中。</li>
-    <li><b>切分:</b>排除光模組/CPO 本體(另一條鏈);與「AI 伺服器整機/機櫃組裝」題交界(那題的 NVLink 銅背板已標台股陪跑、歸本 224G 題深做);PCB midplane 板材歸 CCL 鏈;嘉澤(母)/嘉基(子)同集團勿重複計。</li>
+    <li><b>切分:</b>排除光模組/CPO 本體(另一條鏈);與「AI 伺服器整機/機櫃組裝」題交界(那題的 NVLink 銅背板已標台股陪跑、歸本 224G 題深做);PCB midplane 板材歸 CCL 鏈;UQD 液冷快接頭屬散熱交界元件不計互連分;嘉澤(母)/嘉基(子)同集團勿重複計;太康精密 6833 為興櫃(2021/6/1 興櫃掛牌)且為信邦 57% 子公司,依護欄不入 holds/watch;6913=鴻呈(「維峰 6913」為前輪誤植,維峰電子=深交所 301328.SZ)。</li>
   </ul>
   <div class="g2 grid">
-    <div class="callout warn" style="margin:0"><b>🔍 判斷 1:價值量歸屬之爭——晶片端(美中)vs 實體互連端(台)</b><br>整條 224G 銅互連的價值量在「<b>晶片端</b>」與「<b>實體互連端</b>」之間分配。晶片端(SerDes/PHY+retimer/AEC DSP)=高毛利、純美系壟斷(NVIDIA/Broadcom/Marvell/Credo/Astera),<b>台廠零切入</b>;實體互連端(連接器/線纜組裝/機構)=毛利較低但量大、認證可突破,台廠是重要供應商/挑戰者。AEC 之所以叫「主動」正因把一顆美系 DSP 塞進台廠組裝的線纜裡=兩端價值量綁定。<b>台廠贏在「量」(用量暴增讓實體端營收結構性成長)、難跨進晶片端高毛利區;唯一能往上吃的是貿聯(自有 224G AEC 方案、co-design)。</b></div>
-    <div class="callout info" style="margin:0"><b>🔍 判斷 2:Rubin cableless 是「層級重分配」非全砍(三分歧正解)</b><br>市場易把 Rubin「cableless」誤讀成「砍 NVLink 銅背板」。<b>正解(官方+SemiAnalysis):VR NVL72 有兩層 NVLink 銅互連,cableless 只動其中一層</b>——(A) rack 級 spine(5,184 條銅纜 cartridge)<b>沿用</b>(NVIDIA VR NVL72 官方頁仍載 5,000 銅纜/2 英里);(B) compute-tray/canister 內 flyover 線纜改 PCB midplane+Amphenol Paladin HD2 board-to-board(組裝 2 小時→5 分鐘)。<b>銅纜價值是「層級重分配」非消失:</b>spine 保留、tray 內飛線被 PCB+B2B 連接器吃掉。「Amphenol 被 cableless 殺死」是誤讀(spine 保留+B2B 連接器暴增=雙重受惠)。NVLink6「448G/lane」靠雙向 SerDes(224G TX+224G RX)達成、非真 448G=224G 通道延續、無斷代換料。</div>
+    <div class="callout warn" style="margin:0"><b>🔍 判斷 1:價值量歸屬之爭——晶片端(美中)vs 實體互連端(台)</b><br>整條 224G 銅互連的價值量在「<b>晶片端</b>」與「<b>實體互連端</b>」之間分配。晶片端(SerDes/PHY+retimer/AEC DSP)=高毛利、純美系壟斷(NVIDIA/Broadcom/Marvell/Credo/Astera;Credo 4QFY26 non-GAAP GM 68.3%),<b>台廠幾乎零切入</b>(例外=譜瑞-KY 集團 ACC 類比 $9M 小額);實體互連端(連接器/線纜組裝/機構)=毛利較低(20-50%)但量大、認證可突破,台廠是重要供應商/挑戰者。AEC 之所以叫「主動」正因把一顆美系 DSP 塞進台廠組裝的線纜裡=兩端價值量綁定。<b>台廠贏在「量」(用量暴增讓實體端營收結構性成長)、難跨進晶片端高毛利區;唯一能往上吃的是貿聯(自有 224G AEC 方案、co-design;惟自有規模無第三方拆分⚪)。</b></div>
+    <div class="callout info" style="margin:0"><b>🔍 判斷 2:Rubin cableless 是「層級重分配」非全砍(三分歧正解)</b><br>市場易把 Rubin「cableless」誤讀成「砍 NVLink 銅背板」。<b>正解:VR NVL72 有兩層 NVLink 銅互連,cableless 只動其中一層</b>——(A) rack 級 spine(5,184 條銅纜 cartridge)<b>沿用</b>(Wheeler's Network 2025/11《Decoding Nvidia's Rubin Networking Math》:NVLink6 以雙向 SerDes 倍增頻寬、纜數 5,184 不變沿用 GB300 背板;SemiAnalysis 同判。⚠ 出處更正:VR200 官方產品頁<b>無</b> spine 纜數/2 英里字樣,「5,000+/2 英里」屬 GB200 官方 blog 語言,見被反駁區 ⑧);(B) compute-tray/canister 內 flyover 線纜改 PCB midplane+Amphenol Paladin HD2 board-to-board(44 層 22+22、M9 CCL、約 420×60mm;組裝 2 小時→5 分鐘=郭明錤口徑,StorageReview 稱縮 18 倍、量級一致)。<b>銅纜價值是「層級重分配」非消失:</b>spine 保留、tray 內飛線被 PCB+B2B 連接器吃掉。「Amphenol 被 cableless 殺死」是誤讀(spine 保留+B2B 連接器暴增=雙重受惠;1Q26 IT datacom +99% 實證)。NVLink6「448G/lane」靠雙向 SerDes(224G TX+224G RX)達成、非真 448G=224G 通道延續、無斷代換料。</div>
   </div>
+  <h3>判斷 1 補充:價值分配對照表</h3>
+  <table>
+    <tr><th>環節</th><th>誰捕捉</th><th>毛利對照</th><th>台廠</th></tr>
+    <tr><td>晶片端(SerDes/retimer/AEC DSP)</td><td>NVIDIA/Broadcom/Marvell/Credo/Astera(美)</td><td>Credo non-GAAP GM 68.3%(4QFY26)、Astera GM 76.3%(1Q26)</td><td><span class="conf c-low">幾乎零切入(例外=譜瑞集團 ACC 類比 $9M)</span></td></tr>
+    <tr><td>實體互連端(連接器/線纜組裝)</td><td>Amphenol/Molex/TE(美)+Luxshare(中)+台廠</td><td>台廠連接器 GM 約 20-50%(嘉澤 1Q26 49.55%/嘉基 40%)</td><td><span class="conf c-high">重要供應商/挑戰者(量大利薄)</span></td></tr>
+    <tr><td>唯一能往上吃的台廠</td><td>貿聯(自有 224G AEC、co-design)</td><td>—</td><td><span class="conf c-med">自有方案+Credo 代工並進(自有規模⚪無第三方拆分)</span></td></tr>
+  </table>
 </div>
-
 <!-- 2 -->
 <h2 id="s2"><span class="n">2</span>訊號鏈拆解(SerDes → 背板/midplane)<span class="conf c-high">高信心</span></h2>
-<p class="sub">七環節:① SerDes/PHY 224G → ② retimer/AEC 晶片 → ③ 高速連接器(MCIO/board-to-board)→ ④ AEC/DAC 線纜組裝 → ⑤ NVLink 銅背板(5,184 條)→ ⑥ PCB midplane(Rubin cableless)→ ⑦ scale-out AEC(1→9 條)。<b>台廠 alpha 在 ③④⑦(實體互連端);晶片端 ①② 與銅背板 ⑤ 缺席/陪跑。</b></p>
+<p class="sub">七環節:① SerDes/PHY 224G → ② retimer/AEC 晶片 → ③ 高速連接器(MCIO/board-to-board)→ ④ AEC/DAC 線纜組裝 → ⑤ NVLink 銅背板(5,184 條)→ ⑥ PCB midplane(Rubin cableless)→ ⑦ scale-out AEC(1→9 條機會口徑)。<b>台廠 alpha 在 ③④⑦(實體互連端);晶片端 ①② 與銅背板 ⑤ 缺席/陪跑。</b></p>
 <div class="flow">
   <div class="step"><div class="num">1</div><div class="body">
     <h4>① SerDes/PHY 224G PAM4(晶片內)— 台廠缺席</h4>
-    <p>訊號鏈起點:GPU/Switch/ASIC 內把資料以 PAM4 從晶片 I/O 推出。NVLink5/GB200~GB300 已全面 224G;NVLink6/Rubin 仍 224G/lane 實體 baud,靠「雙向 BiDi SerDes」同通道同時收發達 448G「有效/每電氣通道」。</p>
-    <div class="diff">難點(全鏈最高):224G PAM4 在 28GHz Nyquist 下訊雜比逼極限,需 3nm DSP、極強 FFE/DFE/MLSE 等化、極低抖動 PLL/CDR;BiDi SerDes 要同通道分離自身回波更難。<b>台廠幾乎缺席(無 224G SerDes IP);聯發科 224G SerDes 打入 Google TPU 為唯一台系觸點、TSMC 製造受惠但非連接器鏈本體。</b></div>
-    <div class="who">對應:<span class="tag t-tw">(台廠缺席;聯發科切 Google TPU 為唯一台系觸點)</span> <span class="tag t-intl">NVIDIA(自研/客製)/ Broadcom / Marvell / Credo / Astera / Synopsys·Cadence(IP)</span> <span class="conf c-high">高</span></div>
+    <p>訊號鏈起點:GPU/Switch/ASIC 內把資料以 PAM4 從晶片 I/O 推出。NVLink5/GB200~GB300 已全面 224G;NVLink6/Rubin 仍 224G/lane 實體 baud,靠「雙向 BiDi SerDes」同通道同時收發達 448G「有效/每電氣通道」(每 GPU 3.6TB/s、每櫃 260TB/s)。</p>
+    <div class="diff">難點(全鏈最高):224G PAM4 在 28GHz Nyquist 下訊雜比逼極限,需 3nm DSP、極強 FFE/DFE/MLSE 等化、極低抖動 PLL/CDR;BiDi SerDes 要同通道分離自身回波更難。448G 世代更甚:PAM4 需約 112GHz 類比頻寬、PAM6 約 174GBd/90GHz、PAM8 150GBd/75GHz,銅 reach 縮至數 cm 級(SemiEngineering/OIF)。<b>台廠幾乎缺席(無 224G SerDes IP);聯發科 224G SerDes 打入 Google TPU 為唯一台系觸點、TSMC 製造受惠但非連接器鏈本體。</b></div>
+    <div class="who">對應:<span class="tag t-tw">(台廠缺席;聯發科切 Google TPU 為唯一台系觸點)</span> <span class="tag t-intl">NVIDIA(自研/客製)/ Broadcom / Marvell / Credo / Astera / Synopsys·Alphawave(IP)</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">2</div><div class="body">
-    <h4>② retimer / AEC 晶片(Credo/Marvell 訊號再生)— 台廠缺席</h4>
-    <p>當 channel 插損超過 SerDes 自身等化能力,需在線纜/板上插入 retimer/DSP 把劣化訊號「重新計時+再生」=AEC(主動式電纜)的靈魂:被動 DAC 約 1m→AEC 可達 3~7m。Credo Cardinal=3nm 224G/lane DSP。</p>
-    <div class="diff">難點(極高):retimer DSP 需 224G PAM4 全等化+FEC 互通、低功耗(較 DAC 省約 50% vs AOC 更省)、低延遲;晶片設計+流片門檻=純美系。<b>晶片端台股缺席:Credo(AEC DSP 龍頭,2025/10 約 88%、2026/04 估降至約 70%,Marvell+Astera 侵蝕)、Marvell(Alaska A)主導。台廠只做下游含這顆外購晶片的線纜組裝。</b></div>
-    <div class="who">對應:<span class="tag t-tw">(台廠缺席,吃下游線纜組裝)</span> <span class="tag t-intl">Credo(約 88%→70%)/ Marvell / Astera Labs / Broadcom</span> <span class="conf c-high">高</span></div>
+    <h4>② retimer / AEC 晶片(Credo/Marvell 訊號再生)— 台廠幾乎缺席</h4>
+    <p>當 channel 插損超過 SerDes 自身等化能力,需在線纜/板上插入 retimer/DSP 把劣化訊號「重新計時+再生」=AEC(主動式電纜)的靈魂:被動 DAC 約 1m→AEC 可達 3~7m。Marvell Alaska A=業界首款 1.6T PAM4 AEC DSP(5nm、8×200G lanes、reach >3m)。</p>
+    <div class="diff">難點(極高):retimer DSP 需 224G PAM4 全等化+FEC 互通、低功耗(較 AOC 省約 50%)、低延遲;晶片設計+流片門檻=純美系。<b>晶片端台股幾乎缺席:Credo(AEC DSP 龍頭,650 Group 口徑 73–88% 區間〔2025〕;FY2026 營收 $13.35 億 +205.7%、4Q $4.37 億 +157%;「→70%」侵蝕說⚪無具名更新)、Marvell(Alaska A+Golden Cable 倡議)、Astera(Taurus,1Q26 +93%)。例外:譜瑞-KY 4966 集團 2025/4 以 $9M 購 Spectra7 ACC 類比資產=「AEC DSP 缺席、ACC 類比小額入列」口徑修正,規模不足撐評分。台廠只做下游含這顆外購晶片的線纜組裝。</b></div>
+    <div class="who">對應:<span class="tag t-tw">譜瑞-KY 4966 集團(ACC 類比,$9M 小額)</span> <span class="tag t-intl">Credo(73–88% 區間)/ Marvell / Astera Labs / Broadcom / Parade(ex-Spectra7)/ MaxLinear</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">3</div><div class="body">
     <h4>③ 高速連接器(MCIO/board-to-board/PCIe Gen6 插槽)⭐ 台廠最有地位</h4>
-    <p>把 224G 訊號在板對板、板對線纜、模組對機箱做可插拔/盲插連接:近封裝 MCIO、board-to-board(Amphenol Paladin HD2,Rubin midplane 盲插)、QSFP-DD/OSFP 模組殼、PCIe Gen6 插槽/CPU socket。</p>
-    <div class="diff">難點(中高):224G 連接器要控阻抗連續性、壓低插損/回波、抑制串擾與共模噪訊、機械盲插對位公差;趨膚效應使表面鍍層、接觸電阻關鍵。<b>但門檻低於晶片、台廠可透過認證切入:宏致 MCIO pure-play(獲兩家 CSP ASIC 訂單)、嘉澤 CPU/GPU socket+PCIe 插槽+UQD、宣德 MCIO 二線。</b></div>
-    <div class="who">對應:<span class="tag t-tw">宏致 3605(MCIO)/ 嘉澤 3533(socket/插槽/UQD)/ 宣德 5457(MCIO 二線)</span> <span class="tag t-intl">Amphenol(Paladin HD2)/ Molex / TE / 鴻騰 FIT(港股)</span> <span class="conf c-high">高</span></div>
+    <p>把 224G 訊號在板對板、板對線纜、模組對機箱做可插拔/盲插連接:近封裝 MCIO、board-to-board(Amphenol Paladin HD2,VR200 midplane 盲插)、QSFP-DD/OSFP 模組殼、PCIe Gen6 插槽/CPU socket。</p>
+    <div class="diff">難點(中高):224G 連接器要控阻抗連續性、壓低插損/回波、抑制串擾與共模噪訊、機械盲插對位公差;趨膚效應使表面鍍層、接觸電阻關鍵。<b>但門檻低於晶片、台廠可透過認證切入:宏致 MCIO pure-play(獲至少 2 家 CSP 訂單;2026/06 營收 +29.81% 首個加速月)、嘉澤 CPU/GPU socket+PCIe 插槽、宣德 MCIO 二線(H1 營收 −2.2% 未反映)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">宏致 3605(MCIO)/ 嘉澤 3533(socket/插槽)/ 宣德 5457(MCIO 二線)</span> <span class="tag t-intl">Amphenol(Paladin HD2/CMIO)/ Molex / TE(AdrenaLINE)/ 鴻騰 FIT(港股)/ ACES</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">4</div><div class="body">
     <h4>④ AEC/DAC 線纜組裝(主動式/被動式銅纜)⭐ 台廠有自有方案</h4>
-    <p>把銅纜(同軸/雙軸 twinax)兩端接上連接器+(AEC 則加 retimer DSP)組裝成可用線纜。DAC=純被動(最省電/便宜、距離短約 1m);AEC=銅纜+兩端 DSP(延伸 3~7m、較 DAC 省電 vs AOC 便宜),scale-out 短中距甜蜜點。</p>
-    <div class="diff">難點(中高):224G twinax 要控介電損耗、屏蔽抑串擾、端接阻抗連續性、彎折下 SI 穩定;AEC 還要整合外購 retimer DSP 做 co-design+平台認證。組裝門檻低於晶片。<b>貿聯=Credo AEC 主要/唯一第三方代工製造商(Credo 10-K 級硬佐證)、且自有 224G AEC 量產(公司自述);嘉基/宏致 800G AEC 切入。晶片外購 Credo/Marvell。</b></div>
-    <div class="who">對應:<span class="tag t-tw">貿聯-KY 3665(Credo AEC 代工霸主+自有方案)/ 嘉基 6715 / 宏致 3605</span> <span class="tag t-intl">Amphenol / Luxshare 立訊(中)/ Molex</span> <span class="conf c-high">高</span></div>
+    <p>把銅纜(同軸/雙軸 twinax)兩端接上連接器+(AEC 則加 retimer DSP)組裝成可用線纜。DAC=純被動(最省電/便宜、距離短約 1m;LightCounting:2029 仍佔高速線出貨量 50%);AEC=銅纜+兩端 DSP(延伸 3~7m),scale-out 短中距甜蜜點,ASP $300-500/條(CNBC)。</p>
+    <div class="diff">難點(中高):224G twinax 要控介電損耗、屏蔽抑串擾、端接阻抗連續性、彎折下 SI 穩定;AEC 還要整合外購 retimer DSP 做 co-design+平台認證。組裝門檻低於晶片。<b>Credo 10-K 揭露 AEC 製造夥伴兩家:貿聯 BizLink(主供)+正崴 Cheng Uei/Foxlink(第二源)——「獨家代工」不成立、窄化為「主要製造夥伴之一(主供)」;貿聯另有自有 224G AEC 量產(公司自述;⚪「1.6T 年出貨破千萬支」未驗證,保守口徑=2H26 小量產、2027 放量)。嘉基/宏致 800G AEC 切入。晶片外購 Credo/Marvell。</b></div>
+    <div class="who">對應:<span class="tag t-tw">貿聯-KY 3665(Credo 主供+自有)/ 正崴 2392(10-K 第二源)/ 嘉基 6715 / 宏致 3605</span> <span class="tag t-intl">Amphenol / Luxshare 立訊(中)/ Molex</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">5</div><div class="body">
     <h4>⑤ NVLink scale-up 銅背板 / cable cartridge(5,184 條)— 台股陪跑</h4>
-    <p>NVL72 機櫃內把 72 顆 GPU 以 NVLink 全互連的 rack-scale 銅背板/spine。GB200/GB300 用 cable cartridge 裝 5,184 條被動同軸銅纜(NVIDIA 官方),走 NVSwitch 托盤間=scale-up 銅互連核心、Amphenol 獨大戰場。</p>
-    <div class="diff">難點(高):5,184 條 224G 被動銅纜在密集機櫃內要全數通過插損/串擾/SI 預算,線徑/屏蔽/彎折半徑/cartridge 機構盲插全是 know-how;被動(無 retimer)更吃 channel budget、容錯極低。<b>台股基本陪跑:Amphenol 獨大、Luxshare 立訊二供、Molex/TE 有 224G 方案;鴻騰 FIT 在港股(非台股本體)。Rubin spine 沿用銅纜(見區塊 5)。</b></div>
-    <div class="who">對應:<span class="tag t-tw">(台股上市缺席/陪跑;鴻騰 FIT 在港股)</span> <span class="tag t-intl">Amphenol(獨大)/ Luxshare 立訊(二供)/ Molex / TE</span> <span class="conf c-high">高</span></div>
+    <p>NVL72 機櫃內把 72 顆 GPU 以 NVLink 全互連的 rack-scale 銅背板/spine。GB200 用 4 組 cable cartridge 裝 5,184 條被動同軸銅纜(1,296 埠×4 對,SemiAnalysis;官方 blog 約 5,000+/2 英里/省 20kW);GB300 沿用 cartridge backplane(Lenovo 產品指南:18 compute tray+9 switch tray);多櫃擴展 NVL36x2 另需 DensiLink flyover 纜 324 條、每套 >$10,000(SemiAnalysis)。</p>
+    <div class="diff">難點(高):5,184 條 224G 被動銅纜在密集機櫃內要全數通過插損/串擾/SI 預算,線徑/屏蔽/彎折半徑/cartridge 機構盲插全是 know-how;被動(無 retimer)更吃 channel budget、容錯極低;SemiAnalysis 估背板組件成本「每板數千美元」且主要在連接器(防串擾)而非線材。<b>台股基本陪跑:Amphenol 實質主供(現貨市場流通 cartridge 實物均其料號)、Luxshare 爭取中⚪、TE 為推估備援;鴻騰 FIT 在港股(非台股本體)。VR200 spine 沿用銅纜(見區塊 5)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">(台股上市缺席/陪跑;鴻騰 FIT 在港股)</span> <span class="tag t-intl">Amphenol(主供)/ Luxshare 立訊(爭取中)/ Molex / TE</span> <span class="conf c-high">高</span></div>
   </div></div>
   <div class="step"><div class="num">6</div><div class="body">
     <h4>⑥ PCB midplane(Rubin cableless、Paladin board-to-board)— 線纜端受損/PCB 受惠</h4>
-    <p>Rubin「cableless」的真身:把 GB200/GB300 compute-tray 內承載 Ethernet+PCIe 訊號的 flyover 線纜改成 PCB midplane+Amphenol Paladin HD2 盲插 B2B 連接器(PCIe Gen6 over PCB)。Jensen(CES 2026)稱 compute-tray 組裝 2 小時→5 分鐘(18-20×)。</p>
-    <div class="diff">難點(高且偏 PCB/CCL):約 500mm PCB 走線承載 PCIe Gen6,要極低介電損耗→CCL 從 M7/M8 升 M8/M9、銅箔 HVLP2→HVLP4、玻纖考慮石英;板面積 GB300→VR NVL72 約 ×2.3。<b>門檻轉移到高階 CCL/HVLP/PCB(歸 CCL 鏈、台光電/聯茂/台燿受惠);連接器端 Amphenol 主導、台廠 B2B 著墨少;tray 內短距線纜組裝(貿聯/嘉基)在此微環節受損,但 scale-out 補回。</b></div>
-    <div class="who">對應:<span class="tag t-tw">(連接器端著墨少;PCB/CCL 受惠歸 CCL 題:台光電 2383/聯茂 6213/台燿 6274)</span> <span class="tag t-intl">Amphenol(Paladin HD2 B2B)/ Molex / TE</span> <span class="conf c-med">中</span></div>
+    <p>Rubin「cableless」的真身:把 GB200/GB300 compute-tray 內承載 Ethernet+PCIe 訊號的 flyover 線纜改成 PCB midplane+Amphenol Paladin HD2 盲插 B2B 連接器(訊號路徑:Strata 模組↔midplane↔daughter modules,Paladin HD2×2 段;SemiAnalysis《Vera Rubin – Extreme Co-Design》)。midplane 規格:44 層(22+22)、M9 CCL(EM896K3)、約 420×60mm(郭明錤,CES 2026 後);組裝 2 小時→5 分鐘(StorageReview 稱縮 18 倍,量級一致)。</p>
+    <div class="diff">難點(高且偏 PCB/CCL):約 420×60mm、44 層板承載 PCIe Gen6 等訊號,要極低介電損耗 M9 級 CCL+HVLP 銅箔。<b>門檻轉移到高階 CCL/HVLP/PCB(歸 CCL 鏈,供應商名單未逐項佐證、不列名不雙計);連接器端 Amphenol Paladin HD2 主導(與 112G 版共用介面、1U 支援 144 對)、台廠 B2B 著墨少;tray 內短距線纜組裝在此微環節受損,但 scale-out 補回。</b></div>
+    <div class="who">對應:<span class="tag t-tw">(連接器端著墨少;PCB/CCL 受惠歸 CCL 題不列名)</span> <span class="tag t-intl">Amphenol(Paladin HD2 B2B,in-design)/ Molex / TE</span> <span class="conf c-med">中</span></div>
   </div></div>
   <div class="step"><div class="num">7</div><div class="body">
-    <h4>⑦ scale-out rack 間互連(AEC 1→9 條/伺服器)⭐ 最大受惠環節</h4>
-    <p>機櫃之間(scale-out,跨 rack 的 Ethernet/InfiniBand fabric)用 AEC/DAC/AOC 互連。AI 訓練叢集橫向擴張使每伺服器 scale-out 線纜從約 1 條暴增到 9 條(650 Group/CNBC);短中距優先用 AEC、超距才上 AOC。</p>
-    <div class="diff">難點(中):同 ④(224G AEC 組裝+整合 retimer DSP+平台認證),外加 scale-out 拓樸下的長度/良率/一致性管理;晶片(retimer)仍外購美系。<b>是 Rubin 世代台廠線纜組裝「淨受惠」最確定處——cableless 只動 tray 內、不影響 rack 間互連,故 scale-out 1→9 條可抵銷 ⑥ tray 內被砍的價值量。為貿聯/嘉基/宏致 AI 成長主引擎。</b></div>
-    <div class="who">對應:<span class="tag t-tw">貿聯-KY 3665 / 嘉基 6715 / 宏致 3605(800G AEC)</span> <span class="tag t-intl">Amphenol / Luxshare 立訊(中)/ Credo·Marvell(晶片)</span> <span class="conf c-high">高</span></div>
+    <h4>⑦ scale-out rack 間互連(AEC 機會密度 1→9 條/伺服器)⭐ 最大受惠環節</h4>
+    <p>機櫃之間(scale-out,跨 rack 的 Ethernet/InfiniBand fabric)用 AEC/DAC/AOC 互連。AI 訓練叢集橫向擴張使每伺服器 scale-out 線纜機會從約 1 條增到 9 條(650 Group Weckel 原話 "…now Credo's opportunity is nine cables per server",CNBC 2025/10/17;機會口徑非實際配置);短中距優先用 AEC、超距才上 AOC。650 Group:AEC 線纜市場 $6.44 億(2025)→$14 億(2029)。</p>
+    <div class="diff">難點(中):同 ④(224G AEC 組裝+整合 retimer DSP+平台認證),外加 scale-out 拓樸下的長度/良率/一致性管理;晶片(retimer)仍外購美系。<b>是 Rubin 世代台廠線纜組裝「淨受惠」最確定處——cableless 只動 tray 內、不影響 rack 間互連,故 scale-out 放量可抵銷 ⑥ tray 內被砍的價值量。為貿聯(6 月營收 85.18 億新高)/正崴/宏致 AI 成長主引擎;1.6T AEC 2026-27 接棒(Marvell DSP ready、Luxshare demo)。</b></div>
+    <div class="who">對應:<span class="tag t-tw">貿聯-KY 3665 / 正崴 2392 / 宏致 3605(800G AEC)/ 嘉基 6715</span> <span class="tag t-intl">Amphenol / Luxshare 立訊(中)/ Credo·Marvell·Astera(晶片)</span> <span class="conf c-high">高</span></div>
   </div></div>
 </div>
 
@@ -175,148 +188,324 @@
 <p class="sub">難度維度:技術門檻 / 晶片依賴 / 規模·認證壁壘 / 台廠進入難度,各 0~5 分(5＝最難/最被卡)。⚠ <b>本題特殊:台廠 alpha 在難度「較低」的實體互連端(③④⑦);難度最高的晶片端(①②)與銅背板(⑤)台廠缺席/陪跑。</b>評分為推估。</p>
 <table>
   <tr><th>訊號鏈環節</th><th>技術門檻</th><th>晶片依賴</th><th>規模認證壁壘</th><th>台廠進入難度</th><th>總分/20</th><th>台廠位置</th></tr>
-  <tr><td><b>① SerDes/PHY 224G</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>缺席(無 224G SerDes IP)</td></tr>
-  <tr><td><b>② retimer/AEC 晶片</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>缺席(Credo/Marvell/Astera 美系壟斷)</td></tr>
-  <tr><td><b>⑤ NVLink 銅背板(5,184 條)</b></td><td>5</td><td>3</td><td>5</td><td>5</td><td><b>18</b></td><td>陪跑(Amphenol 獨大、Luxshare 二供;FIT 港股)</td></tr>
+  <tr><td><b>① SerDes/PHY 224G</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>缺席(無 224G SerDes IP;聯發科切 Google TPU 唯一觸點)</td></tr>
+  <tr><td><b>② retimer/AEC 晶片</b></td><td>5</td><td>5</td><td>5</td><td>5</td><td><b>20</b></td><td>幾乎缺席(Credo/Marvell/Astera 美系壟斷;譜瑞 ACC $9M 例外)</td></tr>
+  <tr><td><b>⑤ NVLink 銅背板(5,184 條)</b></td><td>5</td><td>3</td><td>5</td><td>5</td><td><b>18</b></td><td>陪跑(Amphenol 主供、Luxshare 爭取中;FIT 港股)</td></tr>
   <tr><td>⑥ PCB midplane(cableless)</td><td>4</td><td>3</td><td>4</td><td>4</td><td><b>15</b></td><td>連接器陪跑/PCB 受惠(歸 CCL 鏈)</td></tr>
   <tr><td>③ 高速連接器 MCIO/B2B ⭐</td><td>3</td><td>2</td><td>3</td><td>3</td><td><b>11</b></td><td>挑戰者(宏致/嘉澤/宣德可切入)</td></tr>
-  <tr><td>④ AEC/DAC 線纜組裝 ⭐</td><td>2</td><td>3</td><td>2</td><td>3</td><td><b>10</b></td><td>重要供應商(貿聯自有方案+Credo 代工)</td></tr>
-  <tr><td>⑦ scale-out AEC ⭐</td><td>2</td><td>3</td><td>2</td><td>2</td><td><b>9</b></td><td>淨受惠(1→9 條放量、cableless 不影響)</td></tr>
+  <tr><td>④ AEC/DAC 線纜組裝 ⭐</td><td>2</td><td>3</td><td>2</td><td>3</td><td><b>10</b></td><td>重要供應商(貿聯主供+正崴第二源,10-K)</td></tr>
+  <tr><td>⑦ scale-out AEC ⭐</td><td>2</td><td>3</td><td>2</td><td>2</td><td><b>9</b></td><td>淨受惠(1→9 條機會口徑放量、cableless 不影響)</td></tr>
 </table>
-<div class="callout"><b>台廠的位置(關鍵):</b>台廠 alpha 在 <b>③④⑦(連接器+線纜組裝,難度較低、量大、可切入)</b>;難度最高的 <b>①② 晶片端與 ⑤ 銅背板台廠缺席/陪跑</b>。即「題材真實、用量暴增,但台廠吃的是量大利薄的實體互連端,晶片端高毛利區吃不到」。⑥ PCB midplane 受惠主體在高階 CCL/HVLP(歸 CCL 鏈)。</div>
+<div class="callout"><b>台廠的位置(關鍵):</b>台廠 alpha 在 <b>③④⑦(連接器+線纜組裝,難度較低、量大、可切入)</b>;難度最高的 <b>①② 晶片端與 ⑤ 銅背板台廠缺席/陪跑</b>。即「題材真實、用量暴增,但台廠吃的是量大利薄的實體互連端,晶片端高毛利區吃不到」(Credo GM 68.3% vs 台廠連接器 20-50%)。⑥ PCB midplane 受惠主體在高階 CCL/HVLP(歸 CCL 鏈)。448G 世代警訊:價值進一步向晶片/基板端移動,台股 448G 公開產品/demo 為 0 件(國際 4 家已 demo/驗證)。</div>
 <h3>公司受惠強度評分(報酬,含環節釐清)</h3>
-<p class="sub">維度:AI互連受惠 / 技術卡位 / 放量時程 / 利基壁壘·挑戰者份額 / 規模財務,各 0~5 分;總分由高到低。型態:AEC 線纜組裝/MCIO 連接器/CPU socket·插槽/概念股。評分為推估,非投資建議。</p>
+<p class="sub">維度:AI互連受惠 / 技術卡位 / 放量時程 / 利基壁壘·挑戰者份額 / 規模財務,各 0~5 分;總分由高到低。型態:AEC 線纜組裝/MCIO 連接器/CPU socket·插槽/概念股。宣德(概念/早期送樣、6 月僅 +3.0%)與 watch 圈(佳必琪等,見區塊 4 反駁表)不列評分;佳必琪不列評分理由=AI 佔比為公司自述且 224G 訊號佔比未拆分,升格需料號級佐證。評分為推估,非投資建議。</p>
 <table>
   <tr><th>公司(股號)</th><th>型態</th><th>AI受惠</th><th>技術卡位</th><th>放量時程</th><th>利基壁壘</th><th>規模財務</th><th>總分/25</th><th>查證</th></tr>
   <tr><td>貿聯-KY 3665</td><td>AEC 線纜組裝(scale-out)</td><td>5</td><td>4</td><td>4</td><td>4</td><td>5</td><td><b>22</b></td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>嘉澤 3533</td><td>CPU socket·插槽·UQD(平台龍頭)</td><td>4</td><td>5</td><td>4</td><td>4</td><td>5</td><td><b>22</b></td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>嘉澤 3533</td><td>CPU socket·插槽(平台龍頭)</td><td>4</td><td>5</td><td>4</td><td>4</td><td>5</td><td><b>22</b></td><td><span class="conf c-high">高</span></td></tr>
   <tr><td>宏致 3605</td><td>MCIO 連接器(挑戰者)</td><td>4</td><td>3</td><td>3</td><td>4</td><td>3</td><td><b>17</b></td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>嘉基 6715</td><td>AEC 線材(嘉澤子,勿重複計)</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td><b>15</b></td><td><span class="conf c-med">中</span></td></tr>
-  <tr><td>宣德 5457</td><td>概念股(MCIO 二線/早期送樣)</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td><b>10</b></td><td><span class="conf c-un">待查</span></td></tr>
+  <tr><td>嘉基 6715</td><td>AEC 線材(嘉澤子,勿重複計)</td><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td><td><b>15</b></td><td><span class="conf c-med">中(⚠ 動能已被月營收反駁)</span></td></tr>
+  <tr><td>宣德 5457</td><td>概念股(MCIO 二線/早期送樣)</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td><b>不列評分</b></td><td><span class="conf c-un">待查</span></td></tr>
 </table>
-<p class="sub"><b>貿聯</b>=scale-out AEC 線纜組裝霸主(Credo AEC 主要/唯一第三方代工=10-K 硬佐證 + 自有 224G AEC 量產;1Q26 EPS 11.66、1.6T 研發、800V HVDC 線束);<b>嘉澤</b>=連接器平台龍頭、規模財務最強(全球前三大 CPU socket、伺服器營收 1Q26 破 5 成、GPU socket 爭 B300 二供、UQD 出貨逾 1 萬顆;⚠ NVIDIA 占比 2%→5-8% 為公司自述、與嘉基同集團);<b>宏致</b>=MCIO pure-play 挑戰者份額故事最強(市佔 1%→10% 法人估、2Q26 量產;⚠ 但 1Q26 EPS 僅 0.67 年減 51%=AI 動能尚未反映當期);<b>嘉基</b>=嘉澤子公司(動能與母重疊、壓抑勿雙計);<b>宣德</b>=MCIO 二線(2026/04 法說自列主力為工控/遊戲機/低軌衛星、AI MCIO 僅送樣=概念早期)。受惠評分為推估,僅供參考。</p>
+<p class="sub"><b>貿聯</b>=scale-out AEC 線纜組裝主力(Credo AEC 主要製造夥伴〔10-K 硬佐證,正崴第二源〕+自有 224G AEC 量產〔自述〕;<b>2026/06 營收 85.18 億歷史新高 +63.79%、2Q26 232.53 億 +37.3%、H1 441.11 億 +33.97%</b>;Interplex Datacom〔EV $8.5 億,2H26 交割〕+新富生光電〔$4,600 萬,已併表〕雙收購);<b>嘉澤</b>=連接器平台龍頭、規模財務最強(1Q26 伺服器營收占比首破 50%、年增 60%;6 月 +17.3%、H1 +17.2% 符合全年 +15% 目標;⚠ NVIDIA 占比 2%→5-8%〔至低雙位數,口徑分歧〕為公司自述、與嘉基同集團);<b>宏致</b>=MCIO pure-play 挑戰者份額故事最強(市佔 1%→10% 公司自述+法人估、MCIO 無第三方研調分母;<b>6 月 +29.81% 首個加速月</b>;⚠ 1Q26 EPS 僅 0.67 年減 51%=獲利兌現待 8 月 2Q26 財報);<b>嘉基</b>=嘉澤子公司(⚠⚠ 4-6 月營收連三月年減 −11.6%/−26.0%/−9.2%、2Q26 季減約 19%——「高階模組上半年放量」被月營收反駁,動能下修;「放量時程 3 分」屬產品升級口徑、2Q26 財報若再弱應下修);<b>宣德</b>=MCIO 二線(6 月僅 +3.0%、H1 −2.2%;2026/04 法說自列主力為工控/遊戲機/低軌衛星=概念早期,不列評分)。受惠評分為推估,僅供參考。</p>
 
 <!-- 4 -->
-<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照</h2>
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照 ＋ watch 反駁清單</h2>
 <div class="legend">
-  <span><span class="conf c-high">高</span> NVIDIA 官方/10-K/法說</span>
+  <span><span class="conf c-high">高</span> NVIDIA 官方/10-K/SEC/法說</span>
   <span><span class="conf c-med">中</span> 研調/公司自述/法人估</span>
-  <span><span class="conf c-un">待查</span> 概念/早期送樣(不否定)</span>
+  <span><span class="conf c-un">待查/⚪</span> 概念/早期送樣/未驗證(不否定)</span>
 </div>
-<h3>台廠 × 角色對照(依環節)</h3>
+<h3>台廠 × 角色對照(holds 五檔,含 2026/06 月營收)</h3>
 <table>
-  <tr><th>公司(股號)</th><th>型態</th><th>角色 / 最新數字</th><th>查證</th></tr>
-  <tr><td>貿聯-KY 3665(上市)</td><td>AEC 線纜組裝(scale-out)</td><td>AI 電氣銅互連 scale-out 端最具實質地位之台廠。<b>Credo 10-K 揭露貿聯為 Credo AEC 之主要/唯一第三方代工製造商</b>(殼體/原始線纜/組裝;Foxlink 二供)=Credo 88% AEC 晶片背後的線纜組裝主力;另自有 224G 電纜已量產、400G AEC 放量、1.6T 研發中(公司自述)。1Q26 營收 208.6 億、EPS 11.66(處新舊交替陣痛期);COMPUTEX 2026 展 800V/110kW HVDC、1.6T 銅纜、CPC/CPO 線材</td><td><span class="conf c-high">高(代工霸主);自有方案部分自述</span></td></tr>
-  <tr><td>嘉澤 3533(上市)</td><td>CPU socket·插槽·UQD(平台龍頭)</td><td>連接器平台龍頭、規模財務最強。1Q26 營收 93.28 億創高、伺服器業務年增約 60%、<b>伺服器營收占比首破 50%</b>;GPU socket(LGA)客戶驗證中、爭 NVIDIA B300 插槽二供、UQD 已出貨逾 1 萬顆並推進 MP Ready、CPU socket 針腳 2027 由 5,000→7,000+ 帶 ASP +15%。⚠ NVIDIA 占比 2%→5-8% 為公司自述;EPS 95 元為法人估、低可信;與嘉基同集團</td><td><span class="conf c-high">高(平台地位);占比為自述</span></td></tr>
-  <tr><td>宏致 3605(上市)</td><td>MCIO 連接器(挑戰者)</td><td>MCIO 連接器最大台股 pure-play、挑戰者份額故事最強。法人估 MCIO 市佔 2024 約 1%→2025 約 10%(目標 20%)、營收貢獻約 4.3 億;獲多家 CSP/ODM 認證、MCIO 線材 2Q26 大量出貨、800G AEC 為 2026-27 雙引擎。⚠ <b>但 1Q26 EPS 僅 0.67(季減 20%/年減 51%)=AI 動能屬法人預估、尚未反映當期 EPS</b>;市佔 1%→10% 為公司自述+法人估、缺第三方研調</td><td><span class="conf c-med">中(份額自述/法人估)</span></td></tr>
-  <tr><td>嘉基 6715(上市)</td><td>AEC 線材(嘉澤子公司)</td><td>嘉澤(3533)子公司(母為嘉澤端子、集團持股近五成),下游模組/線材廠,與嘉澤、佳必琪同列 NVIDIA 次世代(Vera Rubin)平台供應鏈名單;客製化高階連接模組 2026 上半起放量、全球少數獲 Intel TBT5 認證、800G LPO 進美系驗證。⚠⚠ <b>與嘉澤同集團、動能高度重疊,評分已壓抑以避免雙計</b>;AEC/DAC 逐項自製、JPC 具體料號、CPO 線材試產時程未見獨立佐證(列名≠逐料號)</td><td><span class="conf c-med">中(列名;與嘉澤勿雙計)</span></td></tr>
-  <tr><td>宣德 5457(上市)</td><td>(觀察)概念股/MCIO 二線</td><td>MCIO 二線挑戰者、目前偏概念。2025/08 法說宣布切 AI 用 MCIO、已送樣、2026 期望大量出貨。⚠ <b>但 2026/04 最新法說自陳主要成長動能為工控/遊戲機組裝/既有連接器/低軌衛星——AI MCIO 並非當前領銜動能、未成實質營收引擎</b>=歸概念/早期送樣;2026 全年目標年增約 20%(公司目標)</td><td><span class="conf c-un">待查(概念/早期送樣)</span></td></tr>
+  <tr><th>公司(股號)</th><th>型態</th><th>角色 / 最新數字(2026/07 刷新)</th><th>查證</th></tr>
+  <tr><td>貿聯-KY 3665(上市)</td><td>AEC 線纜組裝(scale-out)</td><td>AI 電氣銅互連 scale-out 端最具實質地位之台廠。<b>Credo 10-K 揭露 BizLink 為其 AEC 主要製造夥伴(Development and Manufacturing Agreement,涵蓋外殼/原纜/組裝;正崴 Cheng Uei/Foxlink 為第二源——「獨家」不成立)</b>;自有 224G AEC 量產、800G AEC 自 2Q25 量產(公司自述);⚪「1.6T 年出貨破千萬支」僅投顧轉述未驗證(保守口徑=2H26 小量產、2027 放量)。<b>2026/06 營收 85.18 億歷史新高(+63.79% YoY、+15.86% MoM,超越 1 月前紀錄 74.55 億);2Q26 逐月走高(5 月 73.52 億 +41.35%→6 月 85.18 億),單季 232.53 億(+37.3%)續創新高;H1 441.11 億(+33.97%)</b>=全年千億目標達成率 44.1%、需 H2 加速;HPC+半導體佔比 >51%(3Q25)。收購雙軌:Interplex Datacom(EV $8.5 億+或有 $5,000 萬≈NT$287 億;TTM 營收 $3.92 億;2H26 交割;2026/6/11 宣布)+新富生光電(MPO/跳線,$4,600 萬,2026/1/5 併表);台南 shuffle box 產線 2H26。COMPUTEX 2026 展 MGX 生態 AEC/DAC、224G CPC、448G/lane、PCIe Gen6/7、800V HVDC(公司新聞稿)。法人:廣發初評目標價 3,400 元/2026-2028 EPS 74.7/121.4/177 元(2026/05/12);另一彙整口徑 2026E 66.6 元——兩機構分開標、均非財測</td><td><span class="conf c-high">高(代工主供 10-K);自有方案自述</span></td></tr>
+  <tr><td>嘉澤 3533(上市)</td><td>CPU socket·插槽(平台龍頭)</td><td>連接器平台龍頭、規模財務最強。1Q26 營收 93.28 億創高(+20.1%)、EPS 21.37 元(+5%)、<b>伺服器營收占比首破 50%(年增 60%)</b>、毛利率 49.55%(原料壓力,Q2 預期持平、H2 隨新品改善);<b>2026/06 營收 30.94 億(+17.3%);H1 189.11 億(+17.2%)符合全年 +15% 目標</b>;法說指引 H2 伺服器出貨較上半年至少 +15%;SOCAMM 連接器 2026H2 出貨;AMD SP7/Intel Oak Stream 腳位增帶 ASP 至少 +15%。NVIDIA 曝險量化:2025 約 2%→2026E 5-8%(另一說 Rubin 放量後至低雙位數,口徑分歧、均自述);QD(UQD+NVQD)2025 僅約 1 萬顆、2Q26 起量產——⚠ UQD 屬液冷交界元件歸散熱鏈不計互連分,且 Stäubli UQD/MQD 依 NVIDIA 規格相容 VR200、入 NVIDIA 推薦供應商清單(官方稿)=非獨佔。capex 2026E 25-30 億、越南產能佔比 7%→15%。⚠ 與嘉基同集團勿雙計(法說分工:嘉基 CPO 線材/嘉澤 NPO socket 2027)</td><td><span class="conf c-high">高(平台地位);占比為自述</span></td></tr>
+  <tr><td>宏致 3605(上市)</td><td>MCIO 連接器(挑戰者)</td><td>MCIO 連接器最大台股 pure-play、挑戰者份額故事最強。MCIO 市佔 1%→10%(目標 20%)、單一 ODM/OEM 滲透率 30-40%=<b>公司自述+法人估,MCIO 子市場無任何第三方研調分母</b>;產能帶時點:2025 底 200 萬顆/月→2026 擴至約 500 萬顆/月、高速線材 2Q26 量產(約 20 萬條/月);新世代介面單價 $1.5-3 vs 傳統 $0.1(MoneyDJ);AI 伺服器每主板高速連接器 15→20-25 顆(公司口徑);獲至少 2 家 CSP 訂單;AI 產品佔比目標 40%(高速線 20%+連接器 20%)。<b>2026/06 營收 11.18 億(+29.81%)——年增率由 4 月 +16.5%/5 月 +15.3% 跳升=MCIO 2Q26 量產首個月營收兌現訊號;H1 61.72 億(+15.05%)</b>。⚠ <b>1Q26 EPS 僅 0.67 元(季減 20%/年減 51%)、稅後淨利 1.07 億(年減 47%)=獲利兌現待 8 月 2Q26 財報</b>;法人估 2026 營收 130 億/EPS 6 元隱含下半年獲利跳升、執行風險高(非財測)</td><td><span class="conf c-med">中(份額自述/法人估)</span></td></tr>
+  <tr><td>嘉基 6715(上櫃)</td><td>AEC 線材(嘉澤子公司)</td><td>嘉澤(3533)子公司,下游模組/線材廠。<b>⚠⚠ 動能下修(裁決性修正):2026 年 4-6 月營收連三月年減(1.64 億 −11.58%/1.19 億 −26.01%/1.31 億 −9.2%,6 月為彙整站數據、MOPS 公告為準),2Q26 約 4.14 億、季減約 19%——「客製化高階連接模組 2026 上半放量」與月營收背離、不成立</b>。產品升級是真:1Q26 營收 5.10 億(+17%)、毛利率 40%(去年同期 35%)、EPS 1.02 元(季增 62%);Thunderbolt 5 被動線材 2026/6/9 法說宣布量產;全球少數獲 Intel TBT5 認證。CPO 線材選擇權在 2027 後(嘉澤法說分工)。與嘉澤同集團、動能高度重疊,評分已壓抑以避免雙計;月營收規模僅 1.2-1.9 億、與 224G 題材距離遠;AEC/DAC 逐項自製與具體料號未見獨立佐證(列名≠逐料號)</td><td><span class="conf c-med">中(列名;動能被月營收反駁)</span></td></tr>
+  <tr><td>宣德 5457(上櫃)</td><td>(觀察)概念股/MCIO 二線</td><td>MCIO 二線挑戰者、目前偏概念。2025/08 法說宣布切 AI 用 MCIO、已送樣。⚠ <b>2026/06 營收 17.45 億僅 +2.95%(月減 1.6%);H1 106.11 億年減 2.2%(TechNews 2026/07/09)——上半年整體衰退、AI MCIO 非主要動能獲月營收數據支持</b>;2026/04 法說自陳主力=工控/遊戲機組裝/低軌衛星;2026 全年目標年增約 20%(公司目標)。上櫃(5457.TWO)掛牌合格、維持 watch 不升格</td><td><span class="conf c-un">待查(概念/早期送樣)</span></td></tr>
 </table>
-<p class="sub">⚠ 股號核對(皆上市):貿聯-KY 3665、嘉澤 3533、嘉基 6715、宏致 3605、宣德 5457;<b>鴻騰 FIT 6088 為港股(鴻海系)、台股吃不到</b>(僅鴻海 2317 間接持股);聯發科 224G SerDes 打入 Google TPU 為唯一台系晶片觸點(歸 ASIC 題)。PCB midplane 板材受惠台光電 2383/聯茂 6213/台燿 6274(歸 CCL 鏈、不在本題評)。</p>
+<p class="sub">⚠ 股號/掛牌核對:貿聯-KY 3665(上市)、嘉澤 3533(上市)、宏致 3605(上市)、嘉基 6715(上櫃)、宣德 5457(上櫃)、佳必琪 6197(上市)、信邦 3023(上市)、凡甲 3526(上櫃)、優群 3217(上櫃)、正崴 2392(上市)、萬旭 6134(上櫃)、健和興 3003(上市)、鴻呈 6913(上市)、譜瑞-KY 4966(上櫃)、光環 6820(上市);<b>太康精密 6833=興櫃(2021/6/1 興櫃掛牌、2026 現況仍興櫃)依護欄不入 holds/watch、且為信邦 57% 子公司勿雙計;鴻騰 FIT 6088 為港股(鴻海 2317 持股約 7 成、間接曝險)</b>;聯發科 224G SerDes 打入 Google TPU 為唯一台系晶片觸點(歸 ASIC 題)。PCB midplane 板材受惠歸 CCL 鏈(供應商未逐項佐證、不列名)。</p>
+<h3>watch 觀察名單(每檔帶反駁理由;2026/07 逐檔查證)</h3>
+<p class="sub">收錄≠受惠背書。升格條件逐檔明寫;太康精密 6833(興櫃、信邦子公司)依護欄不入名單;維峰 6913 誤植已更正為鴻呈。</p>
+<table>
+  <tr><th>股票</th><th>2026/06 月營收/最新動能</th><th>收錄理由</th><th>反駁理由(為何只 watch)</th></tr>
+  <tr><td><b>佳必琪 6197</b>(上市)<span class="conf c-med" style="margin-left:6px">升格 holds 候選第一位</span></td><td>6 月 8.95 億(+45.2%,續創單月歷史新高、+10.7% MoM);2Q26 25.11 億(+28.5%);H1 45.37 億(+25%)(經濟日報 2026/07/09)</td><td>月營收動能為 holds 五檔以外最強;AI 佔比自述 50-55%→2026E 60-65%,客戶含微軟/AWS/Supermicro/Oracle;全年目標「賺一股本」EPS 10 元+(媒體轉述);Vera Rubin 平台自設計階段投入高電流線材與 busbar 開發(自述)</td><td>⚪「Vera Rubin Tier 1 直接供應商」僅投顧/媒體轉述(CMoney/優分析;GB300 產品線=60A ORV3 Power Whip/busbar/PCIe Gen6 內部線)、料號與 Tier 1 角色未驗證;強項在電力/線束,224G 訊號路徑佔比未拆分;AI 佔比為公司自述缺第三方</td></tr>
+  <tr><td><b>正崴 2392</b>(上市)</td><td>1-4 月累計 265.07 億(−5.22%);4 月 62.22 億(−5.5%);6 月未逐項查證(財報狗;鉅亨 2025/07 的 95.59 億為去年同期數勿誤用)</td><td><b>Credo 10-K 明載 Cheng Uei Precision(Foxlink)為 BizLink 之外的第二家 AEC 製造夥伴(Development and Manufacturing Agreement)</b>=SEC 一手文件級 AEC 代工角色</td><td>集團龐雜(消費電子/電源/算力中心投資)、合併營收衰退中,AEC 佔比未揭露;「銅纜延壽紅利」屬部落格敘事。升格條件=AEC 相關營收可辨識地扭轉衰退</td></tr>
+  <tr><td><b>信邦 3023</b>(上市)</td><td>6 月 30.93 億(+17.6%,單月新高、+2.7% MoM);Q2 90.63 億(+16.7%);H1 173.87 億(+8.74%);指引 Q3 續創單季新高、人形機器人專案試量產(鉅亨/TechNews 2026/07)</td><td>AI 伺服器線束供應商、規模大、Q3 指引正向</td><td>AI 貢獻主體=電源線束+液冷散熱配套,不在 224G 高速訊號路徑;業務高度分散(工控/綠能/醫療/車用)、H1 僅 +8.8%(vs 佳必琪 +25%、貿聯 +34%);AI 佔比未單獨揭露。升格條件=高速訊號類產品料號級佐證。註:太康精密 6833(興櫃)為其 57% 子公司(第二大股東緯創),勿雙計</td></tr>
+  <tr><td><b>凡甲 3526</b>(上櫃)</td><td>6 月 4.09 億(+29.7%、+11.9% MoM);H1 23.12 億(+24.9%)(TechNews 2026/07/08)</td><td>AI 伺服器連接器動能強(功率 1200W→4200W、每 pin 30A→140A)</td><td>動能主體是大電流「電源」連接器,與 224G 高速「訊號」鏈不同賽道;法人估 2026 EPS 23 元(非財測)——窄口徑收錄</td></tr>
+  <tr><td><b>優群 3217</b>(上櫃)</td><td>6 月 3.24 億(+2.4%);H1 18.95 億(−4.2%)(TechNews 2026/07/08);1Q26 9.48 億(+2.6%)</td><td>CAMM/CABB 連接器與 Google 資料中心供應鏈(公司自述);全年目標 +10~15%、「上半年低個位數、下半年雙位數」(法說)</td><td>主業 DDR5/記憶體/NB 連接器非 224G 訊號路徑;H1 負成長;2025 EPS 12.69 元基期。升格需下半年月營收轉雙位數驗證</td></tr>
+  <tr><td><b>萬旭 6134</b>(上櫃)</td><td>5 月 2.23 億(+63.5%、+3.4% MoM);1-5 月 10.04 億(+52.2%);6 月待補(聚財網/Yahoo)</td><td>AI 高速線材為三動能之一(儲能工控/車用/AI 線材)、年增率高</td><td>月營收僅 2 億元量級、基期極低;AI 線材佔比未揭露、無 NVIDIA/CSP 料號級佐證</td></tr>
+  <tr><td><b>健和興 3003</b>(上市)</td><td>1-4 月 17.44 億(+24.7%);4 月 4.81 億(+22.7%);1 月 +59.4%;6 月未見具名報導(待查 MOPS)</td><td>營收動能佳(2025 全年 43.96 億基期)</td><td>主業端子/電源連接(EV 充電/綠能/電力),AI 貢獻在電源端子非 224G 高速訊號——窄口徑收錄</td></tr>
+  <tr><td><b>鴻呈 6913</b>(上市)</td><td>2025 營收 26.3 億(+21.7%);伺服器+資料存取佔比 1Q25 首破 50%→2026E >60%;6 月營收未查得(vocus 法說 2026/04/10)</td><td>AI 伺服器高速線/水冷純度快速拉高的小型股;訂單能見度約 10 週;越南河內新廠(現有越南廠 4 倍產能)2025Q4 試產轉量產、北寧擴產 4Q26 投產、美國新廠啟動;PCIe Gen6 用 Molded Paddle 取代 paddle PCB 改善 Return Loss</td><td>規模小(月營收 2-3 億級);「上半年營收翻倍」為公司自述;法人目標價僅單一來源。⚠ 股號消歧:6913=鴻呈實業(上市),「維峰 6913」為前輪誤植(維峰電子=深交所 301328.SZ)</td></tr>
+  <tr><td><b>鴻騰 FIT 6088.HK</b>(港股,對照)</td><td>OFC 2026 宣稱 1.6T 量產、224Gbps XPO loopback 實測;雲端/DC 2026E +70%(公司自述);OCP 2025 展 224G CPC+224G OSFP 冷板</td><td>224G 環節產品線最完整的鴻海系公司(224G CPC/OSFP 冷板/MCIO/B2B/busbar);<b>Marvell Golden Cable 倡議首個完成 AEC 設計的夥伴(2 個月)=AEC 晶片雙源化拉台鏈入局、同時稀釋 Credo-貿聯軸線</b></td><td>港股非台股,台股曝險僅經鴻海 2317(持股約 7 成)間接;+70% 為公司自述缺第三方——列對照不列 holds/watch 本體</td></tr>
+</table>
 <h3>國際 × 角色(晶片壟斷 + 連接器三雄 + 銅背板)</h3>
 <table>
-  <tr><th>公司</th><th>國別/環節</th><th>角色</th><th>查證</th></tr>
-  <tr><td>Amphenol 安費諾</td><td>美 · 連接器/銅背板/B2B(龍頭)</td><td>Paladin HD/HD2 224G 銅背板互連獨大、NVL72 5,184 條銅纜 cartridge 核心連接器;<b>Rubin cableless 改 Paladin board-to-board+PCB midplane=從 cable cartridge 轉向 B2B 連接器、仍是 cableless 世代最大受惠者</b>(spine 保留+B2B 暴增)。台股最強對手</td><td><span class="conf c-high">高</span></td></tr>
-  <tr><td>Credo / Marvell / Astera Labs</td><td>美 · AEC retimer/DSP 晶片</td><td>AEC 晶片端壟斷群。Credo 約 88%(650 Group,2026/04 估降至約 70%)、$500「紫色線」AEC 雙位數環比成長;Marvell(Alaska A/Golden Cable,FY27 AEC+retimer 估年增逾倍)挑戰;Astera 第三。<b>台廠在 AEC 晶片端幾乎缺席的關鍵壟斷者</b></td><td><span class="conf c-high">高(88% 為單一研調)</span></td></tr>
-  <tr><td>Molex / TE Connectivity</td><td>美 · 連接器三雄</td><td>Molex 業界首發 chip-to-chip 224G 全產品線(AEC 內建 retimer 7m、2026 推 Impress co-packaged copper、NextStream PCIe Gen6);TE 具 224G 連接器/背板方案。MCIO/插槽/背板主導群,台廠多陪跑或快速挑戰</td><td><span class="conf c-high">高(Molex);中(TE 逐料號)</span></td></tr>
-  <tr><td>Luxshare 立訊 / 鴻騰 FIT</td><td>中/港 · 銅纜/連接器</td><td>Luxshare 立訊=scale-up 銅背板二供(OCP 2025 展 448G CPC/1.6T AEC、OFC 2026 與 Marvell 展 hybrid AEC/ACC)=貿聯 224G AEC 主要競爭者;鴻騰 FIT(港股,鴻海系)=224G CPC/高速線材要角但非台股本體</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><th>公司</th><th>國別/環節</th><th>角色 / 最新數字</th><th>查證</th></tr>
+  <tr><td>Amphenol 安費諾</td><td>美 · 連接器/銅背板/B2B(龍頭)</td><td><b>1Q26 營收 $76 億(+58%,organic +33%)創紀錄、IT datacom 佔 41%/年增 99%(organic +81%)、訂單 $94 億創紀錄、book-to-bill 1.24、adj EPS $1.06(+68%)、adj 營益率 27.3%</b>(8-K,2026/04/29);2Q26 指引 $81-82 億(+43-45%)、adj EPS $1.14-1.16、IT datacom 續季增 low-teens,7/29 13:00 ET 放榜。Paladin HD/HD2 224G 背板獨大(HD2 與 112G 版共用介面、1U 支援 144 對);NVL72 spine cartridge 現貨實物均其料號;<b>Rubin cableless 改 Paladin HD2 B2B+PCB midplane=spine 保留+B2B 暴增、仍是 cableless 世代最大受惠者</b>。台股最強對手</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Credo</td><td>美 · AEC DSP 龍頭</td><td><b>FY2026(迄 2026/5/2)營收 $13.35 億(+205.7%)、4Q $4.37 億(+157%,單季超過 FY25 全年)、non-GAAP GM 68.3%、淨利 $6.62 億(5 倍+);FY27 Q1 guide $465-475M、全年 +80% 以上;FY27 光學組合(ZeroFlap/SiPh/光 DSP)上看 $6 億+、增量約 50/50 銅光</b>(Business Wire/8-K,2026/06/01)——公司敘事重心開始轉光=AEC 成長持續性雙面訊號。份額:650 Group 口徑 73%(2Q25)~88%(2025/10,Weckel 估)區間,⚪「→70%」2026 無具名更新;$500 紫色線 AEC;⚠ 近 90% 營收來自極少數客戶+製造集中台灣夥伴(集中度風險沿代工鏈傳導,The Motley Fool 2026/07/07)</td><td><span class="conf c-high">高(份額為分析師估)</span></td></tr>
+  <tr><td>Marvell / Astera Labs</td><td>美 · AEC 晶片挑戰者</td><td>Marvell:<b>Golden Cable 生態倡議(2025/12/09,官方稿引 650 Group $6.44 億→$14 億)</b>+Alaska A 業界首款 1.6T PAM4 AEC DSP(2024/6 發布;5nm、8×200G、reach >3m)+OFC 2026 與 Luxshare 合展 hybrid AEC/ACC;FIT 為首個 2 個月完成 AEC 設計的夥伴。Astera:1Q26 $3.084 億(+93%)、Taurus AEC 多專案量產、GM 76.3%、2Q26 guide $355-365M;獲 Amazon $65 億 warrant 綁定——Credo 份額「獨占→寡占」方向具名化(未給市佔數字)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Molex / TE Connectivity</td><td>美 · 連接器三雄</td><td>Molex:<b>Impress Co-Packaged Copper 2026/2/20 發布</b>(壓接式基板連接器直落 ASIC 封裝基板;224G 現貨、336G/448G 驗證中)+AEC 內建 retimer 7m+NextStream PCIe Gen6;TE:AdrenaLINE 224G 全線(Catapult 近晶片/Slingshot cabled backplane/cabled I/O/micro LGA/自產 224G 線纜)。MCIO/插槽/背板主導群,台廠多陪跑或快速挑戰</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Luxshare 立訊 / 鴻騰 FIT / Stäubli</td><td>中/港/瑞士 · 銅纜/連接器/QD</td><td>Luxshare:<b>OFC 2026(3/17-19)展 448G KOOLIO CPC(>90GHz)+1.6T AEC/ACC、DesignCon 2026 實測 400mm@110GHz 插損平穩=首家以實測數據支持 448G PAM4 互連;448G 公開 demo 領先台廠(台股 448G 公開發表 0 件)</b>,但出貨規模無第三方數據=2027 期權級威脅;Arista XPO MSA 創始成員。FIT(港股):224G CPC/1.6T 量產宣稱。Stäubli(瑞士):UQD/MQD 依 NVIDIA 規格相容 VR200、入 NVIDIA 推薦供應商清單=QD 環節既存國際強者(嘉澤 UQD 非獨佔)</td><td><span class="conf c-high">高</span></td></tr>
 </table>
-<h3>台灣吃得到多少(逐環節定位)</h3>
-<p class="sub">一句話:<b>AEC 線纜組裝=重要供應商(貿聯);MCIO 連接器=挑戰者(宏致/嘉澤);CPU socket/插槽/UQD=重要供應商(嘉澤);NVLink 銅背板=陪跑(Amphenol);224G SerDes/AEC 晶片=缺席(美系);PCB midplane=連接器陪跑/PCB 板材受惠(歸 CCL 鏈)。</b>定位為質化判斷。</p>
+<h3>台灣吃得到多少(逐環節定位,含 2026/06 月營收證據)</h3>
+<p class="sub">一句話:<b>AEC 線纜組裝=重要供應商(貿聯主供+正崴第二源);MCIO 連接器=挑戰者(宏致);CPU socket/插槽=重要供應商(嘉澤);NVLink 銅背板=陪跑(Amphenol);224G SerDes/AEC 晶片=缺席(譜瑞 ACC $9M 例外);PCB midplane=連接器陪跑/PCB 板材受惠(歸 CCL 鏈)。</b>定位為質化判斷。</p>
 <table>
   <tr><th>環節</th><th>台廠</th><th>定位</th><th>證據</th></tr>
-  <tr><td>AEC 線纜組裝(scale-out)⭐</td><td>貿聯 3665 / 宏致 3605 / 嘉基 6715</td><td><span class="conf c-high">重要供應商(貿聯)+挑戰者</span></td><td>貿聯=Credo AEC 主要代工(10-K)+自有 224G;AEC 1→9 條/伺服器;晶片端被 Credo/Marvell 壟斷台廠吃組裝</td></tr>
-  <tr><td>MCIO 連接器(Gen5/Gen6)</td><td>宏致 3605 / 宣德 5457</td><td><span class="conf c-med">快速挑戰者(宏致)+二線(宣德)</span></td><td>宏致市佔自述 1%→10%、單一 ODM 滲透 30-40%;主導 Amphenol/Molex/TE/FIT</td></tr>
-  <tr><td>CPU socket/PCIe 插槽/UQD</td><td>嘉澤 3533</td><td><span class="conf c-high">重要供應商(全球前三)</span></td><td>全球前三大 CPU socket、伺服器營收破 5 成、UQD 送 NVIDIA 驗證;cableless 改 PCIe over PCB 對插槽正面</td></tr>
-  <tr><td>NVLink 銅背板/cartridge(5,184 條)</td><td>(鴻騰 FIT 港股;台股上市缺席)</td><td><span class="conf c-low">陪跑/缺席</span></td><td>Amphenol 獨大、Luxshare 二供;鴻騰在港股台股吃不到</td></tr>
-  <tr><td>224G SerDes/retimer/AEC 晶片</td><td>(幾乎缺席;聯發科切 Google TPU)</td><td><span class="conf c-low">缺席</span></td><td>Credo(88%)+Marvell+Astera 美系主導;聯發科 224G SerDes 打入 Google TPU 為唯一台系觸點</td></tr>
-  <tr><td>PCB midplane/B2B(cableless 新增)</td><td>(連接器 Amphenol;PCB 板材歸 CCL 鏈)</td><td><span class="conf c-med">連接器陪跑/PCB 受惠(間接)</span></td><td>Paladin HD2 B2B Amphenol 主導;cableless 推升高階 PCB 板面積 ×2.3→台系 CCL/PCB 間接受惠</td></tr>
+  <tr><td>AEC 線纜組裝(scale-out)⭐</td><td>貿聯 3665 / 正崴 2392 / 宏致 3605(延伸)/ 嘉基 6715</td><td><span class="conf c-high">重要供應商(貿聯主供+正崴第二源)</span></td><td>Credo 10-K 具名兩家製造夥伴;貿聯 6 月 85.18 億新高(+63.8%)、H1 +33.97%;AEC 機會密度 1→9 條;晶片端被 Credo/Marvell/Astera 壟斷、台廠吃組裝</td></tr>
+  <tr><td>MCIO 連接器(Gen5/Gen6)</td><td>宏致 3605 / 宣德 5457</td><td><span class="conf c-med">快速挑戰者(宏致)+二線(宣德)</span></td><td>宏致市佔自述 1%→10%、單一 ODM 滲透 30-40%、6 月 +29.8% 首兌現;主導 Amphenol(CMIO)/Molex/TE/FIT;宣德 H1 −2.2% 未反映</td></tr>
+  <tr><td>CPU socket/PCIe 插槽</td><td>嘉澤 3533</td><td><span class="conf c-high">重要供應商(全球前三)</span></td><td>全球前三大 CPU socket、1Q26 伺服器占比首破 50%(+60% YoY)、6 月 +17.3%;cableless 改 PCIe over PCB 對插槽正面;QD 歸散熱鏈且 Stäubli 為既存國際強者</td></tr>
+  <tr><td>NVLink 銅背板/cartridge(5,184 條)</td><td>(鴻騰 FIT 港股;台股上市缺席)</td><td><span class="conf c-low">陪跑/缺席</span></td><td>Amphenol 實質主供(現貨實物料號)、Luxshare 爭取中⚪;FIT 在港股台股吃不到——單櫃最高價值密度環節缺席</td></tr>
+  <tr><td>224G SerDes/retimer/AEC 晶片</td><td>(幾乎缺席;譜瑞 ACC $9M 例外;聯發科切 Google TPU)</td><td><span class="conf c-low">缺席(小額例外)</span></td><td>Credo(73–88% 區間、GM 68.3%)+Marvell+Astera 美系主導;譜瑞集團 ACC 類比 $9M;聯發科 224G SerDes 打入 Google TPU 唯一台系觸點</td></tr>
+  <tr><td>PCB midplane/B2B(cableless 新增)</td><td>(連接器 Amphenol;PCB 板材歸 CCL 鏈)</td><td><span class="conf c-med">連接器陪跑/PCB 受惠(間接)</span></td><td>Paladin HD2 B2B Amphenol 主導(in-design);cableless 推升高階 PCB(44 層 M9 CCL)→台系 CCL/PCB 間接受惠(供應商未逐項佐證)</td></tr>
 </table>
 
 <!-- 5 -->
-<h2 id="s5"><span class="n">5</span>Rubin cableless 模型、市場與催化劑</h2>
+<h2 id="s5"><span class="n">5</span>Rubin cableless 模型、細顆粒元件地圖、市場口徑與催化劑</h2>
 <div class="card">
   <h3>🔬 Rubin cableless midplane 對銅纜背板價值量衝擊模型</h3>
   <p><b>核心釐清(三分歧之 Rubin 背板分歧正解):</b>VR NVL72 同時存在「兩層 NVLink 銅互連」,cableless 只動其中一層——</p>
   <table>
-    <tr><th>層級</th><th>GB200/GB300(現況)</th><th>Vera Rubin(2H26)</th><th>銅纜價值變化</th></tr>
-    <tr><td><b>(A) Rack 級 NVLink spine</b>(機櫃背面、compute tray↔36 NVSwitch tray)</td><td>銅纜 cartridge:4 組 cartridge、約 5,000(GB200=5,184)條同軸銅纜、合計約 2 英里、Amphenol Paladin HD</td><td><b>沿用銅纜 cartridge</b>(NVIDIA VR NVL72 官方頁仍載 5,000 銅纜/2 英里)</td><td>持平至微增(NVLink6 改 BiDi、密度↑;銅纜條數不必然減)</td></tr>
-    <tr><td><b>(B) Compute tray/canister 內</b>(GPU↔NVSwitch 板內+PCIe Gen6 flyover)</td><td>flyover cables(板內飛線銅纜)</td><td><b>改 PCB midplane+Paladin HD2 board-to-board「cableless」</b>(組裝 2h→5min,18-20×)</td><td>板內銅飛線「歸零」、價值重分配給高階 PCB+B2B 連接器</td></tr>
+    <tr><th>層級</th><th>GB200/GB300(現況)</th><th>Vera Rubin(3Q26 量產)</th><th>銅纜價值變化</th></tr>
+    <tr><td><b>(A) Rack 級 NVLink spine</b>(機櫃背面、compute tray↔NVSwitch tray)</td><td>銅纜 cartridge:GB200 4 組 cartridge、5,184 條(1,296 埠×4 對,SemiAnalysis;官方 blog 約 5,000+/2 英里/省 20kW)、Amphenol Paladin HD;GB300 沿用 cartridge backplane(Lenovo 產品指南)</td><td><b>沿用銅纜 cartridge</b>(Wheeler's Network 2025/11:NVLink6 以雙向 SerDes 倍增頻寬、纜數 5,184 不變沿用 GB300 背板;SemiAnalysis 同判。⚠ 出處更正:前版「NVIDIA VR NVL72 官方頁仍載 5,000 銅纜/2 英里」=張冠李戴,官方頁實測無此規格、僅「cable-free modular tray designs」+NVLink6 260TB/s——見被反駁區 ⑧)</td><td>持平至微增(NVLink6 改 BiDi、密度↑;銅纜條數不必然減)</td></tr>
+    <tr><td><b>(B) Compute tray/canister 內</b>(GPU↔NVSwitch 板內+PCIe Gen6 flyover)</td><td>flyover cables(板內飛線銅纜);多櫃擴展 NVL36x2 另需 DensiLink 324 條、每套 >$10,000(SemiAnalysis)</td><td><b>改 PCB midplane+Paladin HD2 board-to-board「cableless」</b>(44 層 22+22、M9 CCL EM896K3、約 420×60mm;組裝 2hr→5min=郭明錤;StorageReview 稱 GB300 單 tray 約 100 分鐘/縮 18 倍,量級一致;電力 whip 60A→100A、TCS 液冷流量約 +100%)</td><td>板內銅飛線「歸零」、價值重分配給高階 PCB+B2B 連接器</td></tr>
   </table>
-  <div class="callout info"><b>價值量重分配(誰受惠/誰受損):</b><br><b>受損(相對):</b>tray 內銅纜組裝/飛線工序(工時+線纜料號被消滅);但對 Amphenol 是淨正面(spine 保留+新增大量 Paladin HD2 B2B 連接器)。<b>「Amphenol 被 cableless 殺死」是誤讀。</b><br><b>受惠(高確定):</b>① 高階 PCB/板材(板面積 GB300→VR NVL72 約 ×2.3、M8/M9 CCL+HVLP4,歸 CCL 題);② board-to-board 連接器(Paladin HD2,Amphenol 主導);③ NVLink6 仍 224G class SerDes(BiDi)、晶片端不變。<br><b>對台廠淨衝擊:</b>貿聯(scale-out AEC)<b>幾乎無衝擊(中性偏正,cableless 改 scale-up tray 內、與 scale-out AEC 不同層)</b>;宏致/宣德(MCIO)<b>中性偏正</b>(價值往連接器+PCB 推);嘉澤(socket/插槽/UQD)<b>正面</b>(PCIe Gen6 over PCB 對插槽需求不減、UQD 因液冷一體設計需求增);嘉基(線材)<b>中性偏負(小)</b>(板內飛線被 PCB 取代、但 scale-out 不受影響)。<br><b>⚠ 最大不確定(待查):</b>TheValueist(X)激進口徑把「rack 級 spine 也視為被 PCB 取代」,與官方+SemiAnalysis「spine cartridge 沿用」衝突;本模型採「spine 保留、tray 內 cableless」為主說。<b>2027 Rubin Ultra(Kyber NVL576)銅 midplane 更徹底——若 spine 亦 PCB 化,Amphenol 銅纜量才真受損=2027 觀察點、非 2026 事實。</b></div>
-  <h3>市場規模多口徑(AEC 口徑差 10 倍已判讀)</h3>
+  <div class="callout info"><b>價值量重分配(誰受惠/誰受損):</b><br><b>受損(相對):</b>tray 內銅纜組裝/飛線工序(工時+線纜料號被消滅);但對 Amphenol 是淨正面(spine 保留+新增大量 Paladin HD2 B2B 連接器;1Q26 IT datacom +99% 實證)。<b>「Amphenol 被 cableless 殺死」是誤讀。</b><br><b>受惠(高確定):</b>① 高階 PCB/板材(44 層 M9 CCL+HVLP,歸 CCL 題);② board-to-board 連接器(Paladin HD2,Amphenol 主導);③ NVLink6 仍 224G class SerDes(BiDi)、晶片端不變。<br><b>對台廠淨衝擊:</b>貿聯(scale-out AEC)<b>幾乎無衝擊(中性偏正,cableless 改 scale-up tray 內、與 scale-out AEC 不同層)</b>;宏致/宣德(MCIO)<b>中性偏正</b>(部分內部線被 midplane 吸收=量−,但 Gen6 升級 ASP+、淨向待 2Q26 財報驗證);嘉澤(socket/插槽)<b>正面</b>(PCIe Gen6 over PCB 對插槽需求不減);嘉基(線材)<b>中性偏負(小)</b>(板內飛線被 PCB 取代、但 scale-out 不受影響)。<br><b>⚠ 已裁決:</b>TheValueist(X)激進口徑把「rack 級 spine 也視為被 PCB midplane 取代」——被 tray 級口徑(郭明錤)+spine 沿用證據(Wheeler's/SemiAnalysis)共同否決。<b>2H27 Rubin Ultra/Kyber NVL576 將改 backplane 設計(Ray Wang,低信心)——若 spine 亦 PCB 化,銅纜匣才真受損=2027 觀察點、非 2026 事實。</b></div>
+
+  <h3>元件級細顆粒地圖(元件 × 機型世代 × 台廠/國際 × 狀態;技術版完整 11 元件)</h3>
+  <p class="sub">機型世代軌跡:GB200 → GB300 → VR200(3Q26 量產)→ Kyber NVL576(2H27)。「影響方向」指 VR200 世代對該元件用量/價值的淨向。<b>技術版獨有:含證據源欄。</b></p>
   <table>
-    <tr><th>研調</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR</th><th>口徑說明</th></tr>
-    <tr><td>Intel Market Research</td><td>資料中心 AEC(狹義,<b>主口徑</b>)</td><td>2025 US$7.38 億</td><td>2034 US$35.74 億</td><td>23.8%</td><td>與 650 Group「2028 約 $40 億」方向一致、<b>採信為主口徑</b></td></tr>
-    <tr><td>彙整(疑含廣義)</td><td>AEC 廣義(疑含 AOC/工業)</td><td>US$87 億</td><td>US$174 億</td><td>約 8%</td><td>與狹義差約 10 倍且 CAGR 僅 8% 矛盾於 AI 高成長=<b>可信度低、勿用</b></td></tr>
-    <tr><td>Intel Market Research</td><td>800G AEC(細分)</td><td>2025 US$3.29 億</td><td>2034 US$11.24 億</td><td>18.2%</td><td>佐證 800G AEC(宏致/嘉基切入點)為高成長子市場</td></tr>
-    <tr><td>LightCounting</td><td>高速銅纜整體(DAC+ACC+AEC)</td><td>2024</td><td>2029 US$67 億</td><td>約 25%+</td><td>AEC/ACC 蠶食被動 DAC,DAC 至 2029 仍占出貨量約 50%</td></tr>
-    <tr><td>Research and Markets</td><td>背板連接器</td><td>2025 US$24.3 億</td><td>2032 US$34.3 億</td><td>5.0%</td><td>含傳統電信/工業/車用基數大;AI 高速背板為高成長子段被稀釋</td></tr>
-    <tr><td>SNS Insider</td><td>高速 SerDes 收發(訊號鏈上游)</td><td>2025 US$27.9 億</td><td>2033 US$61.4 億</td><td>10.45%</td><td><b>台廠幾乎缺席之環節</b>(NVIDIA 自研+Credo/Marvell/Broadcom),供對照價值分布</td></tr>
+    <tr><th>元件</th><th>機型世代軌跡</th><th>台廠</th><th>國際商</th><th>狀態·影響方向</th><th>證據源</th></tr>
+    <tr><td><b>NVLink spine 銅纜匣(cable cartridge)</b></td><td>GB200 5,184 條/4 匣→GB300 沿用(Lenovo 指南)→VR200 沿用(Wheeler's 2025/11)→Kyber 2H27 改 backplane 待查</td><td><span class="tag t-tw">台股缺席</span>(現貨實物均 Amphenol 料號)</td><td>Amphenol(主供,高);Luxshare 爭取中⚪</td><td>量產;<b>沿用/+</b></td><td>NVIDIA 官方頁核對+Wheeler's+Lenovo</td></tr>
+    <tr><td><b>tray 內 flyover 跳線/內部高速線</b></td><td>GB200/GB300 有(tray 內 PCIe/NVLink 跳線)→<b>VR200 被 44 層 midplane 取代=消失</b></td><td>貿聯 3665(rack 內線束之一,佔比未拆分)</td><td>Amphenol、Luxshare、FIT</td><td>GB 世代量產;<b>−(VR200 起淘汰)</b></td><td>郭明錤 X(2026/01)</td></tr>
+    <tr><td><b>PCB midplane(VR200 新生)</b></td><td>VR200 首見:44 層(22+22)M9 CCL EM896K3、約 420×60mm;組裝 2hr→5min</td><td>PCB/CCL 廠受惠但歸 PCB/CCL 鏈不雙計(供應商名單未逐項佐證,不列名)</td><td>—(材料 EM896K3=郭明錤口徑⚪)</td><td>隨 VR200 3Q26 量產;<b>+(新生)</b></td><td>郭明錤 X(2026/01)</td></tr>
+    <tr><td><b>B2B/CPC 板對板連接器(含近 ASIC 銅)</b></td><td>VR200:Paladin HD2 B2B×2 段(Strata↔midplane↔daughter);448G:Luxshare KOOLIO(demo)、Molex Impress(224G 現貨/448G 驗證中)、FIT 224G CPC(OCP 2025)</td><td><span class="tag t-tw">台股僅間接</span>(鴻海 2317 經 FIT)</td><td>Amphenol Paladin HD2(in-design,高)、Molex Impress、TE Catapult、Luxshare KOOLIO</td><td>VR200 隨 3Q26 量產;448G 開發/驗證中;<b>+(新生)</b></td><td>SemiAnalysis VR 拆解+Amphenol datasheet</td></tr>
+    <tr><td><b>AEC 主動電纜(400G/800G/1.6T)</b></td><td>800G 量產(貿聯 2Q25 起);1.6T:Marvell Alaska A DSP ready、Luxshare demo,量產 2026-27;主戰場 scale-out TOR↔NIC</td><td><span class="tag t-tw">貿聯 3665(Credo 10-K 主供)</span><span class="tag t-tw">正崴 2392(10-K 第二源)</span>;自有規模⚪</td><td>Credo、Marvell、Astera Taurus、Luxshare、Molex/TE/Amphenol 線端</td><td>800G 量產/1.6T ramp;<b>+(隨 scale-out 增)</b></td><td>Credo 10-K/FY26 8-K</td></tr>
+    <tr><td><b>DAC 被動銅纜</b></td><td>全世代沿用(rack 內短距);LightCounting:2029 仍佔高速線出貨 50%(零功耗優勢)</td><td>貿聯(AEC/DAC 並列 COMPUTEX 2026 展品)、宣德(AI 佔比未揭露)</td><td>Amphenol、TE、Molex、Luxshare</td><td>量產;<b>持平</b>(被 AEC 部分替代但基數大)</td><td>LightCounting 2024/12</td></tr>
+    <tr><td><b>MCIO 連接器/線(PCIe Gen5→Gen6)</b></td><td>GB200/GB300 tray 內大量;VR200 部分被 midplane 吸收(量−)但 Gen6 升級 ASP+;AI 板每片 15→20-25 顆(宏致口徑)</td><td><span class="tag t-tw">宏致 3605</span>(市佔 1%→10% 自述+法人;500 萬顆/月)、宣德 5457(非主動能)</td><td>Amphenol(CMIO)、FIT、TE、ACES</td><td>Gen5 量產/Gen6 隨 VR200 起量;<b>量−價+(淨向待 2Q26 財報驗證)</b></td><td>UAnalyze/富果+Amphenol CMIO 簡報</td></tr>
+    <tr><td><b>CPU/GPU socket 與 PCIe Gen6 插槽</b></td><td>全世代;Vera CPU socket 針腳增(新平台 ASP 上行,嘉澤法說);PCIe Gen6 隨 VR200 導入</td><td><span class="tag t-tw">嘉澤 3533</span>(1Q26 伺服器占比 >50%)</td><td>Amphenol、TE、Molex、FIT</td><td>量產+世代升級;<b>+(針腳/ASP)</b></td><td>vocus 嘉澤法說(2026/05/14)</td></tr>
+    <tr><td><b>UQD/UQDB 液冷快接頭[交界:歸散熱鏈]</b></td><td>GB300/VR200 液冷標配;NVQD 盲插為下一代</td><td>嘉澤(2024/12 報導通過 NVIDIA UQD 認證;2025 出貨僅約 1 萬顆、2Q26 量產)、富世達 6805(歸散熱)</td><td><b>Stäubli(UQD/MQD 相容 VR200、NVIDIA RVL)</b>、Parker、CPC(Colder)、Danfoss</td><td>量產;<b>交界元件,本 guide 不評分</b></td><td>Stäubli 官方稿+經濟日報(2024/12)</td></tr>
+    <tr><td><b>retimer/AEC DSP 晶片</b></td><td>AEC DSP:Credo(FY26 $13.35 億)、Marvell Alaska A 1.6T、Astera Taurus;PCIe retimer:Astera Aries、Marvell;ACC 類比:ex-Spectra7→Parade</td><td>譜瑞-KY 4966 集團(2025/4 $9M 購 Spectra7 ACC 資產,交割淨現金 $6.44M——<b>口徑修正:AEC DSP 缺席、ACC 類比小額入列</b>,規模不足撐評分)</td><td>Credo、Marvell、Astera、Parade(ex-Spectra7)、MaxLinear</td><td>量產;<b>晶片端價值集中美系</b></td><td>eeNews/PR Newswire+Credo 8-K</td></tr>
+    <tr><td><b>224G/448G SerDes IP 與標準</b></td><td>224G 量產(NVLink5/6、Ethernet);448G:OIF workshop/標準化中(Google 100K+ TPU 集群需求),PAM4 需約 112GHz、PAM6 約 174GBd/90GHz、PAM8 150GBd/75GHz,銅 reach 數 cm 級→CPC/CPO</td><td><span class="tag t-tw">台股缺席</span>(台積電只做製造)</td><td>Broadcom、Marvell、Synopsys、Alphawave、NVIDIA(自研)</td><td>224G 量產/448G 研發;<b>448G 世代價值向晶片/基板端移動</b></td><td>SemiEngineering+OIF</td></tr>
   </table>
-  <h3>催化劑時間軸(2025H2 → 2027)</h3>
+
+  <h3>市場規模多口徑(帶品質分層;主口徑=650 Group 狹義;同一「AEC」標籤 2025 年口徑 $2.45 億~$87 億、極差 35 倍)</h3>
+  <table>
+    <tr><th>研調(分層)</th><th>口徑</th><th>基準</th><th>目標</th><th>CAGR/備註</th></tr>
+    <tr><td><b>650 Group</b>(第一層·<b>主口徑</b>;載於 Marvell 2025/12/09 官方新聞稿)</td><td>資料中心 AEC 線纜(狹義)</td><td>2025 US$6.44 億</td><td>2029 US$14 億</td><td>約 21%;650 Group 有 AEC 專門季度報告(線纜+晶片份額),2026 最新數字未公開(付費)</td></tr>
+    <tr><td><b>650 Group/CNBC</b>(2025/10/17)</td><td>AEC「晶片」子市場</td><td>2023 US$0.68 億</td><td>2028 >US$10 億</td><td>ASP $300-500/條;Credo 份額 73–88% 區間(分析師估、時點浮動)</td></tr>
+    <tr><td><b>LightCounting</b>(第一層;2024/12 版,2026/04 有更新 newsletter)</td><td>高速銅纜 DAC+ACC+AEC <b>合計</b>(勿當 AEC 單獨)</td><td>2024</td><td>2029 US$67 億(較前版 2028 $28 億大幅上修)</td><td>AEC CAGR 45%/DAC 25%/AOC 15%;DAC 至 2029 仍佔出貨量 50%</td></tr>
+    <tr><td><b>TrendForce</b>(第一層·質性;RP260126WQ 2026/01+RP260611NI 2026/06)</td><td>AI 互連轉折:AEC 已成 400G/800G 櫃內最廣泛短距互連;448G 世代 LPO/NPO/CPO 路線</td><td>—</td><td>—</td><td>質性口徑無金額;第三家權威研調補位</td></tr>
+    <tr><td>Research and Markets(第二層·彙編)</td><td>背板連接器(含電信/工控傳統口徑)</td><td>2025 US$24.3 億</td><td>2032 US$34.3 億</td><td>5.02%——被傳統基數稀釋,<b>引用於 AI 224G 題材屬口徑誤用</b>(對照 Amphenol IT datacom 1Q26 +99%、相差一個數量級);另 Data Insights Market 伺服器背板子口徑 2026 $25.3 億(CAGR 約 6.7%,第三層)</td></tr>
+    <tr><td>Intel Market Research(第三層·報告農場,降權)</td><td>資料中心 AEC(狹義)/800G AEC(細分)/AEC 連接器件</td><td>2025 US$7.38 億/US$3.29 億/US$2.45 億</td><td>2034 US$35.74 億/US$11.24 億/US$11.04 億</td><td>23.8%/18.2%/20.7%(狹義量級與 650 Group 相符、僅供對照)</td></tr>
+    <tr><td>報告農場廣義(WiseGuy/DataIntelo;第三層·勿用)</td><td>Active Electrical Cables 廣義(混入 EV 線束/5G/AOC)</td><td>2025 US$87 億</td><td>2034 US$174 億</td><td>8%——為 650 Group 狹義的 13.5 倍,投資判讀不可混用;凡見「AEC 市場 80-90 億美元」大數字均屬此口徑</td></tr>
+    <tr><td>SNS Insider(第三層·未定位報告頁,not_found 未附網址)</td><td>高速 SerDes 收發(訊號鏈上游,台廠缺席環節)</td><td>2025 US$27.9 億</td><td>2033 US$61.4 億</td><td>10.45%(供對照價值分布)</td></tr>
+    <tr><td>MCIO 子市場</td><td><b>無任何具名研調口徑</b>(僅 Amphenol CMIO 技術簡報)</td><td>—</td><td>—</td><td>宏致「市佔 1%→10%」無第三方分母可驗;最近替代口徑=PCIe 連接器 2035 US$101.4 億(MRF)/2031 約 US$100 億(Fact.MR),均第三層</td></tr>
+  </table>
+  <p class="sub">研調品質分層:第一層(可引為錨)=650 Group(專營 AEC 季度追蹤)、LightCounting(光/銅纜專業);第二層=Research and Markets(彙編)、TrendForce(質性);第三層(僅供對照,不可為投資錨)=Intel Market Research、SNS Insider、WiseGuy/DataIntelo、Data Insights Market。<b>Dell'Oro 2026 預測(2025/12/16)未單獨發布 AEC/銅互連口徑=權威缺位確認。224G 連接器無研調單獨口徑——地面實證替代:Amphenol 1Q26 IT datacom +99% YoY(organic +81%)vs 傳統背板研調 CAGR 5-6.7%。</b></p>
+
+  <h3>催化劑時間軸(2025/10 → 2H27,18 個帶日期錨點)</h3>
   <ul>
-    <li><b>2025H2-2026H1:</b>GB300 NVL72 出貨放量(雲端預訂約 40 萬 GB300 node),延續 5,184 條 224G 銅纜背板用量<span class="conf c-high">進行中</span></li>
-    <li><b>2025/10:</b>scale-out AEC 用量升級:每伺服器 1→9 條(Credo 88% 受惠、$500 紫色線雙位數環比成長)<span class="conf c-high">進行中</span></li>
-    <li><b>2026/01(CES 2026):</b>NVLink6 規格確認:448G/lane 靠「雙向 SerDes 224G TX+224G RX」而非真 448G 單向=化解 224G vs 448G 分歧、per-GPU 頻寬翻倍至 3,600 GB/s<span class="conf c-high">已確認</span></li>
-    <li><b>2026:</b>PCIe Gen6/MCIO Gen6 放量(Molex NextStream;宏致 MCIO 卡位、高速線材 2Q26 量產);800G AEC 量產潮<span class="conf c-high">進行中</span></li>
-    <li><b>2026H2:</b>Vera Rubin NVL72/NVL144 量產(Jensen 指 Q3/Q4);canister 內改 PCB midplane+Paladin B2B「cableless」=銅纜背板價值重分配,最大結構變數<span class="conf c-med">確認在即</span></li>
-    <li><b>2026:</b>1.6T AEC/ACC 升級世代(貿聯 COMPUTEX 2026 展 1.6T+CPC/CPO;Luxshare/Marvell OFC 2026 展 hybrid AEC/ACC、448G CPC);近 ASIC CPC 世代化(Molex Impress)<span class="conf c-un">送樣→2026-27 放量</span></li>
-    <li><b>2026-2027:</b>AEC 晶片端競爭演進:Marvell Alaska A FY27 AEC+retimer 估年增逾倍、挑戰 Credo 88%;Astera 第三勢力(台廠線纜組裝仍受制三家)<span class="conf c-un">進行中</span></li>
-    <li><b>2027H2:</b>Rubin Ultra NVL576「Kyber」機架(600kW):銅 midplane「cable-free」、葉片直插、每櫃消除約 2 英里銅纜佈線+retimer 減少=scale-up 維持銅但價值再分配給 midplane/B2B<span class="conf c-un">路線圖</span></li>
+    <li><b>2025/10/13-16(OCP Global Summit 2025):</b>Credo 展 AI 高速連接;Luxshare 首發 448G KOOLIO CPC=中系技術追平訊號;FIT 展 224G CPC+OSFP 冷板<span class="conf c-high">已發生</span></li>
+    <li><b>2025/10/17(CNBC AEC 主流化專文):</b>Credo 紫纜 $300-500/條、份額 88%(650 Group Weckel 估)、1→9 條機會口徑(Weckel 具名原話)——台股 AEC 題材共同錨點<span class="conf c-high">已發生</span></li>
+    <li><b>2025/11:</b>貿聯公告收購新富生光電(XFS,$4,600 萬):MTP/MPO 光跳線技術;2026/1/5 併入合併報表(TechNews/中央社)<span class="conf c-high">已併表</span></li>
+    <li><b>2025/12/09(Marvell Golden Cable 生態倡議):</b>官方稿引 650 Group $6.44 億→$14 億;FIT 為首個 2 個月完成 AEC 設計的夥伴=AEC 晶片雙源化拉台鏈(FIT)入局、同時稀釋 Credo-貿聯軸線<span class="conf c-high">已發生</span></li>
+    <li><b>2026/01/06(CES 2026):</b>VR200 定名(NVL144→NVL72,package 口徑)+cableless 細節:黃仁勳宣布 VR NVL72 full production、2H26 volume;郭明錤:midplane 44 層 M9 CCL、組裝 2hr→5min、whip 60A→100A;NVLink6 448G/lane=雙向 SerDes(224G TX+RX)非真 448G、per-GPU 3.6TB/s<span class="conf c-high">已確認</span></li>
+    <li><b>2026/02/24-26(DesignCon 2026):</b>448G 卡位戰:立訊 448G CPC >90GHz、400mm@110GHz 實測;同展共識「448G SerDes 依然還不是現實」(光纖在線 2026/03/04)=448G 屬 2027+ 選擇權<span class="conf c-high">已發生</span></li>
+    <li><b>2026/03/17-19(OFC 2026):</b>Luxshare 448G CPC/1.6T AEC/ACC 續展+與 Marvell 合展 hybrid AEC/ACC;FIT 宣稱 1.6T 量產、224Gbps XPO loopback 實測<span class="conf c-high">已發生</span></li>
+    <li><b>2026/05/14(嘉澤法說):</b>1Q26 伺服器占比首破 50%(+60% YoY);H2 出貨 +15%;GM 49.55%;SOCAMM H2 出貨;QD 2Q26 量產起量<span class="conf c-high">已發生</span></li>
+    <li><b>2026/06/01(Credo FY26 全年財報+GTC Taipei):</b>FY26 $13.35 億(+205.7%)、FY27 指引 +80%+、光學 FY27 >$6 億;同日黃仁勳 GTC Taipei 宣示 Vera Rubin full production、150 家台灣供應商參與 ramp<span class="conf c-high">已發生</span></li>
+    <li><b>2026/06/02-05(COMPUTEX 2026):</b>貿聯展 MGX 生態 AEC/DAC、224G CPC、448G/lane、PCIe Gen6/7、800V HVDC(公司自述展品級);光環 6820 展 CPO/1.6T;嘉澤/宏致/嘉基未見具名互連展品報導<span class="conf c-med">已發生(展品級)</span></li>
+    <li><b>2026/06/11:</b>貿聯宣布收購 Interplex Datacom:EV $8.5 億+或有 $5,000 萬(約 NT$287 億);TTM 營收 $3.92 億;2H26 交割=無機成長量化錨;大摩維持加碼(目標價 3,665 元,法人估非財測)<span class="conf c-high">已宣布</span></li>
+    <li><b>2026/06/25(Digitimes):</b>VR200 疑慮排除:供應鏈駁斥疑慮、產品轉換 2Q26 完成、3Q26 起上行;與 2026/05/15 前篇構成第二源鏈;首批出貨目標 2026/7(鴻海/廣達/美超微/緯創驗證中)<span class="conf c-high">已發生</span></li>
+    <li><b>2026/07/10(六月營收全鏈公告):</b>貿聯 +63.79% 新高/宏致 +29.81% 首加速/嘉澤 +17.26%/宣德 +2.95%/嘉基 −9.2%;佳必琪 +45.2% 續創新高——鏈內分化錨:AEC/socket 強、MCIO 開始加速、線材小廠未反映<span class="conf c-high">已兌現</span></li>
+    <li><b>2026/07/29(Amphenol 2Q26 財報,13:00 ET):</b>指引 $81-82 億(+43-45%)、IT datacom 季增 low-teens——224G 全球景氣最高頻第三方驗證點(⚠ 財報日兩源分歧已裁決為 7/29 非 7/22)<span class="conf c-high">待發生</span></li>
+    <li><b>2026/08(台廠 2Q26 財報):</b>宏致 MCIO 毛利/EPS 兌現判準(對照 1Q26 EPS −51%);嘉基季減 19% 確認;貿聯 AEC 佔比與毛利結構;8 月底 Marvell FY27Q2(AEC/retimer 口徑、Golden Cable 進展)<span class="conf c-med">待發生</span></li>
+    <li><b>3Q26 底(VR200 NVL72 rack 量產):</b>2H26 出貨 5,000-7,000 櫃(郭明錤/供應鏈估非官方);Rubin CoWoS 2026 投片 300-350K 片;midplane/Paladin HD2/Gen6 新料號放量<span class="conf c-med">確認在即</span></li>
+    <li><b>2026/10(OCP Global Summit 2026):</b>448G/cableless/背板新品發表窗口;同季觀察:2H26 貿聯台南 shuffle box 產線投產、Interplex 交割、鴻呈北寧 4Q26 投產;Digitimes 2026/07:連接器業者共識 2H26 優於上半年(材料成本為變數)<span class="conf c-un">待發生</span></li>
+    <li><b>2H27(Kyber NVL576「backplane」世代):</b>Ray Wang:VR200/CPX 採 cableless midplane+CX9;Kyber 機架(NVL576,600kW)2H27 改 backplane 設計——spine 銅纜匣是否 PCB 化=2027 互連價值重分配關鍵觀察點(低信心);448G 銅 reach 數 cm 級→CPC/CPO 路線<span class="conf c-un">路線圖</span></li>
   </ul>
-  <div class="callout"><b>選股節奏:</b>現在就有營收(GB300 出貨中)=貿聯(AEC scale-out)、嘉澤(socket/插槽/UQD);多棒動能(PCIe Gen6/MCIO Gen6+800G→1.6T AEC)2026-27=宏致(MCIO/800G AEC,但當期 EPS 弱待兌現)。<b>勝負手=台廠能否從「線纜組裝」升級到「B2B/CPC 連接器+midplane 組裝」</b>(2026-27)。⚠ 對 cableless 重分配與晶片端缺席保持折價;宣德概念待放量;嘉澤/嘉基同集團勿雙計。</div>
+
+  <h3>短期 vs 長期節奏(選股節奏四段)</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>✅ 現在就有營收(2026H2)</b><br><b>貿聯</b>(6 月 85.18 億新高 +63.8%、H1 +33.97%)、<b>嘉澤</b>(6 月 +17.3%、伺服器占比 >50%)為台股雙主軸;watch 圈<b>佳必琪</b>(6 月 +45.2% 新高)動能更陡但 224G 訊號佔比未拆分。國際錨:Credo FY26 營收 3 倍、Amphenol IT datacom +99%=全球 224G 景氣是現在進行式非題材期;Digitimes 2026/07:連接器業者共識 2H26 優於上半年(成本為變數)。</div>
+    <div class="callout info" style="margin:0"><b>🔜 年內兌現觀察位(2026Q3-Q4)</b><br><b>宏致 MCIO</b>:6 月 +29.8% 為首個加速月(1-5 月累計僅 +12.2%),8 月 2Q26 財報=EPS 兌現判準;<b>VR200 3Q26 底量產</b>(midplane/Paladin HD2/Gen6 新料號);嘉澤 SOCAMM H2 出貨+QD 2Q26 量產起量;Amphenol 7/29 財報;貿聯 Interplex 2H26 交割+台南光通產線。</div>
+    <div class="callout" style="margin:0"><b>🎲 2027-2028 選擇權</b><br>① 1.6T AEC 放量(Marvell Alaska A GA/Credo FY27/立訊競逐;貿聯 1.6T=2H26 小量產、2027 放量的保守口徑);② 448G CPC/近 ASIC 銅(DesignCon 2026 共識 SerDes 未成熟=2027 後;Molex Impress 448G 驗證中);③ Kyber NVL576 背板 PCB 化(2H27);④ 嘉澤 NPO socket 2027/嘉基 CPO 線材;⑤ 宣德 AI MCIO——後兩者目前均無月營收證據,屬純選擇權,估值邏輯應與「現在有營收」組分開。</div>
+    <div class="callout warn" style="margin:0"><b>⚠️ 長期風險線</b><br>① 晶片端缺席天花板:Credo GM 68.3% vs 台廠連接器 20-50%,價值最高層吃不到;② 448G 世代銅 reach 縮至數 cm 級(PAM4 需約 112GHz)→價值向晶片/基板端移動,台股 448G 公開發表 0 件 vs 國際 4 家已 demo/驗證;③ 立訊 448G CPC/1.6T AEC 公開進度領先台廠;④ Credo 客戶集中(近 90% 營收來自極少數客戶)+光學轉向(FY27 光學 >$6 億、增量 50/50 銅光)沿 AEC 代工鏈傳導至貿聯/正崴;⑤ Kyber 背板重構(2H27)。</div>
+  </div>
+  <div class="callout"><b>選股節奏一句話:</b>現在有營收=貿聯(AEC scale-out)、嘉澤(socket/插槽);年內判準=宏致 8 月財報與 VR200 3Q26 量產;2027 選擇權(1.6T/448G/CPC)另計。<b>勝負手=台廠能否從「線纜組裝」升級到「B2B/CPC 連接器+midplane 組裝」</b>(2026-27)。⚠ 對 cableless 重分配與晶片端缺席保持折價;嘉基動能已由月營收反駁、宣德概念待放量;嘉澤/嘉基同集團勿雙計。</div>
 </div>
 
 <!-- 6 -->
-<h2 id="s6"><span class="n">6</span>投資警示與待查證 <span class="conf c-low">務必閱讀</span></h2>
-<div class="callout warn"><b>被對抗式查證否決/修正(請勿當既成事實):</b>
-  <ul>
-    <li><b>貿聯「自有 224G AEC 方案龍頭、AEC 強度純來自自有方案」:</b>需修正——Credo 10-K 揭露貿聯為 Credo AEC 主要/唯一第三方代工製造商(Foxlink 二供),即 scale-out AEC 霸主地位<b>主要建立在「Credo 88% 晶片的線纜組裝代工」之上、而非純自有 AEC IP</b>;正確口徑=「Credo AEC 代工霸主+自有方案並進」,組裝端硬佐證、純自有龍頭口徑須加註</li>
-    <li><b>「Rubin 沿用 5,184 條銅纜 spine、銅纜用量線性延續」:</b>須分層——VR canister 內確採 PCB midplane+Paladin B2B cableless(rack 內 tray 內飛線被取代);但 rack 級 spine cartridge 沿用銅纜(官方頁仍載 5,000 條)。<b>spine 與 canister 屬不同層級、不可線性外推</b>;激進說(spine 亦 PCB 化)為 2027 Kyber 觀察點、待查</li>
-    <li><b>嘉澤「NVIDIA 占比 2%→5-8% 為已證實」:</b>未證實、降級為公司自述——第三方僅證實 GPU socket 驗證中/爭 B300 二供/UQD 出貨逾 1 萬顆等定性事項,2%→5-8% 具體百分比無第三方逐筆佐證</li>
-    <li><b>宏致「市佔 1%→10%→20% 與 2026 營收 130 億/EPS 6 元為確定數據」:</b>口徑降級——多篇明標「法人估算/法人預估」及公司「希望」目標,非已實現;<b>1Q26 EPS 僅 0.67(年減 51%)=放量尚未反映當期</b>;第三方研調無獨立 MCIO 市佔可交叉驗證</li>
-    <li><b>宣德「為 AI MCIO 實質受惠股、2026 大量出貨已是當前主要動能」:</b>與其 2026/04 法說矛盾——自列主力為工控/遊戲機/低軌衛星,AI MCIO 僅送樣/期望=歸概念/早期送樣、非實質受惠</li>
-    <li><b>AEC 市場規模口徑:</b>採 Intel Market Research 狹義 US$7.38 億→35.7 億 CAGR 23.8%(與 650 Group 一致);US$87 億 CAGR 8% 是廣義含 AOC/工業彙整、可信度低、勿擇用</li>
-    <li><b>「Amphenol 被 cableless 殺死」:</b>誤讀——spine 銅纜延續+新增大量 Paladin HD2 B2B 連接器=Amphenol 是 cableless 世代最大受惠者(雙重受惠)</li>
-  </ul>
-</div>
-<div class="card"><h3>持續性兩劇本(用量暴增 vs cableless+晶片缺席)</h3>
-  <div class="g2 grid">
-    <div class="callout ok" style="margin:0"><b>多方:224G 用量結構性暴增(線纜組裝+連接器確定)</b><br>① scale-up NVL72 單櫃 5,184 條 224G 銅纜(GB300 約 40 萬 node);② scale-out AEC 1→9 條/伺服器(AEC 狹義 $7.38 億→35.7 億 CAGR 23.8%、高速銅纜整體 2029 $67 億);③ PCIe Gen6/MCIO Gen6 2026 放量;④ 1.6T AEC 2026-27 接棒;⑤ 台廠在連接器+線纜組裝有實質地位(貿聯自有 224G AEC、嘉澤前三大 socket、宏致 MCIO 1→10%)。銅互連是訊號出晶片後不可繞過、隨 GPU 密度線性放大。NVLink6 BiDi 達 448G、224G 通道延續至 Kyber(2H27)=結構續航無虞。</div>
-    <div class="callout warn" style="margin:0"><b>空方:cableless 重分配+晶片端缺席(保持折價)</b><br>① Rubin/Kyber cableless midplane(2H26 起)使 tray 內銅纜價值重分配給 midplane/B2B,純線纜組裝量恐萎縮、B2B 主導者仍 Amphenol;② <b>AEC 晶片端被 Credo(88%)+Marvell+Astera 壟斷,台廠只吃線纜組裝(低毛利、無 IP 護城河)</b>;③ NVLink 銅背板美中主導、台股 pure-play 陪跑(FIT 港股);④ retimer 用量隨 cableless/CPC 短距化是雙面刃;⑤ SerDes 收發台廠完全缺席;⑥ 法人估值(嘉澤 EPS 95/宏致 130 億)低可信、宏致當期 EPS 弱。</div>
+<h2 id="s6"><span class="n">6</span>受惠股估值方法 ＋ 試算(工具)</h2>
+<div class="card">
+  <p class="sub">通用估值方法 + 互動計算機(與淺色版同一工具)。下方預設填入貿聯量級<b>示意數字</b>(非財測)。本輪核心=224G 用量暴增 × 連接器/線纜組裝放量;但須分清量(確定)vs 晶片端缺席+cableless 重分配(折價)。</p>
+  <table>
+    <tr><th>方法</th><th>公式</th><th>適用情境</th><th>備註</th></tr>
+    <tr><td><b>PE</b></td><td>目標價 = EPS × PE</td><td>連接器/線纜</td><td>用量放大期 PE 拉升;晶片端缺席+cableless 風險折價</td></tr>
+    <tr><td><b>用量 × ASP</b></td><td>單櫃條數/連接器數 × 單價</td><td>本輪核心</td><td>5,184 條銅纜/AEC 1→9 條(機會口徑)× AEC ASP $300-500(CNBC);宏致新世代介面 $1.5-3 vs 傳統 $0.1;台廠吃組裝量、晶片價值外購</td></tr>
+    <tr><td><b>升級溢價</b></td><td>224G→1.6T AEC、Gen5→Gen6 MCIO</td><td>多棒動能</td><td>貿聯 1.6T(2H26 小量產、2027 放量)、宏致 800G AEC、嘉澤新平台針腳增帶 ASP 上行(至少 +15%)</td></tr>
+    <tr><td><b>cableless 重分配折價</b></td><td>tray 內線纜砍量 vs scale-out 補回</td><td>風險</td><td>勝負手=升級到 B2B/CPC 連接器;晶片端無 IP 護城河</td></tr>
+    <tr><td><b>無機成長(併購)</b></td><td>本業 + 收購標的營收併表</td><td>貿聯特有</td><td>Interplex Datacom TTM 營收 $3.92 億(約 NT$125 億量級)2H26 交割併入;新富生光電 2026/1/5 已併表——試算時分開列本業/併購貢獻</td></tr>
+  </table>
+  <h3>試算計算機(示意預設=貿聯量級,請填真實數字)</h3>
+  <div style="background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:16px">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" id="calcIn">
+      <div><label style="display:block;font-size:12px;color:var(--sub);margin-bottom:3px">基期營收(億元)</label><input id="rev" type="number" value="850" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--txt);font-size:14px"></div>
+      <div><label style="display:block;font-size:12px;color:var(--sub);margin-bottom:3px">營收成長率(%)</label><input id="g" type="number" value="15" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--txt);font-size:14px"></div>
+      <div><label style="display:block;font-size:12px;color:var(--sub);margin-bottom:3px">淨利率(%)</label><input id="npm" type="number" value="11" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--txt);font-size:14px"></div>
+      <div><label style="display:block;font-size:12px;color:var(--sub);margin-bottom:3px">流通股數(億股)</label><input id="sh" type="number" value="2" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--txt);font-size:14px"></div>
+      <div><label style="display:block;font-size:12px;color:var(--sub);margin-bottom:3px">目標 PE(x)</label><input id="pe" type="number" value="18" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--txt);font-size:14px"></div>
+      <div><label style="display:block;font-size:12px;color:var(--sub);margin-bottom:3px">EPS 成長率(%)</label><input id="epsg" type="number" value="20" style="width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--txt);font-size:14px"></div>
+    </div>
+    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="calcOut">
+      <div style="background:rgba(56,189,248,.10);border-radius:10px;padding:12px;text-align:center"><small style="display:block;color:var(--accent);font-size:12px">預估 EPS</small><b id="oEps" style="font-size:20px;color:#fff">—</b></div>
+      <div style="background:rgba(56,189,248,.10);border-radius:10px;padding:12px;text-align:center"><small style="display:block;color:var(--accent);font-size:12px">PE 目標價</small><b id="oPe" style="font-size:20px;color:#fff">—</b></div>
+      <div style="background:rgba(56,189,248,.10);border-radius:10px;padding:12px;text-align:center"><small style="display:block;color:var(--accent);font-size:12px">隱含 PEG</small><b id="oPeg" style="font-size:20px;color:#fff">—</b></div>
+      <div style="background:rgba(56,189,248,.10);border-radius:10px;padding:12px;text-align:center"><small style="display:block;color:var(--accent);font-size:12px">稅後淨利(億)</small><b id="oNi" style="font-size:20px;color:#fff">—</b></div>
+    </div>
   </div>
-  <p><b>裁決(verdict):</b><b>分層判斷(中性偏多,須區分環節)。【確定吃得到、可持續】線纜組裝+連接器:貿聯 3665(自有 224G AEC+Credo 代工霸主+HVDC 線束)為台股最確定主軸;嘉澤 3533(CPU socket 前三大+PCIe/UQD)、宏致 3605(MCIO 1→10%)為連接器/MCIO 結構受惠,PCIe Gen6/MCIO Gen6 與 800G→1.6T AEC 提供 2026-27 多棒動能。【缺席、不可持續溢價】224G SerDes/retimer 晶片端(Credo 88%+Marvell+Astera 壟斷)台廠無從切入、純組裝毛利受制於人。【最大下行變數】Rubin/Kyber cableless midplane 使 scale-up 銅纜背板價值重分配——對 Amphenol(B2B)利多、對純「銅纜組裝量」台廠潛在利空,惟 B2B/CPC 仍是銅互連、總價值未消失,<b>台廠能否從「線纜組裝」升級到「B2B/CPC 連接器與 midplane 組裝」是 2026-27 勝負手</b>。NVLink6 224G BiDi 已確認、銅互連續命至 Kyber。整體:題材真實且續航,但須以「連接器+線纜組裝台廠(貿聯/嘉澤/宏致)」為核心,對 cableless 重分配與晶片端缺席保持折價。</b></p>
+  <p class="sub">通用試算工具,預設值為貿聯量級示意、非財測(參考:貿聯 H1 2026 實績 441.11 億、全年千億目標達成率 44.1%)。法人口徑分開標註勿混用:貿聯 2026E EPS 66.6 元(市場彙整)vs 廣發 74.7/121.4/177 元(2026-2028,初評 2026/05/12、目標價 3,400 元);嘉澤 EPS 95、宏致 130 億/EPS 6 元——全部為法人估非財測、低可信勿直接套用(宏致 1Q26 EPS 0.67 對照)。嘉澤(規模最強)/宏致(當期 EPS 弱)股數與毛利差異大,務必填入標的真實數字。晶片端缺席+cableless 重分配=保持折價。僅供研究參考,不構成投資建議。</p>
 </div>
-<div class="card"><h3>結構性風險與開放問題</h3>
-  <ul>
-    <li><b>價值量歸屬:</b>晶片端(美中壟斷、高毛利)台廠吃不到;台廠吃量大利薄的實體互連端</li>
-    <li><b>cableless 重分配:</b>tray 內線纜被 PCB midplane 取代(scale-out 補回);勝負手=升級到 B2B/CPC 連接器</li>
-    <li><b>晶片依賴:</b>AEC 線纜組裝的 retimer 外購 Credo/Marvell=毛利受制於人、無 IP 護城河</li>
-    <li><b>口徑/法人估:</b>AEC 市場差 10 倍(採狹義)、公司自述市佔(嘉澤占比/宏致 1→10%)缺第三方、EPS 估值低可信</li>
-    <li><b>跨題交界:</b>PCB midplane 板材歸 CCL 鏈、與 #26 整機組裝題(NVLink 銅背板深做)、CPO/光模組另題;嘉澤/嘉基同集團勿雙計</li>
-    <li><b>開放問題(延伸 backlog):</b>貿聯自有 224G AEC(非 Credo 代工部分)出貨規模/客戶、1.6T 量產時程;Rubin cableless 對各家 cartridge/MCIO 營收逐家量化淨衝擊;Credo 88% 多源交叉;2027 Kyber spine 是否亦 PCB 化</li>
-  </ul>
+<!-- 7 -->
+<h2 id="s7"><span class="n">7</span>投資警示：被反駁完整表 ＋ 兩劇本裁決 ＋ 開放問題 <span class="conf c-low">務必閱讀</span></h2>
+
+<h3>被對抗式查證否決/修正完整表(技術版獨有;①〜⑰ 與淺色版同批,⑱〜㉔ 為技術版加列;2026/07/11 補強輪)</h3>
+<p class="sub">裁決規則:refuted=不入正文、僅此區留痕(含理由);correction=一律採用、原口徑留痕;unverified ⚪=不否定但不得寫成既成事實。逐條帶「正確口徑」供直接引用。</p>
+<table>
+  <tr><th>#</th><th>說法(前版/市場流通)</th><th>裁決</th><th>理由 / 正確口徑</th></tr>
+  <tr><td>①</td><td>貿聯「自有 224G AEC 方案龍頭/Credo 獨家代工」</td><td><span class="conf c-med">correction</span></td><td>Credo 10-K(SEC)同時具名 <b>BizLink 貿聯(主要製造商)與 Cheng Uei/Foxlink 正崴(第二源)</b>,均有 Development and Manufacturing Agreement——「獨家」不成立;正確口徑=「主要製造夥伴之一(主供)+自有方案並進」,組裝端 10-K 硬佐證、自有方案為公司自述;正崴因此獲 watch 一手代工錨</td></tr>
+  <tr><td>②</td><td>「Rubin 沿用 5,184 條銅纜、銅纜用量線性延續」/「cableless=砍 NVLink 銅背板」</td><td><span class="conf c-med">correction(分層)</span></td><td>VR NVL72 有兩層銅互連:rack 級 spine 銅纜匣<b>沿用</b>(Wheeler's Network 2025/11:NVLink6 雙向 SerDes、纜數 5,184 不變沿用 GB300 背板;SemiAnalysis 同判);tray 內 flyover 線纜改 44 層 PCB midplane+Paladin HD2 B2B——<b>層級重分配、不可線性外推亦非全砍</b>;spine 亦 PCB 化為 2H27 Kyber 觀察點</td></tr>
+  <tr><td>③</td><td>嘉澤「NVIDIA 占比 2%→5-8% 為已證實」</td><td><span class="conf c-med">correction(降級自述)</span></td><td>第三方僅證實 GPU socket 驗證中/QD 2025 約 1 萬顆、2Q26 量產等定性事項;2%→5-8% 為公司自述,另一說「Rubin 放量後至低雙位數」(市場彙整)——口徑分歧,引用標「公司/市場口徑 5-8% 至低雙位數不等,均自述」</td></tr>
+  <tr><td>④</td><td>宏致「市佔 1%→10%→20% 與 2026 營收 130 億/EPS 6 元為確定數據」</td><td><span class="conf c-med">correction(降級)</span></td><td>多篇明標「法人估算/公司希望」;<b>MCIO 子市場無任何第三方研調分母可驗</b>;1Q26 EPS 僅 0.67 元(年減 51%)、稅後淨利 1.07 億(年減 47%)=放量尚未反映當期;6 月 +29.81% 為首個加速月,獲利兌現待 8 月 2Q26 財報——固定格式「公司自述+法人估,非財測」</td></tr>
+  <tr><td>⑤</td><td>宣德「為 AI MCIO 實質受惠股、2026 大量出貨已是當前主要動能」</td><td><span class="conf c-low">refuted(維持 watch)</span></td><td>與其 2026/04 法說矛盾(自列主力=工控/遊戲機組裝/低軌衛星、AI MCIO 僅送樣);<b>2026/06 營收僅 +2.95%、H1 106.11 億年減 2.2%</b>(TechNews 2026/07/09)——月營收反證成立,歸概念/早期送樣、不升格</td></tr>
+  <tr><td>⑥</td><td>「AEC 市場 80-90 億美元」大口徑(US$87 億→174 億 CAGR 8%)</td><td><span class="conf c-med">correction(勿用)</span></td><td>廣義口徑混入 EV 線束/5G/AOC(WiseGuy/DataIntelo 報告農場),為狹義的 13.5 倍;同一「AEC」標籤 2025 口徑 $2.45 億~$87 億、極差 35 倍——主口徑採 <b>650 Group 狹義資料中心 AEC 線纜 $6.44 億(2025)→$14 億(2029)</b>(載於 Marvell 2025/12/09 官方稿)</td></tr>
+  <tr><td>⑦</td><td>「Amphenol 被 cableless 殺死」</td><td><span class="conf c-low">refuted</span></td><td>spine 銅纜匣延續+新增大量 Paladin HD2 B2B 連接器=雙重受惠;地面實證:1Q26 IT datacom 年增 99%(organic +81%)、訂單 $94 億創紀錄(8-K 2026/04/29)</td></tr>
+  <tr><td>⑧</td><td>「NVIDIA 官方 VR NVL72 產品頁明載 spine 四組 cable cartridges/5,000+ 銅纜/2 英里」(前版正文口徑)</td><td><span class="conf c-low">refuted(出處更正)</span></td><td>直接核對 VR200 官方頁:<b>無</b> spine 纜數/cartridge/2 英里任何字樣,頁面僅載「cable-free modular tray designs」+NVLink6 260TB/s/3.6TB/s per GPU——出處張冠李戴(該敘述屬 GB200 官方 blog 語言);<b>spine 沿用結論不變</b>,出處改掛 Wheeler's Network(2025/11)+SemiAnalysis,「5,000+/2 英里/省 20kW」掛 NVIDIA GB200 Developer Blog</td></tr>
+  <tr><td>⑨</td><td>「Credo AEC 份額 88%→70%(2026/04 估)」侵蝕說</td><td><span class="conf c-un">unverified ⚪</span></td><td>2026/07 多輪查證無任何具名研調/媒體給出「70%」更新;88%(2025/10 CNBC/Weckel)與 73%(2Q25 部落格轉述)均為 650 Group 不同時點浮動估計;方向性侵蝕(Marvell Golden Cable/Astera Taurus/立訊)有具名據點但數字無源——固定寫法「650 Group 口徑 73–88% 區間(2025),2026 未見具名更新」;Credo FY26 +205.7% 顯示年內未見侵蝕反映於營收</td></tr>
+  <tr><td>⑩</td><td>貿聯「1.6T 產品年出貨量突破千萬支、非 NVIDIA 陣營大規模出貨」</td><td><span class="conf c-un">unverified ⚪</span></td><td>僅投顧/部落格轉述,無公司財測、法說逐字稿或第三方研調;與 Threads 法說 QA 轉述「1.6T 2H26 小量產、2027 放量」矛盾——兩說並陳、引用取保守口徑</td></tr>
+  <tr><td>⑪</td><td>貿聯光通訊收購對象「鑫富盛」</td><td><span class="conf c-low">refuted(勘誤)</span></td><td>公司名誤植:正確為深圳「<b>新富生光電</b>」(XFS,EV $4,600 萬≈14 億台幣,2025/11 公告、2026/1/5 併表;MTP/MPO 高密度連接器/跳線/尾纖;TechNews/中央社/鉅亨)——與 Interplex Datacom(EV $8.5 億,2026/6/11 宣布、2H26 交割)為兩件獨立收購勿混</td></tr>
+  <tr><td>⑫</td><td>太康精密 6833「已掛牌(非興櫃)」</td><td><span class="conf c-low">refuted</span></td><td>工商時報:2021/6/1 興櫃掛牌;財報狗 2026 現況仍興櫃——依護欄興櫃不入 holds/watch、僅 notes 留名;且為信邦 3023 持股 57% 子公司(第二大股東緯創),勿與信邦雙計</td></tr>
+  <tr><td>⑬</td><td>「維峰 6913」列 watch 候選</td><td><span class="conf c-med">correction(股號消歧)</span></td><td>台股 6913=<b>鴻呈實業</b>(AI 伺服器高速線/水冷,上市);維峰電子=深交所 301328.SZ 非台股——watch 已以鴻呈為 6913 正確主體收錄</td></tr>
+  <tr><td>⑭</td><td>TheValueist(X):「rack 級 midplane 取代 cable-cartridge spine」(cableless 全砍激進說)</td><td><span class="conf c-low">refuted</span></td><td>被三重證據共同否決:VR200 官方頁(cable-free 僅指 modular tray)+郭明錤 tray 級口徑(44 層 midplane/M9 CCL/2hr→5min)+StorageReview CES 2026(cable-free tray 僅 PCB+連接器、服務時間縮 18 倍)——裁決=層級重分配(spine 沿用/tray flyover 消失/midplane+B2B 新生/MCIO 部分吸收)</td></tr>
+  <tr><td>⑮</td><td>佳必琪「NVIDIA Vera Rubin Tier 1 直接供應商」</td><td><span class="conf c-un">unverified ⚪</span></td><td>僅投顧/媒體轉述(CMoney/優分析),無 NVIDIA 官方或國際第二源;GB300 產品線=60A ORV3 Power Whip/busbar/PCIe Gen6 內部線——列名採信但角色與料號標「媒體引述、未逐項佐證」;升格 holds 候選靠月營收動能(6 月 +45.2% 續創新高)而非此宣稱</td></tr>
+  <tr><td>⑯</td><td>嘉基「客製化高階連接模組 2026 上半放量」</td><td><span class="conf c-low">refuted(月營收反證)</span></td><td>2026 年 4-6 月營收連三月年減(1.64 億 −11.58%/1.19 億 −26.01%/1.31 億 −9.2%,6 月為彙整站數據、MOPS 公告為準)、2Q26 約 4.14 億季減約 19%——與 1Q26 毛利率 40% 的產品升級敘事背離;holds 卡動能已下修,2Q26 財報若再弱應下修評分</td></tr>
+  <tr><td>⑰</td><td>「AEC 每伺服器 1→9 條出處為 0、應維持 unverified」(前輪查證判定)</td><td><span class="conf c-med">correction(改 confirmed)</span></td><td>CNBC 2025/10/17 原文含 650 Group 分析師 Alan Weckel 具名原話 "In the past, Credo's opportunity was one cable per server, but now Credo's opportunity is nine cables per server"——前輪「出處 0」判定被裁決推翻;惟屬<b>機會(opportunity)口徑非實際配置口徑</b>,引用必帶此標註</td></tr>
+  <tr><td>⑱</td><td>宏致高速連接器產能「200 萬→500 萬顆/月」與「40 萬→200 萬顆/月」互相矛盾</td><td><span class="conf c-med">correction(帶時點)</span></td><td>兩組均屬實、時點不同:2025 報導口徑=月產能 40 萬→100 萬→年底 200 萬顆(理財周刊/優分析);2026 MoneyDJ 口徑=已從約 200 萬顆擴至約 500 萬顆/月、高速線材 2Q26 量產約 20 萬條/月——引用一律帶時點,避免「5 倍」與「2.5 倍」兩敘事打架</td></tr>
+  <tr><td>⑲</td><td>「貿聯 2026E EPS 66.6 元=廣發口徑」</td><td><span class="conf c-med">correction(機構分開)</span></td><td>混用勘誤:廣發(2026/05/12 初評買進、合理股價 3,400 元)自估 2026-2028 EPS 為 <b>74.7/121.4/177 元</b>;66.6 元(+42%)為另一市場法人彙整口徑——不同機構分開標註,均為法人估非財測;大摩目標價 3,665 元(2026/06)為第三家</td></tr>
+  <tr><td>⑳</td><td>Amphenol 2Q26 財報日 7/22</td><td><span class="conf c-med">correction</span></td><td>兩源分歧裁決:<b>2026/07/29 13:00 ET</b>(Investing.com/TipRanks 一致)——催化劑時間軸統一用 7/29</td></tr>
+  <tr><td>㉑</td><td>Credo FY2026「迄 2026/04」</td><td><span class="conf c-med">correction</span></td><td>Credo 財年止於最接近 4/30 的週六——正確為「FY2026(迄 2026/5/2)」;「至 2026/04」為近似寫法</td></tr>
+  <tr><td>㉒</td><td>「224G 晶片端台股完全缺席」</td><td><span class="conf c-med">correction(窄化)</span></td><td>AEC DSP/retimer/224G SerDes 台股缺席維持;但 ACC 類比晶片資產已由譜瑞-KY 4966 集團 2025/4 以 $900 萬購自 Spectra7(交割淨現金 $644 萬;PR Newswire/eeNews)——「幾乎缺席(ACC 類比小額例外)」;規模 $9M 級不足以撐受惠評分的判讀保留</td></tr>
+  <tr><td>㉓</td><td>Marvell Alaska A=「業界首款 1.6T PAM4 AEC DSP」</td><td><span class="conf c-high">confirmed(窄口徑)</span></td><td>Marvell 自稱、但發布時點(2024/6)早於同級品,窄口徑成立——引用帶「公司自稱+時點」;規格 5nm、8×200G lanes、reach >3m</td></tr>
+  <tr><td>㉔</td><td>舊版 AEC 市場主錨=Intel Market Research US$7.38 億(2025)→35.74 億(2034)CAGR 23.8%</td><td><span class="conf c-med">correction(降級退役)</span></td><td>Intel Market Research 屬報告農場級——本輪主錨改 <b>650 Group $6.44 億→$14 億</b>(經 Marvell 官方稿載明)、LightCounting 為 DAC+ACC+AEC 合計口徑、TrendForce 為第三家權威質性;Intel MR 各版數字(量級與 650 Group 相符)僅留第三層對照、不再作投資錨</td></tr>
+</table>
+
+<div class="card"><h3>持續性兩劇本(用量暴增 vs cableless+晶片缺席)＋ 裁決</h3>
+  <div class="g2 grid">
+    <div class="callout ok" style="margin:0"><b>多方:224G 用量結構性暴增(線纜組裝+連接器確定,且已由財報/月營收兌現)</b><br>① scale-up NVL72 單櫃 5,184 條 224G 銅纜(SemiAnalysis 拆解;官方 blog 5,000+/2 英里),GB300→VR200 spine 沿用;② scale-out AEC 機會密度 1→9 條/伺服器(650 Group Weckel,機會口徑);AEC 狹義 $6.44 億(2025)→$14 億(2029,650 Group)、高速銅纜合計 2029 $67 億(LightCounting);③ PCIe Gen6/MCIO Gen6 隨 VR200(3Q26)放量;④ 1.6T AEC 2026-27 接棒(Marvell Alaska A ready);⑤ 台廠實質地位有一手佐證(貿聯=Credo 10-K 主供+正崴第二源、嘉澤全球前三大 socket、宏致 MCIO 挑戰者)。<b>兌現證據:貿聯 6 月 85.18 億歷史新高(+63.79%)、H1 +33.97%;宏致 6 月 +29.81% 首加速;Credo FY26 營收 +205.7%;Amphenol IT datacom +99%</b>——224G 景氣是現在進行式非題材期。NVLink6 BiDi 達 448G/lane、224G 通道延續至 Kyber(2H27)=結構續航無虞。</div>
+    <div class="callout warn" style="margin:0"><b>空方:cableless 重分配+晶片端缺席(保持折價)</b><br>① Rubin cableless midplane(3Q26 起)使 tray 內銅纜價值重分配給 midplane/B2B,純線纜組裝量恐萎縮、B2B 主導者仍 Amphenol;② <b>AEC 晶片端被 Credo(73–88% 區間)+Marvell+Astera 壟斷,台廠只吃線纜組裝(無 IP 護城河;Credo GM 68.3% vs 台廠連接器 20-50%)</b>;③ NVLink 銅背板美中主導、台股 pure-play 陪跑(FIT 港股);④ 立訊 448G CPC/1.6T AEC 公開 demo 領先(台股 448G 公開發表 0 件);⑤ Credo 客戶集中(近 90% 營收來自極少數客戶)+光學轉向(FY27 光學 >$6 億)沿代工鏈傳導至貿聯/正崴;⑥ 法人估值低可信(嘉澤 EPS 95/宏致 130 億/貿聯兩機構口徑),宏致當期 EPS 弱(1Q26 −51%)、嘉基動能已被月營收反駁;⑦ 448G 世代銅 reach 縮至數 cm 級→價值向晶片/基板端移動;⑧ 2H27 Kyber 背板重構(低信心)。</div>
+  </div>
+  <p><b>裁決(verdict):</b><b>分層判斷(中性偏多,須區分環節)。【確定吃得到、可持續】線纜組裝+連接器:貿聯 3665(Credo 10-K 主供+自有 224G AEC+雙收購無機成長;6 月營收歷史新高)為台股最確定主軸;嘉澤 3533(CPU socket 前三大+PCIe 插槽;伺服器占比 >50%)、宏致 3605(MCIO 挑戰者;6 月首加速、8 月財報為 EPS 判準)為連接器/MCIO 結構受惠,PCIe Gen6/MCIO Gen6 與 800G→1.6T AEC 提供 2026-27 多棒動能。【缺席、不可持續溢價】224G SerDes/retimer 晶片端(Credo 73–88% 區間+Marvell+Astera 壟斷;譜瑞 ACC $9M 例外)台廠無從切入、純組裝毛利受制於人。【最大下行變數】Rubin/Kyber cableless midplane 使 scale-up 銅互連價值重分配——對 Amphenol(B2B)利多、對純「銅纜組裝量」台廠潛在利空,惟 B2B/CPC 仍是銅互連、總價值未消失,<b>台廠能否從「線纜組裝」升級到「B2B/CPC 連接器與 midplane 組裝」是 2026-27 勝負手</b>。NVLink6 224G BiDi 已確認、銅互連續命至 Kyber。整體:題材真實且已由月營收/國際財報兌現,但須以「連接器+線纜組裝台廠(貿聯/嘉澤/宏致)」為核心,對 cableless 重分配與晶片端缺席保持折價;嘉基/宣德不作主軸。</b></p>
 </div>
 
-<!-- 7 -->
-<h2 id="s7"><span class="n">7</span>資料來源(含網址)</h2>
-<p class="sub">品質:<span class="src-q q-primary">primary</span> <span class="src-q q-secondary">secondary</span> <span class="src-q q-blog">blog</span></p>
+<div class="card"><h3>結構性風險與開放問題(完整清單,技術版獨有)</h3>
+  <h3 style="font-size:15px;margin-top:6px">A. 結構性風險</h3>
+  <ul>
+    <li><b>價值量歸屬:</b>晶片端(美系壟斷、Credo GM 68.3%/Astera GM 76.3%)台廠吃不到;台廠吃量大利薄的實體互連端(連接器 GM 約 20-50%)</li>
+    <li><b>cableless 重分配:</b>tray 內線纜被 PCB midplane 取代(scale-out 補回);勝負手=升級到 B2B/CPC 連接器與 midplane 組裝(2026-27)</li>
+    <li><b>晶片依賴:</b>AEC 線纜組裝的 retimer DSP 外購 Credo/Marvell/Astera=毛利受制於人、無 IP 護城河;Credo 客戶集中度(近 90% 營收來自極少數客戶)+光學轉向沿代工鏈傳導</li>
+    <li><b>陸系競爭:</b>立訊 448G KOOLIO CPC(DesignCon 2026 實測 400mm@110GHz)/1.6T AEC 公開 demo 領先台廠;Marvell Golden Cable 拉 FIT(2 個月完成 AEC 設計)入局=Credo-貿聯軸線稀釋</li>
+    <li><b>448G 世代天花板:</b>銅 reach 縮至數 cm 級(PAM4 需約 112GHz/PAM6 約 174GBd/90GHz)→價值向晶片/基板端移動,台股 448G 公開發表 0 件 vs 國際 4 家(Luxshare/Molex/TE/Amphenol)已 demo/驗證</li>
+    <li><b>口徑/法人估:</b>AEC 口徑極差 35 倍(採 650 Group 狹義)、MCIO 無研調分母、公司自述市佔(嘉澤占比/宏致 1→10%)缺第三方、法人 EPS 均非財測</li>
+    <li><b>跨題交界:</b>PCB midplane 板材歸 CCL 鏈、NVLink 銅背板與 #26 整機組裝題交界、CPO/光模組另題、UQD 歸散熱鏈;嘉澤/嘉基母子與信邦/太康(57% 子公司)勿雙計</li>
+  </ul>
+  <h3 style="font-size:15px">B. 開放問題/交界區塊(open segments,6 項)</h3>
+  <table>
+    <tr><th>區塊</th><th>歸屬</th><th>驅動 / 現狀</th><th>備註(不雙計線)</th></tr>
+    <tr><td><b>PCB midplane 板材升級</b></td><td>CCL/PCB 鏈</td><td>Rubin cableless 改 44 層(22+22)M9 CCL(EM896K3)midplane、約 420×60mm、組裝 2hr→5min(郭明錤 2026/01);板面積 GB300→VR NVL72 約 ×2.3、M8/M9 CCL+HVLP 銅箔(前版口徑)</td><td>受惠主體台光電 2383/聯茂 6213/台燿 6274/金像電 2368 歸 CCL/PCB 鏈題(見高階CCL-HVLP guide),本題只標交界、不重複計分</td></tr>
+    <tr><td><b>AEC/retimer/SerDes 晶片端</b></td><td>高速互連晶片(美系)</td><td>Credo(73–88% 區間 2025,⚪2026 無具名更新)+Marvell Alaska A+Astera Taurus;224G SerDes IP=NVIDIA/Broadcom/Synopsys/Alphawave</td><td>台股幾乎缺席;譜瑞-KY 4966 ACC 類比 $9M 小額入列;聯發科 224G SerDes 切 Google TPU 歸 AI ASIC 題;監控晶片端供需(影響台廠代工量與毛利)</td></tr>
+    <tr><td><b>UQD 液冷快接+800VDC 電力線束</b></td><td>AI 散熱/電源互連</td><td>液冷一體設計帶動 UQD;VR200 whip 60A→100A;800V HVDC 機櫃線束(貿聯 110kW 展品)</td><td>嘉澤 QD(2025 約 1 萬顆、2Q26 量產;⚪MP Ready 進度待更新)非獨佔——Stäubli UQD/MQD 相容 VR200+入 NVIDIA 推薦名單;交界元件不計互連分</td></tr>
+    <tr><td><b>448G/近 ASIC CPC 世代卡位(2027+)</b></td><td>本題延伸</td><td>448G 銅 reach 數 cm 級→CPC/近封裝銅+CPO;OIF 標準化中(Google 100K+ TPU 集群需求);Molex Impress(448G 驗證中)/Luxshare KOOLIO(實測)/TE/Amphenol 開發中</td><td>台股 448G 公開產品/demo=0 件(2026/07 裁決);台廠入場券取決於 CPC 纜組代工格局;FIT(港股)224G CPC=鴻海間接;列 rhythm 長期風險、不列現期反駁</td></tr>
+    <tr><td><b>Kyber NVL576 背板重構(2H27)</b></td><td>本題延伸</td><td>Ray Wang(2025/10):Kyber rack 2H27 改 backplane 設計——spine 銅纜匣面臨 PCB 化重構(blog 級單源、低信心)</td><td>2027 後最大架構變數:多方=B2B/高層數 PCB 受惠;空方=spine 銅纜匣供應鏈重構;追蹤 OCP 2026(10 月)與 CES 2027</td></tr>
+    <tr><td><b>光通訊/CPO 交界(貿聯雙軌)</b></td><td>光模組/CPO 鏈</td><td>貿聯收購新富生光電($46M,已併表,MPO/跳線)+台南 shuffle box 產線 2H26;Credo FY27 光學 >$6 億=上游客戶自身轉光</td><td>光模組/CPO 本體排除於本題;此處只標貿聯由銅纜向 1.6T 光互連雙軌延伸的交界事證與光環 6820(COMPUTEX 2026 展 CPO/1.6T)——不計入本題受惠評分</td></tr>
+  </table>
+  <h3 style="font-size:15px">C. 延伸查證 backlog(下輪優先)</h3>
+  <ul>
+    <li>貿聯自有 224G AEC(非 Credo 代工部分)出貨規模/客戶第三方佐證;1.6T 量產時程兩說(⑩)以法說逐字稿定案;Interplex Datacom 2H26 交割完成與併表口徑</li>
+    <li>Credo 份額 2026 具名更新(650 Group 付費報告口徑)——「73–88% 區間」何時有新錨;FY27 光學轉向對 AEC 代工鏈(貿聯/正崴)訂單結構影響</li>
+    <li>宏致 8 月 2Q26 財報:MCIO 放量是否反映毛利/EPS(對照 1Q26 EPS 0.67);MCIO 子市場是否出現第三方研調分母</li>
+    <li>嘉澤 UQD MP Ready 進度+CPU socket 針腳 5,000→7,000+ 時程(前版口徑,待 2026H2 法說更新);NVIDIA 占比口徑(5-8% vs 低雙位數)收斂</li>
+    <li>嘉基 2Q26 財報確認季減約 19% 與評分去留;佳必琪 Vera Rubin 料號級佐證(升格 holds 判準);正崴 AEC 相關營收可辨識性(升格判準)</li>
+    <li>watch 圈月營收補查:萬旭 6 月、健和興 6 月(MOPS)、鴻呈 6 月;7 月營收全鏈 8/10 前公告刷新</li>
+    <li>Rubin cableless 對各家 cartridge/MCIO 營收逐家 BOM 級量化淨衝擊;NVL72 銅背板 cartridge 單櫃價值量估算(SemiAnalysis「每板數千美元、主要在連接器」之細化)</li>
+    <li>2H27 Kyber spine 是否 PCB 化(OCP 2026/CES 2027 觀察);448G 台廠首個公開 demo 何時出現</li>
+  </ul>
+  <div class="callout info"><b>下次刷新錨:</b>2026/07/29 Amphenol 2Q26 財報 → 2026/08 台廠 2Q26 財報(宏致 EPS 兌現/嘉基去留/貿聯 AEC 佔比)→ 8 月底 Marvell FY27Q2 → 3Q26 底 VR200 rack 量產 → 2026/10 OCP Global Summit;7 月營收 8/10 前公告。</div>
+</div>
+
+<!-- 8 -->
+<h2 id="s8"><span class="n">8</span>資料來源(分層帶 URL)</h2>
+<p class="sub">經 Workflow 研究與對抗式查證(2026/07/11 補強輪)。品質:<span class="src-q q-primary">primary</span> 官方/SEC/一手 <span class="src-q q-secondary">secondary</span> 權威媒體/研調 <span class="src-q q-blog">blog</span> 部落格/社群/彙整(降權);not_found=本輪未定位原文、未附網址。</p>
 <div class="card">
-  <div class="src-item"><a href="https://www.nvidia.com/" target="_blank">NVIDIA 官方/OCP/CES 2026</a> — NVL72 5,184 條銅纜 cartridge、VR NVL72 spine 沿用 5,000 銅纜/2 英里、NVLink6 448G(雙向 SerDes)、cableless midplane、Kyber NVL576<span class="src-q q-primary">primary</span></div>
-  <div class="src-item"><a href="https://www.sec.gov/" target="_blank">Credo 10-K(SEC)</a> — 揭露貿聯為 Credo AEC 主要/唯一第三方代工製造商(Foxlink 二供)<span class="src-q q-primary">primary</span></div>
-  <div class="src-item">貿聯/嘉澤/宏致/嘉基/宣德 2026 法說與月營收(公開申報)— 各家 EPS、伺服器占比、市佔自述、AEC/MCIO 進度<span class="src-q q-primary">primary</span></div>
-  <div class="src-item"><a href="https://www.semianalysis.com/" target="_blank">SemiAnalysis</a> / wheelersnetwork / ServeTheHome / DCD — Rubin cableless midplane、Paladin HD2 B2B、PCB 板面積 ×2.3、Kyber 銅 midplane<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item"><a href="https://www.cnbc.com/2025/10/17/" target="_blank">650 Group / CNBC(2025/10)</a> — Credo AEC 市佔約 88%、每伺服器 1→9 條;Intel Market Research(AEC $7.38 億→35.7 億)/LightCounting(2029 $67 億)/SNS Insider(SerDes)<span class="src-q q-secondary">secondary</span></div>
-  <div class="src-item">vocus/cmoney/經濟日報/工商(嘉澤伺服器破 5 成/UQD、宏致 MCIO 1→10% 法人估、宣德 MCIO 送樣);TheValueist(X,spine 亦 PCB 化激進說、待查)<span class="src-q q-blog">blog</span></div>
+  <h3>一手(primary)</h3>
+  <div class="src-item"><b>NVIDIA Developer Blog:GB200 NVL72 OCP 貢獻文</b> — 佐證 spine 官方口徑「5,000+ 條、逾 2 英里、以銅代光每櫃省約 20kW」。<a href="https://developer.nvidia.com/blog/nvidia-contributes-nvidia-gb200-nvl72-designs-to-open-compute-project/" target="_blank">developer.nvidia.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>NVIDIA Vera Rubin NVL72 官方產品頁</b> — 經直接核對:僅載「cable-free modular tray designs」與 NVLink6 260TB/s、3.6TB/s per GPU,<b>無</b> spine 纜數/cartridge/2 英里字樣(前版出處誤植已更正,見被反駁區 ⑧)。<a href="https://www.nvidia.com/en-us/data-center/vera-rubin-nvl72/" target="_blank">nvidia.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Credo FY26 Q4/全年業績新聞稿(Business Wire,2026/06/01)</b> — FY2026(迄 2026/5/2)營收 $13.35 億(+205.7%)、4Q $4.37 億(+157%)、non-GAAP GM 68.3%、淨利 $6.62 億、FY27 指引 +80%+、光學 FY27 >$6 億。<a href="https://www.businesswire.com/news/home/20260601641616/en/Credo-Technology-Group-Holding-Ltd-Reports-Fourth-Quarter-and-Fiscal-Year-2026-Financial-Results" target="_blank">businesswire.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Credo 10-K(SEC EDGAR,FY24 crdo-20240427;FY25/FY26 續揭)</b> — AEC 製造夥伴兩家:BizLink 貿聯(主供)+Cheng Uei/Foxlink 正崴(第二源)——「獨家代工」不成立的一手依據。<a href="https://www.sec.gov/Archives/edgar/data/1807794/000162828024029629/crdo-20240427.htm" target="_blank">sec.gov(10-K)</a>;FY26 8-K EX-99.1:<a href="https://www.sec.gov/Archives/edgar/data/0001807794/000162828026039474/credoq42026ex-991.htm" target="_blank">sec.gov(8-K)</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Amphenol 1Q26 業績(8-K EX-99.1,2026/04/29)</b> — 營收 $76 億(+58%,organic +33%)、IT datacom 佔 41%/+99%(organic +81%)、訂單 $94 億、book-to-bill 1.24、adj EPS $1.06、2Q26 指引 $81-82 億(+43-45%)。<a href="https://www.sec.gov/Archives/edgar/data/0000820313/000110465926050984/aph-20260429xex99d1.htm" target="_blank">sec.gov</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Amphenol CS Paladin HD2 datasheet</b> — 224G PAM4 背板系統、與 112G 版共用介面、1U 支援 144 對——VR200 B2B 元件一手規格。<a href="https://cdn.amphenol-cs.com/media/wysiwyg/files/documentation/datasheet/backplane/bpl_paladin_hd2.pdf" target="_blank">amphenol-cs.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Astera Labs 1Q26 業績新聞稿(2026/05/05)</b> — $3.084 億(+93%)、Taurus AEC 多專案量產、GM 76.3%、2Q26 guide $355-365M——Credo 侵蝕方向具名證據(未給市佔數字)。<a href="https://ir.asteralabs.com/news-releases/news-release-details/astera-labs-reports-first-quarter-2026-financial-results" target="_blank">ir.asteralabs.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Marvell Golden Cable 倡議新聞稿(2025/12/09)+Alaska A 1.6T AEC DSP</b> — 官方稿載 650 Group AEC $6.44 億(2025)→$14 億(2029);FIT 為首個 2 個月完成 AEC 設計的夥伴;Alaska A=5nm、8×200G、reach >3m。<a href="https://www.marvell.com/company/newsroom/marvell-launches-strategic-initiative-to-accelerate-aec-ecosystem-and-hyperscaler-adoption.html" target="_blank">marvell.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Molex Impress CPC 發布(PR Newswire,2026/02/20)</b> — 近 ASIC 壓接式 CPC:224G 現貨、336G/448G 驗證中——448G 路線圖錨。<a href="https://www.prnewswire.com/news-releases/molex-launches-impress-co-packaged-copper-solutions-scaling-near-asic-connectivity-innovations-to-meet-next-generation-data-rate-demands-302689580.html" target="_blank">prnewswire.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Luxshare 官方(OCP 2025/OFC 2026)</b> — 448G KOOLIO CPC、1.6T AEC/ACC demo、與 Marvell 合展 hybrid AEC/ACC——陸系競爭反方線一手。<a href="https://en.luxshare-tech.com/company/resources/news/33.html" target="_blank">en.luxshare-tech.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>BizLink 貿聯 COMPUTEX 2026 新聞稿</b> — MGX 生態 AEC/DAC、224G CPC、448G/lane、PCIe Gen6/7、800V HVDC 展品(公司自述展品級)。<a href="https://www.bizlinktech.com/news/bizlink-showcases-ai-infrastructure-interconnect-solutions-supporting-the-nvidia-mgx-ecosystem-at-computex-2026" target="_blank">bizlinktech.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>FIT 鴻騰 OFC 2026 新聞稿</b> — 1.6T 量產宣稱、224Gbps XPO loopback 實測、雲端/DC 2026E +70%(公司自述)——鴻海 2317 間接曝險事證。<a href="https://www.fit-foxconn.com/main/modules/MySpace/BlogInfo.php?xmlid=28215" target="_blank">fit-foxconn.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Lenovo GB300 NVL72 Product Guide</b> — 18 compute tray+9 switch tray 經 cable cartridge backplane 互連=GB300 世代銅纜匣沿用一手;NVL36x2 DensiLink 324 條/每套 >$10,000 為 SemiAnalysis 口徑。<a href="https://lenovopress.lenovo.com/lp2357-lenovo-nvidia-gb300-nvl72-rack-scale-ai" target="_blank">lenovopress.lenovo.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>TE Connectivity 224G 產品頁(AdrenaLINE)</b> — Catapult 近晶片/Slingshot cabled backplane/micro LGA/自產 224G 線纜——背板與近晶片國際第二供應商證據。<a href="https://www.te.com/en/industries/data-centers-ai/technologies/224g-gigabit-ethernet-solution.html" target="_blank">te.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>Stäubli 官方新聞稿(2026)</b> — UQD/MQD 依 NVIDIA 規格、相容 VR200、入 NVIDIA 推薦供應商清單——QD 環節非嘉澤獨佔的反方一手。<a href="https://www.staubli.com/global/en/news/global/2026/uqd-mqd-vera-rubin-nvidia-staubli.html" target="_blank">staubli.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>650 Group AEC 報告頁</b> — AEC 專門季度報告(線纜+晶片份額、5 年預測)存在證明;2026 最新數字未公開(付費)。<a href="https://650group.com/reports/active-electrical-cables-aec/" target="_blank">650group.com</a><span class="src-q q-primary">primary</span></div>
+  <div class="src-item"><b>OIF 448G AI workshop 資料(2025)</b> — 448G 標準化與 Google 100K+ TPU 集群需求——448G 世代路線的標準組織一手。<a href="https://www.oiforum.com/wp-content/uploads/OIF_448G_AI_workshop_2025_khu_Ciena_20pages_v2.pdf" target="_blank">oiforum.com</a><span class="src-q q-primary">primary</span></div>
+  <h3>二手(secondary)</h3>
+  <div class="src-item"><b>CNBC(2025/10/17)</b> — Credo 紫色線 $300-500/條、份額 88%(650 Group Weckel 估)、「1→9 條/伺服器」Weckel 具名原話(機會口徑非實際配置);AEC 晶片 $0.68 億(2023)→>$10 億(2028)。<a href="https://www.cnbc.com/2025/10/17/500-purple-cables-put-credo-in-middle-of-the-ai-boom.html" target="_blank">cnbc.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>SemiAnalysis:Vera Rubin – Extreme Co-Design + GB200 Hardware BOM</b> — VR200 midplane/Paladin HD2 訊號路徑(Strata↔midplane↔daughter)、GB200 spine 5,184 條(1,296 埠×4 對)拆解、背板組件成本主要在連接器。<a href="https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution" target="_blank">semianalysis.com(VR)</a>;<a href="https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component" target="_blank">semianalysis.com(GB200)</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Wheeler's Network:Decoding Nvidia's Rubin Networking Math(2025/11)</b> — NVLink6 以雙向 SerDes 倍增頻寬、纜數 5,184 不變沿用 GB300 背板——VR200 spine 沿用的正確出處(前版 not_found 已回填)。<a href="https://www.wheelersnetwork.com/2025/11/decoding-nvidias-rubin-networking-math.html" target="_blank">wheelersnetwork.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Digitimes(2026/06/25;2026/06/01;2026/05/15)</b> — VR200 3Q26 ramp 供應鏈確認(兩篇第二源鏈);GTC Taipei「Vera Rubin full production、150 家台供應商」;2026/07 連接器業者 2H26 旺季共識。<a href="https://www.digitimes.com/news/a20260625PD224/nvidia-rubin-gpu-revenue-2026.html" target="_blank">digitimes.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TrendForce(RP260126WQ 2026/01;RP260611NI 2026/06)</b> — AEC 為 400G/800G 櫃內最廣泛短距互連、448G 世代 LPO/NPO/CPO 路線——第三家權威研調口徑(質性)。<a href="https://www.trendforce.com/research/download/RP260126WQ" target="_blank">trendforce.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>LightCounting newsletter(2024/12;2026/04 更新版)</b> — 高速銅纜(DAC+ACC+AEC 合計)2029 $67 億(較前版 2028 $28 億大幅上修)、AEC CAGR 45%、DAC 佔出貨 50%。<a href="https://www.lightcounting.com/newsletter/en/december-2024-aocs-dacs-linear-drive-pluggable-and-co-packaged-optics-303" target="_blank">lightcounting.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>2026/06 月營收公告(鉅亨/TechNews/經濟日報/MoneyDJ,2026/07/06-10)</b> — 貿聯 85.18 億新高:<a href="https://news.cnyes.com/news/id/6523792" target="_blank">cnyes.com</a>;嘉澤:<a href="https://finance.technews.tw/2026/07/08/lotes-3533-202606-financial-report" target="_blank">technews.tw</a>;宣德:<a href="https://finance.technews.tw/2026/07/09/speed-tech-5457-202606-financial-report" target="_blank">technews.tw</a>;佳必琪:<a href="https://money.udn.com/money/story/5710/9610141" target="_blank">money.udn.com</a>;貿聯 2Q26/Interplex Datacom:<a href="https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=1d041ec0-da80-46de-83ce-41bf47088192" target="_blank">moneydj.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>eeNews Europe:Spectra7 ACC 資產 $9M 售予 Parade(2025)</b> — 譜瑞-KY 集團取得 ACC 類比資產(交割淨現金 $6.44M)——台股晶片端「幾乎缺席」口徑修正依據。<a href="https://www.eenewseurope.com/en/spectra7-active-copper-cable-assets-sold-in-9m-deal/" target="_blank">eenewseurope.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>SemiEngineering(Synopsys 448G 白皮書轉載)</b> — 448G:PAM4 約 112GHz/PAM6 約 174GBd/90GHz/PAM8 150GBd、銅 reach 數 cm 級——448G 天花板物理數字。<a href="https://semiengineering.com/designing-for-448g-modulation-dsp-and-channel-trade-offs-in-high-speed-serdes/" target="_blank">semiengineering.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>工商時報(2026/05/12)</b> — 廣發初評貿聯買進、合理股價 3,400 元、2026-2028 EPS 74.7/121.4/177 元(法人估非財測)。<a href="https://www.ctee.com.tw/news/20260512701512-430201" target="_blank">ctee.com.tw</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>TechNews(2026/06/03)</b> — 貿聯 COMPUTEX 展 CPC/CPO;收購新富生光電取得 MPO 技術、台南 shuffle box 產線 2H26。<a href="https://technews.tw/2026/06/03/bizlink-computex-2026/" target="_blank">technews.tw</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Research and Markets:Backplane Connector Market</b> — 背板連接器 $24.3 億(2025)→$34.3 億(2032)CAGR 5.02%(含電信/工控傳統口徑,引用於 AI 224G 屬口徑誤用、供對照)。<a href="https://www.researchandmarkets.com/report/backplane-connector" target="_blank">researchandmarkets.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>Dell'Oro 2026 Predictions(2025/12/16)</b> — 查無 AEC/銅互連獨立口徑=權威研調缺位確認(反面證據)。<a href="https://www.delloro.com/2026-predictions-data-center-infrastructure/" target="_blank">delloro.com</a><span class="src-q q-secondary">secondary</span></div>
+  <div class="src-item"><b>The Motley Fool(2026/07/07)</b> — Credo 近 90% 營收來自極少數客戶、高度依賴台灣製造夥伴——集中度風險傳導鏈。<a href="https://www.fool.com/coverage/better-buy/2026/07/07/credo-technology-group-vs-marvell-technology-which-technology-stock-is-a-better-buy-in-2026/" target="_blank">fool.com</a><span class="src-q q-secondary">secondary</span></div>
+  <h3>blog / 社群 / 彙整(降權)與 not_found</h3>
+  <div class="src-item"><b>郭明錤 X(2026/01,CES 2026 後)</b> — VR200 NVL144→NVL72 更名、midplane 44 層(22+22)M9 CCL(EM896K3)/約 420×60mm/組裝 2hr→5min、2H26 出貨 5,000-7,000 櫃(供應鏈估)、whip 60A→100A。<a href="https://x.com/mingchikuo/status/2008439734536986852" target="_blank">x.com</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>Ray Wang X(2025/10/13)</b> — VR200/CPX cableless midplane+CX9;Kyber NVL576 2H27 改 backplane——2027 重分配關鍵日期(低信心)。<a href="https://x.com/rwang07/status/1977691965958361242" target="_blank">x.com</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>vocus 法說筆記</b> — 嘉澤 2026/05/14(伺服器>50%/QD/嘉基分工):<a href="https://vocus.cc/article/6a06639afd897800018b1b5c" target="_blank">vocus.cc</a>;嘉基 2026/06/09(GM 40%/TBT5 量產):<a href="https://vocus.cc/article/6a27f038fd8978000195c8c0" target="_blank">vocus.cc</a>;鴻呈 2026/04/10 法說:<a href="https://vocus.cc/article/69d9c969fd89780001e133c7" target="_blank">vocus.cc</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>UAnalyze+富果法說備忘錄</b> — 宏致 MCIO 市佔 1%→10%→目標 20% 口徑出處(公司自述+法人估):<a href="https://uanalyze.com.tw/articles/3786312241" target="_blank">uanalyze.com.tw</a>;優群法說(2026/05/11):<a href="https://blog.fugle.tw/post/earnings-call-3217-2026-05-11" target="_blank">blog.fugle.tw</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>TheValueist(X)</b> — 「rack 級 midplane 取代 spine」激進說——已被官方頁+郭明錤 tray 級口徑+Wheeler's spine 沿用共同否決(被反駁區 ⑭),引用時必標。<a href="https://x.com/TheValueist/status/1983276631348195593" target="_blank">x.com</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>Intel Market Research(AEC 各版口徑)</b> — 報告農場級、降權僅供對照(前版主錨已退役,見被反駁區 ㉔)。<a href="https://www.intelmarketresearch.com/aec-active-cable-for-data-centers-market-27749" target="_blank">intelmarketresearch.com</a><span class="src-q q-blog">blog</span></div>
+  <div class="src-item"><b>not_found(未附網址,降權)</b> — SNS Insider(SerDes 口徑 $27.9 億→61.4 億,未定位具體報告頁);DCD(DataCenterDynamics,前版列名、本輪未定位原文);ServeTheHome(前版列名、本輪未定位原文);嘉基 2026/06 月營收(winvest 彙整站數據、以 MOPS 公告為準)。<span class="src-q q-blog">not_found</span></div>
 </div>
 
 <footer>
-  <p><b>研究方法：</b>Workflow 多 agent 研究(訊號鏈 7 環節+4 路線之爭 / 台廠逐檔查證+受惠評分 / 國際對照+市場多口徑+持續性兩劇本 / 逐組件地圖+Rubin cableless 衝擊模型+台灣吃得到定位)＋ 對抗式查證(貿聯 Credo 代工修正、Rubin 背板分層、AEC 口徑判讀、NVLink6 分歧解、嘉澤/嘉基同集團、宣德概念降級)。</p>
-  <p>本報告以「已通過查證」內容為主幹,被反駁/待查項目已標明(台廠晶片端缺席、cableless 重分配、法人估值低可信)。屬時間敏感領域,數據請以最新官方法說/公告為準。<b>本報告為研究整理,非投資建議。</b></p>
-  <p style="color:var(--muted)">產出：2026-06 · Claude Code · process-chain-research</p>
+  <p><b>研究方法：</b>Workflow 多 agent 研究(宏觀/公司/細顆粒三路 findings ＋ 對抗式查證 verdicts 裁決)：訊號鏈 7 環節+價值量歸屬/cableless 兩大判斷/台廠逐檔查證+受惠評分/watch 9 檔逐檔反駁/國際對照+市場多口徑分層+持續性兩劇本/元件級細顆粒地圖(11 元件×機型世代×證據源)+Rubin cableless 衝擊模型+台灣吃得到定位+被反駁完整表 24 條+開放問題 6 區塊。2026/07/11 補強輪:2026/06 月營收全鏈刷新、Credo FY26/Amphenol 1Q26/Astera 1Q26 財報接入、VR200 spine 出處更正(⑧)、市場主錨改 650 Group(㉔)、watch 擴充帶反駁、refs 分層帶 URL。</p>
+  <p>本報告以「已通過查證」內容為主幹;refuted 不入正文只入被反駁區(含理由)、unverified 標 ⚪、correction 一律採用並留痕。屬時間敏感領域,數據請以最新官方法說/公告(MOPS)為準。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出：2026-06(初版)/2026-07-11(補強)· Claude Code · process-chain-research · 配對淺色版:224G高速互連-process-chain-light.html</p>
 </footer>
 
 </div>
+<script>
+(function(){
+  const ids=['rev','g','npm','sh','pe','epsg'];const $=id=>document.getElementById(id);
+  function calc(){const rev=+$('rev').value,g=+$('g').value/100,npm=+$('npm').value/100,sh=+$('sh').value,pe=+$('pe').value,epsg=+$('epsg').value;
+    const ni=rev*(1+g)*npm,eps=sh>0?ni/sh:0,price=eps*pe,peg=epsg>0?pe/epsg:0;
+    $('oEps').textContent=eps.toFixed(2);$('oPe').textContent=price.toFixed(0);$('oPeg').textContent=peg.toFixed(2);$('oNi').textContent=ni.toFixed(0);}
+  ids.forEach(id=>{const el=$(id);if(el)el.addEventListener('input',calc)});if($('rev'))calc();
+})();
+</script>
 </body>
 </html>
