@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人形機器人關節傳動鏈 製程鏈 × 供應鏈 深度研究報告</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2330; --line:#2a3340;
+    --txt:#e6edf3; --sub:#9aa7b4; --muted:#6e7b8a;
+    --tw:#ff5d5d;      /* 台灣 紅 */
+    --intl:#4aa3ff;    /* 國際 藍 */
+    --green:#26d07c; --amber:#f5b73d; --red:#ff5d5d; --accent:#ffb36b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font-family:"Segoe UI","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+  header.hero{border:1px solid var(--line);border-radius:16px;
+    background:linear-gradient(135deg,#161b22,#2a1f12);padding:34px 36px;margin-bottom:24px}
+  h1{margin:0 0 6px;font-size:28px}
+  .sub{color:var(--sub);font-size:15px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{background:var(--card2);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--sub)}
+  .pill b{color:var(--txt)}
+  h2{font-size:22px;margin:42px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .n{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;background:var(--accent);color:#08111d;border-radius:8px;font-size:15px;font-weight:700}
+  h3{font-size:17px;margin:24px 0 10px;color:#cdd9e5}
+  p{margin:10px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:14px 0}
+  .grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}
+  @media(max-width:820px){.g2{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:var(--card2);color:#cdd9e5;font-weight:600;font-size:12.5px}
+  tr:nth-child(even) td{background:#12171f}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;margin:1px}
+  .t-tw{background:rgba(255,93,93,.15);color:#ff8585;border:1px solid rgba(255,93,93,.35)}
+  .t-intl{background:rgba(74,163,255,.15);color:#7ab8ff;border:1px solid rgba(74,163,255,.35)}
+  .conf{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .c-high{background:rgba(38,208,124,.16);color:#4fe39a}
+  .c-med{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .c-un{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .c-low{background:rgba(255,93,93,.16);color:#ff8585}
+  .callout{border-left:4px solid var(--amber);background:rgba(245,183,61,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin:16px 0}
+  .callout.warn{border-color:var(--red);background:rgba(255,93,93,.07)}
+  .callout.info{border-color:var(--accent);background:rgba(255,179,107,.07)}
+  .callout.ok{border-color:var(--green);background:rgba(38,208,124,.07)}
+  .callout b{color:#fff}
+  ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+  a{color:var(--accent);text-decoration:none;word-break:break-all}a:hover{text-decoration:underline}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .toc a{background:var(--card2);border:1px solid var(--line);padding:6px 12px;border-radius:8px;font-size:13px}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  @media(max-width:820px){.kpi{grid-template-columns:repeat(2,1fr)}}
+  .kpi .box{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+  .kpi .v{font-size:22px;font-weight:700;color:#fff}.kpi .l{font-size:12px;color:var(--sub);margin-top:2px}
+  .flow{display:flex;flex-direction:column;gap:0;margin:18px 0}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:14px;position:relative;padding:0 0 18px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:22px;top:40px;bottom:0;width:2px;background:var(--line)}
+  .step .num{width:44px;height:44px;border-radius:50%;background:var(--card2);border:2px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:16px;z-index:1}
+  .step .body{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 16px}
+  .step .body h4{margin:0 0 4px;font-size:15.5px}
+  .step .diff{font-size:12px;color:var(--amber);margin-top:5px}
+  .step .who{font-size:12px;color:var(--sub);margin-top:5px}
+  .step .mach{font-size:12px;color:#8fb5ff;margin-top:4px}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px;margin-left:8px}
+  .b-no{background:rgba(255,93,93,.18);color:#ff8585}
+  .src-item{padding:11px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .src-item:last-child{border:0}
+  .src-q{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:5px;margin-left:6px}
+  .q-primary{background:rgba(38,208,124,.16);color:#4fe39a}
+  .q-secondary{background:rgba(74,163,255,.16);color:#7ab8ff}
+  .q-blog{background:rgba(245,183,61,.16);color:#f5cb6b}
+  .q-forum{background:rgba(110,123,138,.2);color:#9aa7b4}
+  .q-unreliable{background:rgba(255,93,93,.16);color:#ff8585}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sub);margin:10px 0}
+  .pos{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:6px}
+  .p-lead{background:rgba(38,208,124,.18);color:#4fe39a}
+  .p-chase{background:rgba(245,183,61,.18);color:#f5cb6b}
+  .p-absent{background:rgba(255,93,93,.18);color:#ff8585}
+  .p-olig{background:rgba(124,158,255,.18);color:#9db8ff}
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+  @media print{body{background:#fff;color:#000}.hero,.card,.step .body{border-color:#ccc}a{color:#06c}}
+  p,li{overflow-wrap:anywhere}
+  td{overflow-wrap:break-word}
+  @media(max-width:640px){
+    .wrap{padding:16px 11px 56px}
+    h1{font-size:21px}
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .step{grid-template-columns:36px 1fr;gap:9px}
+    .step .num{width:34px;height:34px}
+    .step:not(:last-child)::before{left:17px}
+    .card{padding:14px 13px}
+    .tag,.pill,.badge{white-space:normal;overflow-wrap:anywhere;max-width:100%}
+    td .tag,th .tag{white-space:nowrap;overflow-wrap:normal}
+    .kpi .v{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>人形機器人關節傳動鏈 製程鏈 × 供應鏈 深度研究報告</h1>
+  <div class="sub">旋轉關節(無框力矩馬達 + 諧波/擺線/行星減速機 + 雙編碼器 + 驅動板)→ 直線關節(無框馬達 + 行星滾柱絲桿 PRS)→ 靈巧手(空心杯/微型絲桿/腱繩)→ 力矩/六軸/觸覺感測 → 關節模組整合 → 整機組裝:16 個環節逐一拆解、逐環節技術難度、台灣與國際供應鏈對照、對抗式查證 40 條裁決</div>
+  <div class="meta-row">
+    <span class="pill">產出日期:<b>2026-10-01</b></span>
+    <span class="pill">研究方法:<b>Deep Research 三路平行(macro / companies / finegrain)＋對抗式 verify 裁決</b></span>
+    <span class="pill">來源數:<b>70+(primary 24 / secondary 40+ / blog 10+)</b></span>
+    <span class="pill">主張驗證:<b>40 條裁決 → 20 confirmed / 16 corrected / 3 unverified / 1 refuted</b></span>
+    <span class="pill">月營收錨:<b>2026/08(TWSE/TPEx 開放資料,資料年月 11508)</b></span>
+    <span class="pill">財報錨:<b>2Q26 / 1H26</b></span>
+  </div>
+  <div class="toc">
+    <a href="#s0">0. 開題十問 / 多研調口徑 / 催化劑</a>
+    <a href="#s1">1. 是什麼 / 平台世代 / 技術路線</a>
+    <a href="#s2">2. 完整製程 16 環節</a>
+    <a href="#s3">3. 難度評分 + 受惠評分</a>
+    <a href="#s4">4. 供應鏈對照 / 台灣定位 / 細顆粒地圖</a>
+    <a href="#s5">5. 量產時程 / 短期 vs 長期</a>
+    <a href="#s6">6. 投資警示 / 被反駁 / 開放問題</a>
+    <a href="#s7">7. 資料來源</a>
+  </div>
+</header>
+
+<!-- 0:一句話總結 -->
+<div class="callout info"><b>一句話總結:</b>人形機器人的錢 50-60% 流向「關節致動」——馬達、減速機、絲桿、感測器、關節模組(券商、Morgan Stanley、Schaeffler 三種 BOM 口徑皆指向此區間)。但 2026 年的真實需求錨不是 Tesla:1H26 全球出貨 1.91 萬台中<b>中國廠商佔 97%+</b>(Smart Analytics Global,Bloomberg 引用),而中國兩大整機廠宇樹/智元佔中國出貨近 80% 且<b>關節自研自製率 >90%</b>,外購鏈只吃得到長尾。Tesla Optimus 自己在 7/22 法說只承諾「2026 開產、2027 才有意義產能」,9 月媒體口徑週產數百台、首批約 5,000 台份執行器訂單給<b>拓普/三花/均勝三家中國 Tier1</b>——<b>台廠至今沒有任何一家出現在 Tesla 公開或第三方報導的供應商名單</b>。台股 8 檔 holds 的共同特徵是:<b>2026 營收動能全部來自半導體/AI 設備或車用本業,人形貢獻 ≈ 0,人形是 2027H2 之後的選擇權</b>;環節上台股在滾珠絲桿「領先」、PRS/諧波/關節模組「追趕」、空心杯/編碼器/力矩感測/觸覺皮膚/磁材「缺席」。最強空方不是技術,而是價格:來福諧波單台成本一年從 482 降到 351 元人民幣、綠的諧波毛利率年減 1.5-2.5 pt,台廠即使 2027 切入也是切進一條向下的價格曲線。</div>
+
+<div class="kpi">
+  <div class="box"><div class="v">28 具</div><div class="l">Optimus Gen2 本體執行器:14 旋轉(諧波)+ 14 直線(反向行星滾柱絲桿);V3 規格 Tesla 未公開</div></div>
+  <div class="box"><div class="v">1.91 萬台</div><div class="l">1H26 全球人形出貨(Smart Analytics Global/Bloomberg,2026-08);中國廠商 97%+、智元 44%/宇樹 31%</div></div>
+  <div class="box"><div class="v">0 家</div><div class="l">截至 2026-10-01 出現在 Tesla Optimus 公開/第三方供應商名單的台廠;2026-09 首批 5,000 台份給拓普/三花/均勝(媒體口徑)</div></div>
+  <div class="box"><div class="v">482→351 元</div><div class="l">來福諧波(03952.HK)諧波減速器單台成本,1H26 出貨 23.95 萬台 +112%——價格曲線向下是本題最強空方</div></div>
+</div>
+
+<!-- 0:開題十問 -->
+<h2 id="s0"><span class="n">0</span>投資視角:開題十問、多研調口徑、催化劑時間軸</h2>
+
+<div class="card">
+  <h3>❓ 開題十問(一問一答,證據等級逐條標)</h3>
+  <table>
+    <tr><th style="width:22%">問題</th><th>本輪答案</th><th style="width:9%">證據</th></tr>
+    <tr><td>1. 錢從誰流向誰</td><td>整機廠 → 關節致動(三口徑皆 ≥50-60% BOM,見下方三欄表)→ 其中<b>減速機/絲桿/馬達</b>是零組件層最大三塊(券商口徑合計 45%)。但頭部整機廠自製:宇樹自研自產率 >90%(招股書)、Tesla/Figure/1X/小鵬/Boston Dynamics 全部自製致動器;Tesla V3 執行器總成外包給拓普/三花/均勝(媒體)。外購減速機/馬達的實際買家 = 長尾整機 + 第三方關節模組商(中國 2025 第三方關節模組出貨 28 萬台,研報口徑)。</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>2. 誰有定價權</td><td>高階諧波:Harmonic Drive Systems(1Q FY3/27 營收 166.81 億日圓 +23.6%、營益率 11.0%;人形訂單 FY3/26 全年預期 25 億日圓、潛在客戶 >15 家,公司法說 2025-11);RV/擺線:Nabtesco 約 60%(2025 全球 RV 8.83 億美元,QYR);六軸力:藍點觸控中國 80%+;PRS 高階:Rollvis/GSA/Schaeffler-Ewellix。中國放量端(綠的、來福)正在拿走「量」但交出「價」。台廠在任何一環都沒有定價權。</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>3. 台股在哪些環節缺席</td><td><b>確認缺席 7 環節</b>:空心杯馬達、關節編碼器、關節力矩/六軸力感測器、觸覺皮膚、釹鐵硼磁材、減速機磨齒/螺紋磨設備、交叉滾子/柔性軸承(製造)。台灣有能力但未上市者:利茗(諧波+RV)、優士特(PRS)、協力測控/三鋒(六軸力)。</td><td><span class="conf c-high">高(缺席之確認)</span></td></tr>
+    <tr><td>4. 市場規模幾套口徑、分歧主因</td><td>2026 年全球出貨從 3 萬台(UBS)到 10 萬台(中國工信部「產量」)差 3 倍。四個主因:(1)分母——IDC/TrendForce 含科研教育機,Omdia 只算通用人形,MS/DB 只算中國,工信部是「產量」不是「出貨」;(2)Tesla 假設——GS 9 月版 7.5 萬台隱含 Optimus 下半年放量,Tesla 自己未給數字;(3)2025 基期打架——IDC 1.8 萬 vs Omdia 1.33 萬 vs DB 1.75 萬,宇樹自述 >5,500 vs Omdia 4,200;(4)2050 TAM 1.4-7 兆美元差 5 倍來自單價(2 萬 vs 5 萬美元)×保有量(3 億 vs 6.5 億台)。</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>5. 量產年共識 vs 分歧</td><td><b>2027 是共識量產年</b>:Tesla「meaningful capacity 2027」+ Giga Texas 第二線 2027 夏;Agility Digit 5 GA 2027 底;小鵬 IRON 2027 交付;全球傳動 EIP「2H27 市場回饋」。分歧在 2026 下半年 Optimus 到底週產幾百台還是「年底 1,000 台/週」(The Information,Tesla 未官宣)。</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>6. 台廠 alpha 集中在哪一環、證據等級</td><td>唯一有「環節唯一性」的是<b>直線關節 PRS/EIP(全球傳動 4540,法說時程明確但客戶未具名)</b>與<b>上銀(2049)的元件全譜系</b>(諧波+螺桿+PRS+關節模組+交叉滾柱軸承,唯一一家都做的上市公司)。證據等級:兩者皆「法說自述 + 交易所營收」,人形出貨金額 = 0,屬 🟡。</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>7. 誰現在就有營收、誰是 2027+ 選擇權</td><td>現在有營收(但非人形):上銀機器人占比 1Q26 12%(含晶圓移載/工業機器人)、鈞興工業機器人齒輪 2025 約 1.8 億元/毛利 >40%、台灣精銳行星減速機(2Q26 EPS 3.25)、東元關節模組四足機器狗 200-300 顆(2025 口徑)。<b>人形專屬營收:全部為 0 或未揭露</b>。2027+ 選擇權:全球傳動 EIP、上銀 PRS、鈞興少齒差減速器、宇隆北美減速機、盟英關節模組、和大人形減速器。</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>8. 最強反方</td><td>(a)Optimus 訂單給中國鏈:2026-09-16/17 Tesla 赴寧波審廠,拓普/三花/均勝由臨時轉正式量產夥伴、首批約 5,000 台份(CnEVPost/Bloomberg);MS 估去中國化 BOM 由 4.6 萬升至 13.1 萬美元。(b)台廠多為題材股:A 股樣本——5 檔「純人形」標的 1H26 合計歸母淨利 9 億元人民幣、合計市值約 1,400 億元、靜態 PE 中位數 90 倍+(鈦媒體 2026-09);台股對照:上銀 2025-11 自承人形「送樣測試、進展不多」。</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>9. 最大未定變數</td><td>(1)<b>PRS 路線是否勝出</b>:Tesla 是唯一大量用 PRS 的平台(14 支/台),宇樹/智元/Figure 03 全旋轉關節不用直線;PRS 需求 = Tesla 台數 × 14,等於押注單一客戶。(2)<b>諧波 vs 擺線 vs 行星</b>:宇樹 G1 全關節兩級行星、鈞興把人形上肢從諧波改為少齒差(效率 93% vs 80%),行星路線正在搶諧波份額。(3)<b>Tesla 供應鏈在地化</b>:2027 Texas 線是「非中國第二來源」的唯一窗口,但 Tesla V4 要「更垂直整合」(Q2 法說),對所有外購鏈皆負面。</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>10. 流傳名單裡誰最可能錯殺 / 沾光</td><td><b>可能錯殺</b>:台灣精銳(4583)——行星減速機實力有獨立佐證(2Q26 毛利率 52.13%),管理層保守說「無訂單」反而被名單冷落;長期行星路線若勝出是受益者。<b>沾光</b>:智崴(5263)8 月營收 +216.6% 是併入 Flyover Attractions(交易所備註);高鋒(4510)與和大的合資是封測分選機不是減速機;緯創 Optimus 代工零證據;新代 +151% 是工具機。</td><td><span class="conf c-high">高</span></td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>📐 多研調口徑表(整機出貨/產值;口徑並列、勿混用)</h3>
+  <table>
+    <tr><th style="width:17%">研調 / 機構</th><th>數字</th><th style="width:14%">口徑</th><th style="width:12%">日期</th><th style="width:8%">信心</th></tr>
+    <tr><td>Goldman Sachs「Physical AI」</td><td>2026 年 <b>7.5 萬台</b>(前版 5.1 萬);2030 年 89 萬台(前版 25.6 萬);2035 年約 650 萬台 / 1,380 億美元(前版約 140 萬台 / 380 億美元)</td><td>全球整機出貨+產值(美元)</td><td>2026-09-13</td><td><span class="conf c-med">中(二手轉述)</span></td></tr>
+    <tr><td>Morgan Stanley(Sheng Zhong)</td><td>2026 年中國出貨 <b>5 萬台</b>(修訂路徑 1.4 萬→2.8 萬→5 萬);2026 中國市場 20 億美元;2030 年中國 44.6 萬台 / 150 億美元</td><td>中國出貨+產值</td><td>2026-06-24</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>Morgan Stanley(供應鏈情境)</td><td>Optimus Gen2 若移除中國供應商,BOM 由約 4.6 萬美元升至約 13.1 萬美元</td><td>Optimus BOM 情境</td><td>2026-01</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Deutsche Bank(Iris Zheng)</td><td>2025 基期 1.75 萬台;2026 近 5 萬台(中國約 4 萬);2030 約 70 萬台;2050 年 700 萬台</td><td>全球整機出貨</td><td>2026-06</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Bank of America</td><td>2026 年 9 萬台 → 2030 年 120 萬台(CAGR 86%);2060 全球保有量 30 億台</td><td>全球出貨/保有量</td><td>2026-03-13</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>UBS</td><td>2026 年需求約 3 萬台、2027-28 放量;2035 TAM 400 億美元 / 200 萬台;2050 1.4-1.7 兆美元 / 3 億台</td><td>全球 TAM</td><td>2025-2026</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Citi</td><td>2050 年全球約 6.5 億台在役、市場 7 兆美元</td><td>全球保有量/TAM</td><td>2024-12(2026 仍為引用基準)</td><td><span class="conf c-high">高(官網)</span></td></tr>
+    <tr><td>TrendForce</td><td>2026 年全球人形出貨超過 <b>5 萬台</b>、YoY >700%(2025-12-09);2026 中國產量 YoY +94%、宇樹+智元合計近 80% 出貨、宇樹產能目標人形 7.5 萬台/年(2026-04-09)</td><td>全球出貨 / 中國產量與集中度</td><td>2025-12-09 / 2026-04-09</td><td><span class="conf c-high">高(原始新聞稿)</span></td></tr>
+    <tr><td>Smart Analytics Global(Bloomberg 引用)</td><td>1H26 全球出貨約 <b>19,100 台</b>(+272% YoY);中國廠商 >97%、中國客戶 >85%;智元約 8,400 台(44%)、宇樹約 5,900 台(31%);2026 全年預期接近 6 萬台、產業營收約 16 億美元;工業/商用 >70%</td><td>全球出貨(半年實績)</td><td>2026-08-10</td><td><span class="conf c-high">高(多源)</span></td></tr>
+    <tr><td>中國工信部(甘小斌,WAIC)</td><td>2026 年中國人形整機<b>產量</b>預估突破 10 萬台;2025 約 2 萬台;2026 市場規模超 500 億元人民幣</td><td>中國整機產量(產量≠出貨)</td><td>2026-07-07</td><td><span class="conf c-high">高(澎湃/新華/光明三源)</span></td></tr>
+    <tr><td>Omdia《通用具身智能機器人 2026》</td><td>2025 年全球出貨 13,318 台(+約 480%);智元 5,168 台(39%,第一)、宇樹 4,200 台(32%)、優必選 1,000 台;宇樹自述 2025 純人形出貨 >5,500 台並公開異議</td><td>全球出貨與廠商份額</td><td>2026-01</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>IDC</td><td>2025 年全球人形出貨約 1.8 萬台(+508%,含科研/教育機)</td><td>全球出貨(寬口徑)</td><td>2026-01</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td>智研諮詢(諧波子市場)</td><td>2026 年中國機器人諧波減速器約 18 億元人民幣(工業 11 億 + 人形 5 億);出貨 200 萬台(工業 120 萬 + 人形 60 萬)</td><td>中國諧波減速器</td><td>2026</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>賽迪(六維力子市場)</td><td>2025 年中國六維力感測器市場超 3 億元人民幣(+24%);2030 年約 120 萬顆 / 60 億元;2025 前三廠 92.8%(藍點觸控 80%+、坤維 9.2%、宇立 3.3%)</td><td>中國六維力感測器</td><td>2026-08-31</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>ABI Research(無框馬達)</td><td>2025 年全球無框力矩馬達出貨 251 萬顆(+14%)、ASP 361 美元(-5%);營收占比協作機器人 38%、人形 24%、醫療 18%</td><td>全球無框力矩馬達(含非人形)</td><td>2026</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td>Meticulous / Valuates(執行器子市場)</td><td>Meticulous:全球人形執行器 2025 年 2.8 億 → 2026 年 4.7 億 → 2036 年 101.7 億美元(CAGR 36%);Valuates:2024 年 1.5 億 → 2031 年 98.6 億美元——兩家時間軸差一個數量級</td><td>全球人形執行器</td><td>2026-01</td><td><span class="conf c-un">低(商業報告)</span></td></tr>
+    <tr><td>東吳證券(靈巧手)</td><td>靈巧手市場 2025 年 36 億元 → 2035 年 2,330 億元人民幣(十年 CAGR 52.4%)</td><td>全球靈巧手(券商測算)</td><td>2026</td><td><span class="conf c-un">低(假設未見)</span></td></tr>
+    <tr><td>QYR(軸承 / 六軸 F/T)</td><td>人形機器人軸承 2025 約 3,380 萬 → 2032 年 8.72 億美元(CAGR 46.6%);機器人六軸力矩感測器 2025 約 3.11 億 → 2032 年 27.79 億美元</td><td>子元件全球市場</td><td>2026</td><td><span class="conf c-med">中(單源)</span></td></tr>
+  </table>
+  <p class="sub">對關節鏈的換算:以 2026 年 5-7.5 萬台中值 6 萬台 × 每台約 30 具執行器 ≈ 180 萬具執行器;智研「人形諧波 60 萬台」對應約 2-4 萬台中國人形(每台 14-30 顆),與出貨口徑可相互對得上。注意「產量」(工信部)與「出貨量」(SAG)為兩套不可互換的分母。</p>
+
+  <h3>💰 BOM 結構三口徑(分母與分類法不同,不可相加或互證)</h3>
+  <table>
+    <tr><th style="width:20%">口徑</th><th>結構</th><th style="width:16%">單機金額</th><th style="width:16%">出處</th></tr>
+    <tr><td>中國券商拆解(中信/開源/國泰君安,澎湃彙整)</td><td>執行器 35%、滾柱絲桿 18%、減速器 15%、馬達 12%、感測器及其他 20%;每台約 28 具執行器、14 支反向行星滾柱絲桿、靈巧手約 20 顆空心杯(「執行器」與零件分列,有重複計算嫌疑)</td><td>小批量約 4.3 萬美元 → 量產目標 2 萬美元內</td><td>澎湃 2026-04-26 <span class="conf c-med">中(推估)</span></td></tr>
+    <tr><td>Morgan Stanley(Optimus Gen2 級,以部位拆)</td><td>手 17.2%(約 9,500 美元)、腰骨盆 14.2%、大腿/小腿各 13.2%、腳 12.2%;致動器合計約 56%(直線+旋轉 51%);電池僅約 300 美元(0.5%);臂肩 10 具旋轉(諧波+力矩感測)、腿 8 直線、足 6D 力感測</td><td>約 5.5 萬美元</td><td>FourWeekMBA 轉述 MS <span class="conf c-med">中</span></td></tr>
+    <tr><td>Schaeffler 投資人簡報(以子系統拆,XPeng 人形為例)</td><td>直線致動器約 30%、旋轉致動器約 25%、靈巧手約 20%、AI 晶片 >10%、視覺/電池/熱管理各 <5%(p.6,Schaeffler 自身 portfolio 示意;p.5 另引 Goldman 2025 作 ASP 曲線、BofA 2025 作銷量 ×30)</td><td>未給</td><td>Schaeffler 2026-01-12 PDF <span class="conf c-high">高(一手)</span></td></tr>
+  </table>
+  <p class="sub">三口徑共同點:關節致動相關(馬達+減速機+絲桿+執行器總成+靈巧手)合計 ≥50-60%;差異點:MS 把手算到 17.2%、券商把感測器及其他算到 20%、Schaeffler 把 AI 晶片算到 >10%。本報告不把「關節傳動鏈 = 60%」當單一事實。</p>
+</div>
+
+<div class="card">
+  <h3>📅 催化劑時間軸(2025-11 → 2027;已發生 / 進行中 / 前瞻)</h3>
+  <table>
+    <tr><th style="width:11%">時點</th><th>事件</th><th style="width:13%">狀態 / 來源型別</th><th style="width:22%">對關節鏈的意義</th></tr>
+    <tr><td>2025-11-06</td><td>Tesla 股東會 75%+ 通過 Musk 1 兆美元薪酬案,里程碑含「年產 100 萬台人形機器人」;Musk 稱 Fremont 100 萬台/年、Giga Texas 1,000 萬台/年產線</td><td><span class="conf c-high">已發生・股東會</span></td><td>Optimus 量產寫進 CEO 激勵合約;100 萬台是產線設計目標非 2026 產量</td></tr>
+    <tr><td>2025-11-11</td><td>上銀法說:人形僅「送樣測試、進展不多」;機器人占比 3Q25 7%、全年 9-10%;PRS 2026 展場公開;歐美 PRS 價格約為滾珠螺桿 10 倍;無 Tesla 字眼</td><td><span class="conf c-high">已發生・法說</span></td><td>台股龍頭的人形貢獻 ≈ 0 的錨</td></tr>
+    <tr><td>2025-12-09</td><td>TrendForce:2026 全球人形出貨 >5 萬台、YoY >700%;點名日本走零組件路線</td><td><span class="conf c-high">已發生・研調</span></td><td>台股法人常引口徑</td></tr>
+    <tr><td>2026-01-06</td><td>Boston Dynamics CES 2026 發布產品版電動 Atlas,2026 全部產量給 Hyundai RMAC 與 Google DeepMind;Hyundai 2028 入廠</td><td><span class="conf c-high">已發生・平台</span></td><td>全電動旋轉關節路線再添一票</td></tr>
+    <tr><td>2026-01-12</td><td>Schaeffler Citi 簡報:14 家人形 OEM 共 28 件原型訂單、3 個致動器平台;同月 MS 研報去中國化 BOM 4.6 萬→13.1 萬美元</td><td><span class="conf c-high">已發生・一手簡報</span></td><td>德系 Tier1 已拿 14 家 OEM 原型;「Tesla 離不開中國件」量化</td></tr>
+    <tr><td>2026-02</td><td>工信部《人形機器人與具身智能標準體系(2026 版)》;Apptronik 募 5.2 億美元(估值 55 億美元+)</td><td><span class="conf c-med">已發生・政策/融資</span></td><td>中國關節模組/減速機進入國標化,利於本土鏈統一規格降本</td></tr>
+    <tr><td>2026-03-16~19</td><td>NVIDIA GTC 2026:Isaac GR00T N 系列、Jetson Thor;夥伴含 ABB/AgiBot/Agility/FANUC/Figure/Hexagon/KUKA/Yaskawa</td><td><span class="conf c-high">已發生・平台</span></td><td>「腦」門檻下降 → 硬體關節成為差異化與產能瓶頸</td></tr>
+    <tr><td>2026-03-20</td><td>宇樹科創板 IPO 受理(擬募 42.02 億元)→ 2026-07-02 註冊 → 2026-08-19 掛牌:發行價 150.80 元、開盤 1,100 元(+629%)、市值一度 4,449 億元、次日最低 700 元;發行 PE 219 倍</td><td><span class="conf c-high">已發生・IPO</span></td><td>A 股「人形第一股」給全球關節鏈定價錨;但宇樹全自研關節,外購鏈吃不到</td></tr>
+    <tr><td>2026-04-22</td><td>Tesla Q1 法說:S/X 線 5 月停產改 Optimus 線,Fremont 7 月底/8 月開產;Giga Texas 2027 夏;承認 2025 約 1 萬台目標未達、2026-01 稱「零台在做有用工作」;Gen3 公開延至年中</td><td><span class="conf c-high">已發生・法說</span></td><td>量產時程第一次有硬日期</td></tr>
+    <tr><td>2026-04-29</td><td>Figure 宣布累計交付 350+ 台 Figure 03、BotQ 從每日 1 台提升到每小時 1 台、良率 >80%</td><td><span class="conf c-med">已發生・公司自述</span></td><td>美系自製致動器平台的實際交付量級(百台級)</td></tr>
+    <tr><td>2026-04-30</td><td>1X Hayward NEO 工廠開幕(首年 1 萬台、2027 底 10 萬台/年);截至 2026-09 無公開交付台數</td><td><span class="conf c-high">已發生・官方稿</span></td><td>腱繩路線首個萬台級產線</td></tr>
+    <tr><td>2026-05-08</td><td>NSK 與台達電簽 MOU,共同開發人形/協作機器人旋轉與直線致動器(NSK 出軸承/滾珠螺桿、台達出伺服驅動/馬達控制);NSK 2026-03 成立機器人事業部;無金額時程</td><td><span class="conf c-high">已發生・官方稿</span></td><td>台達電 watch 理由;對 645 億/月營收不可量化</td></tr>
+    <tr><td>2026-05-19</td><td>台灣「智慧機器人產業推動方案」:2026-2029 投入 200 億元(科技預算 100 億 + 國發基金 100 億);工研院六甲智慧機器人研究中心揭牌;目標 2030 產值 500 億元</td><td><span class="conf c-high">已發生/進行中・政策</span></td><td>預算對象是整機與場域,未點名人形關節零組件;對台廠為間接</td></tr>
+    <tr><td>2026-06-02</td><td>上銀 COMPUTEX 首展自研 PRS、與大銀+Dexterity 雙臂八軸物流機器人;機器人占比 2024 7%→2025 10%→1Q26 12%;交期 6 個月、產能滿載至 2027Q1</td><td><span class="conf c-high">已發生・法說/展會</span></td><td>台廠 PRS 進度:展示 → 自述具量產能力(8 月)</td></tr>
+    <tr><td>2026-06-24</td><td>Morgan Stanley 把 2026 中國出貨上修至 5 萬台;同日 Agility Robotics 宣布與 Churchill Capital XI SPAC 合併、估值 25 億美元、募資 >6.2 億美元(代號 AGLT)</td><td><span class="conf c-high">已發生・研調/IPO</span></td><td>美系第一家人形上市;MS 口徑成下半年主流</td></tr>
+    <tr><td>2026-07-07</td><td>工信部(WAIC):2026 中國人形整機產量預估破 10 萬台;「實景實訓專項行動」要求年底萬台級落地;國家電網規劃採購 8,500 台具身智能設備</td><td><span class="conf c-high">已發生/進行中・政策</span></td><td>政策採購成為中國關節需求底盤</td></tr>
+    <tr><td>2026-07-22</td><td>Tesla Q2 法說:一代線安裝中、2026 開產、「meaningful capacity 2027」、10,000+ 個獨特零件、「hardest product to scale」、V4 將更垂直整合;未給 2026 數量;股價次日 -11%</td><td><span class="conf c-high">已發生・逐字稿</span></td><td>2026 放量預期降溫,2027 成共識量產年</td></tr>
+    <tr><td>2026-07-22 / 07-28</td><td>和大法說:人形諧波+行星減速器「已開始為數家客戶供貨、NDA 不揭露」,1H26 營收 23.6 億持平;鈞興:人形少齒差減速器「已獲客戶樣品訂單」</td><td><span class="conf c-med">已發生・法說/台媒</span></td><td>台廠減速機:供貨/樣品皆客戶未具名</td></tr>
+    <tr><td>2026-08-07</td><td>Harmonic Drive Systems 1Q FY3/27:營收 166.81 億日圓 +23.6%、經常利益 17.19 億;通期經常利益 62→82 億日圓、營業利益 62→85 億日圓上修</td><td><span class="conf c-high">已發生・決算</span></td><td>諧波龍頭景氣回升;人形貢獻未拆分</td></tr>
+    <tr><td>2026-08-14</td><td>全球傳動法說:EIP 三規格客戶驗證中、DPRS 原型完成;2026 驗證 / 2H27 市場回饋 / 2027-2029 建產能;2Q26 毛利率 21%、EPS 0.44</td><td><span class="conf c-high">已發生・法說</span></td><td>台股直線關節唯一有時程的標的</td></tr>
+    <tr><td>2026-08-24 / 09-07</td><td>XPeng Robotics 募 9 億美元(估值 63 億美元);IRON 產線 9/7 投用,2026 底量產、2027 交付;全身 76 DoF、關節/靈巧手全自研</td><td><span class="conf c-high">已發生・融資/產能</span></td><td>車廠系人形第二家進入量產前夜;全自研關節</td></tr>
+    <tr><td>2026-08-28</td><td>Optimus 在 Fremont 開產(The Information 報導日期;Tesla 未官宣)</td><td><span class="conf c-med">已發生・媒體</span></td><td>V3 進入小批量</td></tr>
+    <tr><td>2026-09-13</td><td>Goldman 上修:2026 年 7.5 萬、2030 年 89 萬、2035 年約 650 萬台 / 1,380 億美元;09-15 Agility 發布 Digit 5(早期交付 1H27、GA 2027 底)</td><td><span class="conf c-med">已發生・研調/平台</span></td><td>外資最高 2035 口徑</td></tr>
+    <tr><td>2026-09-16/17</td><td>Tesla 赴寧波審廠拓普/三花/均勝,三家由臨時轉正式量產夥伴;首批約 5,000 台份;媒體另稱「2026 計畫約 5 萬台、單台 <2 萬美元」</td><td><span class="conf c-med">已發生・媒體(CnEVPost/Bloomberg/科技新報)</span></td><td>Optimus 首批執行器/熱管理訂單確認給中國 Tier1;台廠未在名單</td></tr>
+    <tr><td>2026-09-25/26</td><td>The Information:Optimus Q2 週產「幾十台」→ 8 月「幾百台」(約 10 倍),年底目標週 1,000 台以上;手/前臂 100+ 顆螺絲手工組裝、中國件需返工</td><td><span class="conf c-med">已發生・媒體調查報導(一源多轉)</span></td><td>2026 量產瓶頸在靈巧手/前臂,不在旋轉/直線關節</td></tr>
+    <tr><td>2026-10-10</td><td>台廠 9 月營收公告(上銀、大銀、全球傳動、直得、鈞興、和大、宇隆、盟立)</td><td><span class="conf c-un">前瞻・MOPS 慣例</span></td><td>驗證 3Q26 關節零組件出貨是否出現在營收</td></tr>
+    <tr><td>2026-10 下旬</td><td>Tesla Q3 2026 法說(Fremont 首季產出、Texas 線進度);11 月 Tesla 股東會</td><td><span class="conf c-un">前瞻・慣例</span></td><td>首次有 Fremont 實際產出口徑的季度;可能給 2027 數量指引</td></tr>
+    <tr><td>2026-12</td><td>四個年底承諾同時到期:Tesla 週產 1,000 台目標(媒體)、Agility Digit 5 正式 launch、XPeng IRON 量產啟動、1X NEO 首批消費者交付</td><td><span class="conf c-un">前瞻</span></td><td>年底是跳票檢核點</td></tr>
+    <tr><td>2027 夏</td><td>Tesla Giga Texas 第二條 Optimus 線(高量產)</td><td><span class="conf c-high">前瞻・法說</span></td><td>關節鏈真正放量窗口;台廠第二來源切入時點</td></tr>
+  </table>
+</div>
+
+<!-- 1:是什麼 -->
+<h2 id="s1"><span class="n">1</span>是什麼、平台世代、技術路線之爭 <span class="conf c-high">高信心</span></h2>
+<div class="card">
+  <h3>核心定義</h3>
+  <p><b>人形機器人關節傳動鏈 = 把電能變成每個關節的扭矩/推力、再把位置與力回報給控制器的全部硬體。</b>一個旋轉關節 = 無框力矩馬達 + 減速機(諧波/擺線/行星)+ 馬達端與輸出端雙編碼器 + 48V FOC 驅動板 + 交叉滾子軸承 +(高階機)關節力矩感測器,全部塞進同一個殼體;一個直線關節 = 無框馬達 + 行星滾柱絲桿(PRS)或滾珠絲桿 + 編碼器 + 驅動板,把旋轉變成推拉。靈巧手是縮小版:空心杯馬達 + 微型絲桿/行星 + 腱繩或連桿。本題<b>不做</b>視覺/VLA 模型/邊緣運算晶片(另題),工業機械手臂本體與協作機器人只在「同零件可移植」處帶到。</p>
+  <table>
+    <tr><th style="width:18%">關節型式</th><th>組成</th><th>代表平台</th><th>為何需要</th></tr>
+    <tr><td>旋轉關節(高減速比)</td><td>無框馬達 + 諧波減速機(50-160:1)+ 雙編碼器 + 驅動板 + 交叉滾子軸承 ± 力矩感測</td><td>Optimus Gen2 上肢 14 具(20/110/180 N·m 三規)、東元 TJM、Schaeffler 旋轉平台</td><td>肩/肘/腕需要高精度、小體積、零背隙</td></tr>
+    <tr><td>旋轉關節(低減速比行星)</td><td>外轉子無框馬達 + 一到兩級自研齒形行星(10-30:1)+ 雙編碼器 + 驅動板,同殼一體化</td><td>宇樹 G1/H2(M107 關節 220 N·m/kg;G1 膝 22.5:1)、智元 PowerFlow、Figure 03、1X(低齒輪比)</td><td>便宜、高效率、可反驅(跌倒不壞),用自研齒形補精度;中國兩大廠全走此路</td></tr>
+    <tr><td>直線關節</td><td>無框馬達 + 反向行星滾柱絲桿(PRS)或滾珠絲桿 + 力感測 + 驅動板</td><td>Optimus Gen2 本體 14 具(500/3,900/8,000 N 三規;2 肘/4 腕/8 腿)、Apptronik Apollo、全球傳動 EIP</td><td>髖/膝/踝需要大推力與高剛性;PRS 同尺寸負載為滾珠絲桿 2-3 倍、壽命長</td></tr>
+    <tr><td>靈巧手微致動</td><td>空心杯馬達 + 微型絲桿/行星 + 腱繩(UHMWPE/鋼索)或連桿 + 指尖觸覺</td><td>Optimus Gen2 每手約 6 顆空心杯 / V3 專利版 22 DoF 腱繩前臂驅動(Musk 2026-04 稱已改版);兆威 20 DoF 直線直驅手 600 g</td><td>手 BOM 占比 17-20%(MS/Schaeffler);路線未定</td></tr>
+    <tr><td>感測層</td><td>關節一維力矩感測、腕/踝六軸力/力矩(每台 2-4 顆)、足底 6D、觸覺皮膚</td><td>Optimus 旋轉關節內建力矩感測+足部 6D(MS 拆解);傅利葉 GR-3 31 個觸覺感測器;宇樹低價機以電流估測取代</td><td>力控從「可選」變「標配」只發生在高階平台;低價機不裝</td></tr>
+  </table>
+
+  <h3>平台世代表(需求錨:關節數 / 型式 / 2026 產量宣稱 vs 實際)</h3>
+  <table>
+    <tr><th style="width:15%">平台</th><th style="width:22%">關節數與型式</th><th style="width:21%">2026 產量宣稱</th><th>實際證據(至 2026-10-01)</th><th style="width:7%">信心</th></tr>
+    <tr><td><b>Tesla Optimus</b> Gen2(2023-12)/ V3(2026-08 Fremont 小批量)</td><td>Gen2 本體 28 具執行器 = 14 旋轉(諧波)+ 14 直線(PRS);手 Gen2 11 DoF → V3 專利版 22 DoF/手。<b>V3 整機規格表 Tesla 未公開</b>,是否減少諧波改行星/擺線屬未驗證</td><td>Tesla 自己:「2026 開產、2027 有意義產能」,無數量。供應鏈/媒體口徑:週 1,000 台(9 月前)→ 2,000-2,500 台(年底)(MS 引產業報導);「2026 約 5 萬台、單台 <2 萬美元」(中國供應鏈媒體)</td><td>Q2 週產幾十台 → 8 月幾百台,年底目標 >1,000 台/週(The Information,Tesla 未官宣);首批約 5,000 台份執行器訂單給拓普/三花/均勝(媒體);2025 目標 1 萬台未達、The Information 口徑實際約 2,000 台;2026 全年合理區間 = 低千台</td><td><span class="conf c-high">高(法說)</span><span class="conf c-med">中(媒體量化)</span></td></tr>
+    <tr><td><b>Figure 03</b>(2025-10)</td><td>整機 30 DoF、手 20 DoF;168 cm/60 kg、負載 20 kg;自製無框 BLDC 馬達 + 自製執行器(旋轉/直線拆分未公開)</td><td>BotQ 一代線 1.2 萬台/年、長期 5 萬台/年</td><td>2026-04-29:累計交付 350+ 台、BotQ 每日 1 台 → 每小時 1 台、良率 >80%(公司自述);2025-09 Series C 10 億美元+、投後 390 億美元</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td><b>宇樹 Unitree</b> H2(2025-10)/ G1(2024-05)/ R1(2025-07)</td><td>H2 本體 31 DoF(單腿 6、單臂 7、腰 3、頭 2),關節峰值 360 N·m;G1 23-43 DoF;<b>全部旋轉關節</b>、自研 M107 一體化關節(無框馬達+自研齒形行星+驅動器+編碼器),不用諧波、不用直線;核心零件自研自產率 >90%</td><td>產能目標人形 7.5 萬台/年、四足 11.5 萬台/年(TrendForce 引招股書)</td><td>2025 純人形出貨自述 >5,500 台(Omdia 給 4,200);1H26 出貨約 5,900 台(SAG);2025 營收 16.99 億元、扣非 5.9 億、毛利率 60.13%;1H26 營收 11.52 億元 +48.5%,扣非淨利預告年減 6.4-22.0%;2026-08-19 科創板掛牌</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td><b>智元 AgiBot</b> 遠征 A2/A3、靈犀 X2</td><td>旋轉關節為主(自研 PowerFlow 關節模組),細分未公開;減速機外購中大力德等</td><td>2026 出貨「數萬台」(公司自述);2027 營收 >100 億、2030 1,000 億元(公司目標)</td><td>2025 出貨 5,168 台(Omdia 第一、39%);1H26 約 8,400 台(SAG 44%);第 1 萬台 A3 2026-03 下線;2026-07-24 啟動港股上市(目標估值 360-430 億元人民幣),至 10/1 未掛牌</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td><b>Agility Digit</b> v4 / Digit 5(2026-09-15)</td><td>旋轉關節 + 腿部連桿;Digit 5 換新腿/電池/安全架構(無籠協作)</td><td>RoboFab 設計產能 1 萬台/年;Digit 5 多年期訂單 3 億美元;早期交付 1H27、GA 2027 底</td><td>Digit v4 部署 9 個客戶場域、累計 6.5 萬+ 運行小時(Schaeffler、GXO、Toyota Canada、Amazon、Mercado Libre);2026-06-24 SPAC 估值 25 億美元、募資 >6.2 億美元(S-4 已送 SEC)</td><td><span class="conf c-high">高</span></td></tr>
+    <tr><td><b>1X NEO</b>(家用,2 萬美元或 499 美元/月)</td><td>腱繩驅動(tendon-driven)全身、低齒輪比自研馬達;非諧波/非 PRS</td><td>Hayward 首年 1 萬台、2027 底 10 萬台/年;首年預購 5 天售罄(公司自述)</td><td>2026-04-30 工廠開幕;首批消費者交付「2026 年底前」,至 2026-09 無公開台數;Series C 10 億美元/估值 100 億美元+ 至 2026-06 未確認完成</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td><b>Apptronik Apollo</b></td><td>自研直線執行器為主(直線+旋轉混合),細節未公開</td><td>2026 開始商業單位製造;Jabil 代工條款</td><td>2026-02 募 5.2 億美元、累計近 10 億美元、估值 55 億美元+;客戶 Mercedes-Benz、GXO、Jabil;無公開交付台數</td><td><span class="conf c-high">高(融資)</span></td></tr>
+    <tr><td><b>Boston Dynamics 電動 Atlas</b>(產品版 CES 2026)</td><td>全電動旋轉關節(自研高扭矩旋轉執行器,放棄液壓)</td><td>2026 全部產量承諾給 Hyundai RMAC 與 Google DeepMind;Hyundai 2028 入廠、2030 組裝</td><td>CES 2026 發布並「立即」在 Boston 總部投產(公司自述);無台數;「Hyundai 部署 2.5 萬台」為投資意向非訂單</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td><b>小鵬 XPeng IRON</b>(新一代 2025-11)</td><td>全身 76 DoF、單手 21 DoF(業界最高自由度口徑);仿生脊椎;關節、靈巧手、晶片(3 顆圖靈 2,250 TOPS)全自研(公司自述)</td><td>2026 底量產、2027 中國與海外交付</td><td>2026-08-24 募 9 億美元(IDG 領投、騰訊/阿里)、投後 63 億美元;2026-09-07 產線投用;無交付台數</td><td><span class="conf c-high">高(融資)</span></td></tr>
+    <tr><td><b>優必選 Walker S2</b>(工業)</td><td>旋轉關節為主(自研伺服關節);可自主換電</td><td>2026 產能 5,000 台 → 2027 1 萬台</td><td>2025 Walker 訂單 11 億元人民幣、累計近 14 億;2025 產能破 1,000 台、交付超 500 台;Omdia 2025 出貨 1,000 台;1H25 淨虧 4.4 億元</td><td><span class="conf c-med">中</span></td></tr>
+    <tr><td><b>傅利葉 Fourier GR-3</b>(康養)</td><td>全身 55 DoF、31 個觸覺感測器;旋轉關節;減速機外購中大力德等</td><td>未公布台數</td><td>康養方案進入 40+ 國家(公司自述);2026 無出貨台數公開</td><td><span class="conf c-med">中</span></td></tr>
+  </table>
+  <p class="sub">需求含義:11 個平台裡<b>只有 Tesla 與 Apptronik 大量用直線關節</b>;中國兩大廠(1H26 合計 75% 全球出貨)全部旋轉行星自研。外購諧波/PRS 的可及市場 = Tesla(若不自製)+ 長尾整機 + 第三方關節模組商。</p>
+
+  <h3>技術路線之爭(六條線:選項 / 領先者 / 台廠位置 / 勝負變數 / 時點)</h3>
+  <table>
+    <tr><th style="width:14%">環節</th><th>選項與取捨</th><th>領先者(帶數字)</th><th>台廠位置</th><th>勝負變數 / 時點</th></tr>
+    <tr><td>旋轉減速器:諧波 vs 擺線 vs 行星</td><td>諧波(50-160:1、小體積高精度、低剛性易疲勞、單價高)/ 擺線 RV(高剛性抗衝擊、重、貴、多用於工業大關節)/ 行星(便宜、高效率、可反驅、背隙大、比低,靠自研齒形補精度)</td><td>諧波:HDS(1Q FY3/27 +23.6%)、綠的(中國人形諧波市占 2025 約 70% → 2026 升至 80-90%,研報口徑;1H26 營收 3.49 億 +38.6%、諧波產品毛利率 32.79% -1.54 pt)、來福(1H26 23.95 萬台 +112%、單台成本 482→351 元);擺線:Nabtesco 約 60%、雙環、中大力德;行星:宇樹/智元/Figure/1X 自研,Schaeffler 行星平台</td><td>諧波:上銀有產品線、鈞興 2025 諧波營收約 900 萬元且虧損、宇隆/盟英/和大送樣或小量;擺線:缺席(利茗未上市);行星:台灣精銳工業為主、人形無訂單 → <b>追趕/缺席</b></td><td>(1)Tesla V3 是否維持 14 顆諧波(未公開);(2)宇樹/智元近 80% 中國出貨皆自研行星 → 諧波人形需求 = 長尾 + Tesla;(3)中國諧波已為日系 40-60% 價、來福成本年降 27%。分水嶺 = 2027 Texas 線 V3/V4 BOM 定案</td></tr>
+    <tr><td>直線關節:PRS vs 滾珠絲桿 vs 不用直線</td><td>PRS(線接觸、同尺寸負載 3-10 倍、壽命長、磨削工藝難、單價為滾珠絲桿 10 倍+)/ 滾珠絲桿(便宜成熟、負載低、體積大)/ 全旋轉(宇樹/智元/Figure 03,靠行星關節+連桿)</td><td>PRS:Rollvis(瑞士)、GSA(瑞士,Optimus Gen2 的 14 支)、Schaeffler/Ewellix、北特(擴產 18.5 億人民幣)、五洲新春(募投 98 萬套 PRS,公告);中國 PRS 價約 Rollvis 50%、國產化率 <20%;滾珠絲桿:NSK/THK/上銀</td><td>上銀全球前三滾珠螺桿(營收占比 20%),PRS 2026-06 首展、2026-08 自述具量產能力、產能較年初 +20%;全球傳動 EIP 三規格客戶驗證中、2H27 回饋;直得 PRS 無佐證;台廠 PRS 出貨金額 = 0 → <b>追趕中、最有機會</b></td><td>(1)PRS 需求 = Tesla 台數 × 14,單一客戶風險;(2)磨削 vs 冷成形/滾軋誰先把成本壓到滾珠絲桿 3 倍內;(3)Tesla 首批 5,000 台份給拓普/三花(總成),PRS 二階是否納台廠。台廠:展示 2026 → 認證 2027 → 營收最快 2027H2</td></tr>
+    <tr><td>關節馬達:無框力矩馬達自研 vs 外購;外轉子 vs 內轉子</td><td>整機廠自研(Tesla、宇樹 M107 220 N·m/kg、小鵬、Figure)/ 外購(Maxon、Kollmorgen、鳴志、步科 Leadshine、Allient);外轉子占比 2022-2025 由 38% → 42%(人形拉動)</td><td>ABI:2025 全球 251 萬顆、ASP 361 美元(-5%);步科 1H26 無框馬達出貨 11.4 萬台(+423%)、機器人收入 2.43 億元(54%);維宏 1H26 靈巧手電機 >5 萬台、目標年底月產 8 萬</td><td>大銀(力矩/直驅馬達+驅動器量產,工業/半導體設備)、東元(無框馬達供國產手臂、TJM 內用)、台達電(伺服延伸);人形無框馬達無獨立佐證出貨 → <b>有能力、無案例</b></td><td>頭部整機全自研 → 商用無框市場只剩長尾與模組商;ASP 年降 5%+;台廠切入要靠 ODM 整機自採。已量產(2024-),2026 為價格戰年</td></tr>
+    <tr><td>靈巧手:腱繩 vs 連桿 vs 微型絲桿+空心杯</td><td>腱繩(Tesla V3 專利 22 DoF、執行器移前臂、1X 全身;輕、低慣量、組裝難/壽命疑慮)/ 連桿(剛性、確定性、DoF 低)/ 微型絲桿+空心杯(Optimus Gen2 約 20 顆空心杯/台;精密、貴)</td><td>靈心巧手 Linkerbot(高 DoF 市占 80%+、月產千台,公司自述)、兆威(DM17/LM06;2026H1 淨利 -34%)、鳴志、Shadow;Tesla 自製</td><td><b>缺席</b>:無空心杯馬達/微型絲桿人形案例;僅全球傳動 DPRS 微型致動器原型、上銀靈巧手螺桿供樣</td><td>The Information 2026-09:手/前臂 100+ 顆螺絲手工組裝是週產 1,000 台的瓶頸 → 誰先把腱繩手做成可自動化組裝;DoF 共識「約 20 即夠」。V3 腱繩 2026-08 小批量;可自動化版本未定(V4)</td></tr>
+    <tr><td>感測:六維力 vs 關節扭矩 vs 無感測電流估測 + 觸覺皮膚</td><td>六維力(腕/踝 1-4 顆/台、貴)/ 關節扭矩(每關節一顆,Optimus 旋轉關節內建)/ 電流估測(宇樹等低價機)/ 觸覺皮膚(GR-3 31 個、Tesla 開發可換「感測手套」)</td><td>六維力:藍點觸控(中國 80%+)、坤維 9.2%(2026-03 B+ 輪 1 億元,供優必選/銀河通用/智元/星海圖)、宇立 3.3%;ATI/SCHUNK 外資標竿;關節扭矩:Sensodrive、柯力、東華;觸覺:漢威(百萬級產能自述)、福萊新材</td><td><b>缺席</b>(協力測控、三鋒科技未上市、展品級)</td><td>2B 工業場景把力控從可選變標配(賽迪);但宇樹/智元低價機用電流估測 → 感測器需求綁定高階平台。六維力中國 2025 3 億元 → 2030 60 億元</td></tr>
+    <tr><td>供應鏈在地化:Tesla 中國鏈 vs 美/台第二來源</td><td>維持中國 Tier1(拓普/三花/均勝/旭升/榮旗)/ 美國在地(Schaeffler 美廠、Tesla 自製)/ 台灣第二來源(上銀/大銀/全球傳動/宇隆赴美設廠)</td><td>2026-09 審廠後拓普/三花/均勝轉正式量產夥伴、首批 5,000 台份(媒體);MS:去中國化 BOM ×2.8</td><td>至 2026-10-01 <b>無任何台廠</b>出現在 Tesla 公開供應商名單或第三方報導;上銀 2025-11 法說明言僅樣品測試</td><td>美國對中國機器人零組件關稅/出口管制是否升級;Tesla V4「更垂直整合」是否把執行器收回自製。2026 中國鏈定;2027 Texas 線為第二來源窗口</td></tr>
+  </table>
+</div>
+
+<!-- 2:完整製程環節 -->
+<h2 id="s2"><span class="n">2</span>完整製程/零件鏈逐環節拆解(16 環節) <span class="conf c-high">高信心</span></h2>
+<p class="sub">主流路線:磁材/馬達上游 → 無框力矩馬達 / 空心杯馬達 → 諧波 / RV / 行星減速機 → PRS / 滾珠絲桿 → 軸承 → 編碼器 → 驅動板 → 力矩感測 → 觸覺 → 關節模組整合 → 靈巧手總成 → 整機組裝 → 加工設備。每環節標:做什麼(輸入/輸出)、關鍵設備/材料、難點、台廠/國際商、查證等級。來源:EMAG 製程頁、TI/EPC 原廠、拆解部落格、各公司法說與半年報(逐條標註於第 4、7 節)。</p>
+<div class="flow">
+
+  <div class="step"><div class="num">1</div><div class="body">
+    <h4>永磁材料與馬達上游(釹鐵硼磁鋼、矽鋼片、扁線/繞組)</h4>
+    <p>做什麼:燒結釹鐵硼(含鏑/鋱重稀土晶界擴散)磁鋼切片、充磁;高頻矽鋼片沖疊;扁線或圓線繞組。輸入:稀土氧化物/合金、矽鋼卷、銅線 → 輸出:磁鋼片、定子鐵芯、繞線定子。單台人形需 3.5-4 kg 稀土永磁(Argus 口徑,單源)。</p>
+    <div class="mach">設備/材料:真空熔煉、氫碎/氣流磨、燒結爐、多線切割、充磁機;NdFeB N48-N52 等級、重稀土晶界擴散。</div>
+    <div class="diff">難點:材料端幾乎全在中國——中國 2025/4 起稀土管制、2025/10 暫停管制至 2026/11/10;富田電機 2025/4 起磁鐵交付曾受阻、改日本/馬來西亞貨源(工商 2025-10-13)。繞線本身難度中,但高槽滿率扁線定子需專用設備。政策風險 > 技術風險。</div>
+    <div class="who">對應:<span class="tag t-intl">金力永磁/中科三環/正海磁材(中)</span><span class="tag t-intl">Proterial 日立金屬/信越化學(日)</span><span class="tag t-tw">東元 1504(扁線馬達技術,車用/工業為主)</span><span class="tag t-tw">富田-創 4590(無稀土永磁馬達開發)</span> <b>磁鋼:台股缺席</b> <span class="conf c-high">缺席確認高</span><span class="conf c-med">單台用量中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">2</div><div class="body">
+    <h4>無框力矩馬達(frameless torque motor)</h4>
+    <p>做什麼:外轉子/內轉子永磁同步馬達,無外殼無軸,直接嵌入關節殼體;追求高扭矩密度、低齒槽效應。Optimus Gen2 口徑 28 顆無框馬達(14 旋轉 + 14 直線);宇樹 G1 膝關節為 18 槽 16 極、約 1 kg、120 N·m(拆解)。輸入:磁鋼、矽鋼鐵芯、繞組、溫度感測 → 輸出:定子+轉子套件(含霍爾/溫度線)。</p>
+    <div class="mach">設備:自動繞線機、灌膠/真空含浸、動平衡機、反電動勢/齒槽轉矩測試台。</div>
+    <div class="diff">難點:極槽配合與磁路設計、批次一致性是門檻,製造門檻中等;價格戰——ABI:2025 ASP 361 美元年減 5%;步科 1H26 出貨 11.4 萬台(+423%)、宇樹自製率 >90%。頭部整機廠全部自研,商用市場只剩長尾。</div>
+    <div class="who">對應:<span class="tag t-intl">Kollmorgen TBM2G(美)</span><span class="tag t-intl">Allient/Allied Motion(美)</span><span class="tag t-intl">Maxon EC frameless DT(瑞)</span><span class="tag t-intl">步科 688160(中,1H26 11.4 萬台)</span><span class="tag t-intl">昊志機械(中)</span><span class="tag t-intl">宇樹自製(自研自產率 >90%)</span><span class="tag t-intl">Schaeffler(德)</span><span class="tag t-tw">大銀微系統 4576(力矩/直驅馬達+驅動器量產;8 月 4.27 億 +98%,動能=矽光子檢測平台)</span><span class="tag t-tw">東元 1504(供國產手臂無框電機、TJM 內用)</span><span class="tag t-tw">台達電 2308(伺服延伸、NSK MOU)</span> <span class="conf c-med">台廠工業級量產中、人形未具名</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">3</div><div class="body">
+    <h4>空心杯馬達(coreless motor)— 靈巧手/微關節</h4>
+    <p>做什麼:無鐵芯杯形繞組轉子,低慣量、高響應;用於手指/前臂微致動器。Optimus Gen2 口徑每隻手約 6 顆空心杯、整機約 20 顆(券商)。輸入:細銅線、磁鋼、精密軸承 → 輸出:Φ8-Φ22 mm 空心杯馬達(常搭微型行星/絲桿)。</p>
+    <div class="mach">設備:斜繞/直繞精密繞線機(核心 know-how)、杯形繞組成形治具、微型軸承壓裝。</div>
+    <div class="diff">難點:繞線成形良率是核心門檻;鳴志 2025 空心杯產線年增 >56%、1H26 營收 15.67 億元 +19.21%、歸母 3,720 萬 +38.01%;維宏 1H26 靈巧手關節電機/模組出貨 >5 萬台、目標 2026 底月產 8 萬(「全球約 40%/中國約 80% 方案」為公司自述)。<b>台股缺席:三篇台媒清單皆無台廠量產者</b>;建準/台達電被清單列入但無產品證據。</div>
+    <div class="who">對應:<span class="tag t-intl">Maxon(瑞)</span><span class="tag t-intl">Faulhaber(德)</span><span class="tag t-intl">Portescap(美)</span><span class="tag t-intl">鳴志電器 603728(中)</span><span class="tag t-intl">維宏股份 300508(中)</span><span class="tag t-intl">鼎智科技(中)</span><span class="tag t-intl">兆威機電 003021(中,微型傳動+靈巧手)</span> <b>台股:缺席</b> <span class="conf c-high">高(缺席確認)</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">4</div><div class="body">
+    <h4>諧波減速機(柔輪 / 剛輪 / 波發生器)</h4>
+    <p>做什麼:柔輪為壁厚 <1 mm 薄壁杯形齒件(SNCM439 38-42 HRC、模數 0.15-1.5、齒數 100-400、跳動 ≤5 μm、ISO 1328 Class 4),剛輪為內齒圈,波發生器 = 橢圓凸輪 + 柔性軸承;減速比 50-160:1,上半身旋轉關節主流。輸入:SNCM439/40CrNiMoA 合金鋼棒、軸承鋼 → 輸出:成品減速機。製程:軟車 → 熱處理(含深冷)→ 硬車 → 內孔珩磨 → 滾齒 → 去毛邊(EMAG 製程頁)。</p>
+    <div class="mach">設備:滾齒機 EMAG K160/K300、Gleason、Liebherr;齒形量測機;真空熱處理爐。</div>
+    <div class="diff">難點:薄壁變形控制 + 熱處理是良率關鍵(部落格口徑:中國 Tier-1 柔輪報廢率 28-41% vs 日系 <12%,低信心單源;2025 高精滾齒機與真空爐短缺致交期 4-7 個月,同源低信心)。價格:綠的 1H26 綜合毛利率 32.26%(-2.51 pct)/諧波產品 32.79%(-1.54 pt);來福 1H26 出貨 23.95 萬台 +112%、單台成本 482→351 元、綜合毛利率 27.3%(+7.5 pct)、月產能 2025 底 3.96 萬 → 2026/7 6.48 萬台、稼動率 95%、在手 >40 萬台;收入 1.42 億元 +80%、經調整淨虧 412 萬——<b>量增、價降、仍虧</b>是本環節寫照。</div>
+    <div class="who">對應:<span class="tag t-intl">Harmonic Drive Systems 6324.T(日;1Q FY3/27 營收 166.81 億日圓 +23.6%、營益率 11.0%)</span><span class="tag t-intl">綠的諧波 688017(中)</span><span class="tag t-intl">來福諧波 03952.HK(中)</span><span class="tag t-intl">Leaderdrive 長盛精密(中,與 SKF 合資 2026 底投產)</span><span class="tag t-intl">Schaeffler strain wave(與 Hexagon Robotics 合作)</span><span class="tag t-intl">Nidec Drive Technology(日)</span><span class="tag t-tw">上銀 2049(自製諧波+關節模組;人形客戶驗證中)</span><span class="tag t-tw">鈞興-KY 4571(諧波 2025 營收約 900 萬元、虧損;人形上肢改少齒差)</span><span class="tag t-tw">宇隆 2233(TUF ONE 諧波;北美客戶樣品)</span><span class="tag t-tw">盟立 2464(盟英;2026-05 小量出貨,公司自述、客戶未具名)</span><span class="tag t-tw">和大 1536(數家客戶供貨,NDA)</span><span class="tag t-tw">利茗(未上市;諧波+RV 皆量產自述、引進 Gleason 滾齒機)</span> <span class="conf c-high">HDS/綠的/來福數字高</span><span class="conf c-med">台廠全為自述、無第三方出貨金額</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">5</div><div class="body">
+    <h4>擺線/RV 減速機與行星減速機(腰/髖/膝重負載旋轉關節)</h4>
+    <p>做什麼:RV = 擺線針輪 + 行星前級,高剛性抗衝擊;行星減速機(1-2 級、比 10-30:1)體積小、背隙較大、成本最低——宇樹 G1 全關節採兩級行星(膝 22.5:1);中國 2025 第三方關節模組出貨 28 萬台中諧波+行星型 >90%(研報)。輸入:滲碳鋼齒輪坯、針齒、曲柄軸 → 輸出:RV/行星減速機或與馬達整合之關節。鈞興人形上肢改用漸開線少齒差減速器(效率 93% vs 諧波 80%),2026-07 已獲客戶樣品訂單。</p>
+    <div class="mach">設備:滾齒機、磨齒機(Reishauer/Kapp Niles/Gleason)、擺線磨床、滲碳爐、三次元量測。</div>
+    <div class="diff">難點:RV 核心在擺線輪磨削與針齒裝配(Nabtesco 約 60%、2025 全球 RV 8.83 億美元、前三家約 87%);行星門檻最低但人形精度靠自研齒形。中大力德 1H26 營收 6.0 億元 +16%、綜合毛利率 23.3%(-4.5 pct)、精密減速器毛利率 14.6%(-9.0 pct)——行星/RV 外購價也在跌。</div>
+    <div class="who">對應:<span class="tag t-intl">Nabtesco 6268.T(日,RV 約 60%)</span><span class="tag t-intl">住友重機械 6302.T(日)</span><span class="tag t-intl">雙環傳動/環動科技 002472(中,2025 國內 RV 第一)</span><span class="tag t-intl">中大力德 002896(中,三類皆量產;進智元/傅利葉鏈)</span><span class="tag t-intl">Neugart/Wittenstein(德)</span><span class="tag t-intl">Schaeffler 行星致動器</span><span class="tag t-tw">台灣精銳 4583(行星減速機 73-85% 營收、全球 5-10% 自述;2Q26 EPS 3.25、毛利率 52.13%;人形無訂單)</span><span class="tag t-tw">鈞興-KY 4571(少齒差減速器樣品訂單)</span><span class="tag t-tw">宇隆 2233(行星/微型行星/RV 產品線)</span><span class="tag t-tw">和大 1536(行星減速器,肩/腰/髖)</span><span class="tag t-tw">利茗(未上市,RV)</span> <span class="conf c-high">Nabtesco/中大力德高</span><span class="conf c-med">台廠人形中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">6</div><div class="body">
+    <h4>行星滾柱絲桿 PRS(直線關節核心)</h4>
+    <p>做什麼:螺母內多根螺紋滾柱繞絲桿公轉,線接觸 → 承載為滾珠絲桿 2-3 倍(台廠口徑;研報 3-10 倍)、壽命長、可反驅。Optimus Gen2 本體 14 根反向式 PRS(2 肘/4 腕/8 腿),單機大絲桿價值量 0.7-2.8 萬人民幣(財通)。輸入:GCr15/滲氮鋼棒 → 輸出:Φ8-Φ30 PRS 總成(絲桿+滾柱+螺母+保持架)。</p>
+    <div class="mach">設備:外螺紋磨床(Studer/Kapp Niles 類)、內螺紋磨床(瓶頸)、旋風銑、冷成形/滾壓(無切屑替代路線)、螺紋量測。</div>
+    <div class="diff">難點:PRS 單價為滾珠絲桿 10 倍以上(上銀董事長);內螺紋磨削工時長、精密磨床供給受限是量產隘口;冷成形是替代路線但多頭小螺距模具難、一致性待驗證(財通 2026-08)。中國國產化率 <20%(研報)。五洲新春募投 98 萬套 PRS + 210 萬套微型滾珠絲桿(公告);「通過 Tesla 審廠」僅媒體,公司曾被上交所通報批評並澄清絲桿累計收入僅約 680 萬元含稅 <span class="conf c-un">unverified</span>。</div>
+    <div class="who">對應:<span class="tag t-intl">Rollvis(瑞)</span><span class="tag t-intl">GSA(瑞,Optimus Gen2 供應)</span><span class="tag t-intl">Schaeffler/Ewellix/INA(德)</span><span class="tag t-intl">SKF(瑞典)</span><span class="tag t-intl">NTN(日)</span><span class="tag t-intl">北特科技 603009(中,擴產 18.5 億元)</span><span class="tag t-intl">五洲新春 603667(中)</span><span class="tag t-intl">恒立液壓/貝斯特/雙林/秦川(中,磨削路線)</span><span class="tag t-intl">三花智控 002050 / 拓普 601689(中,執行器總成)</span><span class="tag t-tw">上銀 2049(PRS 2026-06 首展、2026-08 自述具量產能力、產能較年初 +20%、交期 6 個月;客戶為台/中自主品牌,人形驗證中)</span><span class="tag t-tw">全球傳動 4540(EIP 三規格客戶驗證中、DPRS 原型;2H27 回饋)</span><span class="tag t-tw">優士特(未上市)</span> <span class="conf c-high">台廠 PRS 出貨金額=0 之確認高</span><span class="conf c-med">進度中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">7</div><div class="body">
+    <h4>滾珠絲桿 / 微型絲桿(靈巧手、輕負載直線)</h4>
+    <p>做什麼:研磨級/轉造級滾珠絲桿;靈巧手用 Φ3-Φ6 微型絲桿(搭空心杯)。輸入:軸承鋼棒 → 輸出:絲桿+螺母+鋼珠循環件。Optimus 用量:14 PRS 為 Gen2 公開口徑;「40 支滾珠絲桿 + 8 PRS」為 Gen3 傳聞,Tesla 未公開 <span class="conf c-un">unverified</span>。</p>
+    <div class="mach">設備:螺紋磨床、滾造機、珠槽研磨、雷射測長。</div>
+    <div class="diff">難點:台灣強項(上銀全球第三大滾珠絲桿廠);全球傳動研磨級訂單已排到 2027Q2——但需求來自鋰電/半導體設備,非人形。微型絲桿一致性與量產才是人形門檻;五洲新春規劃 210 萬套微型滾珠絲桿。</div>
+    <div class="who">對應:<span class="tag t-intl">THK 6481.T(日)</span><span class="tag t-intl">NSK 6471.T(日;人形旋轉/直線致動器 2028 上市)</span><span class="tag t-intl">Bosch Rexroth</span><span class="tag t-intl">新劍傳動 / 五洲新春(中)</span><span class="tag t-tw">上銀 2049(本業;靈巧手螺桿、交叉滾柱軸承已供樣)</span><span class="tag t-tw">全球傳動 4540(本業;研磨級排至 2027Q2)</span><span class="tag t-tw">直得 1597(樹谷二期滾珠絲桿量產、微型線性滑軌全球前三自述;8 月 1.33 億 +45.2% 來自矽光子/HBM 設備)</span> <span class="conf c-high">高(本業)</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">8</div><div class="body">
+    <h4>軸承(交叉滾子軸承、薄壁四點接觸、柔性軸承)</h4>
+    <p>做什麼:關節輸出端用交叉滾子軸承承受複合負載;諧波波發生器用柔性軸承;宇樹 G1 膝關節拆解可見交叉滾子軸承。輸入:軸承鋼/滲碳鋼環 → 輸出:薄壁交叉滾子/柔性軸承。市場 2025 約 3,380 萬 → 2032 年 8.72 億美元(QYR,CAGR 46.6%,單源)。</p>
+    <div class="mach">設備:內外圈磨床、超精機、滾子分選、真空熱處理。</div>
+    <div class="diff">難點:薄壁 + 小截面公差嚴;日系 IKO/THK/NSK 與 Schaeffler 主導;台廠僅上銀自述供交叉滾柱軸承樣品;和椿為代理/通路非製造。</div>
+    <div class="who">對應:<span class="tag t-intl">IKO/THK/NSK(日)</span><span class="tag t-intl">Schaeffler/INA(德)</span><span class="tag t-intl">SKF(瑞典,與 Leaderdrive 合資)</span><span class="tag t-intl">長盛軸承 / 五洲新春(中)</span><span class="tag t-tw">上銀 2049(交叉滾柱軸承供樣自述)</span><span class="tag t-tw">和椿 6215(代理,非製造)</span> <b>製造:台股缺席</b> <span class="conf c-high">缺席確認高</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">9</div><div class="body">
+    <h4>編碼器(磁性/感應式、雙編碼器、多圈絕對值)</h4>
+    <p>做什麼:關節需馬達端 + 輸出端雙編碼器(17-23 bit),中空、薄型(中國銳鷹同側中空感應式雙編碼器安裝高度 6.8 mm);RLS/Renishaw 20-bit 磁環。輸入:磁環/碼盤、AMR/TMR 晶片、ASIC → 輸出:編碼器模組(SPI/BiSS 介面)。</p>
+    <div class="mach">設備:磁環充磁/校正台、分度校驗設備;晶片 ams OSRAM、TDK、MPS、Infineon。</div>
+    <div class="diff">難點:精度校正與抗磁干擾;晶片端被歐美日 IDM 掌握;台廠無人形用編碼器量產者(大銀有自用編碼器列清單,無出貨;東元關節模組之編碼器來源未揭露)。</div>
+    <div class="who">對應:<span class="tag t-intl">Renishaw/RLS(英/斯)</span><span class="tag t-intl">Heidenhain(德)</span><span class="tag t-intl">ams OSRAM / TDK / MPS(晶片)</span><span class="tag t-intl">銳鷹傳感 / 奧松 / 雷賽(中)</span><span class="tag t-tw">大銀微系統 4576(自製編碼器,自用)</span> <b>台股:缺席</b> <span class="conf c-high">高</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">10</div><div class="body">
+    <h4>關節驅動器 / 伺服驅動板(MCU + 功率級 + FOC 韌體)</h4>
+    <p>做什麼:每關節一片 48V FOC 驅動板:MCU(TI AM26x/Sitara、Infineon、ST、峰岹)+ GaN 或 MOSFET 半橋 + 電流感測 + 編碼器介面 + EtherCAT/RS485。TI 48V 1kW 關節參考設計 TIDA-010979;EPC EPC91120 Φ32 mm GaN 三相逆變(15-55V、100 kHz PWM、50 ns 死區)。輸入:PCB、MCU、功率元件、磁性元件 → 輸出:驅動板/整合式驅動器。</p>
+    <div class="mach">設備:SMT、ICT/功能測試、EMC 實驗室。</div>
+    <div class="diff">難點:硬體門檻中等、韌體(FOC、力控、通訊)是差異化;晶片端台股僅 MOSFET/驅動 IC 二線(本題不展開);台灣在驅動器整機有大銀/台達/新代,但人形客製無具名。</div>
+    <div class="who">對應:<span class="tag t-intl">TI(TIDA-010979)</span><span class="tag t-intl">Infineon(GaN 關節方案)</span><span class="tag t-intl">EPC(GaN)</span><span class="tag t-intl">Elmo / Maxon 驅動器</span><span class="tag t-intl">峰岹科技(中)</span><span class="tag t-tw">大銀微系統 4576(高響應驅動器量產;供上銀物流機器人)</span><span class="tag t-tw">台達電 2308(伺服驅動本業)</span><span class="tag t-tw">新代 7750(控制器/驅動;無人形產品)</span> <span class="conf c-high">參考設計高</span><span class="conf c-med">台廠人形中</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">11</div><div class="body">
+    <h4>力矩/力感測器(關節一維力矩、腕/踝六軸 F/T、足底)</h4>
+    <p>做什麼:關節輸出端一維力矩感測(應變片/矽應變);腕、踝各 1 顆六軸力/力矩(每台 2-4 顆);Optimus 腳部 6D 力感測(MS 拆解)。輸入:彈性體(鋁/鋼)、應變片/MEMS、放大與解耦電路 → 輸出:F/T 感測器模組。中國 2025 人形六維力出貨首破萬套、前三家 92.8%(藍點 80%+、坤維 9.2%、宇立 3.3%);2025 中國市場 >3 億元 → 2030 年 120 萬顆/60 億元(賽迪)。</p>
+    <div class="mach">設備:應變片貼片與固化、多軸標定機(六軸解耦標定為核心 know-how)。</div>
+    <div class="diff">難點:六軸解耦精度、溫漂、小型化;定價權在 ATI/SCHUNK 與中國藍點/坤維;<b>台廠只有協力測控、三鋒科技(未上市)展品級——台股缺席</b>。</div>
+    <div class="who">對應:<span class="tag t-intl">ATI(美,Novanta 旗下)</span><span class="tag t-intl">SCHUNK FTS(德)</span><span class="tag t-intl">Sensodrive(德,關節力矩)</span><span class="tag t-intl">Bota Systems(瑞)</span><span class="tag t-intl">Aidin Robotics(韓,AFT150-D50)</span><span class="tag t-intl">藍點觸控 / 坤維科技 / 宇立儀器(中)</span><span class="tag t-intl">柯力傳感 603662 / 東華測試 300354(中)</span><span class="tag t-tw">協力測控 / 三鋒科技 CELKEES(未上市,展品級)</span> <b>台股:缺席</b> <span class="conf c-high">高</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">12</div><div class="body">
+    <h4>觸覺感測 / 電子皮膚(指尖、掌面)</h4>
+    <p>做什麼:電阻式(Optimus 採用,媒體口徑)/ 電容式 / 壓電式柔性陣列;指尖多維(力、溫度)感知。輸入:奈米敏感材料、柔性基板、讀出 IC → 輸出:指尖/掌面觸覺陣列。傅利葉 GR-3 全身 31 個觸覺感測器;Tesla 開發可換「感測手套」(The Information)。</p>
+    <div class="mach">設備:塗布/印刷、雷射圖案化、柔性電路貼合。</div>
+    <div class="diff">難點:材料穩定性、空間解析度與讀出整合;路線未定。漢威科技 2026 WRC 發布電容式全身電子皮膚、已小批量供貨多家人形廠;福萊新材二代指尖觸覺小批量。<b>台股無標的</b>(軟板/PCB 廠延伸無佐證)。</div>
+    <div class="who">對應:<span class="tag t-intl">漢威科技 300007(中)</span><span class="tag t-intl">福萊新材 605488(中)</span><span class="tag t-intl">帕西尼(中)</span><span class="tag t-intl">GelSight / Tacta(美)</span><span class="tag t-intl">Schaeffler(觸覺列入路線圖)</span> <b>台股:缺席</b> <span class="conf c-high">高</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">13</div><div class="body">
+    <h4>關節模組整合與測試(旋轉關節 / 直線致動器總成)</h4>
+    <p>做什麼:馬達 + 減速機 + 雙編碼器 + 驅動板 + 軸承 + 力矩感測於同一殼體,做背隙、剛性、溫升、壽命、EOL 測試;人形每台 14-30 組關節(台媒口徑)。輸入:上述零件 → 輸出:標準化關節模組(如東元 TJM 五尺寸,額定 17-361 N·m、峰值 484 N·m;M1-140 峰值 360 N·m、15 rad/s)。關節模組占本體成本約 50%(中國研報口徑,分母不同)。</p>
+    <div class="mach">設備:扭矩/背隙測試台、壽命試驗機、動平衡、熱成像。</div>
+    <div class="diff">難點:整合門檻在熱管理與控制韌體,不在單件加工;<b>平台廠多自製致動器</b>(Figure 03 幾乎從零設計含致動器與馬達;宇樹自製率 >90%;Tesla V3 執行器總成外包拓普/三花/均勝),第三方關節模組的客戶是二線平台與四足/服務機器人——這是台廠關節模組最大反方。Schaeffler 以 3 個致動器平台拿到 14 家 OEM 28 件原型訂單(多數已交付)。</div>
+    <div class="who">對應:<span class="tag t-intl">Tesla 自製(Fremont 8 月週產數百台,媒體)</span><span class="tag t-intl">Figure(BotQ 1.2 萬台/年目標)</span><span class="tag t-intl">宇樹 / 智元(自製)</span><span class="tag t-intl">Schaeffler(14 OEM 28 原型)</span><span class="tag t-intl">NSK(致動器 2028 上市)</span><span class="tag t-intl">拓普 / 三花 / 均勝(中,Tesla 執行器總成,媒體)</span><span class="tag t-intl">中大力德 / 綠的(中,機電一體化)</span><span class="tag t-intl">Nidec(日)</span><span class="tag t-tw">東元 1504(TJM;四足機器狗小批量 200-300 顆,2025 口徑;人形六大關節規劃、合作對象未具名)</span><span class="tag t-tw">上銀 2049(肩/髖關節模組;送樣測試)</span><span class="tag t-tw">盟立 2464(盟英關節模組 2026-05 小量出貨,自述)</span><span class="tag t-tw">羅昇 8374(ACTDG45-O 首發,無出貨)</span><span class="tag t-tw">富田-創 4590(四足機器狗關節模組 Q4 出貨)</span> <span class="conf c-high">Schaeffler/東元第三方佐證高</span><span class="conf c-med">台廠客戶全未具名</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">14</div><div class="body">
+    <h4>靈巧手與前臂總成(腱繩、微型絲桿、空心杯)</h4>
+    <p>做什麼:Optimus 專利版 22 DoF / 25 致動器、致動器移至前臂、每指 3 條腱繩經腕部導槽——Musk 2026-04 稱該設計已改版,V3 實際手部方案未揭露;Figure 03 手 20 DoF;兆威 20 DoF 直線直驅手 600 g、6 DoF 連桿手 400 g/5 kg 抓取(CES 2026)。手占 BOM:MS 17.2%(約 9,500 美元/5.5 萬)、Schaeffler 簡報約 20%。輸入:空心杯/微型馬達、微型絲桿、腱繩、觸覺陣列 → 輸出:手+前臂模組。</p>
+    <div class="mach">設備:微型零件精密裝配、腱繩張力校正、手指壽命試驗。</div>
+    <div class="diff">難點:腕部腱繩摩擦/伸長是可靠性失效點;路線未定(腱繩 vs 微型絲桿直驅 vs 連桿);The Information 2026-09:手/前臂 100+ 顆螺絲手工組裝是 Optimus 週產 1,000 台的瓶頸。台廠只有全球傳動 DPRS 微型致動器原型(2026 法國設計獎銀獎)、上銀靈巧手螺桿供樣;<b>整手模組台股缺席</b>。</div>
+    <div class="who">對應:<span class="tag t-intl">Tesla 自製</span><span class="tag t-intl">兆威機電 003021(中;2026H1 淨利 -34%)</span><span class="tag t-intl">靈心巧手 / 因時(中)</span><span class="tag t-intl">新劍傳動(中,靈巧手總成千台級訂單自述)</span><span class="tag t-intl">Shadow Robot(英)</span><span class="tag t-tw">全球傳動 4540(DPRS 原型)</span><span class="tag t-tw">上銀 2049(靈巧手螺桿供樣)</span> <span class="conf c-high">BOM 占比高</span><span class="conf c-med">Optimus 手改版中(媒體)</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">15</div><div class="body">
+    <h4>整機組裝、骨架與電池包</h4>
+    <p>做什麼:鋁/鎂骨架或碳纖、線束、熱管理、電池包(MS 口徑 Optimus Gen2 電池僅約 300 美元/0.5%;Schaeffler 口徑 <5%);Tesla 稱 Optimus 有 10,000+ 個獨特零件、Fremont 改線 4 個月。輸入:關節模組、手、骨架、電池、運算模組 → 輸出:整機(含 EOL 校正)。</p>
+    <div class="mach">設備:組裝線、動作標定、燒機。</div>
+    <div class="diff">難點:10,000 零件、產線新、「跟最慢最倒楣的那個零件一樣快」(Musk);中國件需返工(The Information)。台廠優勢在 EMS/系統組裝(鴻海/緯創/廣達),但人形整機代工目前無具名訂單;鴻海×川崎護理人形 2026 年度台灣開賣、2027 累計 200 台目標;Molicel(台泥)高功率電芯 2026 主攻 eVTOL/BBU/無人機,人形無具名出貨。</div>
+    <div class="who">對應:<span class="tag t-intl">Tesla Fremont</span><span class="tag t-intl">Figure BotQ</span><span class="tag t-intl">宇樹(產能可擴 3 萬台/年)</span><span class="tag t-intl">Agility RoboFab / Apptronik-Jabil / 1X Hayward</span><span class="tag t-intl">CATL/ATL(電池)</span><span class="tag t-tw">鴻海 2317(川崎護理人形;NVIDIA 合作;關節自製無佐證)</span><span class="tag t-tw">台泥 1101 Molicel(高功率電芯,人形無具名)</span><span class="tag t-tw">新普 6121(電池模組,清單)</span> <span class="conf c-high">10,000 零件高(法說)</span><span class="conf c-un">台廠代工未佐證</span></div>
+  </div></div>
+
+  <div class="step"><div class="num">16</div><div class="body">
+    <h4>加工設備與量測(磨齒機、螺紋磨床、繞線機、熱處理)</h4>
+    <p>做什麼:諧波柔輪滾齒機(EMAG K160/K300、Gleason、Liebherr)、擺線/齒輪磨齒機(Reishauer、Kapp Niles、Gleason)、PRS 內外螺紋磨床(Studer 類)、真空/深冷熱處理爐、空心杯繞線機、六軸標定機。輸入:工具機、量具 → 輸出:各環節產能。財通測算:五洲新春 98 萬套 PRS 募投需 326 台磨床、對應約 7 萬台機器人。</p>
+    <div class="mach">歐日設備為主;中國推冷成形/旋風銑降低磨床依賴;利茗引進 Gleason 滾齒機擴傘齒輪線。</div>
+    <div class="diff">難點:2025 高精滾齒機與真空熱處理設備短缺是中國諧波交期 4-7 個月主因(單源低信心);台灣工具機廠(台中精機、福裕、陸聯)無人形專用磨齒機佐證——<b>台股在減速機磨齒設備缺席</b>,列開放問題。</div>
+    <div class="who">對應:<span class="tag t-intl">EMAG(德)</span><span class="tag t-intl">Gleason(美)</span><span class="tag t-intl">Liebherr(德)</span><span class="tag t-intl">Reishauer(瑞)</span><span class="tag t-intl">Kapp Niles(德)</span><span class="tag t-intl">Studer(瑞)</span><span class="tag t-intl">秦川機床(中)</span> <b>台股:缺席</b> <span class="conf c-high">設備品牌高</span><span class="conf c-un">短缺數字低</span></div>
+  </div></div>
+
+</div>
+
+<!-- 3:難度評分 + 受惠評分 -->
+<h2 id="s3"><span class="n">3</span>逐環節技術難度評分 + 公司受惠強度評分</h2>
+<h3>3a. 逐環節技術難度(5 維度 × 0-5 分,總分 25)</h3>
+<p class="sub">維度:材料與熱處理 / 精密加工公差 / 設備取得與產能 / 良率與一致性 / 設計整合與驗證。5 = 極高門檻。依查證證據推估,僅供相對比較。</p>
+<table>
+  <tr><th>環節</th><th>材料/熱處理</th><th>加工公差</th><th>設備/產能</th><th>良率/一致性</th><th>設計整合</th><th>總分/25</th><th>最卡關原因</th></tr>
+  <tr><td>1. 永磁材料/馬達上游</td><td>5</td><td>2</td><td>3</td><td>2</td><td>1</td><td><b>13</b></td><td>稀土與重稀土擴散幾乎中國獨占(管制暫停至 2026/11/10),政策風險 > 技術風險</td></tr>
+  <tr><td>2. 無框力矩馬達</td><td>3</td><td>3</td><td>2</td><td>3</td><td>4</td><td><b>15</b></td><td>極槽/磁路設計與一致性為主,製造門檻中;ASP 年降 5%、步科 +423% 放量</td></tr>
+  <tr><td>3. 空心杯馬達</td><td>2</td><td>4</td><td>3</td><td>5</td><td>3</td><td><b>17</b></td><td>杯形繞組成形良率是核心 know-how,專用繞線機;台股缺席</td></tr>
+  <tr><td>4. 諧波減速機</td><td>5</td><td>5</td><td>4</td><td>5</td><td>3</td><td><b>22</b></td><td><1 mm 薄壁柔輪 + 熱處理變形 + 跳動 ≤5 μm;滾齒機/真空爐短缺;中國報廢率口徑 28-41%(低信心)</td></tr>
+  <tr><td>5. 擺線/RV/行星減速機</td><td>4</td><td>4</td><td>3</td><td>3</td><td>3</td><td><b>17</b></td><td>RV 擺線磨削難、行星門檻最低;台灣精銳行星有工業量產基礎</td></tr>
+  <tr><td>6. 行星滾柱絲桿 PRS</td><td>4</td><td>5</td><td>5</td><td>4</td><td>3</td><td><b>21</b></td><td>內螺紋磨削工時 + 磨床供給瓶頸;冷成形替代一致性待驗證;單價 10 倍滾珠絲桿</td></tr>
+  <tr><td>7. 滾珠絲桿/微型絲桿</td><td>3</td><td>4</td><td>3</td><td>3</td><td>2</td><td><b>15</b></td><td>台灣強項;微型化與人形一致性才是新門檻</td></tr>
+  <tr><td>8. 交叉滾子/柔性軸承</td><td>4</td><td>5</td><td>3</td><td>4</td><td>2</td><td><b>18</b></td><td>薄壁小截面公差、日系主導</td></tr>
+  <tr><td>9. 編碼器</td><td>2</td><td>3</td><td>3</td><td>4</td><td>4</td><td><b>16</b></td><td>晶片 + 校正 + 抗干擾;台股缺席</td></tr>
+  <tr><td>10. 關節驅動板</td><td>1</td><td>2</td><td>2</td><td>3</td><td>4</td><td><b>12</b></td><td>硬體通用、FOC/力控韌體差異化</td></tr>
+  <tr><td>11. 力矩/六軸 F/T 感測</td><td>3</td><td>4</td><td>3</td><td>5</td><td>4</td><td><b>19</b></td><td>六軸解耦標定、溫漂、小型化;台股缺席</td></tr>
+  <tr><td>12. 觸覺/電子皮膚</td><td>4</td><td>3</td><td>3</td><td>4</td><td>4</td><td><b>18</b></td><td>材料穩定性、讀出整合;路線未定</td></tr>
+  <tr><td>13. 關節模組整合</td><td>2</td><td>3</td><td>2</td><td>4</td><td>5</td><td><b>16</b></td><td>熱管理 + 控制韌體 + 可靠度;平台廠自製是最大反方</td></tr>
+  <tr><td>14. 靈巧手/前臂</td><td>3</td><td>4</td><td>3</td><td>5</td><td>5</td><td><b>20</b></td><td>腱繩可靠度(腕部摩擦/伸長)、路線未定、Tesla 已改版;100+ 顆螺絲手工</td></tr>
+  <tr><td>15. 整機組裝/電池</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td><td><b>15</b></td><td>10,000 零件、產線新;台廠 EMS 強但無訂單</td></tr>
+  <tr><td>16. 加工設備/量測</td><td>3</td><td>5</td><td>5</td><td>3</td><td>3</td><td><b>19</b></td><td>磨齒機/螺紋磨床歐日主導、交期長;台灣工具機廠缺席</td></tr>
+</table>
+<p class="sub">讀法:難度最高的三環節(諧波 22、PRS 21、靈巧手 20)正好是台廠「追趕中」與「缺席」的環節;台廠「領先」的滾珠絲桿(15)難度中等——這解釋了為什麼台股 alpha 不在「做得到」,而在「做得到且別人做不到」的 PRS 上。</p>
+
+<h3>3b. 公司受惠強度評分(5 維度 × 0-5 分,總分 25;holds 8 檔 + watch 8 檔)</h3>
+<p class="sub">維度:AI 受惠(題材與需求連結)/ 技術卡位(環節唯一性與難度)/ 商轉時程(高分 = 現在就有人形相關營收)/ 供給稀缺 / 規模財務(本業體量與人形占比能否被看見)。全部依查證口徑評分,非投資建議。</p>
+<table>
+  <tr><th>公司(股號)</th><th>分層</th><th>AI 受惠</th><th>技術卡位</th><th>商轉時程</th><th>供給稀缺</th><th>規模財務</th><th>總分</th><th>評分依據(帶日期數字)</th></tr>
+  <tr><td><b>上銀 2049</b></td><td>holds・核心</td><td>4</td><td>4</td><td>3</td><td>3</td><td>4</td><td><b>18</b></td><td>機器人占比 2024 7% → 2025 10% → 1Q26 12%(含晶圓移載/工業);2026/08 營收 27.08 億 +42.3%(動能 = 半導體/AI 設備);PRS 2026-08 自述具量產能力;人形客戶驗證中</td></tr>
+  <tr><td><b>全球傳動 4540</b></td><td>holds・核心</td><td>3</td><td>3</td><td>1</td><td>3</td><td>2</td><td><b>12</b></td><td>EIP 客戶驗證中、2H27 回饋;1H26 營收 16.18 億 +45%、2Q26 EPS 0.44、毛利率 21%;中國 84%;人形營收 0</td></tr>
+  <tr><td>大銀微系統 4576</td><td>holds・受惠</td><td>3</td><td>4</td><td>2</td><td>3</td><td>3</td><td><b>15</b></td><td>力矩馬達 + 驅動器量產;2Q26 EPS 0.96(+336%)、1H26 1.92;8 月 4.27 億 +98%(矽光子);人形無具名出貨</td></tr>
+  <tr><td>鈞興-KY 4571</td><td>holds・受惠</td><td>3</td><td>3</td><td>2</td><td>3</td><td>2</td><td><b>13</b></td><td>工業機器人齒輪 2025 約 1.8 億/毛利 >40%;少齒差減速器樣品訂單(2026-07-28);智能傳動 1H26 10.45%;8 月 2.89 億 -4.0%</td></tr>
+  <tr><td>東元 1504</td><td>holds・受惠</td><td>3</td><td>3</td><td>3</td><td>2</td><td>4</td><td><b>15</b></td><td>TJM 關節模組五尺寸、四足小批量 200-300 顆(2025 口徑);人形六大關節規劃;8 月 54.08 億 +16.8%,關節貢獻 ≈ 0</td></tr>
+  <tr><td>宇隆 2233</td><td>holds・受惠</td><td>3</td><td>3</td><td>2</td><td>3</td><td>2</td><td><b>13</b></td><td>北美多家人形客戶供應鏈(自述)、樣品 14 天、改赴美設廠;1Q26 EPS 1.59、車用 77%;8 月 2.85 億 +21.3%;量產無時程</td></tr>
+  <tr><td>盟立 2464</td><td>holds・受惠</td><td>3</td><td>3</td><td>2</td><td>2</td><td>2</td><td><b>12</b></td><td>盟英諧波 + 關節模組 2026-05 小量出貨(自述);泰國科盟 16.67 億;8 月 9.28 億 +73.7%(交易所備註:半導體自動化設備)</td></tr>
+  <tr><td>和大 1536</td><td>holds・受惠</td><td>2</td><td>2</td><td>1</td><td>2</td><td>3</td><td><b>10</b></td><td>2026-07-22 法說「數家客戶供貨、NDA」;1H26 23.6 億持平、2026 指引 +5-10%;8 月 4.60 億 +13.7%</td></tr>
+  <tr><td>直得 1597</td><td>watch</td><td>2</td><td>2</td><td>1</td><td>2</td><td>2</td><td><b>9</b></td><td>關節模組「投入開發」(2026-03),無送樣/客戶;8 月 1.33 億 +45.2% 全部來自矽光子/HBM 設備</td></tr>
+  <tr><td>台達電 2308</td><td>watch</td><td>3</td><td>2</td><td>1</td><td>1</td><td>5</td><td><b>12</b></td><td>NSK MOU 2026-05-08 一手確認、無金額時程;8 月 645.86 億 +34.9%,人形不可量化</td></tr>
+  <tr><td>台灣精銳 4583</td><td>watch</td><td>2</td><td>3</td><td>2</td><td>2</td><td>2</td><td><b>11</b></td><td>行星減速機 2Q26 EPS 3.25、毛利率 52.13%;管理層自承人形無訂單;關稅 22.5%</td></tr>
+  <tr><td>富田-創 4590</td><td>watch</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td><b>9</b></td><td>四足機器狗關節模組 Q4 出貨、接單近四位數(自述);8 月 1.36 億 +62.9%、前 8 月 -3.8%;創新板</td></tr>
+  <tr><td>羅昇 8374</td><td>watch</td><td>2</td><td>2</td><td>1</td><td>1</td><td>2</td><td><b>8</b></td><td>ACTDG45-O 關節模組 2026-08 首發、無出貨;2Q26 營收 16.33 億 +36.6%(代理)</td></tr>
+  <tr><td>新代 7750</td><td>watch</td><td>2</td><td>2</td><td>1</td><td>1</td><td>2</td><td><b>8</b></td><td>控制器/驅動可移植;8 月 24.37 億 +151.1% 來自工具機/自動化;無人形產品</td></tr>
+  <tr><td>達明 4585</td><td>watch</td><td>3</td><td>2</td><td>2</td><td>1</td><td>2</td><td><b>10</b></td><td>協作機器人(題外);輪型/雙足人形 2026H2 試用非銷售;2Q26 EPS 1.18;8 月 1.53 億 -6.1%</td></tr>
+  <tr><td>鴻海 2317</td><td>watch</td><td>4</td><td>2</td><td>1</td><td>1</td><td>5</td><td><b>13</b></td><td>川崎護理人形 2026 開賣、2027 累計 200 台目標;NVIDIA 合作;關節傳動零證據;8 月 9217.66 億 +52%</td></tr>
+</table>
+<p class="sub">讀法:總分最高的上銀(18)也只有「商轉時程 3」——沒有一檔台股的人形營收能在 2026 被看見。總分差距來自「技術卡位」與「規模財務」,不是來自人形訂單。</p>
+
+<!-- 4:供應鏈對照 -->
+<h2 id="s4"><span class="n">4</span>供應鏈逐環節對照、台灣吃得到定位表、元件 × 平台細顆粒地圖</h2>
+<div class="legend">
+  <span><span class="conf c-high">高</span> 有獨立佐證(交易所/一手文件/多源)</span>
+  <span><span class="conf c-med">中</span> 法說/單一可靠來源/公司自述有旁證</span>
+  <span><span class="conf c-un">未佐證</span> 概念股清單列舉(不否定、待查)</span>
+  <span><span class="conf c-low">反證</span> 公司否認或查證否決</span>
+</div>
+
+<h3>4a. 台廠 × 環節(holds 8 / watch 8 / excluded)</h3>
+<table>
+  <tr><th style="width:12%">公司(股號)</th><th style="width:13%">環節</th><th>角色與證據(帶日期)</th><th style="width:12%">受惠節奏</th><th style="width:8%">查證</th></tr>
+  <tr><td><b>上銀(2049)</b><br>上市・核心</td><td>諧波 / 滾珠螺桿 / PRS / 關節模組 / 交叉滾柱軸承</td><td>台股唯一同時量產諧波減速機、滾珠螺桿(全球前三)、線性滑軌、關節模組並自研 PRS 的公司。2026-06-02 COMPUTEX 首展 PRS、與大銀+Dexterity 雙臂八軸物流機器人;2026-08-19 自述 PRS 具量產能力、滾柱螺桿產能較年初 +20%、線軌 +10-15%、交期 6 個月、負重 2-3 倍,客戶為台灣與中國自主品牌(早期曾與 Boston Dynamics 合作)。機器人占比 2024 7% → 2025 10% → 1Q26 12%(含晶圓移載/工業)。2Q26 營收 56.29 億、毛利率 27.87%、EPS 1.83;1H26 EPS 1.41;2026/08 營收 27.08 億 +42.3%、前 8 月 192.77 億 +23%。雙臂物流機器人原訂 2026 小批量,改 11 月改版送樣。⚠ 人形貢獻 ≈ 0(2025-11 法說「送樣測試、進展不多」);「Tesla 滾柱絲桿供應商/首選」為媒體推論,法說無 Tesla 字眼。</td><td>現在有營收(半導體/AI 設備);人形 = 2027+ 選擇權</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td><b>全球傳動(4540)</b><br>上市・核心</td><td>PRS / EIP 直線致動器 / DPRS 微型致動器</td><td>台股「直線關節」唯一有具體產品 + 法說時程的上市公司。2026-08-14 法說:EIP 三規格(手臂/大腿/小腿)客戶驗證中、DPRS 靈巧手微型致動器原型完成(兩品 2026 法國設計獎銀獎);時程 2026 驗證 → 2H27 市場回饋 → 2027-2029 建產能;交期 6-8 個月;鎢鋼刀具成本 +300%;研磨級絲桿排至 2027Q2(鋰電/半導體需求)。1H26 營收 16.18 億 +45%、2Q26 8.3 億 +29%、毛利率 21%(1Q 14%)、EPS 0.44;2026/08 3.16 億 +45.0%。2024Q4 起線性執行器與靈巧手微型螺桿出貨中國機器人廠(工商 2025-08)。⚠ 客戶未具名;公司自估人形只做工業重負載 10-15%;中國市場 84% 直接暴露價格戰;毛利率低於同業。</td><td>現在有營收(本業);PRS/EIP = 2027H2 起選擇權</td><td><span class="conf c-high">高(法說)</span></td></tr>
+  <tr><td>大銀微系統(4576)<br>上市・受惠</td><td>無框/力矩/直驅馬達、驅動器、控制器</td><td>上銀子公司,台灣少數量產力矩/直驅馬達與驅動器的上市公司。2Q26 EPS 0.96(+336%)、1H26 1.92(+191%);1Q26 營收 8.55 億、毛利率 39.0%;2026/08 4.27 億 +98.0%(單月新高)、前 8 月 26.70 億 +55.8%,動能 = 矽光子檢測定位平台、能見度至 2027Q2;2026-05 法說驅動器新品放量、下半年產能 +30%;機器人占比約 1 成(2025)。⚠ 人形關節馬達送樣僅見概念股清單、無公司側;法人 EPS 3.7-4.8 為機構估非財測。</td><td>現在有營收(半導體設備);人形 = 選擇權</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>鈞興-KY(4571)<br>上市・受惠</td><td>減速機齒輪 / 諧波 / 少齒差減速器 / 微型齒輪</td><td>齒輪廠(珠海 75%/越南 25%)。工業機器人齒輪 2025 約 1.8 億元、毛利 >40%、在手 1.6 億;2026/1-5 月接單 1.8 億 = 2025 全年;諧波減速器 2025 營收約 900 萬元、虧損;人形上肢改採漸開線少齒差減速器(效率 93% vs 諧波 80%),2026-07-28 工商:已獲客戶樣品訂單;靈巧手微型齒輪 2026 內推出;智能傳動占比 2025 8.02% → 1H26 10.45%、2026 目標 +20%;2025 EPS 9.61;2026/08 營收 2.89 億 -4.0%、前 8 月 +2.6%。⚠ 本業電動工具齒輪(TTI)壓價、營收年減;人形客戶未具名;珠海 75% 受美關稅。</td><td>現在有營收(工業機器人齒輪);人形 = 2027 選擇權</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>東元(1504)<br>上市・受惠</td><td>關節模組整合(TJM:無框電機 + 諧波/行星 + 編碼器 + 伺服驅動)、無框電機</td><td>2026-08-06 中央社:關節模組已用於四足機器狗實際產品,整合無框電機、諧波、行星減速機、編碼器、伺服驅動;已推髖關節與旋轉關節;與科技公司合作開發人形、規劃六大關節(肩/膝/腕);供應國產手臂無框電機。TJM 五尺寸額定 17-361 N·m、峰值 484 N·m(2026-07 日本首發);M1-140 台灣精品金質獎(2025-11);已產 200-300 顆關節模組(2025 口徑,2026 未更新)。2026/08 營收 54.08 億 +16.8%。⚠ 對 400 億+/年體量貢獻 ≈ 0;人形合作對象未具名;減速機仍外購/結盟。</td><td>現在有營收(馬達/機電);關節 = 小批量;人形 = 2027+</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>宇隆(2233)<br>上市・受惠</td><td>減速機(行星/微型行星/諧波/RV、靈巧手減速機 TUF ONE)、關節模組化(與信邦 MOU)</td><td>車用精密件廠(車用 77%、E-bike 14%、工業 9%)。2026-07-02 法說:已打入多家北美指標性人形機器人客戶供應鏈、客戶預示訂單量龐大(公司自述)、樣品交付 14 天(目標 8-10 天)、由墨西哥改為美國設廠、目前沒有精確量產時程;1Q26 營收 8.13 億、毛利率 27.59%、EPS 1.59;諧波 26 件新品開發中;2026/08 2.85 億 +21.3%、前 8 月 +1.3%。⚠「訂單異常大」為自述;赴美設廠資本支出待董事會;減速機占比仍個位數;Optimus 連結為理財周刊媒體敘述。</td><td>現在有營收(車用);人形 = 2027 選擇權</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>盟立(2464)<br>上市・受惠</td><td>關節模組整合(子公司盟英:諧波 + 關節模組)、整機(盟立一號)、泰國非紅產能</td><td>自動化設備商(半導體 >60%)。盟英(與和大合資)諧波減速機 + 關節模組 2026-05「開始小量出貨」(自由財經,公司自述、客戶未具名);2026-05-07 與科達利合資泰國科盟約 16.67 億元(科達利 51%/盟立 39%/盟英 10%);2025-12-22 法說:人形/機器狗本體年產 500 台規劃、在手訂單約 60 億、2026Q1 轉盈;2026/08 營收 9.28 億 +73.7% 創高,交易所備註主因半導體自動化設備訂單增加;在手訂單上看 150 億。⚠「已供應 Optimus 3、Tesla 要求建非紅產能」為經濟日報 2026-06-22 記者敘述,公司回應「無法置評」,無 Tesla 側證據;與科達利(中國)合資與「非紅」定位有張力。</td><td>現在有營收(半導體自動化);關節模組 = 小量、2027 選擇權</td><td><span class="conf c-med">中(低-中)</span></td></tr>
+  <tr><td>和大(1536)<br>上市・受惠</td><td>行星/諧波減速機(人形脖/肩/腰/髖)、精密齒輪;盟英合資方</td><td>汽車傳動齒輪廠(Tesla/Rivian/BorgWarner/Ford 車用)。2026-07-22 法說:諧波 + 行星減速器應用於人形脖子/肩/腰/髖,「已開始為數家客戶供貨,客戶名稱因保密協議未揭露」;1H26 營收約 23.6 億(年增 0%)、2Q26 約 11.7 億;2026 指引 +5-10%;最大風險缺工。2025-09-09:D、K 公司試樣、T 公司報價、Apptronik 試樣。2026/08 4.60 億 +13.7%、前 8 月 +2.6%。⚠「唯一供應 Optimus 關鍵零組件台廠」「每台約 40 顆」回溯至 2025-08 台媒無歸屬敘述與 pttstock,Tesla 側零證據;1H26 零成長;車用本業受 EV 需求與關稅拖累。</td><td>現在有營收(車用齒輪);人形 = 2026 供貨宣稱、營收未見</td><td><span class="conf c-med">中(低-中)</span></td></tr>
+  <tr><td>直得(1597)<br>上市・watch</td><td>微型線性滑軌(全球前三)、微型滾珠螺桿、線性/DD 馬達、關節模組開發</td><td>2026-03-05 法說:投入人形機器人與機器狗關節模組開發、2025 毛利率 40.99%;2Q26 EPS 0.87(季增 102%)、1H26 1.30;線性馬達占比 11.3%(+184%);2026/08 1.33 億 +45.2%、前 8 月 10.27 億 +44.9%,動能 = 矽光子/HBM 設備。<b>降級理由</b>:人形/機器狗關節模組只有「投入開發」,無送樣/客戶/出貨證據,PRS 無佐證。升格條件:關節模組或微型螺桿人形客戶具名/出貨。</td><td>現在有營收(半導體設備);人形 = 無證據</td><td><span class="conf c-med">中(人形低)</span></td></tr>
+  <tr><td>台達電(2308)<br>上市・watch</td><td>關節致動器(NSK 合作)、伺服驅動/馬達控制;投資 NEURA Robotics</td><td>2026-05-08 NSK/Delta 官方新聞稿:MOU 開發人形/協作機器人旋轉與直線致動器,NSK 出軸承/滾珠螺桿/機電、台達出伺服驅動/馬達控制/電源,應用汽車焊接/總裝;無金額/時程。2024 底投資 NEURA Robotics。2026/08 645.86 億 +34.9%(AI 電源/散熱主導)。<b>watch 理由</b>:事實一手確認但對集團零可量化影響。升格條件:致動器出貨或具名客戶。</td><td>現在有營收(AI 電源);致動器 = 2027+、占比趨近 0</td><td><span class="conf c-high">高(事實)</span><span class="conf c-un">低(影響)</span></td></tr>
+  <tr><td>台灣精銳(4583)<br>上市・watch</td><td>行星減速機(人形腰/肩/踝候選)、微型行星</td><td>行星減速機占營收 73-85%、全球市占 5-10%(自述);Amazon 物流倉儲專案首期單一客戶需求 >10 萬顆(非人形)。2025-08-13 執行長:人形「應用面未定、技術發展不如預期、零組件規範不確定」「人人有機會、個個沒把握」,國內外廠商試做洽談中、無訂單;諧波/行星各半、長期看好行星;美關稅 2.5%+20% = 22.5%、美國約 20% 營收。2Q26 EPS 3.25(去年 1.17)、1H26 6.81、毛利率 52.13%(近 10 季低);2026/08 2.61 億 +23.6%。<b>watch 理由</b>:實力有佐證、人形零訂單。升格條件:人形量產訂單揭露。</td><td>現在有營收(工業/物流);人形 = 無訂單</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>富田-創(4590)<br>上市(創新板)・watch</td><td>關節動力模組(四足機器狗 2.0)、無稀土永磁馬達、無人機馬達</td><td>Tesla 電動車馬達供應商轉型,2026-01-29 創新板上市。2026-07-08 法說:機器狗關節動力模組、5 噸物流車動力模組 Q4 出貨;1Q26 毛利率 30.18%、EPS 1.21;15 款無人機馬達、兩家航太級大廠訂單下半年量產;2.0 版「台灣土狗」接單逼近四位數(自述)。2026/08 1.36 億 +62.9%、前 8 月 -3.8%(交易所備註:客戶計畫性出貨)。<b>watch 理由</b>:產品為四足非人形(人形僅「多軸馬達系統開發中」),且創新板流動性/交易資格限制。升格條件:Q4 出貨數字落地或人形客戶。</td><td>機器狗關節 = 2026Q4;人形 = 開發中</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>羅昇(8374)<br>上市・watch</td><td>關節模組(ACTDG45-O:DD 馬達 + 諧波 + 中空旋轉平台)、傳動控制代理</td><td>2026-08-06 自動化展首發自研 ACTDG45-O 關節模組;2Q26 營收 16.33 億 +36.6%、稅後 0.52 億 +90.4%;2026/08 4.77 億 +35.4%。<b>watch 理由</b>:單一款首發、無客戶/出貨數字;代理商毛利結構;諧波來源(自製或代理)未揭露。升格條件:模組出貨量或具名客戶。</td><td>現在有營收(代理);關節 = 2027+</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>新代(7750)<br>上市・watch</td><td>控制器 / 伺服驅動(可移植環節)</td><td>1Q26 營收 48.6 億 +49.45%、EPS 15.38、毛利率 48.77%;2026/08 24.37 億 +151.1%、前 8 月 184.31 億 +101.3%——全部來自工具機/自動化;「類人形機器人」列三大趨勢但無人形產品。<b>watch 理由</b>:防沾光。</td><td>現在有營收(控制器);人形 = 題材連結</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>達明(4585)<br>上市・watch</td><td>協作機器人整機、關節模組自製(協作手臂)、輪型/雙足人形試用</td><td>2Q26 營收 5.12 億 +29.6%、EPS 1.18、1H26 1.83;輪型人形 2026H2 於車用/半導體客戶試用、首款雙足人形 2026H2 推出供夥伴測試;2026/08 1.53 億 -6.1%。<b>watch 理由</b>:協作機器人屬本題排除範圍;人形為試用非銷售;只作關節模組移植參照。</td><td>現在有營收(協作);人形 = 2026H2 試用</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>鴻海(2317)<br>上市・watch</td><td>整機組裝 / 自用部署</td><td>與川崎重工合作護理人形 2026 年度內在台開賣、目標 2027 年度累計 200 台;劉揚偉:德州廠約 6 個月後配備人形員工;與 NVIDIA 合作人形大腦/AI 訓練;2026/08 9217.66 億 +52.0%(AI 伺服器)。<b>watch 理由</b>:整機組裝代表,關節傳動零證據;對估值零影響。</td><td>整機 = 2026-2027 小量;關節 = 無資料</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>緯創(3231)</td><td>(傳聞)Optimus 整機代工</td><td>多份概念股清單列入 Optimus 代工候選;搜尋無任何緯創官方或第二源證據;2026/08 4600.65 億 +166.5% 為 AI 伺服器。整機代工亦非關節鏈。</td><td>—</td><td><span class="conf c-un">未佐證・excluded</span></td></tr>
+  <tr><td>高鋒(4510)上櫃</td><td>工具機 / 封測分選機</td><td>與和大合資「和大芯科技」做封測分選機(2026Q2 量產),不是減速機;2026/08 1.91 億 +39.0%。沾光。</td><td>—</td><td><span class="conf c-low">反證・excluded</span></td></tr>
+  <tr><td>智崴(5263)上櫃</td><td>體感模擬遊樂設備</td><td>2026/08 3.49 億 +216.6%,交易所備註:併入 Flyover Attractions B.V.;與機器人無關。</td><td>—</td><td><span class="conf c-low">反證・excluded</span></td></tr>
+  <tr><td>亞光(3019)/ 所羅門(2359)</td><td>視覺鏡頭 / 3D 視覺</td><td>視覺環節為本題排除範圍(另題);亞光董事長「每台 7-8 顆鏡頭、配合 Optimus 3 時程」為公司自述;所羅門 2026/08 2.76 億 -18.1%。</td><td>—</td><td><span class="conf c-un">另題・excluded</span></td></tr>
+  <tr><td>和椿(6215)/ 亞德客-KY(1590)/ 士電(1503)/ 建準(2421)/ 鴻準(2354)</td><td>代理整合 / 氣動 / 馬達 / 風扇 / 機構件</td><td>和椿:整合/代理商,2026/08 +132.8% 來自半導體自動化設備,無關節元件自製;亞德客:擴展線軌/絲桿,無人形產品;士電:無人形關節馬達證據;建準:無空心杯產品證據;鴻準:清單列舉。</td><td>—</td><td><span class="conf c-un">未佐證・excluded</span></td></tr>
+  <tr><td>新普(6121)上櫃 / 台泥(1101)Molicel</td><td>電池模組 / 高功率電芯</td><td>電池為另一環節(開放問題),BOM 僅 0.5-5%;Molicel 2026 主攻 eVTOL/BBU/無人機,人形無具名訂單。</td><td>—</td><td><span class="conf c-un">題外・excluded</span></td></tr>
+  <tr><td>利茗機械 / 優士特 / 協力測控 / 三鋒科技 / 盟英 / 東培工業</td><td>諧波+RV / PRS / 六軸力 / 關節模組 / 軸承</td><td>皆未上市(TWSE/TPEx 月營收名單查無)。利茗:台灣唯一諧波與 RV 皆量產(自述)、引進 Gleason 滾齒機;優士特:PRS 專業廠(航太/國防);協力測控/三鋒:六軸力與關節微型扭矩感測器展品級。這些是「台灣有能力、但不在資本市場」的反證,支撐台股在諧波高階/PRS/力感測的缺席判斷。</td><td>不可投資</td><td><span class="conf c-med">中</span></td></tr>
+</table>
+<p class="sub">⚠「未逐項佐證」= 未取得該公司在本主題的<b>獨立</b>佐證,<b>不代表沒有角色</b>,但也不應直接當事實下單。所有「Tesla / Optimus 供應商」類宣稱(上銀、和大、盟立、宇隆、亞光)在本輪皆無 Tesla 側或第二獨立源,一律只能以「媒體敘述」寫在 ⚠ 欄。</p>
+
+<h3>4b. 國際 × 中國 × 環節</h3>
+<table>
+  <tr><th style="width:17%">公司</th><th style="width:14%">環節</th><th>角色與證據(帶數字/日期)</th><th style="width:8%">查證</th></tr>
+  <tr><td>Harmonic Drive Systems(6324.T,日)</td><td>諧波減速機</td><td>全球原創者、高階定價者。1Q FY3/27(2026-08-07):營收 16,681 百萬日圓 +23.6%、營業利益 1,840 百萬(營益率 11.0%)、經常利益 1,719 百萬、純利 1,274 百萬;通期經常利益 6,200→8,200 百萬、營業利益 6,200→8,500 百萬上修。人形訂單:FY3/26 Q2 約 13 億日圓、全年預期 25 億、FY3/27 可能 2-3 倍、潛在客戶 >15 家(公司法說 2025-11-19,其後決算未更新)。</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>Nabtesco(6268.T,日)</td><td>RV/擺線減速機</td><td>工業機器人 RV 約 60%(QYR 等多源;2025 全球 RV 8.83 億美元、前三家約 87%);以 RV 為核心開發人形執行器、協作/人形引合超預期(MONOist 2026-05,定性);RV 產能倍增計畫為定性口徑。</td><td><span class="conf c-high">高(市占)</span></td></tr>
+  <tr><td>NSK(6471.T,日)</td><td>軸承/滾珠螺桿、人形旋轉+直線致動器</td><td>2025-12 發表人形用旋轉/直線致動器、2028 市場投入(官網);2026-03 成立機器人事業部;2026-05-08 與台達電 MOU。</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>THK(6481.T)/ 住友重機械(6302.T)(日)</td><td>線軌/滾珠螺桿/致動器;擺線/行星</td><td>直線元件龍頭;本次未見人形專屬致動器訂單揭露;住友人形進度未查到(列舉)。</td><td><span class="conf c-un">列舉</span></td></tr>
+  <tr><td>Schaeffler(含 Ewellix,德)</td><td>PRS/滾珠螺桿、諧波+行星致動器平台、關節模組</td><td>2026-01-12 Citi 簡報:14 家人形 OEM 共 28 件原型訂單(多數已交付)、3 個致動器平台、第二代內測、20+ 發明揭露;與英國 Humanoid 策略合作(5 年內自用數百台)、與 Hexagon Robotics(7 年內部署 ≥1,000 台,EQS 公告);Hannover Messe:旋轉齒箱 + PRS/滾珠絲桿直線執行器、最高 250 N·m、每台 25-30 具執行器。</td><td><span class="conf c-high">高(一手)</span></td></tr>
+  <tr><td>Rollvis(瑞)/ GSA(瑞)</td><td>PRS 高階原廠</td><td>Rollvis 與 SKF/INA/NTN 並列;GSA 為 Optimus Gen2 的 14 支 PRS 供應(界面);中國 PRS 價約 Rollvis 50%。</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>maxon(瑞)/ Kollmorgen(美,Regal Rexnord)/ Allient</td><td>空心杯/無框馬達、關節模組</td><td>maxon HEJ 90/HEJ 70 關節模組、EC frameless DT 50 M(Hannover 2026);Kollmorgen TBM2G 無框馬達;商用無框供應 Maxon/Kollmorgen/HDS 合計估 60-75%(商業報告口徑,低)。</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>ATI(美)/ SCHUNK(德)/ Sensodrive(德)/ Bota(瑞)</td><td>六軸 F/T、關節力矩感測</td><td>ATI 為 F/T 標竿(UR 協作臂配套);SCHUNK FTS 獲 2026 年度產品獎;Sensodrive 為 DLR 衍生力矩感測關節供應者(人形訂單未查到)。</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>綠的諧波(688017.SS,中)</td><td>諧波減速機</td><td>中國諧波龍頭;人形用諧波市占 2025 約 70% → 2026 升至 80-90%(研報口徑);1H26 營收 3.49 億元 +38.64%、歸母 7,011 萬 +31.25%;綜合毛利率 32.26%(-2.51 pct)/諧波產品 32.79%(-1.54 pt);赴港上市議案 2026-09 股東會通過。</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>來福諧波(03952.HK,中)</td><td>諧波減速機</td><td>港股上市(2026-07-06 盤中 +27% 創新高)。1H26 出貨 23.95 萬台 +112%、單台成本 482→351 元、收入 1.42 億 +80%、綜合毛利率 27.3%(+7.5 pct)、產品線 29.6%、經調整淨虧 412 萬收窄 63.2%;月產能 3.96 萬 → 6.48 萬台(2026/7)、稼動率 95%、在手 >40 萬台。價格戰主角。</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>中大力德(002896.SZ,中)</td><td>行星/RV/諧波三類減速機、機電一體化</td><td>少數三類皆量產;已進入智元、傅利葉供應鏈(群益香港首評 2026-06-26);1H26 營收 6.0 億 +16%、綜合毛利率 23.3%(-4.5 pct)、精密減速器 14.6%(-9.0 pct)、淨利 -40%。</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>雙環傳動/環動科技(002472.SZ,中)</td><td>RV 減速機/精密齒輪</td><td>2025 國內 RV 第一(研報分類);「供 Optimus V3 擺線」僅單一簡中整理稿,unverified。</td><td><span class="conf c-un">列舉</span></td></tr>
+  <tr><td>鳴志電器(603728.SS)/ 維宏股份(300508.SZ)/ 步科(688160.SS)(中)</td><td>空心杯 / 靈巧手電機 / 無框力矩馬達</td><td>鳴志 1H26 營收 15.67 億 +19.21%、歸母 3,720 萬 +38.01%、2025 空心杯產線 +56%;維宏 1H26 靈巧手電機 >5 萬台、目標年底月產 8 萬;步科 1H26 無框馬達 11.4 萬台 +423%、營收 4.48 億 +44%、機器人收入 2.43 億(54%)。</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>兆威機電(003021.SZ,中)</td><td>微型傳動/靈巧手(DM17、LM06)</td><td>靈巧手整手方案;2026H1 淨利 -34.1%、微型傳動 5.06 億 +1.7%、機器人業務占比低;本益比約 88 倍(2026-08-26)。</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>五洲新春(603667.SS)/ 北特科技(603009.SS)/ 恒立液壓 / 貝斯特(中)</td><td>PRS / 微型絲桿</td><td>五洲:募投 98 萬套 PRS + 210 萬套微型滾珠絲桿(公告);「2025/12 通過 Tesla 審廠」僅媒體、公司曾被上交所通報批評並澄清絲桿累計收入約 680 萬元 <span class="conf c-un">unverified</span>;北特擴產 18.5 億元;恒立/貝斯特為磨削路線業者(研報分類)。</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>三花智控(002050.SZ/2050.HK)/ 拓普集團(601689.SS)/ 均勝電子(600699.SS)(中)</td><td>執行器總成 / Tier 0.5 關節模組 / 感測結構件</td><td>2026-09-16/17 Tesla 赴寧波審廠,三家由臨時轉正式量產夥伴、首批約 5,000 台份(CnEVPost/Bloomberg/科技新報,媒體口徑);三花 2026-08 稱機器人機電執行器進入批量交付與產線爬坡(未具名客戶);<b>「三花獲 6.85 億美元/50 億元 Optimus 訂單」已被公司公告澄清不屬實</b>;拓普 Tesla 占營收 35-40%、墨西哥廠執行器產能目標 30 萬套(媒體);均勝自述向北美大客戶批量交付。</td><td><span class="conf c-med">中(媒體)</span><span class="conf c-low">訂單金額反證</span></td></tr>
+  <tr><td>藍點觸控 / 坤維科技 / 宇立 / 柯力傳感(603662.SS)/ 東華測試(300354.SZ)(中)</td><td>六維力 / 關節力矩感測</td><td>賽迪:2025 中國六維力前三 92.8%(藍點 80%+、坤維 9.2%、宇立 3.3%);坤維 2026-03 B+ 輪 1 億元、供優必選/銀河通用/智元/星海圖;柯力驗證序列、2026 量產預期、投資元生科技電子皮膚。</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>漢威科技(300007.SZ)/ 福萊新材(605488.SS)(中)</td><td>柔性觸覺/電子皮膚</td><td>漢威 2026 WRC 發布電容式全身電子皮膚、已小批量供貨多家人形廠;福萊二代指尖觸覺小批量供貨。</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>宇樹科技(688xxx 科創板,2026-08-19 掛牌)</td><td>整機(自研關節馬達/行星減速)</td><td>需求錨兼反方:核心零件自研自產率 >90%;2025 營收 16.99 億、扣非 5.9 億、毛利率 60.13%;1H26 營收 11.52 億 +48.5%、扣非預告年減 6.4-22.0%;發行後市值約 610 億、首日一度 4,449 億元。</td><td><span class="conf c-high">高</span></td></tr>
+</table>
+
+<h3>4c. 台灣吃得到定位表(寡占 / 領先 / 追趕 / 缺席,逐環節)</h3>
+<table>
+  <tr><th style="width:17%">環節</th><th style="width:11%">定位</th><th>證據</th><th style="width:8%">信心</th></tr>
+  <tr><td>滾珠絲桿 / 線性滑軌</td><td><span class="pos p-lead">領先</span></td><td>上銀全球第三大滾珠絲桿廠;全球傳動研磨級訂單排至 2027Q2(法說 2026-08-14);直得微型線軌全球前三(自述)——但需求來自半導體/鋰電設備,非人形</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>行星滾柱絲桿 PRS</td><td><span class="pos p-chase">追趕(最有機會)</span></td><td>上銀 2026-06 首展、2026-08 自述具量產能力、產能較年初 +20%;全球傳動 EIP 客戶驗證中、2H27 回饋;出貨金額 = 0;中國五洲(98 萬套規劃)/北特(18.5 億元)已擴產</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>諧波減速機</td><td><span class="pos p-chase">追趕</span></td><td>上銀/鈞興(2025 約 900 萬元、虧損)/宇隆/盟英/和大皆「送樣/小量/NDA」;綠的中國人形份額 80-90%、HDS 1Q +23.6%;台廠無第三方出貨佐證;利茗(有能力)未上市</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>行星減速機</td><td><span class="pos p-lead">領先(工業)</span> / <span class="pos p-chase">追趕(人形)</span></td><td>台灣精銳全球 5-10%(自述)、Amazon 物流鏈、2Q26 毛利率 52.13%;人形無訂單;鈞興少齒差減速器樣品訂單</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>RV / 擺線減速機</td><td><span class="pos p-absent">缺席(上市)</span></td><td>僅利茗(未上市)自述量產;Nabtesco 約 60%、中國雙環崛起</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>無框力矩馬達 / 驅動器</td><td><span class="pos p-chase">追趕</span></td><td>大銀、東元有工業級量產;人形客戶未具名;中國價格戰(步科 +423%、宇樹自製率 >90%)</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>空心杯馬達</td><td><span class="pos p-absent">缺席</span></td><td>三篇台媒清單皆無台廠量產者;鳴志/維宏/Maxon/Faulhaber 主導</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>編碼器</td><td><span class="pos p-absent">缺席</span></td><td>晶片(ams/TDK/MPS)+ 模組(Renishaw/銳鷹)皆非台廠;大銀僅自用</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>力矩 / 六軸力感測器</td><td><span class="pos p-absent">缺席</span></td><td>ATI/SCHUNK/藍點/坤維主導;協力測控、三鋒為未上市展品級</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>觸覺皮膚</td><td><span class="pos p-absent">缺席</span></td><td>漢威/福萊新材小批量;台股無標的</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>軸承(交叉滾子/柔性)</td><td><span class="pos p-absent">缺席(製造)</span></td><td>IKO/THK/NSK/Schaeffler;上銀僅供樣;和椿為代理</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>磁鋼 / 稀土</td><td><span class="pos p-absent">缺席</span></td><td>中國管制 2025/4 → 暫停至 2026/11/10;富田交付曾受阻</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>關節模組總成</td><td><span class="pos p-chase">追趕</span></td><td>東元 TJM(四足小批量 200-300 顆)、上銀(送樣)、盟英(小量)、羅昇(首發);平台廠(Tesla/Figure/宇樹)自製致動器是結構性反方;Schaeffler 已拿 14 OEM 28 原型</td><td><span class="conf c-med">中</span></td></tr>
+  <tr><td>靈巧手整手</td><td><span class="pos p-absent">缺席</span></td><td>僅全球傳動 DPRS 原型、上銀螺桿供樣;整手由 Tesla 自製 / 中國兆威/新劍/靈心巧手</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>整機組裝</td><td><span class="pos p-chase">追趕(無訂單)</span></td><td>鴻海/緯創/廣達 EMS 能力在,人形代工零具名訂單;鴻海×川崎為服務機器人(2027 累計 200 台目標)</td><td><span class="conf c-high">高</span></td></tr>
+  <tr><td>減速機磨齒 / 螺紋磨設備</td><td><span class="pos p-absent">缺席</span></td><td>EMAG/Gleason/Reishauer/Kapp Niles/Studer;台灣工具機廠無人形專用機佐證</td><td><span class="conf c-high">高</span></td></tr>
+</table>
+<p class="sub">整體:台灣在 16 個環節中「領先」1 個(滾珠絲桿,且需求非人形)、「追趕」5 個、「缺席」10 個(含製造缺席)。這與 AI 伺服器電源鏈(台灣在系統層主導)的結構完全相反——人形關節鏈是一條「台灣能做的別人也能做、別人能做的台灣多半不能做」的鏈。</p>
+
+<h3>4d. 元件 × 供應商 × 平台世代 細顆粒地圖(14 元件;status:量產 / 認證中 / 前瞻)</h3>
+<table>
+  <tr><th style="width:12%">元件</th><th style="width:22%">平台世代(models)</th><th style="width:22%">台廠(code・note)</th><th style="width:18%">國際/中國</th><th style="width:10%">status</th><th style="width:16%">加工設備</th></tr>
+  <tr><td>無框力矩馬達</td><td>Optimus Gen2 28 顆(14+14,拆解口徑);Optimus V3(馬達供應未揭露);宇樹 G1/H2 自製 PMSM(18 槽 16 極膝);Figure 03 自製;東元 TJM 自製</td><td>4576 大銀(力矩/直驅量產;人形未具名)・1504 東元(供國產手臂、TJM 內用)・2308 台達電(伺服延伸,NSK MOU)</td><td>Kollmorgen、Allient、Maxon、步科、昊志、Schaeffler、宇樹自製</td><td>量產(工業);人形 = 認證中</td><td>自動繞線機、真空灌膠、齒槽轉矩測試台</td></tr>
+  <tr><td>空心杯馬達</td><td>Optimus Gen2 手(每手約 6 顆,媒體);兆威 ZWHAND;鳴志靈巧手馬達</td><td>—(缺席)</td><td>Maxon、Faulhaber、Portescap、鳴志 603728、維宏 300508、鼎智、兆威 003021</td><td>量產(中/歐);台股缺席</td><td>斜繞精密繞線機、微型軸承壓裝</td></tr>
+  <tr><td>諧波減速機</td><td>Optimus 上肢旋轉關節(MS 拆解:臂/肩 10 具含諧波+力矩感測);Figure(來源未揭露);智元/傅利葉(綠的 80-90%);東元 TJM 諧波版</td><td>2049 上銀(自製諧波+肩/髖模組)・4571 鈞興(諧波 2025 約 900 萬元、虧損)・2233 宇隆(TUF ONE;北美樣品;26 件新品)・2464 盟立/盟英(2026-05 小量)・1536 和大(數家客戶供貨,NDA)</td><td>HDS 6324、綠的 688017、來福 03952.HK、Leaderdrive(SKF 合資)、Schaeffler、Nidec</td><td>量產(日/中);台廠 = 小量/送樣</td><td>EMAG K160/K300 滾齒、Gleason 滾齒、真空+深冷熱處理、內孔珩磨、齒形量測</td></tr>
+  <tr><td>行星/RV 減速機</td><td>宇樹 G1 全關節兩級行星(膝 22.5:1);Schaeffler 行星致動器;中國第三方關節模組 2025 28 萬台(諧波+行星 >90%);鈞興少齒差(人形上肢)</td><td>4583 台灣精銳(行星 73-85% 營收、全球 5-10% 自述;人形無訂單)・4571 鈞興(少齒差樣品訂單)・2233 宇隆(行星/微型行星/RV)・1536 和大(行星)・利茗(未上市,RV)</td><td>Nabtesco 6268、住友、雙環/環動、中大力德 002896、Neugart、Wittenstein</td><td>量產(工業);人形 = 認證中</td><td>Reishauer/Kapp Niles 磨齒機、擺線磨床、滲碳爐</td></tr>
+  <tr><td>行星滾柱絲桿 PRS</td><td>Optimus Gen2 本體 14 根反向式(2 肘/4 腕/8 腿;GSA 供);Optimus V3 直線致動器(三花/拓普總成,媒體);全球傳動 EIP 三規格;上銀 PRS(2026 公開)</td><td>2049 上銀(2026-08 自述具量產能力、產能 +20%、負重 2-3 倍)・4540 全球傳動(EIP 驗證中、2H27 回饋)・優士特(未上市)</td><td>Rollvis、GSA、Ewellix(Schaeffler)、SKF、NTN、北特 603009、五洲 603667、恒立、貝斯特、新劍、三花 002050/拓普 601689(總成)</td><td>認證中(台);中國量產爬坡</td><td>外/內螺紋磨床(瓶頸)、旋風銑、冷成形/滾壓、車磨複合</td></tr>
+  <tr><td>滾珠絲桿/微型絲桿</td><td>靈巧手微型絲桿(新劍/五洲 210 萬套規劃);全球傳動 DPRS 微型致動器;「Optimus Gen3 40 支滾珠絲桿」unverified</td><td>2049 上銀(全球第三;靈巧手螺桿供樣)・4540 全球傳動(研磨級排至 2027Q2,非人形)・1597 直得(樹谷二期量產;微型線軌全球前三)</td><td>THK、NSK、Bosch Rexroth、新劍、五洲</td><td>量產(工業);人形微型 = 原型</td><td>螺紋磨床、滾造機、珠槽研磨</td></tr>
+  <tr><td>交叉滾子/柔性軸承</td><td>宇樹 G1 膝關節交叉滾子(拆解);諧波波發生器柔性軸承</td><td>2049 上銀(交叉滾柱軸承供樣自述)・6215 和椿(代理,非製造)</td><td>IKO、THK、NSK、Schaeffler、SKF、長盛軸承、五洲</td><td>量產(日/德);台廠 = 送樣</td><td>內外圈磨床、超精機</td></tr>
+  <tr><td>編碼器</td><td>宇樹 G1 關節雙編碼器(拆解);銳鷹 KIT 中空感應式雙編碼器 6.8 mm;RLS 20-bit 磁環</td><td>4576 大銀(自製編碼器,自用)</td><td>Renishaw/RLS、Heidenhain、ams OSRAM、TDK、MPS、銳鷹、奧松、雷賽</td><td>量產;台股缺席</td><td>磁環校正台、分度校驗</td></tr>
+  <tr><td>關節驅動板</td><td>TI TIDA-010979 48V 1kW(AM26x);EPC EPC91120 Φ32 mm GaN;Infineon GaN 人形馬達控制方案</td><td>4576 大銀(高響應驅動器量產)・2308 台達電(伺服驅動本業)・7750 新代(控制器/驅動)</td><td>TI、Infineon、EPC、Iron Devices、Elmo、峰岹</td><td>量產(通用);人形客製 = 開發中</td><td>SMT、EMC 測試</td></tr>
+  <tr><td>關節力矩感測器 / 六軸 F/T</td><td>Optimus 臂部旋轉致動器含力矩感測、足部 6D(MS 拆解);每台 2-4 顆六軸(腕/踝);Aidin AFT150-D50</td><td>協力測控/三鋒科技(未上市,展品級)</td><td>ATI、SCHUNK、Sensodrive、Bota、藍點觸控(80%+)、坤維、宇立、柯力 603662、東華 300354</td><td>量產(美/德/中);台股缺席</td><td>六軸標定機、應變片固化</td></tr>
+  <tr><td>觸覺感測/電子皮膚</td><td>Optimus 指尖電阻式(媒體);福萊二代指尖觸覺;漢威百萬級產能(自述);GR-3 31 個</td><td>—(缺席)</td><td>漢威 300007、福萊 605488、帕西尼、GelSight、Tacta</td><td>小批量;台股缺席</td><td>柔性印刷/塗布</td></tr>
+  <tr><td>關節模組總成(第三方)</td><td>東元 TJM 五尺寸(17-361 N·m 額定、峰值 484);羅昇 ACTDG45-O;上銀肩/髖模組;盟英關節模組;中國第三方關節模組 2025 28 萬台 → 2030 近 500 萬台(研報)</td><td>1504 東元(四足 200-300 顆;人形髖關節合作開發,客戶未具名)・2049 上銀(送樣測試)・2464 盟立(盟英小量)・8374 羅昇(首發,無出貨)・4590 富田-創(四足 Q4 出貨)</td><td>Schaeffler(3 平台、14 OEM 28 原型)、NSK(2028)、中大力德、綠的機電一體化、Nidec、拓普/三花/均勝(Tesla 總成,媒體)</td><td>小量/送樣(台);平台廠多自製</td><td>背隙/剛性測試台、壽命試驗機</td></tr>
+  <tr><td>靈巧手/前臂總成</td><td>Optimus 專利 22 DoF/25 致動器(已改版,Musk 2026-04);Figure 03 手 20 DoF;兆威 20 DoF 600 g / 6 DoF 400 g;新劍千台級總成(自述)</td><td>4540 全球傳動(DPRS 原型)・2049 上銀(靈巧手螺桿供樣)</td><td>Tesla 自製、兆威、靈心巧手、因時、新劍、Shadow Robot</td><td>路線未定;台股整手缺席</td><td>腱繩張力校正、手指壽命試驗</td></tr>
+  <tr><td>整機組裝/電池</td><td>Optimus V3 Fremont(8 月週產數百台,媒體;設計 100 萬/年);Figure BotQ 1.2 萬/年;宇樹產能可擴 3 萬;鴻海×川崎 2027 累計 200 台</td><td>2317 鴻海(無人形代工訂單佐證)・1101 台泥 Molicel(電芯主攻 eVTOL/BBU/無人機)・6121 新普(清單)</td><td>Tesla、Figure、宇樹、Agility、Apptronik/Jabil、1X、CATL/ATL</td><td>試產/小量(2026)</td><td>組裝線、動作標定</td></tr>
+  <tr><td>加工設備(磨齒/螺紋磨/熱處理)</td><td>諧波柔輪 EMAG K160/K300;PRS 磨床(五洲 98 萬套需 326 台,財通測算);利茗引進 Gleason</td><td>—(缺席)</td><td>EMAG、Gleason、Liebherr、Reishauer、Kapp Niles、Studer、秦川</td><td>量產(歐日);台股缺席</td><td>—</td></tr>
+</table>
+
+<!-- 5:量產時程 -->
+<h2 id="s5"><span class="n">5</span>量產時程與各家進度、短期 vs 長期節奏</h2>
+<div class="card">
+  <h3>5a. 平台時間軸(Tesla 法說為錨;媒體量化另標)</h3>
+  <p><b>2025:Tesla 目標約 1 萬台未達(The Information 口徑實際約 2,000 台)→ 2026-01 Musk 自承「零台在做有用工作」→ 2026-04-22 Q1 法說:S/X 線 5 月停產、Fremont 7 月底/8 月開產、Giga Texas 第二線 2027 夏 → 2026-07-22 Q2 法說:「2026 開產、2027 有意義產能」、10,000+ 零件、V4 更垂直整合 → 2026-08-28 Fremont 開產(The Information)→ 2026-09 週產數百台、年底目標 >1,000 台/週(The Information)→ 2027 夏 Texas 線 → 2027 共識量產年。</b></p>
+  <p>平行線:Figure 03 累計 350+ 台(2026-04-29)、BotQ 每小時 1 台;Agility Digit 5 早期交付 1H27、GA 2027 底;1X NEO 首批消費者交付 2026 底前;XPeng IRON 2026 底量產、2027 交付;Boston Dynamics Atlas 2026 全部產量給 Hyundai/DeepMind、Hyundai 2028 入廠;宇樹產能目標 7.5 萬台/年(人形);智元 2026「數萬台」自述。<b>所有 Tesla 側量化(週產幾百台/1,000 台目標/5,000 台份/2026 5 萬台/<2 萬美元/供應商產能指引 2,000-2,500 台/週)皆為媒體或供應鏈口徑,Tesla 未揭露。</b></p>
+
+  <h3>5b. 各家進度表(公司自述 / 法說 / 一手文件,非財測)</h3>
+  <table>
+    <tr><th style="width:14%">公司</th><th style="width:20%">產品 / 環節</th><th>時點與進度</th><th style="width:12%">來源強度</th></tr>
+    <tr><td rowspan="3">上銀 2049</td><td>PRS</td><td>2025-11 法說「開發中、2026 展場公開」→ 2026-06-02 COMPUTEX 首展 → 2026-08-19 自述「已具備量產能力」、產能較年初 +20%、交期 6 個月;客戶為台/中自主品牌;人形客戶驗證中、無出貨金額</td><td><span class="conf c-med">法說/展會</span></td></tr>
+    <tr><td>諧波 + 關節模組 + 靈巧手螺桿 + 交叉滾柱軸承</td><td>2025-11-11 法說:國內機器人業者「僅測試送樣階段」;2026-05 經濟日報稱諧波「已打入國際人形供應鏈」(媒體、無具名)</td><td><span class="conf c-med">法說</span></td></tr>
+    <tr><td>雙臂八軸物流機器人(與大銀/Dexterity)</td><td>原訂 2026 小批量出貨 → 因客戶規格變更改 2026-11 提供改版樣品(uanalyze 2026-08-19)</td><td><span class="conf c-med">媒體</span></td></tr>
+    <tr><td rowspan="2">全球傳動 4540</td><td>EIP 線性致動器(手臂/大腿/小腿)</td><td>2024Q4 起出貨中國機器人廠(工商 2025-08)→ 2026-04 進客戶驗證 → 2026-08-14 法說:2026 驗證 / 2H27 市場回饋 / 2027-2029 建產能;交期 6-8 個月</td><td><span class="conf c-high">法說</span></td></tr>
+    <tr><td>DPRS 靈巧手微型致動器</td><td>原型完成(2026-08);2026 法國設計獎銀獎;量產時程未定</td><td><span class="conf c-high">法說</span></td></tr>
+    <tr><td>鈞興-KY 4571</td><td>少齒差減速器(人形上肢)/ 諧波 / 微型齒輪</td><td>2026-01 立案開發人形諧波 → 2026-07 因效率改採少齒差(93% vs 80%)、Q3 送樣、已獲客戶樣品訂單(工商 2026-07-28);靈巧手微型齒輪 2026 內推出;諧波 2025 約 900 萬元、虧損</td><td><span class="conf c-high">法說/台媒</span></td></tr>
+    <tr><td>宇隆 2233</td><td>行星/諧波/靈巧手減速機(TUF ONE)</td><td>2025-11 送樣美國客戶、SPS 展 TUF-X 概念機、與信邦 MOU → 2026-07-02 法說:多家北美客戶供應鏈、樣品交期 14 天、改赴美設廠、「目前沒有精確時程」</td><td><span class="conf c-high">法說</span></td></tr>
+    <tr><td>和大 1536</td><td>人形諧波 + 行星減速器</td><td>2025-09 D/K 試樣、T 報價、Apptronik 試樣、目標 2026 量產出貨 → 2026-07-22 法說「已開始為數家客戶供貨、NDA」;1H26 營收零成長,人形未見於營收</td><td><span class="conf c-high">法說</span></td></tr>
+    <tr><td>盟立 2464 / 盟英</td><td>諧波減速機 + 關節模組;人形/機器狗本體;泰國科盟</td><td>2025-12-22 法說:本體 3Q25 開發完成、2026Q1 場域測試出貨、年產 500 台規劃 → 2026-03 減速機模組 2026Q1 進入出貨 → 2026-05 盟英「開始小量出貨」(自述)→ 2026-05-07 泰國科盟合資 16.67 億元</td><td><span class="conf c-med">法說/自述</span></td></tr>
+    <tr><td>東元 1504</td><td>TJM 關節模組 / 人形六大關節</td><td>2025-08 關節模組小批量出貨(機器狗)→ 2025-11 M1-140 精品金質獎、已產 200-300 顆 → 2026-07 TJM 全系列日本首發 → 2026-08-06 與科技公司合作開發人形、規劃六大關節(肩/膝/腕);對象未具名</td><td><span class="conf c-high">CNA/精品獎</span></td></tr>
+    <tr><td>大銀微系統 4576</td><td>力矩/直驅馬達、驅動器</td><td>2026-05 法說:驅動器新品放量、下半年產能 +30%;矽光子檢測平台能見度至 2027Q2;人形關節馬達無公司側時程</td><td><span class="conf c-med">法說</span></td></tr>
+    <tr><td>台達電 2308 × NSK</td><td>人形/協作旋轉與直線致動器</td><td>2026-05-08 MOU;NSK 自研人形致動器 2028 市場投入;台達側無金額時程</td><td><span class="conf c-high">官方稿</span></td></tr>
+    <tr><td>富田-創 4590</td><td>四足機器狗關節動力模組 2.0</td><td>Q3 亮相、Q4 出貨;接單近四位數(自述);人形多軸馬達系統開發中</td><td><span class="conf c-med">法說/自述</span></td></tr>
+    <tr><td>Harmonic Drive Systems</td><td>人形諧波</td><td>FY3/26 Q2 人形訂單約 13 億日圓、全年預期 25 億、FY3/27 可能 2-3 倍(2025-11 法說);2026-08 決算未更新人形數字</td><td><span class="conf c-med">法說(單源)</span></td></tr>
+    <tr><td>Schaeffler</td><td>致動器平台(旋轉/直線/諧波+行星)</td><td>2026-01:28 件原型訂單/14 OEM 多數已交付、2026 年內量產;Hexagon 7 年 ≥1,000 台;Humanoid 5 年數百台</td><td><span class="conf c-high">一手簡報/EQS</span></td></tr>
+    <tr><td>NSK</td><td>人形旋轉/直線致動器</td><td>2025-12 發表、2028 市場投入;2026-03 成立機器人事業部</td><td><span class="conf c-high">官網</span></td></tr>
+    <tr><td>綠的諧波 / 來福諧波</td><td>人形諧波量產</td><td>綠的 2025 已量產供智元/傅利葉等(份額 70% → 80-90%);來福月產能 2026/7 6.48 萬台、在手 >40 萬台、2026-07 港股上市</td><td><span class="conf c-high">半年報</span></td></tr>
+    <tr><td>拓普 / 三花 / 均勝</td><td>Optimus 執行器總成 / 感測結構件 / 熱管理</td><td>2026-09-16/17 Tesla 審廠 → 正式量產夥伴、首批約 5,000 台份(媒體);三花 2026-08 稱機電執行器批量交付、產線爬坡(自述)</td><td><span class="conf c-med">媒體</span></td></tr>
+    <tr><td>五洲新春 / 北特</td><td>PRS 量產</td><td>五洲募投 98 萬套 PRS(公告);北特擴產 18.5 億元;「通過 Tesla 審廠」unverified</td><td><span class="conf c-med">公告</span><span class="conf c-un">審廠</span></td></tr>
+  </table>
+
+  <h3>5c. 短期 vs 長期節奏(誰現在有營收、誰是選擇權)</h3>
+  <table>
+    <tr><th style="width:16%">時間窗</th><th>看什麼</th><th>台廠對應</th><th style="width:22%">驗證點</th></tr>
+    <tr><td><b>短期(2026Q4)</b></td><td>台廠 9 月營收(10/10)與 3Q26 法說;Tesla Q3 法說(10 月下旬)首次給 Fremont 實際產出;年底四個承諾到期(Tesla 週 1,000 台、Digit 5 launch、IRON 量產、NEO 交付)</td><td>營收動能仍來自半導體/AI 設備(上銀、大銀、直得、盟立)與車用本業(和大、宇隆);人形不會出現在任何一檔台股的 2026 營收</td><td>上銀機器人占比是否 >12%;全球傳動 EIP 是否進入「客戶回饋」;鈞興少齒差是否由樣品轉小批;Tesla 是否給 2027 數量指引</td></tr>
+    <tr><td><b>中期(2027H1)</b></td><td>Tesla 1Q27/2Q27 法說、Texas 線安裝;Agility Digit 5 早期交付;XPeng IRON 交付;綠的/來福 2026 年報(價格曲線)</td><td>宇隆美國廠、全球傳動 2H27 市場回饋前的認證結果、和大 NDA 客戶是否解密、盟英泰國科盟投產</td><td>任何一家台廠出現在 Tesla 側或第三方報導的供應商名單;PRS 單價是否壓到滾珠絲桿 3 倍內</td></tr>
+    <tr><td><b>長期(2027H2-2029)</b></td><td>Tesla Giga Texas 線 2027 夏放量;V3/V4 BOM 定案(諧波 vs 行星、PRS 數量、自製比例);全球傳動 2027-2029 建產能;NSK 致動器 2028 上市;Hyundai Atlas 2028 入廠</td><td>直線關節 PRS(全球傳動、上銀)與減速機(鈞興、宇隆、和大)是否轉為營收;東元/盟英關節模組是否從四足擴到人形</td><td>台廠人形營收占比首次被揭露;綠的/來福毛利率是否止跌(價格戰終點)</td></tr>
+  </table>
+
+  <h3>5d. holds / watch 2026/08 月營收與最新財報(交易所開放資料,資料年月 11508;營收單位億元)</h3>
+  <table>
+    <tr><th>公司</th><th>分層</th><th>2026/08 營收</th><th>YoY</th><th>1-8 月累計 YoY</th><th>最新財報</th><th>營收動能主因(非人形)</th></tr>
+    <tr><td>2049 上銀</td><td>holds 核心</td><td>27.08</td><td>+42.3%</td><td>+23.0%</td><td>2Q26 EPS 1.83、毛利率 27.87%;1H26 EPS 1.41</td><td>半導體/AI 設備、晶圓移載機器人</td></tr>
+    <tr><td>4540 全球傳動</td><td>holds 核心</td><td>3.16</td><td>+45.0%</td><td>+43.8%</td><td>2Q26 EPS 0.44、毛利率 21%;1H26 營收 16.18 億 +45%</td><td>中國鋰電/半導體設備(84% 中國)</td></tr>
+    <tr><td>4576 大銀微系統</td><td>holds 受惠</td><td>4.27</td><td>+98.0%</td><td>+55.8%</td><td>2Q26 EPS 0.96;1H26 EPS 1.92</td><td>矽光子檢測定位平台</td></tr>
+    <tr><td>4571 鈞興-KY</td><td>holds 受惠</td><td>2.89</td><td>-4.0%</td><td>+2.6%</td><td>2025 EPS 9.61;1H26 智能傳動占比 10.45%</td><td>電動工具齒輪(TTI)壓價</td></tr>
+    <tr><td>2464 盟立</td><td>holds 受惠</td><td>9.28</td><td>+73.7%</td><td>+31.4%</td><td>2026Q1 轉盈(2Q26 未取得)</td><td>半導體自動化設備(交易所備註)</td></tr>
+    <tr><td>1536 和大</td><td>holds 受惠</td><td>4.60</td><td>+13.7%</td><td>+2.6%</td><td>1H26 營收約 23.6 億(年增 0%)</td><td>車用齒輪</td></tr>
+    <tr><td>2233 宇隆</td><td>holds 受惠</td><td>2.85</td><td>+21.3%</td><td>+1.3%</td><td>1Q26 EPS 1.59、毛利率 27.59%</td><td>車用精密件(77%)</td></tr>
+    <tr><td>1504 東元</td><td>holds 受惠</td><td>54.08</td><td>+16.8%</td><td>+8.2%</td><td>2Q26 未取得</td><td>工業馬達/機電/重電</td></tr>
+    <tr><td>1597 直得</td><td>watch</td><td>1.33</td><td>+45.2%</td><td>+44.9%</td><td>2Q26 EPS 0.87;1H26 1.30</td><td>矽光子/HBM 設備微型滑軌</td></tr>
+    <tr><td>2308 台達電</td><td>watch</td><td>645.86</td><td>+34.9%</td><td>+41.1%</td><td>2Q26 法說(機器人未單獨揭露)</td><td>AI 電源/散熱</td></tr>
+    <tr><td>4583 台灣精銳</td><td>watch</td><td>2.61</td><td>+23.6%</td><td>+16.0%</td><td>2Q26 EPS 3.25、毛利率 52.13%;1H26 6.81</td><td>工業/物流行星減速機(Amazon)</td></tr>
+    <tr><td>4590 富田-創</td><td>watch</td><td>1.36</td><td>+62.9%</td><td>-3.8%</td><td>1Q26 EPS 1.21、毛利率 30.18%</td><td>客戶計畫性出貨(交易所備註)</td></tr>
+    <tr><td>8374 羅昇</td><td>watch</td><td>4.77</td><td>+35.4%</td><td>+38.3%</td><td>2Q26 營收 16.33 億、稅後 0.52 億</td><td>傳動控制代理</td></tr>
+    <tr><td>7750 新代</td><td>watch</td><td>24.37</td><td>+151.1%</td><td>+101.3%</td><td>1Q26 EPS 15.38、毛利率 48.77%</td><td>工具機/自動化控制器</td></tr>
+    <tr><td>4585 達明</td><td>watch</td><td>1.53</td><td>-6.1%</td><td>+10.4%</td><td>2Q26 EPS 1.18;1H26 1.83</td><td>協作機器人</td></tr>
+    <tr><td>2317 鴻海</td><td>watch</td><td>9217.66</td><td>+52.0%</td><td>+39.7%</td><td>集團財報(機器人未揭露)</td><td>AI 伺服器</td></tr>
+  </table>
+  <p class="sub">16 檔中 15 檔 8 月營收年增,但沒有任何一檔的年增可歸因於人形關節;鈞興(-4.0%)與達明(-6.1%)年減。法人 EPS 預估(大銀 3.7-4.8 等)為機構估、非財測,本報告不採用為基準。</p>
+</div>
+
+<!-- 6:投資警示 -->
+<h2 id="s6"><span class="n">6</span>投資警示、被反駁說法、空方劇本與開放問題 <span class="conf c-low">務必閱讀</span></h2>
+<div class="callout warn"><b>被對抗式查證否決或降級的說法(請勿當事實):</b>
+  <ul>
+    <li><b>「三花智控獲 Tesla Optimus 6.85 億美元(約 50 億人民幣)直線致動器訂單」</b> — <span class="conf c-low">refuted</span>:三花 2025-10 正式公告「獲得機器人大額訂單的傳言不屬實」(財聯社/界面/鳳凰多源)。可寫的窄口徑只有:2026-08 公司稱機器人機電執行器進入批量交付與產線爬坡、客戶未具名。</li>
+    <li><b>「盟立/盟英已供應 Optimus 3 諧波減速機與關節模組、Tesla 指示建非紅產能」</b> — <span class="conf c-un">unverified</span>:經濟日報 2026-06-22 原文中該句為記者敘述,盟立回應「無法置評」;其後理財周刊/商周/udn 9 月皆轉述同一說法(一源多轉);無 Tesla 側。可寫:盟英 2026-05 小量出貨(自述、客戶未具名)。</li>
+    <li><b>「和大是唯一供應 Optimus 關鍵零組件的台廠、每台約 40 顆、小量出貨中」</b> — <span class="conf c-un">unverified</span>:所有版本回溯到 uanalyze 2025-08-01 與台媒無歸屬敘述,「40 顆」只有 pttstock;2026-07-22 法說無 Tesla 字眼、客戶 NDA。</li>
+    <li><b>「上銀為 Tesla 人形滾柱絲桿供應商/台廠首選」</b> — 2025-11-11 法說:人形僅「與廠商合作樣品測試」「不會有快速進展」;2026-08 客戶為台/中自主品牌;2026-09 Tesla 首批供應商名單為拓普/三花/均勝。「首選」為媒體推論。</li>
+    <li><b>「五洲新春 2025/12 通過 Tesla 量產審廠、躋身 Gen3 核心供應商」</b> — <span class="conf c-un">unverified</span>:僅新浪/藍鯨媒體口徑;反向證據:上交所 2025-02 因公司對人形產品進展回覆「模糊、風險提示不充分」通報批評,公司澄清 2024 至今絲桿累計開票收入約 680 萬元含稅。</li>
+    <li><b>「大銀是亞洲唯二能量產力矩馬達的公司(與 FANUC)」</b> — 源自 2020 工商/cmoney 轉述公司說法,無第三方;Yaskawa SGM7D 等日系直驅/力矩馬達量產已久,「唯二」不成立。改寫:台灣少數量產力矩/直驅馬達與驅動器的上市公司。</li>
+    <li><b>「Tesla 2026 年 Fremont 年產 100 萬台 Optimus」</b> — 100 萬台是 2025-11 股東會的產線「設計目標」;Tesla 2026-04/07 兩次法說只說 2026 開產、2027 才有意義產能;The Information 9 月口徑年底目標週 1,000 台(年化 5 萬台)。</li>
+    <li><b>「Optimus V3 旋轉關節改用擺線(雙環供 RV)、諧波由 Leaderdrive 供應」</b> — 只見於單一簡中整理稿(同花順 2026-07-14),Tesla 未公開 V3 關節規格;Gen2 公開口徑為 14 諧波 + 14 PRS。</li>
+    <li><b>「Optimus 每台 8 根 PRS + 40 支滾珠絲桿」</b> — 8 根 = 腿部子集非全機(Gen2 公開口徑 14 根:2 肘/4 腕/8 腿);40 支滾珠絲桿為 Gen3 傳聞,unverified。</li>
+    <li><b>「2025 全球人形出貨 12.5 萬台」(鳴志研報引用)</b> — 與 Omdia 1.33 萬 / IDC 1.8 萬相差 10 倍,<span class="conf c-low">refuted</span>,全檔不引用。</li>
+    <li><b>「2025 年全球人形出貨 1.8 萬台,智元/宇樹各 5,000+ 台」被當單一事實</b> — IDC 1.8 萬 vs Omdia 1.33 萬口徑差 38%;Omdia 給宇樹 4,200、宇樹自述純人形 >5,500 並公開異議(Caixin 2026-01-24);「宇樹 2025 出貨 >6,500 台」(KrASIA)口徑不明,不採用。</li>
+    <li><b>「工信部:1H26 中國人形產量超 4 萬台」與「1H26 全球出貨 1.91 萬台」並列</b> — 前者只在搜尋摘要出現、澎湃原文未核到;且「產量」(含庫存/教育機)≠「出貨量」。本報告只引用「2026 全年產量破 10 萬台、2025 約 2 萬台」。</li>
+    <li><b>「Hyundai 部署 2.5 萬台 Atlas」</b> — Boston Dynamics 官方口徑為 2026 產量全給 Hyundai RMAC 與 DeepMind、2028 入廠;2.5 萬台為 Hyundai 2025 投資宣言意向量,非訂單。</li>
+    <li><b>「鴻海領投 Agility SPAC PIPE」</b> — TechCrunch 原文未具名,unverified;鴻海角色只寫川崎護理人形與 NVIDIA 合作。</li>
+    <li><b>「鈞興諧波減速器 2025 營收約 0.9 億」</b> — 富果法說原文為「約 900 萬元、初期虧損」;1.8 億 + 0.9 億會超過智能傳動全年 2.46 億(30.65 億 × 8.02%),不自洽。</li>
+    <li><b>「Schaeffler 簡報的 BOM 百分比 = Goldman 口徑」</b> — 簡報 p.6 百分比為 Schaeffler 自身 portfolio 示意(以 XPeng 人形為例);p.5 才引 Goldman 2025 作 ASP/BOM 成本曲線。</li>
+    <li><b>「緯創 Optimus 代工」「高鋒減速機」「智崴機器人」</b> — 緯創零公司/Tesla 側證據;高鋒與和大合資為封測分選機;智崴 8 月 +216.6% 為併入 Flyover(交易所備註)。</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>🐻 空方劇本(每條帶來源)</h3>
+  <table>
+    <tr><th style="width:20%">劇本</th><th>證據鏈</th><th style="width:14%">來源</th></tr>
+    <tr><td>1. 量產跳票是常態</td><td>Tesla 2025 目標 1 萬台 → 5,000 → 實際約 2,000 台(The Information);2026-01 自承零台做有用工作;7/22 法說不重申任何 2026 數量、「meaningful capacity 2027」;9 月仍週產幾百台、手/前臂手工組裝、中國件返工。Figure 350 台(4 月)、1X 零公開交付、Atlas 無台數。</td><td>Electrek 2026-04-22;Tesla Q2 逐字稿;Drive Tesla Canada 2026-09-26</td></tr>
+    <tr><td>2. Optimus 訂單給中國鏈、不給台廠</td><td>2026-09 首批約 5,000 台份給拓普/三花/均勝;MS 估去中國化 BOM 由 4.6 萬升至 13.1 萬美元(×2.8),Tesla 經濟上離不開中國件;台廠至今無一出現在供應商名單;Counterpoint:拓普/三花/旭升/榮旗為 Tesla EV 舊夥伴支援 V3 量產。</td><td>CnEVPost/Bloomberg 2026-09-21;Interesting Engineering 2026-01;Counterpoint</td></tr>
+    <tr><td>3. 中國價格戰與 BOM 下探</td><td>2026-05 宇樹 R1 由近 4 萬降到 3 萬元以下、松延動力整機 9,998 元;中國頭部廠核心件國產化率 80%+,減速器價格降 30%、感測器降 50%、馬達降 40%;來福諧波單台成本一年降 27%(482→351);綠的諧波毛利率 -1.54 pt(產品)/-2.51 pct(綜合);中大力德精密減速器毛利率 -9.0 pct 至 14.6%。台廠即使切入也是低價區。</td><td>虎嗅 2026-06-30;同花順 2026-06-25;綠的/來福/中大力德 1H26 中報</td></tr>
+    <tr><td>4. 題材股而非營收股</td><td>A 股 5 檔「純人形」標的(綠的/兆威/雙環/鳴志/柯力)1H26 合計歸母淨利 9 億元、合計市值約 1,400 億元、靜態 PE 中位數 90 倍+;60 餘檔概念股中同時滿足「機器人業務入收入結構 + 毛利率體現壁壘 + 主業現金流正」者僅 3.5 家(5%);本體 4 龍頭合計 -0.96 億。台股對照:16 檔 holds/watch 無一有人形營收;上銀機器人占比 12% 含工業;盟立股價 65.8 → 126.5 已先反映。</td><td>鈦媒體 2026-09;上銀/盟立法說</td></tr>
+    <tr><td>5. 頭部整機全自研關節,外購鏈吃不到最大量</td><td>宇樹(M107 自研關節 + 行星,自製率 >90%)+ 智元(PowerFlow)占中國近 80% 出貨、1H26 全球 75%;Tesla/Figure/1X/小鵬/Boston Dynamics 全部自製致動器;Tesla V4「更垂直整合」——外購減速機/馬達/絲桿的可及市場只剩長尾整機廠與第三方模組商。</td><td>TrendForce 2026-04-09;Tesla Q2 逐字稿;宇樹招股書轉述</td></tr>
+    <tr><td>6. 整機獲利已在轉弱</td><td>宇樹 1H26 營收 +48.5% 但扣非淨利預告年減 6.4-22.0%(研發與銷售費用增)——單價下滑快於放量;掛牌次日即從 1,100 元跌到 700 元;兆威 1H26 淨利 -34%;中大力德淨利 -40%。整機與零組件兩端獲利同時承壓。</td><td>東方財富 2026-08-17;中證網 2026-09-03;格隆匯 2026-09</td></tr>
+  </table>
+
+  <h3>數據強度分層 / 開放問題</h3>
+  <ul>
+    <li><b>一手可核(高)</b>:TWSE/TPEx 月營收(2026/08)、Tesla Q1/Q2 法說逐字稿、HDS 決算短信、Schaeffler Citi 簡報、NSK/Delta 新聞稿、TrendForce 新聞稿、綠的/來福/中大力德/鳴志/步科半年報、宇樹上市公告、富果法說摘要(上銀/全球傳動/鈞興/和大/宇隆/盟立/直得/新代)。</li>
+    <li><b>媒體單源或一源多轉(中)</b>:The Information 的 Optimus 週產數字;CnEVPost/Bloomberg 的審廠與 5,000 台份;Omdia/GS/MS/DB/BofA 研調數字(多為二手轉述);Argus 單台稀土 3.5-4 kg;QYR 子市場數字。</li>
+    <li><b>公司自述、缺第三方(中-低)</b>:上銀 PRS「具量產能力」;宇隆「訂單量龐大」;盟英「小量出貨」;和大「數家客戶供貨」;維宏「全球 40% 方案」;Figure 350 台/每小時 1 台;靈心巧手市占 80%+。</li>
+    <li><b>部落格/研報單源(低)</b>:中國柔輪報廢率 28-41% vs 日系 <12%;滾齒機/真空爐短缺致交期 4-7 個月;商用無框馬達 Maxon/Kollmorgen/HDS 合計 60-75%;東吳靈巧手 2,330 億元;Meticulous/Valuates 執行器市場。</li>
+    <li><b>開放問題(本輪未解)</b>:(1)Tesla Optimus V3 整機規格表與關節型式(諧波 vs 行星 vs 擺線、PRS 數量)——所有 PRS 需求推估的分子;(2)HDS 1Q FY3/27 的受注/受注殘(訂單/積壓)與人形貢獻拆分;(3)Nabtesco/THK 人形相關訂單數字(只有定性);(4)Yole/Omdia 關節模組與減速機子市場金額原始報告;(5)高工機器人 GGII 2026 全年人形出貨預測;(6)台灣「智慧機器人產業推動方案」2026 單年度預算;(7)全球傳動/和大/宇隆的人形客戶身分(NDA);(8)東元關節模組之編碼器/減速機來源與 2026 數量更新;(9)盟英 2026 小量出貨的實際數量與客戶;(10)鈞興少齒差減速器樣品訂單的客戶與量。</li>
+    <li><b>時效</b>:本報告基準日 2026-10-01;月營收止於 2026/08(9 月營收 10/10 公告)、財報止於 2Q26;Tesla Q3 法說(10 月下旬)、年底四個平台承諾到期為下一次刷新點。</li>
+  </ul>
+
+  <h3>🔭 開放子題(沒深做的細產業,可另立題)</h3>
+  <table>
+    <tr><th style="width:22%">子題</th><th style="width:30%">驅動</th><th>備註</th></tr>
+    <tr><td>減速機磨齒/螺紋磨設備與真空熱處理</td><td>諧波/PRS 量產瓶頸在設備供給(2025 交期 4-7 個月口徑);五洲 98 萬套 PRS 需 326 台磨床</td><td>歐日設備主導;台灣工具機廠(台中精機/福裕/陸聯)有無切入磨齒機待查;冷成形路線若勝出會削弱磨床稀缺性</td></tr>
+    <tr><td>空心杯馬達與精密繞線設備</td><td>靈巧手每手 6+ 顆、手 BOM 17-20%</td><td>台股確認缺席;可追蹤台廠微型馬達業者是否公告切入,目前無佐證</td></tr>
+    <tr><td>關節力矩/六軸力感測器</td><td>每台 2-4 顆六軸 + 各關節一維力矩;中國 2025 出貨首破萬套、2030 120 萬顆</td><td>台股缺席;協力測控/三鋒科技未上市——確認沒有可投資標的也是資訊</td></tr>
+    <tr><td>觸覺皮膚/電子皮膚</td><td>靈巧手觸覺為 VLA 資料閉環必需;漢威百萬級產能</td><td>路線(電阻/電容/壓電)未定;台灣軟板/PCB 廠是否延伸待查</td></tr>
+    <tr><td>機器人電池包與高功率電芯</td><td>BOM 僅 0.5-5%(MS/Schaeffler),但連續作業時數是商用化門檻</td><td>Molicel(台泥)主攻 eVTOL/BBU;新普/順達模組;人形具名訂單 = 0</td></tr>
+    <tr><td>關節驅動 IC / MCU / GaN 功率級</td><td>每關節一片 48V FOC 板、GaN 推高開關頻率(EPC 100 kHz)</td><td>TI/Infineon/EPC 主導;台股 MOSFET/驅動 IC 二線(本題未展開)</td></tr>
+    <tr><td>交叉滾子/柔性軸承</td><td>軸承市場 2025 3,380 萬 → 2032 8.72 億美元(QYR)</td><td>日德主導;上銀供樣;台灣軸承廠未見人形佐證</td></tr>
+    <tr><td>靈巧手整手模組(腱繩 vs 微型絲桿直驅 vs 連桿)</td><td>手占 BOM 17-20%;Tesla 已棄專利版 22 DoF 設計;100+ 顆螺絲手工是週產瓶頸</td><td>路線未定、台股缺席;全球傳動 DPRS 原型是唯一台廠觸點</td></tr>
+    <tr><td>機器人視覺光學(鏡頭/相機模組/深度/LiDAR)— 建議與本鏈分列、同掛「機器人」大標</td><td>實體 AI 眼睛;Schaeffler 口徑視覺系統 <5% BOM 但台廠(亞光/大立光/玉晶光/華晶科/所羅門)吃得到</td><td>受惠主體以「鏡頭/相機模組」為 key,平台別標籤做疊加(人形/四足/AMR/無人機/無人艇/車用 ADAS),避免與本題雙計;同一顆鏡頭可移植多平台,排序權重照「台灣吃得到」原則,避免把人形題材誤算進鏡頭廠營收</td></tr>
+  </table>
+</div>
+
+<!-- 7:資料來源 -->
+<h2 id="s7"><span class="n">7</span>資料來源(含網址;分層 primary / secondary / blog)</h2>
+<p class="sub">品質:<span class="src-q q-primary">primary(官方/一手/交易所/法說逐字)</span> <span class="src-q q-secondary">secondary(媒體/研調/法說摘要/半年報轉述)</span> <span class="src-q q-blog">blog/彙整/概念股清單</span>。每筆附「佐證了什麼」。同一通稿多家轉載計一源。</p>
+
+<h3>7a. primary(一手)</h3>
+<div class="card">
+  <div class="src-item"><a href="https://openapi.twse.com.tw/v1/opendata/t187ap05_L" target="_blank">TWSE 上市公司每月營收 開放資料(資料年月 11508,2026-09-17)</a><span class="src-q q-primary">primary</span><br><span class="sub">上銀/全球傳動/大銀/直得/鈞興/和大/台灣精銳/盟立/宇隆/東元/台達電/富田-創/羅昇/新代/達明/鴻海 等 2026/08 營收與 YoY、備註欄(盟立半導體設備、富田計畫性出貨);九檔掛牌別皆為上市</span></div>
+  <div class="src-item"><a href="https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap05_O" target="_blank">TPEx 上櫃公司每月營收 開放資料(2026-09-17)</a><span class="src-q q-primary">primary</span><br><span class="sub">高鋒/智崴/新普 2026/08 營收;智崴備註「併入 Flyover Attractions B.V.」(沾光反證)</span></div>
+  <div class="src-item"><a href="https://www.shacknews.com/article/150109/tesla-tsla-q2-2026-earnings-call-transcript" target="_blank">Tesla Q2 2026 法說逐字稿(Shacknews,2026-07-22)</a><span class="src-q q-primary">primary</span><br><span class="sub">Optimus 一代線安裝中、2026 開產、meaningful capacity 2027、10,000+ 獨特零件、hardest product to scale、V4 更垂直整合;無 2026 數量指引</span></div>
+  <div class="src-item"><a href="https://www.schaeffler.com/remotemedien/media/_shared_media_rwd/08_investor_relations/presentations/20260112_schaeffler_powering_humanoid_motion.pdf" target="_blank">Schaeffler — Powering Humanoid Motion(Citi 簡報 PDF,2026-01-12)</a><span class="src-q q-primary">primary</span><br><span class="sub">14 家 OEM 28 件原型訂單、3 個致動器平台;p.6 BOM 示意(直線 ~30/旋轉 ~25/手 ~20/AI >10/視覺、電池、熱 <5);p.5 引 Goldman 2025 ASP 曲線、BofA 銷量 ×30</span></div>
+  <div class="src-item"><a href="https://www2.jpx.co.jp/disc/63240/140120260807515115.pdf" target="_blank">JPX 適時開示 — Harmonic Drive Systems 1Q FY3/27 決算短信(2026-08-07)</a><span class="src-q q-primary">primary</span><br><span class="sub">營收 16,681 百萬日圓、營業利益 1,840、經常利益 1,719、純利 1,274;通期上修</span></div>
+  <div class="src-item"><a href="https://www.nsk.com/company/news/2026/nsk-delta-mou-robotics-20260508-en/" target="_blank">NSK 新聞稿 — NSK × Delta MOU(2026-05-08)</a><span class="src-q q-primary">primary</span><br><span class="sub">人形/協作旋轉與直線致動器合作分工;NSK 2026-03 成立機器人事業部;無金額時程(Gasgoo 5/15 為轉載)</span></div>
+  <div class="src-item"><a href="https://www.nsk.com/jp-ja/company/news/2025/robotics-actuators/" target="_blank">NSK — ロボット用アクチュエータ開発(2025-12)</a><span class="src-q q-primary">primary</span><br><span class="sub">人形用旋轉/直線致動器、2028 年市場投入</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/presscenter/news/20251209-12825.html" target="_blank">TrendForce 新聞稿(2025-12-09)</a><span class="src-q q-primary">primary</span><br><span class="sub">2026 全球人形出貨 >5 萬台、YoY >700%;日本走零組件路線;原文無 2025 基期</span></div>
+  <div class="src-item"><a href="https://www.trendforce.com/presscenter/news/20260409-13007.html" target="_blank">TrendForce 新聞稿(2026-04-09)</a><span class="src-q q-primary">primary</span><br><span class="sub">2026 中國人形產量 +94%、宇樹+智元近 80%、宇樹產能目標 7.5 萬/11.5 萬台、智元 A3 第 1 萬台</span></div>
+  <div class="src-item"><a href="https://m.thepaper.cn/newsDetail_forward_33532485" target="_blank">澎湃 — 工信部甘小斌 WAIC 2026 發布會(2026-07-07)</a><span class="src-q q-primary">primary(官方發言報導)</span><br><span class="sub">2026 中國人形整機產量破 10 萬台;光明網/新華網轉述補 2025 約 2 萬台、2026 市場 >500 億元</span></div>
+  <div class="src-item"><a href="https://www.ey.gov.tw/Page/5C0ED08BC3240B/028076e4-0bd2-40b2-84ec-8e8fda2e2bc2" target="_blank">行政院 — 智慧機器人產業推動方案</a><span class="src-q q-primary">primary</span><br><span class="sub">2026-2029 投入 200 億(科技預算 100 億 + 國發基金 100 億);分工國科會/經濟部/數位部/教育部;對象整機與場域</span></div>
+  <div class="src-item"><a href="https://citigroup.com/global/insights/the-rise-of-ai-robots-humanoids-are-coming-for-you" target="_blank">Citi Insights — The Rise of AI Robots(2024-12)</a><span class="src-q q-primary">primary</span><br><span class="sub">2050 年 6.5 億台 / 7 兆美元</span></div>
+  <div class="src-item"><a href="https://www.sec.gov/Archives/edgar/data/0002074973/000121390026097764/ea0297114-04.htm" target="_blank">SEC — Churchill Capital XI S-4(Agility Robotics)</a><span class="src-q q-primary">primary</span><br><span class="sub">Digit v4 9 客戶場域、6.5 萬小時;Digit v5 3 億美元多年訂單;RoboFab 1 萬台/年</span></div>
+  <div class="src-item"><a href="https://www.globenewswire.com/news-release/2026/04/30/3285118/0/en/1X-opens-NEO-Factory.html" target="_blank">GlobeNewswire — 1X opens NEO Factory(2026-04-30)</a><span class="src-q q-primary">primary</span><br><span class="sub">Hayward 工廠、首年 1 萬台、2027 底 10 萬台/年</span></div>
+  <div class="src-item"><a href="https://bostondynamics.com/blog/boston-dynamics-unveils-new-atlas-robot-to-revolutionize-industry/" target="_blank">Boston Dynamics 官方部落格 — 新 Atlas(2026-01)</a><span class="src-q q-primary">primary</span><br><span class="sub">產品版 Atlas 立即投產;2026 部署 Hyundai/DeepMind;「2.5 萬台」非官方口徑</span></div>
+  <div class="src-item"><a href="https://www.finanzen.net/nachricht/aktien/eqs-news-humanoid-robotics-schaeffler-enters-into-strategic-partnership-with-hexagon-robotics-15626582" target="_blank">EQS-News — Schaeffler × Hexagon Robotics(2026-04)</a><span class="src-q q-primary">primary</span><br><span class="sub">諧波+行星致動器開發供應;7 年內部署 ≥1,000 台</span></div>
+  <div class="src-item"><a href="https://schaeffler-tomorrow.de/en/article/schaeffler-and-humanoid-enter-strategic-technology-partnership" target="_blank">Schaeffler Tomorrow — 與 Humanoid 合作(2026-01)</a><span class="src-q q-primary">primary</span><br><span class="sub">供執行器、5 年內自用數百台</span></div>
+  <div class="src-item"><a href="https://www.emag.com/industries-solutions/workpieces/robotics/flexspline/" target="_blank">EMAG — Flexspline machining for harmonic reducers</a><span class="src-q q-primary">primary</span><br><span class="sub">柔輪製程(軟車→熱處理含深冷→硬車→珩磨→滾齒→去毛邊)、壁厚 <1 mm、SNCM439 38-42 HRC、模數 0.15-1.5、跳動 ≤5 μm、K160/K300</span></div>
+  <div class="src-item"><a href="https://www.ti.com/solution/humanoid-robot-motor-drive" target="_blank">TI — Humanoid robot motor drive(TIDA-010979)</a><span class="src-q q-primary">primary</span><br><span class="sub">48V 1kW 關節馬達控制參考設計、AM26x MCU</span></div>
+  <div class="src-item"><a href="https://www.rls.si/news/new-20-bit-absolute-magnetic-ring-encoder/" target="_blank">RLS — 20-bit absolute magnetic ring encoder</a><span class="src-q q-primary">primary</span><br><span class="sub">RLS/Renishaw 20-bit 磁環編碼器</span></div>
+  <div class="src-item"><a href="https://www.maxongroup.com/news-and-events/news/maxon-at-hannover-messe-2026-293536" target="_blank">maxon — Hannover Messe 2026(2026-04-09)</a><span class="src-q q-primary">primary</span><br><span class="sub">HEJ 70/HEJ 90 關節模組、EC frameless DT 50 M</span></div>
+  <div class="src-item"><a href="https://english.sse.com.cn/news/newsrelease/voice/c/c_20260528_10819989.shtml" target="_blank">上交所 — 宇樹 IPO 審核(2026-05-28)</a><span class="src-q q-primary">primary</span><br><span class="sub">2025 營收 16.99 億、募資 42.02 億人民幣</span></div>
+  <div class="src-item"><a href="https://static.cninfo.com.cn/finalpage/2025-06-17/1223887692.PDF" target="_blank">巨潮資訊 — 五洲新春公告(2025-06-17)</a><span class="src-q q-primary">primary</span><br><span class="sub">募投 98 萬套 PRS 規劃;絲桿收入小額(對照「通過 Tesla 審廠」無公告)</span></div>
+  <div class="src-item"><a href="https://www.cna.com.tw/news/afe/202608060119.aspx" target="_blank">中央社 — 東元關節模組切入四足機器狗(2026-08-06)</a><span class="src-q q-primary">primary(通訊社)</span><br><span class="sub">關節模組組成(無框電機+諧波/行星+編碼器+伺服驅動)、四足實際產品、人形六大關節規劃、供國產手臂無框電機;無數量</span></div>
+  <div class="src-item"><a href="https://www.cna.com.tw/news/afe/202509090033.aspx" target="_blank">中央社 — 和大拚先進封裝與 AI 機器人(2025-09-09)</a><span class="src-q q-primary">primary(通訊社)</span><br><span class="sub">D/K 試樣、T 報價、2026 量產目標(自述);與高鋒合資封測分選機</span></div>
+</div>
+
+<h3>7b. secondary(媒體 / 研調 / 法說摘要 / 半年報轉述)</h3>
+<div class="card">
+  <div class="src-item"><a href="https://electrek.co/2026/04/22/tesla-optimus-production/" target="_blank">Electrek — Tesla Q1 2026 Optimus 更新(2026-04-22)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">S/X 5 月停產、Fremont 7 月底/8 月開產、Texas 2027 夏;2025 1 萬台未達;2026-01 零台做有用工作;Gen3 延年中</span></div>
+  <div class="src-item"><a href="https://driveteslacanada.ca/?p=123236" target="_blank">Drive Tesla Canada — Tesla 稽核中國供應商(引 CnEVPost/Bloomberg,2026-09-21)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">拓普/三花/均勝轉正式量產夥伴;首批約 5,000 台份;Fremont 100 萬/Texas 1,000 萬台設計</span></div>
+  <div class="src-item"><a href="https://technews.tw/2026/09/18/tesla-accelerates-optimus-robot-mass-production-audits/" target="_blank">科技新報 — Tesla 審廠寧波(2026-09-18)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">9/16-17 審廠;Gen3 約 5,000 台訂單、2026 約 5 萬台、單台 <2 萬美元(皆媒體口徑)</span></div>
+  <div class="src-item"><a href="https://driveteslacanada.ca/?p=123661" target="_blank">Drive Tesla Canada — Optimus 可靠度與靈巧度問題(引 The Information,2026-09-26)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">Q2 週產幾十台→8 月幾百台、年底週 1,000 台;手/前臂 100+ 顆螺絲手工;中國件返工;2025 5,000→2,000;感測手套</span></div>
+  <div class="src-item"><a href="https://www.analyticsinsight.net/news/tesla-optimus-production-hits-hundreds-weekly-hands-remain-challenge" target="_blank">Analytics Insight — Optimus 週產數百台(2026-09)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">Fremont 2026-08-28 開產;手部仍是瓶頸(轉述 The Information)</span></div>
+  <div class="src-item"><a href="https://eu.36kr.com/en/p/3912365668324739" target="_blank">36kr EN — MS 引供應商產能指引(2026-07)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">週 1,000 台(9 月前)、2,000-2,500 台(年底)為供應鏈口徑非 Tesla 指引</span></div>
+  <div class="src-item"><a href="https://247wallst.com/investing/2026/09/13/robots-everywhere-goldman-sachs-now-sees-6-5-million-humanoid-robots-by-2035/" target="_blank">24/7 Wall St — Goldman 6.5M humanoids by 2035(2026-09-13)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">GS 2026 7.5 萬(前 5.1 萬)、2030 89 萬(前 25.6 萬)、2035 約 650 萬台(前 140 萬)/1,380 億美元(前 380 億)</span></div>
+  <div class="src-item"><a href="https://thenextweb.com/news/china-humanoid-robot-forecast-morgan-stanley-50000" target="_blank">The Next Web — MS 中國 5 萬台(2026-06-24)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">MS 2026 中國 5 萬台/20 億美元、2030 44.6 萬台/150 億美元、Sheng Zhong</span></div>
+  <div class="src-item"><a href="https://wallstreetcn.com/articles/3774781" target="_blank">華爾街見聞 — 德銀上修 2026 近 5 萬台(2026-06)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">DB 2025 1.75 萬、2026 近 5 萬(中國 4 萬)、2030 70 萬、2050 700 萬台</span></div>
+  <div class="src-item"><a href="https://fortune.com/2026/03/13/bank-of-america-humanoid-robot-forecast-3-billion-2060" target="_blank">Fortune — BofA 人形預測(2026-03-13)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">BofA 2026 9 萬→2030 120 萬台;2060 30 億台</span></div>
+  <div class="src-item"><a href="https://www.scmp.com/tech/big-tech/article/3317545/ev-moment-humanoid-robots-may-be-5-years-away-ubs-says" target="_blank">SCMP — UBS「EV moment」</a><span class="src-q q-secondary">secondary</span><br><span class="sub">UBS 2035 400 億美元/200 萬台、2050 1.4-1.7 兆美元/3 億台</span></div>
+  <div class="src-item"><a href="https://techrepublic.com/article/news-humanoid-robot-shipments-chinese-vendors" target="_blank">TechRepublic — SAG 1H26 出貨(2026-08)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 19,100 台 +272%;中國 >97%;智元 8,400/宇樹 5,900;2026 全年近 6 萬台、16 億美元</span></div>
+  <div class="src-item"><a href="https://www.scmp.com/tech/tech-trends/article/3339346/chinese-firms-outpace-us-rivals-2025-humanoid-robot-shipments-agibot-takes-lead" target="_blank">SCMP — Omdia 2025 shipments(2026-01)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">Omdia 13,318 台;智元 5,168;宇樹 4,200(32%)</span></div>
+  <div class="src-item"><a href="https://www.caixinglobal.com/2026-01-24/unitree-defends-robot-sales-as-rival-claims-market-crown-102407436.html" target="_blank">Caixin — 宇樹異議 Omdia 口徑(2026-01-24)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">宇樹自述 2025 人形 >5,500 台 vs Omdia 4,200;口徑差異來源</span></div>
+  <div class="src-item"><a href="https://en.jiemian.com/article/13925066.html" target="_blank">界面 — IDC 2025 全球 1.8 萬台(2026-01)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">IDC 2025 約 1.8 萬台 +508%(含科研機)</span></div>
+  <div class="src-item"><a href="https://finance.eastmoney.com/a/202608173843517159.html" target="_blank">東方財富 — 宇樹上市、上半年營收 11.52 億(2026-08-17)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 營收 11.52 億 +48.54%;扣非仍預告年減 6.43-21.97%;發行後市值約 609.93 億</span></div>
+  <div class="src-item"><a href="https://www.cnfin.com/yw-lb/detail/20260819/4457119_1.html" target="_blank">中國金融信息網 — 宇樹上市首日(2026-08-19)</a><span class="src-q q-secondary">secondary(新華系)</span><br><span class="sub">發行價 150.80、開盤 1,100(+629%)、市值 4,449 億;2025 營收 16.99 億/扣非 5.91 億/毛利率 60.13%</span></div>
+  <div class="src-item"><a href="https://news.10jqka.com.cn/20260818/c679025061.shtml" target="_blank">同花順 — 宇樹上市公告(純人形 5,500+)(2026-08-18)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2025 純人形出貨 >5,500 台(不含輪式雙臂、只算已交付終端客戶)</span></div>
+  <div class="src-item"><a href="https://scouter.monex.co.jp/news/detail/6324_20260807_act_20260807_160027_1" target="_blank">monex scouter — HDS 1Q FY3/27 決算速報(2026-08-07)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">營收 166.81 億日圓 +23.6%、營益率 11.0%;通期經常利益 62→82 億、營業利益 62→85 億</span></div>
+  <div class="src-item"><a href="https://www.investing.com/news/stock-market-news/this-japanese-stock-is-surging-on-positive-outlook-for-humanoid-robot-orders-4367329" target="_blank">Investing.com — HDS 人形訂單(2025-11-19)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">人形訂單 Q2 約 13 億日圓、全年 25 億、FY3/27 可能 2-3 倍;潛在客戶 >15 家(公司法說口徑)</span></div>
+  <div class="src-item"><a href="https://stock.10jqka.com.cn/20260827/c679345669.shtml" target="_blank">同花順 — 綠的諧波 2026 中報(2026-08-27)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 營收 3.49 億 +38.64%、歸母 7,011 萬 +31.25%;諧波產品毛利率 32.79%(-1.54 pt)</span></div>
+  <div class="src-item"><a href="https://m.gelonghui.com/news/5303847" target="_blank">格隆匯 — 綠的諧波中報點評(2026-09)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">綜合毛利率 32.26%(-2.51 pct)</span></div>
+  <div class="src-item"><a href="https://m.gelonghui.com/news/5305185" target="_blank">格隆匯 — 來福諧波中報(2026-09)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 出貨 23.95 萬台 +112%、單台成本 482→351、綜合毛利率 27.3%/產品線 29.6%、收入 1.42 億 +80%、月產能 6.48 萬台、在手 >40 萬台</span></div>
+  <div class="src-item"><a href="https://stock.10jqka.com.cn/hks//20260706/c677969905.shtml" target="_blank">同花順港股 — 來福諧波創新高(2026-07-06)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">來福諧波港股 03952.HK 掛牌狀態、盤中 +27%</span></div>
+  <div class="src-item"><a href="https://www.huxiu.com/article/4891576.html" target="_blank">虎嗅 — 諧波減速器市場/來福諧波(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">綠的人形諧波市占 70%→80-90%;來福出貨與成本</span></div>
+  <div class="src-item"><a href="https://m.huxiu.com/article/4871425.html" target="_blank">虎嗅 — 人形機器人價格戰 2026(2026-06-30)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2026-05 價格分水嶺;松延 9,998 元、宇樹 R1 <3 萬;國產化率 80%+;減速器 -30%/感測器 -50%/馬達 -40%</span></div>
+  <div class="src-item"><a href="https://stock.10jqka.com.cn/20260626/c677740782.shtml" target="_blank">同花順 — 群益(香港)首評中大力德(2026-06-26)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">三類減速機皆量產;已進智元、傅利葉供應鏈</span></div>
+  <div class="src-item"><a href="https://m.gelonghui.com/news/5304069" target="_blank">格隆匯 — 中大力德 2026 中報點評(2026-09)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 營收 6.0 億 +16%、淨利 -40%、綜合毛利率 23.3%(-4.5 pct)、精密減速器 14.6%(-9.0 pct)</span></div>
+  <div class="src-item"><a href="https://stock.10jqka.com.cn/20260901/c679465232.shtml" target="_blank">同花順 — 步科投關紀錄(2026-09-01)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">無框力矩馬達 1H26 出貨 11.4 萬台 +423%;營收 4.48 億 +44%;機器人收入 2.43 億(54%)</span></div>
+  <div class="src-item"><a href="https://stock.10jqka.com.cn/20260731/c678579483.shtml" target="_blank">同花順 — 維宏 2026 中報(2026-07-31)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">靈巧手關節電機/模組出貨 >5 萬台;目標年底月產 8 萬;「全球 ~40%/中國 ~80%」為自述</span></div>
+  <div class="src-item"><a href="https://news.10jqka.com.cn/20260827/c679347066.shtml" target="_blank">同花順 — 鳴志電器 2026 中報(2026-08-27)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 營收 15.67 億 +19.21%、歸母 3,720 萬 +38.01%;2025 空心杯產線 +56%(「2025 全球出貨 12.5 萬台」refuted 不引用)</span></div>
+  <div class="src-item"><a href="https://news.10jqka.com.cn/20260827/c679342754.shtml" target="_blank">同花順 — 財通證券:滾柱絲桿製造工藝(2026-08-27)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">Optimus 14 根反向式 PRS、單機大絲桿 0.7-2.8 萬元;磨削 vs 冷成形;五洲 98 萬套需 326 台磨床</span></div>
+  <div class="src-item"><a href="https://m.cls.cn/detail/2170702" target="_blank">財聯社 — 三花智控澄清(2025-10)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">公司公告「獲得機器人大額訂單的傳言不屬實」(6.85 億美元訂單 refuted)</span></div>
+  <div class="src-item"><a href="https://stock.10jqka.com.cn/20260702/c677892938.shtml" target="_blank">同花順 — 三花 Optimus 量產(2026-07-02)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">三花機器人機電執行器批量交付、產線爬坡(公司側、未具名客戶)</span></div>
+  <div class="src-item"><a href="https://www.nbd.com.cn/articles/2025-02-10/3747321.html" target="_blank">每經 — 上交所通報批評五洲新春(2025-02-10)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">人形產品進展回覆模糊、風險提示不充分;絲桿累計收入約 680 萬元含稅</span></div>
+  <div class="src-item"><a href="https://news.10jqka.com.cn/20260831/c679460636.shtml" target="_blank">同花順 — 六維力感測器國產主導(賽迪,2026-08-31)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2025 前三廠 92.8%(藍點 80%+/坤維 9.2%/宇立 3.3%);2025 >3 億元;2030 120 萬顆/60 億元</span></div>
+  <div class="src-item"><a href="https://www.36kr.com/p/3161665836571398" target="_blank">36kr — 坤維科技 B+ 輪(2026-03)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1 億元;供優必選/銀河通用/智元/星海圖</span></div>
+  <div class="src-item"><a href="https://www.tmtpost.com/8133803.html" target="_blank">鈦媒體 — A 股人形概念股中報「敘事 vs 現實」(2026-09)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">5 檔純人形標的 1H26 合計歸母 9 億/市值 1,400 億/PE 中位 90 倍+;60 餘檔僅 3.5 家達標</span></div>
+  <div class="src-item"><a href="https://www.tmtpost.com/7640489.html" target="_blank">鈦媒體 — 漢威電子皮膚(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">WRC 電容式全身電子皮膚、小批量供貨多家人形廠</span></div>
+  <div class="src-item"><a href="https://m.thepaper.cn/newsDetail_forward_33043760" target="_blank">澎湃 — Optimus 供應鏈/BOM 券商拆解彙整(2026-04-26)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">BOM 4.3 萬→2 萬美元;執行器 35/絲桿 18/減速器 15/馬達 12/感測 20;28 執行器、14 PRS、20 空心杯;中國諧波為日系 40-60% 價</span></div>
+  <div class="src-item"><a href="https://interestingengineering.com/ai-robotics/chinese-parts-cloud-tesla-humanoid-robot-growth" target="_blank">Interesting Engineering — 中國件與 Optimus(MS,2026-01)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">MS:去中國化 BOM 4.6 萬→13.1 萬美元</span></div>
+  <div class="src-item"><a href="https://interestingengineering.com/ai-robotics/figure-humanoid-robot-production-scale-up" target="_blank">Interesting Engineering — Figure scale-up(2026-04-29)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">350+ 台交付、每小時 1 台、良率 >80%、4 個月 24 倍</span></div>
+  <div class="src-item"><a href="https://techcrunch.com/?p=3135736" target="_blank">TechCrunch — Agility SPAC(2026-06-24)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">估值 25 億美元、募資 >6.2 億美元、AGLT;PIPE 領投未具名</span></div>
+  <div class="src-item"><a href="https://www.therobotreport.com/agilitys-digit-5-humanoid-has-new-legs-batteries-safety-upgrades/" target="_blank">The Robot Report — Digit 5(2026-09-15)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">新腿/電池/安全;早期交付 1H27、GA 2027 底</span></div>
+  <div class="src-item"><a href="https://electrek.co/2026/08/24/xpeng-robotics-900m-iron-humanoid-robot-valuation/" target="_blank">Electrek — XPeng Robotics 9 億美元(2026-08-24)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">估值 63 億;IRON 76 DoF、手 21 DoF;2026 底量產、2027 交付</span></div>
+  <div class="src-item"><a href="https://news.bgov.com/private-equity/apptronik-raises-520-million-in-new-funding-to-build-more-humanoids" target="_blank">Bloomberg Government — Apptronik 5.2 億美元(2026-02)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">估值 55 億美元+、累計近 10 億美元</span></div>
+  <div class="src-item"><a href="https://finance.eastmoney.com/a/202510203538704122.html" target="_blank">東方財富 — 宇樹 H2 發布(2025-10-20)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">H2 31 DoF(腿 6/臂 7/腰 3/頭 2)、360 N·m</span></div>
+  <div class="src-item"><a href="https://eu.36kr.com/en/p/3458032911783555" target="_blank">36kr — 宇樹自研關節/單位經濟(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">M107 關節 220 N·m/kg、自研齒形行星、一體化關節</span></div>
+  <div class="src-item"><a href="https://www.ithome.com/0/955/030.htm" target="_blank">IT 之家 — 宇樹招股書 核心零部件自研自產率(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">自研自產率 >90%、主業毛利率 60.13%</span></div>
+  <div class="src-item"><a href="https://monoist.itmedia.co.jp/mn/spv/2605/19/news053.html" target="_blank">MONOist — Nabtesco 人形執行器(2026-05-19)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">以 RV 為核心開發人形執行器;協作/人形引合超預期(定性)</span></div>
+  <div class="src-item"><a href="https://www.gii.tw/report/qyr2021806-global-rv-reducer-market-research-report.html" target="_blank">GII/QYR — Global RV Reducer(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">Nabtesco 約 60%;2025 全球 RV 8.83 億美元;前三家約 87%</span></div>
+  <div class="src-item"><a href="https://www.gii.tw/report/qyr1965183-humanoid-robot-bearings-global-market-share.html" target="_blank">GII/QYR — 人形機器人軸承市場(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2025 約 3,380 萬→2032 8.72 億美元、CAGR 46.6%</span></div>
+  <div class="src-item"><a href="https://www.gii.tw/report/qyr1936060-global-robot-axis-force-torque-sensor-market.html" target="_blank">GII/QYR — 機器人六軸力矩感測器市場(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2025 3.1065 億→2032 27.79 億美元</span></div>
+  <div class="src-item"><a href="https://www.gii.tw/report/ast2094037-global-humanoid-robot-component-market-by.html" target="_blank">GII — 全球人形零組件市場(ABI 轉述,2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">無框馬達 2025 251 萬顆/ASP 361 美元;外轉子 38→42%</span></div>
+  <div class="src-item"><a href="https://www.chyxx.com/industry/1272088.html" target="_blank">智研諮詢 — 中國諧波減速器 2026</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2026 中國機器人諧波 18 億元(人形 5 億)、200 萬台(人形 60 萬台)</span></div>
+  <div class="src-item"><a href="https://m.jiemian.com/article/15040195.html" target="_blank">界面 — 行星滾柱絲桿技術與供應(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">PRS 線接觸負載 3-10 倍;Optimus Gen2 14 支由瑞士 GSA 供;雙林 0.003 mm 自研</span></div>
+  <div class="src-item"><a href="https://www.argusmedia.com/en/news-and-insights/latest-market-news/2756805-china-s-lens-to-expand-humanoid-robot-capacity" target="_blank">Argus — China's Lens to expand humanoid capacity(2025)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">單台人形需 3.5-4 kg 稀土永磁(單源)</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20251013700044-430104" target="_blank">工商時報 — 富田電機磁鐵供應受管制(2025-10-13)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2025/4 起磁鐵交付受阻、改日本/馬來西亞貨源</span></div>
+  <div class="src-item"><a href="https://udn.com/news/story/7240/9128313" target="_blank">聯合報 — 陸鬆綁稀土管制(2025-11)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">中國稀土管制 2025/4 起、暫停至 2026/11/10</span></div>
+  <div class="src-item"><a href="https://www.electropages.com/2025/11/gan-power-ics-enable-new-era-robotic-agility" target="_blank">Electropages — GaN power ICs(EPC,2025-11)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">EPC91120 Φ32 mm GaN 三相逆變、15-55V、100 kHz PWM、50 ns 死區</span></div>
+  <div class="src-item"><a href="https://www.cs.com.cn/ssgs/01/2026/09/03/detail_2026090310036646.html" target="_blank">中證網 — 兆威機電 2026 中報(2026-09-03)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2026H1 淨利 -34.1%、微型傳動 5.06 億 +1.7%;CES 2026 20 DoF/6 DoF 靈巧手</span></div>
+  <div class="src-item"><a href="https://www.36kr.com/p/3647653747035782" target="_blank">36kr — 靈巧手技術路線/東吳測算(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">連桿/腱繩/直驅三路線;靈巧手 2025 36 億→2035 2,330 億元;DoF 共識約 20</span></div>
+  <div class="src-item"><a href="https://www.chinabaogao.com/pdf/29/97/802997.pdf" target="_blank">中國報告網 — 人形機器人關節模組 PDF(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">關節模組占本體成本約 50%;PRS 國產化率 <20%;2025 第三方關節模組 28 萬台→2030 近 500 萬台;諧波+行星 >90%</span></div>
+  <div class="src-item"><a href="https://m.cnyes.com/news/id/6232278" target="_blank">鉅亨網 — 上銀 3Q25 法說(2025-11-11)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">人形僅送樣測試、進展不多;機器人占比 3Q 7%、全年 9-10%;PRS 2026 展示;歐美 PRS 價為滾珠螺桿 10 倍;無 Tesla 字眼</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20260602701142-430503" target="_blank">工商時報 — 上銀 COMPUTEX 2026(2026-06-02)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">PRS 首展、雙臂物流機器人、交期 6 個月;機器人占比 2024 7%→2025 10%→1Q26 12%</span></div>
+  <div class="src-item"><a href="https://finance.technews.tw/2026/08/19/mikrosystem/" target="_blank">科技新報 finance — 上銀/大銀 2026 自動化展(2026-08-19)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">PRS「已具備量產能力」、滾柱螺桿產能較年初 +20%、線軌 +10-15%、負重 2-3 倍、交期 6 個月;客戶為台/中自主品牌</span></div>
+  <div class="src-item"><a href="https://wantrich.chinatimes.com/news/20260716900405-420101" target="_blank">工商時報 — 上銀 2Q26(2026-07-16)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2Q26 營收 56.29 億、毛利率 27.87%、EPS 1.83;1H26 EPS 1.41</span></div>
+  <div class="src-item"><a href="https://money.udn.com/money/story/5607/9735617" target="_blank">經濟日報 — 上銀、大銀 8 月營收(2026-09-10)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">上銀 27.08 億 +42.3%、前 8 月 192.77 億 +23%;大銀 4.27 億 +98%</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-4540-2026-08-14" target="_blank">富果 — 全球傳動(4540)法說摘要(2026-08-14)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 營收 16.18 億 +45%、2Q26 8.3 億/毛利率 21%/EPS 0.44;EIP 驗證、DPRS 原型;2026/2H27/2027-29 時程;中國 84%;研磨級排至 2027Q2</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20250822700270-439901" target="_blank">工商時報 — 全球傳動滾柱螺桿小批量(2025-08-22)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2024Q4 起線性執行器與靈巧手微型螺桿出貨中國機器人廠</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-4571-2026-03-16" target="_blank">富果 — 鈞興-KY(4571)法說摘要(2026-03-16)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2025 EPS 9.61;工業機器人齒輪 1.8 億/毛利 >40%/在手 1.6 億;諧波 2025 約 900 萬元、虧損;珠海 75%/越南 25%</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20260728700252-430503" target="_blank">工商時報 — 鈞興少齒差減速器(2026-07-28)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">少齒差減速器已獲客戶樣品訂單;1-5 月機器人齒輪接單 1.8 億;智能傳動 1H26 10.45%、全年 +20%</span></div>
+  <div class="src-item"><a href="https://ec.ltn.com.tw/article/breakingnews/5205465" target="_blank">自由財經 — 鈞興 2025 營收 30.65 億(2025-10)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">用於交叉驗算智能傳動 8.02% = 2.46 億(證明諧波 0.9 億不自洽)</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-2233-2026-07-02" target="_blank">富果 — 宇隆(2233)法說摘要(2026-07-02)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1Q26 營收 8.13 億/毛利率 27.59%/EPS 1.59;車用 77%;北美多家人形客戶供應鏈;樣品 14 天;改赴美設廠;無精確時程</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-1536-2026-07-22" target="_blank">富果 — 和大(1536)法說摘要(2026-07-22)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1H26 營收 23.6 億零成長;人形諧波+行星(脖/肩/腰/髖)數家客戶供貨、NDA;2026 指引 +5-10%;缺工</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-2464-2025-12-22" target="_blank">富果 — 盟立(2464)法說摘要(2025-12-22)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">人形/機器狗本體 2026Q1 出貨、年產 500 台規劃;在手 60 億、半導體 58%;未提 Tesla</span></div>
+  <div class="src-item"><a href="https://ec.ltn.com.tw/article/breakingnews/5437865" target="_blank">自由財經 — 盟立多重利多(2026-05-15)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">盟英諧波+關節模組「開始小量出貨」(自述);文中無 Tesla/Optimus;股價 65.8→126.5</span></div>
+  <div class="src-item"><a href="https://udn.com/news/story/7240/9579766" target="_blank">經濟日報 — Optimus 3 台廠(盟立/亞光)(2026-06-22)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">「供應 Optimus 3」為記者敘述、盟立「無法置評」;亞光 7-8 顆鏡頭為董事長自述——反證用</span></div>
+  <div class="src-item"><a href="https://wantrich.chinatimes.com/news/20260507900751-420101" target="_blank">工商時報 — 科盟泰國合資(2026-05-07)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">科達利/盟立/盟英合資約 16.67 億元,持股 51/39/10</span></div>
+  <div class="src-item"><a href="https://winvest.tw/News/Detail/93907" target="_blank">winvest — 盟立 8 月營收(2026-09-10)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">9.28 億創高、公司歸因半導體設備;在手訂單上看 150 億</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20251128701407-431202" target="_blank">工商時報 — 東元 M1-140 精品金質獎(2025-11-28)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">已產 200-300 顆關節模組;峰值 360 N·m、15 rad/s</span></div>
+  <div class="src-item"><a href="https://technews.tw/2026/07/15/tjm-series/" target="_blank">科技新報 — 東元 TJM Series 日本首發(2026-07-15)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">TJM 五尺寸、額定 17-361 N·m、峰值 484 N·m</span></div>
+  <div class="src-item"><a href="https://www.nstock.tw/news/article_m?id=527803" target="_blank">nstock — 大銀 2Q26(2026-08)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2Q26 EPS 0.96(+336%)、1H26 1.92(+191%)</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20200624700277-430502" target="_blank">工商時報 — 大銀「亞洲唯二」原始來源(2020-06-24)</a><span class="src-q q-secondary">secondary(反證用)</span><br><span class="sub">「亞洲唯二力矩馬達」出自 2020 台媒轉述公司說法、無第三方;Yaskawa 等日系有反例</span></div>
+  <div class="src-item"><a href="https://technews.tw/?p=1426894" target="_blank">科技新報 — 台灣精銳觀望(2025-08-13)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">人形無訂單、應用未定;諧波/行星各半;關稅 22.5%、美國 ~20%</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20260725700179-430503" target="_blank">工商時報 — 台灣精銳 2Q26(2026-07-25)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2Q26 EPS 3.25、1H26 6.81、毛利率 52.13%</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-1597-2026-03-05" target="_blank">富果 — 直得(1597)法說摘要(2026-03-05)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">投入人形/機器狗關節模組開發(無送樣/客戶);2025 毛利率 40.99%、EPS 0.91</span></div>
+  <div class="src-item"><a href="https://udn.com/news/story/7253/9589039" target="_blank">經濟日報 — 富田-創法說(2026-07-08)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">機器狗關節動力模組 Q4 出貨;1Q26 EPS 1.21、毛利率 30.18%;15 款無人機馬達</span></div>
+  <div class="src-item"><a href="https://wantrich.chinatimes.com/news/20260806900138-420101" target="_blank">工商時報 — 羅昇 ACTDG45-O 關節模組(2026-08-06)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">首款自研關節模組首發;2Q26 營收 16.33 億、稅後 0.52 億</span></div>
+  <div class="src-item"><a href="https://blog.fugle.tw/post/earnings-call-7750-2026-05-22" target="_blank">富果 — 新代(7750)法說摘要(2026-05-22)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">1Q26 營收 48.6 億、EPS 15.38、毛利率 48.77%;無人形產品</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20260730700269-430502" target="_blank">工商時報 — 達明 2Q26(2026-07-30)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">EPS 1.18;輪型/雙足人形 2026H2 試用</span></div>
+  <div class="src-item"><a href="https://technews.tw/?p=1407143" target="_blank">科技新報 — 鴻海×川崎護理人形</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2026 年度台灣開賣、2027 累計 200 台目標</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20260722700218-430502" target="_blank">工商時報 — 台灣力感測業者(2026-07-22)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">協力測控六軸力/關節微型扭矩感測器、三鋒 CELKEES;皆未上市→台股缺席</span></div>
+  <div class="src-item"><a href="https://money.udn.com/money/story/6092/9019850" target="_blank">經濟日報 — 利茗減速機(2025)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">台灣唯一諧波+RV 皆量產(自述)、未上市;引進 Gleason 滾齒機</span></div>
+  <div class="src-item"><a href="https://wantrich.chinatimes.com/news/20250909900229-420101" target="_blank">工商時報 — 和大高鋒合資(2025-09-09)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">和大芯科技為封測分選機(高鋒 excluded 依據)</span></div>
+  <div class="src-item"><a href="https://udn.com/news/story/7240/9548245" target="_blank">聯合新聞網 — 卓揆 4 年 200 億(2026-05)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">智慧機器人產業推動方案 2026-2029 共 200 億</span></div>
+  <div class="src-item"><a href="https://newtalk.tw/news/view/2026-05-19/1036104" target="_blank">Newtalk — 工研院六甲智慧機器人研究中心揭牌(2026-05-19)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">2030 產值 500 億;SIG 150+ 家;場域為醫療/餐飲/巡檢/物流,無人形專項</span></div>
+  <div class="src-item"><a href="https://www.robotics247.com/article/nvidia-gtc-2026-nvidia-global-robotics-leaders-look-to-take-physical-ai-to-the-real-world" target="_blank">Robotics247 — NVIDIA GTC 2026 機器人(2026-03)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">Isaac GR00T N/Cosmos/Jetson Thor;夥伴名單</span></div>
+  <div class="src-item"><a href="https://nasdaq.com/articles/skf-forms-chinese-venture-leaderdrive-humanoid-robot-joints" target="_blank">Nasdaq — SKF × Leaderdrive 合資(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">SKF 與長盛精密合資人形關節傳動,2026 底前投產</span></div>
+  <div class="src-item"><a href="https://counterpointresearch.com/cn/reports/tesla-to-leverage-ev-experience-and-chinese-partners-to-ace-humanoids-market-unlock-huge-revenue-potential" target="_blank">Counterpoint — Tesla 借 EV 經驗與中國夥伴做人形(2026)</a><span class="src-q q-secondary">secondary</span><br><span class="sub">拓普/三花/旭升/榮旗支援 V3 量產;執行器+靈巧手約 60% BOM</span></div>
+</div>
+
+<h3>7c. blog / 彙整 / 概念股清單(用於名單廣撒與反證,不作事實基準)</h3>
+<div class="card">
+  <div class="src-item"><a href="https://humanoid.guide/?p=16316" target="_blank">humanoid.guide — Linear vs rotary actuators</a><span class="src-q q-blog">blog</span><br><span class="sub">Optimus Gen2 28 執行器 = 14 旋轉(20/110/180 N·m)+ 14 直線(500/3,900/8,000 N;2 肘/4 腕/8 腿)</span></div>
+  <div class="src-item"><a href="https://www.china-amass.net/news/deep-dismantling-of-unitree-g1-knee-joint-actuator-full-analysis-of-120-n%c2%b7m-torque-twostage-planetary-reduction-and-dual-encoders/" target="_blank">china-amass — Unitree G1 膝關節拆解</a><span class="src-q q-blog">blog</span><br><span class="sub">約 1 kg、18 槽 16 極、22.5:1 兩級行星、雙編碼器、交叉滾子軸承、120 N·m</span></div>
+  <div class="src-item"><a href="https://fourweekmba.com/where-the-money-goes-in-humanoid-robotics/" target="_blank">FourWeekMBA — Where the money goes(MS 拆解轉述)</a><span class="src-q q-blog">blog</span><br><span class="sub">MS Gen2 級 BOM $55K:手 17.2%、腰骨盆 14.2%、大腿/小腿各 13.2%、腳 12.2%、電池 $300;致動器 ~56%</span></div>
+  <div class="src-item"><a href="https://www.basenor.com/blogs/news/tesla-optimus-gen-3-hand-patents-revealed-25-actuators-22-dof" target="_blank">basenor — Optimus Gen 3 手部專利</a><span class="src-q q-blog">blog</span><br><span class="sub">專利版 22 DoF/25 致動器、腱繩前臂驅動;Musk 2026-04 稱已改版</span></div>
+  <div class="src-item"><a href="https://droids.substack.com/p/the-forearm-is-the-new-hand-inside" target="_blank">droids substack — The forearm is the new hand</a><span class="src-q q-blog">blog</span><br><span class="sub">每指 3 條腱繩、腕部摩擦失效點</span></div>
+  <div class="src-item"><a href="https://pmarketresearch.com/worldwide-harmonic-reducer-for-humanoid-robot-market-research/" target="_blank">pmarketresearch — 人形諧波市場</a><span class="src-q q-blog">blog(低信心)</span><br><span class="sub">2025 交期 4-7 個月、中國 Tier-1 柔輪報廢率 28-41% vs 日系 <12%(單源、低信心)</span></div>
+  <div class="src-item"><a href="https://uanalyze.com.tw/articles/9420011832" target="_blank">uanalyze — 滾珠螺桿 & 行星滾柱螺桿台廠(2025-03-14)</a><span class="src-q q-blog">blog</span><br><span class="sub">台廠名單(上銀/全球傳動/直得/優士特);「40 滾珠絲桿 + 8 PRS」口徑(unverified);國際 Rollvis/SKF/INA/NTN</span></div>
+  <div class="src-item"><a href="https://uanalyze.com.tw/articles/3933312042" target="_blank">uanalyze — 空心杯馬達 & 無框力矩馬達台廠(2025-03-17)</a><span class="src-q q-blog">blog</span><br><span class="sub">台股空心杯缺席;大銀「亞洲唯二」(媒體,已駁);Maxon/Faulhaber/Portescap/鳴志/步科</span></div>
+  <div class="src-item"><a href="https://uanalyze.com.tw/articles/3417926834" target="_blank">uanalyze — 和大「唯一 Tesla 台廠」(2025-08-01)</a><span class="src-q q-blog">blog(反證用)</span><br><span class="sub">「唯一台廠」宣稱的無歸屬源頭</span></div>
+  <div class="src-item"><a href="https://pttstock.tw/humanoid-robot-stocks/" target="_blank">pttstock — 人形機器人概念股整理(2026-07-09)</a><span class="src-q q-blog">blog(廣撒名單)</span><br><span class="sub">概念股清單來源;含「和大每台 40 顆」等未佐證宣稱</span></div>
+  <div class="src-item"><a href="https://www.moneyweekly.com.tw/ArticleData/Info/Article/233806" target="_blank">理財周刊 — Optimus Gen3 台廠(2026-06-22)</a><span class="src-q q-blog">blog</span><br><span class="sub">台廠處研發/送樣/小批量試產、2027 才放量;宇隆/盟立 Optimus 連結為媒體敘述</span></div>
+  <div class="src-item"><a href="https://www.ctee.com.tw/news/20250817700345-430502" target="_blank">工商時報 — 台廠拚人形機器人關節模組分類表(2025-08-17)</a><span class="src-q q-blog">彙整</span><br><span class="sub">每台 14-30 組關節、靈巧手 12 組;關節成本占比 Optimus 15-20%、宇樹 40-50%(台媒口徑,分母不同)</span></div>
+  <div class="src-item"><a href="https://news.10jqka.com.cn/20260714/c678165714.shtml" target="_blank">同花順 — Optimus 關節方案整理稿(2026-07-14)</a><span class="src-q q-blog">單源整理稿</span><br><span class="sub">28 關節 = 3 型旋轉 14 + 3 型直線 14;「V3 用擺線/雙環、諧波 Leaderdrive」僅此一源→unverified</span></div>
+</div>
+
+<footer>
+  <p><b>研究方法:</b>Deep Research 三路平行(macro 市場口徑/平台/催化劑 54 次搜尋;companies 台廠與國際逐檔 + TWSE/TPEx 開放資料核對 31 檔;finegrain 16 環節製程與細顆粒地圖 57 次搜尋)→ verify 對抗式裁決 40 條(逐條找第二獨立源、核掛牌、Tesla 供應商類一律要 Tesla 側)→ package 依裁決改寫(refuted 不入正文、corrected 採正確口徑、unverified 標 ⚪ 或窄口徑)。中/英/日/簡體四語。</p>
+  <p>本報告以「已通過查證」內容為主幹,並標示被反駁與待補項目。屬時間敏感領域,數據請以最新官方法說/公告為準;月營收止於 2026/08、財報止於 2Q26。<b>本報告為研究整理,非投資建議。</b></p>
+  <p style="color:var(--muted)">產出:2026-10-01 · Claude Code · process-chain-research · 深色技術版(同內容淺色投資版見同資料夾 -light.html;guide.json 見 research/人形機器人關節傳動鏈/)</p>
+</footer>
+
+</div>
+</body>
+</html>
