@@ -105,6 +105,28 @@ table td{overflow-wrap:break-word}
 @media(max-width:860px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 @media(max-width:640px){.container{padding:0 14px}.nav-inner{overflow-x:auto;white-space:nowrap;gap:12px;padding:0 14px;scrollbar-width:none}.nav-inner::-webkit-scrollbar{display:none}.hero h1{font-size:23px}.calc .inputs,.calc .out{grid-template-columns:1fr}}
 </style>
+<style id="mobfix2610">
+/* 2026-10 手機版面修正(只加不改):長網址/長代號可斷行;表格在手機保留最小寬度並由 wrapper 橫向捲動(不壓扁欄位);標籤在表格外可換行、表格內維持單行 */
+@media (max-width:760px){
+  li,p,dd,.body,.items,.lvl,.card,.callout,.box,.blk{overflow-wrap:anywhere;min-width:0}
+  table{min-width:560px}
+  .rf26 table{min-width:680px;table-layout:auto}
+  .rf26 th:first-child{width:30%}
+  .mobfix-wrap{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch;margin:0 0 8px}
+  .tag,.pill,.badge,.chip{white-space:normal;overflow-wrap:anywhere;max-width:100%}
+  td .tag,th .tag,td .pill,th .pill{white-space:nowrap;overflow-wrap:normal}
+}
+</style>
+<script id="mobfix2610js">
+// 把沒有可捲動父層的表格包進 .mobfix-wrap(只在 DOM 載入後執行一次,不改原結構以外的東西)
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('table').forEach(function(t){
+    var p=t.parentElement,ok=false;
+    while(p&&p!==document.body){var o=getComputedStyle(p).overflowX;if(o==='auto'||o==='scroll'){ok=true;break;}p=p.parentElement;}
+    if(ok)return;var d=document.createElement('div');d.className='mobfix-wrap';t.parentNode.insertBefore(d,t);d.appendChild(t);
+  });
+});
+</script>
 </head>
 <body>
 
